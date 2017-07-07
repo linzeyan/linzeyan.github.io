@@ -1,0 +1,816 @@
+  <!DOCTYPE html>
+  <html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Expires" content="Fri, Jun 12 1981 08:20:00 GMT" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <title>QR code generator</title>
+
+  <script type="text/javascript" src="/extra/jquery/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="/extra/jquery-ui/1.7.1/js/jquery-ui-1.7.1.custom.min.js"></script>
+  <link rel="stylesheet" href="/extra/jquery-ui/1.7.1/css/smoothness/jquery-ui-1.7.1.custom.css" type="text/css" media="all" />
+
+  <!--script type="text/javascript" src="http://www.google.com/jsapi"></script-->
+  <!--script type="text/javascript">
+   google.load("jquery", "1.3.2");
+   google.load("jqueryui", "1.7.3");
+  </script-->
+  <!--link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/themes/base/jquery-ui.css" type="text/css" media="all" /-->
+
+  <style type="text/css">
+  <!--
+   a { color:#990000;text-decoration:none;list-style-type:none; }
+   a:hover { color:#FF0000;text-decoration:underline;list-style-type:none; }
+  -->
+  </style>
+ 
+   <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19980734-3']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+   </script>
+  
+
+
+ <meta http-equiv="Content-Language" content="zh-tw" />
+ <meta name="description" content="免費的線上 QR code 二線條碼產生器" />
+ <meta name="keywords" content="QR碼,條碼,一維條碼,二維條碼,Barcode,QR Code,QRCode,Code39,Code128,Generator,條碼產生器,名片,聯絡人,連絡人,vCard,Address Book,Namecard,地址簿,GPS,WIFI,Text,MMS,SMS,Contacts" />
+
+
+<style>
+* { font-family:Arial; }
+.ui-tabs-nav { font-size:12px; }
+.ui-tabs-panel { font-size:13px; }
+fieldset { font-size:13px; }
+input { color:#666666; }
+.submitButton { width:160px; height:60px; font-weight:bold; font-size:20px; color:#000000; }
+.Alert { color:#0000FF; }
+</style>
+
+<!--Common Script-->
+<script type="text/javascript" src="/extra/common.js"></script>
+
+</head>
+<body>
+<table border="0" width="100%"><tr>
+<td>
+ <h1 style="font-size:24px;">QR Code 條碼產生器</h1>
+</td>
+<td align="center" valign="bottom">
+ <div id="TopMenu" style="text-align:right;padding-right:20px;">
+  <a href="http://dir.twseo.org/ip-check.php" target="_blank">我的 IP 位址</a> |
+  <a href="https://linzeyan.github.io/" target="_blank">GitHub</a>
+ </div>
+ 
+</td>
+</tr></table>
+<script>
+ $(function(){
+  $( "#Tabs" ).tabs();
+  $( "#Tabs>.Tab").show();
+ });
+ function addAttribute( theForm ){
+  theForm.Size.value    = $("#Size").val();
+  theForm.Version.value = $("#Version").val();
+  theForm.Ecc.value     = $("#Ecc").val();
+  theForm.Ext.value     = $("#Ext").val();
+  return true;
+ }
+ function disableButton( theButton ){
+  setTimeout(function(){theButton.disabled = true;},100);
+  setTimeout(function(){theButton.disabled = false;},6000);
+ }
+ function switchValue(theItem,theValue){
+  if( theItem.value == theValue ){
+   theItem.value = '';
+  }
+ }
+ function checkValue(theItem,theValue){
+  if( theItem.value == '' ){
+   theItem.value = theValue;
+  }
+ }
+
+</script>
+
+<table width="100%"><tr><td valign="top" width="350px">
+ <iframe name="Frame-QRCode" id="Frame-QRCode" width="350px" height="600px" style="border:0px;" src="/qrcode/frame.htm"></iframe>
+ <br/>
+
+</td><td valign="top" width="100%">
+ <div id="Tabs">
+  <ul>
+   <li><a href="#Tabs-1">連結</a></li>
+   <li><a href="#Tabs-2">純文字</a></li>
+   <li><a href="#Tabs-3">郵件</a></li>
+   <li><a href="#Tabs-4">電話</a></li>
+   <li><a href="#Tabs-5">簡訊</a></li>
+   <li><a href="#Tabs-7">地理座標</a></li>
+   <li><a href="#Tabs-11">WIFI 存取</a></li>
+   <li><a href="#Tabs-6">PayPal 立即購</a></li>
+   <li><a href="#Tabs-8">聯絡人(西式)</a></li>
+
+   <li><a href="#Tabs-9">聯絡人(中式)</a></li>
+
+  </ul>
+  <div id="Tabs-1" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-URI" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="URI" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    類型:<br/>
+    <label><input type="radio" name="URI-Type" id="URI-Type-1" checked onclick="form.Type.value='URI';$('#URI-Subject1').hide();">連結</label>
+    <label><input type="radio" name="URI-Type" id="URI-Type-2" onclick="form.Type.value='BOOKMARK';$('#URI-Subject1').show();">書籤</label>
+    </p>
+    <p style="display:none;" id="URI-Subject1">
+    名稱:<br/>
+    <input type="text" name="Subject" id="Subject1" size="40" value="" style="width:100%"><br/>
+    </p>
+    <p>
+    網址:<br/>
+    <input type="text" name="Link" id="Link1" size="40" value="http://" style="width:100%"><br/>
+    </p>
+    <p>
+    類型:<br/>
+    <label><input type="radio" name="Link-Type" id="Link1-Type-1" checked onclick="$('#Link1').val('http://')">網站</label>
+    <label><input type="radio" name="Link-Type" id="Link1-Type-2" onclick="$('#Link1').val('ftp://')">FTP</label>
+    <label><input type="radio" name="Link-Type" id="Link1-Type-3" onclick="$('#Link1').val('https://play.google.com/store/search?q=')">Google Play (搜尋)</label>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-2" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-TEXT" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="TEXT" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    內容:<br/>
+    <textarea name="Text" id="Text2" rows="8" style="width:100%" maxlength="480"></textarea>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-3" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-SMTP" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="SMTP" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    E-Mail 位址:<br/>
+    <input type="text" name="Mail" id="Mail3" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </p>
+    <p>
+    主旨:<br/>
+    <input type="text" name="Subject" id="subject3" size="40" value="" style="width:100%"><br/>
+    </p>
+    內容:<br/>
+    <textarea name="Text" id="Text3" rows="4" style="width:100%" maxlength="240"></textarea>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-4" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-TEL" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="TEL" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    電話號碼:<br/>
+    <input type="text" name="Phone" id="Phone4" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-5" class="Tab" style="height:400px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-SMS" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="SMS" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    類型:<br/>
+    <label><input type="radio" name="SMS-Type" id="SMS-Type-1" checked onclick="form.Type.value='SMS';$('#SMS-Subject5').hide();$('#SMS-Phone5').text('電話號碼');">文字簡訊(SMS)</label>
+    <label><input type="radio" name="SMS-Type" id="SMS-Type-2" onclick="form.Type.value='MMS';$('#SMS-Subject5').show();$('#SMS-Phone5').text('電話號碼或 E-Mail 位址');">多媒體簡訊(MMS)</label>
+    </p>
+    <p style="display:none;" id="SMS-Subject5">
+    主旨:<br/>
+    <input type="text" name="Subject" id="Subject5" size="40" value="" style="width:100%"><br/>
+    </p>
+    <p>
+    <span id="SMS-Phone5">電話號碼</span>:<br/>
+    <input type="text" name="Phone" id="Phone5" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </p>
+    <p>
+    內容:<br/>
+    <textarea name="Text" id="Text5" rows="5" style="width:100%" maxlength="240"></textarea>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-7" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-NAV" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="NAV" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%"><tr>
+    <td width="50%">
+    經度:<br/>
+    <input type="text" name="Longitude" id="Longitude7" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="50%">
+    緯度:<br/>
+    <input type="text" name="Latitude" id="Latitude7" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr></table>
+    </p>
+    <p>
+    名稱:<br/>
+    <input type="text" name="Subject" id="Subject7" size="40" value="" style="width:100%"><br/>
+    </p>
+    <p>
+    地址:<br/>
+    <input type="text" name="Address" id="Address7" size="40" value="" style="width:100%"><br/>
+    </p>
+    <p>
+    類型:<br/>
+    <label><input type="radio" name="NAV-Type" id="NAV-Type-1" checked onclick="form.Type.value='NAV'">VCARD</label>
+    <label><input type="radio" name="NAV-Type" id="NAV-Type-2" onclick="form.Type.value='GEO'">GEO</label>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-11" class="Tab" style="height:330px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-WIFI" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="WIFI" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    加密方式:<br/>
+    <label><input type="radio" name="Encrypt-Type" id="Encrypt11-Type-1" value="WPA" checked>WPA/WPA2 PSK</label>
+    <label><input type="radio" name="Encrypt-Type" id="Encrypt11-Type-2" value="WEP">WEP</label>
+    <label><input type="radio" name="Encrypt-Type" id="Encrypt11-Type-3" value="nopass">未加密</label>
+    </p>
+    <p>
+    SSID:<br/>
+    <input type="text" name="Ssid" id="Ssid11" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </p>
+    <p>
+    密碼:<br/>
+    <input type="text" name="Password" id="Password11" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </p>
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-6" class="Tab" style="height:400px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-PAYPAL" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="PAYPAL" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    收款人 (PayPal Email 帳號):<br/>
+    <input type="text" name="Mail" id="Mail6" size="40" value="" style="width:100%"><br/>
+    <span class="Alert">* 請確認此收款人的 E-Mail 已註冊 PayPal 帳號.</span>
+    </p>
+    <p>
+    商品名稱:<br/>
+    <input type="text" name="Subject" id="Subject6" size="40" value="" style="width:100%"><br/>
+    <span class="Alert">* 如果 "商品名稱" 空白，則可由使用者自行填寫付款內容.</span>
+    </p>
+    商品編號:<br/>
+    <input type="text" name="ItemNumber" id="ItemNumber6" size="40" value="" style="width:100%"><br/>
+    </p>
+    <p>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%"><tr>
+    <td width="50%">
+    金額:<br/>
+    <input type="text" name="Amount" id="Amount6" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="50%">
+    幣別:<br/>
+    <select name="Currency" id="Currency6" style="width:100%">
+     <option value="USD" title="$">USD</option>
+     <option value="DKK" title="">DKK</option>
+     <option value="ILS" title="₪">ILS</option>
+     <option value="RUB" title="">RUB</option>
+     <option value="CAD" title="$">CAD</option>
+     <option value="HUF" title="">HUF</option>
+     <option value="MXN" title="$">MXN</option>
+     <option value="BRL" title="R$">BRL</option>
+     <option value="NOK" title="">NOK</option>
+     <option value="CZK" title="">CZK</option>
+     <option value="SGD" title="$">SGD</option>
+     <option value="TWD" title="NT$" selected>TWD</option>
+     <option value="JPY" title="¥">JPY</option>
+     <option value="EUR" title="€">EUR</option>
+     <option value="PLN" title="">PLN</option>
+     <option value="THB" title="฿">THB</option>
+     <option value="HKD" title="$">HKD</option>
+     <option value="AUD" title="$">AUD</option>
+     <option value="SEK" title="">SEK</option>
+     <option value="CHF" title="">CHF</option>
+     <option value="NZD" title="$">NZD</option>
+     <option value="GBP" title="£">GBP</option>
+     <option value="PHP" title="P">PHP</option>
+    </select><br/>
+    </td>
+    </tr></table>
+    <span class="Alert">* 如果 "金額" 空白，則可由使用者自行填寫金額.</span>
+    </p>
+    <!--p>
+    類型:<br/>
+    <label><input type="radio" name="PAYPAL-Type" id="PAYPAL-Type-1" checked onclick="form.Type.value='PAYPAL'">VCARD</label>
+    <label><input type="radio" name="PAYPAL-Type" id="PAYPAL-Type-2" onclick="form.Type.value='GEO'">GEO</label>
+    </p-->
+    <blockquote>
+     <br/>
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </blockquote>
+   </form>
+  </div>
+  <div id="Tabs-8" class="Tab" style="height:500px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-Addressbook" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="AddressBook" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%">
+    <tr>
+    <td width="34%">
+     全名:<br/>
+     <input type="text" name="FullName" id="FullName8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     名字 (Given Name):<br/>
+     <input type="text" name="GivenName" id="GivenName8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     姓氏 (Family Name):<br/>
+     <input type="text" name="FamilyName" id="FamilyName8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%">
+     公司名稱:<br/>
+     <input type="text" name="Company" id="Company8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     部門:<br/>
+     <input type="text" name="Department" id="Department8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     職稱:<br/>
+     <input type="text" name="Title" id="Title8" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%">
+     E-Mail 位址 #1:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Mail1-Type" id="Mail18-Type"><option value="WORK">工作</option><option value="HOME" selected>住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Mail1" id="Mail18" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%">
+     E-Mail 位址 #2:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Mail2-Type" id="Mail28-Type"><option value="WORK" selected>工作</option><option value="HOME">住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Mail2" id="Mail28" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     網址:<br/>
+     <input type="text" name="Link" id="Link8" size="20" value="" style="width:100%"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%" nowrap>
+     電話號碼 #1:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone1-Type" id="Phone18-Type"><option value="CELL" selected>行動電話</option><option value="WORK">工作</option><option value="HOME">住家</option><option value="FAX">傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone1" id="Phone18" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     電話號碼 #2:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone2-Type" id="Phone28-Type"><option value="CELL">行動電話</option><option value="WORK" selected>工作</option><option value="HOME">住家</option><option value="FAX">傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone2" id="Phone28" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     電話號碼 #3:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone3-Type" id="Phone38-Type"><option value="CELL">行動電話</option><option value="WORK">工作</option><option value="HOME">住家</option><option value="FAX" selected>傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone3" id="Phone38" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%" nowrap>
+     地址 #1:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Address1-Type" id="Address18-Type"><option value="WORK" selected>工作</option><option value="HOME">住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Address1" id="Address18" size="15" value="地址路段" title="地址路段" onfocus="switchValue(this,'地址路段')" onblur="checkValue(this,'地址路段')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td width="50%">
+     <input type="text" name="Address1-City" id="Address18-City" size="15" value="縣/市" title="縣/市" onfocus="switchValue(this,'縣/市')" onblur="checkValue(this,'縣/市')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Address1-State" id="Address18-State" size="15" value="洲/省" title="洲/省" onfocus="switchValue(this,'洲/省')" onblur="checkValue(this,'洲/省')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr>
+     <tr>
+     <td width="50%">
+     <input type="text" name="Address1-Zip" id="Address18-Zip" size="15" value="郵遞區號" title="郵遞區號" onfocus="switchValue(this,'郵遞區號')" onblur="checkValue(this,'郵遞區號')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Address1-Country" id="Address18-Country" size="15" value="國家" title="國家" onfocus="switchValue(this,'國家')" onblur="checkValue(this,'國家')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     地址 #2:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Address2-Type" id="Address28-Type"><option value="WORK">工作</option><option value="HOME" selected>住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Address2" id="Address28" size="15" value="地址路段" title="地址路段" onfocus="switchValue(this,'地址路段')" onblur="checkValue(this,'地址路段')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td width="50%">
+     <input type="text" name="Address2-City" id="Address28-City" size="15" value="縣/市" title="縣/市" onfocus="switchValue(this,'縣/市')" onblur="checkValue(this,'縣/市')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Address2-State" id="Address28-State" size="15" value="洲/省" title="洲/省" onfocus="switchValue(this,'洲/省')" onblur="checkValue(this,'洲/省')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr>
+     <tr>
+     <td width="50%">
+     <input type="text" name="Address2-Zip" id="Address28-Zip" size="15" value="郵遞區號" title="郵遞區號" onfocus="switchValue(this,'郵遞區號')" onblur="checkValue(this,'郵遞區號')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Address2-Country" id="Address28-Country" size="15" value="國家" title="國家" onfocus="switchValue(this,'國家')" onblur="checkValue(this,'國家')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+
+    </td>
+    <td width="33%" nowrap valign="top">
+     地理座標:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td width="50%">
+     <input type="text" name="Longitude" id="Longitude8" size="15" value="經度" title="經度" onfocus="switchValue(this,'經度')" onblur="checkValue(this,'經度')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Latitude" id="Latitude8" size="15" value="緯度" title="緯度" onfocus="switchValue(this,'緯度')" onblur="checkValue(this,'緯度')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="3">
+     備註:<br/>
+     <input type="text" name="Note" id="Note8" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr>
+    </table>
+    </p>
+    <table width="100%"><tr><td valign="top">
+     vCard 版本:<br/>
+     <label><input type="radio" name="CardVersion" id="Card8-Version-1" value="2.1"> 2.1</label>
+     <label><input type="radio" name="CardVersion" id="Card8-Version-2" value="3.0" checked> 3.0</label>
+     <label><input type="radio" name="CardVersion" id="Card8-Version-3" value="4.0"> 4.0</label>
+    </td>
+    <td valign="top">
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </td>
+    <td valign="top" align="center" nowrap>
+    
+   
+    </td>
+    </tr></table>
+   </form>
+  </div>
+
+  <div id="Tabs-9" class="Tab" style="height:450px;display:none">
+   <form target="Frame-QRCode" method="Post" id="Form-AddressbookC" onsubmit="return addAttribute(this);">
+    <input type="hidden" name="Lang" id="Lang" value="tw" />
+    <input type="hidden" name="Type" id="Type" value="AddressBookC" />
+    <input type="hidden" name="Size" value="3" />
+    <input type="hidden" name="Version" value="1" />
+    <input type="hidden" name="Ecc" value="M" />
+    <input type="hidden" name="Ext" value=".png" />
+    <p>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%">
+    <tr>
+    <td width="33%" nowrap>
+     全名: ("姓氏" 與 "名字" 中間請空一格)<br/>
+     <input type="text" name="FullName" id="FullName9" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="34%">
+     姓氏 (Family Name):<br/>
+     <input type="text" name="FamilyName" id="FamilyName9" size="20" value="" style="width:100%" maxlength="120" onchange="form.FullName.value=this.value+' '+form.GivenName.value"><br/>
+    </td>
+    <td width="33%">
+     名字 (Given Name):<br/>
+     <input type="text" name="GivenName" id="GivenName9" size="20" value="" style="width:100%" maxlength="120" onchange="form.FullName.value=form.FamilyName.value+' '+this.value"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%">
+     公司名稱:<br/>
+     <input type="text" name="Company" id="Company9" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     部門:<br/>
+     <input type="text" name="Department" id="Department9" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    <td width="33%">
+     職稱:<br/>
+     <input type="text" name="Title" id="Title9" size="20" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%">
+     E-Mail 位址 #1:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Mail1-Type" id="Mail19-Type"><option value="WORK">工作</option><option value="HOME" selected>住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Mail1" id="Mail19" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%">
+     E-Mail 位址 #2:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Mail2-Type" id="Mail29-Type"><option value="WORK" selected>工作</option><option value="HOME">住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Mail2" id="Mail29" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     網址:<br/>
+     <input type="text" name="Link" id="Link9" size="20" value="" style="width:100%"><br/>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%" nowrap>
+     電話號碼 #1:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone1-Type" id="Phone19-Type"><option value="CELL" selected>行動電話</option><option value="WORK">工作</option><option value="HOME">住家</option><option value="FAX">傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone1" id="Phone19" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     電話號碼 #2:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone2-Type" id="Phone29-Type"><option value="CELL">行動電話</option><option value="WORK" selected>工作</option><option value="HOME">住家</option><option value="FAX">傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone2" id="Phone29" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     電話號碼 #3:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Phone3-Type" id="Phone39-Type"><option value="CELL">行動電話</option><option value="WORK">工作</option><option value="HOME">住家</option><option value="FAX" selected>傳真</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Phone3" id="Phone39" size="20" value="" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    </tr>
+    <tr>
+    <td width="34%" nowrap>
+     地址 #1: (請輸入完整地址資料)<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Address1-Type" id="Address19-Type"><option value="WORK" selected>工作</option><option value="HOME">住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Address1" id="Address19" size="15" value="" title="完整地址" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%" nowrap>
+     地址 #2: (請輸入完整地址資料)<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td>
+     <select name="Address2-Type" id="Address29-Type"><option value="WORK">工作</option><option value="HOME" selected>住家</option></select>
+     </td>
+     <td width="100%">
+     <input type="text" name="Address2" id="Address29" size="15" value="" title="完整地址" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    <td width="33%">
+     地理座標:<br/>
+     <table border="0" cellspacing="0" cellpadding="0" width="100%"><tr>
+     <td width="50%">
+     <input type="text" name="Longitude" id="Longitude9" size="15" value="經度" title="經度" onfocus="switchValue(this,'經度')" onblur="checkValue(this,'經度')" style="width:100%" maxlength="120"><br/>
+     </td>
+     <td width="50%">
+     <input type="text" name="Latitude" id="Latitude9" size="15" value="緯度" title="緯度" onfocus="switchValue(this,'緯度')" onblur="checkValue(this,'緯度')" style="width:100%" maxlength="120"><br/>
+     </td>
+     </tr></table>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="3">
+     備註:<br/>
+     <input type="text" name="Note" id="Note9" size="40" value="" style="width:100%" maxlength="120"><br/>
+    </td>
+    </tr>
+    </table>
+    </p>
+    <table width="100%"><tr><td valign="top">
+     vCard 版本:<br/>
+     <label><input type="radio" name="CardVersion" id="Card9-Version-1" value="2.1"> 2.1</label>
+     <label><input type="radio" name="CardVersion" id="Card9-Version-2" value="3.0" checked> 3.0</label>
+     <label><input type="radio" name="CardVersion" id="Card9-Version-3" value="4.0"> 4.0</label>
+    </td>
+    <td valign="top">
+     <input type="submit" value="產生條碼" class="submitButton" onclick="disableButton(this)">
+    </td>
+
+    </tr></table>
+   </form>
+  </div>
+
+ </div>
+ <br/>
+ <fieldset><legend>條碼格式設定</legend>
+  <table style="margin-left:50px" width="80%">
+  <tr><td width="25%" nowrap>尺寸:</td><td width="25%" nowrap>版本/密度:</td><td width="25%" nowrap>容錯率:</td><td width="25%" nowrap>圖檔格式:</td></tr>
+  <tr><td>
+   <select id="Size">
+    <option value="1">SS</option>
+    <option value="2">S</option>
+    <option value="3" selected>M</option>
+    <option value="5">L</option>
+    <option value="7">XL</option>
+    <option value="9">XXL</option>
+   </select>
+  </td><td>
+   <select id="Version">
+    <!--option value="0">(Auto)</option-->
+    <option value="1" selected>1 (21x21)</option>
+    <option value="2">2 (25x25)</option>
+    <option value="3">3 (29x29)</option>
+    <option value="4">4 (33x33)</option>
+    <option value="5">5 (37x37)</option>
+    <option value="6">6 (41x41)</option>
+    <option value="7">7 (45x45)</option>
+    <option value="8">8 (49x49)</option>
+    <option value="9">9 (53x53)</option>
+    <option value="10">10 (57x57)</option>
+    <option value="11">11 (61x61)</option>
+    <option value="12">12 (65x65)</option>
+    <option value="13">13 (69x69)</option>
+    <option value="14">14 (73x73)</option>
+    <option value="15">15 (77x77)</option>
+    <option value="16">16 (81x81)</option>
+    <option value="17">17 (85x85)</option>
+    <option value="18">18 (89x89)</option>
+    <option value="19">19 (93x93)</option>
+    <option value="20">20 (97x97)</option>
+    <option value="21">21 (101x101)</option>
+    <option value="22">22 (105x105)</option>
+    <option value="23">23 (109x109)</option>
+    <option value="24">24 (113x113)</option>
+    <option value="25">25 (117x117)</option>
+    <option value="26">26 (121x121)</option>
+    <option value="27">27 (125x125)</option>
+    <option value="28">28 (129x129)</option>
+    <option value="29">29 (133x133)</option>
+    <option value="30">30 (137x137)</option>
+    <option value="31">31 (141x141)</option>
+    <option value="32">32 (145x145)</option>
+    <option value="33">33 (149x149)</option>
+    <option value="34">34 (153x153)</option>
+    <option value="35">35 (157x157)</option>
+    <option value="36">36 (161x161)</option>
+    <option value="37">37 (165x165)</option>
+    <option value="38">38 (169x169)</option>
+    <option value="39">39 (173x173)</option>
+    <option value="40">40 (177x177)</option>
+   </select>
+  </td><td>
+   <select id="Ecc">
+    <option value="L">L (7%)</option>
+    <option value="M" selected>M (15%)</option>
+    <option value="Q">Q (25%)</option>
+    <option value="H">H (30%)</option>
+   </select>
+  </td><td>
+   <select id="Ext">
+    <option value=".png" selected>PNG</option>
+    <option value=".gif">GIF</option>
+    <option value=".jpg">JPEG</option>
+   </select>
+  </td></tr>
+  </table>
+ </fieldset>
+
+
+  
+  </div>
+ </fieldset>
+</td></tr></table>
+
+</body>
+</html>
