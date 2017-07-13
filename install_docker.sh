@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#------------------------------------------------------------
+# system update and install some tools
+#------------------------------------------------------------
 sudo apt-get update \
   && sudo apt-get upgrade \
   && sudo apt-get dist-upgrade \
@@ -18,10 +20,15 @@ sudo apt-get update \
   python-setuptools \
   sudo \
   wget \  
+#------------------------------------------------------------
+# install docker and remove temmp files
+#------------------------------------------------------------
   && curl -sSL https://get.docker.com/ | sudo sh \
   && sudo apt-get update \
   && sudo apt-get upgrade \
   && rm -rf /tmp/*
-
-sudo service docker start
-sudo docker pull zeyanlin/rstudio:latest
+#------------------------------------------------------------
+# recognize docker is running and pull rstudio image
+#------------------------------------------------------------
+sudo service docker start \
+  && sudo docker pull zeyanlin/rstudio:latest
