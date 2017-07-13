@@ -26,9 +26,9 @@ sudo apt-get update \
   && curl -sSL https://get.docker.com/ | sudo sh \
   && sudo apt-get update \
   && sudo apt-get upgrade \
-  && rm -rf /tmp/*
+  && rm -rf /tmp/* \
 #------------------------------------------------------------
 # recognize docker is running and pull rstudio image
 #------------------------------------------------------------
-sudo service docker start \
+  && sudo service docker start \
   && sudo docker pull zeyanlin/rstudio:latest
