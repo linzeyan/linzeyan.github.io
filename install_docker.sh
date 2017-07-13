@@ -25,4 +25,3 @@ sudo apt-get update \
 
 sudo service docker start
 sudo docker pull zeyanlin/rstudio:latest
-sudo docker run -d --name Rstudio -p 8787:8787 zeyanlin/rstudio:latest
