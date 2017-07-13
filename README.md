@@ -83,6 +83,7 @@ function fancyAlert(arg) {
 }
 ```
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
 GitHub also supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)!:kissing_heart::smiling_imp::cyclone::octocat::squirrel::iphone::atm::u7981:
 
-/play letitgo
+:fire:/play letitgo
