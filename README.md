@@ -74,7 +74,6 @@ Relative links
 Ignoring Markdown formatting
 You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.
 Let's rename \*our-new-project\* to \*our-old-project\*.
-
 ```
 ```javascript
 function fancyAlert(arg) {
@@ -84,4 +83,6 @@ function fancyAlert(arg) {
 }
 ```
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-GitHub also supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)!:kissing_heart: /play letitgo
+GitHub also supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)!:kissing_heart::smiling_imp::cyclone::octocat::squirrel::iphone::atm::u7981:
+
+/play letitgo
