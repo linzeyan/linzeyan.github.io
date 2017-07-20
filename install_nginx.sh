@@ -6,7 +6,8 @@
 sudo yum install -y --no-install-recommends \
   epel-release  \
   nginx \
-  telnet
+  telnet \
+  nmap
 #------------------------------------------------------------
 # service start and open 80 port
 #------------------------------------------------------------
