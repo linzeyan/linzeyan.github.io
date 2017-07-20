@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# centos 6.8
 sudo yum install -y --no-install-recommends \
   epel-release  \
   nginx
