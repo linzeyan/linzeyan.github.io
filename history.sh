@@ -28,12 +28,12 @@ who
 last
 visudo
 su - ming
-ps -ef
+ps -ef  列出正在運行的程序
 ps -aux
 ps -aux | grep ssh
 ps -aux | grep java
 kill -9 pid	關掉第pid號的程序
-fdisk -l
+fdisk -l  列出硬碟資訊
 ll /dev/sdb
 fdisk /dev/sdb
 mkfs -t ext4 /dev/sdb1	格式化第二顆硬碟為ext4格式
@@ -42,13 +42,13 @@ mkdir /test	建立test目錄
 mount
 mount /dev/sdb1 /test	掛載第二顆硬碟至test目錄
 mount
-df /test
+df /test  顯示資料夾使用情況
 df -h /test
 umount /test	卸載第二顆硬碟
 mount
-du -h /bin
+du -h /bin  顯示資料夾下檔案使用容量
 du -h /dev
-du -sh /dev
+du -sh /dev 顯示累加資料夾下檔案使用容量
 du -sh /bin
 du -sh /var
 mount
@@ -57,6 +57,7 @@ mount -a
 vi /etc/fstab
 mount -a
 mount
+shutdown -h now 立即關機
 ===============================================================
 VI
 指令模式
