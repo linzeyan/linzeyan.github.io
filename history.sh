@@ -58,9 +58,75 @@ vi /etc/fstab
 mount -a
 mount
 shutdown -h now 立即關機
+
+vi /etc/sysconfig/network-scripts/ifcfg-eth0	設定網卡
+tar zcvf audit.tar.gz /var/log/audit	壓縮絕對路徑
+tar zcvf audit.tar.gz ./audit	壓縮相對路徑
+tar zxvf audit.tar.gz	解壓縮
+rm -rf audit.tar.gz	強制遞迴刪除
+rm -rf ./audit
+yum search zip	#搜尋zip套件
+yum install -y zip*	#安裝zip相依套件
+yum install mysql mysql-server
+service mysqld start
+netstat -an | grep 3306
+mysql -uroot -p
+
+chmod +x /tmp/jdk-7u79-linux-x64.rpm	#rpm安裝軟體
+ll
+mkdir /usr/java
+cp jdk-7u79-linux-x64.rpm /usr/java
+cd
+cd /usr/java/
+rpm -ivh jdk-7u79-linux-x64.rpm
+java -version
+rpm -qa | grep jdk	#搜尋jdk
+rpm -e jdk-7u79-linux-x64.rpm		#刪除jdk(java)
+
+date
+yum install ntpdate
+ntpdate time.stdtime.gov.tw && hwclock -w	#校時and寫入BIOS
+
+#排程
+cat /etc/crontab
+vi /etc/crontab
+cat /var/log/cron
+ll /sbin/ntpdate
+yum search updatedb
+yum install mlocate.x86_64
+updatedb
+locate ntpdate
+vi /etc/crontab
+cat /var/log/cron
+
+
+cd /tmp
+vi test.sh
+ll
+chmod +x test.sh
+ll
+./test.sh # echo '123' >> 1.txt
+vi /etc/crontab
+cat 1.txt
+
+vi ex.sh
+chmod +x ex.sh
+./ex.sh a b c
+./ex.sh t gg c # $#  $ $ $
+
+vi /etc/sysconfig/iptables
+service iptables reload
+useradd peter$
+
+
+
+
+
+
 ===============================================================
 VI
 指令模式
 yy	複製一行
+dd  刪除一行
 p	貼上
 :set nu	顯示行數
