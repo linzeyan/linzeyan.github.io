@@ -12,6 +12,8 @@
 # 使用 crontab -e ，或 vi /etc/crontab ，
 # 40 5 * * * root yum -y update && yum clean packages
 # 每天 5:40 ，自動更新完成後會主動的將下載的套件資料移除
+# */5 * * * * root /sbin/ntpdate time.stdtime.gov.tw && /sbin/hwclock -w
+# 每5分鐘校時一次，並寫入BIOS
 #------------------------------------------------------------
 ntpdate time.stdtime.gov.tw && hwclock -w
 yum -y update && yum clean packages
