@@ -24,7 +24,7 @@ sudo apt-get install  -y \
 #------------------------------------------------------------
 # install docker and remove temmp files
 #------------------------------------------------------------
-  && curl -sSL https://get.docker.com/ | sudo sh \
+curl -sSL https://get.docker.com/ | sudo sh \
   && sudo apt-get update \
   && sudo apt-get upgrade \
   && rm -rf /tmp/* \
