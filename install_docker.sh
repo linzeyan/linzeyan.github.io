@@ -3,10 +3,10 @@
 #------------------------------------------------------------
 # system update and install some tools
 #------------------------------------------------------------
-sudo apt-get update \
-  && sudo apt-get upgrade \
-  && sudo apt-get dist-upgrade \
-  && sudo apt-get install  -y \
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+sudo apt-get install  -y \
   ssh \
   bridge-utils \
   uml-utilities \
