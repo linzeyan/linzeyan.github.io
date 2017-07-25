@@ -13,6 +13,7 @@
 # 40 5 * * * root yum -y update && yum clean packages
 # 每天 5:40 ，自動更新完成後會主動的將下載的套件資料移除
 #------------------------------------------------------------
+ntpdate time.stdtime.gov.tw && hwclock -w
 yum -y update && yum clean packages
 #------------------------------------------------------------
 # install nginx
