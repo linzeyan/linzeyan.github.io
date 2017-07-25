@@ -20,14 +20,14 @@ sudo apt-get install  -y \
   psmisc \
   python-setuptools \
   sudo \
-  wget \  
+  wget
 #------------------------------------------------------------
 # install docker and remove temmp files
 #------------------------------------------------------------
-curl -sSL https://get.docker.com/ | sudo sh \
+curl -sSL https://get.docker.com/ | sudo sh
 sudo apt-get update
 sudo apt-get upgrade
-rm -rf /tmp/* \
+rm -rf /tmp/*
 #------------------------------------------------------------
 # recognize docker is running and pull rstudio image
 #------------------------------------------------------------
