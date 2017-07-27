@@ -25,6 +25,7 @@ visudo	#設定使用者權限
 su - ming
 w
 who
+whoami
 last
 visudo
 su - ming
@@ -35,9 +36,9 @@ ps -aux | grep java
 kill -9 pid	#關掉第pid號的程序
 fdisk -l  #列出硬碟資訊
 ll /dev/sdb
-fdisk /dev/sdb
+fdisk /dev/sdb #格式化第二顆硬碟
 mkfs -t ext4 /dev/sdb1	#建立格式化資訊ext4格式
-fdisk -l  #格式化第二顆硬碟為ext4格式
+fdisk -l  
 mkdir /test	#建立test目錄
 mount
 mount /dev/sdb1 /test	#掛載第二顆硬碟至test目錄
@@ -89,7 +90,7 @@ ntpdate time.stdtime.gov.tw && hwclock -w	#校時and寫入BIOS
 
 #排程
 #*/5 * * * * 使用者 指令
-#每5分鐘 root 絕對路徑
+#每5分鐘      root 絕對路徑
 cat /etc/crontab
 vi /etc/crontab
 cat /var/log/cron
@@ -132,3 +133,4 @@ yy	複製一行
 dd  刪除一行
 p	貼上
 :set nu	顯示行數
+/ 搜尋
