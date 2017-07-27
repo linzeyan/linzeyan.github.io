@@ -6,7 +6,8 @@
 # # CentOS7
 # $ sudo yum install docker
 # 
-# 
+# $ yum install -y mlocate.x86_64
+# $ updatedb
 # $ sudo service docker start
 # $ sudo chkconfig docker on
 #------------------------------------------------------------
