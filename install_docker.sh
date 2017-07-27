@@ -1,6 +1,17 @@
 #!/bin/bash
-# ubuntu 14. LTS
 #------------------------------------------------------------
+# CentOS6
+# $ sudo yum install http://mirrors.yun-idc.com/epel/6/i386/epel-release-6-8.noarch.rpm
+# $ sudo yum install docker-io
+# # CentOS7
+# $ sudo yum install docker
+# 
+# 
+# $ sudo service docker start
+# $ sudo chkconfig docker on
+#------------------------------------------------------------
+#------------------------------------------------------------
+# ubuntu 14. LTS
 # system update and install some tools
 #------------------------------------------------------------
 sudo apt-get update
