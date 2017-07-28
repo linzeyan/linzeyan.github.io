@@ -20,11 +20,12 @@ yum -y update && yum clean packages
 #------------------------------------------------------------
 # install nginx
 #------------------------------------------------------------
-yum install -y --no-install-recommends \
-  epel-release  \
-  nginx \
-  telnet \
-  nmap
+yum install -y --no-install-recommends \ 
+  epel-release  \ 
+  nginx \ 
+  telnet \ 
+  nmap \ 
+  bind-utils 
   && yum clean packages
 #------------------------------------------------------------
 # service start and open 80 port
