@@ -1,7 +1,7 @@
 # Here is my shell lab
 
-* [Install Docker](https://linzeyan.github.io/docker.sh)
-* [Install Nginx](https://linzeyan.github.io/nginx.sh)
+* [Install Docker](https://github.com/linzeyan/linzeyan.github.io/blob/shell_only/docker.sh)
+* [Install Nginx](https://github.com/linzeyan/linzeyan.github.io/blob/shell_only/nginx.sh)
 
 
 
