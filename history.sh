@@ -35,14 +35,14 @@ ps -aux | grep ssh
 ps -aux | grep java
 kill -9 pid	#關掉第pid號的程序
 fdisk -l  #列出硬碟資訊
-ll /dev/sdb
-fdisk /dev/sdb #格式化第二顆硬碟
-mkfs -t ext4 /dev/sdb1	#建立格式化資訊ext4格式
-fdisk -l  
+ll /dev/sdb #查看有無掛載
+fdisk /dev/sdb #寫入格式化硬碟資訊，m。n，add a new partition；p，primary partition；else default。m，w，write table to disk and exit。
+mkfs -t ext4 /dev/sdb1	#格式化
+fdisk -l  #查看是否格式化完成並掛載
 mkdir /test	#建立test目錄
 mount
 mount /dev/sdb1 /test	#掛載第二顆硬碟至test目錄
-mount
+mount #查看是否掛載到目錄
 df /test  #顯示資料夾free space
 df -h /test
 umount /test	#卸載第二顆硬碟
@@ -53,7 +53,7 @@ du -sh /dev #顯示累加資料夾下檔案使用容量
 du -sh /bin
 du -sh /var
 mount
-vi /etc/fstab
+vi /etc/fstab #建立預設開機掛載
 mount -a
 vi /etc/fstab
 mount -a
@@ -108,7 +108,7 @@ vi test.sh
 ll
 chmod +x test.sh
 ll
-./test.sh # echo '123' >> 1.txt
+./test.sh # echo '123' >> 1.txt； > 清除再寫入； >> 不斷寫入
 vi /etc/crontab
 cat 1.txt
 
