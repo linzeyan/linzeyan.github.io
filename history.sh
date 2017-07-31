@@ -130,6 +130,32 @@ service sshd restart
 
 netstat -tulpn
 
+
+
+chmod 777 * #修改目錄下所有的資料夾屬性，把資料夾名稱用*來代替就可以了
+chmod -R 777 /upload  #要修改資料夾內所有的檔和資料夾及子資料夾屬性為可寫可讀可執行
+
+#!/bin/bash
+nowa=$(date +"%Y%m%d%h%m%s")"a"
+nowb=$(date +"%Y%m%d%h%m%s")"b"
+nowc=$(date +"%Y%m%d%h%m%s")"c"
+FILEa="$nowa.tar.gz"
+FILEb="$nowb.tar.gz"
+FILEb="$nowb.tar.gz"
+tar zcvf "$FILEa" /var/log
+tar zcvf "$FILEb" /var/log
+tar zcvf "$FILEc" /var/log
+
+#!/bin/bash
+for char in a b c
+do
+now=$(date +"%Y%m%d%H%M%S")$char
+FILE="$now.tar.gz"
+tar zcvf "$FILE" /var/log
+done
+
+rm -rf ./*a.tar.gz
+
 ===============================================================
 VI
 指令模式
