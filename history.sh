@@ -125,6 +125,7 @@ useradd peter$
 
 /etc/ssh/sshd_config # #Port 22，拿掉#可更改port
 /etc/sysconfig/iptables # -A INPUT -m state --state NEW -m tcp -p tcp --dport 要改的PORT -j ACCEPT
+service iptables reload
 service sshd restart
 /etc/init.d/network restart
 
