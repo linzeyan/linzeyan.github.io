@@ -16,7 +16,7 @@ class telegram.Message(message_id, from_user, date, chat, forward_from=None, for
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import telegram,sys,datetime,psutil
+import telegram,datetime,psutil
 from time import sleep
 bot = telegram.Bot(token='348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4')
 print ("*" * 40)
