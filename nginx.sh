@@ -35,3 +35,10 @@ yum install -y gdisk* zip* ntpdate mlocate.x86_64
 /etc/init.d/nginx start
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+#------------------------------------------------------------
+# 編輯 NGINX 設定檔，例: nginx.conf
+# ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+#------------------------------------------------------------
+
+
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
