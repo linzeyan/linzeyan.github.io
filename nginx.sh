@@ -28,7 +28,7 @@ yum install -y --no-install-recommends \
   bind-utils 
   #mysql mysql-server 
   && yum clean packages
-yum install -y gdisk* zip* ntpdate mlocate.x86_64 
+yum install -y gdisk* zip* ntpdate mlocate.x86_64 pip*
 #------------------------------------------------------------
 # service start and open 80 port
 #------------------------------------------------------------
