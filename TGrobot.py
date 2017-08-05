@@ -19,12 +19,10 @@ class telegram.Message(message_id, from_user, date, chat, forward_from=None, for
 import telegram
 from time import sleep  
 bot = telegram.Bot(token='348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4')
-msg_id = 1
 TEXT = 'WOW'
 while True:
-bot.sendMessage(chat_id='361923174', text=TEXT)
-msg_id += 1
-sleep(10)
+	bot.sendMessage(chat_id='361923174', text=TEXT)
+	sleep(10)
 '''
 # coding: utf-8
 """By Weil Jimmer"""
@@ -146,6 +144,4 @@ while True:
 	else:
 		editMessageText(str_value,chat_id,msg_id)
 	sleep(sleep_second)
-
-
-input("\n\n請輸入ENTER鍵結束...")
+	
