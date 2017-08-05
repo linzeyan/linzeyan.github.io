@@ -31,6 +31,20 @@ while True:
 	bot.sendMessage(chat_id='361923174', text=str_value)
 	sleep(10)
 '''
+'''
+-- Telegram action parameters --
+Host: https://api.telegram.org
+Port: 443
+Request: 
+POST https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/sendMessage
+Host: api.telegram.org
+Content-Type: application/json
+
+{"chat_id": "361923174",
+"text": "TestName:%TestName%
+Status: %Status%
+Reply: %Reply%"}
+'''
 # coding: utf-8
 """By Weil Jimmer"""
 import os,urllib.request,shutil,sys,re,datetime,json,psutil
