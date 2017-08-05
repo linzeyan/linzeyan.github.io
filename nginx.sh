@@ -26,7 +26,9 @@ yum install -y --no-install-recommends \
   telnet \ 
   nmap \ 
   bind-utils 
+  #mysql mysql-server 
   && yum clean packages
+yum install -y gdisk* zip* ntpdate mlocate.x86_64 
 #------------------------------------------------------------
 # service start and open 80 port
 #------------------------------------------------------------
