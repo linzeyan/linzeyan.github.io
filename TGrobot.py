@@ -16,12 +16,19 @@ class telegram.Message(message_id, from_user, date, chat, forward_from=None, for
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import telegram
-from time import sleep  
+import telegram,sys,datetime,psutil
+from time import sleep
 bot = telegram.Bot(token='348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4')
-TEXT = 'WOW'
+print ("*" * 40)
+print ("*      Telegrambot is starting         *")
+print ("*" * 40)
 while True:
-	bot.sendMessage(chat_id='361923174', text=TEXT)
+	time_now_str = "當前時間：\n" + str(datetime.datetime.now())
+	cpu_useage_str = "CPU使用率：" + str(psutil.cpu_percent(interval=1)) + " %"
+	memory_useage = psutil.virtual_memory()
+	memory_useage_str = "記憶體使用率：" + str(memory_useage.percent) + " %\n已用：" + str(round(memory_useage.total*0.01*memory_useage.percent/1024/1024/1024,3)) + " GB" + "\n總共：" + str(round(memory_useage.total/1024/1024/1024,3)) + " GB"
+	str_value = time_now_str + "\n" + cpu_useage_str + "\n" + memory_useage_str
+	bot.sendMessage(chat_id='361923174', text=str_value)
 	sleep(10)
 '''
 # coding: utf-8
