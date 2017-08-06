@@ -5,12 +5,9 @@ https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/getMe
 https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/getUpdates
 https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/setWebhook?url=https://linzeyan.github.io
 
-
 pip3 install psutil
 pip3 install python-telegram-bot
-.py
 import telegram
-bot = telegram.Bot(token='348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4')
 class telegram.Bot(token, base_url=None, base_file_url=None, request=None)
 class telegram.Message(message_id, from_user, date, chat, forward_from=None, forward_from_chat=None, forward_from_message_id=None, forward_date=None, reply_to_message=None, edit_date=None, text=None, entities=None, audio=None, document=None, game=None, photo=None, sticker=None, video=None, voice=None, video_note=None, new_chat_members=None, caption=None, contact=None, location=None, venue=None, new_chat_member=None, left_chat_member=None, new_chat_title=None, new_chat_photo=None, delete_chat_photo=False, group_chat_created=False, supergroup_chat_created=False, channel_chat_created=False, migrate_to_chat_id=None, migrate_from_chat_id=None, pinned_message=None, invoice=None, successful_payment=None, bot=None, **kwargs)
 
@@ -31,25 +28,7 @@ while True:
 	bot.sendMessage(chat_id='361923174', text=str_value)
 	sleep(10)
 '''
-'''
--- Telegram action parameters --
-Host: https://api.telegram.org
-Port: 443
-Request: 
-POST https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/sendMessage
-Host: api.telegram.org
-Content-Type: application/json
-{
-"chat_id": "361923174",
-"text": "
-Location: PC01_10.22.13.251
-TIME: %DateTime%
-Site: %TestName%
-Host: %HostName%
-Status: %Status%
-TestMethod: %TestMethod%
-Info: %TestedObjectInfo%"}
-'''
+
 # coding: utf-8
 """By Weil Jimmer"""
 import os,urllib.request,shutil,sys,re,datetime,json,psutil
