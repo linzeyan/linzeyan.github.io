@@ -39,11 +39,16 @@ Request:
 POST https://api.telegram.org/bot348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4/sendMessage
 Host: api.telegram.org
 Content-Type: application/json
-
-{"chat_id": "361923174",
-"text": "TestName:%TestName%
+{
+"chat_id": "361923174",
+"text": "
+Location: PC01_10.22.13.251
+TIME: %DateTime%
+Site: %TestName%
+Host: %HostName%
 Status: %Status%
-Reply: %Reply%"}
+TestMethod: %TestMethod%
+Info: %TestedObjectInfo%"}
 '''
 # coding: utf-8
 """By Weil Jimmer"""
