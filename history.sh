@@ -156,7 +156,7 @@ tar zcvf "$FILE" /var/log
 done
 
 rm -rf ./*a.tar.gz
-
+netstat -nltp # 查看目前 Port 的使用
 ===============================================================
 VI
 指令模式
