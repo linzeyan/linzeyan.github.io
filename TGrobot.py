@@ -13,6 +13,7 @@ class telegram.Message(message_id, from_user, date, chat, forward_from=None, for
 
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# $python3 1.sh &
 import telegram,datetime,psutil
 from time import sleep
 bot = telegram.Bot(token='348831772:AAF0c9UrIHPideiHPvtPjVtdOPknGiZFVe4')
