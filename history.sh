@@ -66,11 +66,14 @@ tar zcvf audit.tar.gz ./audit	#壓縮相對路徑
 tar zxvf audit.tar.gz	#解壓縮，-z gz、-x 解壓、-v verbose、-f file
 rm -rf audit.tar.gz	#強制遞迴刪除
 rm -rf ./audit
+rm -rf ./*a.tar.gz
 yum search zip	#搜尋zip套件
 yum install -y zip*	#安裝zip相依套件
 yum install mysql mysql-server
 service mysqld start
 netstat -an | grep 3306
+netstat -tulpn
+netstat -nltp # 查看目前 Port 的使用
 mysql -uroot -p
 
 chmod +x /tmp/jdk-7u79-linux-x64.rpm	#rpm安裝軟體
@@ -102,25 +105,7 @@ locate ntpdate
 vi /etc/crontab
 cat /var/log/cron #驗證排程
 
-
-cd /tmp
-vi test.sh
-ll
-chmod +x test.sh
-ll
-./test.sh # echo '123' >> 1.txt； > 清除再寫入； >> 不斷寫入
-vi /etc/crontab
-cat 1.txt
-
-vi ex.sh
-chmod +x ex.sh
-./ex.sh a b c
-./ex.sh t gg c # $#  $ $ $
-
-vi /etc/sysconfig/iptables
-service iptables reload
-useradd peter$
-
+# echo '123' >> 1.txt； > 清除再寫入； >> 不斷寫入
 
 
 /etc/ssh/sshd_config # #Port 22，拿掉#可更改port
@@ -128,10 +113,6 @@ useradd peter$
 service iptables reload
 service sshd restart
 service network restart
-
-netstat -tulpn
-
-
 
 chmod 777 * #修改目錄下所有的資料夾屬性，把資料夾名稱用*來代替就可以了
 chmod -R 777 /upload  #要修改資料夾內所有的檔和資料夾及子資料夾屬性為可寫可讀可執行
@@ -155,8 +136,8 @@ FILE="$now.tar.gz"
 tar zcvf "$FILE" /var/log
 done
 
-rm -rf ./*a.tar.gz
-netstat -nltp # 查看目前 Port 的使用
+
+
 ===============================================================
 VI
 指令模式
