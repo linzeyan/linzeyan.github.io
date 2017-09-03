@@ -136,7 +136,15 @@ FILE="$now.tar.gz"
 tar zcvf "$FILE" /var/log
 done
 
+watch -n 1 "ls -l"
+top
+iwconfig
+lspci
+lsof -i :22
+tcpdump -i eth0 'tcp port 22 and host 192.168.186.136'
 
+yum install -y wireshark.x86_64
+tshark -i 1 -a duration:5 -f "port 21"
 
 ===============================================================
 VI
