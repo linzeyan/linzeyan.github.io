@@ -52,6 +52,7 @@ du -h /dev
 du -sh /dev #顯示累加資料夾下檔案使用容量
 du -sh /bin
 du -sh /var
+du -a -h / | sort -n -r | head -n 10
 mount
 vi /etc/fstab #建立預設開機掛載
 mount -a
@@ -145,6 +146,15 @@ tcpdump -i eth0 'tcp port 22 and host 192.168.186.136'
 
 yum install -y wireshark.x86_64
 tshark -i 1 -a duration:5 -f "port 21"
+nmap 211.144.86.95 -p 3389
+
+
+grep cscp801.com /data/app_data/nginx/logs/access.log | grep "408 0"
+grep cscp801.com /data/app_data/nginx/logs/access.log | sort | uniq -c | sort -rn | head -n 20
+grep cscp801.com /data/app_data/nginx/logs/access.log | awk '{print $10}' | sort | uniq -c | sort -rn | head -n 20
+
+grep 43.243.49.13 /data/app_data/nginx/logs/access.log | grep huanlecp11.com | awk '{print $1}' | sort | uniq -c | sort -rn
+#出現那個 IP就是被擋的IP
 
 ===============================================================
 VI
