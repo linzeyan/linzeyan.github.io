@@ -156,6 +156,9 @@ grep cscp801.com /data/app_data/nginx/logs/access.log | awk '{print $10}' | sort
 grep 43.243.49.13 /data/app_data/nginx/logs/access.log | grep huanlecp11.com | awk '{print $1}' | sort | uniq -c | sort -rn
 #出現那個 IP就是被擋的IP
 
+hdparm -t /dev/sda1 #HDD測速
+dmidecode #查看主機板硬體資訊
+
 ===============================================================
 VI
 指令模式
