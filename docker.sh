@@ -18,21 +18,7 @@
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
-sudo apt-get install  -y \
-  ssh \
-  bridge-utils \
-  uml-utilities \
-  file \
-  git \
-  libapparmor1 \
-  libcurl4-openssl-dev \
-  libedit2 \
-  libssl-dev \
-  lsb-release \
-  psmisc \
-  python-setuptools \
-  sudo \
-  wget
+sudo apt-get install -y ssh build-essentials bridge-utils uml-utilities file git libapparmor1 libcurl4-openssl-dev libedit2 libssl-dev lsb-release psmisc python-setuptools sudo wget
 #------------------------------------------------------------
 # install docker and remove temmp files
 #------------------------------------------------------------
