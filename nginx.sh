@@ -25,8 +25,8 @@ yum install -y --no-install-recommends \
   nginx \ 
   telnet \ 
   nmap \ 
-  bind-utils 
-  #mysql mysql-server 
+  bind-utils \
+  mysql mysql-server \
   && yum clean packages
 yum install -y gdisk* zip* ntpdate mlocate.x86_64 python-pip* wget 
 #------------------------------------------------------------
