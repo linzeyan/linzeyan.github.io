@@ -17,28 +17,19 @@
 #------------------------------------------------------------
 ntpdate time.stdtime.gov.tw && hwclock -w
 yum -y update && yum clean packages
+yum groupinstall -y "Development Tools"
 #------------------------------------------------------------
 # install nginx
 #------------------------------------------------------------
-yum install -y --no-install-recommends \ 
-  epel-release  \ 
-  nginx \ 
-  telnet \ 
-  nmap \ 
-  bind-utils \
-  mysql mysql-server \
-  && yum clean packages
-yum install -y gdisk* zip* ntpdate mlocate.x86_64 python-pip* wget 
+yum install -y epel-release nginx telnet nmap bind-utils mysql mysql-server gdisk* zip* ntpdate mlocate.x86_64 python-pip* wget && yum clean packages 
 #------------------------------------------------------------
 # service start and open 80 port
 #------------------------------------------------------------
 /etc/init.d/nginx start
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+#開80 port：
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT && service iptables save
 #------------------------------------------------------------
 # 編輯 NGINX 設定檔，例: nginx.conf
 # ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 #------------------------------------------------------------
 
-
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
