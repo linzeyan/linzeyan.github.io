@@ -1,13 +1,16 @@
+#!/bin/bash
 yum upgrade -y
 yum install -y  epel-release && yum install -y mlocate.x86_64 nmap bind-utils gdisk* zip* ntpdate wget whois ansible lrzsz make man vim jq python-pip
 yum groupinstall -y "Development tools"
 yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel lua-devel lua-static patch libxml2-devel libxslt libxslt-devel gd gd-devel ntpscreen sysstat tree rsync lsof openssh-clients gcc gcc-c++ htop libselinux-python 
 yum install -y tcptraceroute && wget -O /usr/bin/tcpping http://www.vdberg.org/~richard/tcpping && chmod 755 /usr/bin/tcpping
 pip install ansible-lint
-cat <<EOF>> /etc/crontab
+
+cat << EOF >> /etc/crontab
 1 * * * * root ntpdate 1.tw.pool.ntp.org
 EOF
-cat <<EOF> /etc/selinux/config
+
+cat << EOF > /etc/selinux/config
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
 #     enforcing - SELinux security policy is enforced.
@@ -20,6 +23,7 @@ SELINUX=disabled
 #     mls - Multi Level Security protection.
 SELINUXTYPE=targeted
 EOF
+
 yum remove docker docker-common container-selinux docker-selinux docker-engine docker-engine-selinux
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
