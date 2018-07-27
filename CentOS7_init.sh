@@ -24,6 +24,13 @@ SELINUX=disabled
 SELINUXTYPE=targeted
 EOF
 
+cat << EOF >>/root/.bashrc
+export PS1="\[\e[35;1m\][\[\e[31;1m\]\u\[\e[35;1m\]@\[\e[33;1m\]\h \[\e[32;1m\]\w \[\e[33;1m\]\t\[\e[35;1m\]&&\[\e[36;1m\]\#\[\e[35;1m\]]\[\e[34;1m\]\$\[\e[m\]"
+EOF
+cat << EOF >/etc/hostname
+Ricky
+EOF
+hostname Ricky
 yum remove docker docker-common container-selinux docker-selinux docker-engine docker-engine-selinux
 yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -32,10 +39,4 @@ yum install -y docker-ce
 systemctl enable docker
 curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 rpm -U http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm && yum install -y git
-cat <<EOF>>/root/.bashrc
-export PS1="\[\e[35;1m\][\[\e[31;1m\]\u\[\e[35;1m\]@\[\e[33;1m\]\h \[\e[32;1m\]\w \[\e[33;1m\]\t\[\e[35;1m\]&&\[\e[36;1m\]\#\[\e[35;1m\]]\[\e[34;1m\]\$\[\e[m\]"
-EOF
-cat <<EOF>/etc/hostname
-Ricky
-EOF
-hostname Ricky
+
