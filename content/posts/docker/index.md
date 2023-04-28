@@ -9,6 +9,7 @@ menu:
     weight: 10
 tags: ["Docker", "introduction", "slides"]
 categories: ["Docker"]
+hero: docker.jpeg
 ---
 
 # Docker

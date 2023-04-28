@@ -9,6 +9,7 @@ menu:
     weight: 10
 tags: ["Gitlab", "introduction", "slides", "ci"]
 categories: ["Gitlab"]
+hero: gitlab.png
 ---
 
 # Gitlab CI

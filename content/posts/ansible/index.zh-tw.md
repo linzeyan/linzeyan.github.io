@@ -9,6 +9,7 @@ menu:
     weight: 10
 tags: ["Ansible", "introduction", "slides"]
 categories: ["Ansible"]
+hero: ansible.png
 ---
 
 # 認識 Ansible

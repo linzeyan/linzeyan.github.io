@@ -9,6 +9,7 @@ menu:
     weight: 10
 tags: ["Nginx", "configs"]
 categories: ["Nginx"]
+hero: nginx.jpeg
 ---
 
 # 紀錄 Nginx 設定檔及說明
