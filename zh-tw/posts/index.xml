@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 Nov 2021 14:35:58 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/nginx/</guid><description>紀錄 Nginx 設定檔及說明 檔案結構 . ├── geoip.conf ├── nginx.conf ├── sites-available │ ├── default.conf ├── sites-enabled │ ├── default.conf -&amp;gt; ../sites-available/default.conf ├── upstream.conf geoip.conf ## module: ngx_http_geoip2_module ## https://github.com/leev/ngx_http_geoip2_module ## 讀取 GeoIP 資料庫，並進行變數設定 geoip2 /usr/share/GeoIP/GeoLite2-Country.mmdb { auto_reload 60m; $geoip2_metadata_country_build metadata build_epoch; ## 自定義 $geoip2_data_country_code 值為 $remote_addr 對應的 ISO 3116 規範的國碼 $geoip2_data_country_code source=$remote_addr country iso_code; ## 自定義 $geoip2_data_country_name 值為對應的英文城市名 $geoip2_data_country_name country names en; } upstream.conf ## module: ngx_http_upstream_module ## 定義 server 組別 upstream to_nodejs1 { ## server address [parameters]; 定義 server ## parameters: ## weight=number 定義權重，預設為 1 ## max_fails=number 設定到 upstream server 的最大重試次數，預設為 1 ## fail_timeout=time 設定到達 max_fails 次數之後，暫停向此 upstream server 傳送請求的時間，預設為 10 秒 ## backup 標記此 upstream server 為備用，當其他 upstream server 不可用時，此 upstream server 可接受請求 ## down 標記此 upstream server 為不可用 server 10.</description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/ansible/</guid><description>認識 Ansible 大綱 簡介 安裝 常用模組 資料夾結構 結語 簡介 安裝部署工具、設定管理工具等
+同類型工具：Chef、Puppet、SaltStack
+不需要 Agent、透過 ssh
+Linux 有 python 即可 ( ssh port )
+Win 啟用 winrm 即可 ( 5986 port )
+https://docs.ansible.com/ansible/latest/user_guide/windows_winrm.html#inventory-options 資料夾結構簡單易懂、官方文件豐富易懂、模組多支援設備多、易撰寫
+安裝 pip install ansible
+pip3 install ansible yum install ansible
+apt-get install ansible
+apk add ansible
+常用模組 ping
+shell / command
+file
+yum
+systemd / service
+template / copy
+debug
+常用模組 - ping 常用模組 - shell / command 常用模組 - file 常用模組 - yum 常用模組 - systemd / service 常用模組 - template / copy 常用模組 - debug / register 資料夾結構 結語 選擇適合的 ansible ad-hoc ansible gitlab -m ping ansible gitlab -m shell -a 'rm -rf /' playbook role collection shell script python script others</description></item></channel></rss>
