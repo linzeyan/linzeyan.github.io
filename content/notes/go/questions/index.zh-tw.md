@@ -231,6 +231,41 @@ func main() {
 
 
 
+{{< note title="defer4" >}}
+
+```go
+package main
+
+import "fmt"
+
+type temp struct{}
+
+func (t *temp) Add(elem int) *temp {
+	fmt.Print(elem)
+	return &temp{}
+}
+
+func main() {
+	tt := &temp{}
+	defer tt.Add(1).Add(2)
+	tt.Add(3)
+}
+```
+
+- A. 132
+- B. 123
+- C. 312
+- D. 321
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code>A
+</code></pre></details>
+{{< /note >}}
+
+
+
 {{< note title="goroutine" >}}
 
 ```go
@@ -447,6 +482,46 @@ func main() {
 
 
 
+{{< note title="json1" >}}
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
+
+func main() {
+	t := struct {
+		time.Time
+		N int
+	}{
+		time.Date(2020, 12, 20, 0, 0, 0, 0, time.UTC),
+		5,
+	}
+
+	m, _ := json.Marshal(t)
+	fmt.Printf("%s", m)
+}
+
+```
+- A. {"Time":"2020-12-20T00:00:00Z","N":5}
+- B. "2020-12-20T00:00:00Z"
+- C. {"N":5}
+- D. <nil>
+- E. 其他
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code>B
+</code></pre></details>
+{{< /note >}}
+
+
+
 {{< note title="len" >}}
 
 ```go
@@ -602,6 +677,46 @@ func main() {
 <summary>Answer</summary>
 <pre>
 <code class="language-shell">fatal error: all goroutines are asleep - deadlock!
+</code></pre></details>
+{{< /note >}}
+
+
+
+{{< note title="select1" >}}
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+	go func() {
+		ch1 <- 1
+	}()
+
+	go func() {
+		select {
+		case <-ch1:
+		case ch2 <- 2:
+		}
+	}()
+
+	fmt.Println(<-ch2)
+}
+```
+
+- A. 1
+- B. 2
+- C. No output, program is deadlocked
+- D. No output, program has finished execution.
+- E. else
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code>B
 </code></pre></details>
 {{< /note >}}
 
@@ -835,5 +950,36 @@ func main() {
 <pre>
 <code class="language-shell">compilation error
 cannot use i (variable of type int) as MyInt1 value in variable declaration
+</code></pre></details>
+{{< /note >}}
+
+
+
+{{< note title="variable6" >}}
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	const X = 7.0
+	var x interface{} = X
+	if y, ok := x.(int); ok {
+		fmt.Println(y)
+	} else {
+		fmt.Println(int(y))
+	}
+}
+```
+- A. 7
+- B. 7.0
+- C. 0
+- D. compilation error
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code>C
 </code></pre></details>
 {{< /note >}}
