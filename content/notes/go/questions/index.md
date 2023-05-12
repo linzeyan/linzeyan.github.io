@@ -80,6 +80,41 @@ panic: send on closed channel
 
 
 
+{{< note title="context" >}}
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+)
+
+func f(ctx context.Context) {
+	context.WithValue(ctx, "foo", -6)
+}
+
+func main() {
+	ctx := context.TODO()
+	f(ctx)
+	fmt.Println(ctx.Value("foo"))
+}
+```
+
+- A. -6
+- B. 0
+- C. `<nil>`
+- D: panic
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code">C
+</code></pre></details>
+{{< /note >}}
+
+
+
 {{< note title="defer" >}}
 
 ```go
@@ -644,6 +679,36 @@ func main() {
 <pre>
 <code class="language-shell">compilation error
 cannot assign to struct field list["student"].Name in map
+</code></pre></details>
+{{< /note >}}
+
+
+
+{{< note title="print" >}}
+
+```go
+package main
+
+import "fmt"
+
+type T struct {
+	x int
+}
+
+func (t T) String() string { return "boo" }
+
+func main() {
+	t := T{123}
+	fmt.Printf("%v\n", t)
+	fmt.Printf("%#v\n", t)
+}
+```
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code class="language-shell">boo
+main.T{x:123}
 </code></pre></details>
 {{< /note >}}
 
