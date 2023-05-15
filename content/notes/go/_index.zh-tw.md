@@ -4,5 +4,5 @@ menu:
   notes:
     name: Go
     identifier: notes-go
-    weight: 20
+    weight: 5
 ---
