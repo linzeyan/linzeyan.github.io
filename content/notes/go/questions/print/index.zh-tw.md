@@ -36,3 +36,30 @@ func main() {
 main.T{x:123}
 </code></pre></details>
 {{< /note >}}
+
+
+
+{{< note title="print1" >}}
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func f(a ...int) {
+	fmt.Printf("%#v\n", a)
+}
+
+func main() {
+	f()
+}
+```
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code class="language-shell">[]int(nil)
+</code></pre></details>
+{{< /note >}}

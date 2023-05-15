@@ -49,3 +49,29 @@ func main() {
 panic: send on closed channel
 </code></pre></details>
 {{< /note >}}
+
+
+
+{{< note title="channel1" >}}
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	c := make(chan int)
+	close(c)
+	val, _ := <-c
+	fmt.Println(val)
+}
+```
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code class="language-shell">0
+</code></pre></details>
+{{< /note >}}

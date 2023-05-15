@@ -42,3 +42,26 @@ func main() {
 cannot assign to struct field list["student"].Name in map
 </code></pre></details>
 {{< /note >}}
+
+
+
+{{< note title="map1" >}}
+
+```go
+package main
+
+func main() {
+  m := make(map[int]int, 3)
+  x := len(m)
+  m[1] = m[1]
+  y := len(m)
+  println(x, y)
+}
+```
+
+<details>
+<summary>Answer</summary>
+<pre>
+<code class="language-shell">0 1
+</code></pre></details>
+{{< /note >}}
