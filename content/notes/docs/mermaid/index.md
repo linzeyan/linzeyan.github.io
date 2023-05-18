@@ -1,5 +1,5 @@
 ---
-title: Mermaid notes
+title: markdown notes
 weight: 100
 menu:
   notes:
@@ -9,9 +9,46 @@ menu:
     weight: 10
 ---
 
+{{< note title="link" >}}
+
+<pre><code class="language-shell">graph LR
+  A --- B
+  A ---|text| B
+  C --> D
+  C -->|text| D
+  E -.- F
+  E -.-|text| F
+  G -.-> H
+  G -.->|text| H
+  I === J
+  I ===|text| J
+  K ~~~ L
+  K ~~~|text| L
+</code></pre>
+
+{{< /note >}}
+
+
+
+{{< note title="link1" >}}
+
+```markdown
+flowchart LR
+    A --o B
+    B --x C
+
+    D o--o E
+    E <--> F
+    F x--x G
+```
+
+{{< /note >}}
+
+
+
 {{< note title="shapes" >}}
 
-```mermaid
+```markdown
 graph LR
   id1[方框]
   id2(帶有圓角的方框)
@@ -33,41 +70,9 @@ graph LR
 
 
 
-{{< note title="link" >}}
-
-```mermaid
-graph LR
-  A --- B
-  A ---|text| B
-  C --> D
-  C -->|text| D
-  E -.- F
-  E -.-|text| F
-  G -.-> H
-  G -.->|text| H
-  I === J
-  I ===|text| J
-  K ~~~ L
-  K ~~~|text| L
-```
-```mermaid
-flowchart LR
-    A --o B
-    B --x C
-
-    D o--o E
-    E <--> F
-    F x--x G
-
-```
-
-{{< /note >}}
-
-
-
 {{< note title="subgraphs" >}}
 
-```mermaid
+```markdown
 flowchart TD
     c1-->a2
 
