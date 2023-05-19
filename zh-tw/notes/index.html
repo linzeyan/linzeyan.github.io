@@ -79,28 +79,7 @@ English</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Decrypt file</span>
 </span></span><span style=display:flex><span>gpg --output archive_file.tar --decrypt archive_file.tar.gpg
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>link</span></h5><div class=card><div class=card-body><pre><code class=language-shell>graph LR
-  A</div>
-            </div>
-        
-            <div class=card>
-                <div class=card-body>B
-A</div>
-            </div>
-        
-            <div class=card>
-                <div class=card-body>|text| B
-C &ndash;&gt; D
-C &ndash;&gt;|text| D
-E -.- F
-E -.-|text| F
-G -.-&gt; H
-G -.-&gt;|text| H
-I === J
-I ===|text| J
-K ~~~ L
-K ~~~|text| L
-</code></pre></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>link1</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>flowchart LR
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>link</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>flowchart LR
 </span></span><span style=display:flex><span>    A --o B
 </span></span><span style=display:flex><span>    B --x C
 </span></span><span style=display:flex><span>
@@ -136,7 +115,81 @@ K ~~~|text| L
 </span></span><span style=display:flex><span>    subgraph three
 </span></span><span style=display:flex><span>    c1--&gt;c2
 </span></span><span style=display:flex><span>    end
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Check port status</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># `(echo &gt;/dev/tcp/${host}/${port})`</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>sequence</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>sequenceDiagram
+</span></span><span style=display:flex><span>    participant Alice
+</span></span><span style=display:flex><span>    participant Bob
+</span></span><span style=display:flex><span>    Alice-&gt;&gt;John: Hello John, how are you?
+</span></span><span style=display:flex><span>    loop Healthcheck
+</span></span><span style=display:flex><span>        John-&gt;John: Fight against hypochondria
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>    Note right of John: Rational thoughts &lt;<span style=color:#f92672>br</span>/&gt;prevail...
+</span></span><span style=display:flex><span>    John--&gt;Alice: Great!
+</span></span><span style=display:flex><span>    John-&gt;Bob: How about you?
+</span></span><span style=display:flex><span>    Bob--&gt;John: Jolly good!
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gantt</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>gantt
+</span></span><span style=display:flex><span>        dateFormat  YYYY-MM-DD
+</span></span><span style=display:flex><span>        title Adding GANTT diagram functionality to mermaid
+</span></span><span style=display:flex><span>        section A section
+</span></span><span style=display:flex><span>        Completed task            :done,    des1, 2014-01-06,2014-01-08
+</span></span><span style=display:flex><span>        Active task               :active,  des2, 2014-01-09, 3d
+</span></span><span style=display:flex><span>        Future task               :         des3, after des2, 5d
+</span></span><span style=display:flex><span>        Future task2               :         des4, after des3, 5d
+</span></span><span style=display:flex><span>        section Critical tasks
+</span></span><span style=display:flex><span>        Completed task in the critical line :crit, done, 2014-01-06,24h
+</span></span><span style=display:flex><span>        Implement parser and jison          :crit, done, after des1, 2d
+</span></span><span style=display:flex><span>        Create tests for parser             :crit, active, 3d
+</span></span><span style=display:flex><span>        Future task in critical line        :crit, 5d
+</span></span><span style=display:flex><span>        Create tests for renderer           :2d
+</span></span><span style=display:flex><span>        Add to mermaid                      :1d
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>class</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>classDiagram
+</span></span><span style=display:flex><span>  Class01 <span style=color:#960050;background-color:#1e0010>&lt;</span>|-- AveryLongClass : Cool
+</span></span><span style=display:flex><span>  Class03 *-- Class04
+</span></span><span style=display:flex><span>  Class05 o-- Class06
+</span></span><span style=display:flex><span>  Class07 .. Class08
+</span></span><span style=display:flex><span>  Class09 --&gt; C2 : Where am i?
+</span></span><span style=display:flex><span>  Class09 --* C3
+</span></span><span style=display:flex><span>  Class09 --|&gt; Class07
+</span></span><span style=display:flex><span>  Class07 : equals()
+</span></span><span style=display:flex><span>  Class07 : Object[] elementData
+</span></span><span style=display:flex><span>  Class01 : size()
+</span></span><span style=display:flex><span>  Class01 : int chimp
+</span></span><span style=display:flex><span>  Class01 : int gorilla
+</span></span><span style=display:flex><span>  Class08 &lt;<span style=color:#f92672>--</span>&gt; C2: Cool label
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>state</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>stateDiagram-v2
+</span></span><span style=display:flex><span>  open: Open Door
+</span></span><span style=display:flex><span>  closed: Closed Door
+</span></span><span style=display:flex><span>  locked: Locked Door
+</span></span><span style=display:flex><span>  open   --&gt; closed: Close
+</span></span><span style=display:flex><span>  closed --&gt; locked: Lock
+</span></span><span style=display:flex><span>  locked --&gt; closed: Unlock
+</span></span><span style=display:flex><span>  closed --&gt; open: Open
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>git</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>gitGraph:
+</span></span><span style=display:flex><span>options
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  &#34;nodeSpacing&#34;: 150,
+</span></span><span style=display:flex><span>  &#34;nodeRadius&#34;: 10
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>end
+</span></span><span style=display:flex><span>  commit
+</span></span><span style=display:flex><span>  branch newbranch
+</span></span><span style=display:flex><span>  checkout newbranch
+</span></span><span style=display:flex><span>  commit
+</span></span><span style=display:flex><span>  commit
+</span></span><span style=display:flex><span>  checkout master
+</span></span><span style=display:flex><span>  commit
+</span></span><span style=display:flex><span>  commit
+</span></span><span style=display:flex><span>  merge newbranch
+</span></span></code></pre></div></div></div></div></div><div class=mermaid align=left style=background-color:none;border-radius:5px>graph LR
+A --- B
+A ---|text| B
+C --> D
+C -->|text| D
+E -.- F
+E -.-|text| F
+G -.-> H
+G -.->|text| H
+I === J
+I ===|text| J</div><div class=note-card><div class=item><h5 class=note-title><span>Check port status</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># `(echo &gt;/dev/tcp/${host}/${port})`</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>(</span>echo &gt;/dev/tcp/192.168.57.24/80<span style=color:#f92672>)</span> &amp;&gt;/dev/null <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;open&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;closed&#34;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>timeout <span style=color:#ae81ff>1</span> bash -c <span style=color:#e6db74>&#39;&gt;/dev/tcp/192.168.57.24/80 &amp;&gt;/dev/null&#39;</span> <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;open&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;closed&#34;</span>
