@@ -32,7 +32,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/FsQsswPtOpp" target="_blank">Try it</a>
 <code>B
 </code></pre></details>
 {{< /note >}}

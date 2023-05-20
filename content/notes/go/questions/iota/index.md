@@ -32,7 +32,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/ujsBSQPBkm8" target="_blank">Try it</a>
 <code class="language-shell">0 2 zz zz 5
 </code></pre></details>
 {{< /note >}}
@@ -64,7 +64,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/9OvlzxqBZa5" target="_blank">Try it</a>
 <code class="language-shell">0 1 1 2
 </code></pre></details>
 {{< /note >}}

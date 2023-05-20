@@ -33,7 +33,7 @@ func defer_call() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/-bTDzXAjgYn" target="_blank">Try it</a>
 <code class="language-shell">3
 2
 1
@@ -75,7 +75,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/JChQfww_8GK" target="_blank">Try it</a>
 <code class="language-shell">29
 29
 28
@@ -116,7 +116,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/blqcBt9nVrk" target="_blank">Try it</a>
 <code class="language-shell">29
 28
 28
@@ -152,7 +152,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/zkp1U4vSmqO" target="_blank">Try it</a>
 <code class="language-shell">2
 1
 </code></pre></details>
@@ -188,7 +188,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/Y1rR4UK8AOh" target="_blank">Try it</a>
 <code>A
 </code></pre></details>
 {{< /note >}}

@@ -43,7 +43,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/BRdAwDKfZt4" target="_blank">Try it</a>
 <code>B
 </code></pre></details>
 {{< /note >}}
@@ -73,7 +73,6 @@ func main() {
 	m, _ := json.Marshal(t)
 	fmt.Printf("%s", m)
 }
-
 ```
 - A. {"Time":"2020-12-20T00:00:00Z","N":5}
 - B. "2020-12-20T00:00:00Z"
@@ -83,7 +82,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/ylPvSph0WKu" target="_blank">Try it</a>
 <code>B
 </code></pre></details>
 {{< /note >}}

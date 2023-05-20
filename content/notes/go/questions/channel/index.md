@@ -44,7 +44,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/OtDbNbLE1cH" target="_blank">Try it</a>
 <code class="language-shell">ok
 panic: send on closed channel
 </code></pre></details>
@@ -71,7 +71,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/S9Juy0nlAvz" target="_blank">Try it</a>
 <code class="language-shell">0
 </code></pre></details>
 {{< /note >}}

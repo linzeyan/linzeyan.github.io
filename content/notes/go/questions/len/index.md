@@ -29,7 +29,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/5JSJUg9DlVm" target="_blank">Try it</a>
 <code>C
 </code></pre></details>
 {{< /note >}}
@@ -61,7 +61,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/TqAKcTqRFDo" target="_blank">Try it</a>
 <code>C
 </code></pre></details>
 {{< /note >}}
@@ -93,7 +93,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/BGB-z-cJhP2" target="_blank">Try it</a>
 <code>A
 </code></pre></details>
 {{< /note >}}

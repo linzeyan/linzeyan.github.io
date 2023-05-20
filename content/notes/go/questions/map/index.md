@@ -37,7 +37,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/gkPDhQyDAQW" target="_blank">Try it</a>
 <code class="language-shell">compilation error
 cannot assign to struct field list["student"].Name in map
 </code></pre></details>
@@ -51,17 +51,17 @@ cannot assign to struct field list["student"].Name in map
 package main
 
 func main() {
-  m := make(map[int]int, 3)
-  x := len(m)
-  m[1] = m[1]
-  y := len(m)
-  println(x, y)
+	m := make(map[int]int, 3)
+	x := len(m)
+	m[1] = m[1]
+	y := len(m)
+	println(x, y)
 }
 ```
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/OM5SjB_pob2" target="_blank">Try it</a>
 <code class="language-shell">0 1
 </code></pre></details>
 {{< /note >}}

@@ -15,18 +15,18 @@ menu:
 package main
 
 import (
-  "fmt"
+	"fmt"
 )
 
 func main() {
-  var s1 []int
-  var s2 = []int{}
-  if __ == nil {
-    fmt.Println("nil slice")
-  }
-  if __ != nil {
-    fmt.Println("empty slice")
-  }
+	var s1 []int
+	var s2 = []int{}
+	if __ == nil {
+		fmt.Println("nil slice")
+	}
+	if __ != nil {
+		fmt.Println("empty slice")
+	}
 }
 ```
 - A. s1, s2
@@ -36,7 +36,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/S_Q4w6NMAoU" target="_blank">Try it</a>
 <code>A
 </code></pre></details>
 {{< /note >}}
@@ -49,23 +49,23 @@ func main() {
 package main
 
 import (
-  "fmt"
+	"fmt"
 )
 
 func main() {
-  s := [3]int{1, 2, 3}
-  a := s[:0]
-  b := s[:2]
-  c := s[1:2:cap(s)]
-  fmt.Println(len(a), cap(a))
-  fmt.Println(len(b), cap(b))
-  fmt.Println(len(c), cap(c))
+	s := [3]int{1, 2, 3}
+	a := s[:0]
+	b := s[:2]
+	c := s[1:2:cap(s)]
+	fmt.Println(len(a), cap(a))
+	fmt.Println(len(b), cap(b))
+	fmt.Println(len(c), cap(c))
 }
 ```
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/hpZ3VyWv-Pz" target="_blank">Try it</a>
 <code class="language-shell">0 3
 2 3
 1 2
@@ -93,7 +93,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/H-1Jf-LwUg4" target="_blank">Try it</a>
 <code class="language-shell">[1 2 4]
 [1 2 4]
 </code></pre></details>

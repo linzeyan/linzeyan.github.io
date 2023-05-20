@@ -31,7 +31,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/hwt8G32Bfy5" target="_blank">Try it</a>
 <code class="language-shell">boo
 main.T{x:123}
 </code></pre></details>
@@ -59,7 +59,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/uCBzdeAxFE6" target="_blank">Try it</a>
 <code class="language-shell">[]int(nil)
 </code></pre></details>
 {{< /note >}}

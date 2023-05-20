@@ -35,7 +35,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/kF4pOjYXbXf" target="_blank">Try it</a>
 <code class="language-shell">fatal error: all goroutines are asleep - deadlock!
 </code></pre></details>
 {{< /note >}}
@@ -75,7 +75,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/lPURBGXle_N" target="_blank">Try it</a>
 <code>B
 </code></pre></details>
 {{< /note >}}

@@ -45,7 +45,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/VCR1yAY32nG" target="_blank">Try it</a>
 <code>C
 </code></pre></details>
 {{< /note >}}
@@ -72,7 +72,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/SXwEiV0FUWJ" target="_blank">Try it</a>
 <code>B
 </code></pre></details>
 {{< /note >}}
@@ -93,7 +93,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/Th1vvvhoDjR" target="_blank">Try it</a>
 <code class="language-shell">compliation error
 -128 / a (constant 128 of type int8) overflows int8
 </code></pre></details>
@@ -115,7 +115,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/Z8N_FB4szWY" target="_blank">Try it</a>
 <code class="language-shell">-128
 </code></pre></details>
 {{< /note >}}
@@ -142,7 +142,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/Q25PLVaAOfd" target="_blank">Try it</a>
 <code class="language-shell">compilation error
 cannot use i (variable of type int) as MyInt1 value in variable declaration
 </code></pre></details>
@@ -174,7 +174,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/lKmlfL6X6Qu" target="_blank">Try it</a>
 <code>C
 </code></pre></details>
 {{< /note >}}

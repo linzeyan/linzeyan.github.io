@@ -44,7 +44,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/2nBU-dMwW6b" target="_blank">Try it</a>
 <code class="language-shell">BBBBBBB
 </code></pre></details>
 {{< /note >}}
@@ -84,7 +84,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/7SFsQFsd2YJ" target="_blank">Try it</a>
 <code class="language-shell">compilation error
 cannot use Student{} (value of type Student) as People value in variable declaration: Student does not implement People (method Speak has pointer receiver)
 </code></pre></details>
@@ -128,7 +128,7 @@ func main() {
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/IzeaCg4N47K" target="_blank">Try it</a>
 <code class="language-shell">T1.Error T1.String
 T2.Error T2.String
 T1.Error T2.String
@@ -149,12 +149,11 @@ func main() {
 	var m interface{} = [...]int{99: 0}
 	fmt.Println(p == m)
 }
-
 ```
 
 <details>
 <summary>Answer</summary>
-<pre>
+<pre><a href="https://go.dev/play/p/k5eQBOljQLH" target="_blank">Try it</a>
 <code class="language-shell">true
 </code></pre></details>
 {{< /note >}}
