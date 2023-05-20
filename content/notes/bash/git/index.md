@@ -32,3 +32,19 @@ git show dev:main.go
 git ls-files --others --exclude-standard -z | xargs -0 tar rvf backup-untracked.zip
 ```
 {{< /note >}}
+
+{{< note title="Submodule" >}}
+```bash
+# Add submodule
+git submodule add https://github.com/linzeyan/toha.git themes/toha
+
+# Update submodule
+git submodule update --init --recursive
+
+# Remove submodule
+git rm <path-to-submodule>
+rm -rf .git/modules/<path-to-submodule>
+git config --remove-section submodule.<path-to-submodule>.
+rm -f .gitmodules
+```
+{{< /note >}}
