@@ -2,11 +2,12 @@ baseURL: https://linzeyan.github.io/
 
 languageCode: en-us
 title: "Ricky"
+theme: "toha"
 
 # Use Hugo modules to add theme
 module:
-  imports:
-    - path: github.com/hugo-toha/toha/v4
+  # imports:
+  #   - path: github.com/hugo-toha/toha/v4
   mounts:
     - source: ./node_modules/flag-icon-css/flags
       target: static/flags
@@ -145,11 +146,14 @@ params:
 
     # Enable Analytics
     analytics:
-      enabled: false
+      enabled: true
       services:
+        # cloudflare web analytics
+        cloudflare:
+          token: "27a0cd9f0e3b46909879cf99f7cc6878"
         # Google Analytics
-        google:
-          id: G-H4LBG7NDFZ
+        # google:
+        #   id: G-H4LBG7NDFZ
         # # CounterDev
         # counterDev:
         #   id: <your counterdev id>
