@@ -53,6 +53,17 @@ Chinese</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Count commits</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rev-list --count main
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>View a file of another branch</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git show dev:main.go
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Take a backup of untracked files</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git ls-files --others --exclude-standard -z | xargs -0 tar rvf backup-untracked.zip
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Submodule</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Add submodule</span>
+</span></span><span style=display:flex><span>git submodule add https://github.com/linzeyan/toha.git themes/toha
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Update submodule</span>
+</span></span><span style=display:flex><span>git submodule update --init --recursive
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Remove submodule</span>
+</span></span><span style=display:flex><span>git rm &lt;path-to-submodule&gt;
+</span></span><span style=display:flex><span>rm -rf .git/modules/&lt;path-to-submodule&gt;
+</span></span><span style=display:flex><span>git config --remove-section submodule.&lt;path-to-submodule&gt;.
+</span></span><span style=display:flex><span>rm -f .gitmodules
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Install</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>brew install gnupg
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Generate</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg --full-generate-key
 </span></span><span style=display:flex><span>
