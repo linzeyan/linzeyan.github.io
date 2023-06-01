@@ -23,6 +23,15 @@ gpg --list-secret-keys
 ```
 {{< /note >}}
 
+{{< note title="Generate Problem" >}}
+```shell
+$ gpg --full-generate-key
+gpg: Sorry, no terminal at all requested - can't get input
+```
+
+Comment out no-tty in `~/.gnupg/gpg.conf`
+{{< /note >}}
+
 {{< note title="Add to git" >}}
 ```bash
 gpg --armor --export 51ADF7101CA64B2508AE29EEC279555531A1DD62

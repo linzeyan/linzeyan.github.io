@@ -21,3 +21,11 @@ timeout 1 bash -c '>/dev/tcp/192.168.57.24/80' && echo "open" || echo "closed"
 ```
 
 {{< /note >}}
+
+{{< note title="Block subnets" >}}
+
+```bash
+ip route add blackhole 192.168.0.0/24
+```
+
+{{< /note >}}
