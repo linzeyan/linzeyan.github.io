@@ -9,6 +9,14 @@ menu:
     weight: 10
 ---
 
+{{< note title="Create Network" >}}
+
+```bash
+docker network create -d bridge --subnet 172.100.0.0/24 --gateway 172.100.0.1 backend_dev
+```
+
+{{< /note >}}
+
 {{< note title="Multiple build-arg" >}}
 
 ```bash
@@ -20,6 +28,7 @@ docker build . -f ./scripts/Dockerfile \
 ```
 
 {{< /note >}}
+
 {{< note title="Run container in different platform" >}}
 
 ```bash
