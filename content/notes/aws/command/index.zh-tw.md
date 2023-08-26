@@ -21,6 +21,9 @@ aws ecr get-login-password | docker login --username AWS --password-stdin 12345.
 {{< note title="S3" >}}
 
 ```bash
+# Copy local file to S3
+aws s3 cp ./pic.png s3://bucket_name/dir/
+
 # Sync local local_dir to S3
 aws s3 sync local_dir s3://bucket_name --acl public-read --delete
 ```
