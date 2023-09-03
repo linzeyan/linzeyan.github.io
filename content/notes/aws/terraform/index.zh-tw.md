@@ -50,6 +50,8 @@ resource "aws_instance" "Gitlab" {
     volume_size = 100
     volume_type = "gp2"
   }
+
+  user_data = file("initial.bash")
 }
 ```
 

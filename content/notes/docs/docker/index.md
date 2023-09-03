@@ -3,7 +3,7 @@ title: Docker docs
 weight: 100
 menu:
   notes:
-    name: docker-docs
+    name: docker
     identifier: notes-docker-docs
     parent: notes-docs
     weight: 10
@@ -249,7 +249,17 @@ ENV DOCKER_BUILDX_VERSION=${DOCKER_BUILDX_VERSION}
 ENV DOCKER_CLI_EXPERIMENTAL=enabled
 ENV DOCKER_HOST=""
 ENV DOCKER_TLS_CERTDIR=/certs
+```
 
+{{< /note >}}
+
+{{< note title="Dockerfile awscli" >}}
+
+```dockerfile
+FROM ubuntu
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update &&\
+    apt-get install -y awscli --no-install-recommends
 ```
 
 {{< /note >}}

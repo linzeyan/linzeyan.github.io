@@ -3,7 +3,7 @@ title: Gitlab docs
 weight: 100
 menu:
   notes:
-    name: gitlab-docs
+    name: gitlab
     identifier: notes-gitlab-docs
     parent: notes-docs
     weight: 10
@@ -181,15 +181,10 @@ deployer:
   script:
     - |
       case "${stage}" in
-        dev)
-          TEMPLATE_SERVICE_HOST=stage-dev.service.template.com
+        dev|qa)
+          TEMPLATE_SERVICE_HOST=stage-${stage}.service.template.com
           DOCKER_HOST=${TEMPLATE_SERVICE_HOST}:${TEMPLATE_DOCKER_API_PORT}
-          TEMPLATE_ETCD_URL=stage-dev.etcd.template.com:2379
-          ;;
-        qa)
-          TEMPLATE_SERVICE_HOST=stage-qa.service.template.com
-          DOCKER_HOST=${TEMPLATE_SERVICE_HOST}:${TEMPLATE_DOCKER_API_PORT}
-          TEMPLATE_ETCD_URL=stage-qa.etcd.template.com:2379
+          TEMPLATE_ETCD_URL=stage-${stage}.etcd.template.com:2379
           ;;
         *)
           echo 'Please specify ${stage}'
@@ -224,6 +219,97 @@ deployer:
   only:
     - main
     - web
+  when: manual
+```
+
+{{< /note >}}
+
+{{< note title="gitlab-ci.yml template Frontend Static" >}}
+
+```yaml
+stages:
+  - lint
+  - test
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  TEMPLATE_DOCKER_API_PORT: 3333
+  TEMPLATE_STATIC_DIR: dist
+  TEMPLATE_S3_BUCKET_NAME: template_bucket
+  TEMPLATE_SERVICE_NAME: template_service
+  TEMPLATE_NODE_VERSION: 20
+
+linter:
+  stage: lint
+  image:
+    name: node:${TEMPLATE_NODE_VERSION}
+    pull_policy: if-not-present
+  tags:
+    - docker
+  script:
+    - npm install
+    - npm run lint
+    - npm run lint:style
+  allow_failure: true
+
+tester:
+  stage: test
+  image:
+    name: node:${TEMPLATE_NODE_VERSION}
+    pull_policy: if-not-present
+  tags:
+    - docker
+  script:
+    - npm install
+    - npm run test
+  allow_failure: false
+
+builder:
+  stage: build
+  image:
+    name: node:${TEMPLATE_NODE_VERSION}
+    pull_policy: if-not-present
+  tags:
+    - docker
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - ${TEMPLATE_STATIC_DIR}/
+  only:
+    - main
+    - master
+
+releaser:
+  stage: deploy
+  image:
+    name: awscli
+    pull_policy: if-not-present
+  tags:
+    - docker
+  needs:
+    - job: builder
+      artifacts: true
+  script:
+    - |
+      case "${stage}" in
+        dev|qa)
+          TEMPLATE_S3_BUCKET_NAME=template_bucket_${stage}
+          ;;
+        *)
+          echo 'Please specify ${stage}'
+          exit 11
+      esac
+    - aws s3 sync ${TEMPLATE_STATIC_DIR} s3://${TEMPLATE_S3_BUCKET_NAME}/${TEMPLATE_SERVICE_NAME} --acl public-read --delete
+  only:
+    - main
+    - master
   when: manual
 ```
 

@@ -38,6 +38,14 @@ docker build . -f ./scripts/Dockerfile \
 
 {{< /note >}}
 
+{{< note title="Multiple platform" >}}
+
+```bash
+docker buildx build --platform --platform linux/arm64,linux/amd64 -t zeyanlin/ops-cli .
+```
+
+{{< /note >}}
+
 {{< note title="Run container in different platform" >}}
 
 ```bash

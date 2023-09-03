@@ -10,41 +10,53 @@ menu:
 ---
 
 {{< note title="Search in git" >}}
+
 ```bash
 git rev-list --all | xargs git grep -F ''
 ```
+
 {{< /note >}}
 
 {{< note title="Count commits" >}}
+
 ```bash
 git rev-list --count main
 ```
+
 {{< /note >}}
 
 {{< note title="View a file of another branch" >}}
+
 ```bash
 git show dev:main.go
 ```
+
 {{< /note >}}
 
 {{< note title="Take a backup of untracked files" >}}
+
 ```bash
 git ls-files --others --exclude-standard -z | xargs -0 tar rvf backup-untracked.zip
 ```
+
 {{< /note >}}
 
 {{< note title="Submodule" >}}
+
 ```bash
 # Add submodule
-git submodule add https://github.com/linzeyan/toha.git themes/toha
+git submodule add -b main git@github.com:linzeyan/toha.git themes/toha
 
 # Update submodule
-git submodule update --init --recursive
+git submodule update --init --remote
 
 # Remove submodule
-git rm <path-to-submodule>
-rm -rf .git/modules/<path-to-submodule>
-git config --remove-section submodule.<path-to-submodule>.
+modulePath="themes/toha"
+git submodule deinit -f ${modulePath}
+git rm ${modulePath}
+rm -rf .git/modules/${modulePath}
+git config --remove-section submodule.${modulePath}.
 rm -f .gitmodules
 ```
+
 {{< /note >}}
