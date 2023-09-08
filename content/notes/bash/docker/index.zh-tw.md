@@ -18,6 +18,17 @@ docker-compose up -d --pull always
 
 {{< /note >}}
 
+{{< note title="Create buildx instance" >}}
+
+```bash
+# create buildx instance
+docker buildx create --name builder --bootstrap --driver docker-container
+# install emulators
+docker run --privileged --rm tonistiigi/binfmt --install all
+```
+
+{{< /note >}}
+
 {{< note title="Create Network" >}}
 
 ```bash
@@ -41,7 +52,10 @@ docker build . -f ./scripts/Dockerfile \
 {{< note title="Multiple platform" >}}
 
 ```bash
-docker buildx build --platform --platform linux/arm64,linux/amd64 -t zeyanlin/ops-cli .
+# create and use buildx instance
+docker buildx create --use --name builder
+# build multiple platform
+docker buildx build --push --platform linux/arm64,linux/amd64 -t zeyanlin/ops-cli .
 ```
 
 {{< /note >}}
