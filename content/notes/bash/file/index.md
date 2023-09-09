@@ -12,6 +12,7 @@ menu:
 {{< note title="File create time" >}}
 
 #### 1. Find Inode
+
 ```shell
 $ stat dns.yaml
   File: dns.yaml
@@ -23,13 +24,16 @@ Modify: 2021-12-10 18:27:54.157585209 +0800
 Change: 2022-01-07 14:57:58.619727878 +0800
  Birth: -
 ```
+
 or
+
 ```shell
 $ ls -i dns.yaml
 3585173 dns.yaml
 ```
 
 #### 2. Find Filesystem
+
 ```shell
 $ df dns.yaml
 Filesystem     1K-blocks     Used Available Use% Mounted on
@@ -37,6 +41,7 @@ Filesystem     1K-blocks     Used Available Use% Mounted on
 ```
 
 #### 3. Get Create Time
+
 ```shell
 $ sudo debugfs -R 'stat <3595636>' /dev/root
 Inode: 3595636   Type: regular    Mode:  0644   Flags: 0x80000
@@ -57,9 +62,18 @@ EXTENTS:
 
 {{< /note >}}
 
-
 {{< note title="Display Ubuntu's Message of the Day" >}}
+
 ```bash
 sudo chmod +x /etc/update-motd.d/*
 ```
+
+{{< /note >}}
+
+{{< note title="List domains" >}}
+
+```bash
+sed 's/ //g' domains-info.md | awk -F '|' '{if($3 ~ /.*\.com/)print $3}' | sort | uniq
+```
+
 {{< /note >}}

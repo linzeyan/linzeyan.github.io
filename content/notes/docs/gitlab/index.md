@@ -369,3 +369,33 @@ volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
 ```
 
 {{< /note >}}
+
+{{< note title="issue" >}}
+
+##### console output while install
+
+```
+[execute] psql: could not connect to server: Connection refused
+            Is the server running locally and accepting
+            connections on Unix domain socket "/var/opt/gitlab/postgresql/.s.PGSQL.5432"?
+```
+
+##### solve
+
+```bash
+# stop service
+sudo gitlab-ctl stop
+sudo systemctl stop gitlab-runsvdir.service
+
+# check if there are any postgres processes; shouldn't be
+ps aux | grep postgre
+
+# remove process pid
+sudo rm /var/opt/gitlab/postgresql/data/postmaster.pid
+
+# start service
+sudo systemctl start gitlab-runsvdir.service
+sudo gitlab-ctl reconfigure
+```
+
+{{< /note >}}
