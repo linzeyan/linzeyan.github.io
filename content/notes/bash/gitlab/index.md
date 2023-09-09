@@ -33,3 +33,47 @@ gitlab-ctl registry-garbage-collect -m
 ```
 
 {{< /note >}}
+
+{{< note title="migration" >}}
+
+###### 1. Copy Old Crontab、Old /etc/gitlab、update-ca-trust
+
+###### 2. Version should be same
+
+###### 3. Copy newest backup file
+
+###### 4. Stop Services
+
+```bash
+gitlab-ctl stop unicorn
+gitlab-ctl stop puma
+gitlab-ctl stop sidekiq
+gitlab-ctl status
+```
+
+###### 5. Restore
+
+> File must put in /var/opt/gitlab/backup
+
+```bash
+chown git:git backupfile
+gitlab-backup restore BACKUP=11493107454_2018_04_25_10.6.4-ce
+```
+
+###### 6. Check
+
+```bash
+gitlab-ctl reconfigure
+gitlab-ctl restart
+gitlab-rake gitlab:check SANITIZE=true
+```
+
+###### 7. Unlock gitlab-runner at Admin Area
+
+###### 8. Pages: Add https settings in gitlab.rb, Admin Area -> Applications -> Destroy old System OAuth, and remove secret in gitlab-secret.json.
+
+```bash
+gitlab-ctl reconfigure
+```
+
+{{< /note >}}

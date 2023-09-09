@@ -9,9 +9,31 @@ menu:
     weight: 10
 ---
 
+{{< note title="map" >}}
+
+```nginx
+# map
+map $remote_addr $limit_key {
+    35.229.201.209 "";
+    default $binary_remote_addr;
+}
+# wss.conf
+limit_req_zone $limit_key zone=websocket:10m rate=20r/s;
+limit_req_status 499;
+
+server {
+    location = / {
+        limit_req zone=websocket nodelay;
+        limit_req_log_level warn;
+    }
+}
+```
+
+{{< /note >}}
+
 {{< note title="rewrite" >}}
 
-##### 1
+###### 1
 
 ```nginx
 # https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
@@ -26,7 +48,7 @@ location /static {
 
 ```
 
-##### 2
+###### 2
 
 ```nginx
 # https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
@@ -41,11 +63,40 @@ location @pic {
 }
 ```
 
+###### 3
+
+```nginx
+# remove prefix path and allow proxy_pass POST
+location /upload/ {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    root /data/nginx/html;
+    # Remove path
+    rewrite ^/upload/(.*) /$1  break;
+    proxy_pass https://logo$uri$is_args$args;
+    # Proxy_pass POST
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_cache_bypass $http_upgrade;
+    #proxy_redirect  https://logo/ /;
+}
+
+location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    root /data/nginx/html;
+    index  index.html index.htm;
+}
+```
+
 {{< /note >}}
 
 {{< note title="grafana behind nginx" >}}
 
-##### server/ssl.conf
+###### server/ssl.conf
 
 ```nginx
 ssl_certificate     /etc/ssl/go2cloudten.com.crt;
@@ -56,14 +107,14 @@ ssl_protocols TLSv1.2 TLSv1.3;
 ssl_session_timeout 50m;
 ```
 
-##### server/proxy.conf
+###### server/proxy.conf
 
 ```nginx
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ```
 
-##### grafana.conf
+###### grafana.conf
 
 ```nginx
 server {
@@ -87,7 +138,3 @@ server {
 ```
 
 {{< /note >}}
-
-```
-
-```

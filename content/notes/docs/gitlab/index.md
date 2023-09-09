@@ -9,6 +9,25 @@ menu:
     weight: 10
 ---
 
+{{< note title="add member by project" >}}
+
+Admin Area -> Settings -> General -> LDAP settings -> Lock memberships to LDAP synchronization -> Cancel
+
+{{< /note >}}
+
+{{< note title="backup cronjob" >}}
+
+```bash
+# Backup Gitlab configs
+1 0 * * * /usr/bin/tar -zcf /var/opt/gitlab/backups/`date +%Y_%m_%d`_gitlab_config.tar.gz /etc/gitlab &> /tmp/backup.log
+# Backup Gitlab data
+1 1 * * * /usr/bin/gitlab-backup create STRATEGY=copy BACKUP=`date +%Y_%m_%d` &>> /tmp/backup.log
+# Rotate
+0 2 * * * /usr/bin/rm -f `find /data/backups/ -name "*.tar*" -mtime +15`
+```
+
+{{< /note >}}
+
 {{< note title="gitlab-ci.yml template Golang" >}}
 
 ```yaml
@@ -372,7 +391,7 @@ volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
 
 {{< note title="issue" >}}
 
-##### console output while install
+###### console output while install
 
 ```
 [execute] psql: could not connect to server: Connection refused
@@ -380,7 +399,7 @@ volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
             connections on Unix domain socket "/var/opt/gitlab/postgresql/.s.PGSQL.5432"?
 ```
 
-##### solve
+###### solve
 
 ```bash
 # stop service
@@ -396,6 +415,79 @@ sudo rm /var/opt/gitlab/postgresql/data/postmaster.pid
 # start service
 sudo systemctl start gitlab-runsvdir.service
 sudo gitlab-ctl reconfigure
+```
+
+{{< /note >}}
+
+{{< note title="issue1" >}}
+
+###### 解決 Gitlab Pages 限制訪問權限後的 redirect invalid url。
+
+1. Remove "gitlab_pages" block from `/etc/gitlab/gitlab-secrets.json`
+2. `gitlab-ctl reconfigure`
+
+{{< /note >}}
+
+{{< note title="issue2" >}}
+
+###### console output
+
+```shell
+# Gitlab Container Registry
+Error response from daemon: Get https://registry.knowhow.fun/v2/: x509: certificate has expired or is not yet valid
+```
+
+###### /etc/gitlab/gitlab.rb
+
+```ruby
+registry_external_url 'https://registry.knowhow.fun'
+gitlab_rails['registry_enabled'] = true
+gitlab_rails['registry_api_url'] = "http://localhost:5000"
+gitlab_rails['registry_path'] = "/var/opt/gitlab/gitlab-rails/shared/registry"
+gitlab_rails['gitlab_default_projects_features_container_registry'] = true
+gitlab_rails['lfs_enabled'] = true
+nginx['enable'] = true
+nginx['ssl_client_certificate'] = "/etc/gitlab/ca.crt"
+registry['registry_http_addr'] = "localhost:5000"
+registry_nginx['ssl_certificate'] = "/etc/gitlab/server.crt"
+registry_nginx['ssl_certificate_key'] = "/etc/gitlab/server.key"
+registry_nginx['proxy_set_headers'] = { "Host" => "registry.knowhow.fun"  }
+```
+
+###### solve
+
+```bash
+yum install ca-certificates
+cd /etc/gitlab
+openssl genrsa -out ca.key 4096
+openssl req -new -x509 -days 3650 -key ca.key -out ca.crt
+openssl genrsa -out server.key 4096
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
+cp server.crt /etc/pki/ca-trust/source/anchors/
+cp ca.crt /etc/pki/ca-trust/source/anchors/
+update-ca-trust
+```
+
+{{< /note >}}
+
+{{< note title="issue3" >}}
+
+###### console output
+
+```shell
+# Gitlab Container Registry
+received unexpected HTTP status: 500 Internal Server Error
+```
+
+###### solve
+
+```ruby
+gitlab_rails['ldap_servers'] = {
+    'main' => {
+        'encryption' => 'plain',
+    }
+}
 ```
 
 {{< /note >}}
