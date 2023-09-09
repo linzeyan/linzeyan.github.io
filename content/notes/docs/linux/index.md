@@ -17,6 +17,26 @@ ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock 
 
 {{< /note >}}
 
+{{< note title="gd.service" >}}
+
+```bash
+[Unit]
+Description=Fetch DNS
+After=network.target
+After=mysql.service
+
+[Service]
+WorkingDirectory=/data/dns
+ExecStart=/data/dns/gd -o hourly
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+{{< /note >}}
+
 {{< note title="openresty.service" >}}
 
 ```bash
