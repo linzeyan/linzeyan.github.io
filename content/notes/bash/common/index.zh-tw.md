@@ -9,11 +9,27 @@ menu:
     weight: 10
 ---
 
+{{< note title="ab" >}}
+
+```bash
+ab -n 20 -c 20 -k https://default.hddv1.com/error
+```
+
+{{< /note >}}
+
 {{< note title="cutycapt" >}}
 
 ```bash
 # Capture website page as picture
 xvfb-run --server-args="-screen 0, 1024x768x24" cutycapt --url=https://www.google.com --out="/tmp/google.png"
+```
+
+{{< /note >}}
+
+{{< note title="hey" >}}
+
+```bash
+hey -n 200000 -c 500 -h2 -z 30s https://a8-wss.hddv1.com/test
 ```
 
 {{< /note >}}
@@ -49,6 +65,14 @@ for i in $(ps -ef | grep gateway | grep -v grep | awk '{print $2}'); do prlimit 
 
 {{< /note >}}
 
+{{< note title="siege" >}}
+
+```bash
+siege --time=3s --concurrent=30000 https://a8-h5.hddv1.com/index.html
+```
+
+{{< /note >}}
+
 {{< note title="tr" >}}
 
 ```bash
@@ -56,6 +80,42 @@ for i in $(ps -ef | grep gateway | grep -v grep | awk '{print $2}'); do prlimit 
 YRIRY GJB CNFFJBEQ EBGGRA
 # cat krypton2 | tr a-zA-Z n-za-mN-ZA-M
 LEVEL TWO PASSWORD ROTTEN
+```
+
+{{< /note >}}
+
+{{< note title="vegeta" >}}
+
+```bash
+#!/usr/bin/env bash
+
+attack() {
+    echo "GET ${1}" |
+        vegeta attack -duration=100s -header="User-Agent: baidu" -header="X-Forwarded-For: 47.0.0.1" -rate=500 -timeout=1s |
+        vegeta encode |
+        jaggr @count=rps \
+            hist\[100,200,300,400,500\]:code \
+            p25,p50,p95:latency \
+            sum:bytes_in \
+            sum:bytes_out |
+        jplot rps+code.hist.100+code.hist.200+code.hist.300+code.hist.400+code.hist.500 \
+            latency.p95+latency.p50+latency.p25 \
+            bytes_in.sum+bytes_out.sum
+}
+
+if [[ -n ${1} ]]; then
+    attack ${1}
+fi
+
+## -header="Connection: Upgrade" -header="Upgrade: websocket"
+```
+
+{{< /note >}}
+
+{{< note title="wrk" >}}
+
+```bash
+wrk -t10 -c1000 -d30s -H "User-Agent: baidu" "https://default.hddv1.com/error"
 ```
 
 {{< /note >}}
@@ -96,10 +156,101 @@ src/build.sh
 
 {{< note title="Install" >}}
 
+###### autocorrect
+
+> A linter and formatter for help you improve copywriting, to correct spaces, words, punctuations between CJK (Chinese, Japanese, Korean). [Github](https://github.com/huacnlee/autocorrect)
+
 ```bash
-# openresty
+wget https://github.com/huacnlee/autocorrect/releases/download/v1.7.4/autocorrect-darwin-amd64.tar.gz
+```
+
+###### bpf
+
+> BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
+> Kernel should higher than 4.1
+> Install from source is better
+
+```bash
+# `/usr/share/bcc/`
+# https://github.com/iovisor/bcc
+# https://github.com/iovisor/bcc/blob/master/docs/reference_guide.md#1-kernel-source-directory
+# https://github.com/iovisor/bpftrace
+yum install bcc-tools
+```
+
+###### flamegraph
+
+> Stack trace visualizer
+
+```bash
+# https://github.com/brendangregg/FlameGraph
+brew install flamegraph
+```
+
+###### git-split-diffs
+
+> GitHub style split diffs in your terminal
+
+```bash
+npm install -g git-split-diffs
+```
+
+###### glci
+
+> Test your Gitlab CI Pipelines changes locally using Docker. [blog](https://blog.chengweichen.com/2021/03/glci-gitlab-local-ci.html)
+
+```bash
+yarn global add glci
+```
+
+###### openresty
+
+```bash
 wget https://openresty.org/package/centos/openresty.repo -O /etc/yum.repos.d/openresty.repo
 yum install -y openresty openresty-resty
+```
+
+###### perf
+
+> Performance monitoring for the Linux kernel
+
+```bash
+# https://github.com/brendangregg/Misc/blob/master/perf_events/perf.md
+# http://www.brendangregg.com/perf.html
+yum install perf
+```
+
+###### pptx2md
+
+> A pptx to markdown converter
+
+```bash
+pip3 install pptx2md
+```
+
+###### sockperf
+
+> Network Benchmarking Utility
+
+```bash
+# https://github.com/Mellanox/sockperf
+yum install sockperf
+```
+
+###### upx
+
+> UPX - the Ultimate Packer for eXecutables
+
+```bash
+brew install upx
+```
+
+###### wrk
+
+> Modern HTTP benchmarking tool
+
+```bash
+brew install wrk
 ```
 
 {{< /note >}}
