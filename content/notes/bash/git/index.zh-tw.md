@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: git
-    identifier: notes-git
+    identifier: notes-bash-git
     parent: notes-bash
     weight: 10
 ---

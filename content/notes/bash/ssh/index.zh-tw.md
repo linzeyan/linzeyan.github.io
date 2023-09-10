@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: ssh
-    identifier: notes-ssh-keygen
+    identifier: notes-bash-ssh-keygen
     parent: notes-bash
     weight: 10
 ---

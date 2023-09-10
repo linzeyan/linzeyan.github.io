@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: k8s
-    identifier: notes-k8s
+    identifier: notes-bash-k8s
     parent: notes-bash
     weight: 10
 ---

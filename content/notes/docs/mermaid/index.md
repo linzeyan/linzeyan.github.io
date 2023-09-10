@@ -1,10 +1,10 @@
 ---
-title: markdown notes
+title: mermaid notes
 weight: 100
 menu:
   notes:
     name: mermaid
-    identifier: notes-mermaid
+    identifier: notes-docs-mermaid
     parent: notes-docs
     weight: 10
 ---

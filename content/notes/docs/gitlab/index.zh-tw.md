@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: gitlab
-    identifier: notes-gitlab-docs
+    identifier: notes-docs-gitlab
     parent: notes-docs
     weight: 10
 ---

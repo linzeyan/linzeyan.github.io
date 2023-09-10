@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: network
-    identifier: notes-network
+    identifier: notes-bash-network
     parent: notes-bash
     weight: 10
 ---

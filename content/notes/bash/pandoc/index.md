@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: pandoc
-    identifier: notes-pandoc
+    identifier: notes-bash-pandoc
     parent: notes-bash
     weight: 10
 ---

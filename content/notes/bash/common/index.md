@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: common
-    identifier: notes-common
+    identifier: notes-bash-common
     parent: notes-bash
     weight: 10
 ---

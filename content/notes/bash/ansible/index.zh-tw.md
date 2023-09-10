@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: ansible
-    identifier: notes-ansible-lookup
+    identifier: notes-bash-ansible
     parent: notes-bash
     weight: 10
 ---

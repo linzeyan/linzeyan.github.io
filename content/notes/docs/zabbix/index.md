@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: zabbix
-    identifier: notes-zabbix-docs
+    identifier: notes-docs-zabbix
     parent: notes-docs
     weight: 10
 ---

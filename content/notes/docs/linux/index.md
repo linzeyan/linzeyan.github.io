@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: linux
-    identifier: notes-linux-docs
+    identifier: notes-docs-linux
     parent: notes-docs
     weight: 10
 ---

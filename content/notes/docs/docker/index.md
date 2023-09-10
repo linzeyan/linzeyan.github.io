@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: docker
-    identifier: notes-docker-docs
+    identifier: notes-docs-docker
     parent: notes-docs
     weight: 10
 ---

@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: cloudflare
-    identifier: notes-cloudflare-docs
+    identifier: notes-docs-cloudflare
     parent: notes-docs
     weight: 10
 ---

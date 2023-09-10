@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: file
-    identifier: notes-file
+    identifier: notes-bash-file
     parent: notes-bash
     weight: 10
 ---

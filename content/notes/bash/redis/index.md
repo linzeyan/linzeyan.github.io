@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: redis
-    identifier: notes-redis-install
+    identifier: notes-bash-redis-install
     parent: notes-bash
     weight: 10
 ---

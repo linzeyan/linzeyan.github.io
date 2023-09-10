@@ -4,7 +4,7 @@ weight: 100
 menu:
   notes:
     name: gitlab
-    identifier: notes-gitlab
+    identifier: notes-bash-gitlab
     parent: notes-bash
     weight: 10
 ---
