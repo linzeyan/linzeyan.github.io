@@ -141,3 +141,260 @@ resource "aws_mq_broker" "dev-mq" {
 ```
 
 {{< /note >}}
+
+{{< note title="Security Group" >}}
+
+```hcl
+resource "aws_security_group" "default" {
+    name = "prod_default"
+    description = "Default"
+    vpc_id = "vpc-0666666o888888888"
+
+    ingress {
+      description = "SSH"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "TCP"
+      cidr_blocks = ["192.168.0.0/16", "192.123.168.234/32"]
+    }
+
+    tags = {
+      Name = "prod_default"
+    }
+}
+resource "aws_security_group" "nginx" {
+    name = "prod_nginx"
+    description = "Allow nginx"
+    vpc_id = "vpc-0666666o888888888"
+
+    ingress {
+      description = "TCP 443"
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+      Name = "prod_nginx"
+    }
+}
+resource "aws_security_group" "db" {
+    name = "prod_db"
+    description = "Allow db"
+    vpc_id = "vpc-0666666o888888888"
+
+    ingress {
+      description = "TCP 3306"
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    ingress {
+      description = "TCP 6050"
+      from_port   = 6050
+      to_port     = 6050
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    egress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    tags = {
+      Name = "prod_db"
+    }
+}
+resource "aws_security_group" "pm2" {
+    name = "prod_pm2"
+    description = "Allow pm2"
+    vpc_id = "vpc-0666666o888888888"
+
+    ingress {
+      description = "TCP 87-97"
+      from_port   = 87
+      to_port     = 97
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    ingress {
+      description = "TCP 3000"
+      from_port   = 3000
+      to_port     = 3000
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    ingress {
+      description = "TCP 7070"
+      from_port   = 7070
+      to_port     = 7070
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.11.0/24"]
+    }
+
+    egress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["192.168.11.0/24", "1.1.1.1/32"]
+    }
+
+    tags = {
+      Name = "prod_pm2"
+    }
+}
+```
+
+{{< /note >}}
+
+{{< note title="VPC" >}}
+
+```hcl
+resource "aws_vpc" "vpc01" {
+  cidr_block = "192.168.0.0/16"
+  enable_dns_support = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "vpc-test-01"
+  }
+}
+
+resource "aws_internet_gateway" "gateway01" {
+  vpc_id = aws_vpc.vpc01.id
+  tags = {
+    Name = "SNAT-test-01"
+  }
+}
+
+resource "aws_subnet" "subnet01" {
+  vpc_id = aws_vpc.vpc01.id
+  cidr_block = "192.168.10.0/24"
+  tags = {
+    Name = "subnet-test-01"
+  }
+}
+```
+
+{{< /note >}}
+
+{{< note title="WAF" >}}
+
+```hcl
+resource "aws_wafv2_web_acl" "web_acl1" {
+  name        = "prod-wss-test"
+  description = "For prod wss"
+  scope       = "CLOUDFRONT"  # CLOUDFRONT(must also specify the region us-east-1 (N. Virginia)), REGIONAL
+
+  default_action {
+    allow {}
+  }
+
+  rule {
+    name     = "block-ip"
+    priority = 1
+
+    action {
+      block {}
+    }
+
+    statement {
+      rate_based_statement {
+        limit              = 100
+        aggregate_key_type = "IP"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "waf-rule-block-ip"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "block-country"
+    priority = 2
+
+    action {
+      block {}
+    }
+
+    statement {
+      geo_match_statement {
+        country_codes = ["US"]
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "waf-rule-block-country"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "block-query"
+    priority = 3
+
+    action {
+      block {}
+    }
+
+    statement {
+      byte_match_statement {
+        field_to_match {
+          uri_path {}
+        }
+        positional_constraint = "EXACTLY"  # EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
+        search_string = "/abc"
+        text_transformation {
+          priority = 1
+          type = "NONE"
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "waf-rule-block-query"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  tags = {
+    Tag1 = "Value1"
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = true
+    metric_name                = "web-acl-prod-wss-test"
+    sampled_requests_enabled   = true
+  }
+}
+
+data "aws_cloudfront_distribution" "test" {
+  arn = "arn:aws:cloudfront::123456789012:distribution/EATDVGD171BHDS1"
+}
+
+resource "aws_wafv2_web_acl_association" "enable_web_acl" {
+  resource_arn = aws_cloudfront_distribution.test.arn
+  web_acl_arn  = aws_wafv2_web_acl.web_acl1.arn
+}
+```
+
+{{< /note >}}
