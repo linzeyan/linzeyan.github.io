@@ -99,24 +99,24 @@ aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:${region}:${account_
 ##CPUUtilization -->percent
 ##NetworkIn -->bytes
 ##NetworkOut -->bytes
-  for line in $(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100)
-  do
-      ID=$(echo ${line}|awk -F ',' '{print $1}')
-      VALUE=$(echo ${line}|awk -F ',' '{print $2}')
-      aws cloudwatch put-metric-alarm \
-          --alarm-name ${ID}_netout \
-          --metric-name NetworkOut \
-          --namespace AWS/EC2 \
-          --statistic Average \
-          --period 300 \
-          --threshold 2560000 \
-          --comparison-operator GreaterThanOrEqualToThreshold \
-          --dimensions  "Name=InstanceId,Value=${VALUE}" \
-          --evaluation-periods 3 \
-          --alarm-actions arn:aws:sns:${region}:${account_id}:${topic}
-          ##--unit Bytes
-      echo "$ID done"
-  done
+for line in $(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100)
+do
+    ID=$(echo ${line}|awk -F ',' '{print $1}')
+    VALUE=$(echo ${line}|awk -F ',' '{print $2}')
+    aws cloudwatch put-metric-alarm \
+        --alarm-name ${ID}_netout \
+        --metric-name NetworkOut \
+        --namespace AWS/EC2 \
+        --statistic Average \
+        --period 300 \
+        --threshold 2560000 \
+        --comparison-operator GreaterThanOrEqualToThreshold \
+        --dimensions  "Name=InstanceId,Value=${VALUE}" \
+        --evaluation-periods 3 \
+        --alarm-actions arn:aws:sns:${region}:${account_id}:${topic}
+        ##--unit Bytes
+    echo "$ID done"
+done
 ```
 
 {{< /note >}}

@@ -38,7 +38,9 @@ kind: ServiceAccount
 metadata:
   name: gitlab
   namespace: kube-system
----
+```
+
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -53,9 +55,11 @@ subjects:
   namespace: kube-system
 ```
 
+---
+
 ```bash
 # CA Certificate
-  kubectl get secret $(kubectl get secret | grep default | awk '{print $1}') -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
+kubectl get secret $(kubectl get secret | grep default | awk '{print $1}') -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
 
 # Service Token
 kubectl apply -f gitlab-admin-service-account.yaml
@@ -119,7 +123,6 @@ kubectl -n rancher rollout status deploy/rancher
 ###### kind.yaml
 
 ```yaml
----
 #kind: Cluster
 #apiVersion: kind.sigs.k8s.io/v1alpha3
 #nodes:
@@ -218,7 +221,6 @@ helm install argocd argo/argo-cd \
 # sleep 60
 
 # kubectl apply -f - <<SVC
-# ---
 # apiVersion: v1
 # kind: Service
 # metadata:
@@ -368,7 +370,7 @@ cat <<-EOF >${ingressFile}
 #   loadBalancer:
 #     ingress:
 #     - ip: ${ingressIP}
-# ---
+# \-\-\-
 # kind: Endpoints
 # apiVersion: v1
 # metadata:
@@ -381,7 +383,7 @@ cat <<-EOF >${ingressFile}
 #         port: 443
       # - name: ssh
       #   port: 22
----
+\-\-\-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

@@ -31,6 +31,8 @@ func defer_call() {
 }
 ```
 
+---
+
 <details>
 <summary>Answer</summary>
 <pre><a href="https://go.dev/play/p/-bTDzXAjgYn" target="_blank">Try it</a>
@@ -39,9 +41,8 @@ func defer_call() {
 1
 panic: 4
 </code></pre></details>
+---
 {{< /note >}}
-
-
 
 {{< note title="defer1" >}}
 
@@ -73,6 +74,8 @@ func main() {
 }
 ```
 
+---
+
 <details>
 <summary>Answer</summary>
 <pre><a href="https://go.dev/play/p/JChQfww_8GK" target="_blank">Try it</a>
@@ -80,9 +83,8 @@ func main() {
 29
 28
 </code></pre></details>
+---
 {{< /note >}}
-
-
 
 {{< note title="defer2" >}}
 
@@ -114,6 +116,8 @@ func main() {
 }
 ```
 
+---
+
 <details>
 <summary>Answer</summary>
 <pre><a href="https://go.dev/play/p/blqcBt9nVrk" target="_blank">Try it</a>
@@ -121,9 +125,8 @@ func main() {
 28
 28
 </code></pre></details>
+---
 {{< /note >}}
-
-
 
 {{< note title="defer3" >}}
 
@@ -150,15 +153,16 @@ func main() {
 }
 ```
 
+---
+
 <details>
 <summary>Answer</summary>
 <pre><a href="https://go.dev/play/p/zkp1U4vSmqO" target="_blank">Try it</a>
 <code class="language-shell">2
 1
 </code></pre></details>
+---
 {{< /note >}}
-
-
 
 {{< note title="defer4" >}}
 
@@ -181,6 +185,8 @@ func main() {
 }
 ```
 
+---
+
 - A. 132
 - B. 123
 - C. 312
@@ -191,4 +197,5 @@ func main() {
 <pre><a href="https://go.dev/play/p/Y1rR4UK8AOh" target="_blank">Try it</a>
 <code>A
 </code></pre></details>
+---
 {{< /note >}}
