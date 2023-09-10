@@ -30,6 +30,15 @@ done
 
 {{< /note >}}
 
+{{< note title="EC2" >}}
+
+```bash
+# list
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100
+```
+
+{{< /note >}}
+
 {{< note title="ECR" >}}
 
 ```bash
@@ -65,6 +74,49 @@ aws ec2 create-snapshot --volume-id vol-02468851c2bc3bc4b --description "gitlab-
 
 # delete
 aws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0 --region ap-northeast-1
+```
+
+{{< /note >}}
+
+{{< note title="sns" >}}
+
+```bash
+region='ap-east-1'
+account_id='888886666321'
+topic='sa'
+
+# create topic
+aws sns create-topic --name ${topic}
+
+# subscribe
+aws sns subscribe --topic-arn arn:aws:sns:${region}:${account_id}:${topic} --protocol email --notification-endpoint ricky@gmail.com
+
+# list
+aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:${region}:${account_id}:${topic}
+
+# create alarm
+### metric-name
+##CPUUtilization -->percent
+##NetworkIn -->bytes
+##NetworkOut -->bytes
+  for line in $(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100)
+  do
+      ID=$(echo ${line}|awk -F ',' '{print $1}')
+      VALUE=$(echo ${line}|awk -F ',' '{print $2}')
+      aws cloudwatch put-metric-alarm \
+          --alarm-name ${ID}_netout \
+          --metric-name NetworkOut \
+          --namespace AWS/EC2 \
+          --statistic Average \
+          --period 300 \
+          --threshold 2560000 \
+          --comparison-operator GreaterThanOrEqualToThreshold \
+          --dimensions  "Name=InstanceId,Value=${VALUE}" \
+          --evaluation-periods 3 \
+          --alarm-actions arn:aws:sns:${region}:${account_id}:${topic}
+          ##--unit Bytes
+      echo "$ID done"
+  done
 ```
 
 {{< /note >}}
