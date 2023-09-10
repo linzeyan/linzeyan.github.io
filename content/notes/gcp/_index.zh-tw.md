@@ -2,7 +2,7 @@
 title: GCP Notes
 menu:
   notes:
-    name: gcp
+    name: GCP
     identifier: notes-gcp
     weight: 20
 ---
