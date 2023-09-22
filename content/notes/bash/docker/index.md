@@ -9,6 +9,25 @@ menu:
     weight: 10
 ---
 
+{{< note title="Build with secret" >}}
+
+- Dockerfile
+
+```dockerfile
+# syntax = docker/dockerfile:1.6
+FROM golang:1.21.1-alpine3.18
+RUN --mount=type=secret,id=mysecret,target=/root/.ssh/id_rsa git clone git@gitlab.com:ricky/repo.git
+```
+
+- Command
+
+```bash
+export DOCKER_BUILDKIT=1
+docker build --secret id=mysecret,src=id_rsa -t image .
+```
+
+{{< /note >}}
+
 {{< note title="Compose" >}}
 
 ```bash
