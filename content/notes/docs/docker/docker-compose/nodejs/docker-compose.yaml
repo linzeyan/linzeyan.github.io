@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  app:
+    image: app
+    pull_policy: always
+    container_name: app
+    restart: always
+    build:
+      platforms:
+        - "linux/amd64"
+      dockerfile_inline: |
+        FROM node:20
+
+        WORKDIR /app
+        COPY . .
+
+        RUN npm install
+        RUN npm run build
+        CMD ["npm", "run", "start"]
+    ports:
+      # out:in
+      - 3000:3000
+    networks:
+      - app_network
+    working_dir: /app
+    volumes:
+      # log folder or volume
+      - log_volume:/app/log
+
+networks:
+  app_network:
+    name: app_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 100.100.100.0/24
+
+volumes:
+  log_volume:
