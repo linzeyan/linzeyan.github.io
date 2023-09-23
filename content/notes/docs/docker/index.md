@@ -61,5 +61,7 @@ menu:
 
 - [Dockerfile](/notes/docs/docker/dockerfile/supervisord/Dockerfile)
 - [supervisord.conf](/notes/docs/docker/dockerfile/supervisord/supervisord.conf)
+  - service with supervisord
+    - [Dockerfile](/notes/docs/docker/dockerfile/supervisord/service_with_supervisord/Dockerfile)
 
 {{< /note >}}
