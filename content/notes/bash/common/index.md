@@ -26,6 +26,34 @@ xvfb-run --server-args="-screen 0, 1024x768x24" cutycapt --url=https://www.googl
 
 {{< /note >}}
 
+{{< note title="dnscontrol" >}}
+
+- creds.json
+
+```json
+{
+	"cloudflare": {
+		"TYPE": "CLOUDFLAREAPI",
+		"accountid": "accountid",
+		"apitoken": "apitoken"
+	},
+	"r53_main": {
+		"TYPE": "ROUTE53",
+		"KeyId": "keyId",
+		"SecretKey": "secretKey"
+	}
+}
+```
+
+- command
+
+```bash
+dnscontrol get-zones --format=js --out=example.com.js r53 ROUTE53 example.com
+dnscontrol get-zones --format=js --out=example.com.js cloudflare CLOUDFLAREAPI example.com
+```
+
+{{< /note >}}
+
 {{< note title="hey" >}}
 
 ```bash
