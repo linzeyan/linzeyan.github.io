@@ -301,3 +301,9 @@ mknod /dev/null c 1 3
 ```
 
 {{< /note >}}
+
+{{< note title="Script" >}}
+
+{{< gist m-radzikowski 53e0b39e9a59a1518990e76c2bff8038 >}}
+
+{{< /note >}}
