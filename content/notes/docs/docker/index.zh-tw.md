@@ -28,6 +28,13 @@ menu:
 
 - [docker-compose.yaml](/notes/docs/docker/docker-compose/nodejs/docker-compose.yaml)
 
+##### rsyncd
+
+- [docker-compose.yaml](/notes/docs/docker/docker-compose/rsyncd/docker-compose.yaml)
+- [rsyncd.conf](/notes/docs/docker/docker-compose/rsyncd/rsyncd.conf)
+- [rsyncd.secrets](/notes/docs/docker/docker-compose/rsyncd/rsyncd.secrets)
+- `rsync -auz --password-file=/tmp/pass dist user@hostip::myshare`
+
 {{< /note >}}
 
 {{< note title="Dockerfile" >}}
