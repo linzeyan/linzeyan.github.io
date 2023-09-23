@@ -156,7 +156,7 @@ src/build.sh
 
 {{< note title="Install" >}}
 
-###### autocorrect
+###### - autocorrect
 
 > A linter and formatter for help you improve copywriting, to correct spaces, words, punctuations between CJK (Chinese, Japanese, Korean). [Github](https://github.com/huacnlee/autocorrect)
 
@@ -164,7 +164,7 @@ src/build.sh
 wget https://github.com/huacnlee/autocorrect/releases/download/v1.7.4/autocorrect-darwin-amd64.tar.gz
 ```
 
-###### bpf
+###### - bpf
 
 > BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
 > Kernel should higher than 4.1
@@ -178,7 +178,7 @@ wget https://github.com/huacnlee/autocorrect/releases/download/v1.7.4/autocorrec
 yum install bcc-tools
 ```
 
-###### flamegraph
+###### - flamegraph
 
 > Stack trace visualizer
 
@@ -187,7 +187,7 @@ yum install bcc-tools
 brew install flamegraph
 ```
 
-###### git-split-diffs
+###### - git-split-diffs
 
 > GitHub style split diffs in your terminal
 
@@ -195,7 +195,7 @@ brew install flamegraph
 npm install -g git-split-diffs
 ```
 
-###### glci
+###### - glci
 
 > Test your Gitlab CI Pipelines changes locally using Docker. [blog](https://blog.chengweichen.com/2021/03/glci-gitlab-local-ci.html)
 
@@ -203,14 +203,14 @@ npm install -g git-split-diffs
 yarn global add glci
 ```
 
-###### openresty
+###### - openresty
 
 ```bash
 wget https://openresty.org/package/centos/openresty.repo -O /etc/yum.repos.d/openresty.repo
 yum install -y openresty openresty-resty
 ```
 
-###### perf
+###### - perf
 
 > Performance monitoring for the Linux kernel
 
@@ -220,7 +220,7 @@ yum install -y openresty openresty-resty
 yum install perf
 ```
 
-###### pptx2md
+###### - pptx2md
 
 > A pptx to markdown converter
 
@@ -228,7 +228,7 @@ yum install perf
 pip3 install pptx2md
 ```
 
-###### sockperf
+###### - sockperf
 
 > Network Benchmarking Utility
 
@@ -237,7 +237,7 @@ pip3 install pptx2md
 yum install sockperf
 ```
 
-###### upx
+###### - upx
 
 > UPX - the Ultimate Packer for eXecutables
 
@@ -245,7 +245,7 @@ yum install sockperf
 brew install upx
 ```
 
-###### wrk
+###### - wrk
 
 > Modern HTTP benchmarking tool
 

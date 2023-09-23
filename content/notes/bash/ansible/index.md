@@ -23,10 +23,11 @@ ansible-doc -t lookup ping
 
 {{< note title="winrm" >}}
 
-##### console output
+###### - console output
 
 在 hyper-v 那台機器 Enable Winrm 之後 一直出現下面的錯誤。
 在 group 加上一行即可
+
 `ansible_winrm_transport=ntlm`
 
 ```json
@@ -38,7 +39,7 @@ hyper-v01 | UNREACHABLE! => {
 }
 ```
 
-##### /etc/ansible/hosts
+###### - /etc/ansible/hosts
 
 ```ini
 ansible_user=administrator
