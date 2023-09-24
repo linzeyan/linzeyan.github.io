@@ -1,0 +1,19 @@
+image: node:12.13.0
+before_script:
+  - npm install hexo-cli -g
+pages:
+  script:
+    - hexo init blog
+    - mv test.md blog/source/_posts
+    - cd blog
+    - "sed -i '/url:/c url: http://ricky.gitlab.pages/' _config.yml"
+    - "sed -i '/root:/c root: /test/' _config.yml" # project name: test
+    - npm install; hexo generate; hexo deploy
+    - mv public ..
+  tags:
+    - docker
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

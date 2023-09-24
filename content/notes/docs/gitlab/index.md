@@ -30,13 +30,26 @@ Admin Area -> Settings -> General -> LDAP settings -> Lock memberships to LDAP s
 
 {{< note title="gitlab-ci.yml template" >}}
 
+##### gitbook
+
+- [gitlab-ci.yml](/notes/docs/gitlab/ci/gitbook/.gitlab-ci.yml)
+- [gitbook.yml](/notes/docs/gitlab/ci/gitbook/.gitbook.yml)
+
 ##### golang
 
 - [gitlab-ci.yml](/notes/docs/gitlab/ci/golang/.gitlab-ci.yml)
 
+##### hexo
+
+- [gitlab-ci.yml](/notes/docs/gitlab/ci/hexo/.gitlab-ci.yml)
+
 ##### Static resources
 
 - [gitlab-ci.yml](/notes/docs/gitlab/ci/static/.gitlab-ci.yml)
+
+##### template
+
+- [gitlab-ci.yml](/notes/docs/gitlab/ci/template/.gitlab-ci.yml)
 
 {{< /note >}}
 
