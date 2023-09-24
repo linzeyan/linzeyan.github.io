@@ -1,0 +1,109 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'hyperv'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = false
+  config.vm.hostname = "Centos1"
+  config.vm.define vm_name = "centos1"
+  config.vm.provider "hyperv"
+  config.vm.network "public_network", bridge: "External-VSwitch"
+  config.vm.synced_folder "./", "/sync", type: "smb",
+    smb_username: "rickylin",smb_password: "pcpassword",
+    create: true, group: "vagrant", owner: "vagrant", mount_options: ["dir_mode=0775","file_mode=0664","vers=3.0"]
+  config.vm.provider "hyperv" do |hv|
+    hv.cpus = "2"
+    hv.memory = "2048"
+    hv.vmname = "centos1"
+    hv.auto_start_action = "StartIfRunning"
+    hv.enable_virtualization_extensions = true
+    hv.linked_clone = true
+    hv.ip_address_timeout = 240
+#    hv.vlan_id = 20
+  end
+  $script = <<-SCRIPT
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+    setenforce 0
+    timedatectl set-timezone Asia/Taipei
+    sudo yum install -y -q epel-release
+    sudo yum install -y -q https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+    sudo yum install -y -q \
+      bind-utils \
+      bridge-utils \
+      chrony \
+      curl \
+      deltarpm \
+      dos2unix \
+      git \
+      httping \
+      htop \
+      iftop \
+      iotop \
+      jq \
+      lrzsz \
+      lsof \
+      net-tools \
+      nmap \
+      nmap-ncat \
+      openssl \
+      psmisc \
+      python3 \
+      sshpass \
+      subversion \
+      sysstat \
+      tcpdump \
+      tcping \
+      tcptraceroute \
+      telnet \
+      tmux \
+      tree \
+      vim \
+      wget \
+      whois \
+      wireshark \
+      yum-utils \
+      zsh
+    sudo yum update -y -q
+    curl -sSL https://get.docker.com/ | sudo bash
+    sudo yum clean all
+    sudo usermod -aG docker vagrant
+    sudo systemctl enable --now docker
+    wget https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64 -O /usr/bin/docker-compose
+    chmod +x /usr/bin/docker-compose
+    python3 -m pip install -U pip
+    pip3 install ansible
+    pip3 install ansible-lint
+    pip3 install tldr
+    pip3 install websocket-client
+    pip3 install awscli
+    pip3 install yamllint
+    sudo systemctl disable --now postfix
+    systemctl disable --now rpcbind.socket
+    # Update sudo
+    yum install -y -q https://www.sudo.ws/sudo/dist/packages/1.9.2/sudo-1.9.2-1.el7.x86_64.rpm
+    # Modify prompt
+    git clone https://github.com/linzeyan/git-radar /home/vagrant/.git-radar
+    ln -s /home/vagrant/.git-radar/git-radar /usr/local/bin/
+    sudo -u vagrant bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    echo 'export PROMPT="${PROMPT}\$(git-radar --zsh)"' >> /home/vagrant/.zshrc
+    # For git
+    git clone https://github.com/linzeyan/terminal_config.git
+    cp -rf terminal_config/centos/. /home/vagrant/
+    cp -rf terminal_config/etc/sshd_config /etc/ssh/sshd_config
+    rm -rf terminal_config
+    chmod 700 /home/vagrant/.ssh
+    chmod 600 /home/vagrant/.ssh/config
+    curl https://github.com/linzeyan.keys >> /home/vagrant/.ssh/authorized_keys
+    # For Vim
+    git clone https://github.com/VundleVim/Vundle.vim.git /home/vagrant/.vim/bundle/Vundle.vim
+    chown -R vagrant:vagrant /home/vagrant
+    sudo -u vagrant vim -c 'BundleInstall' -c 'q' -c 'q'
+    chmod +x /etc/rc.d/rc.local
+    reboot
+    SCRIPT
+  config.vm.provision "shell", inline: $script
+  config.ssh.forward_x11 = true
+  config.ssh.forward_agent = true
+  config.vm.post_up_message = "Good Job."
+end
