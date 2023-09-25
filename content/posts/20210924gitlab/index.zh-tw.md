@@ -4,8 +4,8 @@ date: 2021-09-24T11:11:03+08:00
 description: Share the concept of Gitlab-CI.
 menu:
   sidebar:
-    name: Gitlab
-    identifier: gitlab
+    name: Gitlab-CI Introduction
+    identifier: gitlab-ci-introduction
     weight: 10
 tags: ["Gitlab", "introduction", "slides", "ci"]
 categories: ["Gitlab"]
@@ -23,9 +23,9 @@ hero: gitlab.png
 
 ### Workflow
 
-~~~
+```
 code push -> pipeline -> stage -> job
-~~~
+```
 
 ### Design
 
@@ -112,8 +112,6 @@ check-icp:
   only:
     - schedules
 ```
-
-
 
 [1]: https://docs.gitlab.com/ee/ci/
 [2]: https://docs.gitlab.com/runner/

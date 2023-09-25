@@ -4,8 +4,8 @@ date: 2021-11-19T14:35:58+08:00
 description: Notes about Nginx configs
 menu:
   sidebar:
-    name: Nginx
-    identifier: nginx
+    name: Nginx notes
+    identifier: nginx-config-notes
     weight: 10
 tags: ["Nginx", "configs"]
 categories: ["Nginx"]

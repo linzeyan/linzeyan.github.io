@@ -4,8 +4,8 @@ date: 2021-09-17T14:11:03+08:00
 description: Share the concept of Docker.
 menu:
   sidebar:
-    name: Docker
-    identifier: docker
+    name: Docker Introduction
+    identifier: docker-introduction
     weight: 10
 tags: ["Docker", "introduction", "slides"]
 categories: ["Docker"]
@@ -25,9 +25,10 @@ hero: docker.jpeg
 
 - Docker daemon - containerd, docker-containerd-shim, docker-runc
 - Docker client - cli command
-~~~
+
+```
 docker cli -> docker daemon -> containerd -> runc -> namespace & cgroup
-~~~
+```
 
 ### Image
 
@@ -216,7 +217,7 @@ DOCKER_HOST=192.168.185.9:2375 docker images
 ## Docker-compose
 
 ```yaml
-version: '3'
+version: "3"
 
 services:
   svn:
