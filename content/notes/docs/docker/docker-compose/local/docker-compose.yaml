@@ -127,21 +127,26 @@ services:
       - MYSQL_PASSWORD=localpassword
 
   mqtt:
-    image: emqx/emqx
+    image: emqx/emqx:latest
     container_name: mqtt
     restart: always
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
     networks:
       - local_net
-    volumes:
-      - ./mqtt/config:/mosquitto/config
-      - ./mqtt/data:/mosquitto/data
-      - ./mqtt/log:/mosquitto/log
     ports:
       - 1883:1883
       - 8083:8083
       - 8084:8084
       - 8883:8883
       - 18083:18083
+    volumes:
+      - emqx-data:/opt/emqx/data
+      - emqx-etc:/opt/emqx/etc
+      - emqx-log:/opt/emqx/log
 
   kafka:
     image: bitnami/kafka
@@ -176,3 +181,8 @@ services:
     ports:
       - 8000:8000
       - 9443:9443
+
+volumes:
+  emqx-data:
+  emqx-etc:
+  emqx-log:
