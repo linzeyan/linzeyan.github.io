@@ -9,7 +9,7 @@ menu:
     weight: 10
 tags: ["Cloudflare", "tunnel", "Synology"]
 categories: ["Cloudflare", "Synology"]
-# hero: nginx.jpeg
+hero: cloudflare.svg
 ---
 
 ## Setup Synology

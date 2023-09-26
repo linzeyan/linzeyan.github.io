@@ -9,7 +9,7 @@ menu:
     weight: 10
 tags: ["Cloudflare", "zero trust"]
 categories: ["Cloudflare", "zero trust"]
-# hero: nginx.jpeg
+hero: cloudflare.svg
 ---
 
 ## [Connect private networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/)
