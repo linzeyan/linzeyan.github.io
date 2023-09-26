@@ -51,6 +51,6 @@ categories: ["Cloudflare", "Synology"]
 2. Import the second container setting json and run a new container.
 3. The tunnel now is connectable.
 
-## reference
+## Reference
 
-- https://www.youtube.com/watch?v=5IrtNxfzH1o
+- [CLOUDFLARE tunnel on SYNOLOGY. (the raw way)](https://www.youtube.com/watch?v=5IrtNxfzH1o)
