@@ -7,7 +7,7 @@ menu:
     name: Nginx 筆記
     identifier: nginx-config-notes
     weight: 10
-tags: ["Nginx", "configs"]
+tags: ["Nginx", "config"]
 categories: ["Nginx"]
 hero: nginx.jpeg
 ---

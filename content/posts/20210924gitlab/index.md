@@ -7,8 +7,8 @@ menu:
     name: Gitlab-CI Introduction
     identifier: gitlab-ci-introduction
     weight: 10
-tags: ["Gitlab", "introduction", "slides", "ci"]
-categories: ["Gitlab"]
+tags: ["Gitlab", "introduction", "slides", "CI"]
+categories: ["Gitlab", "CI"]
 hero: gitlab.png
 ---
 

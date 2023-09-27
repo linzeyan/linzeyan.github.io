@@ -6,8 +6,8 @@ menu:
     name: datavizproject
     identifier: data-visualization-project
     weight: 10
-tags: ["chart", "data", "visualization", "url"]
-categories: ["chart", "data", "visualization", "url"]
+tags: ["chart", "data", "visualization", "URL"]
+categories: ["chart", "data", "visualization", "URL"]
 ---
 
 https://datavizproject.com
