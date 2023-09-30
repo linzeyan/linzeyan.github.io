@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'hyperv'
+Vagrant.configure("2") do |config|
+  config.vm.box = "StefanScherer/windows_2019"
+  config.vm.box_check_update = false
+  config.vm.hostname = "win1"
+  config.vm.define vm_name = "win1"
+  config.vm.provider "hyperv"
+  config.vm.network "public_network", bridge: "External-VSwitch"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder "./", "/sync", type: "smb",
+    smb_username: "rickylin@knowhow",smb_password: "pcpassword"
+
+  $script = <<-SCRIPT
+    Set-TimeZone "Taipei Standard Time"
+    netsh.exe interface ip set address "Ethernet" static 192.168.20.199 255.255.255.0 192.168.20.1
+    netsh interface ipv4 add dnsservers "Ethernet" address=1.1.1.1 index=1
+    netsh interface ipv4 add dnsservers "Ethernet" address=8.8.8.8 index=2
+  SCRIPT
+
+  config.vm.guest = :windows
+  config.vm.communicator = "winrm"
+  config.winrm.max_tries = 20
+  config.winrm.retry_limit = 30
+  config.winrm.retry_delay = 20
+
+  config.vm.provider "hyperv" do |hv|
+    hv.cpus = "2"
+    hv.memory = "2048"
+    hv.vmname = "win"
+    hv.auto_start_action = "StartIfRunning"
+    hv.enable_virtualization_extensions = true
+    hv.linked_clone = true
+    hv.ip_address_timeout = 240
+    # hv.vlan_id = 20
+  end
+  config.vm.provision "shell", privileged: true, inline: $script
+  config.vm.post_up_message = "Good Job."
+end

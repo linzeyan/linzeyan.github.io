@@ -1,0 +1,48 @@
+check_interval = 0
+concurrent = 3
+shutdown_timeout = 0
+
+[session_server]
+session_timeout = 300
+
+[[runners]]
+executor = "docker"
+id = 1
+name = "runner-docker"
+token = "RTalJ5ZWxSU2VrWmlXbv"
+token_expires_at = 0001-01-01T00:00:00Z
+token_obtained_at = 2023-01-31T11:20:18Z
+url = "http://gitlab.com/"
+[runners.docker]
+allowed_pull_policies = ["always", "if-not-present"]
+disable_cache = false
+disable_entrypoint_overwrite = false
+image = "golang"
+oom_kill_disable = false
+privileged = false
+pull_policy = ["if-not-present"]
+shm_size = 0
+tls_verify = false
+volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]
+
+[[runners]]
+executor = "docker"
+id = 2
+name = "runner-dind"
+token = "RTalJ5ZWxSU2VrWmlXbv"
+token_expires_at = 0001-01-01T00:00:00Z
+token_obtained_at = 2023-01-31T11:21:01Z
+url = "http://gitlab.com/"
+[runners.cache]
+MaxUploadedArchiveSize = 0
+[runners.docker]
+allowed_pull_policies = ["always", "if-not-present"]
+disable_cache = false
+disable_entrypoint_overwrite = false
+image = "docker:dind"
+oom_kill_disable = false
+privileged = true
+pull_policy = ["if-not-present"]
+shm_size = 0
+tls_verify = false
+volumes = ["/cache", "/var/run/docker.sock:/var/run/docker.sock"]

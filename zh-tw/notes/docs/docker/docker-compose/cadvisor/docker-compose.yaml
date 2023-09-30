@@ -1,0 +1,85 @@
+version: "3.8"
+
+networks:
+  monitor_network:
+    name: monitor_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.0/24
+
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.46.0
+    container_name: cadvisor
+    restart: always
+    networks:
+      - monitor_network
+    ports:
+      - 65080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    privileged: true
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    networks:
+      - monitor_network
+    ports:
+      - 65090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+
+  node_exporter:
+    image: prom/node-exporter
+    container_name: node_exporter
+    restart: always
+    networks:
+      - monitor_network
+    expose:
+      - 9100
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+
+  # Dashboard: gnetId: 179, 893, 11277, 11600
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    networks:
+      - monitor_network
+    ports:
+      - 65300:3000
+    volumes:
+      - ./grafana-storage:/var/lib/grafana
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
