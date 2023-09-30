@@ -28,6 +28,10 @@ menu:
 
 - [docker-compose.yaml](/notes/docs/docker/docker-compose/nodejs/docker-compose.yaml)
 
+##### rstudio
+
+- [docker-compose.yaml](/notes/docs/docker/dockerfile/rstudio/docker-compose.yaml)
+
 ##### rsyncd
 
 - [docker-compose.yaml](/notes/docs/docker/docker-compose/rsyncd/docker-compose.yaml)
@@ -56,6 +60,11 @@ menu:
 
 - [Dockerfile](/notes/docs/docker/dockerfile/golang/Dockerfile)
 - `docker build --secret id=mysecret,src=id_rsa -t app .`
+
+##### rstudio
+
+- [Dockerfile](/notes/docs/docker/dockerfile/rstudio/Dockerfile)
+- [pkg.txt](/notes/docs/docker/dockerfile/rstudio/pkg.txt)
 
 ##### supervisord
 
