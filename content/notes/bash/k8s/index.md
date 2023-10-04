@@ -26,6 +26,14 @@ helm cm-push ./proxy-0.1.0.tgz go2helm
 
 {{< /note >}}
 
+{{< note title="kompose" >}}
+
+```bash
+kompose --file docker-compose.yml convert
+```
+
+{{< /note >}}
+
 {{< note title="gitlab-runner" >}}
 
 [link](https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html)
