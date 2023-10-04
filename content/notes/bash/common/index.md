@@ -21,14 +21,14 @@ ab -n 20 -c 20 -k https://default.hddv1.com/error
 
 ```bash
 # Install
-sudo apt install certbot python3-certbot-nginx
+sudo apt install certbot python3-certbot-nginx python3-certbot-dns-route53
 
 # Generating Wildcard Certificates
 sudo certbot certonly --manual --preferred-challenges=dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.example.com
 ### add txt record then press enter to continue
 
 # Automating Renewal
-0 0 * * 1 /usr/bin/certbot renew --quiet --post-hook "systemctl reload nginx"
+0 0 * * 1 /usr/bin/certbot certonly --dns-route53 -d *.example.com --quiet --post-hook "systemctl reload nginx"
 ```
 
 {{< /note >}}
