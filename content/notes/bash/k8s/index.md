@@ -9,6 +9,51 @@ menu:
     weight: 10
 ---
 
+{{< note title="cert-manager" >}}
+
+- [cert-manager](https://cert-manager.io/docs)
+- [Route53 IAM Role](/notes/bash/k8s/files/cert-manager-aws-iam-role.json)
+- [Cert Manager Resource](/notes/bash/k8s/files/cert-manager-resource.yaml)
+- [Cert Generate Resource](/notes/bash/k8s/files/cert-generate-resource.yaml)
+- [Cert Ingress Resource](/notes/bash/k8s/files/cert-ingress-resource.yaml)
+
+```bash
+# install the cert-manager CustomResourceDefinition resources
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+
+# Add the Jetstack Helm repository
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+
+# install the cert-manager helm chart
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.13.1 \
+  --set installCRDs=true
+  --set prometheus.enabled=false \
+  --set webhook.timeoutSeconds=4
+
+# uninstalling
+helm delete my-release
+kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+
+# create clusterissuer
+kubectl apply -f cert-manager-resource.yaml
+
+# generate certificate
+kubectl apply -f cert-generate-resource.yaml
+
+# create ingress controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
+# create ingress
+kubectl apply -f cert-ingress-resource.yaml
+```
+
+{{< /note >}}
+
 {{< note title="helm" >}}
 
 ```bash

@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example.com
+  namespace: default
+spec:
+  # At least one of a DNS Name, URI, or IP address is required.
+  dnsNames:
+    - "example.com"
+    - "*.example.com"
+  # uris:
+  #   - spiffe://cluster.local/ns/sandbox/sa/example
+  # ipAddresses:
+  #   - 192.168.0.5
+  secretName: default-dev-example-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

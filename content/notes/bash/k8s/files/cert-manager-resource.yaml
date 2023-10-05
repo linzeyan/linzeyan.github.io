@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cert-manager-secret
+  namespace: cert-manager
+type: Opaque
+data:
+  # aws_secret_access_key base64-encoded
+  secretAccessKey: ${secretAccessKey}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+  namespace: cert-manager
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: cert@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - selector:
+          dnsZones:
+            # domain
+            - "example.com"
+        dns01:
+          route53:
+            region: ap-northeast-1
+            accessKeyID: ${accessKeyID}
+            secretAccessKeySecretRef:
+              name: cert-manager-secret
+              key: secretAccessKey
