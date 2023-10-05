@@ -17,6 +17,24 @@ ab -n 20 -c 20 -k https://default.hddv1.com/error
 
 {{< /note >}}
 
+{{< note title="age" >}}
+
+```bash
+# generate public and private keys
+age-keygen -o key.txt
+
+# encrypt file with public key
+age -r public_key -o file.txt.enc file.txt
+
+# encrypt file with ssh key
+age -R ~/.ssh/id_ed25519.pub file.txt > file.txt.enc
+
+# decrypt file
+age --decrypt -i key.txt file.txt.enc > file.txt
+```
+
+{{< /note >}}
+
 {{< note title="certbot" >}}
 
 ```bash
