@@ -61,6 +61,12 @@ menu:
 - [Dockerfile](/notes/docs/docker/dockerfile/golang/Dockerfile)
 - `docker build --secret id=mysecret,src=id_rsa -t app .`
 
+##### [nginx](https://github.com/macbre/docker-nginx-http3)
+
+- [Dockerfile](/notes/docs/docker/dockerfile/nginx/Dockerfile)
+- [docker-compose.yml](/notes/docs/docker/dockerfile/nginx/docker-compose.yml)
+- [nginx.conf](/notes/docs/docker/dockerfile/nginx/nginx.conf)
+
 ##### rstudio
 
 - [Dockerfile](/notes/docs/docker/dockerfile/rstudio/Dockerfile)
