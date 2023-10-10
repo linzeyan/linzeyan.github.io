@@ -1,0 +1,39 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: local
+servers: 3 # same as `--servers 3`
+agents: 3 # same as `--agents 3`
+image: docker.io/rancher/k3s:v1.27.4-k3s1
+kubeAPI: # same as `--api-port 127.0.0.1:8443`
+  # host: "myhost.my.domain"
+  hostIP: "127.0.0.1"
+  hostPort: "8443"
+# network: my-custom-net # same as `--network my-custom-net`
+subnet: "10.255.0.0/16" # same as `--subnet 10.255.0.0/16`
+token: superSecretToken # same as `--token superSecretToken`
+ports:
+  - port: 8080:80 # same as `--port 8080:80@loadbalancer`
+    nodeFilters:
+      - loadbalancer
+volumes: # same as `--volume '${PWD}:/app@server:0;agent:*'`
+  - volume: ${PWD}:/app
+    nodeFilters:
+      - server:0
+      - agent:*
+env:
+  - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
+    nodeFilters:
+      - server:0
+hostAliases: # /etc/hosts style entries to be injected into /etc/hosts in the node containers and in the NodeHosts section in CoreDNS
+  - ip: 192.168.11.104
+    hostnames:
+      - etcd
+      - etcd1
+  - ip: 1.1.1.1
+    hostnames:
+      - cloudflare.dns
+options:
+  k3d:  # k3d runtime settings
+    wait: true  # wait for cluster to be usable before returining; same as `--wait`
+    timeout: "60s"  # wait timeout before aborting; same as `--timeout 60s`

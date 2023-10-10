@@ -276,7 +276,7 @@ Install from source is better</p></blockquote><div class=highlight><pre tabindex
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Decrypt file</span>
 </span></span><span style=display:flex><span>gpg --output archive_file.tar --decrypt archive_file.tar.gpg
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cert-manager</span></h5><div class=card><div class=card-body><ul><li><a href=https://cert-manager.io/docs target=_blank rel=noopener>cert-manager</a></li><li><a href=/notes/bash/k8s/files/cert-manager-aws-iam-role.json>Route53 IAM Role</a></li><li><a href=/notes/bash/k8s/files/cert-manager-resource.yaml>Cert Manager Resource</a></li><li><a href=/notes/bash/k8s/files/cert-generate-resource.yaml>Cert Generate Resource</a></li><li><a href=/notes/bash/k8s/files/cert-ingress-resource.yaml>Cert Ingress Resource</a></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># install the cert-manager CustomResourceDefinition resources</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cert-manager</span></h5><div class=card><div class=card-body><ul><li><a href=https://cert-manager.io/docs target=_blank rel=noopener>cert-manager</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-manager-aws-iam-role.json>Route53 IAM Role</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-manager-resource.yaml>Cert Manager Resource</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-generate-resource.yaml>Cert Generate Resource</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-ingress-resource.yaml>Cert Ingress Resource</a></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># install the cert-manager CustomResourceDefinition resources</span>
 </span></span><span style=display:flex><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Add the Jetstack Helm repository</span>
@@ -319,30 +319,14 @@ Install from source is better</p></blockquote><div class=highlight><pre tabindex
 </span></span><span style=display:flex><span><span style=color:#75715e>## https://docs.gitlab.com/ee/user/packages/helm_repository/</span>
 </span></span><span style=display:flex><span>helm cm-push ./proxy-0.1.0.tgz go2helm
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kompose</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kompose --file docker-compose.yml convert
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gitlab-runner</span></h5><div class=card><div class=card-body><p><a href=https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html target=_blank rel=noopener>link</a></p><h6 id=gitlab-admin-service-accountyaml>gitlab-admin-service-account.yaml</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ServiceAccount</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>metadata</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>gitlab</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>namespace</span>: <span style=color:#ae81ff>kube-system</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>rbac.authorization.k8s.io/v1beta1</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ClusterRoleBinding</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>metadata</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>gitlab-admin</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>roleRef</span>:
-</span></span><span style=display:flex><span>  <span style=color:#f92672>apiGroup</span>: <span style=color:#ae81ff>rbac.authorization.k8s.io</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ClusterRole</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>cluster-admin</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>subjects</span>:
-</span></span><span style=display:flex><span>  - <span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ServiceAccount</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>gitlab</span>
-</span></span><span style=display:flex><span>  <span style=color:#f92672>namespace</span>: <span style=color:#ae81ff>kube-system</span>
-</span></span></code></pre></div></div></div><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># CA Certificate</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gitlab-runner</span></h5><div class=card><div class=card-body><p><a href=https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html target=_blank rel=noopener>link</a></p><h6 id=gitlab-admin-service-accountyamlcontentnotesbashk8sfilesgitlab-runnergitlab-admin-service-accountyaml><a href=/content/notes/bash/k8s/files/gitlab-runner/gitlab-admin-service-account.yaml>gitlab-admin-service-account.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># CA Certificate</span>
 </span></span><span style=display:flex><span>kubectl get secret <span style=color:#66d9ef>$(</span>kubectl get secret | grep default | awk <span style=color:#e6db74>&#39;{print $1}&#39;</span><span style=color:#66d9ef>)</span> -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{[&#39;data&#39;][&#39;ca\.crt&#39;]}&#34;</span> | base64 --decode
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Service Token</span>
 </span></span><span style=display:flex><span>kubectl apply -f gitlab-admin-service-account.yaml
 </span></span><span style=display:flex><span>kubectl -n kube-system describe secret <span style=color:#66d9ef>$(</span>kubectl -n kube-system get secret | grep gitlab | awk <span style=color:#e6db74>&#39;{print $1}&#39;</span><span style=color:#66d9ef>)</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/master/values.yaml</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/master/values.yaml</span>
 </span></span><span style=display:flex><span>echo | openssl s_client -CAfile ca.crt -connect gitlab.knowhow.it:443 &gt; /tmp/certs/server.pem
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e># Install gitlab-runner from gitlab</span>
@@ -352,52 +336,22 @@ Install from source is better</p></blockquote><div class=highlight><pre tabindex
 </span></span><span style=display:flex><span>kubectl --namespace gitlab create secret generic gitlab-certs --from-file<span style=color:#f92672>=</span>gitlab.knowhow.it.crt<span style=color:#f92672>=</span>/tmp/certs/server.pem --from-file<span style=color:#f92672>=</span>registry.knowhow.it.crt<span style=color:#f92672>=</span>/tmp/certs/server.pem
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>helm install --namespace gitlab k8srunner --set gitlabUrl<span style=color:#f92672>=</span>https://gitlab.knowhow.it,runnerRegistrationToken<span style=color:#f92672>=</span>VmyYjzmU_FjqyMJNJxJK,certsSecretName<span style=color:#f92672>=</span>gitlab-certs,rbac.create<span style=color:#f92672>=</span>true,runners.privileged<span style=color:#f92672>=</span>true,runners.tags<span style=color:#f92672>=</span>k8s,runners.image<span style=color:#f92672>=</span>alpine:3.12,runners.locked<span style=color:#f92672>=</span>false gitlab/gitlab-runner
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>k3d</span></h5><div class=card><div class=card-body><h6 id=installsh>install.sh</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Install K3D</span>
-</span></span><span style=display:flex><span>curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-</span></span><span style=display:flex><span>k3d completion bash &gt;&gt; ~/.bashrc
-</span></span><span style=display:flex><span>source ~/.bashrc
-</span></span><span style=display:flex><span>k3d cluster create rancher -s <span style=color:#ae81ff>3</span>
-</span></span><span style=display:flex><span>k3d kubeconfig merge
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>k3d</span></h5><div class=card><div class=card-body><h6 id=k3dyamlcontentnotesbashk8sfilesk3dk3dyaml><a href=/content/notes/bash/k8s/files/k3d/k3d.yaml>k3d.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create cluster</span>
+</span></span><span style=display:flex><span>k3d cluster create --config k3d.yaml
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Install Helm</span>
-</span></span><span style=display:flex><span>wget https://get.helm.sh/helm-v3.4.2-linux-amd64.tar.gz
+</span></span><span style=display:flex><span><span style=color:#75715e># delete cluster</span>
+</span></span><span style=display:flex><span>k3d cluster delete local
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># https://rancher.com/docs/rancher/v2.x/en/installation/install-rancher-on-k8s/</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Install Rancher</span>
-</span></span><span style=display:flex><span>helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
-</span></span><span style=display:flex><span>helm repo update
-</span></span><span style=display:flex><span>kubectl create namespace rancher
-</span></span><span style=display:flex><span>helm install rancher rancher-latest/rancher <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --namespace rancher <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set hostname<span style=color:#f92672>=</span>rancher.knowhow.it <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set ingress.tls.source<span style=color:#f92672>=</span>secret <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set privateCA<span style=color:#f92672>=</span>true
-</span></span><span style=display:flex><span>kubectl -n rancher create secret tls tls-rancher-ingress <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --cert<span style=color:#f92672>=</span>tls.crt <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --key<span style=color:#f92672>=</span>tls.key
-</span></span><span style=display:flex><span>kubectl -n rancher create secret generic tls-ca <span style=color:#ae81ff>\
-</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --from-file<span style=color:#f92672>=</span>cacerts.pem<span style=color:#f92672>=</span>./cacerts.pem
-</span></span><span style=display:flex><span>kubectl -n rancher rollout status deploy/rancher
-</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kind</span></h5><div class=card><div class=card-body><h6 id=kindyaml>kind.yaml</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e>#kind: Cluster</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#apiVersion: kind.sigs.k8s.io/v1alpha3</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#nodes:</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#  - role: control-plane</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#  - role: worker</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#  - role: worker</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># import image</span>
+</span></span><span style=display:flex><span>k3d image import superapp -c local
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kind</span></h5><div class=card><div class=card-body><h6 id=kindyamlcontentnotesbashk8sfileskindkindyaml><a href=/content/notes/bash/k8s/files/kind/kind.yaml>kind.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create cluster</span>
+</span></span><span style=display:flex><span>kind create cluster --config kind.yaml
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Cluster</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>kind.sigs.k8s.io/v1alpha3</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>nodes</span>:
-</span></span><span style=display:flex><span>  - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>control-plane</span>
-</span></span><span style=display:flex><span>  - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>control-plane</span>
-</span></span><span style=display:flex><span>  - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>control-plane</span>
-</span></span></code></pre></div><h6 id=installsh>install.sh</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span>curl -Lo ./kind <span style=color:#e6db74>&#34;https://github.com/kubernetes-sigs/kind/releases/download/v0.7.0/kind-</span><span style=color:#66d9ef>$(</span>uname<span style=color:#66d9ef>)</span><span style=color:#e6db74>-amd64&#34;</span>
-</span></span><span style=display:flex><span>chmod a+x ./kind
-</span></span><span style=display:flex><span>sudo mv ./kind /usr/local/bin/kind
+</span></span><span style=display:flex><span><span style=color:#75715e># delete cluster</span>
+</span></span><span style=display:flex><span>kind delete cluster -n local
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># import image</span>
+</span></span><span style=display:flex><span>kind load docker-image superapp -n local
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>rancher</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span>docker run <span style=color:#ae81ff>\
