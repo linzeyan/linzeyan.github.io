@@ -12,10 +12,10 @@ menu:
 {{< note title="cert-manager" >}}
 
 - [cert-manager](https://cert-manager.io/docs)
-- [Route53 IAM Role](/notes/bash/k8s/files/cert-manager-aws-iam-role.json)
-- [Cert Manager Resource](/notes/bash/k8s/files/cert-manager-resource.yaml)
-- [Cert Generate Resource](/notes/bash/k8s/files/cert-generate-resource.yaml)
-- [Cert Ingress Resource](/notes/bash/k8s/files/cert-ingress-resource.yaml)
+- [Route53 IAM Role](/notes/bash/k8s/files/cert-manager/cert-manager-aws-iam-role.json)
+- [Cert Manager Resource](/notes/bash/k8s/files/cert-manager/cert-manager-resource.yaml)
+- [Cert Generate Resource](/notes/bash/k8s/files/cert-manager/cert-generate-resource.yaml)
+- [Cert Ingress Resource](/notes/bash/k8s/files/cert-manager/cert-ingress-resource.yaml)
 
 ```bash
 # install the cert-manager CustomResourceDefinition resources
@@ -83,32 +83,7 @@ kompose --file docker-compose.yml convert
 
 [link](https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html)
 
-###### gitlab-admin-service-account.yaml
-
-```yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: gitlab
-  namespace: kube-system
-```
-
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: gitlab-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-  name: gitlab
-  namespace: kube-system
-```
-
----
+###### [gitlab-admin-service-account.yaml](/content/notes/bash/k8s/files/gitlab-runner/gitlab-admin-service-account.yaml)
 
 ```bash
 # CA Certificate
@@ -117,9 +92,7 @@ kubectl get secret $(kubectl get secret | grep default | awk '{print $1}') -o js
 # Service Token
 kubectl apply -f gitlab-admin-service-account.yaml
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab | awk '{print $1}')
-```
 
-```bash
 # https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/master/values.yaml
 echo | openssl s_client -CAfile ca.crt -connect gitlab.knowhow.it:443 > /tmp/certs/server.pem
 
@@ -136,69 +109,34 @@ helm install --namespace gitlab k8srunner --set gitlabUrl=https://gitlab.knowhow
 
 {{< note title="k3d" >}}
 
-###### install.sh
+###### [k3d.yaml](/content/notes/bash/k8s/files/k3d/k3d.yaml)
 
 ```bash
-#!/usr/bin/env bash
+# create cluster
+k3d cluster create --config k3d.yaml
 
-# Install K3D
-curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-k3d completion bash >> ~/.bashrc
-source ~/.bashrc
-k3d cluster create rancher -s 3
-k3d kubeconfig merge
+# delete cluster
+k3d cluster delete local
 
-# Install Helm
-wget https://get.helm.sh/helm-v3.4.2-linux-amd64.tar.gz
-
-# https://rancher.com/docs/rancher/v2.x/en/installation/install-rancher-on-k8s/
-# Install Rancher
-helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
-helm repo update
-kubectl create namespace rancher
-helm install rancher rancher-latest/rancher \
-    --namespace rancher \
-    --set hostname=rancher.knowhow.it \
-    --set ingress.tls.source=secret \
-    --set privateCA=true
-kubectl -n rancher create secret tls tls-rancher-ingress \
-    --cert=tls.crt \
-    --key=tls.key
-kubectl -n rancher create secret generic tls-ca \
-    --from-file=cacerts.pem=./cacerts.pem
-kubectl -n rancher rollout status deploy/rancher
+# import image
+k3d image import superapp -c local
 ```
 
 {{< /note >}}
 
 {{< note title="kind" >}}
 
-###### kind.yaml
-
-```yaml
-#kind: Cluster
-#apiVersion: kind.sigs.k8s.io/v1alpha3
-#nodes:
-#  - role: control-plane
-#  - role: worker
-#  - role: worker
-
-kind: Cluster
-apiVersion: kind.sigs.k8s.io/v1alpha3
-nodes:
-  - role: control-plane
-  - role: control-plane
-  - role: control-plane
-```
-
-###### install.sh
+###### [kind.yaml](/content/notes/bash/k8s/files/kind/kind.yaml)
 
 ```bash
-#!/usr/bin/env bash
+# create cluster
+kind create cluster --config kind.yaml
 
-curl -Lo ./kind "https://github.com/kubernetes-sigs/kind/releases/download/v0.7.0/kind-$(uname)-amd64"
-chmod a+x ./kind
-sudo mv ./kind /usr/local/bin/kind
+# delete cluster
+kind delete cluster -n local
+
+# import image
+kind load docker-image superapp -n local
 ```
 
 {{< /note >}}
