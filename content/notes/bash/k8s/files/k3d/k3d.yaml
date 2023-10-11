@@ -13,18 +13,21 @@ kubeAPI: # same as `--api-port 127.0.0.1:8443`
 subnet: "10.255.0.0/16" # same as `--subnet 10.255.0.0/16`
 token: superSecretToken # same as `--token superSecretToken`
 ports:
-  - port: 8080:80 # same as `--port 8080:80@loadbalancer`
+  - port: 1080:80 # same as `--port 1080:80@loadbalancer`
     nodeFilters:
       - loadbalancer
-volumes: # same as `--volume '${PWD}:/app@server:0;agent:*'`
-  - volume: ${PWD}:/app
+  - port: 1443:443
     nodeFilters:
-      - server:0
-      - agent:*
+      - loadbalancer
+# volumes: # same as `--volume '${PWD}:/app@server:0;agent:*'`
+#   - volume: ${PWD}:/app
+#     nodeFilters:
+#       - server:0
+#       - agent:*
 env:
-  - envVar: bar=baz # same as `--env 'bar=baz@server:0'`
+  - envVar: TZ=Asia/Taipei # same as `--env 'TZ=Asia/Taipei@all'`
     nodeFilters:
-      - server:0
+      - all
 hostAliases: # /etc/hosts style entries to be injected into /etc/hosts in the node containers and in the NodeHosts section in CoreDNS
   - ip: 192.168.11.104
     hostnames:
@@ -37,3 +40,9 @@ options:
   k3d:  # k3d runtime settings
     wait: true  # wait for cluster to be usable before returining; same as `--wait`
     timeout: "60s"  # wait timeout before aborting; same as `--timeout 60s`
+    disableLoadbalancer: false
+    disableImageVolume: false
+    disableRollback: false
+    loadbalancer:
+      configOverrides:
+        - settings.workerConnections=2048
