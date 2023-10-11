@@ -54,7 +54,7 @@ spec:
                 --docker-password="${ECR_TOKEN}" \
                 --namespace=$NAMESPACE_NAME
                 echo "Secret was successfully updated at $(date)"
-          restartPolicy: Never
+          restartPolicy: OnFailure
 ---
 apiVersion: v1
 kind: ServiceAccount
