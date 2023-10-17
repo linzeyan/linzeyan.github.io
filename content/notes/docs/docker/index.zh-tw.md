@@ -59,7 +59,6 @@ menu:
 ##### golang
 
 - [Dockerfile](/notes/docs/docker/dockerfile/golang/Dockerfile)
-- [Dockerfile.golanci-lint](/notes/docs/docker/dockerfile/golang/Dockerfile.golanci-lint)
 - `docker build --secret id=mysecret,src=id_rsa -t app .`
 
 ##### [nginx](https://github.com/macbre/docker-nginx-http3)
