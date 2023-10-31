@@ -33,6 +33,10 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd1_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   etcd2:
     image: bitnami/etcd:latest
@@ -55,6 +59,10 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd2_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   etcd3:
     image: bitnami/etcd:latest
@@ -77,6 +85,10 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd3_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   rabbitmq:
     image: rabbitmq:3.9.29
@@ -89,6 +101,10 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=localuser
       - RABBITMQ_DEFAULT_PASS=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   redis:
     image: redis
@@ -98,6 +114,10 @@ services:
       - local_net
     ports:
       - 6379:6379
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   mongo:
     image: mongo
@@ -111,6 +131,10 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=localuser
       - MONGO_INITDB_ROOT_PASSWORD=localpassword
       - MONGO_INITDB_DATABASE=my-database
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   mysql:
     image: mysql
@@ -125,6 +149,10 @@ services:
       - MYSQL_DATABASE=my-database
       - MYSQL_USER=localuser
       - MYSQL_PASSWORD=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   mqtt:
     image: emqx/emqx:latest
@@ -174,6 +202,10 @@ services:
       - net.core.rmem_max=16777216
       - net.core.wmem_max=16777216
       - net.core.optmem_max=16777216
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   kafka:
     image: bitnami/kafka
@@ -195,6 +227,10 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     volumes:
       - ./kafka:/bitnami/kafka
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -208,6 +244,10 @@ services:
     ports:
       - 8000:8000
       - 9443:9443
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
 
 volumes:
   emqx-data:
