@@ -42,8 +42,6 @@ func main() {
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="context1" >}}
 
 ```go
@@ -64,6 +62,6 @@ func main() {
 <details>
 <summary>Answer</summary>
 <pre><a href="https://go.dev/play/p/CWdDXkvRExT" target="_blank">Try it</a>
-<code class="language-shell">{"Context":0}
+<code class="language-shell">{"Context":{}}
 </code></pre></details>
 {{< /note >}}
