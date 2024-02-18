@@ -242,6 +242,8 @@ services:
       options:
         max-size: "10M"
         max-file: 5
+    # dashboard(restful api): ip:18083
+    # ./bin/emqx ctl admins passwd <Username> <Password>
 
   kafka:
     image: bitnami/kafka
@@ -270,6 +272,10 @@ services:
       options:
         max-size: "10M"
         max-file: 5
+    # server.properties
+    # message.max.bytes=200000000
+    # replica.fetch.max.bytes=204857600
+    # fetch.message.max.bytes=204857600
   # https://github.com/provectus/kafka-ui
   kafka-ui:
     container_name: kafka-ui

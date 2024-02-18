@@ -3,13 +3,25 @@ title: Go Tools
 weight: 100
 menu:
   notes:
-    name: tools
+    name: Tools
     identifier: notes-go-tools
     parent: notes-go
     weight: 10
 ---
 
 {{< note title="tools" >}}
+
+##### benchstat
+
+```bash
+go install golang.org/x/perf/cmd/benchstat@latest
+```
+
+##### deadcode
+
+```bash
+go install golang.org/x/tools/cmd/deadcode@latest
+```
 
 ##### httpstat
 
@@ -27,12 +39,32 @@ go get github.com/davecheney/httpstat
 go get github.com/google/go-jsonnet/cmd/jsonnet
 ```
 
+##### migrate
+
+```bash
+go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+```
+
+##### protobuf
+
+```bash
+go install google.golang.org/protobuf/cmd/protoc-gen-go@lastest
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@lastest
+go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+```
+
 ##### gosec
 
 - Golang security checker
 
 ```bash
 go get -u github.com/securego/gosec/cmd/gosec
+```
+
+##### govulncheck
+
+```bash
+go install golang.org/x/vuln/cmd/govulncheck@latest
 ```
 
 ##### vegeta
@@ -109,6 +141,12 @@ go install github.com/abhimanyu003/sttr@latest
 
 ```bash
 go install gorm.io/gen/tools/gentool@latest
+```
+
+##### wire
+
+```bash
+go install github.com/google/wire/cmd/wire@latest
 ```
 
 {{< /note >}}

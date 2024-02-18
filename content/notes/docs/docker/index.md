@@ -61,6 +61,11 @@ menu:
 - [Dockerfile](/notes/docs/docker/dockerfile/golang/Dockerfile)
 - `docker build --secret id=mysecret,src=id_rsa -t app .`
 
+##### Gitlab-ci
+
+- [Dockerfile](/notes/docs/docker/dockerfile/gitlab/Dockerfile)
+- [telegram.bash](/notes/docs/docker/dockerfile/gitlab/telegram.bash)
+
 ##### [nginx](https://github.com/macbre/docker-nginx-http3)
 
 - [Dockerfile](/notes/docs/docker/dockerfile/nginx/Dockerfile)
