@@ -61,6 +61,11 @@ menu:
 - [Dockerfile](/notes/docs/docker/dockerfile/golang/Dockerfile)
 - `docker build --secret id=mysecret,src=id_rsa -t app .`
 
+##### goproxy
+
+- [Dockerfile](/notes/docs/docker/dockerfile/goproxy/Dockerfile)
+- `docker buildx build -f goproxy/Dockerfile --platform linux/amd64,linux/arm64 -t zeyanlin/goproxy:latest --push .`
+
 ##### Gitlab-ci
 
 - [Dockerfile](/notes/docs/docker/dockerfile/gitlab/Dockerfile)
