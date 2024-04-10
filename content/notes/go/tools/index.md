@@ -149,4 +149,12 @@ go install gorm.io/gen/tools/gentool@latest
 go install github.com/google/wire/cmd/wire@latest
 ```
 
+##### ko
+
+- Build and deploy Go applications
+
+```bash
+go install github.com/google/ko@latest
+```
+
 {{< /note >}}
