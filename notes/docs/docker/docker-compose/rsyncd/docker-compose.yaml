@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  rsyncd:
+    image: rsyncd
+    container_name: rsyncd
+    build:
+      dockerfile_inline: |
+        FROM alpine
+        RUN apk add rsync
+    ports:
+      - 873:873
+    volumes:
+      - ./rsyncd.secrets:/etc/rsyncd.secrets:RO
+      - ./rsyncd.conf:/etc/rsyncd.conf:RO
+      - ./data:/srv:Z
+    working_dir: /srv
+    command: rsync --daemon --no-detach --config=/etc/rsyncd.conf

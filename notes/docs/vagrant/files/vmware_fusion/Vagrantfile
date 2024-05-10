@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'vmware_desktop'
+Vagrant.configure("2") do |config|
+  config.vm.box = "kalilinux/rolling"
+  config.vm.hostname = "kali"
+  config.vm.define vm_name = "kali"
+  config.vm.box_check_update = false
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
+  config.vm.provider "vmware_fusion" do |vb|
+    vb.cpus = "2"
+    vb.memory = "2048"
+    vb.name = "kali"
+  end
+end

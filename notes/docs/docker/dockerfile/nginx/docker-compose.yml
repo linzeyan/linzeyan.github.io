@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  nginx:
+    image: zeyanlin/nginx
+    # image: macbre/nginx-http3
+    container_name: nginx
+    restart: always
+    environment:
+      - TZ=Asia/Taipei
+    ports:
+      - 80:80
+      - 443:443/tcp
+      - 443:443/udp
+    volumes:
+      - ./conf/letsencrypt:/etc/letsencrypt
+      - ./conf/nginx:/etc/nginx

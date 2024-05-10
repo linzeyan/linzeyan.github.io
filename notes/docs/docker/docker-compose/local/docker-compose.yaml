@@ -1,0 +1,329 @@
+version: "3.8"
+
+networks:
+  local_net:
+    name: local_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 100.100.100.0/24
+
+services:
+  etcd1:
+    image: bitnami/etcd:latest
+    container_name: etcd1
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 2379:2379
+      - 2380:2380
+    expose:
+      - "2379"
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=etcd1
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd1:2380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd1:2379
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
+      - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
+      - ETCD_INITIAL_CLUSTER_STATE=new
+    volumes:
+      - ./etcd/etcd1_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
+
+  etcd2:
+    image: bitnami/etcd:latest
+    container_name: etcd2
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 12379:2379
+      - 12380:2380
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=etcd2
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd2:2380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd2:2379
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
+      - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
+      - ETCD_INITIAL_CLUSTER_STATE=new
+    volumes:
+      - ./etcd/etcd2_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
+
+  etcd3:
+    image: bitnami/etcd:latest
+    container_name: etcd3
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 22379:2379
+      - 22380:2380
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=etcd3
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd3:2380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd3:2379
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
+      - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
+      - ETCD_INITIAL_CLUSTER_STATE=new
+    volumes:
+      - ./etcd/etcd3_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
+
+  rabbitmq:
+    image: rabbitmq:3.9.29
+    container_name: rabbitmq
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 5671:5671
+    environment:
+      - RABBITMQ_DEFAULT_USER=localuser
+      - RABBITMQ_DEFAULT_PASS=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+
+  redis:
+    image: redis/redis-stack
+    container_name: redis
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 6379:6379
+      - 8001:8001
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/etc/redis-stack.conf
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=localuser
+      - MONGO_INITDB_ROOT_PASSWORD=localpassword
+      - MONGO_INITDB_DATABASE=my-database
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=my-database
+      - MYSQL_USER=localuser
+      - MYSQL_PASSWORD=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+
+  mqtt:
+    image: emqx/emqx:latest
+    container_name: mqtt
+    restart: always
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      - local_net
+    ports:
+      - 1883:1883
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083
+    volumes:
+      - emqx-data:/opt/emqx/data
+      - emqx-etc:/opt/emqx/etc
+      - emqx-log:/opt/emqx/log
+    sysctls:
+      # Sets the maximum number of file handles allowed by the kernel
+      - fs.file-max=2097152
+      # Sets the maximum number of open file descriptors that a process can have
+      - fs.nr_open=2097152
+      # Sets the maximum number of connections that can be queued for acceptance by the kernel.
+      - net.core.somaxconn=32768
+      # Sets the maximum number of SYN requests that can be queued by the kernel
+      - net.ipv4.tcp_max_syn_backlog=16384
+      # Setting the minimum, default and maximum size of TCP Buffer
+      - net.ipv4.tcp_rmem='1024 4096 16777216'
+      - net.ipv4.tcp_wmem='1024 4096 16777216'
+      # Setting Parameters for TCP Connection Tracking
+      - net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
+      # Controls the maximum number of entries in the TCP time-wait bucket table
+      - net.ipv4.tcp_max_tw_buckets=1048576
+      # Controls Timeout for FIN-WAIT-2 Sockets:
+      - net.ipv4.tcp_fin_timeout=15
+      # Sets the size of the backlog queue for the network device
+      - net.core.netdev_max_backlog=16384
+      # Amount of memory that is allocated for storing incoming and outgoing  data for a socket
+      - net.core.rmem_default=262144
+      - net.core.wmem_default=262144
+      # Setting the maximum amount of memory for the socket buffers
+      - net.core.rmem_max=16777216
+      - net.core.wmem_max=16777216
+      - net.core.optmem_max=16777216
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    # dashboard(restful api): ip:18083
+    # ./bin/emqx ctl admins passwd <Username> <Password>
+
+  kafka:
+    image: bitnami/kafka
+    container_name: kafka
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - 9092:9092
+      - 9094:9094
+    environment:
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      # EXTERNAL://serverIPOrDomain:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    volumes:
+      - kafka:/bitnami/kafka
+      - kafka_config:/opt/bitnami/kafka/config
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    # server.properties
+    # message.max.bytes=200000000
+    # replica.fetch.max.bytes=204857600
+    # fetch.message.max.bytes=204857600
+  # https://github.com/provectus/kafka-ui
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - DYNAMIC_CONFIG_ENABLED=true
+    # volumes:
+    #   - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
+    networks:
+      - local_net
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    networks:
+      - local_net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer:/data
+    ports:
+      - 8000:8000
+      - 9443:9443
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+
+volumes:
+  emqx-data:
+  emqx-etc:
+  emqx-log:
+  kafka:
+  kafka_config:

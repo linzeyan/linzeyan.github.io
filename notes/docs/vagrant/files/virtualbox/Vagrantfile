@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+	# config.vm.box = "generic/alpine38" # alpine
+    # config.vm.box = "archlinux/archlinux" # arch
+	# "centos/6", "centos/7", "centos/8"
+	# "generic/gentoo"
+	# "kalilinux/rolling" # username/password: vagrant/vagrant
+	# "nixos/nixos-18.03-x86_64"
+	# "stuxcd/parrot-security"
+	# "rockylinux/8"
+	# "ubuntu/xenial64", "ubuntu/bionic64", "ubuntu/focal64", "ubuntu/jammy64"
+	# "gusztavvargadr/windows-10"
+	config.vm.box = "almalinux/9"
+	config.vm.hostname = "almalinux9"
+	config.vm.define vm_name = "almalinux9"
+	config.vm.box_check_update = false
+	# config.disksize.size = '100GB'
+	# config.vm.network "private_network", ip: "10.0.0.108"
+	config.vm.network :public_network, :bridge => "en0: Wi-Fi"
+	# config.vm.network "public_network", bridge: "Intel(R) Ethernet Controller (2) I225-V"
+	# config.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+	config.vm.synced_folder "./", "/vagrant", type: "rsync"
+	# config.vm.synced_folder "../data", "/vagrant_data"
+	# config.vm.synced_folder "./", "/vagrant", type: "nfs", mount_options: ["dmode=775,fmode=664"]
+
+	config.vm.provider "virtualbox" do |vb|
+		# vb.gui = true
+		vb.cpus = "2"
+		vb.memory = "2048"
+		vb.name = "almalinux9"
+	end
+	# $script = <<-SCRIPT
+    # 	sudo yum install -y epel-release
+	# SCRIPT
+	# config.vm.provision "shell", inline: $script
+end
