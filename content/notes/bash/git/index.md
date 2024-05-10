@@ -60,3 +60,44 @@ rm -f .gitmodules
 ```
 
 {{< /note >}}
+
+{{< note title="commit hash" >}}
+
+```bash
+git rev-parse HEAD
+```
+
+{{< /note >}}
+
+{{< note title="git config" >}}
+
+```ini
+[user]
+  email = zeyanlin@outlook.com
+  name = Ricky
+  signingkey = 2A4313489FDCA802ED6FCC214B03D879EA73DF37
+[commit]
+  gpgsign = true
+```
+
+{{< /note >}}
+
+{{< note title="git config1" >}}
+
+For golang import package
+
+```ini
+[url "git@gitlab.example.com:"]
+    insteadOf = https://gitlab.example.com/
+```
+
+{{< /note >}}
+
+{{< note title="git config2" >}}
+
+```ini
+[includeIf "gitdir:~/work/"]
+    path = ~/.gitconfig-work
+```
+
+{{< /note >}}

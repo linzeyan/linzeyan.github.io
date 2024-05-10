@@ -20,3 +20,12 @@ ssh-keygen -t ed25519 -C "dev" -f ~/.ssh/ed25519
 ```
 
 {{< /note >}}
+
+{{< note title="ssh config" >}}
+
+```sshconfig
+Host private.example.com
+  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+```
+
+{{< /note >}}
