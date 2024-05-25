@@ -42,7 +42,7 @@ go get github.com/google/go-jsonnet/cmd/jsonnet
 ##### migrate
 
 ```bash
-go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+go install -tags 'mysql,sqlite,sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 ```
 
 ##### protobuf
