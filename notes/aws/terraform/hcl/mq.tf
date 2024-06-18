@@ -16,7 +16,7 @@ resource "aws_mq_broker" "dev-mq" {
 
   user {
     username = "admin"
-    password = "password"
+    password = "passwordpassword"
   }
   tags = { "Name" = "dev-mq", "Project" = "dev" }
 }
