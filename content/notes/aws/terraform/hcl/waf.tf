@@ -91,10 +91,11 @@ resource "aws_wafv2_web_acl" "web_acl1" {
 }
 
 data "aws_cloudfront_distribution" "test" {
-  arn = "arn:aws:cloudfront::123456789012:distribution/EATDVGD171BHDS1"
+  id = ""
+  # arn = "arn:aws:cloudfront::123456789012:distribution/EATDVGD171BHDS1"
 }
 
 resource "aws_wafv2_web_acl_association" "enable_web_acl" {
-  resource_arn = aws_cloudfront_distribution.test.arn
+  resource_arn = data.aws_cloudfront_distribution.test.arn
   web_acl_arn  = aws_wafv2_web_acl.web_acl1.arn
 }

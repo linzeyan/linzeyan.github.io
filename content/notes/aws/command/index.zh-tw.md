@@ -133,3 +133,24 @@ aws wafv2 create-web-acl \
 ```
 
 {{< /note >}}
+
+{{< note title="Mount S3 Bucket on EC2" >}}
+
+references: [How to Mount S3 Bucket on Ubuntu 22.04 with S3FS Fuse](https://linuxbeast.com/blog/how-to-mount-s3-bucket-on-ubuntu-22-04-with-s3fs-fuse/)
+
+```bash
+# Installing s3fs-fuse
+sudo apt-get update && sudo apt-get install s3fs
+
+# Configuring AWS Credentials
+echo ACCESS_KEY_ID:SECRET_ACCESS_KEY > ${HOME}/.passwd-s3fs
+chmod 600 ${HOME}/.passwd-s3fs
+
+# Mounting the S3 Bucket
+s3fs mybucketname:/path/to/dir /path/to/local/mountpoint -o passwd_file=${HOME}/.passwd-s3fs
+
+# Ensuring Persistent Mounting
+echo 's3fs#mybucketname:/path/to/dir /path/to/local/mountpoint fuse _netdev,allow_other 0 0' | sudo tee -a /etc/fstab
+```
+
+{{< /note >}}
