@@ -1,0 +1,28 @@
+stages:
+  - deploy
+
+.test: &deploy_master
+  stage: deploy
+  tags:
+    - tw-runner2
+  before_script:
+    - echo "Deploying branch:$CI_BUILD_REF_NAME tag:$CI_BUILD_TAG..."
+
+.test_templates:
+  script: &test_sc
+    - echo 'template 1'
+    - echo 'template 1.1'
+
+test1:
+  <<: *deploy_master
+  script:
+    - echo 'OK'
+    - *test_sc
+    - echo 'OK.1'
+
+test2:
+  <<: *deploy_master
+  script:
+    - echo 'OK2'
+    - *test_sc
+    - echo 'OK2.1'
