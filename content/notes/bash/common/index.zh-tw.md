@@ -35,6 +35,34 @@ age --decrypt -i key.txt file.txt.enc > file.txt
 
 {{< /note >}}
 
+{{< note title="awk" >}}
+
+```bash
+# To lowercase
+uuidgen|awk '{print tolower($0)}' # output: 649612b0-0fa4-4b50-9b13-17279f602a43
+
+# To uppercase
+echo 'hello world'|awk '{print toupper($0)}' # output: HELLO WORLD
+
+# 提取子字符串: `substr(string, start, length)`
+echo "hello world" | awk '{print substr($0, 1, 5)}' # output: hello
+
+# 全局替換字符串中的正則表達式匹配項: `gsub(regex, replacement, string)`
+# 替換字符串中首次匹配的正則表達式: `sub(regex, replacement, string)`
+echo "hello world" | awk '{gsub(/world/, "everyone"); print $0}' # output: hello everyone
+
+# 將數字轉換為整數
+echo "3.14" | awk '{print int($0)}' # output: 3
+
+# 返回平方根
+echo "99" | awk '{print sqrt($0)}' # output: 9.94987
+
+# 指數和對數
+echo "2" | awk '{print exp($0), log($0)}' # output: 7.38906 0.693147
+```
+
+{{< /note >}}
+
 {{< note title="certbot" >}}
 
 ```bash
