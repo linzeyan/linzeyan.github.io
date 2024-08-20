@@ -36,6 +36,7 @@ func main() {
 	fmt.Println(aa)
 }
 ```
+
 - A. [1 2 3] [1 2 3]
 - B. [1 2 3] [3 4 5]
 - C. [1 2 3] [3 4 5 6 7 8 9]
@@ -47,8 +48,6 @@ func main() {
 <code>B
 </code></pre></details>
 {{< /note >}}
-
-
 
 {{< note title="json1" >}}
 
@@ -74,11 +73,12 @@ func main() {
 	fmt.Printf("%s", m)
 }
 ```
+
 - A. {"Time":"2020-12-20T00:00:00Z","N":5}
 - B. "2020-12-20T00:00:00Z"
 - C. {"N":5}
-- D. <nil>
-- E. 其他
+- D. `<nil>`
+- E. else
 
 <details>
 <summary>Answer</summary>
