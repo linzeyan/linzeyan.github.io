@@ -69,6 +69,26 @@ git rev-parse HEAD
 
 {{< /note >}}
 
+{{< note title="commit tag" >}}
+
+```bash
+git describe --tags
+```
+
+{{< /note >}}
+
+{{< note title="worktree" >}}
+
+```bash
+# list
+git worktree list
+
+# add
+git worktree add ../dirname branch-name
+```
+
+{{< /note >}}
+
 {{< note title="git config" >}}
 
 ```ini
