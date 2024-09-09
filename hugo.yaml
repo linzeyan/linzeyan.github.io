@@ -2,14 +2,14 @@ baseURL: https://linzeyan.github.io/
 
 languageCode: en-us
 title: "Ricky"
-# theme: "toha"
 
 # Use Hugo modules to add theme
 module:
   imports:
-    - path: toha
-  #   - path: github.com/hugo-toha/toha/v4
+    - path: github.com/hugo-toha/toha/v4
   mounts:
+    - source: static/files
+      target: static/files
     - source: ./node_modules/flag-icon-css/flags
       target: static/flags
     - source: ./node_modules/@fontsource/mulish/files
@@ -77,15 +77,6 @@ params:
     # Enable dark theme
     darkMode:
       enable: true
-      services:
-        darkreader:
-          defaultColorScheme: system # options are 'system', 'dark', 'light'
-          fixes:
-            invert: ['img[src$=".svg"]'] # inverts svg colors.
-          theme:
-            brightness: 100
-            contrast: 100
-            sepia: 0
 
     # Enable and configure portfolio
     portfolio:
