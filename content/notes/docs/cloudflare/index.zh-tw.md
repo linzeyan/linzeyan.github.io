@@ -175,3 +175,10 @@ resource "cloudflare_rate_limit" "frontend_rate_limit" {
 ```
 
 {{< /note >}}
+
+{{< note title="API Document" >}}
+
+- [Cloudflare for SaaS](https://developers.cloudflare.com/api/operations/custom-hostname-for-a-zone-create-custom-hostname)
+- [partial (CNAME) zone](https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record)
+
+{{< /note >}}
