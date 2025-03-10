@@ -33,6 +33,19 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd1_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
 
   etcd2:
     image: bitnami/etcd:latest
@@ -55,6 +68,19 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd2_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
 
   etcd3:
     image: bitnami/etcd:latest
@@ -77,6 +103,19 @@ services:
       - ETCD_INITIAL_CLUSTER_STATE=new
     volumes:
       - ./etcd/etcd3_data:/bitnami/etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
 
   rabbitmq:
     image: rabbitmq:3.9.29
@@ -89,15 +128,29 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=localuser
       - RABBITMQ_DEFAULT_PASS=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
 
   redis:
-    image: redis
+    image: redis/redis-stack
     container_name: redis
     restart: always
     networks:
       - local_net
     ports:
       - 6379:6379
+      - 8001:8001
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/etc/redis-stack.conf
 
   mongo:
     image: mongo
@@ -111,6 +164,11 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=localuser
       - MONGO_INITDB_ROOT_PASSWORD=localpassword
       - MONGO_INITDB_DATABASE=my-database
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
 
   mysql:
     image: mysql
@@ -125,6 +183,11 @@ services:
       - MYSQL_DATABASE=my-database
       - MYSQL_USER=localuser
       - MYSQL_PASSWORD=localpassword
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
 
   mqtt:
     image: emqx/emqx:latest
@@ -174,6 +237,13 @@ services:
       - net.core.rmem_max=16777216
       - net.core.wmem_max=16777216
       - net.core.optmem_max=16777216
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    # dashboard(restful api): ip:18083
+    # ./bin/emqx ctl admins passwd <Username> <Password>
 
   kafka:
     image: bitnami/kafka
@@ -190,11 +260,48 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      # EXTERNAL://serverIPOrDomain:9094
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     volumes:
-      - ./kafka:/bitnami/kafka
+      - kafka:/bitnami/kafka
+      - kafka_config:/opt/bitnami/kafka/config
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    # server.properties
+    # message.max.bytes=200000000
+    # replica.fetch.max.bytes=204857600
+    # fetch.message.max.bytes=204857600
+  # https://github.com/provectus/kafka-ui
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - DYNAMIC_CONFIG_ENABLED=true
+    # volumes:
+    #   - ~/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+        reservations:
+          cpus: "0.1"
+          memory: 20M
+    networks:
+      - local_net
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -208,8 +315,15 @@ services:
     ports:
       - 8000:8000
       - 9443:9443
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 5
 
 volumes:
   emqx-data:
   emqx-etc:
   emqx-log:
+  kafka:
+  kafka_config:

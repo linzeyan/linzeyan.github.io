@@ -1,0 +1,27 @@
+filebeat.inputs:
+  - type: log
+    id: data-fetcher
+    enabled: true
+    paths:
+      - /var/lib/docker/volumes/news-spider_log_volume/_data/supervisord_news-spider.log*
+    fields:
+      service: "news-spider"
+    index: "news-spider"
+    processors:
+      - dissect:
+          tokenizer: '{"level":"%{level}","time":"%{time}","caller":"%{caller}","msg":"%{msg}"}'
+          field: "message"
+          target_prefix: "log"
+    multiline.type: pattern
+    multiline.pattern: '^\{'
+    multiline.negate: true
+    multiline.match: after
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+setup.template.settings:
+  index.number_of_shards: 1
+setup.kibana:
+output.elasticsearch:
+  hosts: ["172.31.23.153:9200"]
