@@ -154,3 +154,17 @@ echo 's3fs#mybucketname:/path/to/dir /path/to/local/mountpoint fuse _netdev,allo
 ```
 
 {{< /note >}}
+
+{{< note title="resize disk" >}}
+
+```bash
+# 會在 FSTYPE 欄顯示 ext4 或 xfs
+lsblk -f
+# 擴大分割區 1 直到填滿整顆磁碟
+# apt-get -y install cloud-guest-utils   # 內含 growpart
+growpart /dev/xvda 1
+# ext4 # xfs_growfs -d / # xfs
+resize2fs /dev/xvda1
+```
+
+{{< /note >}}

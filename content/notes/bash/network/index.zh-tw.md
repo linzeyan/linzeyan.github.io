@@ -29,3 +29,14 @@ ip route add blackhole 192.168.0.0/24
 ```
 
 {{< /note >}}
+
+{{< note title="Kill sessions" >}}
+
+```bash
+# ss
+sudo ss -K state TIME-WAIT
+# or conntrack
+sudo conntrack -D -p tcp --state TIME_WAIT
+```
+
+{{< /note >}}
