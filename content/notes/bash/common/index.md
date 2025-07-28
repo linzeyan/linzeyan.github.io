@@ -91,6 +91,18 @@ xvfb-run --server-args="-screen 0, 1024x768x24" cutycapt --url=https://www.googl
 
 {{< /note >}}
 
+{{< note title="dmesg" >}}
+
+```bash
+sudo dmesg -T | grep -i 'killed process'
+# total-vm: 該程序分配的虛擬記憶體總量（含未實際使用）
+# anon-rss: 匿名頁面 resident memory（實際佔用記憶體）→ 重點
+# file-rss: 映射檔案的 resident memory（如 shared libraries）
+# shmem-rss: 共用記憶體的 resident memory
+```
+
+{{< /note >}}
+
 {{< note title="dnscontrol" >}}
 
 - [creds.json](/notes/bash/common/files/creds.json)

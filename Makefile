@@ -6,7 +6,7 @@ run:
 .PHONY: run
 
 cf:
-	@wget https://github.com/gohugoio/hugo/releases/download/v0.131.0/hugo_extended_0.131.0_linux-amd64.tar.gz
-	@tar xf hugo_extended_0.131.0_linux-amd64.tar.gz
-	@./hugo --minify -b $CF_PAGES_URL
+	@wget https://github.com/gohugoio/hugo/releases/download/v0.148.2/hugo_extended_0.148.2_linux-amd64.tar.gz
+	@tar xf hugo_extended_0.148.2_linux-amd64.tar.gz
+	@./hugo --minify -b "$(CF_PAGES_URL)"
 .PHONY: cf
