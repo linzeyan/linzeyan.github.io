@@ -566,6 +566,20 @@
 &lt;/div>
 &lt;div class="note-card ">
 &lt;div class="item">
+&lt;h5 class="note-title">&lt;span>caffeinate&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 防止显示器关闭&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 保持系统不休眠&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -i
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 保持 30 分钟&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -t &lt;span style="color:#ae81ff">1800&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
 &lt;h5 class="note-title">&lt;span>certbot&lt;/span>&lt;/h5>
 &lt;div class="card">
 &lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install&lt;/span>
@@ -623,6 +637,28 @@
 &lt;/div>
 &lt;div class="note-card ">
 &lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ffmpeg&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Download sample video&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4 -O test.mp4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Push stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ffmpeg -re -i test.mp4 -c copy -f flv &lt;span style="color:#e6db74">&amp;#34;rtmp://209357.push.tlivecloud.com/live/big_buck_bunny_720p_1mb?txSecret=a543b79d9a8c38ace5ce18eea2bd7721&amp;amp;txTime=687E4609&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>go&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go tool pprof -http&lt;span style="color:#f92672">=&lt;/span>:8081 20250814_024534.heap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
 &lt;h5 class="note-title">&lt;span>k6&lt;/span>&lt;/h5>
 &lt;div class="card">
 &lt;div class="card-body">&lt;ul>
@@ -630,6 +666,18 @@
 &lt;li>command&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>k6 run k6.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>kafka&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list topics&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># all topics count&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list |wc -l
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
 &lt;/div>
 &lt;/div>

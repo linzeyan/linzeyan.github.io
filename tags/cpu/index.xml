@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CPU on Ricky</title><link>https://linzeyan.github.io/tags/cpu/</link><description>Recent content in CPU on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 02 Sep 2025 08:24:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/cpu/index.xml" rel="self" type="application/rss+xml"/><item><title>独立服务器 CPU 频率最大化配置指南</title><link>https://linzeyan.github.io/posts/20250902-linux-cpu-performance/</link><pubDate>Tue, 02 Sep 2025 08:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20250902-linux-cpu-performance/</guid><description>&lt;p>&lt;a href="https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306" target="_blank" rel="noopener">独立服务器 CPU 频率最大化配置指南&lt;/a>&lt;/p>
+&lt;h2 id="看看-cpu-现在混哪种模式">看看 CPU 现在混哪种模式&lt;/h2>
+&lt;p>前提条件
+系统：Linux（Debian、Ubuntu、Proxmox 等都行）&lt;/p>
+&lt;p>权限：root&lt;/p>
+&lt;p>CPU：支持动态调频（Intel Xeon、AMD EPYC / Ryzen 等）&lt;/p>
+&lt;h3 id="governor">governor&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>powersave：节能小绵羊（频率锁低，省电但废武功）&lt;/li>
+&lt;li>ondemand：按需加速（要用时才升频，可能反应慢半拍）&lt;/li>
+&lt;li>performance：全程高能（我们要的就是它！💪）&lt;/li>
+&lt;/ul>
+&lt;h3 id="确认内核到底用的哪种驱动intel--amd">确认内核到底用的哪种驱动（Intel / AMD）&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver&lt;/code>&lt;/p>
+&lt;h2 id="临时拉满性能">临时拉满性能&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> cpu in /sys/devices/system/cpu/cpu&lt;span style="color:#f92672">[&lt;/span>0-9&lt;span style="color:#f92672">]&lt;/span>*; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo performance &amp;gt; $cpu/cpufreq/scaling_governor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="重启后也保持高能">重启后也保持高能&lt;/h2>
+&lt;h3 id="方案-a最稳妥推荐">方案 A：最稳妥推荐&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install cpufrequtils -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;GOVERNOR=&amp;#34;performance&amp;#34;&amp;#39;&lt;/span> &amp;gt;/etc/default/cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl start cpufrequtils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方案-bsystemd-自定义服务">方案 B：systemd 自定义服务&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/systemd/system/cpu-performance.service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>Set CPU governor to performance
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>oneshot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/bin/bash -c &lt;span style="color:#e6db74">&amp;#39;for cpu in /sys/devices/system/cpu/cpu[0-9]*; do echo performance &amp;gt; $cpu/cpufreq/scaling_governor; done&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl daemon-reexec
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable --now cpu-performance.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
