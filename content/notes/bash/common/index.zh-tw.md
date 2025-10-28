@@ -63,6 +63,19 @@ echo "2" | awk '{print exp($0), log($0)}' # output: 7.38906 0.693147
 
 {{< /note >}}
 
+{{< note title="caffeinate" >}}
+
+```bash
+# 防止显示器关闭
+caffeinate -d
+# 保持系统不休眠
+caffeinate -i
+# 保持 30 分钟
+caffeinate -t 1800
+```
+
+{{< /note >}}
+
 {{< note title="certbot" >}}
 
 ```bash
@@ -115,6 +128,26 @@ dnscontrol get-zones --format=js --out=example.com.js cloudflare CLOUDFLAREAPI e
 
 {{< /note >}}
 
+{{< note title="ffmpeg" >}}
+
+```bash
+# Download sample video
+wget https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4 -O test.mp4
+
+# Push stream
+ffmpeg -re -i test.mp4 -c copy -f flv "rtmp://209357.push.tlivecloud.com/live/big_buck_bunny_720p_1mb?txSecret=a543b79d9a8c38ace5ce18eea2bd7721&txTime=687E4609"
+```
+
+{{< /note >}}
+
+{{< note title="go" >}}
+
+```bash
+go tool pprof -http=:8081 20250814_024534.heap
+```
+
+{{< /note >}}
+
 {{< note title="k6" >}}
 
 - [k6.js](/notes/bash/common/files/k6.js)
@@ -122,6 +155,17 @@ dnscontrol get-zones --format=js --out=example.com.js cloudflare CLOUDFLAREAPI e
 
 ```bash
 k6 run k6.js
+```
+
+{{< /note >}}
+
+{{< note title="kafka" >}}
+
+```bash
+# list topics
+kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list
+# all topics count
+kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list |wc -l
 ```
 
 {{< /note >}}
