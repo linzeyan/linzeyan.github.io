@@ -40,3 +40,22 @@ sudo conntrack -D -p tcp --state TIME_WAIT
 ```
 
 {{< /note >}}
+
+{{< note title="connect IPs" >}}
+
+```bash
+ss -tnH state established \
+| awk '{
+  peer = $5; if (peer == "") peer = $NF # 取 Peer Address:Port（某些版本欄位可能不同）
+  sub(/,$/, "", peer)                   # 去掉可能的逗號
+  gsub(/[\[\]]/, "", peer)              # 去掉所有中括號
+  gsub(/::ffff:/, "", peer)             # IPv4-mapped IPv6 無論出現在開頭還中間都移除
+  sub(/%[^:]+/, "", peer)               # 去掉 IPv6 的 scope（如 %eth0）
+  sub(/:[0-9]+$/, "", peer)             # 去掉最後的 :port
+  print peer
+}' \
+| sort | uniq -c | sort -nr
+
+```
+
+{{< /note >}}
