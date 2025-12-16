@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ACME on Ricky</title><link>https://linzeyan.github.io/categories/acme/</link><description>Recent content in ACME on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 20 Oct 2025 16:31:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/acme/index.xml" rel="self" type="application/rss+xml"/><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/posts/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20251020-nginx-acme-module/</guid><description>&lt;p>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/p>
+&lt;h2 id="ngx_http_acme_module">&lt;code>ngx_http_acme_module&lt;/code>&lt;/h2>
+&lt;ul>
+&lt;li>NGINX 1.25.1&lt;/li>
+&lt;/ul>
+&lt;h2 id="pre-install">pre-install&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 Debian/Ubuntu 系统上安装基础编译工具和 NGINX 依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install build-essential libpcre3-dev zlib1g-dev libssl-dev pkg-config libclang-dev git -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装 Rust 工具链 (cargo 和 rustc)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --proto &lt;span style="color:#e6db74">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source $HOME/.cargo/env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -pv /app/nginx/&lt;span style="color:#f92672">{&lt;/span>logs,conf,cache, acme&lt;span style="color:#f92672">}&lt;/span> /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 克隆 ACME 模块的源码&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/nginx/nginx-acme.git /app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 或者&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># git clone git@github.com:nginx/nginx-acme.git /app/nginx-build/nginx-acme&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 下载 NGINX 源码（请替换为您需要的版本）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://nginx.org/download/nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxf nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="compile">compile&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd nginx-1.28.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prefix&lt;span style="color:#f92672">=&lt;/span>/app/nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --error-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/error.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/access.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --pid-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.pid &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --lock-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.lock &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-client-body-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/client_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-proxy-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/proxy_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-fastcgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/fastcgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-uwsgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/uwsgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-scgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/scgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --user&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --group&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-compat &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-file-aio &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-threads &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_addition_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_auth_request_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_dav_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_flv_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gunzip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gzip_static_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_mp4_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_random_index_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_secure_link_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_slice_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_stub_status_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_sub_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v2_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v3_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_preread_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-cc-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-g -O2 -ffile-prefix-map=/home/builder/debuild/nginx-1.28.0/debian/debuild-base/nginx-1.28.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-ld-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>/app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make modules &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make install
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 运行配置脚本，这里的关键是 --add-dynamic-module&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注意：您需要在这里包含您当前 NGINX 已有的所有编译参数，可以通过 nginx -V 查看&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译模块，注意是 make modules 而不是 make install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="config">config&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /app/nginx/conf/nginx.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">user&lt;/span> &lt;span style="color:#e6db74">nginx&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">error.log&lt;/span> &lt;span style="color:#e6db74">debug&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pid&lt;/span> &lt;span style="color:#e6db74">nginx.pid&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_http_acme_module.so&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">events&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">worker_connections&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">multi_accept&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">mime.types&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/octet-stream&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_local] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$host&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">access.log&lt;/span> &lt;span style="color:#e6db74">main&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">sendfile&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tcp_nopush&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">charset&lt;/span> &lt;span style="color:#e6db74">utf-8&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keepalive_timeout&lt;/span> &lt;span style="color:#ae81ff">65&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gzip&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resolver&lt;/span> 8.8.8.8 1.1.1.1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 定义一个名为 letsencrypt 的 ACME 颁发机构实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_issuer&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定 ACME 服务提供商的目录 URL，这里是 Let&amp;#39;s Encrypt 的生产环境
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">uri&lt;/span> &lt;span style="color:#e6db74">https://acme-v02.api.letsencrypt.org/directory&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 提供一个联系邮箱，用于接收 CA 的重要通知（如证书即将过期）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">contact&lt;/span> &lt;span style="color:#e6db74">mailto:security-alerts@aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定状态文件的存储路径，用于保存 ACME 账户密钥，非常重要
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">state_path&lt;/span> &lt;span style="color:#e6db74">acme/letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 同意服务条款，对于 Let&amp;#39;s Encrypt 等 CA 这是必需的步骤
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">accept_terms_of_service&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 可选指令 acme_shared_zone，用于存储所有配置的证书颁发者的证书、私钥和挑战数据。该区域默认大小为 256K，可根据需要增加
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_shared_zone&lt;/span> &lt;span style="color:#e6db74">zone=acme_shared:1M&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">ssl.aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤一：声明此 server 块启用 ACME，并指定使用上面定义的 letsencrypt 颁发机构
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_certificate&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤二：使用动态变量加载由 ACME 模块在内存中管理的证书和私钥
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> $acme_certificate;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> $acme_certificate_key;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_cache&lt;/span> &lt;span style="color:#e6db74">max=2&lt;/span>; &lt;span style="color:#75715e"># required ngx 1.27.4+
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">text/plain&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span> &lt;span style="color:#e6db74">&amp;#39;OK&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ACME 模块会自动处理 /.well-known/acme-challenge/ 的请求，此 location 用于处理所有其他请求
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">301&lt;/span> &lt;span style="color:#e6db74">https://&lt;/span>$host$request_uri;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

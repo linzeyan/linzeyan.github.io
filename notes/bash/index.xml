@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bash Notes on Ricky</title><link>https://linzeyan.github.io/notes/bash/</link><description>Recent content in Bash Notes on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://linzeyan.github.io/notes/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible Command</title><link>https://linzeyan.github.io/notes/bash/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/ansible/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Lookup&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># List all plugins&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ansible-doc -t lookup -l
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use `ansible-doc -t lookup &amp;lt;plugin&amp;gt;` to see detail&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ansible-doc -t lookup ping
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>winrm&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="--console-output">- console output&lt;/h6>
+&lt;p>在 hyper-v 那台機器 Enable Winrm 之後 一直出現下面的錯誤。
+在 group 加上一行即可&lt;/p>
+&lt;p>&lt;code>ansible_winrm_transport=ntlm&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">hyper-v&lt;/span>&lt;span style="color:#ae81ff">01&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">|&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">UNREACHABLE!&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;changed&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;msg&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ssl: the specified credentials were rejected by the server&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;unreachable&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="--etcansiblehosts">- /etc/ansible/hosts&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_user&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">administrator&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_password&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_port&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">5986&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_connection&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">winrm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_winrm_server_cert_validation&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">ignore&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ansible_winrm_transport&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">ntlm&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Common Command</title><link>https://linzeyan.github.io/notes/bash/common/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/common/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ab&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ab -n &lt;span style="color:#ae81ff">20&lt;/span> -c &lt;span style="color:#ae81ff">20&lt;/span> -k https://default.hddv1.com/error
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>age&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># generate public and private keys&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>age-keygen -o key.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># encrypt file with public key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>age -r public_key -o file.txt.enc file.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># encrypt file with ssh key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>age -R ~/.ssh/id_ed25519.pub file.txt &amp;gt; file.txt.enc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># decrypt file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>age --decrypt -i key.txt file.txt.enc &amp;gt; file.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>awk&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To lowercase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uuidgen|awk &lt;span style="color:#e6db74">&amp;#39;{print tolower($0)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: 649612b0-0fa4-4b50-9b13-17279f602a43&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To uppercase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;hello world&amp;#39;&lt;/span>|awk &lt;span style="color:#e6db74">&amp;#39;{print toupper($0)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: HELLO WORLD&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 提取子字符串: `substr(string, start, length)`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;hello world&amp;#34;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print substr($0, 1, 5)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: hello&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 全局替換字符串中的正則表達式匹配項: `gsub(regex, replacement, string)`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 替換字符串中首次匹配的正則表達式: `sub(regex, replacement, string)`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;hello world&amp;#34;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{gsub(/world/, &amp;#34;everyone&amp;#34;); print $0}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: hello everyone&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 將數字轉換為整數&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;3.14&amp;#34;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print int($0)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: 3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 返回平方根&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;99&amp;#34;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print sqrt($0)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: 9.94987&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 指數和對數&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print exp($0), log($0)}&amp;#39;&lt;/span> &lt;span style="color:#75715e"># output: 7.38906 0.693147&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>caffeinate&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 防止显示器关闭&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 保持系统不休眠&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -i
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 保持 30 分钟&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>caffeinate -t &lt;span style="color:#ae81ff">1800&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>certbot&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install certbot python3-certbot-nginx python3-certbot-dns-route53
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 1. Generating Wildcard Certificates&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo certbot certonly --manual --preferred-challenges&lt;span style="color:#f92672">=&lt;/span>dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### add txt record then press enter to continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 2. Generating Wildcard Certificates&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo certbot certonly -d example.com -d *.example.com --dns-route53 --agree-tos --server https://acme-v02.api.letsencrypt.org/directory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Automating Renewal&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> * * &lt;span style="color:#ae81ff">1&lt;/span> /usr/bin/certbot certonly --dns-route53 -d *.example.com --quiet --post-hook &lt;span style="color:#e6db74">&amp;#34;systemctl reload nginx&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>cutycapt&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Capture website page as picture&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xvfb-run --server-args&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;-screen 0, 1024x768x24&amp;#34;&lt;/span> cutycapt --url&lt;span style="color:#f92672">=&lt;/span>https://www.google.com --out&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/tmp/google.png&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>dmesg&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo dmesg -T | grep -i &lt;span style="color:#e6db74">&amp;#39;killed process&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># total-vm: 該程序分配的虛擬記憶體總量（含未實際使用）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># anon-rss: 匿名頁面 resident memory（實際佔用記憶體）→ 重點&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># file-rss: 映射檔案的 resident memory（如 shared libraries）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># shmem-rss: 共用記憶體的 resident memory&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>dnscontrol&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/common/files/creds.json">creds.json&lt;/a>&lt;/li>
+&lt;li>command&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dnscontrol get-zones --format&lt;span style="color:#f92672">=&lt;/span>js --out&lt;span style="color:#f92672">=&lt;/span>example.com.js r53 ROUTE53 example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dnscontrol get-zones --format&lt;span style="color:#f92672">=&lt;/span>js --out&lt;span style="color:#f92672">=&lt;/span>example.com.js cloudflare CLOUDFLAREAPI example.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ffmpeg&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Download sample video&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4 -O test.mp4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Push stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ffmpeg -re -i test.mp4 -c copy -f flv &lt;span style="color:#e6db74">&amp;#34;rtmp://209357.push.tlivecloud.com/live/big_buck_bunny_720p_1mb?txSecret=a543b79d9a8c38ace5ce18eea2bd7721&amp;amp;txTime=687E4609&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>go&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go tool pprof -http&lt;span style="color:#f92672">=&lt;/span>:8081 20250814_024534.heap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>k6&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/common/files/k6.js">k6.js&lt;/a>&lt;/li>
+&lt;li>command&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>k6 run k6.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>kafka&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list topics&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># all topics count&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list |wc -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>hey&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hey -n &lt;span style="color:#ae81ff">200000&lt;/span> -c &lt;span style="color:#ae81ff">500&lt;/span> -h2 -z 30s https://a8-wss.hddv1.com/test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>openfortivpn&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># https://github.com/adrienverge/openfortivpn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo openfortivpn ip:port --username&lt;span style="color:#f92672">=&lt;/span>ricky --pppd-use-peerdns&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>openssl&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 自簽名證書，要把 ca.p7b 匯入 certmgr.msc 的受信任的根憑證授權單位，Chrome 才吃的到。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl crl2pkcs7 -nocrl -certfile ca.crt -out ca.p7b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>prlimit&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 更改 Max_open_files 遇到參數錯誤，原因為 CentOS6 與 CentOS7 指令不同&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># CentOS6&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i in &lt;span style="color:#66d9ef">$(&lt;/span>ps -ef | grep &lt;span style="color:#e6db74">&amp;#39;publish/server/game_server&amp;#39;&lt;/span> | egrep -v &lt;span style="color:#e6db74">&amp;#39;grep|startall&amp;#39;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span> echo -n &lt;span style="color:#e6db74">&amp;#34;Max open files=1024000:1024000&amp;#34;&lt;/span> &amp;gt; /proc/$i/limits; &lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># CentOS7&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i in &lt;span style="color:#66d9ef">$(&lt;/span>ps -ef | grep gateway | grep -v grep | awk &lt;span style="color:#e6db74">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span> prlimit --pid $i --nofile&lt;span style="color:#f92672">=&lt;/span>1024000:1024000 ; &lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>siege&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>siege --time&lt;span style="color:#f92672">=&lt;/span>3s --concurrent&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">30000&lt;/span> https://a8-h5.hddv1.com/index.html
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>tr&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cat krypton2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>YRIRY GJB CNFFJBEQ EBGGRA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cat krypton2 | tr a-zA-Z n-za-mN-ZA-M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LEVEL TWO PASSWORD ROTTEN
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>vegeta&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>attack&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;GET &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vegeta attack -duration&lt;span style="color:#f92672">=&lt;/span>100s -header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;User-Agent: baidu&amp;#34;&lt;/span> -header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;X-Forwarded-For: 47.0.0.1&amp;#34;&lt;/span> -rate&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">500&lt;/span> -timeout&lt;span style="color:#f92672">=&lt;/span>1s |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vegeta encode |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> jaggr @count&lt;span style="color:#f92672">=&lt;/span>rps &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> hist&lt;span style="color:#ae81ff">\[&lt;/span>100,200,300,400,500&lt;span style="color:#ae81ff">\]&lt;/span>:code &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> p25,p50,p95:latency &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> sum:bytes_in &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> sum:bytes_out |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> jplot rps+code.hist.100+code.hist.200+code.hist.300+code.hist.400+code.hist.500 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> latency.p95+latency.p50+latency.p25 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> bytes_in.sum+bytes_out.sum
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -n &lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#e6db74">}&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> attack &lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## -header=&amp;#34;Connection: Upgrade&amp;#34; -header=&amp;#34;Upgrade: websocket&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>wrk&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wrk -t10 -c1000 -d30s -H &lt;span style="color:#e6db74">&amp;#34;User-Agent: baidu&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;https://default.hddv1.com/error&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Vagrant with hyper-v provider&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Common&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Find out processes swap usage command&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> file in /proc/*/status ; &lt;span style="color:#66d9ef">do&lt;/span> awk &lt;span style="color:#e6db74">&amp;#39;/VmSwap|Name/{printf $2 &amp;#34; &amp;#34; $3}END{ print &amp;#34;&amp;#34;}&amp;#39;&lt;/span> $file; &lt;span style="color:#66d9ef">done&lt;/span> | sort -k &lt;span style="color:#ae81ff">2&lt;/span> -n -r | less
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Gitbook&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>Hide gitbook sidebar default.&lt;/p></description></item><item><title>Docker Command</title><link>https://linzeyan.github.io/notes/bash/docker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/docker/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Build with secret&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>Dockerfile&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># syntax = docker/dockerfile:1.6&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> golang:1.21.1-alpine3.18&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>type&lt;span style="color:#f92672">=&lt;/span>secret,id&lt;span style="color:#f92672">=&lt;/span>mysecret,target&lt;span style="color:#f92672">=&lt;/span>/root/.ssh/id_rsa git clone git@gitlab.com:ricky/repo.git&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Command&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>export DOCKER_BUILDKIT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker build --secret id&lt;span style="color:#f92672">=&lt;/span>mysecret,src&lt;span style="color:#f92672">=&lt;/span>id_rsa -t image .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Compose&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Force pull image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker-compose up -d --pull always
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Create buildx instance&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create buildx instance&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker buildx create --name builder --bootstrap --driver docker-container
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install emulators&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker run --privileged --rm tonistiigi/binfmt --install all
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Create Network&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker network create -d bridge --subnet 172.100.0.0/24 --gateway 172.100.0.1 backend_dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Multiple build-arg&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker build . -f ./scripts/Dockerfile &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --build-arg Date&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>date&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --build-arg Tag&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git rev-list -n &lt;span style="color:#ae81ff">1&lt;/span> --tags&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --build-arg Commit&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>git describe --tags --abbrev&lt;span style="color:#f92672">=&lt;/span>0&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -t ops-cli
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Multiple platform&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create and use buildx instance&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker buildx create --use --name builder
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># build multiple platform&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker buildx build --push --platform linux/arm64,linux/amd64 -t zeyanlin/ops-cli .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Run container in different platform&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>finch run -it --rm --platform&lt;span style="color:#f92672">=&lt;/span>linux/arm64 zeyanlin/ops-cli /bin/sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>File Related Command</title><link>https://linzeyan.github.io/notes/bash/file/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/file/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>File create time&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h4 id="1-find-inode">1. Find Inode&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ stat dns.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File: dns.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Size: &lt;span style="color:#ae81ff">1003&lt;/span> Blocks: &lt;span style="color:#ae81ff">8&lt;/span> IO Block: &lt;span style="color:#ae81ff">4096&lt;/span> regular file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device: ca01h/51713d Inode: &lt;span style="color:#ae81ff">3595636&lt;/span> Links: &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Access: &lt;span style="color:#f92672">(&lt;/span>0644/-rw-r--r--&lt;span style="color:#f92672">)&lt;/span> Uid: &lt;span style="color:#f92672">(&lt;/span> 1000/ ubuntu&lt;span style="color:#f92672">)&lt;/span> Gid: &lt;span style="color:#f92672">(&lt;/span> 1000/ ubuntu&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Access: 2022-05-03 12:59:59.996755279 +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Modify: 2021-12-10 18:27:54.157585209 +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Change: 2022-01-07 14:57:58.619727878 +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Birth: -
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>or&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ ls -i dns.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">3585173&lt;/span> dns.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-find-filesystem">2. Find Filesystem&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ df dns.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Filesystem 1K-blocks Used Available Use% Mounted on
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dev/root &lt;span style="color:#ae81ff">101583780&lt;/span> &lt;span style="color:#ae81ff">25703988&lt;/span> &lt;span style="color:#ae81ff">75863408&lt;/span> 26% /
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-get-create-time">3. Get Create Time&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo debugfs -R &lt;span style="color:#e6db74">&amp;#39;stat &amp;lt;3595636&amp;gt;&amp;#39;&lt;/span> /dev/root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Inode: &lt;span style="color:#ae81ff">3595636&lt;/span> Type: regular Mode: &lt;span style="color:#ae81ff">0644&lt;/span> Flags: 0x80000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Generation: &lt;span style="color:#ae81ff">449657737&lt;/span> Version: 0x00000000:00000001
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User: &lt;span style="color:#ae81ff">1000&lt;/span> Group: &lt;span style="color:#ae81ff">1000&lt;/span> Project: &lt;span style="color:#ae81ff">0&lt;/span> Size: &lt;span style="color:#ae81ff">1003&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>File ACL: &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Links: &lt;span style="color:#ae81ff">1&lt;/span> Blockcount: &lt;span style="color:#ae81ff">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Fragment: Address: &lt;span style="color:#ae81ff">0&lt;/span> Number: &lt;span style="color:#ae81ff">0&lt;/span> Size: &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ctime: 0x61d7e476:93c13018 -- Fri Jan &lt;span style="color:#ae81ff">7&lt;/span> 14:57:58 &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> atime: 0x6270b6cf:eda51d3c -- Tue May &lt;span style="color:#ae81ff">3&lt;/span> 12:59:59 &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mtime: 0x61b32baa:25923ce4 -- Fri Dec &lt;span style="color:#ae81ff">10&lt;/span> 18:27:54 &lt;span style="color:#ae81ff">2021&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>crtime: 0x61b32baa:25923ce4 -- Fri Dec &lt;span style="color:#ae81ff">10&lt;/span> 18:27:54 &lt;span style="color:#ae81ff">2021&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Size of extra inode fields: &lt;span style="color:#ae81ff">32&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Inode checksum: 0x5b176bb2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>EXTENTS:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>0&lt;span style="color:#f92672">)&lt;/span>:2665902
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Display Ubuntu&amp;#39;s Message of the Day&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo chmod +x /etc/update-motd.d/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>List domains&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sed &lt;span style="color:#e6db74">&amp;#39;s/ //g&amp;#39;&lt;/span> domains-info.md | awk -F &lt;span style="color:#e6db74">&amp;#39;|&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;{if($3 ~ /.*\.com/)print $3}&amp;#39;&lt;/span> | sort | uniq
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Git Command</title><link>https://linzeyan.github.io/notes/bash/git/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/git/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Search in git&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git rev-list --all | xargs git grep -F &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Count commits&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git rev-list --count main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>View a file of another branch&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git show dev:main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Take a backup of untracked files&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git ls-files --others --exclude-standard -z | xargs -0 tar rvf backup-untracked.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Submodule&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Add submodule&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add -b main git@github.com:linzeyan/toha.git themes/toha
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Update submodule&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule update --init --remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Remove submodule&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>modulePath&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;themes/toha&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule deinit -f &lt;span style="color:#e6db74">${&lt;/span>modulePath&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git rm &lt;span style="color:#e6db74">${&lt;/span>modulePath&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -rf .git/modules/&lt;span style="color:#e6db74">${&lt;/span>modulePath&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --remove-section submodule.&lt;span style="color:#e6db74">${&lt;/span>modulePath&lt;span style="color:#e6db74">}&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -f .gitmodules
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>commit hash&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git rev-parse HEAD
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>commit tag&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git describe --tags
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>worktree&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git worktree list
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># add&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git worktree add ../dirname branch-name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>git config&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[user]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">email&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">zeyanlin@outlook.com
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> name = Ricky
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> signingkey = 2A4313489FDCA802ED6FCC214B03D879EA73DF37&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[commit]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">gpgsign&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>git config1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>For golang import package&lt;/p></description></item><item><title>Gitlab Command</title><link>https://linzeyan.github.io/notes/bash/gitlab/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/gitlab/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>cleanup&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>&lt;a href="https://docs.gitlab.com/ee/administration/packages/container_registry.html" target="_blank" rel="noopener">doc&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># artifacts&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-rake gitlab:cleanup:orphan_job_artifact_files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># expire session&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-rake gitlab:cleanup:sessions:active_sessions_lookup_keys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># lfs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-rake gitlab:cleanup:orphan_lfs_files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># project&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-rake gitlab:cleanup:project_uploads
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-rake gitlab:cleanup:remote_upload_files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-ctl registry-garbage-collect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-ctl registry-garbage-collect -m
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>migration&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="1-copy-old-crontabold-etcgitlabupdate-ca-trust">1. Copy Old Crontab、Old /etc/gitlab、update-ca-trust&lt;/h6>
+&lt;h6 id="2-version-should-be-same">2. Version should be same&lt;/h6>
+&lt;h6 id="3-copy-newest-backup-file">3. Copy newest backup file&lt;/h6>
+&lt;h6 id="4-stop-services">4. Stop Services&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gitlab-ctl stop unicorn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-ctl stop puma
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-ctl stop sidekiq
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gitlab-ctl status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="5-restore">5. Restore&lt;/h6>
+&lt;blockquote>
+&lt;p>File must put in /var/opt/gitlab/backup&lt;/p></description></item><item><title>GPG Command</title><link>https://linzeyan.github.io/notes/bash/gpg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/gpg/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Install&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>brew install gnupg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Generate&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gpg --full-generate-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --list-secret-keys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Generate Problem&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ gpg --full-generate-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: Sorry, no terminal at all requested - can&lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>t get input
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Comment out no-tty in &lt;code>~/.gnupg/gpg.conf&lt;/code>&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Add to git&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gpg --armor --export 51ADF7101CA64B2508AE29EEC279555531A1DD62
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Set .gitconfig&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config user.email zeyanlin@outlook.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.name Ricky
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.signingkey 51ADF7101CA64B2508AE29EEC279555531A1DD62
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config commit.gpgsign true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Delete key&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gpg --delete-secret-keys 51ADF7101CA64B2508AE29EEC279555531A1DD62
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Backup key&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># https://www.jwillikers.com/backup-and-restore-a-gpg-key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --list-secret-keys --keyid-format LONG
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Export key as a file, replace email-address and Enter the private key’s passphrase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg -o private.gpg --export-options backup --export-secret-keys rickylin@cloud-miner.net
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Restore key and enter the private key’s passphrase&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --import-options restore --import private.gpg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>If GPG not work&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;export GPG_TTY=$(tty)&amp;#39;&lt;/span> &amp;gt;&amp;gt; ~/.zshrc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpgconf –kill gpg-agent
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec $SHELL
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Encrypt file&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Encrypt file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --symmetric --cipher-algo aes256 archive_file.tar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Decrypt file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --output archive_file.tar --decrypt archive_file.tar.gpg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>K8s Command</title><link>https://linzeyan.github.io/notes/bash/k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/k8s/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>cert-manager&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://cert-manager.io/docs" target="_blank" rel="noopener">cert-manager&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/k8s/files/cert-manager/cert-manager-aws-iam-role.json">Route53 IAM Role&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/k8s/files/cert-manager/cert-manager-resource.yaml">Cert Manager Resource&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/k8s/files/cert-manager/cert-generate-resource.yaml">Cert Generate Resource&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/bash/k8s/files/cert-manager/cert-ingress-resource.yaml">Cert Ingress Resource&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install the cert-manager CustomResourceDefinition resources&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Add the Jetstack Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add jetstack https://charts.jetstack.io
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install the cert-manager helm chart&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> cert-manager jetstack/cert-manager &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace cert-manager &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --create-namespace &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --version v1.13.1 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set installCRDs&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --set prometheus.enabled&lt;span style="color:#f92672">=&lt;/span>false &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set webhook.timeoutSeconds&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># uninstalling&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm delete my-release
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create clusterissuer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f cert-manager-resource.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># generate certificate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f cert-generate-resource.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create ingress controller&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create ingress&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f cert-ingress-resource.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>helm&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install plugin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm plugin install https://github.com/chartmuseum/helm-push.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># add repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## helm repo add --username gitlab-ci-token --password ${CI_JOB_TOKEN} ${CI_PROJECT_NAME} ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add go2helm https://gitlab.go2cloudten.com/api/v4/projects/29/packages/helm/stable --username ricky
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># push chart&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## https://docs.gitlab.com/ee/user/packages/helm_repository/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm cm-push ./proxy-0.1.0.tgz go2helm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>kompose&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kompose --file docker-compose.yml convert
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>gitlab-runner&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>&lt;a href="https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html" target="_blank" rel="noopener">link&lt;/a>&lt;/p></description></item><item><title>Network Related Command</title><link>https://linzeyan.github.io/notes/bash/network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/network/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Check port status&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># `(echo &amp;gt;/dev/tcp/${host}/${port})`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>echo &amp;gt;/dev/tcp/192.168.57.24/80&lt;span style="color:#f92672">)&lt;/span> &amp;amp;&amp;gt;/dev/null &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;open&amp;#34;&lt;/span> &lt;span style="color:#f92672">||&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;closed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timeout &lt;span style="color:#ae81ff">1&lt;/span> bash -c &lt;span style="color:#e6db74">&amp;#39;&amp;gt;/dev/tcp/192.168.57.24/80 &amp;amp;&amp;gt;/dev/null&amp;#39;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;open&amp;#34;&lt;/span> &lt;span style="color:#f92672">||&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;closed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>timeout &lt;span style="color:#ae81ff">1&lt;/span> bash -c &lt;span style="color:#e6db74">&amp;#39;&amp;gt;/dev/tcp/192.168.57.24/80&amp;#39;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;open&amp;#34;&lt;/span> &lt;span style="color:#f92672">||&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;closed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Block subnets&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ip route add blackhole 192.168.0.0/24
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Kill sessions&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ss&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ss -K state TIME-WAIT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># or conntrack&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo conntrack -D -p tcp --state TIME_WAIT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>connect IPs&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ss -tnH state established &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>| awk &lt;span style="color:#e6db74">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> peer = $5; if (peer == &amp;#34;&amp;#34;) peer = $NF # 取 Peer Address:Port（某些版本欄位可能不同）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sub(/,$/, &amp;#34;&amp;#34;, peer) # 去掉可能的逗號
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> gsub(/[\[\]]/, &amp;#34;&amp;#34;, peer) # 去掉所有中括號
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> gsub(/::ffff:/, &amp;#34;&amp;#34;, peer) # IPv4-mapped IPv6 無論出現在開頭還中間都移除
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sub(/%[^:]+/, &amp;#34;&amp;#34;, peer) # 去掉 IPv6 的 scope（如 %eth0）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sub(/:[0-9]+$/, &amp;#34;&amp;#34;, peer) # 去掉最後的 :port
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> print peer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">}&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>| sort | uniq -c | sort -nr
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Pandoc Command</title><link>https://linzeyan.github.io/notes/bash/pandoc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/pandoc/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>texlive&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>macOS&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># brew install textlive&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># npm i -g mermaid-filter&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Render mermaid&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pandoc -F mermaid-filter -o readme.pdf readme.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Ubuntu&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># sudo apt install pandoc -y&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># sudo apt-get -y install texlive-latex-recommended texlive-pictures texlive-latex-extra texlive-fonts-recommended&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># npm i -g mermaid-filter&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pandoc -F mermaid-filter -o readme.pdf readme.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Redis Install Command</title><link>https://linzeyan.github.io/notes/bash/redis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/redis/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Install&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Ubuntu22.04&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo add-apt-repository ppa:redislabs/redis
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install redis-server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>SSH Command</title><link>https://linzeyan.github.io/notes/bash/ssh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/ssh/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Generate ssh key&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># RSA&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ssh-keygen -m PEM -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -C &lt;span style="color:#e6db74">&amp;#34;zeyanlin@outlook.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ED25519&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ssh-keygen -t ed25519 -C &lt;span style="color:#e6db74">&amp;#34;dev&amp;#34;&lt;/span> -f ~/.ssh/ed25519
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ssh config&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;pre tabindex="0">&lt;code class="language-sshconfig" data-lang="sshconfig">Host private.example.com
+ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Telegram Command</title><link>https://linzeyan.github.io/notes/bash/telegram/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/bash/telegram/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>getUpdates&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#e6db74">&amp;#39;https://api.telegram.org/bot1234567890:KE9zNTZ8RGcxJTMlI29EJElKeU9QQExm3%E/getUpdates&amp;#39;&lt;/span> | jq .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>sendMessage&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># chat&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#e6db74">&amp;#39;https://api.telegram.org/bot1234567890:KE9zNTZ8RGcxJTMlI29EJElKeU9QQExm3%E/sendMessage?chat_id=-12345&amp;amp;text=hello&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># thread&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#e6db74">&amp;#39;https://api.telegram.org/bot1234567890:KE9zNTZ8RGcxJTMlI29EJElKeU9QQExm3%E/sendMessage?chat_id=-12345&amp;amp;text=hello&amp;amp;message_thread_id=14&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

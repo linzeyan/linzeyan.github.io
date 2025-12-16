@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ssh on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/ssh/</link><description>Recent content in Ssh on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 11 Feb 2025 15:06:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/ssh/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuring SSH Keys for Multiple GitHub Accounts</title><link>https://linzeyan.github.io/zh-tw/posts/20250211-configure-ssh-keys-for-multiple-github-accounts/</link><pubDate>Tue, 11 Feb 2025 15:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20250211-configure-ssh-keys-for-multiple-github-accounts/</guid><description>&lt;p>&lt;a href="https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts" target="_blank" rel="noopener">Configuring SSH Keys for Multiple GitHub Accounts&lt;/a>&lt;/p>
+&lt;h3 id="use-different-host-values">Use Different Host values&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Host github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_ed25519
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Host github-plnx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_plnx_ed25519
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Instead of the actual URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github.com:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Substitue in our custom Host value for the `github.com` part&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github-plnx:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="automate-substituting-the-host">Automate Substituting the Host&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>include&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &lt;span style="color:#f92672">=&lt;/span> ~/.gitconfig_custom
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># See custom `Host github-plnx` in ~/.ssh/config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>url &lt;span style="color:#e6db74">&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> insteadOf &lt;span style="color:#f92672">=&lt;/span> git@github.com:planet-express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/zh-tw/posts/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory">Add SFTP user and share directory&lt;/h1>
+&lt;p>dev_test_user, qa_test_user 同權限
+dev_user, qa_user 同權限&lt;/p>
+&lt;h2 id="1-建立共享資料夾sftp-使用的資料夾">1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/&lt;span style="color:#f92672">{&lt;/span>exchange,upload&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/exchange/success
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/upload/backup
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-建立使用者群組">2. 建立使用者群組&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo groupadd share01-test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo groupadd share01-prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test">3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-test qa_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_test_user 使用者的群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-test dev_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_test_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod">4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-prod qa_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_user 使用者的群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-prod dev_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-設定權限">5. 設定權限&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_test_user:share01-test test/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_user:share01-prod prod/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># SFTP 登入資料夾權限要給 root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-設定-etcsshsshd_config">6. 設定 /etc/ssh/sshd_config&lt;/h2>
+&lt;p>&lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/p></description></item><item><title>Use terminal and SSH to remote host</title><link>https://linzeyan.github.io/zh-tw/posts/20231124-ssh/</link><pubDate>Fri, 24 Nov 2023 22:22:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20231124-ssh/</guid><description>&lt;h1 id="use-terminal-and-ssh-to-remote-host">Use terminal and SSH to remote host&lt;/h1>
+&lt;h2 id="1-modern-terminals">1. Modern Terminals&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/vercel/hyper" target="_blank" rel="noopener">Hyper&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://iterm2.com/" target="_blank" rel="noopener">iTerm2&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/Eugeny/tabby" target="_blank" rel="noopener">Tabby&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.warp.dev/" target="_blank" rel="noopener">Warp&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/wez/wezterm" target="_blank" rel="noopener">Wez&amp;rsquo;s Terminal&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/kingToolbox/WindTerm" target="_blank" rel="noopener">WindTerm&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-open-terminal-in-macos">2. Open terminal in macOS&lt;/h2>
+&lt;ol>
+&lt;li>&lt;code>⌘ + space&lt;/code> open Spotlight
+&lt;img src="https://linzeyan.github.io/posts/20231124-ssh/pics/auto_20231124_222253.png" alt="">&lt;/li>
+&lt;li>search terminal.app
+&lt;img src="https://linzeyan.github.io/posts/20231124-ssh/pics/auto_20231124_222316.png" alt="">&lt;/li>
+&lt;li>press &lt;code>↩&lt;/code>
+&lt;img src="https://linzeyan.github.io/posts/20231124-ssh/pics/auto_20231124_222410.png" alt="">&lt;/li>
+&lt;/ol>
+&lt;h2 id="3-ssh-to-remote-host">3. SSH to remote host&lt;/h2>
+&lt;ol>
+&lt;li>ensure the private key file path.&lt;/li>
+&lt;li>enter the command in the terminal: &lt;code>ssh -i /path/to/private_key.pem ubuntu@ubuntu.host.com&lt;/code>&lt;/li>
+&lt;/ol></description></item></channel></rss>

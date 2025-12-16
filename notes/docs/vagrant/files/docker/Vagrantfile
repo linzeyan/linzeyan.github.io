@@ -1,0 +1,24 @@
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "web" do
+    config.vm.provider "docker" do |d|
+      # d.build_dir = "."
+      # d.dockerfile = "Dockerfile.nginx"
+      # d.vagrant_vagrantfile = "./Vagrantfile.proxy"
+      d.image = "nginx"
+      d.name = "nginx-latest"
+      d.ports = ["8080:80"]
+      d.env = {
+          USER: "root",
+          PASSWORD: "abcd"
+      }
+      d.remains_running = true
+      # d.has_ssh = true
+      # d.volumes = ["/home/vagrant:/etc/nginx"]
+      d.cmd = ["/usr/sbin/nginx","-g","daemon off;"]
+    end
+    config.vm.network :private_network, ip: "10.0.0.11", netmask: 16
+    # config.vm.network :private_network, type: "dhcp", subnet: "10.0.0.0/24"
+  end
+end

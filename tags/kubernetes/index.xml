@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on Ricky</title><link>https://linzeyan.github.io/tags/kubernetes/</link><description>Recent content in Kubernetes on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 09:06:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20231004-container/</guid><description>&lt;p>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/p></description></item><item><title>Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes</title><link>https://linzeyan.github.io/posts/20230927-mqtt/</link><pubDate>Wed, 27 Sep 2023 10:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230927-mqtt/</guid><description>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener">Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning" target="_blank" rel="noopener">Performance Tuning (Linux)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.facebook.com/technologynoteniu/posts/pfbid02ntZshJdTEHLhnkb4hATadU8qGdzB45T2AdmCqtx73oegqrCLNRTKJwkYNZkVNLMsl" target="_blank" rel="noopener">矽谷牛的耕田筆記&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="note">Note&lt;/h2>
+&lt;h3 id="linux-kernel-tuning">Linux Kernel Tuning&lt;/h3>
+&lt;ul>
+&lt;li>node level, basically the non-namespaced sysctls&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of file handles allowed by the kernel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.file-max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of open file descriptors that a process can have&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.nr_open&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>namespaced sysctls&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of connections that can be queued for acceptance by the kernel.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.somaxconn&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">32768&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of SYN requests that can be queued by the kernel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_syn_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the minimum, default and maximum size of TCP Buffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_rmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_wmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting Parameters for TCP Connection Tracking&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls the maximum number of entries in the TCP time-wait bucket table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_tw_buckets&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1048576&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls Timeout for FIN-WAIT-2 Sockets:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_fin_timeout&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>There are some more namespaced sysctls that will improve the performance but because of an active issue we are not able to set them on the container level&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the size of the backlog queue for the network device&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.netdev_max_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Amount of memory that is allocated for storing incoming and outgoing data for a socket&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the maximum amount of memory for the socket buffers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.optmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="erlang-vm-tuning">Erlang VM Tuning&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Erlang Process Limit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.process_limit &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Sets the maximum number of simultaneously existing ports for this system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.max_ports &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emqx-broker-tuning">EMQX Broker Tuning&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Other configuration…&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.0.0.0:1883&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__ACCEPTORS&lt;/span>: &lt;span style="color:#ae81ff">64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span>: &lt;span style="color:#ae81ff">1024000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

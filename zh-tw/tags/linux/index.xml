@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/linux/</link><description>Recent content in Linux on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 03 Sep 2025 09:03:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker 容器无法访问外网？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/zh-tw/posts/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20250903-linux-docker-nftables/</guid><description>&lt;p>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器无法访问外网？nftables 下的 NAT 配置指南&lt;/a>&lt;/p></description></item><item><title>独立服务器 CPU 频率最大化配置指南</title><link>https://linzeyan.github.io/zh-tw/posts/20250902-linux-cpu-performance/</link><pubDate>Tue, 02 Sep 2025 08:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20250902-linux-cpu-performance/</guid><description>&lt;p>&lt;a href="https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306" target="_blank" rel="noopener">独立服务器 CPU 频率最大化配置指南&lt;/a>&lt;/p>
+&lt;h2 id="看看-cpu-现在混哪种模式">看看 CPU 现在混哪种模式&lt;/h2>
+&lt;p>前提条件
+系统：Linux（Debian、Ubuntu、Proxmox 等都行）&lt;/p>
+&lt;p>权限：root&lt;/p>
+&lt;p>CPU：支持动态调频（Intel Xeon、AMD EPYC / Ryzen 等）&lt;/p>
+&lt;h3 id="governor">governor&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>powersave：节能小绵羊（频率锁低，省电但废武功）&lt;/li>
+&lt;li>ondemand：按需加速（要用时才升频，可能反应慢半拍）&lt;/li>
+&lt;li>performance：全程高能（我们要的就是它！💪）&lt;/li>
+&lt;/ul>
+&lt;h3 id="确认内核到底用的哪种驱动intel--amd">确认内核到底用的哪种驱动（Intel / AMD）&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver&lt;/code>&lt;/p>
+&lt;h2 id="临时拉满性能">临时拉满性能&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> cpu in /sys/devices/system/cpu/cpu&lt;span style="color:#f92672">[&lt;/span>0-9&lt;span style="color:#f92672">]&lt;/span>*; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo performance &amp;gt; $cpu/cpufreq/scaling_governor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="重启后也保持高能">重启后也保持高能&lt;/h2>
+&lt;h3 id="方案-a最稳妥推荐">方案 A：最稳妥推荐&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install cpufrequtils -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;GOVERNOR=&amp;#34;performance&amp;#34;&amp;#39;&lt;/span> &amp;gt;/etc/default/cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl start cpufrequtils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方案-bsystemd-自定义服务">方案 B：systemd 自定义服务&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/systemd/system/cpu-performance.service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>Set CPU governor to performance
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>oneshot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/bin/bash -c &lt;span style="color:#e6db74">&amp;#39;for cpu in /sys/devices/system/cpu/cpu[0-9]*; do echo performance &amp;gt; $cpu/cpufreq/scaling_governor; done&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl daemon-reexec
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable --now cpu-performance.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用</title><link>https://linzeyan.github.io/zh-tw/posts/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20250801-linuxserver.io/</guid><description>&lt;p>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io 官網&lt;/a>&lt;/p></description></item><item><title>Lightweight Linux Distributions For Older PCs</title><link>https://linzeyan.github.io/zh-tw/posts/20240820-linux/</link><pubDate>Tue, 20 Aug 2024 12:38:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20240820-linux/</guid><description>&lt;p>&lt;a href="https://www.freecodecamp.org/news/lightweight-linux-distributions-for-your-pc/" target="_blank" rel="noopener">https://www.freecodecamp.org/news/lightweight-linux-distributions-for-your-pc/&lt;/a>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Site&lt;/th>
+&lt;th>Comment&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Puppy Linux&lt;/td>
+&lt;td>&lt;a href="https://puppylinux-woof-ce.github.io/" target="_blank" rel="noopener">https://puppylinux-woof-ce.github.io/&lt;/a>&lt;/td>
+&lt;td>This tiny OS weighs in at under 300MB, so it can run smoothly even on systems with as little as 512MB of RAM.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Bodhi Linux&lt;/td>
+&lt;td>&lt;a href="https://www.bodhilinux.com/" target="_blank" rel="noopener">https://www.bodhilinux.com/&lt;/a>&lt;/td>
+&lt;td>System requirements are just 512MB of RAM and a 500MHz processor.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Peppermint OS&lt;/td>
+&lt;td>&lt;a href="https://peppermintos.com/" target="_blank" rel="noopener">https://peppermintos.com/&lt;/a>&lt;/td>
+&lt;td>It only needs 512MB of RAM to run, so it will fly on that Pentium 4 machine or Core 2 Duo laptop you have stashed in your closet. While Peppermint OS is light on local resources, it integrates well with cloud and web apps. The OS builds in close integration with services like Dropbox, Google Drive, and more.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AntiX&lt;/td>
+&lt;td>&lt;a href="https://antixlinux.com/" target="_blank" rel="noopener">https://antixlinux.com/&lt;/a>&lt;/td>
+&lt;td>AntiX is designed to run on systems with as little as 64MB of RAM and a Pentium II processor.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Lubuntu&lt;/td>
+&lt;td>&lt;a href="https://lubuntu.me/" target="_blank" rel="noopener">https://lubuntu.me/&lt;/a>&lt;/td>
+&lt;td>Lubuntu will run smoothly on computers with as little as 512 MB of RAM and a 1 GHz processor.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/zh-tw/posts/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory">Add SFTP user and share directory&lt;/h1>
+&lt;p>dev_test_user, qa_test_user 同權限
+dev_user, qa_user 同權限&lt;/p>
+&lt;h2 id="1-建立共享資料夾sftp-使用的資料夾">1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/&lt;span style="color:#f92672">{&lt;/span>exchange,upload&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/exchange/success
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/upload/backup
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-建立使用者群組">2. 建立使用者群組&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo groupadd share01-test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo groupadd share01-prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test">3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-test qa_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_test_user 使用者的群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-test dev_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_test_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod">4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-prod qa_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_user 使用者的群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-prod dev_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-設定權限">5. 設定權限&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_test_user:share01-test test/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_user:share01-prod prod/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># SFTP 登入資料夾權限要給 root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-設定-etcsshsshd_config">6. 設定 /etc/ssh/sshd_config&lt;/h2>
+&lt;p>&lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/p></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20231004-container/</guid><description>&lt;p>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/p></description></item><item><title>調整系統使得 EMQX 可以支援 1M 連線</title><link>https://linzeyan.github.io/zh-tw/posts/20230927-mqtt/</link><pubDate>Wed, 27 Sep 2023 10:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230927-mqtt/</guid><description>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener">Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning" target="_blank" rel="noopener">Performance Tuning (Linux)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.facebook.com/technologynoteniu/posts/pfbid02ntZshJdTEHLhnkb4hATadU8qGdzB45T2AdmCqtx73oegqrCLNRTKJwkYNZkVNLMsl" target="_blank" rel="noopener">矽谷牛的耕田筆記&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="note">Note&lt;/h2>
+&lt;h3 id="linux-kernel-tuning">Linux Kernel Tuning&lt;/h3>
+&lt;ul>
+&lt;li>node level, basically the non-namespaced sysctls&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of file handles allowed by the kernel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.file-max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of open file descriptors that a process can have&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.nr_open&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>namespaced sysctls&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of connections that can be queued for acceptance by the kernel.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.somaxconn&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">32768&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of SYN requests that can be queued by the kernel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_syn_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the minimum, default and maximum size of TCP Buffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_rmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_wmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting Parameters for TCP Connection Tracking&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls the maximum number of entries in the TCP time-wait bucket table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_tw_buckets&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1048576&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls Timeout for FIN-WAIT-2 Sockets:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_fin_timeout&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>There are some more namespaced sysctls that will improve the performance but because of an active issue we are not able to set them on the container level&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the size of the backlog queue for the network device&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.netdev_max_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Amount of memory that is allocated for storing incoming and outgoing data for a socket&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the maximum amount of memory for the socket buffers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.optmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="erlang-vm-tuning">Erlang VM Tuning&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Erlang Process Limit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.process_limit &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Sets the maximum number of simultaneously existing ports for this system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.max_ports &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emqx-broker-tuning">EMQX Broker Tuning&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Other configuration…&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.0.0.0:1883&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__ACCEPTORS&lt;/span>: &lt;span style="color:#ae81ff">64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span>: &lt;span style="color:#ae81ff">1024000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

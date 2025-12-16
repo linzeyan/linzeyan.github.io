@@ -1,0 +1,779 @@
+<!doctype html><html lang=zh-tw><head><title>Bash Notes</title><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel=stylesheet href=/application.780dc7a6fc8e42bf9fef490724bc6cbc57e759a0db2df60fcd517f9f667085ed.css integrity="sha256-eA3HpvyOQr+f70kHJLxsvFfnWaDbLfYPzVF/n2Zwhe0="><link rel=icon type=image/png href=/images/site/highlight.svg><link rel=alternate type=application/rss+xml href=https://linzeyan.github.io/zh-tw/notes/bash/index.xml title=Ricky><meta property="og:title" content="Ricky"><meta property="og:type" content="website"><meta property="og:description" content="Ricky 的網頁"><meta property="og:image" content="/images/author/ava.jpg"><meta property="og:url" content="https://linzeyan.github.io/"><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "27a0cd9f0e3b46909879cf99f7cc6878"}'></script><script integrity="sha256-DO4ugzEwhTW1Id1UIWn0gUJWaebCYOypeTit6LW4QB4=">let theme=localStorage.getItem("theme-scheme")||localStorage.getItem("darkmode:color-scheme")||"light";theme==="system"&&(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?theme="dark":theme="light"),document.documentElement.setAttribute("data-theme",theme)</script></head><body class="type-notes kind-section" data-bs-spy=scroll data-bs-target=#TableOfContents data-bs-offset=80><div class="container-fluid bg-secondary wrapper"><nav class="navbar navbar-expand-xl top-navbar shadow" id=top-navbar><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<i data-feather=sidebar></i>
+</button>
+<a class=navbar-brand href=/zh-tw><img src=/images/site/highlight.svg id=logo alt=Logo>
+Ricky</a>
+<button class="navbar-toggler navbar-light" id=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#top-nav-items aria-label=menu>
+<i data-feather=menu></i></button><div class="collapse navbar-collapse dynamic-navbar" id=top-nav-items><ul class="nav navbar-nav ms-auto"><li class=nav-item><a class=nav-link href=/zh-tw#home>首頁</a></li><li class=nav-item><a class=nav-link href=/zh-tw#about>關於</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false>更多的</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a class=dropdown-item href=/zh-tw#skills>技能</a>
+<a class=dropdown-item href=/zh-tw#experiences>經歷</a>
+<a class=dropdown-item href=/zh-tw#education>學歷</a>
+<a class=dropdown-item href=/zh-tw#projects>專案</a></div></li><div id=top-navbar-divider></div><li class=nav-item><a class=nav-link id=blog-link href=/zh-tw/posts>文章</a></li><li class=nav-item><a class=nav-link id=note-link href=/zh-tw/notes>筆記</a></li><li class=nav-item><a class=nav-link href=https://linzeyan.github.io/activities>活動</a></li><li class=nav-item><a class=nav-link href=https://linzeyan.github.io/running>跑步</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=languageSelector role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false><span class="fi fi-tw"></span>
+Chinese</a><div class=dropdown-menu aria-labelledby=languageSelector><a class="dropdown-item nav-link languages-item" href=/notes/bash><span class="fi fi-us"></span>
+English
+</a><a class="dropdown-item nav-link languages-item" href=/zh-tw/notes/bash><span class="fi fi-tw"></span>
+Chinese</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg class=theme-icon src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=theme-icon src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme">
+</a><a class="dropdown-item nav-link" href=# data-scheme=dark><img class=theme-icon src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme">
+</a><a class="dropdown-item nav-link" href=# data-scheme=system><img class=theme-icon src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/site/highlight.svg class=d-none id=main-logo alt=Logo>
+<img src=/images/site/highlight.svg class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/zh-tw/search><input type=text name=keyword placeholder=搜尋 data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/zh-tw/notes data-filter=all>筆記</a></li><div class=subtree><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/aws/> AWS</a><ul><li><a class=list-link href=/zh-tw/notes/aws/command/ title=command>command</a></li><li><a class=list-link href=/zh-tw/notes/aws/configure/ title=configure>configure</a></li><li><a class=list-link href=/zh-tw/notes/aws/terraform/ title=terraform>terraform</a></li></ul></li><li><i data-feather=minus-circle></i><a class="active list-link" href=/zh-tw/notes/bash/> Bash</a><ul class=active><li><a class=list-link href=/zh-tw/notes/bash/ansible/ title=ansible>ansible</a></li><li><a class=list-link href=/zh-tw/notes/bash/common/ title=common>common</a></li><li><a class=list-link href=/zh-tw/notes/bash/docker/ title=docker>docker</a></li><li><a class=list-link href=/zh-tw/notes/bash/file/ title=file>file</a></li><li><a class=list-link href=/zh-tw/notes/bash/git/ title=git>git</a></li><li><a class=list-link href=/zh-tw/notes/bash/gitlab/ title=gitlab>gitlab</a></li><li><a class=list-link href=/zh-tw/notes/bash/gpg/ title=gpg>gpg</a></li><li><a class=list-link href=/zh-tw/notes/bash/k8s/ title=k8s>k8s</a></li><li><a class=list-link href=/zh-tw/notes/bash/network/ title=network>network</a></li><li><a class=list-link href=/zh-tw/notes/bash/pandoc/ title=pandoc>pandoc</a></li><li><a class=list-link href=/zh-tw/notes/bash/redis/ title=redis>redis</a></li><li><a class=list-link href=/zh-tw/notes/bash/ssh/ title=ssh>ssh</a></li><li><a class=list-link href=/zh-tw/notes/bash/telegram/ title=telegram>telegram</a></li></ul></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/docs/> Docs</a><ul><li><a class=list-link href=/zh-tw/notes/docs/cloudflare/ title=cloudflare>cloudflare</a></li><li><a class=list-link href=/zh-tw/notes/docs/diagrams/ title=diagrams>diagrams</a></li><li><a class=list-link href=/zh-tw/notes/docs/docker/ title=docker>docker</a></li><li><a class=list-link href=/zh-tw/notes/docs/gitlab/ title=gitlab>gitlab</a></li><li><a class=list-link href=/zh-tw/notes/docs/linux/ title=linux>linux</a></li><li><a class=list-link href=/zh-tw/notes/docs/mermaid/ title=mermaid>mermaid</a></li><li><a class=list-link href=/zh-tw/notes/docs/network/ title=network>network</a></li><li><a class=list-link href=/zh-tw/notes/docs/nginx/ title=nginx>nginx</a></li><li><a class=list-link href=/zh-tw/notes/docs/vagrant/ title=vagrant>vagrant</a></li><li><a class=list-link href=/zh-tw/notes/docs/zabbix/ title=zabbix>zabbix</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/elasticsearch/ title=Elasticsearch>Elasticsearch</a></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/gcp/> GCP</a><ul><li><a class=list-link href=/zh-tw/notes/gcp/command/ title=command>command</a></li></ul></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/go/> Go</a><ul><li><a class=list-link href=/zh-tw/notes/go/libraries/ title=Libraries>Libraries</a></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/go/questions/> Questions</a><ul><li><a class=list-link href=/zh-tw/notes/go/questions/array/ title=Array>Array</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/channel/ title=Channel>Channel</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/context/ title=Context>Context</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/defer/ title=Defer>Defer</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/goroutine/ title=Goroutine>Goroutine</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/interface/ title=Interface>Interface</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/iota/ title=Iota>Iota</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/json/ title=JSON>JSON</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/len/ title=Len>Len</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/map/ title=Map>Map</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/print/ title=Print>Print</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/race/ title=Race>Race</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/select/ title=Select>Select</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/slice/ title=Slice>Slice</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/variable/ title=Variable>Variable</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/go/snippet/ title=Snippet>Snippet</a></li><li><a class=list-link href=/zh-tw/notes/go/tools/ title=Tools>Tools</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/input-method/ title=Input-Method>Input-Method</a></li><li><a class=list-link href=/zh-tw/notes/server/ title=Server-Configs>Server-Configs</a></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class="content container-fluid" id=content><div class="container-fluid note-card-holder" id=note-card-holder><div class=note-card><div class=item><h5 class=note-title><span>Lookup</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># List all plugins</span>
+</span></span><span style=display:flex><span>ansible-doc -t lookup -l
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Use `ansible-doc -t lookup &lt;plugin&gt;` to see detail</span>
+</span></span><span style=display:flex><span>ansible-doc -t lookup ping
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>winrm</span></h5><div class=card><div class=card-body><h6 id=--console-output>- console output</h6><p>在 hyper-v 那台機器 Enable Winrm 之後 一直出現下面的錯誤。
+在 group 加上一行即可</p><p><code>ansible_winrm_transport=ntlm</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>hyper-v</span><span style=color:#ae81ff>01</span> <span style=color:#960050;background-color:#1e0010>|</span> <span style=color:#960050;background-color:#1e0010>UNREACHABLE!</span> <span style=color:#960050;background-color:#1e0010>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;changed&#34;</span>: <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;msg&#34;</span>: <span style=color:#e6db74>&#34;ssl: the specified credentials were rejected by the server&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;unreachable&#34;</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h6 id=--etcansiblehosts>- /etc/ansible/hosts</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#a6e22e>ansible_user</span><span style=color:#f92672>=</span><span style=color:#e6db74>administrator</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_password</span><span style=color:#f92672>=</span><span style=color:#e6db74>password</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_port</span><span style=color:#f92672>=</span><span style=color:#e6db74>5986</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_connection</span><span style=color:#f92672>=</span><span style=color:#e6db74>winrm</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_winrm_server_cert_validation</span><span style=color:#f92672>=</span><span style=color:#e6db74>ignore</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_winrm_transport</span><span style=color:#f92672>=</span><span style=color:#e6db74>ntlm</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>ab</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ab -n <span style=color:#ae81ff>20</span> -c <span style=color:#ae81ff>20</span> -k https://default.hddv1.com/error
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>age</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># generate public and private keys</span>
+</span></span><span style=display:flex><span>age-keygen -o key.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># encrypt file with public key</span>
+</span></span><span style=display:flex><span>age -r public_key -o file.txt.enc file.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># encrypt file with ssh key</span>
+</span></span><span style=display:flex><span>age -R ~/.ssh/id_ed25519.pub file.txt &gt; file.txt.enc
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># decrypt file</span>
+</span></span><span style=display:flex><span>age --decrypt -i key.txt file.txt.enc &gt; file.txt
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>awk</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># To lowercase</span>
+</span></span><span style=display:flex><span>uuidgen|awk <span style=color:#e6db74>&#39;{print tolower($0)}&#39;</span> <span style=color:#75715e># output: 649612b0-0fa4-4b50-9b13-17279f602a43</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># To uppercase</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;hello world&#39;</span>|awk <span style=color:#e6db74>&#39;{print toupper($0)}&#39;</span> <span style=color:#75715e># output: HELLO WORLD</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 提取子字符串: `substr(string, start, length)`</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;hello world&#34;</span> | awk <span style=color:#e6db74>&#39;{print substr($0, 1, 5)}&#39;</span> <span style=color:#75715e># output: hello</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 全局替換字符串中的正則表達式匹配項: `gsub(regex, replacement, string)`</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 替換字符串中首次匹配的正則表達式: `sub(regex, replacement, string)`</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;hello world&#34;</span> | awk <span style=color:#e6db74>&#39;{gsub(/world/, &#34;everyone&#34;); print $0}&#39;</span> <span style=color:#75715e># output: hello everyone</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 將數字轉換為整數</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;3.14&#34;</span> | awk <span style=color:#e6db74>&#39;{print int($0)}&#39;</span> <span style=color:#75715e># output: 3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 返回平方根</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;99&#34;</span> | awk <span style=color:#e6db74>&#39;{print sqrt($0)}&#39;</span> <span style=color:#75715e># output: 9.94987</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 指數和對數</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;2&#34;</span> | awk <span style=color:#e6db74>&#39;{print exp($0), log($0)}&#39;</span> <span style=color:#75715e># output: 7.38906 0.693147</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>caffeinate</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 防止显示器关闭</span>
+</span></span><span style=display:flex><span>caffeinate -d
+</span></span><span style=display:flex><span><span style=color:#75715e># 保持系统不休眠</span>
+</span></span><span style=display:flex><span>caffeinate -i
+</span></span><span style=display:flex><span><span style=color:#75715e># 保持 30 分钟</span>
+</span></span><span style=display:flex><span>caffeinate -t <span style=color:#ae81ff>1800</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>certbot</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Install</span>
+</span></span><span style=display:flex><span>sudo apt install certbot python3-certbot-nginx python3-certbot-dns-route53
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 1. Generating Wildcard Certificates</span>
+</span></span><span style=display:flex><span>sudo certbot certonly --manual --preferred-challenges<span style=color:#f92672>=</span>dns --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d *.example.com
+</span></span><span style=display:flex><span><span style=color:#75715e>### add txt record then press enter to continue</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. Generating Wildcard Certificates</span>
+</span></span><span style=display:flex><span>sudo certbot certonly -d example.com -d *.example.com --dns-route53 --agree-tos --server https://acme-v02.api.letsencrypt.org/directory
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Automating Renewal</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> * * <span style=color:#ae81ff>1</span> /usr/bin/certbot certonly --dns-route53 -d *.example.com --quiet --post-hook <span style=color:#e6db74>&#34;systemctl reload nginx&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cutycapt</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Capture website page as picture</span>
+</span></span><span style=display:flex><span>xvfb-run --server-args<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;-screen 0, 1024x768x24&#34;</span> cutycapt --url<span style=color:#f92672>=</span>https://www.google.com --out<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/tmp/google.png&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>dmesg</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo dmesg -T | grep -i <span style=color:#e6db74>&#39;killed process&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># total-vm: 該程序分配的虛擬記憶體總量（含未實際使用）</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># anon-rss: 匿名頁面 resident memory（實際佔用記憶體）→ 重點</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># file-rss: 映射檔案的 resident memory（如 shared libraries）</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># shmem-rss: 共用記憶體的 resident memory</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>dnscontrol</span></h5><div class=card><div class=card-body><ul><li><a href=/notes/bash/common/files/creds.json>creds.json</a></li><li>command</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dnscontrol get-zones --format<span style=color:#f92672>=</span>js --out<span style=color:#f92672>=</span>example.com.js r53 ROUTE53 example.com
+</span></span><span style=display:flex><span>dnscontrol get-zones --format<span style=color:#f92672>=</span>js --out<span style=color:#f92672>=</span>example.com.js cloudflare CLOUDFLAREAPI example.com
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>ffmpeg</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Download sample video</span>
+</span></span><span style=display:flex><span>wget https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4 -O test.mp4
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Push stream</span>
+</span></span><span style=display:flex><span>ffmpeg -re -i test.mp4 -c copy -f flv <span style=color:#e6db74>&#34;rtmp://209357.push.tlivecloud.com/live/big_buck_bunny_720p_1mb?txSecret=a543b79d9a8c38ace5ce18eea2bd7721&amp;txTime=687E4609&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>go</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>go tool pprof -http<span style=color:#f92672>=</span>:8081 20250814_024534.heap
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>k6</span></h5><div class=card><div class=card-body><ul><li><a href=/notes/bash/common/files/k6.js>k6.js</a></li><li>command</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>k6 run k6.js
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kafka</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># list topics</span>
+</span></span><span style=display:flex><span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list
+</span></span><span style=display:flex><span><span style=color:#75715e># all topics count</span>
+</span></span><span style=display:flex><span>kafka-topics.sh --bootstrap-server 127.0.0.1:9094 --list |wc -l
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>hey</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>hey -n <span style=color:#ae81ff>200000</span> -c <span style=color:#ae81ff>500</span> -h2 -z 30s https://a8-wss.hddv1.com/test
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>openfortivpn</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://github.com/adrienverge/openfortivpn</span>
+</span></span><span style=display:flex><span>sudo openfortivpn ip:port --username<span style=color:#f92672>=</span>ricky --pppd-use-peerdns<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>openssl</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 自簽名證書，要把 ca.p7b 匯入 certmgr.msc 的受信任的根憑證授權單位，Chrome 才吃的到。</span>
+</span></span><span style=display:flex><span>openssl crl2pkcs7 -nocrl -certfile ca.crt -out ca.p7b
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>prlimit</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 更改 Max_open_files 遇到參數錯誤，原因為 CentOS6 與 CentOS7 指令不同</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># CentOS6</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i in <span style=color:#66d9ef>$(</span>ps -ef | grep <span style=color:#e6db74>&#39;publish/server/game_server&#39;</span> | egrep -v <span style=color:#e6db74>&#39;grep|startall&#39;</span> | awk <span style=color:#e6db74>&#39;{print $2}&#39;</span><span style=color:#66d9ef>)</span>; <span style=color:#66d9ef>do</span> echo -n <span style=color:#e6db74>&#34;Max open files=1024000:1024000&#34;</span> &gt; /proc/$i/limits; <span style=color:#66d9ef>done</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># CentOS7</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i in <span style=color:#66d9ef>$(</span>ps -ef | grep gateway | grep -v grep | awk <span style=color:#e6db74>&#39;{print $2}&#39;</span><span style=color:#66d9ef>)</span>; <span style=color:#66d9ef>do</span> prlimit --pid $i --nofile<span style=color:#f92672>=</span>1024000:1024000 ; <span style=color:#66d9ef>done</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>siege</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>siege --time<span style=color:#f92672>=</span>3s --concurrent<span style=color:#f92672>=</span><span style=color:#ae81ff>30000</span> https://a8-h5.hddv1.com/index.html
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>tr</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># cat krypton2</span>
+</span></span><span style=display:flex><span>YRIRY GJB CNFFJBEQ EBGGRA
+</span></span><span style=display:flex><span><span style=color:#75715e># cat krypton2 | tr a-zA-Z n-za-mN-ZA-M</span>
+</span></span><span style=display:flex><span>LEVEL TWO PASSWORD ROTTEN
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>vegeta</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>attack<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;GET </span><span style=color:#e6db74>${</span>1<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> |
+</span></span><span style=display:flex><span>        vegeta attack -duration<span style=color:#f92672>=</span>100s -header<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;User-Agent: baidu&#34;</span> -header<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-Forwarded-For: 47.0.0.1&#34;</span> -rate<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span> -timeout<span style=color:#f92672>=</span>1s |
+</span></span><span style=display:flex><span>        vegeta encode |
+</span></span><span style=display:flex><span>        jaggr @count<span style=color:#f92672>=</span>rps <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            hist<span style=color:#ae81ff>\[</span>100,200,300,400,500<span style=color:#ae81ff>\]</span>:code <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            p25,p50,p95:latency <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            sum:bytes_in <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            sum:bytes_out |
+</span></span><span style=display:flex><span>        jplot rps+code.hist.100+code.hist.200+code.hist.300+code.hist.400+code.hist.500 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            latency.p95+latency.p50+latency.p25 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>            bytes_in.sum+bytes_out.sum
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -n <span style=color:#e6db74>${</span>1<span style=color:#e6db74>}</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    attack <span style=color:#e6db74>${</span>1<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## -header=&#34;Connection: Upgrade&#34; -header=&#34;Upgrade: websocket&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>wrk</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>wrk -t10 -c1000 -d30s -H <span style=color:#e6db74>&#34;User-Agent: baidu&#34;</span> <span style=color:#e6db74>&#34;https://default.hddv1.com/error&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Vagrant with hyper-v provider</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Common</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Find out processes swap usage command</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> file in /proc/*/status ; <span style=color:#66d9ef>do</span> awk <span style=color:#e6db74>&#39;/VmSwap|Name/{printf $2 &#34; &#34; $3}END{ print &#34;&#34;}&#39;</span> $file; <span style=color:#66d9ef>done</span> | sort -k <span style=color:#ae81ff>2</span> -n -r | less
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Gitbook</span></h5><div class=card><div class=card-body><p>Hide gitbook sidebar default.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>raw_path<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>pwd<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>npm install -g gitbook-cli
+</span></span><span style=display:flex><span>gitbook install
+</span></span><span style=display:flex><span>cd ~/.gitbook/versions/3.2.3/node_modules/gitbook-plugin-theme-default
+</span></span><span style=display:flex><span>sed -i <span style=color:#e6db74>&#34;25i\ \ \ \ gitbook.storage.set(&#39;sidebar&#39;, false);&#34;</span> src/js/theme/sidebar.js
+</span></span><span style=display:flex><span>npm install -g browserify uglify-js less less-plugin-clean-css
+</span></span><span style=display:flex><span>npm install
+</span></span><span style=display:flex><span>src/build.sh
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Install</span></h5><div class=card><div class=card-body><h6 id=--autocorrect>- autocorrect</h6><blockquote><p>A linter and formatter for help you improve copywriting, to correct spaces, words, punctuations between CJK (Chinese, Japanese, Korean). <a href=https://github.com/huacnlee/autocorrect target=_blank rel=noopener>Github</a></p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>wget https://github.com/huacnlee/autocorrect/releases/download/v1.7.4/autocorrect-darwin-amd64.tar.gz
+</span></span></code></pre></div><h6 id=--bpf>- bpf</h6><blockquote><p>BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
+Kernel should higher than 4.1
+Install from source is better</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># `/usr/share/bcc/`</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://github.com/iovisor/bcc</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://github.com/iovisor/bcc/blob/master/docs/reference_guide.md#1-kernel-source-directory</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://github.com/iovisor/bpftrace</span>
+</span></span><span style=display:flex><span>yum install bcc-tools
+</span></span></code></pre></div><h6 id=--flamegraph>- flamegraph</h6><blockquote><p>Stack trace visualizer</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://github.com/brendangregg/FlameGraph</span>
+</span></span><span style=display:flex><span>brew install flamegraph
+</span></span></code></pre></div><h6 id=--git-split-diffs>- git-split-diffs</h6><blockquote><p>GitHub style split diffs in your terminal</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>npm install -g git-split-diffs
+</span></span></code></pre></div><h6 id=--glci>- glci</h6><blockquote><p>Test your Gitlab CI Pipelines changes locally using Docker. <a href=https://blog.chengweichen.com/2021/03/glci-gitlab-local-ci.html target=_blank rel=noopener>blog</a></p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yarn global add glci
+</span></span></code></pre></div><h6 id=--openresty>- openresty</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>wget https://openresty.org/package/centos/openresty.repo -O /etc/yum.repos.d/openresty.repo
+</span></span><span style=display:flex><span>yum install -y openresty openresty-resty
+</span></span></code></pre></div><h6 id=--perf>- perf</h6><blockquote><p>Performance monitoring for the Linux kernel</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://github.com/brendangregg/Misc/blob/master/perf_events/perf.md</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># http://www.brendangregg.com/perf.html</span>
+</span></span><span style=display:flex><span>yum install perf
+</span></span></code></pre></div><h6 id=--pptx2md>- pptx2md</h6><blockquote><p>A pptx to markdown converter</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pip3 install pptx2md
+</span></span></code></pre></div><h6 id=--sockperf>- sockperf</h6><blockquote><p>Network Benchmarking Utility</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://github.com/Mellanox/sockperf</span>
+</span></span><span style=display:flex><span>yum install sockperf
+</span></span></code></pre></div><h6 id=--upx>- upx</h6><blockquote><p>UPX - the Ultimate Packer for eXecutables</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>brew install upx
+</span></span></code></pre></div><h6 id=--wrk>- wrk</h6><blockquote><p>Modern HTTP benchmarking tool</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>brew install wrk
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>LVM</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 確認 resize 在哪個 disk</span>
+</span></span><span style=display:flex><span>lsblk
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 確認 `/dev/sde` 是否為該新增 disk 路徑</span>
+</span></span><span style=display:flex><span>pvresize /dev/sde
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># vgdisplay [vg 編號]</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查 free  PE / Size 的編號</span>
+</span></span><span style=display:flex><span>vgdisplay vg3
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 要升級的 lvm 硬碟路徑</span>
+</span></span><span style=display:flex><span>lvdisplay
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># lvresize -l +[free 的編號] 升級的 lvm 硬碟路徑</span>
+</span></span><span style=display:flex><span>lvresize -l +38400 /dev/vg3/disklvm4
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># resize</span>
+</span></span><span style=display:flex><span>xfs_growfs /dev/vg3/disklvm4
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 檢查擴充是否成功</span>
+</span></span><span style=display:flex><span>df -h
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Migration zabbix</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mysqldump -uroot --opt zabbix &gt; zabbix.sql
+</span></span><span style=display:flex><span>rsync -az zabbix.sql newserver:/root
+</span></span><span style=display:flex><span>mysql -uroot zabbix &lt; zabbix.sql
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Re-create /dev/null</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>rm -f /dev/null
+</span></span><span style=display:flex><span>mknod /dev/null c <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>3</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Script</span></h5><div class=card><div class=card-body><script src=https://gist.github.com/m-radzikowski/53e0b39e9a59a1518990e76c2bff8038.js></script></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Script Optimization</span></h5><div class=card><div class=card-body><p><a href=https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/ target=_blank rel=noopener>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</a></p><ol><li>Use Built-in Commands: Built-in commands execute faster because they don&rsquo;t require loading an external process.</li><li>Minimize Subshells: Subshells can be expensive in terms of performance.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Inefficient</span>
+</span></span><span style=display:flex><span>output<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>cat file.txt<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Efficient</span>
+</span></span><span style=display:flex><span>output<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>&lt;file.txt<span style=color:#66d9ef>)</span>
+</span></span></code></pre></div><ol start=3><li>Use Arrays for Bulk Data: When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Inefficient</span>
+</span></span><span style=display:flex><span>item1<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;apple&#34;</span>
+</span></span><span style=display:flex><span>item2<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;banana&#34;</span>
+</span></span><span style=display:flex><span>item3<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;cherry&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Efficient</span>
+</span></span><span style=display:flex><span>items<span style=color:#f92672>=(</span><span style=color:#e6db74>&#34;apple&#34;</span> <span style=color:#e6db74>&#34;banana&#34;</span> <span style=color:#e6db74>&#34;cherry&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> item in <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>items[@]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;</span>$item<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span></code></pre></div><ol start=4><li>Enable Noclobber: To prevent accidental overwriting of files.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>set -o noclobber
+</span></span></code></pre></div><ol start=5><li>Use Functions: Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.</li><li>Efficient File Operations: When performing file operations, use efficient techniques to minimize resource usage.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Inefficient</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> read -r line; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;</span>$line<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span> &lt; file.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Efficient</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> IFS<span style=color:#f92672>=</span> read -r line; <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;</span>$line<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span> &lt; file.txt
+</span></span></code></pre></div><ol start=7><li>Parallel Processing: Tools like <code>xargs</code> and GNU <code>parallel</code> can be incredibly useful.</li><li>Error Handling: Robust error handling is critical for creating reliable and maintainable scripts.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.</span>
+</span></span><span style=display:flex><span>set -e
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Custom Error Messages: Implement custom error messages to provide more context when something goes wrong.</span>
+</span></span><span style=display:flex><span>command1 <span style=color:#f92672>||</span> <span style=color:#f92672>{</span> echo <span style=color:#e6db74>&#34;command1 failed&#34;</span>; exit 1; <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Trap Signals: Use the `trap` command to catch and handle signals and errors gracefully.</span>
+</span></span><span style=display:flex><span>trap <span style=color:#e6db74>&#39;echo &#34;Error occurred&#34;; cleanup; exit 1&#39;</span> ERR
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> cleanup<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Cleanup code</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Validate Inputs: Always validate user inputs and script arguments to prevent unexpected behavior.</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z <span style=color:#e6db74>&#34;</span>$1<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;Usage: </span>$0<span style=color:#e6db74> &lt;argument&gt;&#34;</span>
+</span></span><span style=display:flex><span>    exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Logging: Implement logging to keep track of script execution and diagnose issues.</span>
+</span></span><span style=display:flex><span>logfile<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;script.log&#34;</span>
+</span></span><span style=display:flex><span>exec &gt; &gt;<span style=color:#f92672>(</span>tee -i $logfile<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>exec 2&gt;&amp;<span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;Script started&#34;</span>
+</span></span></code></pre></div><ol start=9><li>Automating Complex System Administration Tasks:<ol><li>Automated Backups</li><li>System Monitoring</li><li>User Management</li><li>Automated Updates</li><li>Network Configuration</li></ol></li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Build with secret</span></h5><div class=card><div class=card-body><ul><li>Dockerfile</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-dockerfile data-lang=dockerfile><span style=display:flex><span><span style=color:#75715e># syntax = docker/dockerfile:1.6</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>FROM</span><span style=color:#e6db74> golang:1.21.1-alpine3.18</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>RUN</span> --mount<span style=color:#f92672>=</span>type<span style=color:#f92672>=</span>secret,id<span style=color:#f92672>=</span>mysecret,target<span style=color:#f92672>=</span>/root/.ssh/id_rsa git clone git@gitlab.com:ricky/repo.git<span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></div><ul><li>Command</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export DOCKER_BUILDKIT<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>docker build --secret id<span style=color:#f92672>=</span>mysecret,src<span style=color:#f92672>=</span>id_rsa -t image .
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Compose</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Force pull image</span>
+</span></span><span style=display:flex><span>docker-compose up -d --pull always
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Create buildx instance</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create buildx instance</span>
+</span></span><span style=display:flex><span>docker buildx create --name builder --bootstrap --driver docker-container
+</span></span><span style=display:flex><span><span style=color:#75715e># install emulators</span>
+</span></span><span style=display:flex><span>docker run --privileged --rm tonistiigi/binfmt --install all
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Create Network</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker network create -d bridge --subnet 172.100.0.0/24 --gateway 172.100.0.1 backend_dev
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Multiple build-arg</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker build . -f ./scripts/Dockerfile <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --build-arg Date<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>date<span style=color:#66d9ef>)</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --build-arg Tag<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>git rev-list -n <span style=color:#ae81ff>1</span> --tags<span style=color:#66d9ef>)</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --build-arg Commit<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>git describe --tags --abbrev<span style=color:#f92672>=</span>0<span style=color:#66d9ef>)</span>  <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  -t ops-cli
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Multiple platform</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create and use buildx instance</span>
+</span></span><span style=display:flex><span>docker buildx create --use --name builder
+</span></span><span style=display:flex><span><span style=color:#75715e># build multiple platform</span>
+</span></span><span style=display:flex><span>docker buildx build --push --platform linux/arm64,linux/amd64 -t zeyanlin/ops-cli .
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Run container in different platform</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>finch run -it --rm --platform<span style=color:#f92672>=</span>linux/arm64 zeyanlin/ops-cli /bin/sh
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>File create time</span></h5><div class=card><div class=card-body><h4 id=1-find-inode>1. Find Inode</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ stat dns.yaml
+</span></span><span style=display:flex><span>  File: dns.yaml
+</span></span><span style=display:flex><span>  Size: <span style=color:#ae81ff>1003</span>        Blocks: <span style=color:#ae81ff>8</span>          IO Block: <span style=color:#ae81ff>4096</span>   regular file
+</span></span><span style=display:flex><span>Device: ca01h/51713d    Inode: <span style=color:#ae81ff>3595636</span>     Links: <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>Access: <span style=color:#f92672>(</span>0644/-rw-r--r--<span style=color:#f92672>)</span>  Uid: <span style=color:#f92672>(</span> 1000/  ubuntu<span style=color:#f92672>)</span>   Gid: <span style=color:#f92672>(</span> 1000/  ubuntu<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>Access: 2022-05-03 12:59:59.996755279 +0800
+</span></span><span style=display:flex><span>Modify: 2021-12-10 18:27:54.157585209 +0800
+</span></span><span style=display:flex><span>Change: 2022-01-07 14:57:58.619727878 +0800
+</span></span><span style=display:flex><span> Birth: -
+</span></span></code></pre></div><p>or</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ ls -i dns.yaml
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3585173</span> dns.yaml
+</span></span></code></pre></div><h4 id=2-find-filesystem>2. Find Filesystem</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ df dns.yaml
+</span></span><span style=display:flex><span>Filesystem     1K-blocks     Used Available Use% Mounted on
+</span></span><span style=display:flex><span>/dev/root      <span style=color:#ae81ff>101583780</span> <span style=color:#ae81ff>25703988</span>  <span style=color:#ae81ff>75863408</span>  26% /
+</span></span></code></pre></div><h4 id=3-get-create-time>3. Get Create Time</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ sudo debugfs -R <span style=color:#e6db74>&#39;stat &lt;3595636&gt;&#39;</span> /dev/root
+</span></span><span style=display:flex><span>Inode: <span style=color:#ae81ff>3595636</span>   Type: regular    Mode:  <span style=color:#ae81ff>0644</span>   Flags: 0x80000
+</span></span><span style=display:flex><span>Generation: <span style=color:#ae81ff>449657737</span>    Version: 0x00000000:00000001
+</span></span><span style=display:flex><span>User:  <span style=color:#ae81ff>1000</span>   Group:  <span style=color:#ae81ff>1000</span>   Project:     <span style=color:#ae81ff>0</span>   Size: <span style=color:#ae81ff>1003</span>
+</span></span><span style=display:flex><span>File ACL: <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>Links: <span style=color:#ae81ff>1</span>   Blockcount: <span style=color:#ae81ff>8</span>
+</span></span><span style=display:flex><span>Fragment:  Address: <span style=color:#ae81ff>0</span>    Number: <span style=color:#ae81ff>0</span>    Size: <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span> ctime: 0x61d7e476:93c13018 -- Fri Jan  <span style=color:#ae81ff>7</span> 14:57:58 <span style=color:#ae81ff>2022</span>
+</span></span><span style=display:flex><span> atime: 0x6270b6cf:eda51d3c -- Tue May  <span style=color:#ae81ff>3</span> 12:59:59 <span style=color:#ae81ff>2022</span>
+</span></span><span style=display:flex><span> mtime: 0x61b32baa:25923ce4 -- Fri Dec <span style=color:#ae81ff>10</span> 18:27:54 <span style=color:#ae81ff>2021</span>
+</span></span><span style=display:flex><span>crtime: 0x61b32baa:25923ce4 -- Fri Dec <span style=color:#ae81ff>10</span> 18:27:54 <span style=color:#ae81ff>2021</span>
+</span></span><span style=display:flex><span>Size of extra inode fields: <span style=color:#ae81ff>32</span>
+</span></span><span style=display:flex><span>Inode checksum: 0x5b176bb2
+</span></span><span style=display:flex><span>EXTENTS:
+</span></span><span style=display:flex><span><span style=color:#f92672>(</span>0<span style=color:#f92672>)</span>:2665902
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Display Ubuntu's Message of the Day</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo chmod +x /etc/update-motd.d/*
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>List domains</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sed <span style=color:#e6db74>&#39;s/ //g&#39;</span> domains-info.md | awk -F <span style=color:#e6db74>&#39;|&#39;</span> <span style=color:#e6db74>&#39;{if($3 ~ /.*\.com/)print $3}&#39;</span> | sort | uniq
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Search in git</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rev-list --all | xargs git grep -F <span style=color:#e6db74>&#39;&#39;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Count commits</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rev-list --count main
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>View a file of another branch</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git show dev:main.go
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Take a backup of untracked files</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git ls-files --others --exclude-standard -z | xargs -0 tar rvf backup-untracked.zip
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Submodule</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Add submodule</span>
+</span></span><span style=display:flex><span>git submodule add -b main git@github.com:linzeyan/toha.git themes/toha
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Update submodule</span>
+</span></span><span style=display:flex><span>git submodule update --init --remote
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Remove submodule</span>
+</span></span><span style=display:flex><span>modulePath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;themes/toha&#34;</span>
+</span></span><span style=display:flex><span>git submodule deinit -f <span style=color:#e6db74>${</span>modulePath<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>git rm <span style=color:#e6db74>${</span>modulePath<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>rm -rf .git/modules/<span style=color:#e6db74>${</span>modulePath<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>git config --remove-section submodule.<span style=color:#e6db74>${</span>modulePath<span style=color:#e6db74>}</span>.
+</span></span><span style=display:flex><span>rm -f .gitmodules
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>commit hash</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git rev-parse HEAD
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>commit tag</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git describe --tags
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>worktree</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># list</span>
+</span></span><span style=display:flex><span>git worktree list
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># add</span>
+</span></span><span style=display:flex><span>git worktree add ../dirname branch-name
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>git config</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[user]</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>email</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>zeyanlin@outlook.com
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  name = Ricky
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  signingkey = 2A4313489FDCA802ED6FCC214B03D879EA73DF37</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[commit]</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>gpgsign</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>true</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>git config1</span></h5><div class=card><div class=card-body><p>For golang import package</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[url &#34;git@gitlab.example.com:&#34;]</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>insteadOf</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>https://gitlab.example.com/</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>git config2</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[includeIf &#34;gitdir:~/work/&#34;]</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>path</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>~/.gitconfig-work</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cleanup</span></h5><div class=card><div class=card-body><p><a href=https://docs.gitlab.com/ee/administration/packages/container_registry.html target=_blank rel=noopener>doc</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># artifacts</span>
+</span></span><span style=display:flex><span>gitlab-rake gitlab:cleanup:orphan_job_artifact_files
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># expire session</span>
+</span></span><span style=display:flex><span>gitlab-rake gitlab:cleanup:sessions:active_sessions_lookup_keys
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># lfs</span>
+</span></span><span style=display:flex><span>gitlab-rake gitlab:cleanup:orphan_lfs_files
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># project</span>
+</span></span><span style=display:flex><span>gitlab-rake gitlab:cleanup:project_uploads
+</span></span><span style=display:flex><span>gitlab-rake gitlab:cleanup:remote_upload_files
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># registry</span>
+</span></span><span style=display:flex><span>gitlab-ctl registry-garbage-collect
+</span></span><span style=display:flex><span>gitlab-ctl registry-garbage-collect -m
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>migration</span></h5><div class=card><div class=card-body><h6 id=1-copy-old-crontabold-etcgitlabupdate-ca-trust>1. Copy Old Crontab、Old /etc/gitlab、update-ca-trust</h6><h6 id=2-version-should-be-same>2. Version should be same</h6><h6 id=3-copy-newest-backup-file>3. Copy newest backup file</h6><h6 id=4-stop-services>4. Stop Services</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gitlab-ctl stop unicorn
+</span></span><span style=display:flex><span>gitlab-ctl stop puma
+</span></span><span style=display:flex><span>gitlab-ctl stop sidekiq
+</span></span><span style=display:flex><span>gitlab-ctl status
+</span></span></code></pre></div><h6 id=5-restore>5. Restore</h6><blockquote><p>File must put in /var/opt/gitlab/backup</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>chown git:git backupfile
+</span></span><span style=display:flex><span>gitlab-backup restore BACKUP<span style=color:#f92672>=</span>11493107454_2018_04_25_10.6.4-ce
+</span></span></code></pre></div><h6 id=6-check>6. Check</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gitlab-ctl reconfigure
+</span></span><span style=display:flex><span>gitlab-ctl restart
+</span></span><span style=display:flex><span>gitlab-rake gitlab:check SANITIZE<span style=color:#f92672>=</span>true
+</span></span></code></pre></div><h6 id=7-unlock-gitlab-runner-at-admin-area>7. Unlock gitlab-runner at Admin Area</h6><h6 id=8-pages-add-https-settings-in-gitlabrb-admin-area---applications---destroy-old-system-oauth-and-remove-secret-in-gitlab-secretjson>8. Pages: Add https settings in gitlab.rb, Admin Area -> Applications -> Destroy old System OAuth, and remove secret in gitlab-secret.json.</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gitlab-ctl reconfigure
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Install</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>brew install gnupg
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Generate</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg --full-generate-key
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>gpg --list-secret-keys
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Generate Problem</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ gpg --full-generate-key
+</span></span><span style=display:flex><span>gpg: Sorry, no terminal at all requested - can<span style=color:#960050;background-color:#1e0010>&#39;</span>t get input
+</span></span></code></pre></div><p>Comment out no-tty in <code>~/.gnupg/gpg.conf</code></p></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Add to git</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg --armor --export 51ADF7101CA64B2508AE29EEC279555531A1DD62
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Set .gitconfig</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git config user.email zeyanlin@outlook.com
+</span></span><span style=display:flex><span>git config user.name Ricky
+</span></span><span style=display:flex><span>git config user.signingkey 51ADF7101CA64B2508AE29EEC279555531A1DD62
+</span></span><span style=display:flex><span>git config commit.gpgsign true
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Delete key</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gpg --delete-secret-keys 51ADF7101CA64B2508AE29EEC279555531A1DD62
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Backup key</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># https://www.jwillikers.com/backup-and-restore-a-gpg-key</span>
+</span></span><span style=display:flex><span>gpg --list-secret-keys --keyid-format LONG
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Export key as a file, replace email-address and Enter the private key’s passphrase</span>
+</span></span><span style=display:flex><span>gpg -o private.gpg --export-options backup --export-secret-keys rickylin@cloud-miner.net
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Restore key and enter the private key’s passphrase</span>
+</span></span><span style=display:flex><span>gpg --import-options restore --import private.gpg
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>If GPG not work</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>echo <span style=color:#e6db74>&#39;export GPG_TTY=$(tty)&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span style=display:flex><span>gpgconf –kill gpg-agent
+</span></span><span style=display:flex><span>exec $SHELL
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Encrypt file</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Encrypt file</span>
+</span></span><span style=display:flex><span>gpg --symmetric --cipher-algo aes256 archive_file.tar
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Decrypt file</span>
+</span></span><span style=display:flex><span>gpg --output archive_file.tar --decrypt archive_file.tar.gpg
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cert-manager</span></h5><div class=card><div class=card-body><ul><li><a href=https://cert-manager.io/docs target=_blank rel=noopener>cert-manager</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-manager-aws-iam-role.json>Route53 IAM Role</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-manager-resource.yaml>Cert Manager Resource</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-generate-resource.yaml>Cert Generate Resource</a></li><li><a href=/notes/bash/k8s/files/cert-manager/cert-ingress-resource.yaml>Cert Ingress Resource</a></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># install the cert-manager CustomResourceDefinition resources</span>
+</span></span><span style=display:flex><span>kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Add the Jetstack Helm repository</span>
+</span></span><span style=display:flex><span>helm repo add jetstack https://charts.jetstack.io
+</span></span><span style=display:flex><span>helm repo update
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># install the cert-manager helm chart</span>
+</span></span><span style=display:flex><span>helm install <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  cert-manager jetstack/cert-manager <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --namespace cert-manager <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --version v1.13.1 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set installCRDs<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span>  --set prometheus.enabled<span style=color:#f92672>=</span>false <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set webhook.timeoutSeconds<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># uninstalling</span>
+</span></span><span style=display:flex><span>helm delete my-release
+</span></span><span style=display:flex><span>kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># create clusterissuer</span>
+</span></span><span style=display:flex><span>kubectl apply -f cert-manager-resource.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># generate certificate</span>
+</span></span><span style=display:flex><span>kubectl apply -f cert-generate-resource.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># create ingress controller</span>
+</span></span><span style=display:flex><span>kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># create ingress</span>
+</span></span><span style=display:flex><span>kubectl apply -f cert-ingress-resource.yaml
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>helm</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># install plugin</span>
+</span></span><span style=display:flex><span>helm plugin install https://github.com/chartmuseum/helm-push.git
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># add repo</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## helm repo add --username gitlab-ci-token --password ${CI_JOB_TOKEN} ${CI_PROJECT_NAME} ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/helm/stable</span>
+</span></span><span style=display:flex><span>helm repo add go2helm https://gitlab.go2cloudten.com/api/v4/projects/29/packages/helm/stable --username ricky
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># push chart</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## https://docs.gitlab.com/ee/user/packages/helm_repository/</span>
+</span></span><span style=display:flex><span>helm cm-push ./proxy-0.1.0.tgz go2helm
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kompose</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kompose --file docker-compose.yml convert
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gitlab-runner</span></h5><div class=card><div class=card-body><p><a href=https://docs.gitlab.com/ee/user/project/clusters/add_remove_clusters.html target=_blank rel=noopener>link</a></p><h6 id=gitlab-admin-service-accountyaml><a href=/content/notes/bash/k8s/files/gitlab-runner/gitlab-admin-service-account.yaml>gitlab-admin-service-account.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># CA Certificate</span>
+</span></span><span style=display:flex><span>kubectl get secret <span style=color:#66d9ef>$(</span>kubectl get secret | grep default | awk <span style=color:#e6db74>&#39;{print $1}&#39;</span><span style=color:#66d9ef>)</span> -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{[&#39;data&#39;][&#39;ca\.crt&#39;]}&#34;</span> | base64 --decode
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Service Token</span>
+</span></span><span style=display:flex><span>kubectl apply -f gitlab-admin-service-account.yaml
+</span></span><span style=display:flex><span>kubectl -n kube-system describe secret <span style=color:#66d9ef>$(</span>kubectl -n kube-system get secret | grep gitlab | awk <span style=color:#e6db74>&#39;{print $1}&#39;</span><span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/master/values.yaml</span>
+</span></span><span style=display:flex><span>echo | openssl s_client -CAfile ca.crt -connect gitlab.knowhow.it:443 &gt; /tmp/certs/server.pem
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Install gitlab-runner from gitlab</span>
+</span></span><span style=display:flex><span>helm repo add gitlab https://charts.gitlab.io
+</span></span><span style=display:flex><span>kubectl create namespace gitlab
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kubectl --namespace gitlab create secret generic gitlab-certs --from-file<span style=color:#f92672>=</span>gitlab.knowhow.it.crt<span style=color:#f92672>=</span>/tmp/certs/server.pem --from-file<span style=color:#f92672>=</span>registry.knowhow.it.crt<span style=color:#f92672>=</span>/tmp/certs/server.pem
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>helm install --namespace gitlab k8srunner --set gitlabUrl<span style=color:#f92672>=</span>https://gitlab.knowhow.it,runnerRegistrationToken<span style=color:#f92672>=</span>VmyYjzmU_FjqyMJNJxJK,certsSecretName<span style=color:#f92672>=</span>gitlab-certs,rbac.create<span style=color:#f92672>=</span>true,runners.privileged<span style=color:#f92672>=</span>true,runners.tags<span style=color:#f92672>=</span>k8s,runners.image<span style=color:#f92672>=</span>alpine:3.12,runners.locked<span style=color:#f92672>=</span>false gitlab/gitlab-runner
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>k3d</span></h5><div class=card><div class=card-body><h6 id=k3dyaml><a href=/content/notes/bash/k8s/files/k3d/k3d.yaml>k3d.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create cluster</span>
+</span></span><span style=display:flex><span>k3d cluster create --config k3d.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># delete cluster</span>
+</span></span><span style=display:flex><span>k3d cluster delete local
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># import image</span>
+</span></span><span style=display:flex><span>k3d image import superapp -c local
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>kind</span></h5><div class=card><div class=card-body><h6 id=kindyaml><a href=/content/notes/bash/k8s/files/kind/kind.yaml>kind.yaml</a></h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># create cluster</span>
+</span></span><span style=display:flex><span>kind create cluster --config kind.yaml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># delete cluster</span>
+</span></span><span style=display:flex><span>kind delete cluster -n local
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># import image</span>
+</span></span><span style=display:flex><span>kind load docker-image superapp -n local
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>rancher</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>docker run <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    -d <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --restart<span style=color:#f92672>=</span>always  <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --name rancher <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --network<span style=color:#f92672>=</span>host <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    -v /etc/ssl/server.crt:/etc/rancher/ssl/cert.pem <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    -v /etc/ssl/server.key:/etc/rancher/ssl/key.pem <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    -v /etc/ssl/ca.crt:/etc/rancher/ssl/cacerts.pem <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --privileged <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    rancher/rancher:latest
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>skaffold</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e># https://github.com/GoogleContainerTools/skaffold/examples/getting-started</span>
+</span></span><span style=display:flex><span>curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 <span style=color:#f92672>&amp;&amp;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    sudo install skaffold /usr/local/bin/
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>k8s in k8s</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Install kubernetes-in-kubernetes</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>helm repo add kvaps https://kvaps.github.io/charts
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>helm install kik kvaps/kubernetes --version 0.13.4 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --namespace kik <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set persistence.storageClassName<span style=color:#f92672>=</span>local-path
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>argocd</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>nameSpace<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;argocd&#39;</span>
+</span></span><span style=display:flex><span>port<span style=color:#f92672>=</span><span style=color:#ae81ff>8443</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## helm</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd</span>
+</span></span><span style=display:flex><span>helm repo add argo https://argoproj.github.io/argo-helm
+</span></span><span style=display:flex><span>helm repo update
+</span></span><span style=display:flex><span>helm install argocd argo/argo-cd <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --namespace <span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span> --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set server.service.type<span style=color:#f92672>=</span>NodePort <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set server.service.nodePortHttps<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>port<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## kubectl</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kubectl create namespace ${nameSpace}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kubectl apply -n ${nameSpace} -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># sleep 60</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kubectl apply -f - &lt;&lt;SVC</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># apiVersion: v1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kind: Service</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># metadata:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   labels:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     app.kubernetes.io/component: server</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     app.kubernetes.io/name: argocd-server</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     app.kubernetes.io/part-of: argocd</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   name: argocd-server</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   namespace: ${nameSpace}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># spec:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   type: NodePort</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   selector:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     app.kubernetes.io/name: argocd-server</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#   ports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     - name: https</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#       nodePort: ${port}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#       port: 443</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#       targetPort: 8080</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># SVC</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> ! which argocd 2&gt;&amp;<span style=color:#ae81ff>1</span> &gt;/dev/null; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>  wget https://github.com/argoproj/argo-cd/releases/download/v2.1.7/argocd-linux-amd64
+</span></span><span style=display:flex><span>  chmod <span style=color:#ae81ff>755</span> argocd-linux-amd64
+</span></span><span style=display:flex><span>  mv argocd-linux-amd64 /usr/local/bin/argocd
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>sleep <span style=color:#ae81ff>120</span>
+</span></span><span style=display:flex><span>account<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;admin&#39;</span>
+</span></span><span style=display:flex><span>password<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n <span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span> get secret argocd-initial-admin-secret -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.data.password}&#34;</span> | base64 -d<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>${</span>account<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>${</span>password<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## CLI</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># argocd login https://192.168.185.95:6443</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>delete<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>  kubectl delete clusterrole argocd-application-controller ; kubectl delete clusterrole argocd-server
+</span></span><span style=display:flex><span>  kubectl delete clusterrolebindings argocd-application-controller ; kubectl delete clusterrolebindings argocd-server
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cert manager</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Install cert-manager</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## https://cert-manager.io/docs/installation/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>helm repo add jetstack https://charts.jetstack.io
+</span></span><span style=display:flex><span>helm install <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    cert-manager jetstack/cert-manager <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --namespace cert-manager <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --version v1.7.2 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set installCRDs<span style=color:#f92672>=</span>true <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set prometheus.enabled<span style=color:#f92672>=</span>false <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set webhook.timeoutSeconds<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>cilium</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>set -eux
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>use_cli<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-darwin-amd64.tar.gz<span style=color:#f92672>{</span>,.sha256sum<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>shasum -a <span style=color:#ae81ff>256</span> -c cilium-darwin-amd64.tar.gz.sha256sum
+</span></span><span style=display:flex><span>sudo tar xzvfC cilium-darwin-amd64.tar.gz /usr/local/bin
+</span></span><span style=display:flex><span>rm cilium-darwin-amd64.tar.gz<span style=color:#f92672>{</span>,.sha256sum<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>cilium install
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>helm install cilium cilium/cilium --version 1.11.0 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --namespace kube-system
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>ingress</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>ingressClass<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;nginx&#39;</span>
+</span></span><span style=display:flex><span>ingressFile<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/tmp/ing.yaml&#39;</span>
+</span></span><span style=display:flex><span>ingressIP<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;192.168.185.109&#39;</span>
+</span></span><span style=display:flex><span>ingressName<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;proxy&#39;</span>
+</span></span><span style=display:flex><span>ingressSuffix<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ingress-nginx&#39;</span>
+</span></span><span style=display:flex><span>nameSpace<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ingress&#39;</span>
+</span></span><span style=display:flex><span>nginxRepo<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ingress-nginx&#39;</span>
+</span></span><span style=display:flex><span>replica<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> <span style=color:#e6db74>&#34;</span>$1<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;delete&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Delete</span>
+</span></span><span style=display:flex><span>    kubectl delete namespace <span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>    kubectl delete IngressClass <span style=color:#e6db74>${</span>ingressClass<span style=color:#e6db74>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># kubectl delete ValidatingWebhookConfiguration ${ingressName}-ingress-nginx-admission</span>
+</span></span><span style=display:flex><span>    exit $?
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> ! <span style=color:#66d9ef>$(</span>helm repo list | grep <span style=color:#e6db74>${</span>nginxRepo<span style=color:#e6db74>}</span> &gt;/dev/null<span style=color:#66d9ef>)</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    echo <span style=color:#e6db74>&#34;Install </span><span style=color:#e6db74>${</span>nginxRepo<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>    helm repo add <span style=color:#e6db74>${</span>nginxRepo<span style=color:#e6db74>}</span> https://kubernetes.github.io/ingress-nginx
+</span></span><span style=display:flex><span>    helm repo update
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.autoscaling.enabled=true \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.autoscaling.maxReplicas=9 \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.metrics.enabled=true \</span>
+</span></span><span style=display:flex><span>helm install <span style=color:#e6db74>${</span>ingressName<span style=color:#e6db74>}</span> <span style=color:#e6db74>${</span>nginxRepo<span style=color:#e6db74>}</span>/<span style=color:#e6db74>${</span>ingressSuffix<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --namespace <span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span> --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set controller.ingressClass<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>ingressClass<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set controller.replicaCount<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>replica<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    --set controller.service.externalTrafficPolicy<span style=color:#f92672>=</span>Local
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.publishService.enabled=true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.defaultBackend.port=443 \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.hostNetwork=true \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.kind=DaemonSet \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.daemonset.useHostPorts=true \</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --set controller.service.loadBalancerIP=${ingressIP}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>clusertIP<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n ingress get service | awk <span style=color:#e6db74>&#39;NR==2{print $3}&#39;</span><span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt;-EOF &gt;${ingressFile}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># apiVersion: v1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># kind: Service
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># metadata:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   name: ${ingressName}-${ingressSuffix}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># spec:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   clusterIP: ${clusertIP}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   externalIPs:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   - ${ingressIP}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   externalTrafficPolicy: Local
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   selector:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     app: proxy-nginx-ingress
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   ports:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   - name: https
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     port: 443
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     targetPort: 443
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   type: LoadBalancer
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># status:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   loadBalancer:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     ingress:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     - ip: ${ingressIP}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># \-\-\-
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># kind: Endpoints
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># apiVersion: v1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># metadata:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   name: ${ingressName}-${ingressSuffix}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74># subsets:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   - addresses:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#       - ip: 54.238.209.164
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     ports:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#       - name: https
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#         port: 443
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      # - name: ssh
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      #   port: 22
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>\-\-\-
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>apiVersion: networking.k8s.io/v1
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>kind: Ingress
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>metadata:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  name: ingress
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  annotations:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    kubernetes.io/ingress.class: ${ingressClass}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    nginx.ingress.kubernetes.io/upstream-vhost: own.go2cloudten.com
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    nginx.ingress.kubernetes.io/backend-protocol: &#34;HTTPS&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    nginx.ingress.kubernetes.io/default-backend: ${ingressName}-${ingressSuffix}-controller
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    nginx.ingress.kubernetes.io/http2-push-preload: &#34;true&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    nginx.ingress.kubernetes.io/service-upstream: &#34;true&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    # nginx.ingress.kubernetes.io/rewrite-target: /
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>spec:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#   defaultBackend:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#     service:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#       name: ${ingressName}-${ingressSuffix}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#       port:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#         number: 443
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  rules:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  - host: gitlab.go2cloudten.com
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    http:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      paths:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>      - path: /*
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        pathType: Prefix
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        backend:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>          service:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            name: ${ingressName}-${ingressSuffix}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            port:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>              number: 443
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#       - path: /*
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#         pathType: Prefix
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#         backend:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#           service:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#             name: ${ingressName}-${ingressSuffix}
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#             port:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>#               name: ssh
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># kubectl -n ingress apply -f ${ingressFile}</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>krew</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>set -x
+</span></span><span style=display:flex><span>cd <span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>mktemp -d<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    OS<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>uname | tr <span style=color:#e6db74>&#39;[:upper:]&#39;</span> <span style=color:#e6db74>&#39;[:lower:]&#39;</span><span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    ARCH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>uname -m | sed -e <span style=color:#e6db74>&#39;s/x86_64/amd64/&#39;</span> -e <span style=color:#e6db74>&#39;s/\(arm\)\(64\)\?.*/\1\2/&#39;</span> -e <span style=color:#e6db74>&#39;s/aarch64$/arm64/&#39;</span><span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    KREW<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;krew-</span><span style=color:#e6db74>${</span>OS<span style=color:#e6db74>}</span><span style=color:#e6db74>_</span><span style=color:#e6db74>${</span>ARCH<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    curl -fsSLO <span style=color:#e6db74>&#34;https://github.com/kubernetes-sigs/krew/releases/latest/download/</span><span style=color:#e6db74>${</span>KREW<span style=color:#e6db74>}</span><span style=color:#e6db74>.tar.gz&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    tar zxvf <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>KREW<span style=color:#e6db74>}</span><span style=color:#e6db74>.tar.gz&#34;</span> <span style=color:#f92672>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    ./<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>KREW<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> install krew
+</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>KREW_ROOT<span style=color:#66d9ef>:-</span>$HOME/.krew<span style=color:#e6db74>}</span><span style=color:#e6db74>/bin:</span>$PATH<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>kubectl krew install change-ns
+</span></span><span style=display:flex><span>kubectl change-ns nginx
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>prometheus</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>nameSpace<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;monitoring&#39;</span>
+</span></span><span style=display:flex><span>prometheusPort<span style=color:#f92672>=</span><span style=color:#ae81ff>9090</span>
+</span></span><span style=display:flex><span>grafanaPort<span style=color:#f92672>=</span><span style=color:#ae81ff>3000</span>
+</span></span><span style=display:flex><span>kubeControllerManagerDefaultPort<span style=color:#f92672>=</span><span style=color:#ae81ff>10257</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## helm</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 1. monitoring every namespaces and export port</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 2. export grafana port</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 3. monitoring kubeControllerManager</span>
+</span></span><span style=display:flex><span>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+</span></span><span style=display:flex><span>helm repo update
+</span></span><span style=display:flex><span>helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --namespace <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --create-namespace <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set prometheus.prometheusSpec.podMonitorSelectorNilUsesHelmValues<span style=color:#f92672>=</span>false <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues<span style=color:#f92672>=</span>false <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues<span style=color:#f92672>=</span>false <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set prometheus.service.type<span style=color:#f92672>=</span>NodePort <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set prometheus.service.nodePort<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>prometheusPort<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set grafana.service.type<span style=color:#f92672>=</span>NodePort <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set grafana.service.nodePort<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>grafanaPort<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set kubeControllerManager.service.port<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>kubeControllerManagerDefaultPort<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set kubeControllerManager.service.targetPort<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>kubeControllerManagerDefaultPort<span style=color:#e6db74>}</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set kubeControllerManager.ServiceMonitor.https<span style=color:#f92672>=</span>true <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set kubeControllerManager.ServiceMonitor.insecureSkipVerify<span style=color:#f92672>=</span>true <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>  --set kubeControllerManager.ServiceMonitor.serverName<span style=color:#f92672>=</span>localhost
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>sleep <span style=color:#ae81ff>30</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>account<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> get secret kube-prometheus-stack-grafana -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.data.admin-user}&#34;</span> | base64 -d<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>password<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>kubectl -n <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>nameSpace<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> get secret kube-prometheus-stack-grafana -o jsonpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{.data.admin-password}&#34;</span> | base64 -d<span style=color:#66d9ef>)</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Create and use secret</span></h5><div class=card><div class=card-body><h5 id=command>command</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kubectl -n nginx create secret docker-registry gitlab --docker-server<span style=color:#f92672>=</span>registry.go2cloudten.com --docker-username<span style=color:#f92672>=</span>ricky --docker-password<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;token or password&#34;</span>
+</span></span></code></pre></div><h5 id=config>config</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>imagePullSecrets</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>gitlab</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Run pod</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kubectl run -it --rm --image<span style=color:#f92672>=</span>registry.go2cloudten.com/it/docker/backup test --image-pull-policy<span style=color:#f92672>=</span>IfNotPresent -- bash
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Check port status</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># `(echo &gt;/dev/tcp/${host}/${port})`</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>(</span>echo &gt;/dev/tcp/192.168.57.24/80<span style=color:#f92672>)</span> &amp;&gt;/dev/null <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;open&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;closed&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>timeout <span style=color:#ae81ff>1</span> bash -c <span style=color:#e6db74>&#39;&gt;/dev/tcp/192.168.57.24/80 &amp;&gt;/dev/null&#39;</span> <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;open&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;closed&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>timeout <span style=color:#ae81ff>1</span> bash -c <span style=color:#e6db74>&#39;&gt;/dev/tcp/192.168.57.24/80&#39;</span> <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;open&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;closed&#34;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Block subnets</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ip route add blackhole 192.168.0.0/24
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Kill sessions</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># ss</span>
+</span></span><span style=display:flex><span>sudo ss -K state TIME-WAIT
+</span></span><span style=display:flex><span><span style=color:#75715e># or conntrack</span>
+</span></span><span style=display:flex><span>sudo conntrack -D -p tcp --state TIME_WAIT
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>connect IPs</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ss -tnH state established <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>| awk <span style=color:#e6db74>&#39;{
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  peer = $5; if (peer == &#34;&#34;) peer = $NF # 取 Peer Address:Port（某些版本欄位可能不同）
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  sub(/,$/, &#34;&#34;, peer)                   # 去掉可能的逗號
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  gsub(/[\[\]]/, &#34;&#34;, peer)              # 去掉所有中括號
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  gsub(/::ffff:/, &#34;&#34;, peer)             # IPv4-mapped IPv6 無論出現在開頭還中間都移除
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  sub(/%[^:]+/, &#34;&#34;, peer)               # 去掉 IPv6 的 scope（如 %eth0）
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  sub(/:[0-9]+$/, &#34;&#34;, peer)             # 去掉最後的 :port
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  print peer
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>}&#39;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>| sort | uniq -c | sort -nr
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>texlive</span></h5><div class=card><div class=card-body><ul><li>macOS</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># brew install textlive</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># npm i -g mermaid-filter</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Render mermaid</span>
+</span></span><span style=display:flex><span>pandoc -F mermaid-filter -o readme.pdf readme.md
+</span></span></code></pre></div><ul><li>Ubuntu</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># sudo apt install pandoc -y</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># sudo apt-get -y install texlive-latex-recommended texlive-pictures texlive-latex-extra texlive-fonts-recommended</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># npm i -g mermaid-filter</span>
+</span></span><span style=display:flex><span>pandoc -F mermaid-filter -o readme.pdf readme.md
+</span></span></code></pre></div></div></div></div></div></div><div class=paginator><ul class="pagination pagination-default"><li class="page-item disabled"><a aria-disabled=true aria-label=First class=page-link role=button tabindex=-1><span aria-hidden=true>&#171;&#171;</span></a></li><li class="page-item disabled"><a aria-disabled=true aria-label=Previous class=page-link role=button tabindex=-1><span aria-hidden=true>&#171;</span></a></li><li class="page-item active"><a aria-current=page aria-label="Page 1" class=page-link role=button>1</a></li><li class=page-item><a href=/zh-tw/notes/bash/page/2/ aria-label="Page 2" class=page-link role=button>2</a></li><li class=page-item><a href=/zh-tw/notes/bash/page/2/ aria-label=Next class=page-link role=button><span aria-hidden=true>&#187;</span></a></li><li class=page-item><a href=/zh-tw/notes/bash/page/2/ aria-label=Last class=page-link role=button><span aria-hidden=true>&#187;&#187;</span></a></li></ul></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-start"><div class="col-md-4 col-sm-12"><h5>導覽列</h5><ul><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#about>關於</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#skills>技能</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#experiences>經歷</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#education>學歷</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#projects>專案</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>聯絡方式:</h5><ul><li><a href=mailto:zeyanlin@outlook.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>zeyanlin@outlook.com</span></a></li><li><a href=https://github.com/linzeyan target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>linzeyan</span></a></li><li><a href=https://www.strava.com/athletes/rickylin target=_blank rel=noopener><span><i class="fab fa-fab fa-strava"></i></span> <span>Ricky</span></a></li><li><a href=https://t.me/ricky_lin target=_blank rel=noopener><span><i class="fab fa-fab fa-telegram"></i></span> <span>Ricky</span></a></li></ul></div></div></div></footer><script src=/application.eed5c22001d7c9cc6de7d8db62219c198319957fa017da141928bee1c40883b4.js integrity="sha256-7tXCIAHXycxt59jbYiGcGYMZlX+gF9oUGSi+4cQIg7Q=" defer></script></body></html>

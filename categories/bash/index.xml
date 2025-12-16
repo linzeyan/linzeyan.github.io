@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BASH on Ricky</title><link>https://linzeyan.github.io/categories/bash/</link><description>Recent content in BASH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 12 Jun 2025 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>TIL: timeout in Bash scripts</title><link>https://linzeyan.github.io/posts/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20250612-bash-timeout/</guid><description>&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL: timeout in Bash scripts&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>timeout 1m ./until.sh&lt;/code>&lt;/li>
+&lt;li>wrap&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>timeout 1m bash -c &lt;span style="color:#e6db74">&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">done&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/posts/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20240925-advanced-shell-scripting/</guid><description>&lt;h1 id="advanced-shell-scripting-techniques-automating-complex-tasks-with-bash">Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/h1>
+&lt;h2 id="advanced-shell-scripting-techniques-automating-complex-tasks-with-bash-1">&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener">Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a>&lt;/h2>
+&lt;h4 id="use-built-in-commands">Use Built-in Commands&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;h4 id="minimize-subshells">Minimize Subshells&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>Subshells can be expensive in terms of performance.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cat file.txt&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>&amp;lt;file.txt&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-arrays-for-bulk-data">Use Arrays for Bulk Data&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;apple&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item2&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;banana&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item3&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cherry&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>items&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;apple&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;banana&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cherry&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> item in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>items[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$item&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="enable-noclobber">Enable Noclobber&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>To prevent accidental overwriting of files.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set -o noclobber
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-functions">Use Functions&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;h4 id="efficient-file-operations">Efficient File Operations&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>When performing file operations, use efficient techniques to minimize resource usage.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; file.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; file.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="parallel-processing">Parallel Processing&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>Tools like &lt;code>xargs&lt;/code> and GNU &lt;code>parallel&lt;/code> can be incredibly useful.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;h4 id="error-handling">Error Handling&lt;/h4>
+&lt;div class="alert info">
+&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>Robust error handling is critical for creating reliable and maintainable scripts.&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Custom Error Messages: Implement custom error messages to provide more context when something goes wrong.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>command1 &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">{&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;command1 failed&amp;#34;&lt;/span>; exit 1; &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Trap Signals: Use the `trap` command to catch and handle signals and errors gracefully.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trap &lt;span style="color:#e6db74">&amp;#39;echo &amp;#34;Error occurred&amp;#34;; cleanup; exit 1&amp;#39;&lt;/span> ERR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> cleanup&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Cleanup code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Validate Inputs: Always validate user inputs and script arguments to prevent unexpected behavior.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -z &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Usage: &lt;/span>$0&lt;span style="color:#e6db74"> &amp;lt;argument&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Logging: Implement logging to keep track of script execution and diagnose issues.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>logfile&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;script.log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec &amp;gt; &amp;gt;&lt;span style="color:#f92672">(&lt;/span>tee -i $logfile&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Script started&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="automating-complex-system-administration-tasks">Automating Complex System Administration Tasks:&lt;/h4>
+&lt;ol>
+&lt;li>Automated Backups&lt;/li>
+&lt;li>System Monitoring&lt;/li>
+&lt;li>User Management&lt;/li>
+&lt;li>Automated Updates&lt;/li>
+&lt;li>Network Configuration&lt;/li>
+&lt;/ol></description></item></channel></rss>

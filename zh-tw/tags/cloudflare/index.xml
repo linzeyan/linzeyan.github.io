@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudflare on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/cloudflare/</link><description>Recent content in Cloudflare on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 26 Sep 2023 09:01:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/cloudflare/index.xml" rel="self" type="application/rss+xml"/><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/zh-tw/posts/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230926-cloudflare/</guid><description>&lt;h2 id="connect-private-networks">&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener">Connect private networks&lt;/a>&lt;/h2>
+&lt;h3 id="1-set-up-the-client">1. Set up the client&lt;/h3>
+&lt;h4 id="create-device-enrollment-rules">Create device enrollment rules&lt;/h4>
+&lt;blockquote>
+&lt;p>Create device enrollment rules to determine which devices can enroll to Zero Trust organization.&lt;/p>&lt;/blockquote>
+&lt;h5 id="set-device-enrollment-permissions">Set device enrollment permissions&lt;/h5>
+&lt;ol>
+&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage.&lt;/li>
+&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com.&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-route-private-network-ips-through-warp">2. Route private network IPs through WARP&lt;/h3>
+&lt;ol>
+&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure.&lt;/li>
+&lt;li>Configure settings:
+&lt;ol>
+&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates.&lt;/li>
+&lt;li>Service mode: Gateway with WARP.&lt;/li>
+&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com.&lt;/li>
+&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage.
+&lt;ul>
+&lt;li>Delete the IP range of nas.ruru910.com.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-filter-network-traffic-with-gateway">3. Filter network traffic with Gateway&lt;/h3>
+&lt;h4 id="1-enable-the-gateway-proxy">1. Enable the Gateway proxy&lt;/h4>
+&lt;ol>
+&lt;li>In Zero Trust, go to Settings &amp;gt; Network.
+&lt;ol>
+&lt;li>Gateway Logging: Capture all.&lt;/li>
+&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="2-create-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">Create Zero Trust policies&lt;/a>&lt;/h4>
+&lt;ol>
+&lt;li>Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li>
+&lt;li>For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li>
+&lt;li>Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li>
+&lt;/ol>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener">Connect private networks&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/" target="_blank" rel="noopener">Configure Local Domain Fallback&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener">Configure Split Tunnels&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/" target="_blank" rel="noopener">Traffic routing with WARP&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Cloudflare tunnel on Synology</title><link>https://linzeyan.github.io/zh-tw/posts/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230925-cloudflare/</guid><description>&lt;h2 id="setup-synology">Setup Synology&lt;/h2>
+&lt;ol>
+&lt;li>Create a directory in docker directory, such as &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>Download cloudflared/cloudflared image to registry.&lt;/li>
+&lt;li>ssh to admin@synology&lt;/li>
+&lt;li>Change &lt;code>cloudflare-tunnel&lt;/code> owner, &lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="run-containers">Run containers&lt;/h3>
+&lt;h4 id="--cloudflared-tunnel-login">- &lt;code>cloudflared tunnel login&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Run container and mount volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>.&lt;/li>
+&lt;li>Select &lt;code>Use the same network as Docker Host&lt;/code> in network tab.&lt;/li>
+&lt;li>Add command &lt;code>tunnel login&lt;/code> in envorinment tab.&lt;/li>
+&lt;li>Go to container log, and copy login url.&lt;/li>
+&lt;li>Paste url to browser and authorize the zone.&lt;/li>
+&lt;li>Export the container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel">- &lt;code>cloudflared tunnel create synology-tunnel&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel create synology-tunnel&lt;/code>.&lt;/li>
+&lt;li>Import the container setting json and run a new container.&lt;/li>
+&lt;li>The container will stop and create tunnel config json in &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>Create config.yml and write ingress rules.&lt;/li>
+&lt;li>In config.yml, tunnel value is the same as the tunnel config json name, and credentials-file is &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>&lt;/li>
+&lt;li>Export the second container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com">- &lt;code>cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>.&lt;/li>
+&lt;li>Import the second container setting json and run a new container.&lt;/li>
+&lt;li>The container will stop and create a dns record mapping domain to the tunnel.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel">- &lt;code>cloudflared tunnel run synology-tunnel&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel run synology-tunnel&lt;/code>.&lt;/li>
+&lt;li>Import the second container setting json and run a new container.&lt;/li>
+&lt;li>The tunnel now is connectable.&lt;/li>
+&lt;/ol>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

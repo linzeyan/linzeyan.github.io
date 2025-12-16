@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go Questions on Ricky</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/</link><description>Recent content in Go Questions on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><atom:link href="https://linzeyan.github.io/zh-tw/notes/go/questions/index.xml" rel="self" type="application/rss+xml"/><item><title>Array</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/array/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/array/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>array&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> [&lt;span style="color:#ae81ff">5&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>{&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">4&lt;/span>, &lt;span style="color:#ae81ff">5&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span>[&lt;span style="color:#ae81ff">3&lt;/span>:&lt;span style="color:#ae81ff">4&lt;/span>:&lt;span style="color:#ae81ff">4&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 3&lt;/li>
+&lt;li>B. 4&lt;/li>
+&lt;li>C. compilation error&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/z3KqBXFXMm3" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Channel</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/channel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/channel/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>channel&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">1000&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">ok&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">ch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> !&lt;span style="color:#a6e22e">ok&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;close&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;a: &amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">a&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> close(&lt;span style="color:#a6e22e">ch&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;ok&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Sleep&lt;/span>(&lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">100&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/OtDbNbLE1cH" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">ok
+panic: send on closed channel
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>channel1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> close(&lt;span style="color:#a6e22e">c&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">val&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">c&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">val&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/S9Juy0nlAvz" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">0
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Context</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/context/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>context&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>(&lt;span style="color:#a6e22e">ctx&lt;/span> &lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">WithValue&lt;/span>(&lt;span style="color:#a6e22e">ctx&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;foo&amp;#34;&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">6&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ctx&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">TODO&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">f&lt;/span>(&lt;span style="color:#a6e22e">ctx&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">ctx&lt;/span>.&lt;span style="color:#a6e22e">Value&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;foo&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. -6&lt;/li>
+&lt;li>B. 0&lt;/li>
+&lt;li>C. &lt;code>&amp;lt;nil&amp;gt;&lt;/code>&lt;/li>
+&lt;li>D: panic&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/NY8BWaciqad" target="_blank">Try it&lt;/a>
+&lt;code>C
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>context1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">data&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">json&lt;/span>.&lt;span style="color:#a6e22e">Marshal&lt;/span>(&lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">WithValue&lt;/span>(&lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">Background&lt;/span>(), &lt;span style="color:#e6db74">&amp;#34;a&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;b&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/CWdDXkvRExT" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">{"Context":{}}
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Defer</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/defer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/defer/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>defer&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">defer_call&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">defer_call&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() { &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>) }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() { &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span>) }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() { &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;3&amp;#34;&lt;/span>) }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#e6db74">&amp;#34;4&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/-bTDzXAjgYn" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">3
+2
+1
+panic: 4
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>defer1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Person&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">age&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>{&lt;span style="color:#ae81ff">28&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }(&lt;span style="color:#a6e22e">person&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span> = &lt;span style="color:#ae81ff">29&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/JChQfww_8GK" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">29
+29
+28
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>defer2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Person&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">age&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>{&lt;span style="color:#ae81ff">28&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">p&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }(&lt;span style="color:#a6e22e">person&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>{&lt;span style="color:#ae81ff">29&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/blqcBt9nVrk" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">29
+28
+28
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>defer3&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;3&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/zkp1U4vSmqO" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">2
+1
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>defer4&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">temp&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">temp&lt;/span>) &lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#a6e22e">elem&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">temp&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Print&lt;/span>(&lt;span style="color:#a6e22e">elem&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">temp&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tt&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">temp&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">tt&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>).&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tt&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>A. 132&lt;/li>
+&lt;li>B. 123&lt;/li>
+&lt;li>C. 312&lt;/li>
+&lt;li>D. 321&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/Y1rR4UK8AOh" target="_blank">Try it&lt;/a>
+&lt;code>A
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Goroutine</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/goroutine/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/goroutine/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>goroutine&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">ch1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch1&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Sleep&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 5&lt;/li>
+&lt;li>B. deadlock&lt;/li>
+&lt;li>C. compilation error&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/FsQsswPtOpp" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Interface</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/interface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/interface/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>interface&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">People&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Show&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Student&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">stu&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Student&lt;/span>) &lt;span style="color:#a6e22e">Show&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">live&lt;/span>() &lt;span style="color:#a6e22e">People&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">stu&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Student&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">stu&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">live&lt;/span>() &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;AAAAAAA&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;BBBBBBB&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/2nBU-dMwW6b" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">BBBBBBB
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>interface1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">People&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Speak&lt;/span>(&lt;span style="color:#66d9ef">string&lt;/span>) &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Student&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">stu&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Student&lt;/span>) &lt;span style="color:#a6e22e">Speak&lt;/span>(&lt;span style="color:#a6e22e">think&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) (&lt;span style="color:#a6e22e">talk&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">think&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;love&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">talk&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;You are a good boy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">talk&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;hi&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">peo&lt;/span> &lt;span style="color:#a6e22e">People&lt;/span> = &lt;span style="color:#a6e22e">Student&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">think&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;love&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">peo&lt;/span>.&lt;span style="color:#a6e22e">Speak&lt;/span>(&lt;span style="color:#a6e22e">think&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/7SFsQFsd2YJ" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">compilation error
+cannot use Student{} (value of type Student) as People value in variable declaration: Student does not implement People (method Speak has pointer receiver)
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>interface2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">T1&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">String&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">T1&lt;/span>) &lt;span style="color:#a6e22e">Error&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;T1.Error&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">T2&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Error&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">T2&lt;/span>) &lt;span style="color:#a6e22e">String&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;T2.String&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t1&lt;/span> = &lt;span style="color:#a6e22e">T1&lt;/span>{&lt;span style="color:#a6e22e">String&lt;/span>: &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;T1.String&amp;#34;&lt;/span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t2&lt;/span> = &lt;span style="color:#a6e22e">T2&lt;/span>{&lt;span style="color:#a6e22e">Error&lt;/span>: &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;T2.Error&amp;#34;&lt;/span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">t1&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>(), &lt;span style="color:#a6e22e">t1&lt;/span>.&lt;span style="color:#a6e22e">String&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">t2&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>(), &lt;span style="color:#a6e22e">t2&lt;/span>.&lt;span style="color:#a6e22e">String&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">t1&lt;/span>, &lt;span style="color:#a6e22e">t2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/IzeaCg4N47K" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">T1.Error T1.String
+T2.Error T2.String
+T1.Error T2.String
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>interface3&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">p&lt;/span> [&lt;span style="color:#ae81ff">100&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">m&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{} = [&lt;span style="color:#f92672">...&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>{&lt;span style="color:#ae81ff">99&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">m&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/k5eQBOljQLH" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">true
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Iota</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/iota/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/iota/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>iota&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">x&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">y&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">z&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;zz&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">k&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">p&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">x&lt;/span>, &lt;span style="color:#a6e22e">y&lt;/span>, &lt;span style="color:#a6e22e">z&lt;/span>, &lt;span style="color:#a6e22e">k&lt;/span>, &lt;span style="color:#a6e22e">p&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/ujsBSQPBkm8" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">0 2 zz zz 5
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>iota1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;name&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">d&lt;/span> = &lt;span style="color:#66d9ef">iota&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>, &lt;span style="color:#a6e22e">c&lt;/span>, &lt;span style="color:#a6e22e">d&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/9OvlzxqBZa5" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">0 1 1 2
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>JSON</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/json/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/json/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>json&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">AutoGenerated&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Age&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#e6db74">`json:&amp;#34;age&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Name&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#e6db74">`json:&amp;#34;name&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Child&lt;/span> []&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#e6db74">`json:&amp;#34;child&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">jsonStr1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">`{&amp;#34;age&amp;#34;: 14,&amp;#34;name&amp;#34;: &amp;#34;potter&amp;#34;, &amp;#34;child&amp;#34;:[1,2,3]}`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">AutoGenerated&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">json&lt;/span>.&lt;span style="color:#a6e22e">Unmarshal&lt;/span>([]byte(&lt;span style="color:#a6e22e">jsonStr1&lt;/span>), &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">a&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">aa&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span>.&lt;span style="color:#a6e22e">Child&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">aa&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">jsonStr2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">`{&amp;#34;age&amp;#34;: 12,&amp;#34;name&amp;#34;: &amp;#34;potter&amp;#34;, &amp;#34;child&amp;#34;:[3,4,5,7,8,9]}`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">json&lt;/span>.&lt;span style="color:#a6e22e">Unmarshal&lt;/span>([]byte(&lt;span style="color:#a6e22e">jsonStr2&lt;/span>), &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">a&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">aa&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. [1 2 3] [1 2 3]&lt;/li>
+&lt;li>B. [1 2 3] [3 4 5]&lt;/li>
+&lt;li>C. [1 2 3] [3 4 5 6 7 8 9]&lt;/li>
+&lt;li>D. [1 2 3] [3 4 5 0 0 0]&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/BRdAwDKfZt4" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>json1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">N&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Date&lt;/span>(&lt;span style="color:#ae81ff">2020&lt;/span>, &lt;span style="color:#ae81ff">12&lt;/span>, &lt;span style="color:#ae81ff">20&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">UTC&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">json&lt;/span>.&lt;span style="color:#a6e22e">Marshal&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%s&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">m&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. {&amp;ldquo;Time&amp;rdquo;:&amp;ldquo;2020-12-20T00:00:00Z&amp;rdquo;,&amp;ldquo;N&amp;rdquo;:5}&lt;/li>
+&lt;li>B. &amp;ldquo;2020-12-20T00:00:00Z&amp;rdquo;&lt;/li>
+&lt;li>C. {&amp;ldquo;N&amp;rdquo;:5}&lt;/li>
+&lt;li>D. &lt;code>&amp;lt;nil&amp;gt;&lt;/code>&lt;/li>
+&lt;li>E. 其他&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/ylPvSph0WKu" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Len</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/len/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/len/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>len&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span> [][&lt;span style="color:#ae81ff">32&lt;/span>]&lt;span style="color:#66d9ef">byte&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(len(&lt;span style="color:#a6e22e">x&lt;/span>.&lt;span style="color:#a6e22e">s&lt;/span>[&lt;span style="color:#ae81ff">99&lt;/span>]))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. panic&lt;/li>
+&lt;li>B. compilation error&lt;/li>
+&lt;li>C. 32&lt;/li>
+&lt;li>D. 0&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/5JSJUg9DlVm" target="_blank">Try it&lt;/a>
+&lt;code>C
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>len1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;Go101.org&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// len(s) == 9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 1 &amp;lt;&amp;lt; 9 == 512&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 512 / 128 == 4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> len(&lt;span style="color:#a6e22e">s&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">128&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> len(&lt;span style="color:#a6e22e">s&lt;/span>[:]) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">128&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A: 0 0&lt;/li>
+&lt;li>B: 0 4&lt;/li>
+&lt;li>C: 4 0&lt;/li>
+&lt;li>D: 4 4&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/TqAKcTqRFDo" target="_blank">Try it&lt;/a>
+&lt;code>C
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>len2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;Go101.org&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// len(s) == 9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 1 &amp;lt;&amp;lt; 9 == 512&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 512 / 128 == 4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> len(&lt;span style="color:#a6e22e">s&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">128&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">byte&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span> len(&lt;span style="color:#a6e22e">s&lt;/span>[:]) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">128&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A: 0 0&lt;/li>
+&lt;li>B: 0 4&lt;/li>
+&lt;li>C: 4 0&lt;/li>
+&lt;li>D: 4 4&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/BGB-z-cJhP2" target="_blank">Try it&lt;/a>
+&lt;code>A
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Map</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/map/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/map/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>map&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Student&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Name&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">list&lt;/span> &lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#66d9ef">string&lt;/span>]&lt;span style="color:#a6e22e">Student&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">list&lt;/span> = make(&lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#66d9ef">string&lt;/span>]&lt;span style="color:#a6e22e">Student&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">student&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">Student&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;Aceld&amp;#34;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">list&lt;/span>[&lt;span style="color:#e6db74">&amp;#34;student&amp;#34;&lt;/span>] = &lt;span style="color:#a6e22e">student&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">list&lt;/span>[&lt;span style="color:#e6db74">&amp;#34;student&amp;#34;&lt;/span>].&lt;span style="color:#a6e22e">Name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;LDB&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">list&lt;/span>[&lt;span style="color:#e6db74">&amp;#34;student&amp;#34;&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/gkPDhQyDAQW" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">compilation error
+cannot assign to struct field list["student"].Name in map
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>map1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#66d9ef">int&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">m&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">m&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>] = &lt;span style="color:#a6e22e">m&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">y&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">m&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#a6e22e">x&lt;/span>, &lt;span style="color:#a6e22e">y&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/OM5SjB_pob2" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">0 1
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Print</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/print/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/print/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>print&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">T&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#a6e22e">T&lt;/span>) &lt;span style="color:#a6e22e">String&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;boo&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">T&lt;/span>{&lt;span style="color:#ae81ff">123&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%v\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%#v\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">t&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/hwt8G32Bfy5" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">boo
+main.T{x:123}
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>print1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">...&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%#v\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">a&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">f&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/uCBzdeAxFE6" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">[]int(nil)
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Race</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/race/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/race/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>race&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Stats&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mutex&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">Mutex&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">counters&lt;/span> &lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#66d9ef">string&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Stats&lt;/span>) &lt;span style="color:#a6e22e">Snapshot&lt;/span>() &lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#66d9ef">string&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">mutex&lt;/span>.&lt;span style="color:#a6e22e">Lock&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">mutex&lt;/span>.&lt;span style="color:#a6e22e">Unlock&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">counters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">Stats&lt;/span>) &lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>, &lt;span style="color:#a6e22e">num&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">mutex&lt;/span>.&lt;span style="color:#a6e22e">Lock&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">mutex&lt;/span>.&lt;span style="color:#a6e22e">Unlock&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span>.&lt;span style="color:#a6e22e">counters&lt;/span>[&lt;span style="color:#a6e22e">name&lt;/span>] = &lt;span style="color:#a6e22e">num&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>
+&lt;code class="language-golang">func (s *Stats) Snapshot() map[string]int {
+s.mutex.Lock()
+defer s.mutex.Unlock()
+&lt;pre>&lt;code>result := make(map[string]int, len(s.counters))
+for k, v := range s.counters {
+result[k] = v
+}
+return result
+&lt;/code>&lt;/pre>
+&lt;p>}
+&lt;/code>&lt;/pre>&lt;/details>&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Select</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/select/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/select/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>select&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;sync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">wg&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">WaitGroup&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">foo&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">bar&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Done&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">select&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">case&lt;/span> &lt;span style="color:#a6e22e">foo&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">bar&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">default&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#e6db74">&amp;#34;default&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/kF4pOjYXbXf" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">fatal error: all goroutines are asleep - deadlock!
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>select1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make(&lt;span style="color:#66d9ef">chan&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch1&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">select&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">case&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">ch1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">case&lt;/span> &lt;span style="color:#a6e22e">ch2&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#f92672">&amp;lt;-&lt;/span>&lt;span style="color:#a6e22e">ch2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 1&lt;/li>
+&lt;li>B. 2&lt;/li>
+&lt;li>C. No output, program is deadlocked&lt;/li>
+&lt;li>D. No output, program has finished execution.&lt;/li>
+&lt;li>E. else&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/lPURBGXle_N" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Slice</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/slice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/slice/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>slice&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">s1&lt;/span> []&lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">s2&lt;/span> = []&lt;span style="color:#66d9ef">int&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">__&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;nil slice&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">__&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;empty slice&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. s1, s2&lt;/li>
+&lt;li>B. s2, s1&lt;/li>
+&lt;li>C. s1, s1&lt;/li>
+&lt;li>D. s2, s2&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/S_Q4w6NMAoU" target="_blank">Try it&lt;/a>
+&lt;code>A
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>slice1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> [&lt;span style="color:#ae81ff">3&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>{&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>[:&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>[:&lt;span style="color:#ae81ff">2&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>:&lt;span style="color:#ae81ff">2&lt;/span>:cap(&lt;span style="color:#a6e22e">s&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(len(&lt;span style="color:#a6e22e">a&lt;/span>), cap(&lt;span style="color:#a6e22e">a&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(len(&lt;span style="color:#a6e22e">b&lt;/span>), cap(&lt;span style="color:#a6e22e">b&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(len(&lt;span style="color:#a6e22e">c&lt;/span>), cap(&lt;span style="color:#a6e22e">c&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/hpZ3VyWv-Pz" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">0 3
+2 3
+1 2
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>slice2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> []&lt;span style="color:#66d9ef">int&lt;/span>{&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">s1&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>:]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s2&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>] = &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">s1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s2&lt;/span> = append(&lt;span style="color:#a6e22e">s2&lt;/span>, &lt;span style="color:#ae81ff">5&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>, &lt;span style="color:#ae81ff">7&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">s1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/H-1Jf-LwUg4" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">[1 2 4]
+[1 2 4]
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Variable</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/variable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/variable/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>A. p.name&lt;/li>
+&lt;li>B. (&amp;amp;p).name&lt;/li>
+&lt;li>C. (*p).name&lt;/li>
+&lt;li>D. p-&amp;gt;name&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>
+&lt;code>AC
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">ans&lt;/span> &lt;span style="color:#66d9ef">float64&lt;/span> = &lt;span style="color:#ae81ff">15&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">25&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">5.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">ans&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 45&lt;/li>
+&lt;li>B. 45.0&lt;/li>
+&lt;li>C. 45.2&lt;/li>
+&lt;li>D. compliation error&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/VCR1yAY32nG" target="_blank">Try it&lt;/a>
+&lt;code>C
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">ans&lt;/span> &lt;span style="color:#66d9ef">float64&lt;/span> = &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">ans&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 1.5&lt;/li>
+&lt;li>B. 1&lt;/li>
+&lt;li>C. 0&lt;/li>
+&lt;li>D. compliation error&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/SXwEiV0FUWJ" target="_blank">Try it&lt;/a>
+&lt;code>B
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable3&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#66d9ef">int8&lt;/span> = &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">int8&lt;/span> = &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">128&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/Th1vvvhoDjR" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">compliation error
+-128 / a (constant 128 of type int8) overflows int8
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable4&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#66d9ef">int8&lt;/span> = &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">int8&lt;/span> = &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">128&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println(&lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/Z8N_FB4szWY" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">-128
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable5&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">MyInt1&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">MyInt2&lt;/span> = &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> =&lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">i1&lt;/span> &lt;span style="color:#a6e22e">MyInt1&lt;/span> = &lt;span style="color:#a6e22e">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">i2&lt;/span> &lt;span style="color:#a6e22e">MyInt2&lt;/span> = &lt;span style="color:#a6e22e">i&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">i1&lt;/span>, &lt;span style="color:#a6e22e">i2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/Q25PLVaAOfd" target="_blank">Try it&lt;/a>
+&lt;code class="language-shell">compilation error
+cannot use i (variable of type int) as MyInt1 value in variable declaration
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>variable6&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">X&lt;/span> = &lt;span style="color:#ae81ff">7.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{} = &lt;span style="color:#a6e22e">X&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">y&lt;/span>, &lt;span style="color:#a6e22e">ok&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span>.(&lt;span style="color:#66d9ef">int&lt;/span>); &lt;span style="color:#a6e22e">ok&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">y&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(int(&lt;span style="color:#a6e22e">y&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>A. 7&lt;/li>
+&lt;li>B. 7.0&lt;/li>
+&lt;li>C. 0&lt;/li>
+&lt;li>D. compilation error&lt;/li>
+&lt;/ul>
+&lt;details>
+&lt;summary>Answer&lt;/summary>
+&lt;pre>&lt;a href="https://go.dev/play/p/lKmlfL6X6Qu" target="_blank">Try it&lt;/a>
+&lt;code>C
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

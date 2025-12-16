@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CI on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/ci/</link><description>Recent content in CI on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Fri, 24 Sep 2021 11:11:03 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/ci/index.xml" rel="self" type="application/rss+xml"/><item><title>Gitlab-CI Introduction</title><link>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</link><pubDate>Fri, 24 Sep 2021 11:11:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</guid><description>&lt;h1 id="gitlab-ci">Gitlab CI&lt;/h1>
+&lt;h2 id="concept">Concept&lt;/h2>
+&lt;h3 id="gitlab">Gitlab&lt;/h3>
+&lt;ul>
+&lt;li>DevOps&lt;/li>
+&lt;li>GitOps&lt;/li>
+&lt;/ul>
+&lt;h3 id="workflow">Workflow&lt;/h3>
+&lt;pre tabindex="0">&lt;code>code push -&amp;gt; pipeline -&amp;gt; stage -&amp;gt; job
+&lt;/code>&lt;/pre>&lt;h3 id="design">Design&lt;/h3>
+&lt;pre tabindex="0">&lt;code>plan -&amp;gt; code -&amp;gt; build -&amp;gt; test -&amp;gt; release -&amp;gt; deploy -&amp;gt; operate -&amp;gt; monitor -&amp;gt; plan
+&lt;/code>&lt;/pre>&lt;h3 id="runner-executors">Runner Executors&lt;/h3>
+&lt;ul>
+&lt;li>Shell&lt;/li>
+&lt;li>VirtualBox&lt;/li>
+&lt;li>Docker&lt;/li>
+&lt;li>Docker Machine&lt;/li>
+&lt;li>Kubernetes&lt;/li>
+&lt;li>Else&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;h3 id="references">References&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.gitlab.com/ee/ci/" target="_blank" rel="noopener">Gitlab CI/CD&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.gitlab.com/runner/" target="_blank" rel="noopener">Gitlab Runner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.gitlab.com/ee/ci/yaml/" target="_blank" rel="noopener">.gitlab-ci.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="runner">Runner&lt;/h2>
+&lt;h3 id="register">Register&lt;/h3>
+&lt;p>&lt;code>gitlab-runner register&lt;/code>&lt;/p>
+&lt;h3 id="after-register">After register&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">concurrent&lt;/span> = &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">check_interval&lt;/span> = &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">session_server&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">session_timeout&lt;/span> = &lt;span style="color:#ae81ff">1800&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[[&lt;span style="color:#a6e22e">runners&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;public-shell&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;https://gitlab.go2cloudten.com/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">token&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;-mdH9OAOzG5yPsf_AVnW&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">executor&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;shell&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[[&lt;span style="color:#a6e22e">runners&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">name&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;public-docker&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">url&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;https://gitlab.go2cloudten.com/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">token&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;AcEGPPKTS1uuQ_A_qpWy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">executor&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;docker&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#a6e22e">runners&lt;/span>.&lt;span style="color:#a6e22e">docker&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">dns&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;192.168.185.5&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;192.168.185.6&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tls_verify&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">image&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;registry.go2cloudten.com/it/office_sop/node:12.13.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">privileged&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disable_entrypoint_overwrite&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">oom_kill_disable&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">disable_cache&lt;/span> = &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">shm_size&lt;/span> = &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pull_policy&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;if-not-present&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">volumes&lt;/span> = [&lt;span style="color:#e6db74">&amp;#34;/cache&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="repository">Repository&lt;/h2>
+&lt;h3 id="gitlab-ciyaml">.gitlab-ci.yaml&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">stages&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domain&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">check-icp&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">stage&lt;/span>: &lt;span style="color:#ae81ff">domain&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">registry.go2cloudten.com/it/office_sop/icp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tags&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">script&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domains=$(awk -F &amp;#39;|&amp;#39; &amp;#39;{if($6 ~ &amp;#34;Y&amp;#34; &amp;amp;&amp;amp; ($7 ~ &amp;#34;West&amp;#34; || $7 ~ &amp;#34;Yuqu&amp;#34;)) print $3}&amp;#39; domains-info.md | sed &amp;#39;s/ //g&amp;#39; | sort | uniq)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">if [[ &amp;#34;${domains}&amp;#34; == &amp;#34;&amp;#34; ]]; then telegram.sh &amp;#39;There is no domain in list&amp;#39; ; else telegram.sh &amp;#39;Start checking ICP.&amp;#39; ; fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">for i in ${domains}; do result=$(checkicp ${i}); if [[ &amp;#34;${result}&amp;#34; == &amp;#34;未备案&amp;#34; ]];then telegram.sh &amp;#34;${i} 未备案&amp;#34;; sleep 1 ;fi;done&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">telegram.sh &amp;#39;ICP check completed.&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">only&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">schedules&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

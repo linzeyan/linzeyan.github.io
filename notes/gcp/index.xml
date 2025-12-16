@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GCP Notes on Ricky</title><link>https://linzeyan.github.io/notes/gcp/</link><description>Recent content in GCP Notes on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://linzeyan.github.io/notes/gcp/index.xml" rel="self" type="application/rss+xml"/><item><title>GCP Command</title><link>https://linzeyan.github.io/notes/gcp/command/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/gcp/command/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>monitoring&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gcloud alpha monitoring policies list --project&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;project-prod-a&amp;#34;&lt;/span> &amp;gt;project-prod-a.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># update&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gcloud alpha monitoring policies update --policy-from-file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;project-prod-a.yaml&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;project-prod-a&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>cloud storage&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create bucket&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil mb -c standard -l asia-east2 gs://prod-a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil iam ch allUsers:objectViewer gs://prod-a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Upload files&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil -m rsync -x &lt;span style="color:#e6db74">&amp;#34;.svn/&amp;#34;&lt;/span> -u -d -r srcDir gs://prod-a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil -m cp downloads/*.csv gs://prod-a/data/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create CORS file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#e6db74">&amp;lt;&amp;lt; EOF &amp;gt; /data/cors.json
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">[
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;origin&amp;#34;: [&amp;#34;*&amp;#34;],
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;responseHeader&amp;#34;: [&amp;#34;Access-Control-Allow-Origin&amp;#34;],
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;method&amp;#34;: [&amp;#34;GET&amp;#34;,&amp;#34;HEAD&amp;#34;,&amp;#34;DELETE&amp;#34;],
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;maxAgeSeconds&amp;#34;: 3600
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set CORS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil cors set /data/cors.json gs://prod-a/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Check CORS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gsutil cors get gs://prod-a/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Purge CDN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gcloud compute url-maps invalidate-cdn-cache balancer-client-prod-a --host &lt;span style="color:#e6db74">${}&lt;/span> --path &lt;span style="color:#e6db74">&amp;#34;/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

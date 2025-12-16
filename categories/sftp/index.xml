@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SFTP on Ricky</title><link>https://linzeyan.github.io/categories/sftp/</link><description>Recent content in SFTP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 30 Nov 2023 17:22:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/sftp/index.xml" rel="self" type="application/rss+xml"/><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/posts/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory">Add SFTP user and share directory&lt;/h1>
+&lt;p>dev_test_user, qa_test_user 同權限
+dev_user, qa_user 同權限&lt;/p>
+&lt;h2 id="1-建立共享資料夾sftp-使用的資料夾">1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/&lt;span style="color:#f92672">{&lt;/span>exchange,upload&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/exchange/success
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/upload/backup
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-建立使用者群組">2. 建立使用者群組&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo groupadd share01-test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo groupadd share01-prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test">3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-test qa_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_test_user 使用者的群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-test dev_test_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_test_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod">4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-prod qa_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_user 使用者的群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-prod dev_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_user
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-設定權限">5. 設定權限&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_test_user:share01-test test/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_user:share01-prod prod/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># SFTP 登入資料夾權限要給 root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/prod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-設定-etcsshsshd_config">6. 設定 /etc/ssh/sshd_config&lt;/h2>
+&lt;p>&lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NGINX on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/nginx/</link><description>Recent content in NGINX on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 20 Oct 2025 16:31:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</guid><description>&lt;p>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/p>
+&lt;h2 id="ngx_http_acme_module">&lt;code>ngx_http_acme_module&lt;/code>&lt;/h2>
+&lt;ul>
+&lt;li>NGINX 1.25.1&lt;/li>
+&lt;/ul>
+&lt;h2 id="pre-install">pre-install&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 Debian/Ubuntu 系统上安装基础编译工具和 NGINX 依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install build-essential libpcre3-dev zlib1g-dev libssl-dev pkg-config libclang-dev git -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装 Rust 工具链 (cargo 和 rustc)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --proto &lt;span style="color:#e6db74">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source $HOME/.cargo/env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -pv /app/nginx/&lt;span style="color:#f92672">{&lt;/span>logs,conf,cache, acme&lt;span style="color:#f92672">}&lt;/span> /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 克隆 ACME 模块的源码&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/nginx/nginx-acme.git /app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 或者&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># git clone git@github.com:nginx/nginx-acme.git /app/nginx-build/nginx-acme&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 下载 NGINX 源码（请替换为您需要的版本）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://nginx.org/download/nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxf nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="compile">compile&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd nginx-1.28.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prefix&lt;span style="color:#f92672">=&lt;/span>/app/nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --error-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/error.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/access.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --pid-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.pid &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --lock-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.lock &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-client-body-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/client_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-proxy-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/proxy_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-fastcgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/fastcgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-uwsgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/uwsgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-scgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/scgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --user&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --group&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-compat &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-file-aio &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-threads &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_addition_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_auth_request_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_dav_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_flv_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gunzip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gzip_static_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_mp4_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_random_index_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_secure_link_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_slice_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_stub_status_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_sub_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v2_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v3_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_preread_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-cc-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-g -O2 -ffile-prefix-map=/home/builder/debuild/nginx-1.28.0/debian/debuild-base/nginx-1.28.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-ld-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>/app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make modules &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make install
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 运行配置脚本，这里的关键是 --add-dynamic-module&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注意：您需要在这里包含您当前 NGINX 已有的所有编译参数，可以通过 nginx -V 查看&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译模块，注意是 make modules 而不是 make install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="config">config&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /app/nginx/conf/nginx.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">user&lt;/span> &lt;span style="color:#e6db74">nginx&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">error.log&lt;/span> &lt;span style="color:#e6db74">debug&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pid&lt;/span> &lt;span style="color:#e6db74">nginx.pid&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_http_acme_module.so&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">events&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">worker_connections&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">multi_accept&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">mime.types&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/octet-stream&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_local] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$host&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">access.log&lt;/span> &lt;span style="color:#e6db74">main&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">sendfile&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tcp_nopush&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">charset&lt;/span> &lt;span style="color:#e6db74">utf-8&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keepalive_timeout&lt;/span> &lt;span style="color:#ae81ff">65&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gzip&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resolver&lt;/span> 8.8.8.8 1.1.1.1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 定义一个名为 letsencrypt 的 ACME 颁发机构实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_issuer&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定 ACME 服务提供商的目录 URL，这里是 Let&amp;#39;s Encrypt 的生产环境
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">uri&lt;/span> &lt;span style="color:#e6db74">https://acme-v02.api.letsencrypt.org/directory&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 提供一个联系邮箱，用于接收 CA 的重要通知（如证书即将过期）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">contact&lt;/span> &lt;span style="color:#e6db74">mailto:security-alerts@aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定状态文件的存储路径，用于保存 ACME 账户密钥，非常重要
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">state_path&lt;/span> &lt;span style="color:#e6db74">acme/letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 同意服务条款，对于 Let&amp;#39;s Encrypt 等 CA 这是必需的步骤
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">accept_terms_of_service&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 可选指令 acme_shared_zone，用于存储所有配置的证书颁发者的证书、私钥和挑战数据。该区域默认大小为 256K，可根据需要增加
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_shared_zone&lt;/span> &lt;span style="color:#e6db74">zone=acme_shared:1M&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">ssl.aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤一：声明此 server 块启用 ACME，并指定使用上面定义的 letsencrypt 颁发机构
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_certificate&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤二：使用动态变量加载由 ACME 模块在内存中管理的证书和私钥
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> $acme_certificate;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> $acme_certificate_key;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_cache&lt;/span> &lt;span style="color:#e6db74">max=2&lt;/span>; &lt;span style="color:#75715e"># required ngx 1.27.4+
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">text/plain&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span> &lt;span style="color:#e6db74">&amp;#39;OK&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ACME 模块会自动处理 /.well-known/acme-challenge/ 的请求，此 location 用于处理所有其他请求
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">301&lt;/span> &lt;span style="color:#e6db74">https://&lt;/span>$host$request_uri;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服务被通报的概率</title><link>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</guid><description>&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服务被通报的概率&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用error_page指令为497状态码设置虚拟路径@close，Nginx在处理的@close时发现是返回444状态码，于是直接关闭连接。&lt;/p>
+&lt;p>这个时候你再用 curl 访问对应的端口就会收到如下报错：&lt;/p>
+&lt;p>curl &lt;a href="http://example.zz.ac:5678" target="_blank" rel="noopener">http://example.zz.ac:5678&lt;/a>
+curl: (52) Empty reply from server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">example.zz.ac&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">...&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">..&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">...&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">..&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211119-nginx/</guid><description>&lt;h1 id="紀錄-nginx-設定檔及說明">紀錄 Nginx 設定檔及說明&lt;/h1>
+&lt;h2 id="檔案結構">檔案結構&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── geoip.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── nginx.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── sites-available
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── default.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── sites-enabled
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ ├── default.conf -&amp;gt; ../sites-available/default.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── upstream.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="geoipconf">geoip.conf&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_http_geoip2_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## https://github.com/leev/ngx_http_geoip2_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 讀取 GeoIP 資料庫，並進行變數設定
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">geoip2&lt;/span> &lt;span style="color:#e6db74">/usr/share/GeoIP/GeoLite2-Country.mmdb&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auto_reload&lt;/span> &lt;span style="color:#ae81ff">60m&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">$geoip2_metadata_country_build&lt;/span> &lt;span style="color:#e6db74">metadata&lt;/span> &lt;span style="color:#e6db74">build_epoch&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 自定義 $geoip2_data_country_code 值為 $remote_addr 對應的 ISO 3116 規範的國碼
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">$geoip2_data_country_code&lt;/span> &lt;span style="color:#e6db74">source=&lt;/span>$remote_addr &lt;span style="color:#e6db74">country&lt;/span> &lt;span style="color:#e6db74">iso_code&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 自定義 $geoip2_data_country_name 值為對應的英文城市名
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">$geoip2_data_country_name&lt;/span> &lt;span style="color:#e6db74">country&lt;/span> &lt;span style="color:#e6db74">names&lt;/span> &lt;span style="color:#e6db74">en&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="upstreamconf">upstream.conf&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_http_upstream_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 定義 server 組別
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">upstream&lt;/span> &lt;span style="color:#e6db74">to_nodejs1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## server address [parameters]; 定義 server
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## parameters:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## weight=number 定義權重，預設為 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## max_fails=number 設定到 upstream server 的最大重試次數，預設為 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## fail_timeout=time 設定到達 max_fails 次數之後，暫停向此 upstream server 傳送請求的時間，預設為 10 秒
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## backup 標記此 upstream server 為備用，當其他 upstream server 不可用時，此 upstream server 可接受請求
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## down 標記此 upstream server 為不可用
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">server&lt;/span> 10.7.0.12:&lt;span style="color:#ae81ff">90&lt;/span> &lt;span style="color:#e6db74">max_fails=3&lt;/span> &lt;span style="color:#e6db74">fail_timeout=5s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> 10.7.0.12:&lt;span style="color:#ae81ff">91&lt;/span> &lt;span style="color:#e6db74">max_fails=3&lt;/span> &lt;span style="color:#e6db74">fail_timeout=5s&lt;/span> &lt;span style="color:#e6db74">backup&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">upstream&lt;/span> &lt;span style="color:#e6db74">to_nodejs2&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> 10.7.0.12:&lt;span style="color:#ae81ff">92&lt;/span> &lt;span style="color:#e6db74">max_fails=3&lt;/span> &lt;span style="color:#e6db74">fail_timeout=5s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> 10.7.0.12:&lt;span style="color:#ae81ff">93&lt;/span> &lt;span style="color:#e6db74">max_fails=3&lt;/span> &lt;span style="color:#e6db74">fail_timeout=5s&lt;/span> &lt;span style="color:#e6db74">backup&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">upstream&lt;/span> &lt;span style="color:#e6db74">to_nodejs95&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> 10.7.0.12:&lt;span style="color:#ae81ff">95&lt;/span> &lt;span style="color:#e6db74">max_fails=3&lt;/span> &lt;span style="color:#e6db74">fail_timeout=5s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_http_map_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## map string $variable { ... } 建立一個新的變數
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">map&lt;/span> $arg_agent $game_api {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## $arg_agent 請求中 agent 的值(https://abc.com/?agent=123)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## agent=60037, $game_api 的值為 to_nodejs95
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">60037&lt;/span> &lt;span style="color:#e6db74">to_nodejs95&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## agent 結尾是 1, 2, 3, 或是 4, $game_api 的值為 to_nodejs1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">~*1$&lt;/span> &lt;span style="color:#e6db74">to_nodejs1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">~*2$&lt;/span> &lt;span style="color:#e6db74">to_nodejs1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">~*3$&lt;/span> &lt;span style="color:#e6db74">to_nodejs1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">~*4$&lt;/span> &lt;span style="color:#e6db74">to_nodejs1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 若 agent 不符合上開規則，預設 $game_api 的值為 to_nodejs2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#e6db74">to_nodejs2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="defaultconf">default.conf&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_http_limit_req_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 限制請求處理
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## limit_req_zone key zone=name:size rate=rate [sync]; 定義限制請求的規則
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">limit_req_zone&lt;/span> $binary_remote_addr$server_name &lt;span style="color:#e6db74">zone=websocket:10m&lt;/span> &lt;span style="color:#e6db74">rate=1r/m&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## limit_req_status code; 設定被拒絕連線的 HTTP 狀態碼，預設為 503
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">limit_req_status&lt;/span> &lt;span style="color:#ae81ff">502&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 設定虛擬主機
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## listen port [default_server] [ssl] [http2 | spdy] [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number] [rcvbuf=size] [sndbuf=size] [accept_filter=filter] [deferred] [bind] [ipv6only=on|off] [reuseport] [so_keepalive=on|off|[keepidle]:[keepintvl]:[keepcnt]];
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 設定監聽的埠口，預設為 *:80
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 下方設定為監聽 80 port，且為預設的虛擬主機
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## server_name name ...; 設定虛擬主機名，可使用正則表示式，預設為 &amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">logs/default/default.log&lt;/span> &lt;span style="color:#e6db74">json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_log&lt;/span> &lt;span style="color:#e6db74">logs/default/default.error.log&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_access_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## allow address | CIDR | unix: | all; 允許 IP 訪問
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">allow&lt;/span> 1.1.1.1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## deny address | CIDR | unix: | all; 禁止 IP 訪問
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">deny&lt;/span> 12.34.56.78;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定請求訪問的根資料夾
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/usr/share/nginx/html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## limit_req zone=name [burst=number] [nodelay | delay=number]; 設定限制請求的規則 zone
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">limit_req&lt;/span> &lt;span style="color:#e6db74">zone=websocket&lt;/span> &lt;span style="color:#e6db74">nodelay&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## limit_req_log_level info | notice | warn | error; 設定被拒絕連線的請求日誌等級，預設為 error
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">limit_req_log_level&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## location [ = | ~ | ~* | ^~ ] uri { ... }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## location @name { ... } 依據請求的 URI 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 返回 HTTP 狀態碼 200，並包含字串
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>{&lt;span style="color:#f92672">&amp;#34;Code&amp;#34;:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$status&amp;#34;, &lt;span style="color:#e6db74">&amp;#34;IP&amp;#34;:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$remote_addr&amp;#34;}&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 下方設定為監聽 443 port，且為預設的虛擬主機，所有連線都使用 SSL
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">logs/default/default.log&lt;/span> &lt;span style="color:#e6db74">json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_log&lt;/span> &lt;span style="color:#e6db74">logs/default/default.error.log&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_ssl_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 設定 PEM 格式的證書
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">/etc/ssl/hddv1.com.crt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定 PEM 格式的密鑰
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">/etc/ssl/hddv1.com.key&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定 SSL 版本，預設為 TLSv1 TLSv1.1 TLSv1.2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_protocols&lt;/span> &lt;span style="color:#e6db74">TLSv1.2&lt;/span> &lt;span style="color:#e6db74">TLSv1.3&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定啟用的加密方法，預設為 HIGH:!aNULL:!MD5
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_ciphers&lt;/span> &lt;span style="color:#e6db74">&amp;#34;EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:HIGH:!RC2:!RC4:!aNULL:!eNULL:!LOW:!IDEA:!DES:!TDES:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!EXPORT:!ANON&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 為 DHE 加密法指定帶有 DH 參數的文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_dhparam&lt;/span> &lt;span style="color:#e6db74">/etc/ssl/dhparams.pem&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 是否優先使用 server 的加密法，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_prefer_server_ciphers&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## ssl_session_cache off | none | [builtin[:size]] [shared:name:size];
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 設定緩存及大小，預設為 none
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_session_cache&lt;/span> &lt;span style="color:#e6db74">shared:SSL:1m&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定 session 可重複使用的時間，預設為 5 分鐘
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_session_timeout&lt;/span> &lt;span style="color:#ae81ff">5m&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">X-Frame-Options&lt;/span> &lt;span style="color:#e6db74">&amp;#34;SAMEORIGIN&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">X-XSS-Protection&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1&lt;/span>; &lt;span style="color:#f92672">mode=block&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">Strict-Transport-Security&lt;/span> &lt;span style="color:#e6db74">&amp;#34;max-age=31536000&lt;/span>; &lt;span style="color:#f92672">includeSubdomains&lt;/span>; &lt;span style="color:#f92672">preload&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/usr/share/nginx/html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_req&lt;/span> &lt;span style="color:#e6db74">zone=websocket&lt;/span> &lt;span style="color:#e6db74">nodelay&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_req_log_level&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>{&lt;span style="color:#f92672">&amp;#34;Code&amp;#34;:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$status&amp;#34;, &lt;span style="color:#e6db74">&amp;#34;IP&amp;#34;:&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$remote_addr&amp;#34;}&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="nginxconf">nginx.conf&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_core_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## worker_processes number | auto; 啟動 Nginx worker 程序數量, 設定 auto 即和 CPU 的數量相等
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_processes&lt;/span> &lt;span style="color:#e6db74">auto&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## worker_rlimit_nofile number; Nginx worker 程序最大打開文件數，預設為系統 RLIMIT_NOFILE
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_rlimit_nofile&lt;/span> &lt;span style="color:#ae81ff">131072&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## worker_shutdown_timeout time; 設定關閉超時時間，當執行 reload 或是其他相關指令，超過 time 時間之後，Nginx 會主動關閉所有受影響的 worker
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_shutdown_timeout&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## error_log file [level]; 設定錯誤日誌寫入位置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## debug, info, notice, warn, error, crit, alert, emerg
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">logs/error.log&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## pid file; 主程序 ID 文件位置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pid&lt;/span> &lt;span style="color:#e6db74">logs/nginx.pid&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_core_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 設定連線處理相關
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">events&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## worker_connections number; 單個 Nginx worker 程序的最大並發連接數，預設為 512，需要小於 worker_rlimit_nofile
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 最大連接數 = worker_connections * worker_processes
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">worker_connections&lt;/span> &lt;span style="color:#ae81ff">102400&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## accept_mutex on | off; 預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 只有一個新連線進入，如果設定為 on，只有一個 worker 會接受連線，其餘持續休眠
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 如果設定為 off，所有 worker 會被喚醒，只有一個 worker 會接受連線，其餘重新休眠
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 業務上使用 TCP 長連線、流量大，off 的效能以及 QPS 表現較佳
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">accept_mutex&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## multi_accept on | off; 是否同時接受所有的請求，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">multi_accept&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## module: ngx_http_core_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 設定 HTTP server 相關
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_core_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## include file | mask; 使用文件中的設定
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 下方為設定 MIME 類型,類型由 mime.type 文件定義
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">mime.types&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## default_type mime-type; 定義默認 MIME 類型，預設為 text/plain
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/octet-stream&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## server_names_hash_max_size size; 設定 server_name 的 hash 表最大值，預設為 512 kb
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">server_names_hash_max_size&lt;/span> &lt;span style="color:#ae81ff">2048&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定 server_name 的 hash 表的大小，用於快速找到對應的 server_name，預設值取決於 CPU 的 L1 cache
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">server_names_hash_bucket_size&lt;/span> &lt;span style="color:#ae81ff">256&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## server_tokens on | off | build | string; 是否在 Nginx 錯誤頁面顯示 Nginx 版本，預設為 on
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">server_tokens&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 是否在錯誤日誌記錄 404
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">log_not_found&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 是否啟用 sendfile() 提高文件傳輸效率，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">sendfile&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 文件是否使用完整封包發送，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">tcp_nopush&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 數據是否儘快傳送，預設為 on
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">tcp_nodelay&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定長連線持續秒數，超過時間 Nginx 會主動關閉連線，預設為 75
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">keepalive_timeout&lt;/span> &lt;span style="color:#ae81ff">70&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## client_max_body_size size; 設定請求允許最大的 body 大小
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">client_max_body_size&lt;/span> &lt;span style="color:#e6db74">64M&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_gzip_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 是否啟用 gzip 壓縮，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定要壓縮的 Content-Length 最小值，預設為 20
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_min_length&lt;/span> &lt;span style="color:#ae81ff">1k&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定壓縮緩衝大小，預設為一頁記憶體
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## gzip_buffers number size;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_buffers&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">32k&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定壓縮等級，範圍 1 ~ 9，預設為 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_comp_level&lt;/span> &lt;span style="color:#ae81ff">7&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 設定要壓縮的 MIME 類型，預設為 text/html
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_types&lt;/span> &lt;span style="color:#e6db74">text/plain&lt;/span> &lt;span style="color:#e6db74">application/x-javascript&lt;/span> &lt;span style="color:#e6db74">text/css&lt;/span> &lt;span style="color:#e6db74">application/xml&lt;/span> &lt;span style="color:#e6db74">text/javascript&lt;/span> &lt;span style="color:#e6db74">application/x-httpd-php&lt;/span> &lt;span style="color:#e6db74">application/json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 是否在 HTTP response header 增加 Vary: Accept-Encoding，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_vary&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 針對特定 User-Agent 禁用壓縮
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 下方為設定禁用 IE 6
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">gzip_disable&lt;/span> &lt;span style="color:#e6db74">&amp;#34;MSIE&lt;/span> &lt;span style="color:#e6db74">[1-6]\.&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## resolver address ... [valid=time] [ipv6=on|off] [status_zone=zone]; 使用指定的 NS 解析 server_name, upstream server 等
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">resolver&lt;/span> 114.114.114.114 8.8.8.8 1.1.1.1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_headers_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## add_header name value [always]; 在 HTTP response header 增加欄位
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## 下方為設定允許跨域
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">Access-Control-Allow-Origin&lt;/span> &lt;span style="color:#e6db74">*&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">Access-Control-Allow-Headers&lt;/span> &lt;span style="color:#e6db74">DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">Access-Control-Allow-Methods&lt;/span> &lt;span style="color:#e6db74">GET,POST,OPTIONS&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">Access-Control-Expose-Headers&lt;/span> &lt;span style="color:#e6db74">&amp;#39;WWW-Authenticate,Server-Authorization,User-Identity-Token&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_realip_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## set_real_ip_from address | CIDR | unix:; 設定信任的可被替代的伺服器 IP，如反向代理伺服器
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">set_real_ip_from&lt;/span> 10.0.0.0&lt;span style="color:#e6db74">/8&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">set_real_ip_from&lt;/span> 172.16.0.0&lt;span style="color:#e6db74">/12&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">set_real_ip_from&lt;/span> 192.168.0.0&lt;span style="color:#e6db74">/16&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## real_ip_header field | X-Real-IP | X-Forwarded-For | proxy_protocol; 定義使用哪個標頭取代獲取到的 client IP，預設為 X-Real-IP
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">real_ip_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## 將 real_ip_header 設定的標頭中，「最後一個非信任伺服器 IP」或是「最後一個 IP」當成真實 IP，預設為 off
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">real_ip_recursive&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## module: ngx_http_log_module
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## log_format name [escape=default|json|none] string ...; 設定日誌格式
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">log_format&lt;/span> &lt;span style="color:#e6db74">json&lt;/span> &lt;span style="color:#e6db74">escape=json&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>{&lt;span style="color:#f92672">&amp;#34;@timestamp&amp;#34;:&amp;#34;$time_iso8601&amp;#34;,&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;@source&amp;#34;:&amp;#34;&lt;/span>$server_addr&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;ip&amp;#34;:&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;client&amp;#34;:&amp;#34;&lt;/span>$remote_addr&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;request_method&amp;#34;:&amp;#34;&lt;/span>$request_method&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;scheme&amp;#34;:&amp;#34;&lt;/span>$scheme&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;domain&amp;#34;:&amp;#34;&lt;/span>$server_name&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;client_host&amp;#34;:&amp;#34;&lt;/span>$host&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;referer&amp;#34;:&amp;#34;&lt;/span>$http_referer&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;request&amp;#34;:&amp;#34;&lt;/span>$request_uri&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;args&amp;#34;:&amp;#34;&lt;/span>$args&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;sent_bytes&amp;#34;:&lt;/span>$body_bytes_sent,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;status&amp;#34;:&lt;/span>$status,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;responsetime&amp;#34;:&lt;/span>$request_time,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;upstreamtime&amp;#34;:&amp;#34;&lt;/span>$upstream_response_time&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;upstreamaddr&amp;#34;:&amp;#34;&lt;/span>$upstream_addr&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;http_user_agent&amp;#34;:&amp;#34;&lt;/span>$http_user_agent&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;Country&amp;#34;:&amp;#34;&lt;/span>$geoip2_data_country_name&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;State&amp;#34;:&amp;#34;&lt;/span>$geoip2_data_state_name&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;City&amp;#34;:&amp;#34;&lt;/span>$geoip2_data_city_name&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;all_agent&amp;#34;:&amp;#34;&lt;/span>$arg_agent&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;dfw_agent&amp;#34;:&amp;#34;&lt;/span>$arg_proxy&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;nw2_agent&amp;#34;:&amp;#34;&lt;/span>$arg_channel&amp;#34;,&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;https&amp;#34;:&amp;#34;&lt;/span>$https&amp;#34;&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_local] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">## access_log path [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]]; 設定日誌寫入位置以及使用的日誌名稱
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## access_log off; 不紀錄日誌
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">logs/access.log&lt;/span> &lt;span style="color:#e6db74">json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

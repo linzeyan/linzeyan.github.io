@@ -1,0 +1,655 @@
+<!doctype html><html lang=zh-tw><head><title>Docs</title><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel=stylesheet href=/application.780dc7a6fc8e42bf9fef490724bc6cbc57e759a0db2df60fcd517f9f667085ed.css integrity="sha256-eA3HpvyOQr+f70kHJLxsvFfnWaDbLfYPzVF/n2Zwhe0="><link rel=icon type=image/png href=/images/site/highlight.svg><link rel=alternate type=application/rss+xml href=https://linzeyan.github.io/zh-tw/notes/docs/index.xml title=Ricky><meta property="og:title" content="Ricky"><meta property="og:type" content="website"><meta property="og:description" content="Ricky 的網頁"><meta property="og:image" content="/images/author/ava.jpg"><meta property="og:url" content="https://linzeyan.github.io/"><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "27a0cd9f0e3b46909879cf99f7cc6878"}'></script><script integrity="sha256-DO4ugzEwhTW1Id1UIWn0gUJWaebCYOypeTit6LW4QB4=">let theme=localStorage.getItem("theme-scheme")||localStorage.getItem("darkmode:color-scheme")||"light";theme==="system"&&(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?theme="dark":theme="light"),document.documentElement.setAttribute("data-theme",theme)</script></head><body class="type-notes kind-section" data-bs-spy=scroll data-bs-target=#TableOfContents data-bs-offset=80><div class="container-fluid bg-secondary wrapper"><nav class="navbar navbar-expand-xl top-navbar shadow" id=top-navbar><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<i data-feather=sidebar></i>
+</button>
+<a class=navbar-brand href=/zh-tw><img src=/images/site/highlight.svg id=logo alt=Logo>
+Ricky</a>
+<button class="navbar-toggler navbar-light" id=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#top-nav-items aria-label=menu>
+<i data-feather=menu></i></button><div class="collapse navbar-collapse dynamic-navbar" id=top-nav-items><ul class="nav navbar-nav ms-auto"><li class=nav-item><a class=nav-link href=/zh-tw#home>首頁</a></li><li class=nav-item><a class=nav-link href=/zh-tw#about>關於</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false>更多的</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a class=dropdown-item href=/zh-tw#skills>技能</a>
+<a class=dropdown-item href=/zh-tw#experiences>經歷</a>
+<a class=dropdown-item href=/zh-tw#education>學歷</a>
+<a class=dropdown-item href=/zh-tw#projects>專案</a></div></li><div id=top-navbar-divider></div><li class=nav-item><a class=nav-link id=blog-link href=/zh-tw/posts>文章</a></li><li class=nav-item><a class=nav-link id=note-link href=/zh-tw/notes>筆記</a></li><li class=nav-item><a class=nav-link href=https://linzeyan.github.io/activities>活動</a></li><li class=nav-item><a class=nav-link href=https://linzeyan.github.io/running>跑步</a></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=languageSelector role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false><span class="fi fi-tw"></span>
+Chinese</a><div class=dropdown-menu aria-labelledby=languageSelector><a class="dropdown-item nav-link languages-item" href=/notes/docs><span class="fi fi-us"></span>
+English
+</a><a class="dropdown-item nav-link languages-item" href=/zh-tw/notes/docs><span class="fi fi-tw"></span>
+Chinese</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-bs-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg class=theme-icon src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=theme-icon src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme">
+</a><a class="dropdown-item nav-link" href=# data-scheme=dark><img class=theme-icon src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme">
+</a><a class="dropdown-item nav-link" href=# data-scheme=system><img class=theme-icon src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/site/highlight.svg class=d-none id=main-logo alt=Logo>
+<img src=/images/site/highlight.svg class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/zh-tw/search><input type=text name=keyword placeholder=搜尋 data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/zh-tw/notes data-filter=all>筆記</a></li><div class=subtree><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/aws/> AWS</a><ul><li><a class=list-link href=/zh-tw/notes/aws/command/ title=command>command</a></li><li><a class=list-link href=/zh-tw/notes/aws/configure/ title=configure>configure</a></li><li><a class=list-link href=/zh-tw/notes/aws/terraform/ title=terraform>terraform</a></li></ul></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/bash/> Bash</a><ul><li><a class=list-link href=/zh-tw/notes/bash/ansible/ title=ansible>ansible</a></li><li><a class=list-link href=/zh-tw/notes/bash/common/ title=common>common</a></li><li><a class=list-link href=/zh-tw/notes/bash/docker/ title=docker>docker</a></li><li><a class=list-link href=/zh-tw/notes/bash/file/ title=file>file</a></li><li><a class=list-link href=/zh-tw/notes/bash/git/ title=git>git</a></li><li><a class=list-link href=/zh-tw/notes/bash/gitlab/ title=gitlab>gitlab</a></li><li><a class=list-link href=/zh-tw/notes/bash/gpg/ title=gpg>gpg</a></li><li><a class=list-link href=/zh-tw/notes/bash/k8s/ title=k8s>k8s</a></li><li><a class=list-link href=/zh-tw/notes/bash/network/ title=network>network</a></li><li><a class=list-link href=/zh-tw/notes/bash/pandoc/ title=pandoc>pandoc</a></li><li><a class=list-link href=/zh-tw/notes/bash/redis/ title=redis>redis</a></li><li><a class=list-link href=/zh-tw/notes/bash/ssh/ title=ssh>ssh</a></li><li><a class=list-link href=/zh-tw/notes/bash/telegram/ title=telegram>telegram</a></li></ul></li><li><i data-feather=minus-circle></i><a class="active list-link" href=/zh-tw/notes/docs/> Docs</a><ul class=active><li><a class=list-link href=/zh-tw/notes/docs/cloudflare/ title=cloudflare>cloudflare</a></li><li><a class=list-link href=/zh-tw/notes/docs/diagrams/ title=diagrams>diagrams</a></li><li><a class=list-link href=/zh-tw/notes/docs/docker/ title=docker>docker</a></li><li><a class=list-link href=/zh-tw/notes/docs/gitlab/ title=gitlab>gitlab</a></li><li><a class=list-link href=/zh-tw/notes/docs/linux/ title=linux>linux</a></li><li><a class=list-link href=/zh-tw/notes/docs/mermaid/ title=mermaid>mermaid</a></li><li><a class=list-link href=/zh-tw/notes/docs/network/ title=network>network</a></li><li><a class=list-link href=/zh-tw/notes/docs/nginx/ title=nginx>nginx</a></li><li><a class=list-link href=/zh-tw/notes/docs/vagrant/ title=vagrant>vagrant</a></li><li><a class=list-link href=/zh-tw/notes/docs/zabbix/ title=zabbix>zabbix</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/elasticsearch/ title=Elasticsearch>Elasticsearch</a></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/gcp/> GCP</a><ul><li><a class=list-link href=/zh-tw/notes/gcp/command/ title=command>command</a></li></ul></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/go/> Go</a><ul><li><a class=list-link href=/zh-tw/notes/go/libraries/ title=Libraries>Libraries</a></li><li><i data-feather=plus-circle></i><a class=list-link href=/zh-tw/notes/go/questions/> Questions</a><ul><li><a class=list-link href=/zh-tw/notes/go/questions/array/ title=Array>Array</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/channel/ title=Channel>Channel</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/context/ title=Context>Context</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/defer/ title=Defer>Defer</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/goroutine/ title=Goroutine>Goroutine</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/interface/ title=Interface>Interface</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/iota/ title=Iota>Iota</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/json/ title=JSON>JSON</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/len/ title=Len>Len</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/map/ title=Map>Map</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/print/ title=Print>Print</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/race/ title=Race>Race</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/select/ title=Select>Select</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/slice/ title=Slice>Slice</a></li><li><a class=list-link href=/zh-tw/notes/go/questions/variable/ title=Variable>Variable</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/go/snippet/ title=Snippet>Snippet</a></li><li><a class=list-link href=/zh-tw/notes/go/tools/ title=Tools>Tools</a></li></ul></li><li><a class=list-link href=/zh-tw/notes/input-method/ title=Input-Method>Input-Method</a></li><li><a class=list-link href=/zh-tw/notes/server/ title=Server-Configs>Server-Configs</a></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class="content container-fluid" id=content><div class="container-fluid note-card-holder" id=note-card-holder><div class=note-card><div class=item><h5 class=note-title><span>Setting CloudFlare Worker for CORS</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>addEventListener</span>(<span style=color:#e6db74>&#34;fetch&#34;</span>, (<span style=color:#a6e22e>event</span>) =&gt; {
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>respondWith</span>(<span style=color:#a6e22e>handleRequest</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>request</span>));
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>handleRequest</span>(<span style=color:#a6e22e>request</span>) {
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>fetch</span>(<span style=color:#a6e22e>request</span>);
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Response</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>body</span>, <span style=color:#a6e22e>response</span>);
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>headers</span>.<span style=color:#a6e22e>set</span>(
+</span></span><span style=display:flex><span>		<span style=color:#e6db74>&#34;Access-Control-Allow-Origin&#34;</span>,
+</span></span><span style=display:flex><span>		<span style=color:#e6db74>&#34;frontend-h5.shyc883.com&#34;</span>
+</span></span><span style=display:flex><span>	);
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>headers</span>.<span style=color:#a6e22e>set</span>(<span style=color:#e6db74>&#34;Access-Control-Allow-Methods&#34;</span>, <span style=color:#e6db74>&#34;GET, OPTIONS, POST&#34;</span>);
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>headers</span>.<span style=color:#a6e22e>set</span>(
+</span></span><span style=display:flex><span>		<span style=color:#e6db74>&#34;Access-Control-Allow-Headers&#34;</span>,
+</span></span><span style=display:flex><span>		<span style=color:#e6db74>&#34;Content-Type, Authorization&#34;</span>
+</span></span><span style=display:flex><span>	);
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>headers</span>.<span style=color:#a6e22e>set</span>(<span style=color:#e6db74>&#34;Access-Control-Allow-Credentials&#34;</span>, <span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Terraform_create_record</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-hcl data-lang=hcl><span style=display:flex><span><span style=color:#66d9ef>terraform</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>required_providers</span> {
+</span></span><span style=display:flex><span>    cloudflare <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>      source <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;cloudflare/cloudflare&#34;</span>
+</span></span><span style=display:flex><span>      version <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;~&gt; 2.0&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>provider</span> <span style=color:#e6db74>&#34;cloudflare&#34;</span> {
+</span></span><span style=display:flex><span>  email   <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;cloudflare@gmail.com&#34;</span>
+</span></span><span style=display:flex><span>  api_key <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;1488ed0d2082ed36c010b773431fd9dcacde1&#34;</span>
+</span></span><span style=display:flex><span>  account_id <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;06ae012a1ba907df24a220cd14a4fa8b&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;cloudflare_record&#34; &#34;gitlab&#34;</span> {
+</span></span><span style=display:flex><span>  zone_id <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;92c6d5010fbacab27d464f4d79c11fce&#34;</span>
+</span></span><span style=display:flex><span>  name    <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;gitlab&#34;</span>
+</span></span><span style=display:flex><span>  value   <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;192.123.168.234&#34;</span>
+</span></span><span style=display:flex><span>  type    <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;A&#34;</span>
+</span></span><span style=display:flex><span>  ttl     <span style=color:#f92672>=</span> <span style=color:#ae81ff>300</span>
+</span></span><span style=display:flex><span>  proxied <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Terraform_create_page_rule</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-hcl data-lang=hcl><span style=display:flex><span><span style=color:#75715e># Add a page rule to the domain
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;cloudflare_page_rule&#34; &#34;page_rule_png&#34;</span> {
+</span></span><span style=display:flex><span>  zone_id <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;92c6d5010fbacab27d464f4d79c11fce&#34;</span>
+</span></span><span style=display:flex><span>  target <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;www.example.com/*.png*&#34;</span>
+</span></span><span style=display:flex><span>  status   <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;active&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>actions</span> {
+</span></span><span style=display:flex><span>    always_use_https <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;true&#34;</span>
+</span></span><span style=display:flex><span>    browser_cache_ttl <span style=color:#f92672>=</span> <span style=color:#ae81ff>86400</span>
+</span></span><span style=display:flex><span>    cache_level <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;cache_everything&#34;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    # edge_cache_ttl = 86400
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>cache_key_fields</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>cookie</span> {}
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>header</span> {}
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>host</span> {}
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>query_string</span> {
+</span></span><span style=display:flex><span>        ignore <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>user</span> {}
+</span></span><span style=display:flex><span>    }<span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #   cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;200-299&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = 300
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;300-399&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = 60
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;400-403&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = -1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;404&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = 30
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;405-499&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = -1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       cache_ttl_by_status {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           codes = &#34;500-599&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #           ttl = 0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  #       }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>  # }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}<span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e># resource &#34;cloudflare_page_rule&#34; &#34;rules&#34; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   count = &#34;${length(keys(&#34;${var.targets}&#34;))}&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   lifecycle {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#     create_before_destroy = true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   zone_id = &#34;92c6d5010fbacab27d464f4d79c11fce&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   target = &#34;${var.targets[element(keys(var.targets),count.index)]}&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   actions {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#     always_use_https = &#34;true&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#     cache_level = &#34;cache_everything&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   }
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#   priority = &#34;${count.index + 1}&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e># }
+</span></span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Terraform_create_rate_limit_rule</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-hcl data-lang=hcl><span style=display:flex><span><span style=color:#75715e># Create rate limit rule
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;cloudflare_rate_limit&#34; &#34;wss_rate_limit&#34;</span> {
+</span></span><span style=display:flex><span>  zone_id <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;92c6d5010fbacab27d464f4d79c11fce&#34;</span>
+</span></span><span style=display:flex><span>  threshold <span style=color:#f92672>=</span> <span style=color:#ae81ff>50</span>
+</span></span><span style=display:flex><span>  period <span style=color:#f92672>=</span> <span style=color:#ae81ff>60</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>match</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>request</span> {
+</span></span><span style=display:flex><span>      url_pattern <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;*wss*/*&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>action</span> {
+</span></span><span style=display:flex><span>    mode <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ban&#34;</span>
+</span></span><span style=display:flex><span>    timeout <span style=color:#f92672>=</span> <span style=color:#ae81ff>3600</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>correlate</span> {
+</span></span><span style=display:flex><span>    by <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;nat&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>resource</span> <span style=color:#e6db74>&#34;cloudflare_rate_limit&#34; &#34;frontend_rate_limit&#34;</span> {
+</span></span><span style=display:flex><span>  zone_id <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;92c6d5010fbacab27d464f4d79c11fce&#34;</span>
+</span></span><span style=display:flex><span>  threshold <span style=color:#f92672>=</span> <span style=color:#ae81ff>50</span>
+</span></span><span style=display:flex><span>  period <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>match</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>request</span> {
+</span></span><span style=display:flex><span>      url_pattern <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;*h5*/*&#34;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>action</span> {
+</span></span><span style=display:flex><span>    mode <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ban&#34;</span>
+</span></span><span style=display:flex><span>    timeout <span style=color:#f92672>=</span> <span style=color:#ae81ff>3600</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>correlate</span> {
+</span></span><span style=display:flex><span>    by <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;nat&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>API Document</span></h5><div class=card><div class=card-body><ul><li><a href=https://developers.cloudflare.com/api/operations/custom-hostname-for-a-zone-create-custom-hostname target=_blank rel=noopener>Cloudflare for SaaS</a></li><li><a href=https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record target=_blank rel=noopener>partial (CNAME) zone</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Diagrams</span></h5><div class=card><div class=card-body><a href=https://diagrams.mingrammer.com/docs/getting-started/installation target=_blank rel=noopener>https://diagrams.mingrammer.com/docs/getting-started/installation</a></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>docker-compose</span></h5><div class=card><div class=card-body><h5 id=cadvisor>cAdvisor</h5><ul><li><a href=/notes/docs/docker/docker-compose/cadvisor/docker-compose.yaml>docker-compose.yaml</a></li><li><a href=/notes/docs/docker/docker-compose/cadvisor/prometheus.yaml>prometheus.yaml</a></li></ul><h5 id=elasticsearch>Elasticsearch</h5><ul><li><a href=/notes/docs/docker/docker-compose/elasticsearch/docker-compose.yaml>docker-compose.yaml</a></li></ul><h5 id=local-dev>local dev</h5><ul><li><a href=/notes/docs/docker/docker-compose/local/docker-compose.yaml>docker-compose.yaml</a></li></ul><h5 id=nodejs>NodeJS</h5><ul><li><a href=/notes/docs/docker/docker-compose/nodejs/docker-compose.yaml>docker-compose.yaml</a></li></ul><h5 id=rstudio>rstudio</h5><ul><li><a href=/notes/docs/docker/dockerfile/rstudio/docker-compose.yaml>docker-compose.yaml</a></li></ul><h5 id=rsyncd>rsyncd</h5><ul><li><a href=/notes/docs/docker/docker-compose/rsyncd/docker-compose.yaml>docker-compose.yaml</a></li><li><a href=/notes/docs/docker/docker-compose/rsyncd/rsyncd.conf>rsyncd.conf</a></li><li><a href=/notes/docs/docker/docker-compose/rsyncd/rsyncd.secrets>rsyncd.secrets</a></li><li><code>rsync -auz --password-file=/tmp/pass dist user@hostip::myshare</code></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Dockerfile</span></h5><div class=card><div class=card-body><h5 id=awscli>awscli</h5><ul><li><a href=/notes/docs/docker/dockerfile/awscli/Dockerfile>Dockerfile</a></li></ul><h5 id=buildx>buildx</h5><ul><li><a href=/notes/docs/docker/dockerfile/buildx/Dockerfile>Dockerfile</a></li><li><code>docker buildx build --push --platform linux/arm64,linux/amd64 -t zeyanlin/app .</code></li></ul><h5 id=dind>dind</h5><ul><li><a href=/notes/docs/docker/dockerfile/dind/Dockerfile>Dockerfile</a></li></ul><h5 id=golang>golang</h5><ul><li><a href=/notes/docs/docker/dockerfile/golang/Dockerfile>Dockerfile</a></li><li><code>docker build --secret id=mysecret,src=id_rsa -t app .</code></li></ul><h5 id=goproxy>goproxy</h5><ul><li><a href=/notes/docs/docker/dockerfile/goproxy/Dockerfile>Dockerfile</a></li><li><code>docker buildx build -f goproxy/Dockerfile --platform linux/amd64,linux/arm64 -t zeyanlin/goproxy:latest --push .</code></li></ul><h5 id=gitlab-ci>Gitlab-ci</h5><ul><li><a href=/notes/docs/docker/dockerfile/gitlab/Dockerfile>Dockerfile</a></li><li><a href=/notes/docs/docker/dockerfile/gitlab/telegram.bash>telegram.bash</a></li></ul><h5 id=nginx><a href=https://github.com/macbre/docker-nginx-http3 target=_blank rel=noopener>nginx</a></h5><ul><li><a href=/notes/docs/docker/dockerfile/nginx/Dockerfile>Dockerfile</a></li><li><a href=/notes/docs/docker/dockerfile/nginx/docker-compose.yml>docker-compose.yml</a></li><li><a href=/notes/docs/docker/dockerfile/nginx/nginx.conf>nginx.conf</a></li></ul><h5 id=rstudio>rstudio</h5><ul><li><a href=/notes/docs/docker/dockerfile/rstudio/Dockerfile>Dockerfile</a></li><li><a href=/notes/docs/docker/dockerfile/rstudio/pkg.txt>pkg.txt</a></li></ul><h5 id=supervisord>supervisord</h5><ul><li><a href=/notes/docs/docker/dockerfile/supervisord/Dockerfile>Dockerfile</a></li><li><a href=/notes/docs/docker/dockerfile/supervisord/supervisord.conf>supervisord.conf</a><ul><li>service with supervisord<ul><li><a href=/notes/docs/docker/dockerfile/supervisord/service_with_supervisord/Dockerfile>Dockerfile</a></li></ul></li></ul></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>add member by project</span></h5><div class=card><div class=card-body>Admin Area -> Settings -> General -> LDAP settings -> Lock memberships to LDAP synchronization -> Cancel</div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>backup cronjob</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Backup Gitlab configs</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span> * * * /usr/bin/tar -zcf /var/opt/gitlab/backups/<span style=color:#e6db74>`</span>date +%Y_%m_%d<span style=color:#e6db74>`</span>_gitlab_config.tar.gz /etc/gitlab &amp;&gt; /tmp/backup.log
+</span></span><span style=display:flex><span><span style=color:#75715e># Backup Gitlab data</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> <span style=color:#ae81ff>1</span> * * * /usr/bin/gitlab-backup create STRATEGY<span style=color:#f92672>=</span>copy BACKUP<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>date +%Y_%m_%d<span style=color:#e6db74>`</span> &amp;&gt;&gt; /tmp/backup.log
+</span></span><span style=display:flex><span><span style=color:#75715e># Rotate</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span> <span style=color:#ae81ff>2</span> * * * /usr/bin/rm -f <span style=color:#e6db74>`</span>find /data/backups/ -name <span style=color:#e6db74>&#34;*.tar*&#34;</span> -mtime +15<span style=color:#e6db74>`</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gitlab-ci.yml template</span></h5><div class=card><div class=card-body><h5 id=gitbook>gitbook</h5><ul><li><a href=/notes/docs/gitlab/ci/gitbook/.gitlab-ci.yml>gitlab-ci.yml</a></li><li><a href=/notes/docs/gitlab/ci/gitbook/.gitbook.yml>gitbook.yml</a></li></ul><h5 id=golang>golang</h5><ul><li><a href=/notes/docs/gitlab/ci/golang/.gitlab-ci.yml>gitlab-ci.yml</a></li></ul><h5 id=hexo>hexo</h5><ul><li><a href=/notes/docs/gitlab/ci/hexo/.gitlab-ci.yml>gitlab-ci.yml</a></li></ul><h5 id=static-resources>Static resources</h5><ul><li><a href=/notes/docs/gitlab/ci/static/.gitlab-ci.yml>gitlab-ci.yml</a></li></ul><h5 id=template>template</h5><ul><li><a href=/notes/docs/gitlab/ci/template/.gitlab-ci.yml>gitlab-ci.yml</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>config</span></h5><div class=card><div class=card-body><h5 id=gitlab-runner>gitlab-runner</h5><ul><li><a href=/notes/docs/gitlab/config/gitlab-runner/gitlab-runner.toml>gitlab-runner.toml</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>issue</span></h5><div class=card><div class=card-body><h6 id=console-output-while-install>console output while install</h6><pre tabindex=0><code>[execute] psql: could not connect to server: Connection refused
+            Is the server running locally and accepting
+            connections on Unix domain socket &#34;/var/opt/gitlab/postgresql/.s.PGSQL.5432&#34;?
+</code></pre><h6 id=solve>solve</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># stop service</span>
+</span></span><span style=display:flex><span>sudo gitlab-ctl stop
+</span></span><span style=display:flex><span>sudo systemctl stop gitlab-runsvdir.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># check if there are any postgres processes; shouldn&#39;t be</span>
+</span></span><span style=display:flex><span>ps aux | grep postgre
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># remove process pid</span>
+</span></span><span style=display:flex><span>sudo rm /var/opt/gitlab/postgresql/data/postmaster.pid
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># start service</span>
+</span></span><span style=display:flex><span>sudo systemctl start gitlab-runsvdir.service
+</span></span><span style=display:flex><span>sudo gitlab-ctl reconfigure
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>issue1</span></h5><div class=card><div class=card-body><h6 id=解決-gitlab-pages-限制訪問權限後的-redirect-invalid-url>解決 Gitlab Pages 限制訪問權限後的 redirect invalid url。</h6><ol><li>Remove &ldquo;gitlab_pages&rdquo; block from <code>/etc/gitlab/gitlab-secrets.json</code></li><li><code>gitlab-ctl reconfigure</code></li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>issue2</span></h5><div class=card><div class=card-body><h6 id=console-output>console output</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># Gitlab Container Registry</span>
+</span></span><span style=display:flex><span>Error response from daemon: Get https://registry.knowhow.fun/v2/: x509: certificate has expired or is not yet valid
+</span></span></code></pre></div><h6 id=etcgitlabgitlabrb><a href=/notes/docs/gitlab/config/gitlab/gitlab.rb>/etc/gitlab/gitlab.rb</a></h6><h6 id=solve>solve</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>yum install ca-certificates
+</span></span><span style=display:flex><span>cd /etc/gitlab
+</span></span><span style=display:flex><span>openssl genrsa -out ca.key <span style=color:#ae81ff>4096</span>
+</span></span><span style=display:flex><span>openssl req -new -x509 -days <span style=color:#ae81ff>3650</span> -key ca.key -out ca.crt
+</span></span><span style=display:flex><span>openssl genrsa -out server.key <span style=color:#ae81ff>4096</span>
+</span></span><span style=display:flex><span>openssl req -new -key server.key -out server.csr
+</span></span><span style=display:flex><span>openssl x509 -req -days <span style=color:#ae81ff>3650</span> -in server.csr -CA ca.crt -CAkey ca.key -set_serial <span style=color:#ae81ff>01</span> -out server.crt
+</span></span><span style=display:flex><span>cp server.crt /etc/pki/ca-trust/source/anchors/
+</span></span><span style=display:flex><span>cp ca.crt /etc/pki/ca-trust/source/anchors/
+</span></span><span style=display:flex><span>update-ca-trust
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>issue3</span></h5><div class=card><div class=card-body><h6 id=console-output>console output</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># Gitlab Container Registry</span>
+</span></span><span style=display:flex><span>received unexpected HTTP status: <span style=color:#ae81ff>500</span> Internal Server Error
+</span></span></code></pre></div><h6 id=solve>solve</h6><p><code>/etc/gitlab/gitlab.rb</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=display:flex><span>gitlab_rails<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;ldap_servers&#39;</span><span style=color:#f92672>]</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;main&#39;</span> <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;encryption&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;plain&#39;</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>docker.service</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --bip 10.255.0.1/16 --containerd<span style=color:#f92672>=</span>/run/containerd/containerd.sock --insecure-registry hub.srjob.co:8888 --insecure-registry registry.knowhow.fun
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gd.service</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>Fetch DNS
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>network.target
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>mysql.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WorkingDirectory<span style=color:#f92672>=</span>/data/dns
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/data/dns/gd -o hourly
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/bin/kill -s HUP $MAINPID
+</span></span><span style=display:flex><span>Restart<span style=color:#f92672>=</span>always
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>openresty.service</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>The OpenResty Application Platform
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>syslog.target network-online.target remote-fs.target nss-lookup.target
+</span></span><span style=display:flex><span>Wants<span style=color:#f92672>=</span>network-online.target
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Type<span style=color:#f92672>=</span>forking
+</span></span><span style=display:flex><span>WorkingDirectory<span style=color:#f92672>=</span>/data/config/nginx
+</span></span><span style=display:flex><span>PIDFile<span style=color:#f92672>=</span>/data/config/nginx/logs/nginx.pid
+</span></span><span style=display:flex><span>ExecStartPre<span style=color:#f92672>=</span>/usr/bin/chown -R root:root /data/nginx
+</span></span><span style=display:flex><span>ExecStartPre<span style=color:#f92672>=</span>/usr/bin/rm -f /data/nginx/logs/nginx.pid
+</span></span><span style=display:flex><span>ExecStartPre<span style=color:#f92672>=</span>/usr/local/openresty/nginx/sbin/nginx -p /data/nginx -t
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/usr/local/openresty/nginx/sbin/nginx -p /data/nginx
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/bin/kill -s HUP $MAINPID
+</span></span><span style=display:flex><span>ExecStop<span style=color:#f92672>=</span>-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /data/nginx/logs/nginx.pid
+</span></span><span style=display:flex><span><span style=color:#75715e>#ExecStop=/bin/kill -s QUIT $MAINPID</span>
+</span></span><span style=display:flex><span>KillSignal<span style=color:#f92672>=</span>SIGQUIT
+</span></span><span style=display:flex><span>TimeoutStopSec<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>KillMode<span style=color:#f92672>=</span>process
+</span></span><span style=display:flex><span>PrivateTmp<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span>LimitNOFILE<span style=color:#f92672>=</span><span style=color:#ae81ff>1048576</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>pm2.service</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>PM2 process manager
+</span></span><span style=display:flex><span>Documentation<span style=color:#f92672>=</span>https://pm2.keymetrics.io/
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>network.target
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Type<span style=color:#f92672>=</span>forking
+</span></span><span style=display:flex><span>User<span style=color:#f92672>=</span>root
+</span></span><span style=display:flex><span>LimitNOFILE<span style=color:#f92672>=</span>infinity
+</span></span><span style=display:flex><span>LimitNPROC<span style=color:#f92672>=</span>infinity
+</span></span><span style=display:flex><span>LimitCORE<span style=color:#f92672>=</span>infinity
+</span></span><span style=display:flex><span>Environment<span style=color:#f92672>=</span>PM2_HOME<span style=color:#f92672>=</span>/root/.pm2
+</span></span><span style=display:flex><span>PIDFile<span style=color:#f92672>=</span>/root/.pm2/pm2.pid
+</span></span><span style=display:flex><span>WorkingDirectory<span style=color:#f92672>=</span>/game/publish
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/lib/node_modules/pm2/bin/pm2 start game_api.json manage.json
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/lib/node_modules/pm2/bin/pm2 reload all
+</span></span><span style=display:flex><span>ExecStop<span style=color:#f92672>=</span>/lib/node_modules/pm2/bin/pm2 kill
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>logrotate</span></h5><div class=card><div class=card-body><pre tabindex=0><code>/data/gameapi/logs/*.log {
+    create 0644 nobody root
+    daily
+    rotate 30
+    dateext
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+    /bin/kill -USR1 `cat /data/gameapi/logs/nginx.pid 2&gt;/dev/null` 2&gt;/dev/null || true
+    endscript
+}
+</code></pre></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>details</span></h5><div class=card><div class=card-body><details><summary>看我</summary>你看不到我
+看不到我</details></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>class</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>classDiagram
+</span></span><span style=display:flex><span>Class01 <span style=color:#960050;background-color:#1e0010>&lt;</span>|-- AveryLongClass : Cool
+</span></span><span style=display:flex><span>Class03 _-- Class04
+</span></span><span style=display:flex><span>Class05 o-- Class06
+</span></span><span style=display:flex><span>Class07 .. Class08
+</span></span><span style=display:flex><span>Class09 --&gt; C2 : Where am i?
+</span></span><span style=display:flex><span>Class09 --_ C3
+</span></span><span style=display:flex><span>Class09 --|&gt; Class07
+</span></span><span style=display:flex><span>Class07 : equals()
+</span></span><span style=display:flex><span>Class07 : Object[] elementData
+</span></span><span style=display:flex><span>Class01 : size()
+</span></span><span style=display:flex><span>Class01 : int chimp
+</span></span><span style=display:flex><span>Class01 : int gorilla
+</span></span><span style=display:flex><span>Class08 &lt;<span style=color:#f92672>--</span>&gt; C2: Cool label
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/class_1.svg>classDiagram</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>flow-link</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>flowchart LR
+</span></span><span style=display:flex><span>A --o B
+</span></span><span style=display:flex><span>B --x C
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>D o--o E
+</span></span><span style=display:flex><span>E &lt;<span style=color:#f92672>--</span>&gt; F
+</span></span><span style=display:flex><span>F x--x G
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/link.svg>flowchart</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>flow-link1</span></h5><div class=card><div class=card-body><ul><li><a href=/notes/docs/mermaid/img/link1>code</a></li><li><a href=/notes/docs/mermaid/img/link1.svg>flowchart</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>flow-shapes</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>graph LR
+</span></span><span style=display:flex><span>id1[方框]
+</span></span><span style=display:flex><span>id2(帶有圓角的方框)
+</span></span><span style=display:flex><span>id3([體育場形狀])
+</span></span><span style=display:flex><span>id4[[子例程]]
+</span></span><span style=display:flex><span>id5[(圓柱狀)]
+</span></span><span style=display:flex><span>id6((圓形))
+</span></span><span style=display:flex><span>id7&gt;非對稱形狀]
+</span></span><span style=display:flex><span>id8{菱形}
+</span></span><span style=display:flex><span>id9{{六角形}}
+</span></span><span style=display:flex><span>id10[/平行四邊形 1/]
+</span></span><span style=display:flex><span>id11[\平行四邊形 2\]
+</span></span><span style=display:flex><span>id12[/梯形 1\]
+</span></span><span style=display:flex><span>id13[\梯形 2/]
+</span></span><span style=display:flex><span>id14(((雙圓)))
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/shapes.svg>flowchart</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>flow-subgraphs</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>flowchart TD
+</span></span><span style=display:flex><span>c1--&gt;a2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    subgraph one
+</span></span><span style=display:flex><span>    a1--&gt;a2
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    subgraph &#34;<span style=color:#e6db74>`**two**`</span>&#34;
+</span></span><span style=display:flex><span>    b1--&gt;b2
+</span></span><span style=display:flex><span>    end
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    subgraph three
+</span></span><span style=display:flex><span>    c1--&gt;c2
+</span></span><span style=display:flex><span>    end
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/subgraphs.svg>flowchart</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>gantt</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>gantt
+</span></span><span style=display:flex><span>dateFormat YYYY-MM-DD
+</span></span><span style=display:flex><span>title Adding GANTT diagram functionality to mermaid
+</span></span><span style=display:flex><span>section A section
+</span></span><span style=display:flex><span>Completed task :done, des1, 2014-01-06,2014-01-08
+</span></span><span style=display:flex><span>Active task :active, des2, 2014-01-09, 3d
+</span></span><span style=display:flex><span>Future task : des3, after des2, 5d
+</span></span><span style=display:flex><span>Future task2 : des4, after des3, 5d
+</span></span><span style=display:flex><span>section Critical tasks
+</span></span><span style=display:flex><span>Completed task in the critical line :crit, done, 2014-01-06,24h
+</span></span><span style=display:flex><span>Implement parser and jison :crit, done, after des1, 2d
+</span></span><span style=display:flex><span>Create tests for parser :crit, active, 3d
+</span></span><span style=display:flex><span>Future task in critical line :crit, 5d
+</span></span><span style=display:flex><span>Create tests for renderer :2d
+</span></span><span style=display:flex><span>Add to mermaid :1d
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/gantt_1.svg>gantt</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>git</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>gitGraph
+</span></span><span style=display:flex><span>commit
+</span></span><span style=display:flex><span>commit
+</span></span><span style=display:flex><span>branch develop
+</span></span><span style=display:flex><span>checkout develop
+</span></span><span style=display:flex><span>commit
+</span></span><span style=display:flex><span>commit
+</span></span><span style=display:flex><span>checkout main
+</span></span><span style=display:flex><span>merge develop
+</span></span><span style=display:flex><span>commit
+</span></span><span style=display:flex><span>commit
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/git_1.svg>git</a></li></ul></div></div></div></div><p><div class=note-card><div class=item><h5 class=note-title><span>er</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>erDiagram
+</span></span><span style=display:flex><span>CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+</span></span><span style=display:flex><span>CUSTOMER ||--o{ ORDER : places
+</span></span><span style=display:flex><span>CUSTOMER ||--o{ INVOICE : &#34;liable for&#34;
+</span></span><span style=display:flex><span>DELIVERY-ADDRESS ||--o{ ORDER : receives
+</span></span><span style=display:flex><span>INVOICE ||--|{ ORDER : covers
+</span></span><span style=display:flex><span>ORDER ||--|{ ORDER-ITEM : includes
+</span></span><span style=display:flex><span>PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+</span></span><span style=display:flex><span>PRODUCT ||--o{ ORDER-ITEM : &#34;ordered in&#34;
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/er_1.svg>erDiagram</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>journey</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>journey
+</span></span><span style=display:flex><span>title My working day
+</span></span><span style=display:flex><span>section Go to work
+</span></span><span style=display:flex><span>Make tea: 5: Me
+</span></span><span style=display:flex><span>Go upstairs: 3: Me
+</span></span><span style=display:flex><span>Do work: 1: Me, Cat
+</span></span><span style=display:flex><span>section Go home
+</span></span><span style=display:flex><span>Go downstairs: 5: Me
+</span></span><span style=display:flex><span>Sit down: 3: Me
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/journey_1.svg>erDiagram</a></li></ul></div></div></div></div></p><div class=note-card><div class=item><h5 class=note-title><span>pie</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>pie title Pets adopted by volunteers
+</span></span><span style=display:flex><span>&#34;Dogs&#34; : 386
+</span></span><span style=display:flex><span>&#34;Cats&#34; : 85
+</span></span><span style=display:flex><span>&#34;Rats&#34; : 15
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/pie_1.svg>pie</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>sequence</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>sequenceDiagram
+</span></span><span style=display:flex><span>participant Alice
+</span></span><span style=display:flex><span>participant Bob
+</span></span><span style=display:flex><span>Alice-&gt;&gt;John: Hello John, how are you?
+</span></span><span style=display:flex><span>loop Healthcheck
+</span></span><span style=display:flex><span>John-&gt;John: Fight against hypochondria
+</span></span><span style=display:flex><span>end
+</span></span><span style=display:flex><span>Note right of John: Rational thoughts &lt;<span style=color:#f92672>br</span>/&gt;prevail...
+</span></span><span style=display:flex><span>John--&gt;Alice: Great!
+</span></span><span style=display:flex><span>John-&gt;Bob: How about you?
+</span></span><span style=display:flex><span>Bob--&gt;John: Jolly good!
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/sequence_1.svg>sequenceDiagram</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>state</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-markdown data-lang=markdown><span style=display:flex><span>stateDiagram-v2
+</span></span><span style=display:flex><span>open: Open Door
+</span></span><span style=display:flex><span>closed: Closed Door
+</span></span><span style=display:flex><span>locked: Locked Door
+</span></span><span style=display:flex><span>open --&gt; closed: Close
+</span></span><span style=display:flex><span>closed --&gt; locked: Lock
+</span></span><span style=display:flex><span>locked --&gt; closed: Unlock
+</span></span><span style=display:flex><span>closed --&gt; open: Open
+</span></span></code></pre></div><ul><li><a href=/notes/docs/mermaid/img/state_1.svg>stateDiagram-v2</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Synology Active Backup for Bussiness backup task failed</span></h5><div class=card><div class=card-body><h6 id=due-to-ip-change-last-week>Due to IP change last week</h6><ol start=0><li>Firewall policy create NAS_to_ESXi。</li><li>虛擬機器 -> 任務清單 -> 刪除任務。</li><li>虛擬機器 -> VMware vSphere -> 管理 Hypervisor -> 刪除舊的 IP，新增新的 IP。</li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Set LACP for Synology NAS and NETGEAR switch</span></h5><div class=card><div class=card-body><h6 id=netgear>NETGEAR</h6><ol><li>Switching -> LAG -> LAG Configuration -> ch1 -> 41、42 -> Apply。</li><li>ch1 -> Description: NAS、LAG Type:LACP -> Apply。</li><li>Switching -> VLAN -> Port PVID Configuration -> g41、g42 PVID:99、VLAN Member:10-14,17-23,99,101、VLAN Tag:10-14,17-23,99,101 -> Apply。</li></ol><h6 id=synology>Synology</h6><ul><li>控制台 -> 網路 -> 網路介面 -> 新增 Bond。</li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Set NAT in FortiGate</span></h5><div class=card><div class=card-body><h5 id=1-政策物件---虛擬-ip---新增>1. 政策&物件 -> 虛擬 IP -> 新增</h5><ul><li>名稱: IT-VPN</li><li>介面: wan2</li><li>對外 IP: 0.0.0.0</li></ul><h6 id=埠號轉發>埠號轉發</h6><ul><li>協定: TCP</li><li>外部服務埠號: 19979</li><li>對應到埠號: 19979</li></ul><h5 id=2-政策物件---ipv4-政策>2. 政策&物件 -> IPv4 政策</h5><ol><li>From zone wan2 to zone Knowhow_Vlan</li><li>From any to IT-VPN</li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Juniper SRX 320</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 查看當前軟體版本號</span>
+</span></span><span style=display:flex><span>show system software
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看系統啟動時間</span>
+</span></span><span style=display:flex><span>show system uptime
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看硬體板卡及序號</span>
+</span></span><span style=display:flex><span>show chassis haredware
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看硬體板卡當前狀態</span>
+</span></span><span style=display:flex><span>show chassis environment
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看主控板（RE）資源使用及狀態</span>
+</span></span><span style=display:flex><span>show chassis routing-engine
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看當前防火牆併發會話數</span>
+</span></span><span style=display:flex><span>show security flow session summary
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看當前防火牆具體併發會話</span>
+</span></span><span style=display:flex><span>show security flow session
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 清除當前 session</span>
+</span></span><span style=display:flex><span>clear security flow session all
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 檢查全域 ALG 開啟情況</span>
+</span></span><span style=display:flex><span>show security alg status
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查OID</span>
+</span></span><span style=display:flex><span>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 設定政策</span>
+</span></span><span style=display:flex><span>set security policy zones from-zone to-zone
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看路由表</span>
+</span></span><span style=display:flex><span>show route
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看 ARP 表</span>
+</span></span><span style=display:flex><span>show arp
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看系統日誌</span>
+</span></span><span style=display:flex><span>show log messages
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看所有介面運行狀態</span>
+</span></span><span style=display:flex><span>show interface terse
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看介面運行細節資訊</span>
+</span></span><span style=display:flex><span>show interface ge-x/y/z detail
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 比較修改</span>
+</span></span><span style=display:flex><span>show | compare rollback ?
+</span></span><span style=display:flex><span>show | compare rollback <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看系統</span>
+</span></span><span style=display:flex><span>show system
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 查看設定</span>
+</span></span><span style=display:flex><span>show configuration
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 動態統計介面資料包轉發資訊</span>
+</span></span><span style=display:flex><span>monitor interface ge-x/y/z
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 動態報文抓取（Tcpdump，類似 ScreenOS snoop命令）</span>
+</span></span><span style=display:flex><span>monitor traffic interface ge-x/y/z
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>map</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#75715e># map
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>map</span> $remote_addr $limit_key {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>35.229.201.209</span> <span style=color:#e6db74>&#34;&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>default</span> $binary_remote_addr;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e># wss.conf
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>limit_req_zone</span> $limit_key <span style=color:#e6db74>zone=websocket:10m</span> <span style=color:#e6db74>rate=20r/s</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>limit_req_status</span> <span style=color:#ae81ff>499</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> = <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>limit_req</span> <span style=color:#e6db74>zone=websocket</span> <span style=color:#e6db74>nodelay</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>limit_req_log_level</span> <span style=color:#e6db74>warn</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>rewrite</span></h5><div class=card><div class=card-body><h6 id=1>1</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#75715e># https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/img</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>rewrite</span> <span style=color:#e6db74>&#39;^/img/(.*)</span>$&#39; <span style=color:#e6db74>/static/</span>$1;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/static</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>root</span> <span style=color:#e6db74>/data/nginxconfig.io/src</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>index</span> <span style=color:#e6db74>nginx.svg</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h6 id=2>2</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#75715e># https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/photo</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>root</span> <span style=color:#e6db74>/data/nginxconfig.io/src</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>try_files</span> $uri <span style=color:#e6db74>/</span>$uri <span style=color:#e6db74>@pic</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>@pic</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>rewrite</span> <span style=color:#e6db74>&#39;^/photo/(.*)</span>$&#39; <span style=color:#e6db74>/static/</span>$1;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h6 id=3>3</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#75715e># remove prefix path and allow proxy_pass POST
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/upload/</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Host</span> $host;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>X-Real-IP</span> $remote_addr;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>X-Forwarded-For</span> $proxy_add_x_forwarded_for;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>root</span> <span style=color:#e6db74>/data/nginx/html</span>;
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Remove path
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>rewrite</span> <span style=color:#e6db74>^/upload/(.*)</span> <span style=color:#e6db74>/</span>$1  <span style=color:#e6db74>break</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_pass</span> <span style=color:#e6db74>https://logo</span>$uri$is_args$args;
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Proxy_pass POST
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>proxy_http_version</span> <span style=color:#ae81ff>1</span><span style=color:#e6db74>.1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Upgrade</span> $http_upgrade;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Connection</span> <span style=color:#e6db74>&#39;upgrade&#39;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_cache_bypass</span> $http_upgrade;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#proxy_redirect  https://logo/ /;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Host</span> $host;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>X-Real-IP</span> $remote_addr;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>X-Forwarded-For</span> $proxy_add_x_forwarded_for;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>root</span> <span style=color:#e6db74>/data/nginx/html</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>index</span>  <span style=color:#e6db74>index.html</span> <span style=color:#e6db74>index.htm</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>grafana behind nginx</span></h5><div class=card><div class=card-body><h6 id=serversslconf>server/ssl.conf</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>ssl_certificate</span>     <span style=color:#e6db74>/etc/ssl/go2cloudten.com.crt</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ssl_certificate_key</span> <span style=color:#e6db74>/etc/ssl/go2cloudten.com.key</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ssl_ciphers</span> <span style=color:#e6db74>&#34;EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:HIGH:!RC2:!RC4:!aNULL:!eNULL:!LOW:!IDEA:!DES:!TDES:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!EXPORT:!ANON&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ssl_prefer_server_ciphers</span> <span style=color:#66d9ef>on</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ssl_protocols</span> <span style=color:#e6db74>TLSv1.2</span> <span style=color:#e6db74>TLSv1.3</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>ssl_session_timeout</span> <span style=color:#ae81ff>50m</span>;
+</span></span></code></pre></div><h6 id=serverproxyconf>server/proxy.conf</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>proxy_set_header</span> <span style=color:#e6db74>X-Real-IP</span> $remote_addr;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>proxy_set_header</span> <span style=color:#e6db74>X-Forwarded-For</span> $proxy_add_x_forwarded_for;
+</span></span></code></pre></div><h6 id=grafanaconf>grafana.conf</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span>       <span style=color:#ae81ff>443</span> <span style=color:#e6db74>ssl</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>server_name</span>  <span style=color:#e6db74>grafana-test.go2cloudten.com</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>server_name</span>  <span style=color:#e6db74>grafana.go2cloudten.com</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span> <span style=color:#e6db74>server/ssl.conf</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span> <span style=color:#e6db74>server/proxy.conf</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>access_log</span>  <span style=color:#e6db74>logs/grafana.log</span> <span style=color:#e6db74>json</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>error_log</span>   <span style=color:#e6db74>logs/grafana.error.log</span> <span style=color:#e6db74>warn</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_pass</span>   <span style=color:#e6db74>http://grafana</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_connect_timeout</span> <span style=color:#ae81ff>300</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_read_timeout</span> <span style=color:#ae81ff>700</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_send_timeout</span> <span style=color:#ae81ff>700</span>;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Host</span> $host;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Upgrade</span> $http_upgrade;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Connection</span> <span style=color:#e6db74>&#34;Upgrade&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Vagrantfile template</span></h5><div class=card><div class=card-body><h5 id=docker>docker</h5><ul><li><a href=/notes/docs/vagrant/files/docker/Vagrantfile>Nginx</a></li></ul><h5 id=hyperv>hyperv</h5><ul><li><a href=/notes/docs/vagrant/files/hyperv/Vagrantfile.CentOS7>CentOS7</a></li><li><a href=/notes/docs/vagrant/files/hyperv/Vagrantfile.Win2019>Win2019</a></li></ul><h5 id=virtualbox>virtualbox</h5><ul><li><a href=/notes/docs/vagrant/files/virtualbox/Vagrantfile>Vagrantfile</a></li></ul><h5 id=vmware>vmware</h5><ul><li><a href=/notes/docs/vagrant/files/vmware_fusion/Vagrantfile>Vagrantfile</a></li></ul><h5 id=multi>multi</h5><ul><li><a href=/notes/docs/vagrant/files/multi/Vagrantfile>Vagrantfile</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>others</span></h5><div class=card><div class=card-body><h5 id=common>common</h5><ul><li><a href=/notes/docs/vagrant/files/common/Vagrantfile>Vagrantfile</a></li></ul><h5 id=metasploitable3>Metasploitable3</h5><ul><li><a href=/notes/docs/vagrant/files/metasploitable3/Vagrantfile>Vagrantfile</a></li></ul></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>send alert</span></h5><div class=card><div class=card-body><ol><li>Use Webhook, Create Channel and Webhook in Mattermost, and put script to $(grep AlertScriptsPath /etc/zabbix/zabbix_server.conf).</li><li>Create Media types in Zabbix(Administration -> Medai types).</li><li>Add media to user(Administration -> Users -> Media).</li><li>Create action(Configuration -> Actions -> Trigger actions)。</li><li>Debug(Write log in script).<ol><li>Media types:<ol><li>PROBLEM:\nProblem started at {EVENT.TIME} on {EVENT.DATE}\n 問題: {EVENT.NAME}\n 主機: {HOST.NAME}\nSeverity: {EVENT.SEVERITY}\n 目前數值: {EVENT.OPDATA}\n 問題 ID: {EVENT.ID}\n{TRIGGER.URL}</li><li>RECOVERY:\nProblem has been resolved at {EVENT.RECOVERY.TIME} on {EVENT.RECOVERY.DATE}\n 問題: {EVENT.NAME}\n 持續時間: {EVENT.DURATION}\n 主機: {HOST.NAME}\nSeverity: {EVENT.SEVERITY}\n 問題 ID: {EVENT.ID}\n{TRIGGER.URL}</li></ol></li></ol></li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>zabbix server</span></h5><div class=card><div class=card-body><h6 id=etczabbixzabbix_serverconf>/etc/zabbix/zabbix_server.conf</h6><p>Zabbix Server perform high loading, and slow query. Increase ValueCacheSize solve this problem.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#a6e22e>LogFile</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/log/zabbix/zabbix_server.log</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>LogFileSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>5</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>PidFile</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/run/zabbix/zabbix_server.pid</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>SocketDir</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/run/zabbix</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>DBHost</span><span style=color:#f92672>=</span><span style=color:#e6db74>localhost</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>DBName</span><span style=color:#f92672>=</span><span style=color:#e6db74>zabbix_db</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>DBUser</span><span style=color:#f92672>=</span><span style=color:#e6db74>zabbix_user</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>DBPassword</span><span style=color:#f92672>=</span><span style=color:#e6db74>zabbix</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>DBSocket</span><span style=color:#f92672>=</span><span style=color:#e6db74>/data/mysql/mysql.sock</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StartPollers</span><span style=color:#f92672>=</span><span style=color:#e6db74>200</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StartPreprocessors</span><span style=color:#f92672>=</span><span style=color:#e6db74>30</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StartPollersUnreachable</span><span style=color:#f92672>=</span><span style=color:#e6db74>30</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StartTrappers</span><span style=color:#f92672>=</span><span style=color:#e6db74>100</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StartDiscoverers</span><span style=color:#f92672>=</span><span style=color:#e6db74>30</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>SNMPTrapperFile</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/log/snmptrap/snmptrap.log</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>CacheSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>4G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>HistoryCacheSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>2G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>HistoryIndexCacheSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>2G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>TrendCacheSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>2G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ValueCacheSize</span><span style=color:#f92672>=</span><span style=color:#e6db74>24G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Timeout</span><span style=color:#f92672>=</span><span style=color:#e6db74>30</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>UnavailableDelay</span><span style=color:#f92672>=</span><span style=color:#e6db74>120</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>AlertScriptsPath</span><span style=color:#f92672>=</span><span style=color:#e6db74>/usr/lib/zabbix/alertscripts</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ExternalScripts</span><span style=color:#f92672>=</span><span style=color:#e6db74>/usr/lib/zabbix/externalscripts</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>LogSlowQueries</span><span style=color:#f92672>=</span><span style=color:#e6db74>3000</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>StatsAllowedIP</span><span style=color:#f92672>=</span><span style=color:#e6db74>127.0.0.1</span>
+</span></span></code></pre></div><h6 id=etcmycnf>/etc/my.cnf</h6><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[client-server]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>socket</span><span style=color:#f92672>=</span><span style=color:#e6db74>/data/mysql/mysql.sock</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[mysqld]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>socket</span><span style=color:#f92672>=</span><span style=color:#e6db74>/data/mysql/mysql.sock</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>datadir</span><span style=color:#f92672>=</span><span style=color:#e6db74>/data/mysql</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>character_set_server</span><span style=color:#f92672>=</span><span style=color:#e6db74>utf8mb4</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>character_set_filesystem</span><span style=color:#f92672>=</span><span style=color:#e6db74>utf8</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_allowed_packet</span><span style=color:#f92672>=</span><span style=color:#e6db74>32M</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>event_scheduler</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>default_storage_engine</span><span style=color:#f92672>=</span><span style=color:#e6db74>innodb</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>open_files_limit</span><span style=color:#f92672>=</span><span style=color:#e6db74>65535</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>local_infile</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sysdate_is_now</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>back_log</span><span style=color:#f92672>=</span><span style=color:#e6db74>256</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>##error log format</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># connection</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>interactive_timeout</span><span style=color:#f92672>=</span><span style=color:#e6db74>28800</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>wait_timeout</span><span style=color:#f92672>=</span><span style=color:#e6db74>28800</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>lock_wait_timeout</span><span style=color:#f92672>=</span><span style=color:#e6db74>28800</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>skip_name_resolve</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_connections</span><span style=color:#f92672>=</span><span style=color:#e6db74>2000</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_user_connections</span><span style=color:#f92672>=</span><span style=color:#e6db74>1000</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_connect_errors</span><span style=color:#f92672>=</span><span style=color:#e6db74>1000000</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># table cache performance settings #</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>table_open_cache</span><span style=color:#f92672>=</span><span style=color:#e6db74>8192</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>table_definition_cache</span><span style=color:#f92672>=</span><span style=color:#e6db74>8192</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>table_open_cache_instances</span><span style=color:#f92672>=</span><span style=color:#e6db74>16</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># session memory settings #</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>read_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>131072</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>read_rnd_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>262144</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sort_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>262144</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>tmp_table_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>67108864</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>join_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>8M</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>thread_cache_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>256</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># log settings #</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>###slow log  ###</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>slow_query_log</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log_queries_not_using_indexes</span><span style=color:#f92672>=</span><span style=color:#e6db74>0</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log_slow_admin_statements</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#log_slow_slave_statements = 1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log_throttle_queries_not_using_indexes</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>long_query_time</span><span style=color:#f92672>=</span><span style=color:#e6db74>0.5</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log_bin_trust_function_creators</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>###binlog ###</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>binlog_cache_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>32K</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_binlog_cache_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>1G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>max_binlog_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>2G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>expire_logs_days</span><span style=color:#f92672>=</span><span style=color:#e6db74>31</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log_slave_updates</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#binlog_format=STATEMENT</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>binlog_format</span><span style=color:#f92672>=</span><span style=color:#e6db74>ROW</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>slave_compressed_protocol</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># innodb settings #</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#innodb_data_file_path=ibdata1:4G;ibdata2:4G:autoextend</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_page_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>16384</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_buffer_pool_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>4G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_buffer_pool_instances</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_buffer_pool_load_at_startup</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_buffer_pool_dump_at_shutdown</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_lock_wait_timeout</span><span style=color:#f92672>=</span><span style=color:#e6db74>50</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_io_capacity</span><span style=color:#f92672>=</span><span style=color:#e6db74>100</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_io_capacity_max</span><span style=color:#f92672>=</span><span style=color:#e6db74>200</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_flush_neighbors</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_file_per_table</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_log_files_in_group</span><span style=color:#f92672>=</span><span style=color:#e6db74>3</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_log_file_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>2G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_log_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>33554432</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_purge_threads</span><span style=color:#f92672>=</span><span style=color:#e6db74>2</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_large_prefix</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_thread_concurrency</span><span style=color:#f92672>=</span><span style=color:#e6db74>64</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_print_all_deadlocks</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_strict_mode</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_sort_buffer_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>67108864</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_write_io_threads</span><span style=color:#f92672>=</span><span style=color:#e6db74>4</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_read_io_threads</span><span style=color:#f92672>=</span><span style=color:#e6db74>4</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_online_alter_log_max_size</span><span style=color:#f92672>=</span><span style=color:#e6db74>1G</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_open_files</span><span style=color:#f92672>=</span><span style=color:#e6db74>60000</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_max_dirty_pages_pct</span><span style=color:#f92672>=</span><span style=color:#e6db74>75</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_adaptive_flushing</span><span style=color:#f92672>=</span><span style=color:#e6db74>on</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>innodb_flush_log_at_trx_commit</span><span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>sync_binlog</span> <span style=color:#f92672>=</span><span style=color:#e6db74>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[mysqld_safe]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>log-error</span><span style=color:#f92672>=</span><span style=color:#e6db74>/var/log/mariadb/mariadb.log</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># include *.cnf from the config directory</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>!includedir /etc/my.cnf.d</span>
+</span></span></code></pre></div></div></div></div></div></div><div class=paginator></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-start"><div class="col-md-4 col-sm-12"><h5>導覽列</h5><ul><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#about>關於</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#skills>技能</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#experiences>經歷</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#education>學歷</a></li><li class=nav-item><a class=smooth-scroll href=https://linzeyan.github.io/zh-tw/#projects>專案</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>聯絡方式:</h5><ul><li><a href=mailto:zeyanlin@outlook.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>zeyanlin@outlook.com</span></a></li><li><a href=https://github.com/linzeyan target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>linzeyan</span></a></li><li><a href=https://www.strava.com/athletes/rickylin target=_blank rel=noopener><span><i class="fab fa-fab fa-strava"></i></span> <span>Ricky</span></a></li><li><a href=https://t.me/ricky_lin target=_blank rel=noopener><span><i class="fab fa-fab fa-telegram"></i></span> <span>Ricky</span></a></li></ul></div></div></div></footer><script src=/application.eed5c22001d7c9cc6de7d8db62219c198319957fa017da141928bee1c40883b4.js integrity="sha256-7tXCIAHXycxt59jbYiGcGYMZlX+gF9oUGSi+4cQIg7Q=" defer></script></body></html>

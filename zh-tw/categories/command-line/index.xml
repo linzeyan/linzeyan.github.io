@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Command Line on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/command-line/</link><description>Recent content in Command Line on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 11 Feb 2025 15:06:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/command-line/index.xml" rel="self" type="application/rss+xml"/><item><title>Configuring SSH Keys for Multiple GitHub Accounts</title><link>https://linzeyan.github.io/zh-tw/posts/20250211-configure-ssh-keys-for-multiple-github-accounts/</link><pubDate>Tue, 11 Feb 2025 15:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20250211-configure-ssh-keys-for-multiple-github-accounts/</guid><description>&lt;p>&lt;a href="https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts" target="_blank" rel="noopener">Configuring SSH Keys for Multiple GitHub Accounts&lt;/a>&lt;/p>
+&lt;h3 id="use-different-host-values">Use Different Host values&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Host github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_ed25519
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Host github-plnx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_plnx_ed25519
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Instead of the actual URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github.com:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Substitue in our custom Host value for the `github.com` part&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github-plnx:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="automate-substituting-the-host">Automate Substituting the Host&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>include&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &lt;span style="color:#f92672">=&lt;/span> ~/.gitconfig_custom
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># See custom `Host github-plnx` in ~/.ssh/config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>url &lt;span style="color:#e6db74">&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> insteadOf &lt;span style="color:#f92672">=&lt;/span> git@github.com:planet-express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Rules that terminal programs follow</title><link>https://linzeyan.github.io/zh-tw/posts/20241225-terminal-rules/</link><pubDate>Wed, 25 Dec 2024 08:45:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20241225-terminal-rules/</guid><description>&lt;p>&lt;a href="https://jvns.ca/blog/2024/11/26/terminal-rules/" target="_blank" rel="noopener">&amp;ldquo;Rules&amp;rdquo; that terminal programs follow&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>規則 1：非互動程式應在按Ctrl-C時退出&lt;/li>
+&lt;li>規則 2：按q時，TUI 應退出&lt;/li>
+&lt;li>規則 3：在空白行上按Ctrl-D時，REPL 應退出&lt;/li>
+&lt;li>規則 4：不要使用超過 16 種顏色&lt;/li>
+&lt;li>規則 5：支援 readline 鍵綁定
+&lt;ul>
+&lt;li>規則 5.1：Ctrl-W 應刪除最後一個單字&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>規則 6：寫入管道時禁用顏色&lt;/li>
+&lt;li>規則 7： - 表示 stdin/stdout&lt;/li>
+&lt;/ul></description></item></channel></rss>

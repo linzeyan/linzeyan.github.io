@@ -1,0 +1,7 @@
+server.host: 0.0.0.0
+server.shutdownTimeout: 5s
+elasticsearch.hosts: ['https://172.18.0.2:9200']
+monitoring.ui.container.elasticsearch.enabled: true
+elasticsearch.serviceAccountToken: AXXXXXXXXXXXXXX
+elasticsearch.ssl.certificateAuthorities: [/usr/share/kibana/data/ca_1704696029808.crt]
+xpack.fleet.outputs: [{id: fleet-default-output, name: default, is_default: true, is_default_monitoring: true, type: elasticsearch, hosts: ['https://172.18.0.2:9200'], ca_trusted_fingerprint: 03a17212c37e3acafa09ba2aaff91ec21ca14d3dd20edf96cc0bb06ab44eb9c3}]

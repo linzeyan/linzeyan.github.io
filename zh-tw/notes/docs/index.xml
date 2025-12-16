@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Ricky</title><link>https://linzeyan.github.io/zh-tw/notes/docs/</link><description>Recent content in Docs on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><atom:link href="https://linzeyan.github.io/zh-tw/notes/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Cloudflare docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/cloudflare/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/cloudflare/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Setting CloudFlare Worker for CORS&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">addEventListener&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;fetch&amp;#34;&lt;/span>, (&lt;span style="color:#a6e22e">event&lt;/span>) =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">event&lt;/span>.&lt;span style="color:#a6e22e">respondWith&lt;/span>(&lt;span style="color:#a6e22e">handleRequest&lt;/span>(&lt;span style="color:#a6e22e">event&lt;/span>.&lt;span style="color:#a6e22e">request&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">handleRequest&lt;/span>(&lt;span style="color:#a6e22e">request&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">let&lt;/span> &lt;span style="color:#a6e22e">response&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">request&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">response&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">Response&lt;/span>(&lt;span style="color:#a6e22e">response&lt;/span>.&lt;span style="color:#a6e22e">body&lt;/span>, &lt;span style="color:#a6e22e">response&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">response&lt;/span>.&lt;span style="color:#a6e22e">headers&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Access-Control-Allow-Origin&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;frontend-h5.shyc883.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> );
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">response&lt;/span>.&lt;span style="color:#a6e22e">headers&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Access-Control-Allow-Methods&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;GET, OPTIONS, POST&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">response&lt;/span>.&lt;span style="color:#a6e22e">headers&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Access-Control-Allow-Headers&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Content-Type, Authorization&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> );
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">response&lt;/span>.&lt;span style="color:#a6e22e">headers&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Access-Control-Allow-Credentials&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">true&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">response&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Terraform_create_record&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-hcl" data-lang="hcl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">terraform&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">required_providers&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cloudflare &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare/cloudflare&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;~&amp;gt; 2.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">provider&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> email &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare@gmail.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> api_key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1488ed0d2082ed36c010b773431fd9dcacde1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> account_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;06ae012a1ba907df24a220cd14a4fa8b&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare_record&amp;#34; &amp;#34;gitlab&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zone_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;gitlab&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;192.123.168.234&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> proxied &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Terraform_create_page_rule&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-hcl" data-lang="hcl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Add a page rule to the domain
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare_page_rule&amp;#34; &amp;#34;page_rule_png&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zone_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> target &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;www.example.com/*.png*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> status &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;active&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">actions&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> always_use_https &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> browser_cache_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">86400&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cache_level &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cache_everything&amp;#34;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # edge_cache_ttl = 86400
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">cache_key_fields&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">cookie&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">header&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">host&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">query_string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ignore &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">user&lt;/span> {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;200-299&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = 300
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;300-399&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = 60
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;400-403&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = -1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;404&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = 30
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;405-499&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = -1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # cache_ttl_by_status {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # codes = &amp;#34;500-599&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # ttl = 0
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> # }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>}&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># resource &amp;#34;cloudflare_page_rule&amp;#34; &amp;#34;rules&amp;#34; {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># count = &amp;#34;${length(keys(&amp;#34;${var.targets}&amp;#34;))}&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># lifecycle {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create_before_destroy = true
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># zone_id = &amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># target = &amp;#34;${var.targets[element(keys(var.targets),count.index)]}&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># actions {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># always_use_https = &amp;#34;true&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cache_level = &amp;#34;cache_everything&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># priority = &amp;#34;${count.index + 1}&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Terraform_create_rate_limit_rule&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-hcl" data-lang="hcl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create rate limit rule
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare_rate_limit&amp;#34; &amp;#34;wss_rate_limit&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zone_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> threshold &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> period &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">match&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">request&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> url_pattern &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;*wss*/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">action&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mode &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ban&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timeout &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3600&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">correlate&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> by &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;nat&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">resource&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cloudflare_rate_limit&amp;#34; &amp;#34;frontend_rate_limit&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> zone_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> threshold &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> period &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">match&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">request&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> url_pattern &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;*h5*/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">action&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mode &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ban&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timeout &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3600&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">correlate&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> by &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;nat&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>API Document&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://developers.cloudflare.com/api/operations/custom-hostname-for-a-zone-create-custom-hostname" target="_blank" rel="noopener">Cloudflare for SaaS&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record" target="_blank" rel="noopener">partial (CNAME) zone&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Diagrams</title><link>https://linzeyan.github.io/zh-tw/notes/docs/diagrams/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/diagrams/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Diagrams&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;a href="https://diagrams.mingrammer.com/docs/getting-started/installation" target="_blank" rel="noopener">https://diagrams.mingrammer.com/docs/getting-started/installation&lt;/a>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Docker docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/docker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/docker/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>docker-compose&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="cadvisor">cAdvisor&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/cadvisor/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/cadvisor/prometheus.yaml">prometheus.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="elasticsearch">Elasticsearch&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/elasticsearch/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="local-dev">local dev&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/local/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="nodejs">NodeJS&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/nodejs/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="rstudio">rstudio&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/rstudio/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="rsyncd">rsyncd&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/rsyncd/docker-compose.yaml">docker-compose.yaml&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/rsyncd/rsyncd.conf">rsyncd.conf&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/docker-compose/rsyncd/rsyncd.secrets">rsyncd.secrets&lt;/a>&lt;/li>
+&lt;li>&lt;code>rsync -auz --password-file=/tmp/pass dist user@hostip::myshare&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Dockerfile&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="awscli">awscli&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/awscli/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="buildx">buildx&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/buildx/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;code>docker buildx build --push --platform linux/arm64,linux/amd64 -t zeyanlin/app .&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h5 id="dind">dind&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/dind/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="golang">golang&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/golang/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;code>docker build --secret id=mysecret,src=id_rsa -t app .&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h5 id="goproxy">goproxy&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/goproxy/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;code>docker buildx build -f goproxy/Dockerfile --platform linux/amd64,linux/arm64 -t zeyanlin/goproxy:latest --push .&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h5 id="gitlab-ci">Gitlab-ci&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/gitlab/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/gitlab/telegram.bash">telegram.bash&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="nginx">&lt;a href="https://github.com/macbre/docker-nginx-http3" target="_blank" rel="noopener">nginx&lt;/a>&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/nginx/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/nginx/docker-compose.yml">docker-compose.yml&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/nginx/nginx.conf">nginx.conf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="rstudio">rstudio&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/rstudio/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/rstudio/pkg.txt">pkg.txt&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="supervisord">supervisord&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/supervisord/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/supervisord/supervisord.conf">supervisord.conf&lt;/a>
+&lt;ul>
+&lt;li>service with supervisord
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/docker/dockerfile/supervisord/service_with_supervisord/Dockerfile">Dockerfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Gitlab docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/gitlab/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/gitlab/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>add member by project&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">Admin Area -&amp;gt; Settings -&amp;gt; General -&amp;gt; LDAP settings -&amp;gt; Lock memberships to LDAP synchronization -&amp;gt; Cancel&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>backup cronjob&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Backup Gitlab configs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> * * * /usr/bin/tar -zcf /var/opt/gitlab/backups/&lt;span style="color:#e6db74">`&lt;/span>date +%Y_%m_%d&lt;span style="color:#e6db74">`&lt;/span>_gitlab_config.tar.gz /etc/gitlab &amp;amp;&amp;gt; /tmp/backup.log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Backup Gitlab data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> * * * /usr/bin/gitlab-backup create STRATEGY&lt;span style="color:#f92672">=&lt;/span>copy BACKUP&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>date +%Y_%m_%d&lt;span style="color:#e6db74">`&lt;/span> &amp;amp;&amp;gt;&amp;gt; /tmp/backup.log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Rotate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> * * * /usr/bin/rm -f &lt;span style="color:#e6db74">`&lt;/span>find /data/backups/ -name &lt;span style="color:#e6db74">&amp;#34;*.tar*&amp;#34;&lt;/span> -mtime +15&lt;span style="color:#e6db74">`&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>gitlab-ci.yml template&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="gitbook">gitbook&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/gitbook/.gitlab-ci.yml">gitlab-ci.yml&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/gitbook/.gitbook.yml">gitbook.yml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="golang">golang&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/golang/.gitlab-ci.yml">gitlab-ci.yml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="hexo">hexo&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/hexo/.gitlab-ci.yml">gitlab-ci.yml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="static-resources">Static resources&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/static/.gitlab-ci.yml">gitlab-ci.yml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="template">template&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/ci/template/.gitlab-ci.yml">gitlab-ci.yml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>config&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="gitlab-runner">gitlab-runner&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/config/gitlab-runner/gitlab-runner.toml">gitlab-runner.toml&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>issue&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="console-output-while-install">console output while install&lt;/h6>
+&lt;pre tabindex="0">&lt;code>[execute] psql: could not connect to server: Connection refused
+Is the server running locally and accepting
+connections on Unix domain socket &amp;#34;/var/opt/gitlab/postgresql/.s.PGSQL.5432&amp;#34;?
+&lt;/code>&lt;/pre>&lt;h6 id="solve">solve&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># stop service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo gitlab-ctl stop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl stop gitlab-runsvdir.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># check if there are any postgres processes; shouldn&amp;#39;t be&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ps aux | grep postgre
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># remove process pid&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo rm /var/opt/gitlab/postgresql/data/postmaster.pid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># start service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl start gitlab-runsvdir.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo gitlab-ctl reconfigure
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>issue1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="解決-gitlab-pages-限制訪問權限後的-redirect-invalid-url">解決 Gitlab Pages 限制訪問權限後的 redirect invalid url。&lt;/h6>
+&lt;ol>
+&lt;li>Remove &amp;ldquo;gitlab_pages&amp;rdquo; block from &lt;code>/etc/gitlab/gitlab-secrets.json&lt;/code>&lt;/li>
+&lt;li>&lt;code>gitlab-ctl reconfigure&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>issue2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="console-output">console output&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Gitlab Container Registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Error response from daemon: Get https://registry.knowhow.fun/v2/: x509: certificate has expired or is not yet valid
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="etcgitlabgitlabrb">&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/config/gitlab/gitlab.rb">/etc/gitlab/gitlab.rb&lt;/a>&lt;/h6>
+&lt;h6 id="solve">solve&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yum install ca-certificates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /etc/gitlab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl genrsa -out ca.key &lt;span style="color:#ae81ff">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl req -new -x509 -days &lt;span style="color:#ae81ff">3650&lt;/span> -key ca.key -out ca.crt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl genrsa -out server.key &lt;span style="color:#ae81ff">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl req -new -key server.key -out server.csr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssl x509 -req -days &lt;span style="color:#ae81ff">3650&lt;/span> -in server.csr -CA ca.crt -CAkey ca.key -set_serial &lt;span style="color:#ae81ff">01&lt;/span> -out server.crt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp server.crt /etc/pki/ca-trust/source/anchors/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp ca.crt /etc/pki/ca-trust/source/anchors/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>update-ca-trust
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>issue3&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="console-output">console output&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Gitlab Container Registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>received unexpected HTTP status: &lt;span style="color:#ae81ff">500&lt;/span> Internal Server Error
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="solve">solve&lt;/h6>
+&lt;p>&lt;code>/etc/gitlab/gitlab.rb&lt;/code>&lt;/p></description></item><item><title>Linux docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/linux/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/linux/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>docker.service&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --bip 10.255.0.1/16 --containerd&lt;span style="color:#f92672">=&lt;/span>/run/containerd/containerd.sock --insecure-registry hub.srjob.co:8888 --insecure-registry registry.knowhow.fun
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>gd.service&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>Fetch DNS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>network.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>mysql.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WorkingDirectory&lt;span style="color:#f92672">=&lt;/span>/data/dns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/data/dns/gd -o hourly
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecReload&lt;span style="color:#f92672">=&lt;/span>/bin/kill -s HUP $MAINPID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Restart&lt;span style="color:#f92672">=&lt;/span>always
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>openresty.service&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>The OpenResty Application Platform
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>syslog.target network-online.target remote-fs.target nss-lookup.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Wants&lt;span style="color:#f92672">=&lt;/span>network-online.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>forking
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WorkingDirectory&lt;span style="color:#f92672">=&lt;/span>/data/config/nginx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PIDFile&lt;span style="color:#f92672">=&lt;/span>/data/config/nginx/logs/nginx.pid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStartPre&lt;span style="color:#f92672">=&lt;/span>/usr/bin/chown -R root:root /data/nginx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStartPre&lt;span style="color:#f92672">=&lt;/span>/usr/bin/rm -f /data/nginx/logs/nginx.pid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStartPre&lt;span style="color:#f92672">=&lt;/span>/usr/local/openresty/nginx/sbin/nginx -p /data/nginx -t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/usr/local/openresty/nginx/sbin/nginx -p /data/nginx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecReload&lt;span style="color:#f92672">=&lt;/span>/bin/kill -s HUP $MAINPID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStop&lt;span style="color:#f92672">=&lt;/span>-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /data/nginx/logs/nginx.pid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#ExecStop=/bin/kill -s QUIT $MAINPID&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KillSignal&lt;span style="color:#f92672">=&lt;/span>SIGQUIT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TimeoutStopSec&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KillMode&lt;span style="color:#f92672">=&lt;/span>process
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PrivateTmp&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LimitNOFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1048576&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>pm2.service&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>PM2 process manager
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Documentation&lt;span style="color:#f92672">=&lt;/span>https://pm2.keymetrics.io/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>network.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>forking
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User&lt;span style="color:#f92672">=&lt;/span>root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LimitNOFILE&lt;span style="color:#f92672">=&lt;/span>infinity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LimitNPROC&lt;span style="color:#f92672">=&lt;/span>infinity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LimitCORE&lt;span style="color:#f92672">=&lt;/span>infinity
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Environment&lt;span style="color:#f92672">=&lt;/span>PM2_HOME&lt;span style="color:#f92672">=&lt;/span>/root/.pm2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PIDFile&lt;span style="color:#f92672">=&lt;/span>/root/.pm2/pm2.pid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WorkingDirectory&lt;span style="color:#f92672">=&lt;/span>/game/publish
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/lib/node_modules/pm2/bin/pm2 start game_api.json manage.json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecReload&lt;span style="color:#f92672">=&lt;/span>/lib/node_modules/pm2/bin/pm2 reload all
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStop&lt;span style="color:#f92672">=&lt;/span>/lib/node_modules/pm2/bin/pm2 kill
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>logrotate&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;pre tabindex="0">&lt;code>/data/gameapi/logs/*.log {
+create 0644 nobody root
+daily
+rotate 30
+dateext
+missingok
+notifempty
+compress
+sharedscripts
+postrotate
+/bin/kill -USR1 `cat /data/gameapi/logs/nginx.pid 2&amp;gt;/dev/null` 2&amp;gt;/dev/null || true
+endscript
+}
+&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>mermaid notes</title><link>https://linzeyan.github.io/zh-tw/notes/docs/mermaid/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/mermaid/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>details&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;details>
+&lt;summary>看我&lt;/summary>
+你看不到我
+看不到我
+&lt;/details>
+&lt;!-- 你看不到我看不到我 -->
+&lt;!--
+你看不到我
+看不到我
+-->
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>class&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>classDiagram
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class01 &lt;span style="color:#960050;background-color:#1e0010">&amp;lt;&lt;/span>|-- AveryLongClass : Cool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class03 _-- Class04
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class05 o-- Class06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class07 .. Class08
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class09 --&amp;gt; C2 : Where am i?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class09 --_ C3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class09 --|&amp;gt; Class07
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class07 : equals()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class07 : Object[] elementData
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class01 : size()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class01 : int chimp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class01 : int gorilla
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Class08 &amp;lt;&lt;span style="color:#f92672">--&lt;/span>&amp;gt; C2: Cool label
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/class_1.svg">classDiagram&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>flow-link&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>flowchart LR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A --o B
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>B --x C
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>D o--o E
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>E &amp;lt;&lt;span style="color:#f92672">--&lt;/span>&amp;gt; F
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>F x--x G
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/link.svg">flowchart&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>flow-link1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/link1">code&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/link1.svg">flowchart&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>flow-shapes&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>graph LR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id1[方框]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id2(帶有圓角的方框)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id3([體育場形狀])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id4[[子例程]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id5[(圓柱狀)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id6((圓形))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id7&amp;gt;非對稱形狀]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id8{菱形}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id9{{六角形}}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id10[/平行四邊形 1/]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id11[\平行四邊形 2\]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id12[/梯形 1\]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id13[\梯形 2/]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id14(((雙圓)))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/shapes.svg">flowchart&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>flow-subgraphs&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>flowchart TD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c1--&amp;gt;a2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> subgraph one
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a1--&amp;gt;a2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> subgraph &amp;#34;&lt;span style="color:#e6db74">`**two**`&lt;/span>&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b1--&amp;gt;b2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> subgraph three
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> c1--&amp;gt;c2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> end
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/subgraphs.svg">flowchart&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>gantt&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>gantt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dateFormat YYYY-MM-DD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title Adding GANTT diagram functionality to mermaid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>section A section
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Completed task :done, des1, 2014-01-06,2014-01-08
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Active task :active, des2, 2014-01-09, 3d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Future task : des3, after des2, 5d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Future task2 : des4, after des3, 5d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>section Critical tasks
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Completed task in the critical line :crit, done, 2014-01-06,24h
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Implement parser and jison :crit, done, after des1, 2d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Create tests for parser :crit, active, 3d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Future task in critical line :crit, 5d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Create tests for renderer :2d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Add to mermaid :1d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/gantt_1.svg">gantt&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>git&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>gitGraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>branch develop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>checkout develop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>checkout main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>merge develop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/git_1.svg">git&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>er&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>erDiagram
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CUSTOMER }|..|{ DELIVERY-ADDRESS : has
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CUSTOMER ||--o{ ORDER : places
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CUSTOMER ||--o{ INVOICE : &amp;#34;liable for&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DELIVERY-ADDRESS ||--o{ ORDER : receives
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>INVOICE ||--|{ ORDER : covers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ORDER ||--|{ ORDER-ITEM : includes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PRODUCT-CATEGORY ||--|{ PRODUCT : contains
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PRODUCT ||--o{ ORDER-ITEM : &amp;#34;ordered in&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/er_1.svg">erDiagram&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>journey&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>journey
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title My working day
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>section Go to work
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Make tea: 5: Me
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Go upstairs: 3: Me
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do work: 1: Me, Cat
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>section Go home
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Go downstairs: 5: Me
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sit down: 3: Me
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/journey_1.svg">erDiagram&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/p></description></item><item><title>Network docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/network/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/network/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Synology Active Backup for Bussiness backup task failed&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="due-to-ip-change-last-week">Due to IP change last week&lt;/h6>
+&lt;ol start="0">
+&lt;li>Firewall policy create NAS_to_ESXi。&lt;/li>
+&lt;li>虛擬機器 -&amp;gt; 任務清單 -&amp;gt; 刪除任務。&lt;/li>
+&lt;li>虛擬機器 -&amp;gt; VMware vSphere -&amp;gt; 管理 Hypervisor -&amp;gt; 刪除舊的 IP，新增新的 IP。&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Set LACP for Synology NAS and NETGEAR switch&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="netgear">NETGEAR&lt;/h6>
+&lt;ol>
+&lt;li>Switching -&amp;gt; LAG -&amp;gt; LAG Configuration -&amp;gt; ch1 -&amp;gt; 41、42 -&amp;gt; Apply。&lt;/li>
+&lt;li>ch1 -&amp;gt; Description: NAS、LAG Type:LACP -&amp;gt; Apply。&lt;/li>
+&lt;li>Switching -&amp;gt; VLAN -&amp;gt; Port PVID Configuration -&amp;gt; g41、g42 PVID:99、VLAN Member:10-14,17-23,99,101、VLAN Tag:10-14,17-23,99,101 -&amp;gt; Apply。&lt;/li>
+&lt;/ol>
+&lt;h6 id="synology">Synology&lt;/h6>
+&lt;ul>
+&lt;li>控制台 -&amp;gt; 網路 -&amp;gt; 網路介面 -&amp;gt; 新增 Bond。&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Set NAT in FortiGate&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="1-政策物件---虛擬-ip---新增">1. 政策&amp;amp;物件 -&amp;gt; 虛擬 IP -&amp;gt; 新增&lt;/h5>
+&lt;ul>
+&lt;li>名稱: IT-VPN&lt;/li>
+&lt;li>介面: wan2&lt;/li>
+&lt;li>對外 IP: 0.0.0.0&lt;/li>
+&lt;/ul>
+&lt;h6 id="埠號轉發">埠號轉發&lt;/h6>
+&lt;ul>
+&lt;li>協定: TCP&lt;/li>
+&lt;li>外部服務埠號: 19979&lt;/li>
+&lt;li>對應到埠號: 19979&lt;/li>
+&lt;/ul>
+&lt;h5 id="2-政策物件---ipv4-政策">2. 政策&amp;amp;物件 -&amp;gt; IPv4 政策&lt;/h5>
+&lt;ol>
+&lt;li>From zone wan2 to zone Knowhow_Vlan&lt;/li>
+&lt;li>From any to IT-VPN&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Juniper SRX 320&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看當前軟體版本號&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show system software
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看系統啟動時間&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show system uptime
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看硬體板卡及序號&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show chassis haredware
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看硬體板卡當前狀態&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show chassis environment
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看主控板（RE）資源使用及狀態&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show chassis routing-engine
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看當前防火牆併發會話數&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show security flow session summary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看當前防火牆具體併發會話&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show security flow session
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 清除當前 session&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clear security flow session all
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 檢查全域 ALG 開啟情況&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show security alg status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查OID&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定政策&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set security policy zones from-zone to-zone
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看路由表&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看 ARP 表&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show arp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看系統日誌&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show log messages
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看所有介面運行狀態&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show interface terse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看介面運行細節資訊&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show interface ge-x/y/z detail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 比較修改&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show | compare rollback ?
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show | compare rollback &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看系統&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>show configuration
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 動態統計介面資料包轉發資訊&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>monitor interface ge-x/y/z
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 動態報文抓取（Tcpdump，類似 ScreenOS snoop命令）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>monitor traffic interface ge-x/y/z
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Nginx docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/nginx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/nginx/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>map&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># map
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">map&lt;/span> $remote_addr $limit_key {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">35.229.201.209&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> $binary_remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># wss.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">limit_req_zone&lt;/span> $limit_key &lt;span style="color:#e6db74">zone=websocket:10m&lt;/span> &lt;span style="color:#e6db74">rate=20r/s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">limit_req_status&lt;/span> &lt;span style="color:#ae81ff">499&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> = &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_req&lt;/span> &lt;span style="color:#e6db74">zone=websocket&lt;/span> &lt;span style="color:#e6db74">nodelay&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_req_log_level&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>rewrite&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="1">1&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/img&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">&amp;#39;^/img/(.*)&lt;/span>$&amp;#39; &lt;span style="color:#e6db74">/static/&lt;/span>$1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/static&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/data/nginxconfig.io/src&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">index&lt;/span> &lt;span style="color:#e6db74">nginx.svg&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="2">2&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/photo&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/data/nginxconfig.io/src&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">try_files&lt;/span> $uri &lt;span style="color:#e6db74">/&lt;/span>$uri &lt;span style="color:#e6db74">@pic&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">@pic&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">&amp;#39;^/photo/(.*)&lt;/span>$&amp;#39; &lt;span style="color:#e6db74">/static/&lt;/span>$1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3">3&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># remove prefix path and allow proxy_pass POST
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/upload/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span> $proxy_add_x_forwarded_for;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/data/nginx/html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Remove path
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">^/upload/(.*)&lt;/span> &lt;span style="color:#e6db74">/&lt;/span>$1 &lt;span style="color:#e6db74">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">https://logo&lt;/span>$uri$is_args$args;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Proxy_pass POST
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_http_version&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#e6db74">.1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Connection&lt;/span> &lt;span style="color:#e6db74">&amp;#39;upgrade&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_cache_bypass&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#proxy_redirect https://logo/ /;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span> $proxy_add_x_forwarded_for;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/data/nginx/html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">index&lt;/span> &lt;span style="color:#e6db74">index.html&lt;/span> &lt;span style="color:#e6db74">index.htm&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>grafana behind nginx&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="serversslconf">server/ssl.conf&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">/etc/ssl/go2cloudten.com.crt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">/etc/ssl/go2cloudten.com.key&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_ciphers&lt;/span> &lt;span style="color:#e6db74">&amp;#34;EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:HIGH:!RC2:!RC4:!aNULL:!eNULL:!LOW:!IDEA:!DES:!TDES:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!EXPORT:!ANON&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_prefer_server_ciphers&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_protocols&lt;/span> &lt;span style="color:#e6db74">TLSv1.2&lt;/span> &lt;span style="color:#e6db74">TLSv1.3&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ssl_session_timeout&lt;/span> &lt;span style="color:#ae81ff">50m&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="serverproxyconf">server/proxy.conf&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span> $proxy_add_x_forwarded_for;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="grafanaconf">grafana.conf&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">grafana-test.go2cloudten.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">grafana.go2cloudten.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">server/ssl.conf&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">server/proxy.conf&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">logs/grafana.log&lt;/span> &lt;span style="color:#e6db74">json&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_log&lt;/span> &lt;span style="color:#e6db74">logs/grafana.error.log&lt;/span> &lt;span style="color:#e6db74">warn&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://grafana&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_connect_timeout&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_read_timeout&lt;/span> &lt;span style="color:#ae81ff">700&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_send_timeout&lt;/span> &lt;span style="color:#ae81ff">700&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Connection&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Upgrade&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Vagrant docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/vagrant/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/vagrant/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Vagrantfile template&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="docker">docker&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/docker/Vagrantfile">Nginx&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="hyperv">hyperv&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/hyperv/Vagrantfile.CentOS7">CentOS7&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/hyperv/Vagrantfile.Win2019">Win2019&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="virtualbox">virtualbox&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/virtualbox/Vagrantfile">Vagrantfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="vmware">vmware&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/vmware_fusion/Vagrantfile">Vagrantfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="multi">multi&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/multi/Vagrantfile">Vagrantfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>others&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="common">common&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/common/Vagrantfile">Vagrantfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="metasploitable3">Metasploitable3&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/docs/vagrant/files/metasploitable3/Vagrantfile">Vagrantfile&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Zabbix docs</title><link>https://linzeyan.github.io/zh-tw/notes/docs/zabbix/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/docs/zabbix/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>send alert&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ol>
+&lt;li>Use Webhook, Create Channel and Webhook in Mattermost, and put script to $(grep AlertScriptsPath /etc/zabbix/zabbix_server.conf).&lt;/li>
+&lt;li>Create Media types in Zabbix(Administration -&amp;gt; Medai types).&lt;/li>
+&lt;li>Add media to user(Administration -&amp;gt; Users -&amp;gt; Media).&lt;/li>
+&lt;li>Create action(Configuration -&amp;gt; Actions -&amp;gt; Trigger actions)。&lt;/li>
+&lt;li>Debug(Write log in script).
+&lt;ol>
+&lt;li>Media types:
+&lt;ol>
+&lt;li>PROBLEM:\nProblem started at {EVENT.TIME} on {EVENT.DATE}\n 問題: {EVENT.NAME}\n 主機: {HOST.NAME}\nSeverity: {EVENT.SEVERITY}\n 目前數值: {EVENT.OPDATA}\n 問題 ID: {EVENT.ID}\n{TRIGGER.URL}&lt;/li>
+&lt;li>RECOVERY:\nProblem has been resolved at {EVENT.RECOVERY.TIME} on {EVENT.RECOVERY.DATE}\n 問題: {EVENT.NAME}\n 持續時間: {EVENT.DURATION}\n 主機: {HOST.NAME}\nSeverity: {EVENT.SEVERITY}\n 問題 ID: {EVENT.ID}\n{TRIGGER.URL}&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>zabbix server&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h6 id="etczabbixzabbix_serverconf">/etc/zabbix/zabbix_server.conf&lt;/h6>
+&lt;p>Zabbix Server perform high loading, and slow query. Increase ValueCacheSize solve this problem.&lt;/p></description></item></channel></rss>

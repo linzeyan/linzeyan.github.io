@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AWS Notes on Ricky</title><link>https://linzeyan.github.io/notes/aws/</link><description>Recent content in AWS Notes on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://linzeyan.github.io/notes/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS Command</title><link>https://linzeyan.github.io/notes/aws/command/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/aws/command/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>CloudFront&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list distributions&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws cloudfront list-distributions --query &lt;span style="color:#e6db74">&amp;#39;*.Items[*].[Comment,Id,Aliases.Items[0],DefaultCacheBehavior.TargetOriginId]&amp;#39;&lt;/span> --output table
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create invalidation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws cloudfront create-invalidation --distribution-id EATDVGD171BHDS1 --paths &lt;span style="color:#e6db74">&amp;#34;/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## check cloudfornt log enable or not&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i in &lt;span style="color:#66d9ef">$(&lt;/span>aws cloudfront list-distributions --output table --query &lt;span style="color:#e6db74">&amp;#39;DistributionList.Items[*].Id&amp;#39;&lt;/span> --profile route53 | sed &lt;span style="color:#e6db74">&amp;#39;1,3d;$d&amp;#39;&lt;/span> | awk &lt;span style="color:#e6db74">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>aws cloudfront get-distribution --id &lt;span style="color:#e6db74">${&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span> --query &lt;span style="color:#e6db74">&amp;#39;Distribution.DistributionConfig.Logging&amp;#39;&lt;/span> --profile route53 | jq .Enabled&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>result&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> !&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>;&lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">${&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>EC2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ec2 describe-instances --query &lt;span style="color:#e6db74">&amp;#39;Reservations[*].Instances[*].[Tags[0].Value,InstanceId]&amp;#39;&lt;/span> --output table --page-size &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ECR&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Get password and login to 12345.dkr.ecr.ap-northeast-1.amazonaws.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ecr get-login-password | docker login --username AWS --password-stdin 12345.dkr.ecr.ap-northeast-1.amazonaws.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>S3&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Copy local file to S3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws s3 cp ./pic.png s3://bucket_name/dir/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sync local local_dir to S3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws s3 sync local_dir s3://bucket_name --exclude &lt;span style="color:#e6db74">&amp;#39;gameConfig.json&amp;#39;&lt;/span> --acl public-read --delete
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>snapshot&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ec2 describe-snapshots &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --owner-ids self &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --query &lt;span style="color:#e6db74">&amp;#34;Snapshots[?(Tags[0].Value==&amp;#39;backend&amp;#39;)].[SnapshotId,VolumeId]&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --region ap-northeast-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ec2 create-snapshot --volume-id vol-02468851c2bc3bc4b --description &lt;span style="color:#e6db74">&amp;#34;gitlab-&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>date +%F&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> --region ap-northeast-1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># delete&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0 --region ap-northeast-1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>sns&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>region&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;ap-east-1&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>account_id&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;888886666321&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>topic&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;sa&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create topic&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws sns create-topic --name &lt;span style="color:#e6db74">${&lt;/span>topic&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># subscribe&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws sns subscribe --topic-arn arn:aws:sns:&lt;span style="color:#e6db74">${&lt;/span>region&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>account_id&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>topic&lt;span style="color:#e6db74">}&lt;/span> --protocol email --notification-endpoint ricky@gmail.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># list&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:&lt;span style="color:#e6db74">${&lt;/span>region&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>account_id&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>topic&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># create alarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### metric-name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">##CPUUtilization --&amp;gt;percent&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">##NetworkIn --&amp;gt;bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">##NetworkOut --&amp;gt;bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> line in &lt;span style="color:#66d9ef">$(&lt;/span>aws ec2 describe-instances --query &lt;span style="color:#e6db74">&amp;#39;Reservations[*].Instances[*].[Tags[0].Value,InstanceId]&amp;#39;&lt;/span> --output table --page-size 100&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ID&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>echo &lt;span style="color:#e6db74">${&lt;/span>line&lt;span style="color:#e6db74">}&lt;/span>|awk -F &lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;{print $1}&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> VALUE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>echo &lt;span style="color:#e6db74">${&lt;/span>line&lt;span style="color:#e6db74">}&lt;/span>|awk -F &lt;span style="color:#e6db74">&amp;#39;,&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws cloudwatch put-metric-alarm &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --alarm-name &lt;span style="color:#e6db74">${&lt;/span>ID&lt;span style="color:#e6db74">}&lt;/span>_netout &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --metric-name NetworkOut &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace AWS/EC2 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --statistic Average &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --period &lt;span style="color:#ae81ff">300&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --threshold &lt;span style="color:#ae81ff">2560000&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --comparison-operator GreaterThanOrEqualToThreshold &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --dimensions &lt;span style="color:#e6db74">&amp;#34;Name=InstanceId,Value=&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>VALUE&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --evaluation-periods &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --alarm-actions arn:aws:sns:&lt;span style="color:#e6db74">${&lt;/span>region&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>account_id&lt;span style="color:#e6db74">}&lt;/span>:&lt;span style="color:#e6db74">${&lt;/span>topic&lt;span style="color:#e6db74">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">##--unit Bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$ID&lt;span style="color:#e6db74"> done&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>WAF&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>aws wafv2 create-web-acl &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --name acl_name &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --scope CLOUDFRONT &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --default-action Allow&lt;span style="color:#f92672">={}&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --visibility-config SampledRequestsEnabled&lt;span style="color:#f92672">=&lt;/span>true,CloudWatchMetricsEnabled&lt;span style="color:#f92672">=&lt;/span>true,MetricName&lt;span style="color:#f92672">=&lt;/span>metric_acl_name &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --rule
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Mount S3 Bucket on EC2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>references: &lt;a href="https://linuxbeast.com/blog/how-to-mount-s3-bucket-on-ubuntu-22-04-with-s3fs-fuse/" target="_blank" rel="noopener">How to Mount S3 Bucket on Ubuntu 22.04 with S3FS Fuse&lt;/a>&lt;/p></description></item><item><title>AWS Configure</title><link>https://linzeyan.github.io/notes/aws/configure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/aws/configure/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>S3 Bucket Policy&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2012-10-17&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Statement&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Sid&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;AllowPublicRead&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Effect&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Allow&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Principal&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Action&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;s3:GetObject&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;Resource&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;arn:aws:s3:::bucketName/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>S3 CORS&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>[
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;AllowedHeaders&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;AllowedMethods&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;GET&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;PUT&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;POST&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;DELETE&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;AllowedOrigins&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ExposeHeaders&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;x-amz-server-side-encryption&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;x-amz-request-id&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;x-amz-id-2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;MaxAgeSeconds&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">3000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ECR Lifecycle Policy&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rules&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rulePriority&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Keep only the last 100 images&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;selection&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tagStatus&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;any&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;imageCountMoreThan&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countNumber&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;action&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;expire&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ECR Lifecycle Policy1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rules&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rulePriority&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Remove images with certain tag&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;selection&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tagStatus&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;tagged&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tagPrefixList&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;tag1&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;tag2&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;imageCountMoreThan&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countNumber&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;action&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;expire&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>ECR Lifecycle Policy2&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rules&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;rulePriority&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;description&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Remove untagged images older than 14 days&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;selection&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;tagStatus&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;untagged&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countType&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;sinceImagePushed&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countUnit&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;days&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;countNumber&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">14&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;action&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;expire&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>AWS Terraform</title><link>https://linzeyan.github.io/notes/aws/terraform/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/aws/terraform/</guid><description>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>tf&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;h5 id="provider">Provider&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/provider.tf">provider.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="ec2">EC2&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/ec2.tf">ec2.tf&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/initial.bash">initial.bash&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="elastic-ip">Elastic IP&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/elasticip.tf">elasticip.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="mq">MQ&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/mq.tf">mq.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="rds">RDS&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/rds.tf">rds.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="security-group">Security Group&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/sg.tf">sg.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="vpc">VPC&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/vpc.tf">vpc.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="waf">WAF&lt;/h5>
+&lt;ul>
+&lt;li>&lt;a href="https://linzeyan.github.io/notes/aws/terraform/hcl/waf.tf">waf.tf&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
