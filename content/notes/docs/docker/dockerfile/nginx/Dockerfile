@@ -1,0 +1,262 @@
+# https://hg.nginx.org/nginx/file/tip/src/core/nginx.h
+ARG NGINX_VERSION=1.25.2
+
+# https://hg.nginx.org/nginx
+ARG NGINX_COMMIT=44536076405c
+
+# https://github.com/google/ngx_brotli
+ARG NGX_BROTLI_COMMIT=63ca02abdcf79c9e788d2eedcc388d2335902e52
+
+# https://github.com/google/boringssl
+ARG BORINGSSL_COMMIT=e1b8685770d0e82e5a4a3c5d24ad1602e05f2e83
+
+# http://hg.nginx.org/njs / v0.8.1
+ARG NJS_COMMIT=a387eed79b90
+
+# https://github.com/openresty/headers-more-nginx-module#installation
+# we want to have https://github.com/openresty/headers-more-nginx-module/commit/e536bc595d8b490dbc9cf5999ec48fca3f488632
+ARG HEADERS_MORE_VERSION=0.34
+
+# https://github.com/leev/ngx_http_geoip2_module/releases
+ARG GEOIP2_VERSION=3.4
+
+# https://nginx.org/en/docs/http/ngx_http_v3_module.html
+ARG CONFIG="\
+    --build=quic-$NGINX_COMMIT-boringssl-$BORINGSSL_COMMIT \
+    --prefix=/etc/nginx \
+    --sbin-path=/usr/sbin/nginx \
+    --modules-path=/usr/lib/nginx/modules \
+    --conf-path=/etc/nginx/nginx.conf \
+    --error-log-path=/var/log/nginx/error.log \
+    --http-log-path=/var/log/nginx/access.log \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/run/nginx.lock \
+    --http-client-body-temp-path=/var/cache/nginx/client_temp \
+    --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+    --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+    --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
+    --user=www-data \
+    --group=www-data \
+    --with-http_ssl_module \
+    --with-http_realip_module \
+    --with-http_addition_module \
+    --with-http_sub_module \
+    --with-http_dav_module \
+    --with-http_flv_module \
+    --with-http_mp4_module \
+    --with-http_gunzip_module \
+    --with-http_gzip_static_module \
+    --with-http_random_index_module \
+    --with-http_secure_link_module \
+    --with-http_stub_status_module \
+    --with-http_auth_request_module \
+    --with-http_xslt_module=dynamic \
+    --with-http_image_filter_module=dynamic \
+    --with-http_geoip_module=dynamic \
+    --with-http_perl_module=dynamic \
+    --with-threads \
+    --with-stream \
+    --with-stream_ssl_module \
+    --with-stream_ssl_preread_module \
+    --with-stream_realip_module \
+    --with-stream_geoip_module=dynamic \
+    --with-http_slice_module \
+    --with-mail \
+    --with-mail_ssl_module \
+    --with-compat \
+    --with-file-aio \
+    --with-http_v2_module \
+    --with-http_v3_module \
+    --add-module=/usr/src/ngx_brotli \
+    --add-module=/usr/src/headers-more-nginx-module-$HEADERS_MORE_VERSION \
+    --add-module=/usr/src/njs/nginx \
+    --add-dynamic-module=/usr/src/ngx_http_geoip2_module \
+    "
+
+FROM ubuntu:22.04 AS base
+ENV DEBIAN_FRONTEND noninteractive
+
+ARG NGINX_VERSION
+ARG NGINX_COMMIT
+ARG NGX_BROTLI_COMMIT
+ARG HEADERS_MORE_VERSION
+ARG NJS_COMMIT
+ARG GEOIP2_VERSION
+ARG CONFIG
+
+RUN apt-get update
+
+RUN apt-get install -y --no-install-recommends software-properties-common
+RUN add-apt-repository universe
+
+# build-deps
+RUN apt-get install -y --no-install-recommends build-essential
+RUN apt-get install -y --no-install-recommends gcc
+RUN apt-get install -y --no-install-recommends libatomic1
+RUN apt-get install -y --no-install-recommends libgd-dev
+RUN apt-get install -y --no-install-recommends libgeoip-dev
+RUN apt-get install -y --no-install-recommends libpcre3-dev
+RUN apt-get install -y --no-install-recommends libperl-dev
+RUN apt-get install -y --no-install-recommends libssl-dev
+RUN apt-get install -y --no-install-recommends libxslt1-dev
+RUN apt-get install -y --no-install-recommends make
+RUN apt-get install -y --no-install-recommends golang
+RUN apt-get install -y --no-install-recommends ninja-build
+RUN apt-get install -y --no-install-recommends mercurial
+RUN apt-get install -y --no-install-recommends linux-headers-6.2.0-26-generic
+RUN apt-get install -y --no-install-recommends gnupg
+RUN apt-get install -y --no-install-recommends perl
+RUN apt-get install -y --no-install-recommends wget
+
+# brotli-build-deps
+RUN apt-get install -y --no-install-recommends autoconf
+RUN apt-get install -y --no-install-recommends libtool
+RUN apt-get install -y --no-install-recommends automake
+RUN apt-get install -y --no-install-recommends git
+RUN apt-get install -y --no-install-recommends g++
+RUN apt-get install -y --no-install-recommends cmake
+
+# geoip2-build-deps
+RUN apt-get install -y --no-install-recommends libmaxminddb-dev
+
+# njs-build-deps
+RUN apt-get install -y --no-install-recommends libreadline-dev
+
+
+
+WORKDIR /usr/src/
+
+RUN \
+    echo "Cloning nginx $NGINX_VERSION (rev $NGINX_COMMIT from 'default' branch) ..." \
+    && hg clone -b default --rev $NGINX_COMMIT https://hg.nginx.org/nginx /usr/src/nginx-$NGINX_VERSION
+
+RUN \
+    echo "Cloning brotli $NGX_BROTLI_COMMIT ..." \
+    && mkdir /usr/src/ngx_brotli \
+    && cd /usr/src/ngx_brotli \
+    && git init \
+    && git remote add origin https://github.com/google/ngx_brotli.git \
+    && git fetch --depth 1 origin $NGX_BROTLI_COMMIT \
+    && git checkout --recurse-submodules -q FETCH_HEAD \
+    && git submodule update --init --depth 1
+
+# hadolint ignore=SC2086
+RUN \
+    echo "Cloning boringssl ..." \
+    && cd /usr/src \
+    && git clone https://github.com/google/boringssl \
+    && cd boringssl \
+    && git checkout $BORINGSSL_COMMIT
+
+RUN \
+    echo "Building boringssl ..." \
+    && cd /usr/src/boringssl \
+    && mkdir build \
+    && cd build \
+    && cmake -GNinja .. \
+    && ninja
+
+RUN \
+    echo "Downloading headers-more-nginx-module ..." \
+    && cd /usr/src \
+    && wget -q https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v${HEADERS_MORE_VERSION}.tar.gz -O headers-more-nginx-module.tar.gz \
+    && tar -xf headers-more-nginx-module.tar.gz
+
+RUN \
+    echo "Downloading ngx_http_geoip2_module ..." \
+    && git clone --depth 1 --branch ${GEOIP2_VERSION} https://github.com/leev/ngx_http_geoip2_module /usr/src/ngx_http_geoip2_module
+
+RUN \
+    echo "Cloning and configuring njs ..." \
+    && cd /usr/src \
+    && hg clone --rev ${NJS_COMMIT} http://hg.nginx.org/njs \
+    && cd /usr/src/njs \
+    && ./configure \
+    && make njs \
+    && mv /usr/src/njs/build/njs /usr/sbin/njs \
+    && echo "njs v$(njs -v)"
+
+RUN \
+    echo "Building nginx ..." \
+    && cd /usr/src/nginx-$NGINX_VERSION \
+    && ./auto/configure $CONFIG \
+    --with-cc-opt="-I../boringssl/include"   \
+    --with-ld-opt="-L../boringssl/build/ssl  \
+    -L../boringssl/build/crypto" \
+    && make -j"$(getconf _NPROCESSORS_ONLN)"
+
+RUN \
+    cd /usr/src/nginx-$NGINX_VERSION \
+    && make install \
+    && rm -rf /etc/nginx/html/ \
+    && mkdir /etc/nginx/conf.d/ \
+    && strip /usr/sbin/nginx* \
+    && strip /usr/lib/nginx/modules/*.so
+
+# https://tools.ietf.org/html/rfc7919
+# https://github.com/mozilla/ssl-config-generator/blob/master/docs/ffdhe2048.txt
+RUN wget -q https://ssl-config.mozilla.org/ffdhe2048.txt -O /etc/ssl/dhparam.pem
+
+# Bring in gettext so we can get `envsubst`, then throw
+# the rest away. To do this, we need to install `gettext`
+# then move `envsubst` out of the way so `gettext` can
+# be deleted completely, then move `envsubst` back.
+RUN apt-get install -y --no-install-recommends gettext pax-utils \
+    \
+    && scanelf --needed --nobanner /usr/sbin/nginx /usr/sbin/njs /usr/lib/nginx/modules/*.so /usr/bin/envsubst \
+    | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+    | sort -u > /tmp/runDeps.txt
+
+FROM ubuntu:22.04 AS middle
+
+COPY --from=base /tmp/runDeps.txt /tmp/runDeps.txt
+COPY --from=base /etc/nginx /etc/nginx
+COPY --from=base /usr/lib/nginx/modules/*.so /usr/lib/nginx/modules/
+COPY --from=base /usr/sbin/nginx /usr/sbin/
+COPY --from=base /usr/local/lib /usr/local/
+COPY --from=base /usr/bin/envsubst /usr/local/bin/envsubst
+COPY --from=base /etc/ssl/dhparam.pem /etc/ssl/dhparam.pem
+COPY --from=base /usr/sbin/njs /usr/sbin/njs
+
+# hadolint ignore=SC2046
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends tzdata
+RUN apt-get install -y --no-install-recommends libbrotli1
+RUN apt-get install -y --no-install-recommends libc6
+RUN apt-get install -y --no-install-recommends libcrypt1
+RUN apt-get install -y --no-install-recommends libgd3
+RUN apt-get install -y --no-install-recommends libgeoip1
+RUN apt-get install -y --no-install-recommends libmaxminddb0
+RUN apt-get install -y --no-install-recommends libpcre3
+RUN apt-get install -y --no-install-recommends libssl-dev
+RUN apt-get install -y --no-install-recommends libxml2
+RUN apt-get install -y --no-install-recommends libxslt1.1
+RUN apt-get install -y --no-install-recommends zlib1g
+
+RUN ln -s /usr/lib/nginx/modules /etc/nginx/modules
+# forward request and error logs to docker log collector
+RUN mkdir /var/log/nginx \
+    && ln -sf /proc/self/fd/1 /var/log/nginx/access.log \
+    && ln -sf /proc/self/fd/2 /var/log/nginx/error.log
+
+RUN mkdir -p \
+    /var/cache/nginx/client_temp \
+    /var/cache/nginx/proxy_temp \
+    /var/cache/nginx/fastcgi_temp \
+    /var/cache/nginx/uwsgi_temp \
+    /var/cache/nginx/scgi_temp
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+
+FROM scratch
+ARG NGINX_VERSION
+ARG NGINX_COMMIT
+
+ENV NGINX_VERSION $NGINX_VERSION
+ENV NGINX_COMMIT $NGINX_COMMIT
+
+COPY --from=middle / /
+
+CMD ["nginx", "-g", "daemon off;"]

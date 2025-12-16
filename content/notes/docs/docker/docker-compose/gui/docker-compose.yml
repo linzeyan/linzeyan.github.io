@@ -1,0 +1,56 @@
+services:
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    restart: always
+    network_mode: host
+      #ports:
+      #  - 8080:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: "true"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+
+  redis:
+    image: redis/redisinsight:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:5540
+    volumes:
+      - ./redisinsight:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+  mysql:
+    image: dbeaver/cloudbeaver
+    container_name: mysql
+    restart: always
+    network_mode: host
+      #    ports:
+      #      - 8080:8978
+    volumes:
+      - ./cloudbeaver:/opt/cloudbeaver/workspace
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M

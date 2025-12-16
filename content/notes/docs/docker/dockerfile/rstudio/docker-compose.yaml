@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  rstudio:
+    image: zeyanlin/rstudio
+    ports:
+      - 1080:8787
+    environment:
+      - USER=allen
+      - PASSWORD=allen
+    volumes:
+      - ./data:/home/allen

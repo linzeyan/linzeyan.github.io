@@ -1,0 +1,33 @@
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  #image: node:12.13.0
+  image: zeyanlin/gitbook:ci
+  before_script:
+    #    - npm install gitbook-cli -g
+    #    - gitbook fetch 3.2.3
+    - cd book/lecture && gitbook install
+  #    - npm install gitbook-plugin-page-toc
+  #    - npm install gitbook-plugin-search-pro
+  #    - npm install gitbook-plugin-chapter-fold
+  #    - npm install gitbook-plugin-expandable-chapters
+  #    - npm install gitbook-plugin-back-to-top-button
+  #    - npm install gitbook-plugin-lightbox
+  script:
+    - echo '# Index' > SUMMARY.md
+    - for f in $(ls|grep '.md$'|grep -vE 'README.md|SUMMARY.md');do echo "  - [${f:0:$((${#f}-3))}](${f})" >> SUMMARY.md;done
+    - gitbook build . public
+    - mv public ../../
+  cache:
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+  only:
+    - master
+  tags:
+    - runner
