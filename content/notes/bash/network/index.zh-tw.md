@@ -59,3 +59,11 @@ ss -tnH state established \
 ```
 
 {{< /note >}}
+
+{{< note title="websocat connect MQTT" >}}
+
+```bash
+websocat -v --binary --protocol=mqtt ws://57.77.71.2:8083/mqtt
+```
+
+{{< /note >}}

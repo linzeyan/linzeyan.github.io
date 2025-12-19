@@ -121,3 +121,14 @@ For golang import package
 ```
 
 {{< /note >}}
+
+{{< note title="remove big file in repository" >}}
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install git-filter-repo
+git filter-repo --force --strip-blobs-bigger-than 100M
+```
+
+{{< /note >}}

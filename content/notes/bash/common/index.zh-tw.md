@@ -455,8 +455,10 @@ mknod /dev/null c 1 3
 {{< note title="Script Optimization" >}}
 
 [Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash](https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/)
+
 1. Use Built-in Commands: Built-in commands execute faster because they don't require loading an external process.
 2. Minimize Subshells: Subshells can be expensive in terms of performance.
+
 ```bash
 # Inefficient
 output=$(cat file.txt)
@@ -464,7 +466,9 @@ output=$(cat file.txt)
 # Efficient
 output=$(<file.txt)
 ```
+
 3. Use Arrays for Bulk Data: When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.
+
 ```bash
 # Inefficient
 item1="apple"
@@ -477,12 +481,16 @@ for item in "${items[@]}"; do
     echo "$item"
 done
 ```
+
 4. Enable Noclobber: To prevent accidental overwriting of files.
+
 ```bash
 set -o noclobber
 ```
+
 5. Use Functions: Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.
 6. Efficient File Operations: When performing file operations, use efficient techniques to minimize resource usage.
+
 ```bash
 # Inefficient
 while read -r line; do
@@ -494,8 +502,10 @@ while IFS= read -r line; do
     echo "$line"
 done < file.txt
 ```
+
 7. Parallel Processing: Tools like `xargs` and GNU `parallel` can be incredibly useful.
 8. Error Handling: Robust error handling is critical for creating reliable and maintainable scripts.
+
 ```bash
 # Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.
 set -e
@@ -523,11 +533,21 @@ exec 2>&1
 
 echo "Script started"
 ```
+
 9. Automating Complex System Administration Tasks:
    1. Automated Backups
    2. System Monitoring
    3. User Management
    4. Automated Updates
    5. Network Configuration
+
+{{< /note >}}
+
+{{< note title="macOS install specific version Safari" >}}
+
+```bash
+softwareupdate -l
+sudo softwareupdate -i 'Safari18.6VenturaAuto-18.6'
+```
 
 {{< /note >}}
