@@ -79,7 +79,46 @@
 &lt;li>開啟Gluetun的docker-compose檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
 &lt;li>依序啟動Gluetun和 走Gluetun的VPN連線的服務&lt;/li>
 &lt;li>容器公共IP應當跟您選擇的VPN伺服器一致&lt;/li>
-&lt;/ul></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20231004-container/</guid><description>&lt;p>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/p></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
+&lt;/ul></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20231004-container/</guid><description>&lt;p>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/p></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/posts/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;p>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a>&lt;/p>
+&lt;h3 id="method">method&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>docker buildx create --use&lt;/code>&lt;/li>
+&lt;li>&lt;code>FROM --platform=linux/amd64 debian&lt;/code> / &lt;code>FROM --platform=$BUILDPLATFORM debian&lt;/code>&lt;/li>
+&lt;li>variables&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>BUILDPLATFORM — matches the current machine. (e.g. linux/amd64)
+BUILDOS — os component of BUILDPLATFORM, e.g. linux
+BUILDARCH — e.g. amd64, arm64, riscv64
+BUILDVARIANT — used to set ARM variant, e.g. v7
+TARGETPLATFORM — The value set with --platform flag on build
+TARGETOS - OS component from --platform, e.g. linux
+TARGETARCH - Architecture from --platform, e.g. arm64
+TARGETVARIANT
+&lt;/code>&lt;/pre>&lt;h3 id="example">example&lt;/h3>
+&lt;ul>
+&lt;li>before&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> golang:1.17-alpine AS build&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> . .&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> go build -o /out/myapp .&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>build /out/myapp /bin&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>after&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> --platform=$BUILDPLATFORM golang:1.17-alpine AS build&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">ARG&lt;/span> TARGETOS TARGETARCH&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>target&lt;span style="color:#f92672">=&lt;/span>. &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>type&lt;span style="color:#f92672">=&lt;/span>cache,target&lt;span style="color:#f92672">=&lt;/span>/root/.cache/go-build &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>type&lt;span style="color:#f92672">=&lt;/span>cache,target&lt;span style="color:#f92672">=&lt;/span>/go/pkg &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> GOOS&lt;span style="color:#f92672">=&lt;/span>$TARGETOS GOARCH&lt;span style="color:#f92672">=&lt;/span>$TARGETARCH go build -o /out/myapp .&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>build /out/myapp /bin&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
 &lt;h2 id="concept">Concept&lt;/h2>
 &lt;h3 id="vm-vs-container">VM vs Container&lt;/h3>
 &lt;ul>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tor on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/tor/</link><description>Recent content in Tor on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 30 Oct 2025 17:49:44 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/tor/index.xml" rel="self" type="application/rss+xml"/><item><title>onion-mirror</title><link>https://linzeyan.github.io/zh-tw/posts/20251030-onion-mirror/</link><pubDate>Thu, 30 Oct 2025 17:49:44 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251030-onion-mirror/</guid><description>&lt;p>&lt;a href="https://flower.codes/2025/10/23/onion-mirror.html" target="_blank" rel="noopener">onion-mirror&lt;/a>&lt;/p>
+&lt;h3 id="install-tor">Install Tor&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install tor
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configure-tor">Configure Tor&lt;/h3>
+&lt;pre tabindex="0">&lt;code># Disable SOCKS proxy since we aren&amp;#39;t making outbound connections
+# through Tor
+SocksPort 0
+# Make sure Tor runs as a daemon (i.e. in the background)
+RunAsDaemon 1
+# Setup the hidden service on port 80, this is where we tell Tor to
+# create a .onion service for our web server
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80
+# Disable inbound connections, since we aren&amp;#39;t running a relay or
+# exit node
+ORPort 0
+# Disable directory services, since we won&amp;#39;t be mirroring directory
+# information to other Tor nodes
+DirPort 0
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo systemctl restart tor
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="get-your-onion-address">Get Your .onion Address&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo cat /var/lib/tor/hidden_service/hostname
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configure-caddy">Configure Caddy&lt;/h3>
+&lt;pre tabindex="0">&lt;code>http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
+# Set up a reverse proxy, or serve static files, etc.
+}
+&lt;/code>&lt;/pre>&lt;h3 id="advertise-your-onion-address">Advertise Your .onion Address&lt;/h3>
+&lt;pre tabindex="0">&lt;code>header {
+Onion-Location http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion{uri}
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>
