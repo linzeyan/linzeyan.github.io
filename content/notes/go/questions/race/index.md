@@ -38,7 +38,6 @@ func (s *Stats) Add(name string, num int) {
 <code class="language-golang">func (s *Stats) Snapshot() map[string]int {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
-
 	result := make(map[string]int, len(s.counters))
 	for k, v := range s.counters {
 		result[k] = v

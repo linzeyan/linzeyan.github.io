@@ -157,4 +157,12 @@ go install github.com/google/wire/cmd/wire@latest
 go install github.com/google/ko@latest
 ```
 
+##### Talisman
+
+> A tool to detect and prevent secrets from getting checked in
+>
+> https://github.com/thoughtworks/talisman
+
+`brew install talisman`
+
 {{< /note >}}
