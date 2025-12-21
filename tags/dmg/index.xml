@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dmg on Ricky</title><link>https://linzeyan.github.io/tags/dmg/</link><description>Recent content in Dmg on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 12 Jun 2023 10:04:20 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/dmg/index.xml" rel="self" type="application/rss+xml"/><item><title>制作macOS系统dmg包及iso可引导镜像</title><link>https://linzeyan.github.io/posts/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230612-macos-dmg-iso/</guid><description>&lt;p>&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener">制作 macOS 系统 dmg 包及 iso 可引导镜像&lt;/a>&lt;/p>
+&lt;h3 id="dmg">dmg&lt;/h3>
+&lt;ol>
+&lt;li>AppStore ==&amp;gt; search &amp;lsquo;install macos&amp;rsquo; ==&amp;gt; get installer ==&amp;gt; &lt;code>du -sh /Applications/Install\ macOS\ Mojave.app/&lt;/code>&lt;/li>
+&lt;li>磁碟工具程式 ==&amp;gt; 檔案 ==&amp;gt; 新增映像檔 ==&amp;gt; 空白映像檔
+&lt;ol>
+&lt;li>大小: installer size&lt;/li>
+&lt;li>格式: Mac OS 擴充格式(日誌式)&lt;/li>
+&lt;li>分割區: 單一分割區 - GUID 分割區配置表&lt;/li>
+&lt;li>映像檔格式: 可讀寫的磁碟映像檔&lt;/li>
+&lt;li>same as &lt;code>hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;code>sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS\ Mojave&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h3 id="iso">iso&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>hdiutil convert ~/Desktop/macOS\ Mojave.dmg -format UDTO -o ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
+&lt;li>&lt;code>mv ~/Desktop/macOS\ Mojave.iso.cdr ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
+&lt;/ol></description></item></channel></rss>

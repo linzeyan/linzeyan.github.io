@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZSH on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/zsh/</link><description>Recent content in ZSH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 08 May 2023 10:43:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>zsh 配置文件解析及优先级</title><link>https://linzeyan.github.io/zh-tw/posts/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230508-zprofile-zshrc/</guid><description>&lt;p>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">zsh 配置文件解析及优先级&lt;/a>&lt;/p>
+&lt;h3 id="zsh-的环境变量配置文件有">zsh 的环境变量配置文件有：&lt;/h3>
+&lt;ul>
+&lt;li>.zprofile&lt;/li>
+&lt;li>.zlogin&lt;/li>
+&lt;li>.zshrc&lt;/li>
+&lt;li>.zshenv&lt;/li>
+&lt;li>.zlogout&lt;/li>
+&lt;/ul>
+&lt;p>.zshrc 就是用来对 Shell 整体做个性化配置的&lt;/p>
+&lt;ul>
+&lt;li>.zprofile 和 .zlogin 差不多是一样的，他们都会被 login shells 设置环境变量，只是加载时间可能有一些差别。.zprofile 是基于 Bash 的 .bash_profile ，而 .zlogin 则是仿照 CSH 的 .login 遗留下来的名字&lt;/li>
+&lt;li>.zshrc 会设置 interactive shells 的环境变量。它会在 .zprofile 之后加载。通常可以设置 $PATH, $PROMPT, aliases, functions 等等。&lt;/li>
+&lt;li>.zshenv 总是会被读取，所以也可以在这里设置环境变量，$PATH 或 $EDITOR 等，但一般不怎么使用&lt;/li>
+&lt;li>zlogout 是在一个会话登出的时候被加载，非常适合用来清理临时的配置，比如重置终端窗口的标题&lt;/li>
+&lt;/ul>
+&lt;p>zsh 会在用户登录时(login shell)加载 ~/.zprofile&lt;/p>
+&lt;p>zsh 会在开启新的终端会话时加载 ~/.zshrc&lt;/p>
+&lt;h3 id="需要注意的是首先会加载-etczshenv-下的内容-然后再加载-home-目录下的配置文件">需要注意的是首先会加载 /etc/zshenv 下的内容， 然后再加载 HOME 目录下的配置文件：&lt;/h3>
+&lt;p>&lt;code>.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code>&lt;/p></description></item></channel></rss>

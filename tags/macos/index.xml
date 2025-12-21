@@ -291,4 +291,47 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;p>&lt;a href="https://objective-see.org/products/blockblock.html" target="_blank" rel="noopener">BlockBlock&lt;/a>: 可以阻止后台的持久化安装，RansomWhere 可以检测文件被加密的行为，还有一些杂七杂八的独立工具。&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item><item><title>制作macOS系统dmg包及iso可引导镜像</title><link>https://linzeyan.github.io/posts/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230612-macos-dmg-iso/</guid><description>&lt;p>&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener">制作 macOS 系统 dmg 包及 iso 可引导镜像&lt;/a>&lt;/p>
+&lt;h3 id="dmg">dmg&lt;/h3>
+&lt;ol>
+&lt;li>AppStore ==&amp;gt; search &amp;lsquo;install macos&amp;rsquo; ==&amp;gt; get installer ==&amp;gt; &lt;code>du -sh /Applications/Install\ macOS\ Mojave.app/&lt;/code>&lt;/li>
+&lt;li>磁碟工具程式 ==&amp;gt; 檔案 ==&amp;gt; 新增映像檔 ==&amp;gt; 空白映像檔
+&lt;ol>
+&lt;li>大小: installer size&lt;/li>
+&lt;li>格式: Mac OS 擴充格式(日誌式)&lt;/li>
+&lt;li>分割區: 單一分割區 - GUID 分割區配置表&lt;/li>
+&lt;li>映像檔格式: 可讀寫的磁碟映像檔&lt;/li>
+&lt;li>same as &lt;code>hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;code>sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS\ Mojave&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h3 id="iso">iso&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>hdiutil convert ~/Desktop/macOS\ Mojave.dmg -format UDTO -o ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
+&lt;li>&lt;code>mv ~/Desktop/macOS\ Mojave.iso.cdr ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>我的提升生產力 Mac 設定與軟體</title><link>https://linzeyan.github.io/posts/20230420-my-mac-setting/</link><pubDate>Thu, 20 Apr 2023 14:52:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230420-my-mac-setting/</guid><description>&lt;p>&lt;a href="https://jason-memo.dev/posts/my-mac-setting/" target="_blank" rel="noopener">我的提升生產力 Mac 設定與軟體&lt;/a>&lt;/p>
+&lt;h3 id="控制個別-app-是否進入-dark-mode">控制個別 App 是否進入 dark mode&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;a href="https://nightowlapp.co/" target="_blank" rel="noopener">https://nightowlapp.co/&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;code>brew install --cask nightowl&lt;/code>&lt;/p>
+&lt;h3 id="用鍵盤控制外接螢幕亮度---monitorcontrol">用鍵盤控制外接螢幕亮度 - MonitorControl&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;a href="https://github.com/MonitorControl/MonitorControl" target="_blank" rel="noopener">https://github.com/MonitorControl/MonitorControl&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;code>brew install --cask monitorcontrol&lt;/code>&lt;/p>
+&lt;h3 id="raycast">Raycast&lt;/h3>
+&lt;p>Raycast 可以視為免費而且功能更強大的 Alfred，讓你不需要用滑鼠，靠鍵盤 Option + Space 快速啟用各種功能，內建許多付費 App 才有的功能&lt;/p>
+&lt;ul>
+&lt;li>快速啟動 App&lt;/li>
+&lt;li>快速查字典跟使用計算機&lt;/li>
+&lt;li>內建查找剪貼簿歷史紀錄&lt;/li>
+&lt;li>自帶像是 Magnet 得 window managment 功能，利用快捷鍵迅速調整視窗大小置左置右&lt;/li>
+&lt;li>與行事曆整合，會議時間快到可以用快捷鍵快速開啟 Google Meet 遠端會議，而且會帶入對的 email 帳戶&lt;/li>
+&lt;li>可以自行寫 shell nodejs applescript 綁定快捷鍵快速啟用。&lt;/li>
+&lt;li>豐富的 extenstion store 可以下載&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&lt;a href="https://www.raycast.com/" target="_blank" rel="noopener">https://www.raycast.com/&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;code>brew install --cask raycast&lt;/code>&lt;/p>
+&lt;h3 id="減少風扇起飛---讓-spotlight-排除你的專案資料夾">減少風扇起飛 - 讓 Spotlight 排除你的專案資料夾&lt;/h3>
+&lt;p>系統設定 &amp;gt; Spotlight &amp;gt; 搜尋隱私權&lt;/p></description></item></channel></rss>
