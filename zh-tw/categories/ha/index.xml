@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HA on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/ha/</link><description>Recent content in HA on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 18 Apr 2023 10:24:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/ha/index.xml" rel="self" type="application/rss+xml"/><item><title>关于高可用的系统</title><link>https://linzeyan.github.io/zh-tw/posts/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230418-high-availability-system/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">关于高可用的系统&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>項目 / 機制&lt;/th>
+&lt;th>Backups&lt;/th>
+&lt;th>M/S&lt;/th>
+&lt;th>MM&lt;/th>
+&lt;th>2PC&lt;/th>
+&lt;th>Paxos&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Consistency&lt;/td>
+&lt;td>Weak&lt;/td>
+&lt;td>Eventual&lt;/td>
+&lt;td>Eventual&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Transactions&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;td>Local&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Latency&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Throughput&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Medium&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Data loss&lt;/td>
+&lt;td>Lots&lt;/td>
+&lt;td>Some&lt;/td>
+&lt;td>Some&lt;/td>
+&lt;td>None&lt;/td>
+&lt;td>None&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Failover&lt;/td>
+&lt;td>Down&lt;/td>
+&lt;td>Read only&lt;/td>
+&lt;td>Read only&lt;/td>
+&lt;td>Read/write&lt;/td>
+&lt;td>Read/write&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>这个图基本上来说是目前高可用系统中能看得到的所有的解决方案的基础了。M/S、MM 实现起来不难，但是会有很多问题，2PC 的问题就是性能不行，而 Paxos 的问题就是太复杂，实现难度太大。&lt;/p>
+&lt;p>总结一下各个高可用方案的的问题：&lt;/p>
+&lt;ul>
+&lt;li>对于最终一致性来说，在宕机的情况下，会出现数据没有完全同步完成，会出现数据差异性。&lt;/li>
+&lt;li>对于强一致性来说，要么使用性能比较慢的 XA 系的两阶段提交的方案，要么使用性能比较好，但是实现比较复杂的 Paxos 协议。&lt;/li>
+&lt;/ul></description></item></channel></rss>

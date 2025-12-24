@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NGINX on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/nginx/</link><description>Recent content in NGINX on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 20 Oct 2025 16:31:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</guid><description>&lt;p>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NGINX on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/nginx/</link><description>Recent content in NGINX on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 20 Oct 2025 16:31:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251020-nginx-acme-module/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h2 id="ngx_http_acme_module">&lt;code>ngx_http_acme_module&lt;/code>&lt;/h2>
 &lt;ul>
 &lt;li>NGINX 1.25.1&lt;/li>
@@ -143,16 +145,20 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服务被通报的概率</title><link>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</guid><description>&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服务被通报的概率&lt;/a>&lt;/p>
-&lt;ul>
-&lt;li>通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服务被通报的概率</title><link>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20251002-hide-web/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服务被通报的概率&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：&lt;/p>
+&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用error_page指令为497状态码设置虚拟路径@close，Nginx在处理的@close时发现是返回444状态码，于是直接关闭连接。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 error_page 指令为 497 状态码设置虚拟路径@close，Nginx 在处理的@close 时发现是返回 444 状态码，于是直接关闭连接。&lt;/p>
 &lt;p>这个时候你再用 curl 访问对应的端口就会收到如下报错：&lt;/p>
 &lt;p>curl &lt;a href="http://example.zz.ac:5678" target="_blank" rel="noopener">http://example.zz.ac:5678&lt;/a>
 curl: (52) Empty reply from server&lt;/p>

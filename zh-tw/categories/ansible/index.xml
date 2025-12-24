@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ansible on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/ansible/</link><description>Recent content in Ansible on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sat, 26 Sep 2020 16:57:21 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/ansible/index.xml" rel="self" type="application/rss+xml"/><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ansible on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/ansible/</link><description>Recent content in Ansible on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 03 Jan 2023 12:36:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/ansible/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows SSH setup</title><link>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH setup&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Install OpenSSH for Windows&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>預設的 shell 是使用 cmd，照文件說，若需要修改，是要改 ansible_shell_type 變數，這應該是要在 inventory 主機裡加入主機變數：ansible_shell_type，變數內容可以是 cmd 或 powershell。&lt;/li>
+&lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
+&lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
+&lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
+&lt;/ol></description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
 &lt;h2 id="大綱">大綱&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#%e7%b0%a1%e4%bb%8b">簡介&lt;/a>&lt;/li>

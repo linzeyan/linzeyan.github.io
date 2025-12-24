@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Design on Ricky</title><link>https://linzeyan.github.io/categories/design/</link><description>Recent content in Design on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 18 Apr 2023 13:58:38 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/design/index.xml" rel="self" type="application/rss+xml"/><item><title>一些软件设计的原则</title><link>https://linzeyan.github.io/posts/20230418-software-design-principles/</link><pubDate>Tue, 18 Apr 2023 13:58:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230418-software-design-principles/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/4535.html" target="_blank" rel="noopener">一些软件设计的原则&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="1-dont-repeat-yourself-dry">1. Don&amp;rsquo;t Repeat Yourself (DRY)&lt;/h3>
+&lt;h3 id="2-keep-it-simple-stupid-kiss">2. Keep It Simple, Stupid (KISS)&lt;/h3>
+&lt;p>把一个事情搞复杂是一件简单的事，但要把一个复杂的事变简单，这是一件复杂的事。&lt;/p>
+&lt;h3 id="3-program-to-an-interface-not-an-implementation">3. Program to an interface, not an implementation&lt;/h3>
+&lt;ol>
+&lt;li>喜欢组合而不是继承&lt;/li>
+&lt;li>依赖倒置原则&lt;/li>
+&lt;/ol>
+&lt;h3 id="4-command-query-separation-cqs---命令-查询分离原则">4. Command-Query Separation (CQS) - 命令-查询分离原则&lt;/h3>
+&lt;ul>
+&lt;li>查询：当一个方法返回一个值来回应一个问题的时候，它就具有查询的性质；&lt;/li>
+&lt;li>命令：当一个方法要改变对象的状态的时候，它就具有命令的性质；&lt;/li>
+&lt;/ul>
+&lt;h3 id="5-you-aint-gonna-need-it-yagni">5. You Ain&amp;rsquo;t Gonna Need It (YAGNI)&lt;/h3>
+&lt;p>只考虑和设计必须的功能，避免过度设计。只实现目前需要的功能，在以后您需要更多功能时，可以再进行添加。&lt;/p>
+&lt;h3 id="6-law-of-demeter---迪米特法则">6. Law of Demeter - 迪米特法则&lt;/h3>
+&lt;blockquote>
+&lt;p>最少知识原则（Principle of Least Knowledge）
+不要和陌生人说话&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>如果你想让你的狗跑的话，你会对狗狗说还是对四条狗腿说？
+如果你去店里买东西，你会把钱交给店员，还是会把钱包交给店员让他自己拿？&lt;/p>&lt;/blockquote>
+&lt;p>对于对象 O 中一个方法 M ，M 应该只能够访问以下对象中的方法：&lt;/p>
+&lt;ol>
+&lt;li>对象 O；&lt;/li>
+&lt;li>与 O 直接相关的 Component Object；&lt;/li>
+&lt;li>由方法 M 创建或者实例化的对象；&lt;/li>
+&lt;li>作为方法 M 的参数的对象。&lt;/li>
+&lt;/ol>
+&lt;h3 id="7-面向对象的-solid-原则">7. 面向对象的 S.O.L.I.D 原则&lt;/h3>
+&lt;h4 id="single-responsibility-principle-srp---职责单一原则">Single Responsibility Principle (SRP) - 职责单一原则&lt;/h4>
+&lt;p>一个类，只做一件事，并把这件事做好，其只有一个引起它变化的原因&lt;/p></description></item><item><title>关于高可用的系统</title><link>https://linzeyan.github.io/posts/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230418-high-availability-system/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">关于高可用的系统&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>項目 / 機制&lt;/th>
+&lt;th>Backups&lt;/th>
+&lt;th>M/S&lt;/th>
+&lt;th>MM&lt;/th>
+&lt;th>2PC&lt;/th>
+&lt;th>Paxos&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Consistency&lt;/td>
+&lt;td>Weak&lt;/td>
+&lt;td>Eventual&lt;/td>
+&lt;td>Eventual&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;td>Strong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Transactions&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;td>Local&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;td>Full&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Latency&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Throughput&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>High&lt;/td>
+&lt;td>Low&lt;/td>
+&lt;td>Medium&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Data loss&lt;/td>
+&lt;td>Lots&lt;/td>
+&lt;td>Some&lt;/td>
+&lt;td>Some&lt;/td>
+&lt;td>None&lt;/td>
+&lt;td>None&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Failover&lt;/td>
+&lt;td>Down&lt;/td>
+&lt;td>Read only&lt;/td>
+&lt;td>Read only&lt;/td>
+&lt;td>Read/write&lt;/td>
+&lt;td>Read/write&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>这个图基本上来说是目前高可用系统中能看得到的所有的解决方案的基础了。M/S、MM 实现起来不难，但是会有很多问题，2PC 的问题就是性能不行，而 Paxos 的问题就是太复杂，实现难度太大。&lt;/p>
+&lt;p>总结一下各个高可用方案的的问题：&lt;/p>
+&lt;ul>
+&lt;li>对于最终一致性来说，在宕机的情况下，会出现数据没有完全同步完成，会出现数据差异性。&lt;/li>
+&lt;li>对于强一致性来说，要么使用性能比较慢的 XA 系的两阶段提交的方案，要么使用性能比较好，但是实现比较复杂的 Paxos 协议。&lt;/li>
+&lt;/ul></description></item></channel></rss>
