@@ -10,6 +10,5 @@ tags: ["llm", "visualization", "machinelearning", "URL"]
 categories: ["llm", "visualization", "machinelearning", "URL"]
 ---
 
-# [LLM Visualization](https://bbycroft.net/llm)
-
-[Github](https://github.com/bbycroft/llm-viz)
+- [LLM Visualization](https://bbycroft.net/llm)
+- [Github](https://github.com/bbycroft/llm-viz)

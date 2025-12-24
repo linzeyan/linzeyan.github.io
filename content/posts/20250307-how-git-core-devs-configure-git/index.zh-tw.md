@@ -10,8 +10,7 @@ tags: ["URL", "git"]
 categories: ["URL", "git"]
 ---
 
-[How Core Git Developers Configure Git](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
-
+- [How Core Git Developers Configure Git](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
 
 ```bash
 # clearly makes git better

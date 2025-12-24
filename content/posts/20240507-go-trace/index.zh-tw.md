@@ -10,7 +10,7 @@ tags: ["URL", "Go", "trace"]
 categories: ["URL", "Go", "trace"]
 ---
 
-[更强大的 Go 执行跟踪能力](https://colobu.com/2024/03/18/execution-traces-2024/)
+- [更强大的 Go 执行跟踪能力](https://colobu.com/2024/03/18/execution-traces-2024/)
 
 ### runtime/trace
 

@@ -10,7 +10,7 @@ tags: ["URL", "Linux", "CPU"]
 categories: ["URL", "Linux", "CPU"]
 ---
 
-[独立服务器 CPU 频率最大化配置指南](https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306)
+- [独立服务器 CPU 频率最大化配置指南](https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306)
 
 ## 看看 CPU 现在混哪种模式
 
@@ -40,9 +40,11 @@ for cpu in /sys/devices/system/cpu/cpu[0-9]*; do
   echo performance > $cpu/cpufreq/scaling_governor
 done
 ```
+
 ## 重启后也保持高能
 
 ### 方案 A：最稳妥推荐
+
 ```bash
 apt install cpufrequtils -y
 
@@ -51,7 +53,9 @@ systemctl enable cpufrequtils
 systemctl start cpufrequtils
 
 ```
+
 ### 方案 B：systemd 自定义服务
+
 ```bash
 # /etc/systemd/system/cpu-performance.service
 [Unit]

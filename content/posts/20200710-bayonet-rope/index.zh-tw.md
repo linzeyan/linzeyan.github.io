@@ -10,4 +10,4 @@ tags: ["URL", "bayonet"]
 categories: ["URL", "bayonet"]
 ---
 
-[[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子](https://www.mobile01.com/topicdetail.php?f=637&t=282596)
+- [[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子](https://www.mobile01.com/topicdetail.php?f=637&t=282596)

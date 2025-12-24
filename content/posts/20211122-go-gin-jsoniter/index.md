@@ -10,7 +10,7 @@ tags: ["URL", "Go", "GIN", "jsoniter"]
 categories: ["URL", "Go", "GIN", "jsoniter"]
 ---
 
-[Gin 框架绑定 JSON 参数使用 jsoniter](https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw)
+- [Gin 框架绑定 JSON 参数使用 jsoniter](https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw)
 
 ### simple
 

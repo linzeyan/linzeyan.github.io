@@ -10,10 +10,12 @@ tags: ["URL", "Docker", "Gluetun", "VPN"]
 categories: ["URL", "Docker", "Gluetun", "VPN"]
 ---
 
-[Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學](https://ivonblog.com/posts/gluetun-vpn-docker/)
+- [Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學](https://ivonblog.com/posts/gluetun-vpn-docker/)
 
 ## Gluetun
+
 - OpenVPN
+
 ```yaml
 services:
   gluetun:
@@ -48,7 +50,9 @@ networks: # (選擇性) 固定Gluetun容器的IP
         - subnet: 172.27.0.0/16
           gateway: 172.27.0.5
 ```
+
 - WireGuard
+
 ```yaml
 services:
   gluetun:
@@ -85,10 +89,10 @@ networks: # (選擇性) 固定Gluetun容器的IP
           gateway: 172.27.0.5
 ```
 
-## 讓容器走Gluetun的VPN連線
+## 讓容器走 Gluetun 的 VPN 連線
 
-- 如果容器服務跟Gluetun寫在同一個docker-compose：加入網路模式network_mode: "service:gluetun"
-- 如果該容器跟Gluetun不是寫在同一個docker-compose：加入network_mode: "container:gluetun"
-- 開啟Gluetun的docker-compose檔案，把 service 用到的通訊埠(ex:8080)加回來
-- 依序啟動Gluetun和 走Gluetun的VPN連線的服務
-- 容器公共IP應當跟您選擇的VPN伺服器一致
+- 如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: "service:gluetun"
+- 如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: "container:gluetun"
+- 開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來
+- 依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務
+- 容器公共 IP 應當跟您選擇的 VPN 伺服器一致

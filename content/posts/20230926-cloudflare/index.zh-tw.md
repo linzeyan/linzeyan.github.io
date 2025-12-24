@@ -12,7 +12,10 @@ categories: ["Cloudflare", "zero trust"]
 hero: cloudflare.svg
 ---
 
-## [Connect private networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/)
+- [Connect private networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/)
+- [Configure Local Domain Fallback](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/)
+- [Configure Split Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/)
+- [Traffic routing with WARP](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/)
 
 ### 1. Set up the client
 
@@ -48,10 +51,3 @@ hero: cloudflare.svg
 1. Go to Access > Applications > Add an application > Private Network > Application Type > Destination IP.
 2. For Value, enter the IP address for your application (for example, 10.128.0.7).
 3. Modify policy > identify > Selector > User Email > in > @ruru910.com.
-
-## Reference
-
-- [Connect private networks](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/)
-- [Configure Local Domain Fallback](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/)
-- [Configure Split Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/)
-- [Traffic routing with WARP](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/)

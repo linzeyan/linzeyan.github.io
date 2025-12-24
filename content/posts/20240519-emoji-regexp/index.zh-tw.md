@@ -10,7 +10,7 @@ tags: ["regex", "URL", "emoji"]
 categories: ["regex", "URL", "emoji"]
 ---
 
-# [Emoji 正则匹配](https://taxodium.ink/post/emoji-regexp/)
+- [Emoji 正则匹配](https://taxodium.ink/post/emoji-regexp/)
 
 `/\p{Emoji}/u`
 

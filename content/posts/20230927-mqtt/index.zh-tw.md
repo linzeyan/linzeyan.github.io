@@ -10,13 +10,9 @@ tags: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
 categories: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
 ---
 
-## Reference
-
 - [Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes](https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/)
 - [Performance Tuning (Linux)](https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning)
 - [矽谷牛的耕田筆記](https://www.facebook.com/technologynoteniu/posts/pfbid02ntZshJdTEHLhnkb4hATadU8qGdzB45T2AdmCqtx73oegqrCLNRTKJwkYNZkVNLMsl)
-
-## Note
 
 ### Linux Kernel Tuning
 

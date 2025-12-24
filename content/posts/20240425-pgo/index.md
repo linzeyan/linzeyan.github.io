@@ -10,4 +10,4 @@ tags: ["Go", "URL"]
 categories: ["Go", "URL"]
 ---
 
-# [一文读不懂的 Go 1.21 GA 的 PGO 优化——一次在 WebP Server Go 上的尝试](https://blog.webp.se/go-121-pgo-zh/)
+- [一文读不懂的 Go 1.21 GA 的 PGO 优化——一次在 WebP Server Go 上的尝试](https://blog.webp.se/go-121-pgo-zh/)

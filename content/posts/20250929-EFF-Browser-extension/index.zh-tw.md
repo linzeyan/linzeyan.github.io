@@ -10,4 +10,4 @@ tags: ["URL", "EFF", "Browser", "Extension"]
 categories: ["URL", "EFF", "Browser", "Extension"]
 ---
 
-[Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤](https://privacybadger.org/)
+- [Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤](https://privacybadger.org/)

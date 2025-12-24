@@ -10,7 +10,7 @@ tags: ["URL", "Proxy", "Web", "HTTP", "Debug"]
 categories: ["URL", "Proxy", "Web", "HTTP", "Debug"]
 ---
 
-[人人都需要一個 HTTP proxy 來 debug](https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/)
+- [人人都需要一個 HTTP proxy 來 debug](https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/)
 
 1. [Charles](https://www.charlesproxy.com/)
 2. [Burp Suite](https://portswigger.net/burp/communitydownload)

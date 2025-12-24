@@ -10,7 +10,7 @@ tags: ["URL", "Golang"]
 categories: ["URL", "Golang"]
 ---
 
-[淺談 Go Iterator](https://ganhua.wang/go-iterator)
+- [淺談 Go Iterator](https://ganhua.wang/go-iterator)
 
 ```go
 type Seq[V any] func(yield func(V) bool)

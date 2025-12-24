@@ -10,9 +10,7 @@ tags: ["golang", "URL", "GIN", "byte", "string"]
 categories: ["golang", "URL", "GIN", "byte", "string"]
 ---
 
-# Go articles
-
-## [学会 gin 参数校验之 validator 库，看这一篇就足够了](https://juejin.cn/post/6863765115456454664)
+- [学会 gin 参数校验之 validator 库，看这一篇就足够了](https://juejin.cn/post/6863765115456454664)
 
 ### 字符串约束
 

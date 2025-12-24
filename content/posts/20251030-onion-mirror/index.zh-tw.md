@@ -10,7 +10,7 @@ tags: ["URL", "Tor"]
 categories: ["URL", "Tor"]
 ---
 
-[onion-mirror](https://flower.codes/2025/10/23/onion-mirror.html)
+- [onion-mirror](https://flower.codes/2025/10/23/onion-mirror.html)
 
 ### Install Tor
 

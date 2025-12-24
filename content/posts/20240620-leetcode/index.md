@@ -10,4 +10,4 @@ tags: ["golang", "URL", "leetcode"]
 categories: ["golang", "URL", "leetcode"]
 ---
 
-https://books.halfrost.com/leetcode/
+- https://books.halfrost.com/leetcode/

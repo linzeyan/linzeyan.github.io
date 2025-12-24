@@ -10,4 +10,4 @@ tags: ["chart", "data", "visualization", "URL"]
 categories: ["chart", "data", "visualization", "URL"]
 ---
 
-https://datavizproject.com
+- https://datavizproject.com

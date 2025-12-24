@@ -12,6 +12,8 @@ categories: ["Cloudflare", "Synology"]
 hero: cloudflare.svg
 ---
 
+- [CLOUDFLARE tunnel on SYNOLOGY. (the raw way)](https://www.youtube.com/watch?v=5IrtNxfzH1o)
+
 ## Setup Synology
 
 1. Create a directory in docker directory, such as `cloudflare-tunnel`.
@@ -50,7 +52,3 @@ hero: cloudflare.svg
 1. Edit the second container setting json in the the directory `cloudflare-tunnel`, modify cmd. `tunnel run synology-tunnel`.
 2. Import the second container setting json and run a new container.
 3. The tunnel now is connectable.
-
-## Reference
-
-- [CLOUDFLARE tunnel on SYNOLOGY. (the raw way)](https://www.youtube.com/watch?v=5IrtNxfzH1o)

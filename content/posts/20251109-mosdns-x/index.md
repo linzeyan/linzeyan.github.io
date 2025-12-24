@@ -10,8 +10,8 @@ tags: ["URL", "Go", "DNS", "linux"]
 categories: ["URL", "Go", "DNS", "linux"]
 ---
 
-[Mosdns-X](https://github.com/pmkol/mosdns-x)
-[让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X](https://blog.ibytebox.com/archives/OxpX7FQ1)
+- [Mosdns-X](https://github.com/pmkol/mosdns-x)
+- [让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X](https://blog.ibytebox.com/archives/OxpX7FQ1)
 
 ### install
 

@@ -10,7 +10,7 @@ tags: ["URL", "Rust", "Parquet"]
 categories: ["URL", "Rust", "Parquet"]
 ---
 
-[parqeye](https://github.com/kaushiksrini/parqeye)
+- [parqeye](https://github.com/kaushiksrini/parqeye)
 
 ### install methods
 

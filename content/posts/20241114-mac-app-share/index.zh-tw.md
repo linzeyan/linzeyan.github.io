@@ -10,4 +10,4 @@ tags: ["URL", "macOS", "Software", "APP"]
 categories: ["URL", "macOS", "Software", "APP"]
 ---
 
-[Mac 小众软件推荐与工作流分享(2024)](https://blog.ursb.me/posts/mac-app-share-2024/)
+- [Mac 小众软件推荐与工作流分享(2024)](https://blog.ursb.me/posts/mac-app-share-2024/)

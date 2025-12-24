@@ -10,7 +10,7 @@ tags: ["URL", "Go", "channel"]
 categories: ["URL", "Go", "channel"]
 ---
 
-[channel 的 15 条规则和底层实现](https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ)
+- [channel 的 15 条规则和底层实现](https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ)
 
 ### 操作规则
 

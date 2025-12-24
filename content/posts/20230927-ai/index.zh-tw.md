@@ -10,6 +10,6 @@ tags: ["AI", "URL", "Video"]
 categories: ["AI", "URL", "Video"]
 ---
 
-https://www.youtube.com/watch?v=M3z6gI1AEns
+- https://www.youtube.com/watch?v=M3z6gI1AEns
 
 <!-- {{< video src="https://www.youtube.com/watch?v=M3z6gI1AEns" >}} -->

@@ -10,7 +10,7 @@ tags: ["URL", "macOS", "Security"]
 categories: ["URL", "macOS", "Security"]
 ---
 
-# [Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织](https://t.me/misakatech/1349)
+- [Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织](https://t.me/misakatech/1349)
 
 今天搜小工具的时候发现他们做了一堆 macOS 上的开源软件，基本都是和隐私与安全相关的。
 
@@ -23,6 +23,5 @@ categories: ["URL", "macOS", "Security"]
 - [Do Not Disturb](https://objective-see.org/products/dnd.html): 可以阻止你的 Mac 被打扰（没错），当你的 Mac 被别人打开盖子时可以发送警告、执行脚本、检测设备变化之类的。
 
 - [BlockBlock](https://objective-see.org/products/blockblock.html): 可以阻止后台的持久化安装，RansomWhere 可以检测文件被加密的行为，还有一些杂七杂八的独立工具。
-
 
 https://objective-see.org

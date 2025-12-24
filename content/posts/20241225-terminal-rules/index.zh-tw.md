@@ -10,11 +10,11 @@ tags: ["URL", "terminal", "command line"]
 categories: ["URL", "terminal", "command line"]
 ---
 
-["Rules" that terminal programs follow](https://jvns.ca/blog/2024/11/26/terminal-rules/)
+- ["Rules" that terminal programs follow](https://jvns.ca/blog/2024/11/26/terminal-rules/)
 
-- 規則 1：非互動程式應在按Ctrl-C時退出
-- 規則 2：按q時，TUI 應退出
-- 規則 3：在空白行上按Ctrl-D時，REPL 應退出
+- 規則 1：非互動程式應在按 Ctrl-C 時退出
+- 規則 2：按 q 時，TUI 應退出
+- 規則 3：在空白行上按 Ctrl-D 時，REPL 應退出
 - 規則 4：不要使用超過 16 種顏色
 - 規則 5：支援 readline 鍵綁定
   - 規則 5.1：Ctrl-W 應刪除最後一個單字

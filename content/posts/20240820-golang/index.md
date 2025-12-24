@@ -10,9 +10,7 @@ tags: ["golang", "URL", "GIN", "byte", "string"]
 categories: ["golang", "URL", "GIN", "byte", "string"]
 ---
 
-# Go articles
-
-## [学会 gin 参数校验之 validator 库，看这一篇就足够了](https://juejin.cn/post/6863765115456454664)
+- [学会 gin 参数校验之 validator 库，看这一篇就足够了](https://juejin.cn/post/6863765115456454664)
 
 ### 字符串约束
 
@@ -314,4 +312,5 @@ BenchmarkBytesToString/新型转换-2                 	439537762	         2.762 
 BenchmarkBytesToString/k8s转换-2                	478885546	         2.375 ns/op	       0 B/op	       0 allocs/op
 
 ```
+
 整体上看，k8s 方案、传统转换、新型转换性能都挺好，强制转换性能最差。k8s 在 bytes 转 string 上性能最好。

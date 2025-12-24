@@ -10,12 +10,14 @@ tags: ["URL", "NGINX", "ACME", "module"]
 categories: ["URL", "NGINX", "ACME", "module"]
 ---
 
-[NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署](https://sconts.com/post/nginx-native-acme-support/)
+- [NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署](https://sconts.com/post/nginx-native-acme-support/)
 
 ## `ngx_http_acme_module`
+
 - NGINX 1.25.1
 
 ## pre-install
+
 ```bash
 # 在 Debian/Ubuntu 系统上安装基础编译工具和 NGINX 依赖
 sudo apt update

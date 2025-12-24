@@ -10,9 +10,10 @@ tags: ["URL", "command line", "ssh", "Github"]
 categories: ["URL", "command line", "ssh", "Github"]
 ---
 
-[Configuring SSH Keys for Multiple GitHub Accounts](https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts)
+- [Configuring SSH Keys for Multiple GitHub Accounts](https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts)
 
 ### Use Different Host values
+
 ```bash
 Host github.com
   HostName github.com
@@ -34,6 +35,7 @@ $ git clone git@github-plnx:planet-express/delivery_service.git
 ```
 
 ### Automate Substituting the Host
+
 ```bash
 [include]
   path = ~/.gitconfig_custom

@@ -10,7 +10,7 @@ tags: ["URL", "ZSH"]
 categories: ["URL", "ZSH"]
 ---
 
-[zsh 配置文件解析及优先级](https://einverne.github.io/post/2023/01/zprofile-zshrc.html)
+- [zsh 配置文件解析及优先级](https://einverne.github.io/post/2023/01/zprofile-zshrc.html)
 
 ### zsh 的环境变量配置文件有：
 

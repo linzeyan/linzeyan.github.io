@@ -10,9 +10,7 @@ tags: ["golang", "URL", "security"]
 categories: ["golang", "URL", "security"]
 ---
 
-# Go articles
-
-## [提高警惕，供应链攻击就在你我身边](https://v2ex.com/t/1072079)
+- [提高警惕，供应链攻击就在你我身边](https://v2ex.com/t/1072079)
 
 * `github.com/siruspen/logrus` false
 * `github.com/sirupsen/logrus` true

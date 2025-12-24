@@ -10,12 +10,12 @@ tags: ["URL", "web", "browser"]
 categories: ["URL", "web", "browser"]
 ---
 
-[Smarter than 'Ctrl+F': Linking Directly to Web Page Content](https://alfy.blog/2024/10/19/linking-directly-to-web-page-content.html)
+- [Smarter than 'Ctrl+F': Linking Directly to Web Page Content](https://alfy.blog/2024/10/19/linking-directly-to-web-page-content.html)
 
-__syntax__
+**syntax**
 
 `https://example.com/page.html#:~:text=[prefix-,]textStart[,textEnd][,-suffix]`
 
-__example__
+**example**
 
 `https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments#:~:text=without%20relying%20on%20the%20presence%20of%20IDs`

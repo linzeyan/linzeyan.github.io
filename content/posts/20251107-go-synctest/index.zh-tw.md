@@ -10,7 +10,7 @@ tags: ["URL", "Go", "sync", "test"]
 categories: ["URL", "Go", "sync", "test"]
 ---
 
-[go-synctest](https://ganhua.wang/go-synctest)
+- [go-synctest](https://ganhua.wang/go-synctest)
 
 ```go
 func TestAfterFunc(t *testing.T) {

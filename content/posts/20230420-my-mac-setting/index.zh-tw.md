@@ -10,7 +10,7 @@ tags: ["URL", "MacOS"]
 categories: ["URL", "MacOS"]
 ---
 
-[我的提升生產力 Mac 設定與軟體](https://jason-memo.dev/posts/my-mac-setting/)
+- [我的提升生產力 Mac 設定與軟體](https://jason-memo.dev/posts/my-mac-setting/)
 
 ### 控制個別 App 是否進入 dark mode
 

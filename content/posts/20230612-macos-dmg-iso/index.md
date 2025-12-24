@@ -10,7 +10,7 @@ tags: ["URL", "MacOS", "dmg", "iso"]
 categories: ["URL", "MacOS", "dmg", "iso"]
 ---
 
-[制作 macOS 系统 dmg 包及 iso 可引导镜像](https://www.newlearner.site/2019/03/07/macos-dmg-iso.html)
+- [制作 macOS 系统 dmg 包及 iso 可引导镜像](https://www.newlearner.site/2019/03/07/macos-dmg-iso.html)
 
 ### dmg
 

@@ -10,7 +10,7 @@ tags: ["URL", "Synology", "NAS"]
 categories: ["URL", "Synology", "NAS"]
 ---
 
-[Synology: Your NAS RAM Details at a Glance](https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/)
+- [Synology: Your NAS RAM Details at a Glance](https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/)
 
 ### step1
 

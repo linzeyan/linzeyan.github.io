@@ -10,9 +10,7 @@ tags: ["URL", "SHELL", "BASH"]
 categories: ["URL", "SHELL", "BASH"]
 ---
 
-# Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash
-
-## [Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash](https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/)
+- [Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash](https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/)
 
 #### Use Built-in Commands
 

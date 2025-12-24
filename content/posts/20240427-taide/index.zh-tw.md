@@ -10,4 +10,4 @@ tags: ["data", "URL"]
 categories: ["data", "URL"]
 ---
 
-# [Taide - training data](https://taide.tw/index/training-data)
+- [Taide - training data](https://taide.tw/index/training-data)

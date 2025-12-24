@@ -10,7 +10,7 @@ tags: ["Linux", "URL", "lightweight"]
 categories: ["Linux", "URL", "lightweight"]
 ---
 
-https://www.freecodecamp.org/news/lightweight-linux-distributions-for-your-pc/
+- [lightweight-linux-distributions-for-your-pc](https://www.freecodecamp.org/news/lightweight-linux-distributions-for-your-pc/)
 
 | Name          | Site                                  | Comment                                                                                                                                                                                                                                                                                                               |
 | ------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

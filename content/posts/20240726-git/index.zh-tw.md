@@ -10,8 +10,8 @@ tags: ["git", "URL", "push"]
 categories: ["git", "URL", "push"]
 ---
 
-https://www.jvt.me/posts/2021/10/23/undo-force-push/
-https://www.jvt.me/posts/2018/09/18/safely-force-git-push/
+- https://www.jvt.me/posts/2021/10/23/undo-force-push/
+- https://www.jvt.me/posts/2018/09/18/safely-force-git-push/
 
 ```bash
 git push --force-with-lease

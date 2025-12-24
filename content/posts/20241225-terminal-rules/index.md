@@ -10,7 +10,7 @@ tags: ["URL", "terminal", "command line"]
 categories: ["URL", "terminal", "command line"]
 ---
 
-["Rules" that terminal programs follow](https://jvns.ca/blog/2024/11/26/terminal-rules/)
+- ["Rules" that terminal programs follow](https://jvns.ca/blog/2024/11/26/terminal-rules/)
 
 - rule 1: noninteractive programs should quit when you press Ctrl-C
 - rule 2: TUIs should quit when you press q

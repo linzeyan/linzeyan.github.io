@@ -10,16 +10,18 @@ tags: ["URL", "markdown", "VScode"]
 categories: ["URL", "markdown", "VScode"]
 ---
 
-[Marp教學：Markdown搭配VS Code做簡報，快速輸出為PPTX或PDF，提昇做簡報效率](https://ivonblog.com/posts/vscode-marp-presentation/)
+- [Marp 教學：Markdown 搭配 VS Code 做簡報，快速輸出為 PPTX 或 PDF，提昇做簡報效率](https://ivonblog.com/posts/vscode-marp-presentation/)
 
 1. Install 'Marp for VS Code'
-2. 在Markdown最前面的FrontMatter，插入以下屬性，啟用Marp，並開啟顯示頁數功能
+2. 在 Markdown 最前面的 FrontMatter，插入以下屬性，啟用 Marp，並開啟顯示頁數功能
+
 ```
 ---
 marp:true
 paginate: true
 ---
 ```
-3. Markdown文字都是直排排列的，需要換行請加上`\`。
+
+3. Markdown 文字都是直排排列的，需要換行請加上`\`。
 4. 輸入三條橫線`---`分隔投影片。
 5. 插入註解請用`<!-- -->`語法。

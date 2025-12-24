@@ -10,7 +10,7 @@ tags: ["URL", "Go", "Redis", "Lua"]
 categories: ["URL", "Go", "Redis", "Lua"]
 ---
 
-[Go实战指南：使用 go-redis 执行 Lua 脚本](https://www.liwenzhou.com/posts/Go/go-redis-lua/)
+- [Go 实战指南：使用 go-redis 执行 Lua 脚本](https://www.liwenzhou.com/posts/Go/go-redis-lua/)
 
 1. Redis command `Eval`
 2. Redis package `redis.NewScript`, `script.Run`

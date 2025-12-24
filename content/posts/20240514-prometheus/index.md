@@ -10,7 +10,8 @@ tags: ["Prometheus", "URL"]
 categories: ["Prometheus", "URL"]
 ---
 
-# Prometheus relabeling and linux metrics
+- [How to use relabeling in Prometheus and VictoriaMetrics](https://valyala.medium.com/how-to-use-relabeling-in-prometheus-and-victoriametrics-8b90fc22c4b2)
+- [Interpreting Prometheus metrics for Linux disk I/O utilization](https://brian-candler.medium.com/interpreting-prometheus-metrics-for-linux-disk-i-o-utilization-4db53dfedcfc)
 
 _Adding new label_
 
@@ -27,8 +28,3 @@ _metrics_
 - wkB/s:
   `rate(node_disk_written_bytes_total[*])`
   Unit: bytes per second
-
-## Reference
-
-- [How to use relabeling in Prometheus and VictoriaMetrics](https://valyala.medium.com/how-to-use-relabeling-in-prometheus-and-victoriametrics-8b90fc22c4b2)
-- [Interpreting Prometheus metrics for Linux disk I/O utilization](https://brian-candler.medium.com/interpreting-prometheus-metrics-for-linux-disk-i-o-utilization-4db53dfedcfc)

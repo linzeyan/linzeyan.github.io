@@ -10,6 +10,4 @@ tags: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
 categories: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
 ---
 
-# Google Infra
-
-## [Google's 5-generation network architecture in ten years](https://www.kawabangga.com/posts/6624)
+- [Google's 5-generation network architecture in ten years](https://www.kawabangga.com/posts/6624)

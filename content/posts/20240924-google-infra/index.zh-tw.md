@@ -10,6 +10,4 @@ tags: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
 categories: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
 ---
 
-# Google Infra
-
-## [Google 的十年五代网络架构](https://www.kawabangga.com/posts/6624)
+- [Google 的十年五代网络架构](https://www.kawabangga.com/posts/6624)

@@ -10,7 +10,7 @@ tags: ["URL", "Go", "Protobuf"]
 categories: ["URL", "Go", "Protobuf"]
 ---
 
-[[译]Go Protobuf：新的 Opaque API](https://www.liwenzhou.com/posts/Go/protobuf-opaque/)
+- [[译]Go Protobuf：新的 Opaque API](https://www.liwenzhou.com/posts/Go/protobuf-opaque/)
 
 ```diff
 protoc --proto_path=. \

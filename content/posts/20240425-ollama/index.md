@@ -10,9 +10,8 @@ tags: ["Go", "URL", "ollama"]
 categories: ["Go", "URL", "ollama"]
 ---
 
-# ollama
-
-## Instructions
+- [ollama/ollama](https://github.com/ollama/ollama)
+- [Ollama ＋ Open WebUI，快捷部署 AI 大型語言模型到你的電腦，離線執行](https://ivonblog.com/posts/ollama-llm/)
 
 ### Docker-compose
 
@@ -73,8 +72,3 @@ ollama pull llama3
 > port defined in docker-compose.yml ollama-webui.ports
 
 [http://localhost:8080](http://localhost:8080)
-
-## Reference
-
-- [ollama/ollama](https://github.com/ollama/ollama)
-- [Ollama ＋ Open WebUI，快捷部署 AI 大型語言模型到你的電腦，離線執行](https://ivonblog.com/posts/ollama-llm/)
