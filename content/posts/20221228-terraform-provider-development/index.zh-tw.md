@@ -1,6 +1,6 @@
 ---
 title: "Terraform Provider 開發紀錄"
-date: 2023-01-03T12:36:00+08:00
+date: 2023-12-28T12:36:00+08:00
 menu:
   sidebar:
     name: "Terraform Provider 開發紀錄"
