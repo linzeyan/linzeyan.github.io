@@ -12,4 +12,19 @@
 &lt;li>Rootless Container&lt;/li>
 &lt;/ol></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20231004-container/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Containers from scratch</title><link>https://linzeyan.github.io/posts/20221124-containers-from-scratch/</link><pubDate>Thu, 24 Nov 2022 13:10:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221124-containers-from-scratch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener">Containers from scratch&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="container-file-systems">Container file systems&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sha256sum rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#75715e"># tar needs sudo to create /dev files and setup file ownership&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo tar -zxf rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls rootfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin dev home lib64 mnt proc run srv tmp var
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>boot etc lib media opt root sbin sys usr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls -al rootfs/bin/ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rwxr-xr-x. &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">118280&lt;/span> Mar &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">2015&lt;/span> rootfs/bin/ls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="chroot">chroot&lt;/h3>
+&lt;p>it allows us to restrict a process&amp;rsquo; view of the file system. In this case, we&amp;rsquo;ll restrict our process to the &amp;ldquo;rootfs&amp;rdquo; directory then exec a shell.&lt;/p></description></item></channel></rss>

