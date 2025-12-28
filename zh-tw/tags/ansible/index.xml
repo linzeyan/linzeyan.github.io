@@ -7,7 +7,27 @@
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
 &lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
-&lt;/ol></description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
+&lt;/ol></description></item><item><title>將指令輸出轉為圖片</title><link>https://linzeyan.github.io/zh-tw/posts/20221110-tip-command-output-to-image/</link><pubDate>Thu, 10 Nov 2022 16:13:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221110-tip-command-output-to-image/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/tips/tip-command-output-to-image/" target="_blank" rel="noopener">將指令輸出轉為圖片&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Capture command output and convert to image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#ae81ff">all&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tasks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Display content of /etc/redhat-release&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">cat /etc/redhat-release&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">redhat_release_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hostname&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">hostname&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">hostname_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 可以使用 ImageMagick 來轉換文字為圖片&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Convert command output as image&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">echo -e &amp;#34;{{ hostname_result.stdout }}\n{{ redhat_release_result.stdout }}&amp;#34; | convert label:@- {{ hostname_result.stdout }}.png&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">delegate_to&lt;/span>: &lt;span style="color:#ae81ff">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
 &lt;h2 id="大綱">大綱&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#%e7%b0%a1%e4%bb%8b">簡介&lt;/a>&lt;/li>

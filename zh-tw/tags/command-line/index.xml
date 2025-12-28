@@ -154,4 +154,79 @@
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock 192.168.x.x
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock --script-args uri&lt;span style="color:#f92672">=&lt;/span>/cgi-bin/bin,cmd&lt;span style="color:#f92672">=&lt;/span>ls 192.168.x.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to Delete Files With Names That Contain Non-printable Characters</title><link>https://linzeyan.github.io/zh-tw/posts/20221114-delete-files-non-printable-characters/</link><pubDate>Mon, 14 Nov 2022 13:55:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221114-delete-files-non-printable-characters/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/delete-files-non-printable-characters" target="_blank" rel="noopener">How to Delete Files With Names That Contain Non-printable Characters&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ls -l
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>total &lt;span style="color:#ae81ff">13&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 07:08 &lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">162&lt;/span> Apr &lt;span style="color:#ae81ff">16&lt;/span> &lt;span style="color:#ae81ff">2022&lt;/span> &lt;span style="color:#e6db74">&amp;#39;~$iscord.docx&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:03 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:01 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&amp;#39;Λ---ω&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:13 &lt;span style="color:#e6db74">&amp;#39;␴?␴??␴??::␴?␴&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:12 ␴__␴
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:18 &lt;span style="color:#e6db74">&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:16 ␣␣␣␣␣␣␣␣
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:26 ␣ μ μ Ω Ω
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">14&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:23 &lt;span style="color:#e6db74">&amp;#39;␣ μ ␴&amp;#39;$&amp;#39;\342\220\264&amp;#39;&amp;#39;Ξ&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-ansi-c-quoting">Using ANSI-C Quoting&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Using ANSI-C Quoting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># We can also use the $ special character before enclosing the filename in single quotes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">$&amp;#39;\356\200\215&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pass an item&amp;#39;s name to rm without using the ANSI-C quoting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">&amp;#39;\026\033&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm: cannot remove &lt;span style="color:#e6db74">&amp;#39;\026\033&amp;#39;&lt;/span>: No such file or directory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-inode-numbers">Using Inode Numbers&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ls -li
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>total &lt;span style="color:#ae81ff">11&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">6517085&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:18 &lt;span style="color:#e6db74">&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">7826050&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> Nov &lt;span style="color:#ae81ff">9&lt;/span> 04:23 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\356\200\215\356\200\215\356\200\215&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">4685554&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>we can delete the desired file by passing its inode number to the -inum switch of the find command&lt;/p></description></item><item><title>/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes</title><link>https://linzeyan.github.io/zh-tw/posts/20221114-shadow-passwords/</link><pubDate>Mon, 14 Nov 2022 12:55:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221114-shadow-passwords/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shadow-passwords" target="_blank" rel="noopener">/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="chage-and-password-aging">chage and Password Aging&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chage --list root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Last password change : Oct 01, &lt;span style="color:#ae81ff">2022&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Password expires : never
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Password inactive : never
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Account expires : never
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Minimum number of days between password change : &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Maximum number of days between password change : &lt;span style="color:#ae81ff">99999&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Number of days of warning before password expires : &lt;span style="color:#ae81ff">7&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Consequently, we can change any field via its associated flag:&lt;/p></description></item><item><title>How to Use which on an Aliased Command</title><link>https://linzeyan.github.io/zh-tw/posts/20221110-which-on-an-aliased-command/</link><pubDate>Thu, 10 Nov 2022 16:24:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221110-which-on-an-aliased-command/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/which-on-an-aliased-command" target="_blank" rel="noopener">How to Use which on an Aliased Command&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="type">type&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>type grep
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep is an alias &lt;span style="color:#66d9ef">for&lt;/span> grep --color&lt;span style="color:#f92672">=&lt;/span>auto
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Bash&amp;#39;s type&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type -P grep
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/grep
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Zsh&amp;#39;s type&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type -p grep
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep is /usr/bin/grep
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="gnu-which">GNU which&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>which -a which
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>which: shell built-in command
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/which
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alias top10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top10&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alias | /usr/bin/which -i top10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top10&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/uniq
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/sort
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/head
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
