@@ -1423,7 +1423,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-50" playsinline controls>
+&lt;video class="video-player" id="video-45" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</guid><description>&lt;ul>
@@ -3175,7 +3175,73 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="匹配模式">匹配模式&lt;/h5>
-&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>Using Vim as a Diff Tool</title><link>https://linzeyan.github.io/zh-tw/posts/20220707-vim-diff-tool/</link><pubDate>Thu, 07 Jul 2022 17:36:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220707-vim-diff-tool/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/vim-diff-tool" target="_blank" rel="noopener">Using Vim as a Diff Tool&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="command">command&lt;/h4>
+&lt;p>&lt;code>vim -d file1.txt file2.txt&lt;/code>
+or
+&lt;code>vimdiff file1.txt file2.txt&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>Switching Between Diff Windows: &lt;code>Ctrl-w + Ctrl-w&lt;/code>&lt;/li>
+&lt;li>Changing Split Window Orientation
+&lt;ul>
+&lt;li>&lt;code>ctrl-w + K&lt;/code> key combination to change window orientation from vertical to horizontal.&lt;/li>
+&lt;li>&lt;code>ctrl-w + H&lt;/code> shortcut to switch back window orientation to a vertical split.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Jumping Between Changes
+&lt;ul>
+&lt;li>&lt;code>]c&lt;/code> key combination to go to the next change.&lt;/li>
+&lt;li>&lt;code>[c&lt;/code> shortcut to jump to the previous change.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Applying Changes From the Diff Window: &lt;code>:diffget&lt;/code>, &lt;code>:diffput&lt;/code>&lt;/li>
+&lt;li>Export Diff to the HTML Web Page: &lt;code>:TOhtml | w ~/diff.html&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>OIDC(OpenID Connect) 简介</title><link>https://linzeyan.github.io/zh-tw/posts/20220706-openid-connect/</link><pubDate>Wed, 06 Jul 2022 08:47:49 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220706-openid-connect/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_07_06-openid_connect.md.html" target="_blank" rel="noopener">OIDC(OpenID Connect) 简介&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="authentication-vs-authorization">Authentication vs. authorization&lt;/h3>
+&lt;blockquote>
+&lt;p>Authentication 通常是指校验是否是用户本人的这个过程，而 Authorization 则更多的是指用户是否有权限。通常我们都是先校验 是否是用户本人，然后再校验用户是否有权限。也就是先开始 Authentication，再开始 Authorization。&lt;/p>&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Authentication&lt;/th>
+&lt;th>Authorization&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Determines whether users are who they claim to be&lt;/td>
+&lt;td>Determines what users can and cannot access&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Challenges the user to validate credentials (for example, through passwords, answers to security questions, or facial recognition)&lt;/td>
+&lt;td>Verifies whether access is allowed through policies and rules&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Usually done before authorization&lt;/td>
+&lt;td>Usually done after successful authentication&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Generally, transmits info through an ID Token&lt;/td>
+&lt;td>Generally, transmits info through an Access Token&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Generally governed by the OpenID Connect (OIDC) protocol&lt;/td>
+&lt;td>Generally governed by the OAuth 2.0 framework&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Example: Employees in a company are required to authenticate through the network before accessing their company email&lt;/td>
+&lt;td>Example: After an employee successfully authenticates, the system determines what information the employees are allowed to access&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="oauth-2">OAuth 2&lt;/h3>
+&lt;h4 id="client-credentials-grant">&lt;a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4" target="_blank" rel="noopener">Client Credentials Grant&lt;/a>&lt;/h4>
+&lt;blockquote>
+&lt;p>这种模式是最简单的，其实就是客户端告诉服务端自己是哪个客户端，服务器就将 access_token 下发&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
