@@ -1587,7 +1587,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-31" playsinline controls>
+&lt;video class="video-player" id="video-159" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</guid><description>&lt;ul>
@@ -2918,7 +2918,126 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ElasticSearch 学习笔记</title><link>https://linzeyan.github.io/zh-tw/posts/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20221006-elasticsearch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">ElasticSearch 学习笔记&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装中文分词插件">安装中文分词插件&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it elasticsearch bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Dev Tools
+&lt;ul>
+&lt;li>&lt;code>content&lt;/code> 类型为 &lt;code>text&lt;/code>，写入时使用 &lt;code>ik_max_word&lt;/code> 做分词，搜索时使用 &lt;code>ik_smart&lt;/code> 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">PUT&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">/words&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;mappings&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;content&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;text&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_max_word&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;search_analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_smart&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;age&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;integer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>《宝可梦：阿尔宙斯》双周目通关</title><link>https://linzeyan.github.io/zh-tw/posts/20220919-pokemon-legends-arceus-stage-clear/</link><pubDate>Mon, 19 Sep 2022 11:30:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220919-pokemon-legends-arceus-stage-clear/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soulteary.com/2022/09/05/pokemon-legends-arceus-stage-clear.html" target="_blank" rel="noopener">《宝可梦：阿尔宙斯》双周目通关&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Avoiding the Top 10 NGINX Configuration Mistakes - NGINX</title><link>https://linzeyan.github.io/zh-tw/posts/20220916-avoiding-top-10-nginx-configuration-mistakes/</link><pubDate>Fri, 16 Sep 2022 15:22:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220916-avoiding-top-10-nginx-configuration-mistakes/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/" target="_blank" rel="noopener">Avoiding the Top 10 NGINX Configuration Mistakes - NGINX&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-每個-worker-的檔案描述元fd不夠">1) 每個 worker 的檔案描述元（FD）不夠&lt;/h2>
+&lt;h3 id="問題點">問題點&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>worker_connections&lt;/code> 只限制 &lt;strong>單一 worker 可同時開啟的連線數&lt;/strong>（預設 512）。&lt;/li>
+&lt;li>但每個連線/檔案/暫存檔/日誌都會消耗 &lt;strong>檔案描述元（FD）&lt;/strong>，而 OS 預設每個 process 常見是 1024。&lt;/li>
+&lt;li>常見錯誤：只調大 &lt;code>worker_connections&lt;/code>，卻沒有同步提高 FD 限制，導致 worker 提早耗盡 FD。&lt;/li>
+&lt;/ul>
+&lt;h3 id="修正方式">修正方式&lt;/h3>
+&lt;ul>
+&lt;li>在 &lt;strong>main context&lt;/strong> 設定 &lt;code>worker_rlimit_nofile&lt;/code>，至少為 &lt;code>worker_connections&lt;/code> 的 2 倍（經驗值）。&lt;/li>
+&lt;li>同時確認系統總 FD 上限 &lt;code>fs.file-max&lt;/code> 足夠：
+&lt;code>worker_rlimit_nofile * worker_processes&lt;/code> 要明顯小於 &lt;code>fs.file-max&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># main context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_connections&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>; &lt;span style="color:#75715e"># 在 events {} 內
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_rlimit_nofile&lt;/span> &lt;span style="color:#ae81ff">2048&lt;/span>; &lt;span style="color:#75715e"># 在 main context
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="補充">補充&lt;/h3>
+&lt;ul>
+&lt;li>NGINX 當 proxy 時：client 連線 1 FD + upstream 連線 1 FD，可能還需要暫存檔 1 FD。&lt;/li>
+&lt;li>若被 DoS 打滿 FD，甚至可能無法登入機器處置，因此要預留系統餘裕。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2-error_log-off-其實沒有關閉-error-log">2) &lt;code>error_log off&lt;/code> 其實沒有關閉 error log&lt;/h2>
+&lt;h3 id="問題點-1">問題點&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>error_log&lt;/code> &lt;strong>不支援&lt;/strong> &lt;code>off&lt;/code> 參數。&lt;/li>
+&lt;li>寫成 &lt;code>error_log off;&lt;/code> 會讓 NGINX 產生一個名為 &lt;code>off&lt;/code> 的檔案（通常在 &lt;code>/etc/nginx/&lt;/code>）。&lt;/li>
+&lt;/ul>
+&lt;h3 id="修正方式不建議真的關閉">修正方式（不建議真的關閉）&lt;/h3>
+&lt;ul>
+&lt;li>若真的必須停寫 error log（例如磁碟極度有限），改導到 &lt;code>/dev/null&lt;/code> 並限制等級：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># main context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">/dev/null&lt;/span> &lt;span style="color:#e6db74">emerg&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="補充-1">補充&lt;/h3>
+&lt;ul>
+&lt;li>這條生效前，NGINX 啟動/ reload 驗證設定的過程仍可能先寫到預設路徑（常見 &lt;code>/var/log/nginx/error.log&lt;/code>）。&lt;/li>
+&lt;li>可用啟動參數 &lt;code>nginx -e &amp;lt;error_log_location&amp;gt;&lt;/code> 指定啟動階段的 error log 位置。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="3-沒有對-upstream-啟用-keepalive導致連線來源埠耗盡">3) 沒有對 upstream 啟用 keepalive（導致連線/來源埠耗盡）&lt;/h2>
+&lt;h3 id="問題點-2">問題點&lt;/h3>
+&lt;ul>
+&lt;li>預設：NGINX 對 upstream &lt;strong>每個 request 都新建連線&lt;/strong>，連線建立/關閉都有成本。&lt;/li>
+&lt;li>高流量時會放大 OS 資源消耗；且連線關閉後會進入 &lt;code>TIME-WAIT&lt;/code>，可能導致 &lt;strong>來源埠（ephemeral ports）耗盡&lt;/strong>，進而無法建立新連線。&lt;/li>
+&lt;/ul>
+&lt;h3 id="修正方式-1">修正方式&lt;/h3>
+&lt;p>&lt;strong>(A) 在每個 &lt;code>upstream {}&lt;/code> 內加 &lt;code>keepalive&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>Go string format</title><link>https://linzeyan.github.io/zh-tw/posts/20220908-string-format/</link><pubDate>Thu, 08 Sep 2022 11:32:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220908-string-format/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://zetcode.com/golang/string-format/" target="_blank" rel="noopener">Go string format&lt;/a>
+The verb at the end defines the type and the interpretation of its corresponding argument.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>d&lt;/code> - decimal integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>o&lt;/code> - octal integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>O&lt;/code> - octal integer with &lt;code>0o&lt;/code> prefix&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>b&lt;/code> - binary integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>x&lt;/code> - hexadecimal integer lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>X&lt;/code> - hexadecimal integer uppercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>f&lt;/code> - decimal floating point, lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>F&lt;/code> - decimal floating point, uppercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>e&lt;/code> - scientific notation (mantissa/exponent), lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>E&lt;/code> - scientific notation (mantissa/exponent), uppercase&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
@@ -6986,14 +7105,14 @@ main.T{x:123}
 &lt;code class="language-golang">func (s *Stats) Snapshot() map[string]int {
 s.mutex.Lock()
 defer s.mutex.Unlock()
-&lt;pre>&lt;code>result := make(map[string]int, len(s.counters))
+result := make(map[string]int, len(s.counters))
 for k, v := range s.counters {
 result[k] = v
 }
 return result
-&lt;/code>&lt;/pre>
-&lt;p>}
-&lt;/code>&lt;/pre>&lt;/details>&lt;/p>&lt;/div>
+}
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div></description></item><item><title>Select</title><link>https://linzeyan.github.io/zh-tw/notes/go/questions/select/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/go/questions/select/</guid><description>&lt;div class="note-card ">

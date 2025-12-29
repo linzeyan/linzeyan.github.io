@@ -1582,7 +1582,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-136" playsinline controls>
+&lt;video class="video-player" id="video-159" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230926-golang/</guid><description>&lt;ul>
@@ -2898,7 +2898,120 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ElasticSearch 学习笔记</title><link>https://linzeyan.github.io/posts/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221006-elasticsearch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">ElasticSearch 学习笔记&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装中文分词插件">安装中文分词插件&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it elasticsearch bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Dev Tools
+&lt;ul>
+&lt;li>&lt;code>content&lt;/code> 类型为 &lt;code>text&lt;/code>，写入时使用 &lt;code>ik_max_word&lt;/code> 做分词，搜索时使用 &lt;code>ik_smart&lt;/code> 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">PUT&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">/words&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;mappings&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;content&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;text&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_max_word&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;search_analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_smart&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;age&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;integer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>《宝可梦：阿尔宙斯》双周目通关</title><link>https://linzeyan.github.io/posts/20220919-pokemon-legends-arceus-stage-clear/</link><pubDate>Mon, 19 Sep 2022 11:30:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220919-pokemon-legends-arceus-stage-clear/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soulteary.com/2022/09/05/pokemon-legends-arceus-stage-clear.html" target="_blank" rel="noopener">《宝可梦：阿尔宙斯》双周目通关&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Avoiding the Top 10 NGINX Configuration Mistakes - NGINX</title><link>https://linzeyan.github.io/posts/20220916-avoiding-top-10-nginx-configuration-mistakes/</link><pubDate>Fri, 16 Sep 2022 15:22:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220916-avoiding-top-10-nginx-configuration-mistakes/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/" target="_blank" rel="noopener">Avoiding the Top 10 NGINX Configuration Mistakes - NGINX&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-not-enough-file-descriptors-fds-per-worker">1) Not enough file descriptors (FDs) per worker&lt;/h2>
+&lt;h3 id="whats-wrong">What&amp;rsquo;s wrong&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>worker_connections&lt;/code> limits how many concurrent connections &lt;strong>a single worker&lt;/strong> can hold (default 512).&lt;/li>
+&lt;li>But each worker is also limited by the OS per-process &lt;strong>file descriptor&lt;/strong> limit (often 1024 by default).&lt;/li>
+&lt;li>Common mistake: increasing &lt;code>worker_connections&lt;/code> but not raising the FD limit, causing early exhaustion.&lt;/li>
+&lt;/ul>
+&lt;h3 id="fix">Fix&lt;/h3>
+&lt;ul>
+&lt;li>Set &lt;code>worker_rlimit_nofile&lt;/code> in the &lt;strong>main context&lt;/strong> to at least &lt;strong>2×&lt;/strong> &lt;code>worker_connections&lt;/code> (rule of thumb).&lt;/li>
+&lt;li>Also validate the system-wide FD cap (&lt;code>fs.file-max&lt;/code>) so that:
+&lt;code>worker_rlimit_nofile * worker_processes&lt;/code> is well below &lt;code>fs.file-max&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># main context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_connections&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>; &lt;span style="color:#75715e"># inside events {}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">worker_rlimit_nofile&lt;/span> &lt;span style="color:#ae81ff">2048&lt;/span>; &lt;span style="color:#75715e"># main context
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="2-the-error_log-off-directive-it-does-not-disable-error-logging">2) The &lt;code>error_log off&lt;/code> directive (it does not disable error logging)&lt;/h2>
+&lt;h3 id="whats-wrong-1">What&amp;rsquo;s wrong&lt;/h3>
+&lt;ul>
+&lt;li>Unlike &lt;code>access_log&lt;/code>, &lt;code>error_log&lt;/code> does &lt;strong>not&lt;/strong> accept an &lt;code>off&lt;/code> parameter.&lt;/li>
+&lt;li>&lt;code>error_log off;&lt;/code> creates a file literally named &lt;code>off&lt;/code> (often under &lt;code>/etc/nginx/&lt;/code>).&lt;/li>
+&lt;/ul>
+&lt;h3 id="fix-generally-not-recommended">Fix (generally not recommended)&lt;/h3>
+&lt;ul>
+&lt;li>If you must suppress error logging due to storage constraints, send it to &lt;code>/dev/null&lt;/code> and restrict severity:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># main context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">/dev/null&lt;/span> &lt;span style="color:#e6db74">emerg&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="note">Note&lt;/h3>
+&lt;ul>
+&lt;li>This only applies after NGINX reads and validates config; startup/reload may still log to the default location unless you start NGINX with &lt;code>-e &amp;lt;error_log_location&amp;gt;&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="3-not-enabling-keepalive-connections-to-upstream-servers">3) Not enabling keepalive connections to upstream servers&lt;/h2>
+&lt;h3 id="whats-wrong-2">What&amp;rsquo;s wrong&lt;/h3>
+&lt;ul>
+&lt;li>Default behavior: NGINX opens a new upstream connection for each request.&lt;/li>
+&lt;li>At high load this can consume resources and can exhaust ephemeral source ports due to TIME-WAIT, preventing new upstream connections.&lt;/li>
+&lt;/ul>
+&lt;h3 id="fix-1">Fix&lt;/h3>
+&lt;p>&lt;strong>(A) Add &lt;code>keepalive&lt;/code> to each &lt;code>upstream {}&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>Go string format</title><link>https://linzeyan.github.io/posts/20220908-string-format/</link><pubDate>Thu, 08 Sep 2022 11:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220908-string-format/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://zetcode.com/golang/string-format/" target="_blank" rel="noopener">Go string format&lt;/a>
+The verb at the end defines the type and the interpretation of its corresponding argument.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>d&lt;/code> - decimal integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>o&lt;/code> - octal integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>O&lt;/code> - octal integer with &lt;code>0o&lt;/code> prefix&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>b&lt;/code> - binary integer&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>x&lt;/code> - hexadecimal integer lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>X&lt;/code> - hexadecimal integer uppercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>f&lt;/code> - decimal floating point, lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>F&lt;/code> - decimal floating point, uppercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>e&lt;/code> - scientific notation (mantissa/exponent), lowercase&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>E&lt;/code> - scientific notation (mantissa/exponent), uppercase&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
@@ -6223,10 +6336,7 @@ panic: send on closed channel
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#e6db74">&amp;#34;4&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;details>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
 &lt;summary>Answer&lt;/summary>
 &lt;pre>&lt;a href="https://go.dev/play/p/-bTDzXAjgYn" target="_blank">Try it&lt;/a>
 &lt;code class="language-shell">3
@@ -6235,9 +6345,6 @@ panic: send on closed channel
 panic: 4
 &lt;/code>&lt;/pre>&lt;/details>
 &lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -6270,10 +6377,7 @@ panic: 4
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span>.&lt;span style="color:#a6e22e">age&lt;/span> = &lt;span style="color:#ae81ff">29&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;details>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
 &lt;summary>Answer&lt;/summary>
 &lt;pre>&lt;a href="https://go.dev/play/p/JChQfww_8GK" target="_blank">Try it&lt;/a>
 &lt;code class="language-shell">29
@@ -6281,9 +6385,6 @@ panic: 4
 28
 &lt;/code>&lt;/pre>&lt;/details>
 &lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -6316,10 +6417,7 @@ panic: 4
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">person&lt;/span> = &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">Person&lt;/span>{&lt;span style="color:#ae81ff">29&lt;/span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;details>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
 &lt;summary>Answer&lt;/summary>
 &lt;pre>&lt;a href="https://go.dev/play/p/blqcBt9nVrk" target="_blank">Try it&lt;/a>
 &lt;code class="language-shell">29
@@ -6327,9 +6425,6 @@ panic: 4
 28
 &lt;/code>&lt;/pre>&lt;/details>
 &lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -6357,19 +6452,13 @@ panic: 4
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;3&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;details>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
 &lt;summary>Answer&lt;/summary>
 &lt;pre>&lt;a href="https://go.dev/play/p/zkp1U4vSmqO" target="_blank">Try it&lt;/a>
 &lt;code class="language-shell">2
 1
 &lt;/code>&lt;/pre>&lt;/details>
 &lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -6393,10 +6482,7 @@ panic: 4
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">tt&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>).&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">2&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tt&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">3&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>A. 132&lt;/li>
 &lt;li>B. 123&lt;/li>
 &lt;li>C. 312&lt;/li>
@@ -6408,9 +6494,6 @@ panic: 4
 &lt;code>A
 &lt;/code>&lt;/pre>&lt;/details>
 &lt;/div>
-&lt;/div>
-&lt;div class="card">
-&lt;div class="card-body">&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div></description></item><item><title>Goroutine</title><link>https://linzeyan.github.io/notes/go/questions/goroutine/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/go/questions/goroutine/</guid><description>&lt;div class="note-card ">
@@ -6960,14 +7043,14 @@ main.T{x:123}
 &lt;code class="language-golang">func (s *Stats) Snapshot() map[string]int {
 s.mutex.Lock()
 defer s.mutex.Unlock()
-&lt;pre>&lt;code>result := make(map[string]int, len(s.counters))
+result := make(map[string]int, len(s.counters))
 for k, v := range s.counters {
 result[k] = v
 }
 return result
-&lt;/code>&lt;/pre>
-&lt;p>}
-&lt;/code>&lt;/pre>&lt;/details>&lt;/p>&lt;/div>
+}
+&lt;/code>&lt;/pre>&lt;/details>
+&lt;/div>
 &lt;/div>
 &lt;/div>
 &lt;/div></description></item><item><title>Select</title><link>https://linzeyan.github.io/notes/go/questions/select/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/go/questions/select/</guid><description>&lt;div class="note-card ">
