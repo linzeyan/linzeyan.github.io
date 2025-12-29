@@ -233,7 +233,43 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;li>At high load this can consume resources and can exhaust ephemeral source ports due to TIME-WAIT, preventing new upstream connections.&lt;/li>
 &lt;/ul>
 &lt;h3 id="fix-1">Fix&lt;/h3>
-&lt;p>&lt;strong>(A) Add &lt;code>keepalive&lt;/code> to each &lt;code>upstream {}&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>Nginx notes</title><link>https://linzeyan.github.io/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211119-nginx/</guid><description>&lt;h1 id="record-nginx-configuration-file-and-explanation">Record Nginx configuration file and explanation.&lt;/h1>
+&lt;p>&lt;strong>(A) Add &lt;code>keepalive&lt;/code> to each &lt;code>upstream {}&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>Top 25 Nginx Tips and Tricks From Practical Experience</title><link>https://linzeyan.github.io/posts/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</link><pubDate>Wed, 10 Aug 2022 12:27:28 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://hackernoon.com/top-25-nginx-tips-and-tricks-from-practical-experience" target="_blank" rel="noopener">Top 25 Nginx Tips and Tricks From Practical Experience&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>server_tokens off;&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>ssl_protocols TLSv1.2 TLSv1.3;&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Disable any undesirable HTTP methods&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_except&lt;/span> &lt;span style="color:#e6db74">GET&lt;/span> &lt;span style="color:#e6db74">HEAD&lt;/span> &lt;span style="color:#e6db74">POST&lt;/span> { &lt;span style="color:#f92672">deny&lt;/span> &lt;span style="color:#e6db74">all&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Enable sysctl based protection&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>net.ipv4.conf.all.rp_filter &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_syncookies &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Stop image hotlinking&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/images/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">valid_referers&lt;/span> &lt;span style="color:#e6db74">none&lt;/span> &lt;span style="color:#e6db74">blocked&lt;/span> &lt;span style="color:#e6db74">www.domain.com&lt;/span> &lt;span style="color:#e6db74">domain.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span> &lt;span style="color:#e6db74">(&lt;/span>$invalid_referer&lt;span style="color:#e6db74">)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">403&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>add_header X-Content-Type-Options nosniff;&lt;/code>&lt;/li>
+&lt;li>&lt;code>add_header X-XSS-Protection &amp;quot;1; mode=block&amp;quot;;&lt;/code>&lt;/li>
+&lt;li>&lt;code>add_header Strict-Transport-Security &amp;quot;max-age=31536000; includeSubDomains; preload&amp;quot; always;&lt;/code>&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul></description></item><item><title>Nginx notes</title><link>https://linzeyan.github.io/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211119-nginx/</guid><description>&lt;h1 id="record-nginx-configuration-file-and-explanation">Record Nginx configuration file and explanation.&lt;/h1>
 &lt;h2 id="files-structure">files structure&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── geoip.conf

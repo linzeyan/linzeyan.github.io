@@ -501,39 +501,261 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go string format</title><link>https://linzeyan.github.io/zh-tw/posts/20220908-string-format/</link><pubDate>Thu, 08 Sep 2022 11:32:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220908-string-format/</guid><description>&lt;ul>
-&lt;li>
-&lt;p>&lt;a href="https://zetcode.com/golang/string-format/" target="_blank" rel="noopener">Go string format&lt;/a>
-The verb at the end defines the type and the interpretation of its corresponding argument.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>d&lt;/code> - decimal integer&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>o&lt;/code> - octal integer&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>O&lt;/code> - octal integer with &lt;code>0o&lt;/code> prefix&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>b&lt;/code> - binary integer&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>x&lt;/code> - hexadecimal integer lowercase&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>X&lt;/code> - hexadecimal integer uppercase&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>f&lt;/code> - decimal floating point, lowercase&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>F&lt;/code> - decimal floating point, uppercase&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>e&lt;/code> - scientific notation (mantissa/exponent), lowercase&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>E&lt;/code> - scientific notation (mantissa/exponent), uppercase&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zetcode.com/golang/string-format/" target="_blank" rel="noopener">Go string format&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>The verb at the end defines the type and the interpretation of its corresponding argument.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>d&lt;/code> - decimal integer&lt;/li>
+&lt;li>&lt;code>o&lt;/code> - octal integer&lt;/li>
+&lt;li>&lt;code>O&lt;/code> - octal integer with &lt;code>0o&lt;/code> prefix&lt;/li>
+&lt;li>&lt;code>b&lt;/code> - binary integer&lt;/li>
+&lt;li>&lt;code>x&lt;/code> - hexadecimal integer lowercase&lt;/li>
+&lt;li>&lt;code>X&lt;/code> - hexadecimal integer uppercase&lt;/li>
+&lt;li>&lt;code>f&lt;/code> - decimal floating point, lowercase&lt;/li>
+&lt;li>&lt;code>F&lt;/code> - decimal floating point, uppercase&lt;/li>
+&lt;li>&lt;code>e&lt;/code> - scientific notation (mantissa/exponent), lowercase&lt;/li>
+&lt;li>&lt;code>E&lt;/code> - scientific notation (mantissa/exponent), uppercase&lt;/li>
+&lt;li>&lt;code>g&lt;/code> - the shortest representation of &lt;code>%e&lt;/code> or &lt;code>%f&lt;/code>&lt;/li>
+&lt;li>&lt;code>G&lt;/code> - the shortest representation of &lt;code>%E&lt;/code> or &lt;code>%F&lt;/code>&lt;/li>
+&lt;li>&lt;code>c&lt;/code> - a character represented by the corresponding Unicode code point&lt;/li>
+&lt;li>&lt;code>q&lt;/code> - a quoted character&lt;/li>
+&lt;li>&lt;code>U&lt;/code> - Unicode escape sequence&lt;/li>
+&lt;li>&lt;code>t&lt;/code> - the word true or false&lt;/li>
+&lt;li>&lt;code>s&lt;/code> - a string&lt;/li>
+&lt;li>&lt;code>v&lt;/code> - default format&lt;/li>
+&lt;li>&lt;code>#v&lt;/code> - Go-syntax representation of the value&lt;/li>
+&lt;li>&lt;code>T&lt;/code> - a Go-syntax representation of the type of the value&lt;/li>
+&lt;li>&lt;code>p&lt;/code> - pointer address&lt;/li>
+&lt;li>&lt;code>%&lt;/code> - a double &lt;code>%%&lt;/code> prints a single &lt;code>%&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="go-string-format-indexing">Go string format indexing&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n1&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n3&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">res&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Sprintf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;There are %d oranges %d apples %d plums&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">n1&lt;/span>, &lt;span style="color:#a6e22e">n2&lt;/span>, &lt;span style="color:#a6e22e">n3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">res&lt;/span>) &lt;span style="color:#75715e">// There are 2 oranges 3 apples 4 plums&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">res2&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Sprintf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;There are %[2]d oranges %d apples %[1]d plums&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">n1&lt;/span>, &lt;span style="color:#a6e22e">n2&lt;/span>, &lt;span style="color:#a6e22e">n3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">res2&lt;/span>) &lt;span style="color:#75715e">// There are 3 oranges 4 apples 2 plums&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="go-string-format-precision">Go string format precision&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%0.f\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">16.540&lt;/span>) &lt;span style="color:#75715e">// 17&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%0.2f\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">16.540&lt;/span>) &lt;span style="color:#75715e">// 16.54&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%0.3f\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">16.540&lt;/span>) &lt;span style="color:#75715e">// 16.540&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%0.5f\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">16.540&lt;/span>) &lt;span style="color:#75715e">// 16.54000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="go-string-format-flags">Go string format flags&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%+d\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// +1691&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%#x\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 0x69b&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%#X\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 0X69B&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%#b\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 0b11010011011&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%10d\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 1691&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%-10d\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 1691&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%010d\n&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">1691&lt;/span>) &lt;span style="color:#75715e">// 0000001691&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="go-string-format-width">Go string format width&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">w&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;falcon&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">122&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">h&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">455.67&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%s\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">w&lt;/span>) &lt;span style="color:#75715e">// falcon&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%10s\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">w&lt;/span>) &lt;span style="color:#75715e">// falcon&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%d\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">n&lt;/span>). &lt;span style="color:#75715e">// 122&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%7d\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">n&lt;/span>) &lt;span style="color:#75715e">// 122&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%07d\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">n&lt;/span>) &lt;span style="color:#75715e">// 0000122&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%10f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">h&lt;/span>) &lt;span style="color:#75715e">// 455.670000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%11f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">h&lt;/span>) &lt;span style="color:#75715e">// 455.670000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%12f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">h&lt;/span>) &lt;span style="color:#75715e">// 455.670000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>為你的Go應用建立輕量級Docker映象？ | IT人</title><link>https://linzeyan.github.io/zh-tw/posts/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://iter01.com/605065.html" target="_blank" rel="noopener">為你的 Go 應用建立輕量級 Docker 映象？ | IT 人&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="go-build">go build&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># default&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build -o test1 main.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>14M test1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在程式編譯的時候可以加上 `-ldflags &amp;#34;-s -w&amp;#34;` 引數來優化編譯，原理是通過去除部分連結和除錯等資訊來減小編譯生成的可執行程式體積，具體引數如下：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -a：強制編譯所有依賴包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -s：去掉符號表資訊，不過 panic 的時候 stack trace 就沒有任何檔名/行號資訊了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -w：去掉 DWARF 除錯資訊，不過得到的程式就不能使用 gdb 進行除錯了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若對符號表無需求，-ldflags 直接新增 &amp;#34;-s&amp;#34; 即可&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注：不建議-w和-s同時使用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build -ldflags &lt;span style="color:#e6db74">&amp;#34;-s -w&amp;#34;&lt;/span> -o test2 main.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11M test2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="upxbrewyum-install-upx">upx(&lt;code>brew/yum install upx&lt;/code>)&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ upx test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ultimate Packer &lt;span style="color:#66d9ef">for&lt;/span> eXecutables
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Copyright &lt;span style="color:#f92672">(&lt;/span>C&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1996&lt;/span> - &lt;span style="color:#ae81ff">2020&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>UPX 3.96 Markus Oberhumer, Laszlo Molnar &amp;amp; John Reiser Jan 23rd &lt;span style="color:#ae81ff">2020&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File size Ratio Format Name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -------------------- ------ ----------- -----------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">11490768&lt;/span> -&amp;gt; &lt;span style="color:#ae81ff">4063248&lt;/span> 35.36% macho/amd64 test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packed &lt;span style="color:#ae81ff">1&lt;/span> file.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ upx --brute test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.6M test2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>upx 的壓縮選項&lt;/p></description></item><item><title>[Golang] 利用build tags達到不同的build config</title><link>https://linzeyan.github.io/zh-tw/posts/20220718-go-build-config-ldflags/</link><pubDate>Mon, 18 Jul 2022 14:21:34 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220718-go-build-config-ldflags/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.evanlin.com/go-build-config-ldflags/" target="_blank" rel="noopener">[Golang] 利用 build tags 達到不同的 build config&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="go-build--ldflags">Go build -ldflags&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">flagString&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;This build with ldflag:&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">flagString&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go build -ldflags &lt;span style="color:#e6db74">&amp;#39;-X main.flagString &amp;#34;test&amp;#34;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This build with ldflag: test
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="go-build--tags">Go build -tags&lt;/h5>
+&lt;h6 id="debug_configgo">debug_config.go&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//+build debug&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">TestString&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;test debug&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">TestString2&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> = &lt;span style="color:#e6db74">&amp;#34; and it will run every module with debug tag.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">GetConfigString&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;it is debug.....&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert warning">
+&lt;span>&lt;i data-feather="alert-triangle">&lt;/i>&lt;/span>
+&lt;span>&lt;strong>&lt;code>//+build debug&lt;/code> 前後需要一個空行(除非你在第一行)&lt;/strong>&lt;/span>
+&lt;/div>
+&lt;h6 id="release_configgo">release_config.go&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//+build !debug&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">TestString&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;test release&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">TestString2&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> = &lt;span style="color:#e6db74">&amp;#34; and it will run every module as no debug tag.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">GetConfigString&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;it is release.....&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="main">main&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;This build is &amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">TestString&lt;/span>, &lt;span style="color:#a6e22e">TestString2&lt;/span>, &lt;span style="color:#a6e22e">GetConfigString&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go build -tags debug .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This build is test debug and it will run every module with debug tag. it is debug.....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This build is test release and it will run every module as no debug tag. it is release.....
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go embed 简明教程</title><link>https://linzeyan.github.io/zh-tw/posts/20220712-go-embed-tutorial/</link><pubDate>Tue, 12 Jul 2022 13:57:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220712-go-embed-tutorial/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://colobu.com/2021/01/17/go-embed-tutorial/" target="_blank" rel="noopener">Go embed 简明教程&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="嵌入">嵌入&lt;/h3>
+&lt;ul>
+&lt;li>对于单个的文件，支持嵌入为&lt;code>string&lt;/code>和 &lt;code>[]byre&lt;/code>&lt;/li>
+&lt;li>对于多个文件和文件夹，支持嵌入为新的文件系统 FS&lt;/li>
+&lt;li>比如导入 &amp;ldquo;embed&amp;rdquo; 包，即使无显式的使用&lt;/li>
+&lt;li>&lt;code>go:embed&lt;/code> 指令用来嵌入，必须紧跟着嵌入后的变量名&lt;/li>
+&lt;li>只支持嵌入为 &lt;code>string&lt;/code>, &lt;code>[]byte&lt;/code> 和 &lt;code>embed.FS&lt;/code> 三种类型，这三种类型的别名(alias)和命名类型(如 type S string)都不可以&lt;/li>
+&lt;li>使用的是相对路径&lt;/li>
+&lt;/ul>
+&lt;h4 id="stringbyte">string/[]byte&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#e6db74">&amp;#34;embed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed hello.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed hello.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> []&lt;span style="color:#66d9ef">byte&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="embedfs">embed.FS&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;embed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed hello.txt hello2.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed &amp;#34;p/he llo.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed `p/hello-2.txt`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">//go:embed dir&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span> &lt;span style="color:#a6e22e">embed&lt;/span>.&lt;span style="color:#a6e22e">FS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">data&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>.&lt;span style="color:#a6e22e">ReadFile&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hello.txt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">data&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> = &lt;span style="color:#a6e22e">f&lt;/span>.&lt;span style="color:#a6e22e">ReadFile&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hello2.txt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">data&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>.&lt;span style="color:#a6e22e">ReadFile&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;p/he llo.txt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">data&lt;/span>, &lt;span style="color:#a6e22e">_&lt;/span> = &lt;span style="color:#a6e22e">f&lt;/span>.&lt;span style="color:#a6e22e">ReadFile&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;p/hello-2.txt&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="匹配模式">匹配模式&lt;/h5>
+&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>

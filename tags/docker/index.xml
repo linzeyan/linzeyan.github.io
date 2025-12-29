@@ -162,7 +162,39 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>為你的Go應用建立輕量級Docker映象？ | IT人</title><link>https://linzeyan.github.io/posts/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://iter01.com/605065.html" target="_blank" rel="noopener">為你的 Go 應用建立輕量級 Docker 映象？ | IT 人&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="go-build">go build&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># default&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build -o test1 main.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>14M test1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在程式編譯的時候可以加上 `-ldflags &amp;#34;-s -w&amp;#34;` 引數來優化編譯，原理是通過去除部分連結和除錯等資訊來減小編譯生成的可執行程式體積，具體引數如下：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -a：強制編譯所有依賴包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -s：去掉符號表資訊，不過 panic 的時候 stack trace 就沒有任何檔名/行號資訊了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -w：去掉 DWARF 除錯資訊，不過得到的程式就不能使用 gdb 進行除錯了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若對符號表無需求，-ldflags 直接新增 &amp;#34;-s&amp;#34; 即可&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注：不建議-w和-s同時使用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build -ldflags &lt;span style="color:#e6db74">&amp;#34;-s -w&amp;#34;&lt;/span> -o test2 main.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11M test2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="upxbrewyum-install-upx">upx(&lt;code>brew/yum install upx&lt;/code>)&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ upx test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ultimate Packer &lt;span style="color:#66d9ef">for&lt;/span> eXecutables
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Copyright &lt;span style="color:#f92672">(&lt;/span>C&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1996&lt;/span> - &lt;span style="color:#ae81ff">2020&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>UPX 3.96 Markus Oberhumer, Laszlo Molnar &amp;amp; John Reiser Jan 23rd &lt;span style="color:#ae81ff">2020&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File size Ratio Format Name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -------------------- ------ ----------- -----------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">11490768&lt;/span> -&amp;gt; &lt;span style="color:#ae81ff">4063248&lt;/span> 35.36% macho/amd64 test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Packed &lt;span style="color:#ae81ff">1&lt;/span> file.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ upx --brute test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.6M test2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>upx 的壓縮選項&lt;/p></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
 &lt;h2 id="concept">Concept&lt;/h2>
 &lt;h3 id="vm-vs-container">VM vs Container&lt;/h3>
 &lt;ul>
