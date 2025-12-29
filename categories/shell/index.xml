@@ -194,4 +194,146 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/uniq
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/sort
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/head
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell Script Best Practices</title><link>https://linzeyan.github.io/posts/20221103-shell-script-best-practices/</link><pubDate>Thu, 03 Nov 2022 16:51:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221103-shell-script-best-practices/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://sharats.me/posts/shell-script-best-practices/" target="_blank" rel="noopener">Shell Script Best Practices&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="things">Things&lt;/h4>
+&lt;ol>
+&lt;li>Just make the first line be &lt;code>#!/usr/bin/env bash&lt;/code>.&lt;/li>
+&lt;li>Use the &lt;code>.sh&lt;/code> (or &lt;code>.bash&lt;/code>) extension for your file.&lt;/li>
+&lt;li>Use &lt;code>set -o errexit&lt;/code> at the start of your script.&lt;/li>
+&lt;li>Prefer to use &lt;code>set -o nounset&lt;/code>.
+&lt;ol>
+&lt;li>use &lt;code>&amp;quot;${VARNAME-}&amp;quot;&lt;/code> instead of &lt;code>&amp;quot;$VARNAME&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>set -o pipefail&lt;/code>.&lt;/li>
+&lt;li>Use &lt;code>set -o xtrace&lt;/code>, with a check on &lt;code>$TRACE&lt;/code> env variable.
+&lt;ol>
+&lt;li>&lt;code>if [[ &amp;quot;${TRACE-0}&amp;quot; == &amp;quot;1&amp;quot; ]]; then set -o xtrace; fi&lt;/code>&lt;/li>
+&lt;li>People can now enable debug mode, by running your script as &lt;code>TRACE=1 ./script.sh&lt;/code> instead of &lt;code>./script.sh&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>[[ ]]&lt;/code> for conditions in &lt;code>if&lt;/code> / &lt;code>while&lt;/code> statements, instead of &lt;code>[ ]&lt;/code> or &lt;code>test&lt;/code>.&lt;/li>
+&lt;li>Always quote variable accesses with double-quotes.&lt;/li>
+&lt;li>Use &lt;code>local&lt;/code> variables in functions.&lt;/li>
+&lt;li>When printing error messages, please redirect to stderr.
+&lt;ol>
+&lt;li>Use &lt;code>echo 'Something unexpected happened' &amp;gt;&amp;amp;2&lt;/code> for this.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use long options, where possible (like &lt;code>--silent&lt;/code> instead of &lt;code>-s&lt;/code>).&lt;/li>
+&lt;li>If appropriate, change to the script&amp;rsquo;s directory close to the start of the script.
+&lt;ol>
+&lt;li>Use cd &amp;ldquo;$(dirname &amp;ldquo;$0&amp;rdquo;)&amp;rdquo;, which works in most cases.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>shellcheck&lt;/code>. Heed its warnings.&lt;/li>
+&lt;/ol>
+&lt;h4 id="template">Template&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o errexit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o nounset
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o pipefail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>TRACE-0&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> set -o xtrace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1-&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span>~ ^-*h&lt;span style="color:#f92672">(&lt;/span>elp&lt;span style="color:#f92672">)&lt;/span>?$ &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#39;Usage: ./script.sh arg-one arg-two
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">This is an awesome bash script to make your life better.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#66d9ef">do&lt;/span> awesome stuff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>The Art of Command Line</title><link>https://linzeyan.github.io/posts/20221102-the-art-of-command-line/</link><pubDate>Wed, 02 Nov 2022 15:04:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221102-the-art-of-command-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/jlevy/the-art-of-command-line" target="_blank" rel="noopener">The Art of Command Line&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Printing ASCII Art in the Shell</title><link>https://linzeyan.github.io/posts/20221021-shell-printing-ascii-art/</link><pubDate>Fri, 21 Oct 2022 17:30:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221021-shell-printing-ascii-art/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shell-printing-ascii-art" target="_blank" rel="noopener">Printing ASCII Art in the Shell&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="banner">banner&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install sysvbanner&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ banner hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### # # ####&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">###### ##### # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### ###### ###### ####&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="figlet-frank-ian-and-glenns-letters">FIGlet: Frank, Ian, and Glenn&amp;rsquo;s Letters&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install figlet&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ figlet hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _ _ _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| |__ ___| | | ___
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| &lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>_ &lt;span style="color:#ae81ff">\ &lt;/span>/ _ &lt;span style="color:#ae81ff">\ &lt;/span>| |/ _ &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>| | | | __/ | | &lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span> |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|_| |_|&lt;span style="color:#ae81ff">\_&lt;/span>__|_|_|&lt;span style="color:#ae81ff">\_&lt;/span>__/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>-f&lt;/code> option and specify a font name for the output&lt;/li>
+&lt;li>&lt;code>-l&lt;/code>, &lt;code>-c&lt;/code>, and &lt;code>-r&lt;/code> options to align the text to the left, center, or right,&lt;/li>
+&lt;/ul>
+&lt;h5 id="toilet-figlet-with-more-options">TOIlet: FIGlet With More Options&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install toilet&lt;/code>&lt;/p></description></item><item><title>How to Make Output Overwrite the Same Line in a Terminal</title><link>https://linzeyan.github.io/posts/20221021-echo-printf-overwrite-terminal-line/</link><pubDate>Fri, 21 Oct 2022 17:29:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221021-echo-printf-overwrite-terminal-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line" target="_blank" rel="noopener">How to Make Output Overwrite the Same Line in a Terminal&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="introduction-to-the-problem">Introduction to the Problem&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>!/bin/bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span> To simulate the file processing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: readme.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: veryPowerfulService.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: log.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DONE
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="the-magic-code-0330kr">The &amp;ldquo;Magic Code&amp;rdquo;: &lt;code>\033[0K\r&lt;/code>&lt;/h5>
+&lt;ul>
+&lt;li>&lt;code>-n&lt;/code> option asks the echo command to stop outputting the trailing newline character&lt;/li>
+&lt;li>&lt;code>-e&lt;/code> option allows the echo command to interpret backslash escapes such as &lt;code>\n&lt;/code> (newline) and &lt;code>\r&lt;/code> (carriage return)&lt;/li>
+&lt;li>&lt;code>\033&lt;/code> - It&amp;rsquo;s the escape sequence. In other words, it&amp;rsquo;s ESC.&lt;/li>
+&lt;li>&lt;code>\033[&lt;/code> - Then this becomes &amp;ldquo;ESC [&amp;rdquo;, which is the control sequence introducer (CSI).&lt;/li>
+&lt;li>&lt;code>\033[0k&lt;/code> - So it&amp;rsquo;s &amp;ldquo;CSI 0 K&amp;rdquo;. Further, &amp;ldquo;CSI 0 K&amp;rdquo; erases the text from the cursor to the end of the line.&lt;/li>
+&lt;li>&lt;code>\r&lt;/code> - This is the carriage return. It brings the cursor to the beginning of the line.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>!/bin/bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

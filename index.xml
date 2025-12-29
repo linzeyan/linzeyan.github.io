@@ -1582,7 +1582,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-113" playsinline controls>
+&lt;video class="video-player" id="video-136" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20230926-golang/</guid><description>&lt;ul>
@@ -2474,6 +2474,430 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell Script Best Practices</title><link>https://linzeyan.github.io/posts/20221103-shell-script-best-practices/</link><pubDate>Thu, 03 Nov 2022 16:51:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221103-shell-script-best-practices/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://sharats.me/posts/shell-script-best-practices/" target="_blank" rel="noopener">Shell Script Best Practices&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="things">Things&lt;/h4>
+&lt;ol>
+&lt;li>Just make the first line be &lt;code>#!/usr/bin/env bash&lt;/code>.&lt;/li>
+&lt;li>Use the &lt;code>.sh&lt;/code> (or &lt;code>.bash&lt;/code>) extension for your file.&lt;/li>
+&lt;li>Use &lt;code>set -o errexit&lt;/code> at the start of your script.&lt;/li>
+&lt;li>Prefer to use &lt;code>set -o nounset&lt;/code>.
+&lt;ol>
+&lt;li>use &lt;code>&amp;quot;${VARNAME-}&amp;quot;&lt;/code> instead of &lt;code>&amp;quot;$VARNAME&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>set -o pipefail&lt;/code>.&lt;/li>
+&lt;li>Use &lt;code>set -o xtrace&lt;/code>, with a check on &lt;code>$TRACE&lt;/code> env variable.
+&lt;ol>
+&lt;li>&lt;code>if [[ &amp;quot;${TRACE-0}&amp;quot; == &amp;quot;1&amp;quot; ]]; then set -o xtrace; fi&lt;/code>&lt;/li>
+&lt;li>People can now enable debug mode, by running your script as &lt;code>TRACE=1 ./script.sh&lt;/code> instead of &lt;code>./script.sh&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>[[ ]]&lt;/code> for conditions in &lt;code>if&lt;/code> / &lt;code>while&lt;/code> statements, instead of &lt;code>[ ]&lt;/code> or &lt;code>test&lt;/code>.&lt;/li>
+&lt;li>Always quote variable accesses with double-quotes.&lt;/li>
+&lt;li>Use &lt;code>local&lt;/code> variables in functions.&lt;/li>
+&lt;li>When printing error messages, please redirect to stderr.
+&lt;ol>
+&lt;li>Use &lt;code>echo 'Something unexpected happened' &amp;gt;&amp;amp;2&lt;/code> for this.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use long options, where possible (like &lt;code>--silent&lt;/code> instead of &lt;code>-s&lt;/code>).&lt;/li>
+&lt;li>If appropriate, change to the script&amp;rsquo;s directory close to the start of the script.
+&lt;ol>
+&lt;li>Use cd &amp;ldquo;$(dirname &amp;ldquo;$0&amp;rdquo;)&amp;rdquo;, which works in most cases.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Use &lt;code>shellcheck&lt;/code>. Heed its warnings.&lt;/li>
+&lt;/ol>
+&lt;h4 id="template">Template&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o errexit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o nounset
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o pipefail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>TRACE-0&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> set -o xtrace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1-&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span>~ ^-*h&lt;span style="color:#f92672">(&lt;/span>elp&lt;span style="color:#f92672">)&lt;/span>?$ &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#39;Usage: ./script.sh arg-one arg-two
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">This is an awesome bash script to make your life better.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#66d9ef">do&lt;/span> awesome stuff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>The Art of Command Line</title><link>https://linzeyan.github.io/posts/20221102-the-art-of-command-line/</link><pubDate>Wed, 02 Nov 2022 15:04:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221102-the-art-of-command-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/jlevy/the-art-of-command-line" target="_blank" rel="noopener">The Art of Command Line&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>一張圖學會【拼音輸入法】</title><link>https://linzeyan.github.io/posts/20221025-zhuyin-pinyin/</link><pubDate>Tue, 25 Oct 2022 11:57:51 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221025-zhuyin-pinyin/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://briian.com/zhuyin-pinyin" target="_blank" rel="noopener">一張圖學會【拼音輸入法】&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="聲母initials">聲母（Initials）&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>聲母&lt;/th>
+&lt;th>拼音&lt;/th>
+&lt;th>例字&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>ㄅ&lt;/td>
+&lt;td>b&lt;/td>
+&lt;td>爸 ba、別 bie、奔 ben&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄆ&lt;/td>
+&lt;td>p&lt;/td>
+&lt;td>撇 pie、平 ping、鵬 peng&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄇ&lt;/td>
+&lt;td>m&lt;/td>
+&lt;td>媽 ma、莫 mo、某 mou&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄈ&lt;/td>
+&lt;td>f&lt;/td>
+&lt;td>發 fa、飯 fan、風 feng&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄉ&lt;/td>
+&lt;td>d&lt;/td>
+&lt;td>的 d、但 dan、段 duan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄊ&lt;/td>
+&lt;td>t&lt;/td>
+&lt;td>他 ta、貼 tie、團 tuan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄋ&lt;/td>
+&lt;td>n&lt;/td>
+&lt;td>你 ni、農 nong、暖 nuan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄌ&lt;/td>
+&lt;td>l&lt;/td>
+&lt;td>李 li、亂 luan、亮 liang&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄍ&lt;/td>
+&lt;td>g&lt;/td>
+&lt;td>跟 gen、怪 guai、灌 guan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄎ&lt;/td>
+&lt;td>k&lt;/td>
+&lt;td>快 kuai、考 kao、狂 kuang&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄏ&lt;/td>
+&lt;td>h&lt;/td>
+&lt;td>哈 ha、漢 han、橫 heng&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄐ&lt;/td>
+&lt;td>j&lt;/td>
+&lt;td>叫 jiao、雞 ji、京 jing&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄑ&lt;/td>
+&lt;td>q&lt;/td>
+&lt;td>七 qi、琴 qin、巧 qiao&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄒ&lt;/td>
+&lt;td>x&lt;/td>
+&lt;td>西 xi、寫 xie、小 xiao&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄓ&lt;/td>
+&lt;td>zh&lt;/td>
+&lt;td>知 zhi、戰 zhan、正 zheng&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄔ&lt;/td>
+&lt;td>ch&lt;/td>
+&lt;td>吃 chi、船 chuan、重 chong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄕ&lt;/td>
+&lt;td>sh&lt;/td>
+&lt;td>是 shi、山 shan、刷 shuan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄖ&lt;/td>
+&lt;td>r&lt;/td>
+&lt;td>日 ri、讓 rang、人 ren&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄗ&lt;/td>
+&lt;td>z&lt;/td>
+&lt;td>字 zi、讚 zan、昨 zuo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄘ&lt;/td>
+&lt;td>c&lt;/td>
+&lt;td>次 ci、菜 cai、餐 can&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄙ&lt;/td>
+&lt;td>s&lt;/td>
+&lt;td>三 san、四 si、算 suan&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="介音--特殊聲母">介音 / 特殊聲母&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>類型&lt;/th>
+&lt;th>拼音&lt;/th>
+&lt;th>例字&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>y&lt;/td>
+&lt;td>yi / i&lt;/td>
+&lt;td>以 yi、依 yi、修 xiu&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>w&lt;/td>
+&lt;td>wu / u&lt;/td>
+&lt;td>無 wu、溫 wen、船 chuan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v&lt;/td>
+&lt;td>yu / ü&lt;/td>
+&lt;td>律 lü、雨 yu、院 yuan&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="單韻母finals">單韻母（Finals）&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>韻母&lt;/th>
+&lt;th>拼音&lt;/th>
+&lt;th>例字&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>ㄚ&lt;/td>
+&lt;td>a&lt;/td>
+&lt;td>沙 sha、撒 sa、奧 ao&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄛ&lt;/td>
+&lt;td>o&lt;/td>
+&lt;td>哦 o、偶 ou、歐 ou&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄜ&lt;/td>
+&lt;td>e&lt;/td>
+&lt;td>餓 e、樂 le、設 she&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄝ&lt;/td>
+&lt;td>ê / ye&lt;/td>
+&lt;td>也 ye、學 xue、切 qie&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄞ&lt;/td>
+&lt;td>ai&lt;/td>
+&lt;td>愛 ai、篩 shai、崖 yai&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄟ&lt;/td>
+&lt;td>ei&lt;/td>
+&lt;td>雷 lei、最 zui、脆 cui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄠ&lt;/td>
+&lt;td>ao&lt;/td>
+&lt;td>凹 ao、老 lao、笑 xiao&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄡ&lt;/td>
+&lt;td>ou&lt;/td>
+&lt;td>歐 ou、樓 lou、手 shou&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄢ&lt;/td>
+&lt;td>an&lt;/td>
+&lt;td>安 an、蘭 lan、算 suan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄣ&lt;/td>
+&lt;td>en&lt;/td>
+&lt;td>恩 en、林 lin、冷 leng&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄤ&lt;/td>
+&lt;td>ang&lt;/td>
+&lt;td>昂 ang、浪 lang、讓 rang&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄥ&lt;/td>
+&lt;td>eng&lt;/td>
+&lt;td>成 cheng、冷 leng、令 ling&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ㄦ&lt;/td>
+&lt;td>er&lt;/td>
+&lt;td>二 er、兒 er、而 er&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="複韻母--組合韻">複韻母 / 組合韻&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>拼音&lt;/th>
+&lt;th>例字&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>ye&lt;/td>
+&lt;td>也 ye、結 jie、血 xie&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>iu&lt;/td>
+&lt;td>六 liu、有 you、謬 miu&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>in&lt;/td>
+&lt;td>音 yin、新 xin、林 lin&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ing&lt;/td>
+&lt;td>英 ying、靈 ling、醒 xing&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uan&lt;/td>
+&lt;td>元 yuan、卷 juan、團 tuan&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ue&lt;/td>
+&lt;td>略 lue、學 xue&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>yun&lt;/td>
+&lt;td>雲 yun、巡 xun、群 qun&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ong&lt;/td>
+&lt;td>用 yong、兇 xiong、同 tong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ui&lt;/td>
+&lt;td>鬼 gui、為 wei、虧 kui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>un&lt;/td>
+&lt;td>文 wen、混 hun、準 zhun&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ua&lt;/td>
+&lt;td>華 hua、抓 zhua、蛙 wa&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uai&lt;/td>
+&lt;td>壞 huai、快 kuai、踹 chuai&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Printing ASCII Art in the Shell</title><link>https://linzeyan.github.io/posts/20221021-shell-printing-ascii-art/</link><pubDate>Fri, 21 Oct 2022 17:30:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221021-shell-printing-ascii-art/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/shell-printing-ascii-art" target="_blank" rel="noopener">Printing ASCII Art in the Shell&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="banner">banner&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install sysvbanner&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ banner hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### # # ####&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">###### ##### # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### ###### ###### ####&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="figlet-frank-ian-and-glenns-letters">FIGlet: Frank, Ian, and Glenn&amp;rsquo;s Letters&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install figlet&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ figlet hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _ _ _
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| |__ ___| | | ___
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| &lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>_ &lt;span style="color:#ae81ff">\ &lt;/span>/ _ &lt;span style="color:#ae81ff">\ &lt;/span>| |/ _ &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>| | | | __/ | | &lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span> |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|_| |_|&lt;span style="color:#ae81ff">\_&lt;/span>__|_|_|&lt;span style="color:#ae81ff">\_&lt;/span>__/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>-f&lt;/code> option and specify a font name for the output&lt;/li>
+&lt;li>&lt;code>-l&lt;/code>, &lt;code>-c&lt;/code>, and &lt;code>-r&lt;/code> options to align the text to the left, center, or right,&lt;/li>
+&lt;/ul>
+&lt;h5 id="toilet-figlet-with-more-options">TOIlet: FIGlet With More Options&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt install toilet&lt;/code>&lt;/p></description></item><item><title>How to Make Output Overwrite the Same Line in a Terminal</title><link>https://linzeyan.github.io/posts/20221021-echo-printf-overwrite-terminal-line/</link><pubDate>Fri, 21 Oct 2022 17:29:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221021-echo-printf-overwrite-terminal-line/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line" target="_blank" rel="noopener">How to Make Output Overwrite the Same Line in a Terminal&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="introduction-to-the-problem">Introduction to the Problem&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>!/bin/bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span> To simulate the file processing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: readme.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: veryPowerfulService.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: log.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DONE
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="the-magic-code-0330kr">The &amp;ldquo;Magic Code&amp;rdquo;: &lt;code>\033[0K\r&lt;/code>&lt;/h5>
+&lt;ul>
+&lt;li>&lt;code>-n&lt;/code> option asks the echo command to stop outputting the trailing newline character&lt;/li>
+&lt;li>&lt;code>-e&lt;/code> option allows the echo command to interpret backslash escapes such as &lt;code>\n&lt;/code> (newline) and &lt;code>\r&lt;/code> (carriage return)&lt;/li>
+&lt;li>&lt;code>\033&lt;/code> - It&amp;rsquo;s the escape sequence. In other words, it&amp;rsquo;s ESC.&lt;/li>
+&lt;li>&lt;code>\033[&lt;/code> - Then this becomes &amp;ldquo;ESC [&amp;rdquo;, which is the control sequence introducer (CSI).&lt;/li>
+&lt;li>&lt;code>\033[0k&lt;/code> - So it&amp;rsquo;s &amp;ldquo;CSI 0 K&amp;rdquo;. Further, &amp;ldquo;CSI 0 K&amp;rdquo; erases the text from the cursor to the end of the line.&lt;/li>
+&lt;li>&lt;code>\r&lt;/code> - This is the carriage return. It brings the cursor to the beginning of the line.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>!/bin/bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
