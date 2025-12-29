@@ -11,7 +11,8 @@ categories: ["URL", "Go"]
 ---
 
 - [Go string format](https://zetcode.com/golang/string-format/)
-  The verb at the end defines the type and the interpretation of its corresponding argument.
+
+The verb at the end defines the type and the interpretation of its corresponding argument.
 
 - `d` - decimal integer
 - `o` - octal integer
