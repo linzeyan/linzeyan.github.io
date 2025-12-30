@@ -626,4 +626,26 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/posts/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="tcpflow">tcpflow&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;code>apt/dnf install tcpflow&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#ae81ff">80&lt;/span> | grep -oE &lt;span style="color:#e6db74">&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reportfilename: ./report.xml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpflow: listening on wlp0s20f3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>-p&lt;/code> disables promiscuous mode&lt;/li>
+&lt;li>&lt;code>-c&lt;/code> means only print the output to the console and don&amp;rsquo;t create files&lt;/li>
+&lt;li>&lt;code>-i&lt;/code> specifies the network interface
+grep receives the output of tcpflow&lt;/li>
+&lt;li>&lt;code>-o&lt;/code> means show only the matching parts of the lines that match the pattern&lt;/li>
+&lt;li>&lt;code>-E&lt;/code> means the pattern is an extended regular expression (ERE)&lt;/li>
+&lt;/ul>
+&lt;h3 id="httpry">httpry&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item></channel></rss>

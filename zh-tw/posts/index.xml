@@ -1587,7 +1587,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-45" playsinline controls>
+&lt;video class="video-player" id="video-38" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20230926-golang/</guid><description>&lt;ul>
@@ -3491,7 +3491,157 @@ or
 &lt;h3 id="oauth-2">OAuth 2&lt;/h3>
 &lt;h4 id="client-credentials-grant">&lt;a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.4" target="_blank" rel="noopener">Client Credentials Grant&lt;/a>&lt;/h4>
 &lt;blockquote>
-&lt;p>这种模式是最简单的，其实就是客户端告诉服务端自己是哪个客户端，服务器就将 access_token 下发&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;p>这种模式是最简单的，其实就是客户端告诉服务端自己是哪个客户端，服务器就将 access_token 下发&lt;/p></description></item><item><title>Bash Bitwise Operators</title><link>https://linzeyan.github.io/zh-tw/posts/20220704-bash-bitwise-operators/</link><pubDate>Mon, 04 Jul 2022 15:20:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220704-bash-bitwise-operators/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/bash-bitwise-operators" target="_blank" rel="noopener">Bash Bitwise Operators&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="bashs-tools-for-base-conversion">Bash&amp;rsquo;s Tools for Base Conversion&lt;/h3>
+&lt;ul>
+&lt;li>Bash&amp;rsquo;s arithmetic expansion allows us to write numbers in any base by prefixing the numeric digits of the base followed by the hash symbol.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#66d9ef">$((&lt;/span>&lt;span style="color:#ae81ff">2#1001&lt;/span>&lt;span style="color:#66d9ef">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">9&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>bc allows us to convert effortlessly between bases, using the parameters ibase (for the input base) and obase (for the output base). So, let&amp;rsquo;s convert the decimal number 9 to base 2&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#e6db74">&amp;#34;ibase=10;obase=2;9&amp;#34;&lt;/span> | bc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1001&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 使用 split_clients 进行简易 A/B 测试</title><link>https://linzeyan.github.io/zh-tw/posts/20220704-nginx-ab-testing/</link><pubDate>Mon, 04 Jul 2022 14:36:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220704-nginx-ab-testing/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://u.sb/nginx-ab-testing/" target="_blank" rel="noopener">Nginx 使用 split_clients 进行简易 A/B 测试&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="ngx_">&lt;a href="https://nginx.org/en/docs/http/ngx_http_split_clients_module.html" target="_blank" rel="noopener">ngx_http_split_clients_module&lt;/a>&lt;/h5>
+&lt;h5 id="configure">configure&lt;/h5>
+&lt;blockquote>
+&lt;p>这里举例，我们想要 20% 的用户跳转到网址 &lt;a href="https://example.com/" target="_blank" rel="noopener">https://example.com/&lt;/a>，30% 的用户跳转到网址 &lt;a href="https://example.org/" target="_blank" rel="noopener">https://example.org/&lt;/a>，剩下的跳转到网址 &lt;a href="https://examle.edu/" target="_blank" rel="noopener">https://examle.edu/&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">split_clients&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>${remote_addr}AAA&amp;#34; $variant {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">20%&lt;/span> &lt;span style="color:#e6db74">https://example.com/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">30%&lt;/span> &lt;span style="color:#e6db74">https://example.org/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#e6db74">https://example.edu/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">302&lt;/span> ${variant};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述例子中，按照访客请求的 IP 地址 加上 AAA 字符串 会使用 MurmurHash2 转换成数字，如果得出的数字在前 20%，那么 $variant 值为 &lt;a href="https://example.com/" target="_blank" rel="noopener">https://example.com/&lt;/a>，相应的在中间 30% 区间的值为 &lt;a href="https://example.org/" target="_blank" rel="noopener">https://example.org/&lt;/a>，其他的为 &lt;a href="https://example.edu/" target="_blank" rel="noopener">https://example.edu/&lt;/a>。&lt;/p>
+&lt;h6 id="指定不同的目录">指定不同的目录&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">root&lt;/span> &lt;span style="color:#e6db74">/var/www/&lt;/span>${variant};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="指定不同的首页">指定不同的首页&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">index&lt;/span> &lt;span style="color:#e6db74">index-&lt;/span>${variant}.html;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/zh-tw/posts/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="tcpflow">tcpflow&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;code>apt/dnf install tcpflow&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#ae81ff">80&lt;/span> | grep -oE &lt;span style="color:#e6db74">&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reportfilename: ./report.xml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpflow: listening on wlp0s20f3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;code>-p&lt;/code> disables promiscuous mode&lt;/li>
+&lt;li>&lt;code>-c&lt;/code> means only print the output to the console and don&amp;rsquo;t create files&lt;/li>
+&lt;li>&lt;code>-i&lt;/code> specifies the network interface
+grep receives the output of tcpflow&lt;/li>
+&lt;li>&lt;code>-o&lt;/code> means show only the matching parts of the lines that match the pattern&lt;/li>
+&lt;li>&lt;code>-E&lt;/code> means the pattern is an extended regular expression (ERE)&lt;/li>
+&lt;/ul>
+&lt;h3 id="httpry">httpry&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>golang pprof 实战</title><link>https://linzeyan.github.io/zh-tw/posts/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220622-go-ppof-practice/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.wolfogre.com/posts/go-ppof-practice/" target="_blank" rel="noopener">golang pprof 实战&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/wolfogre/go-pprof-practice" target="_blank" rel="noopener">炸弹程序&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#e6db74">&amp;#34;net/http/pprof&amp;#34;&lt;/span> &lt;span style="color:#75715e">// 会自动注册 handler 到 http server，方便通过 http 接口获取程序运行采样报告&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">GOMAXPROCS&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 限制 CPU 使用数，避免过载&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetMutexProfileFraction&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 开启对锁调用的跟踪&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetBlockProfileRate&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 开启对阻塞操作的跟踪&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 启动一个 http server，注意 pprof 相关的 handler 已经自动注册过了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// /debug/pprof/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">ListenAndServe&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;:6060&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">nil&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Exit&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>http://localhost:6060/debug/pprof/&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>类型&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;th>备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>allocs&lt;/td>
+&lt;td>内存分配情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>blocks&lt;/td>
+&lt;td>阻塞操作情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cmdline&lt;/td>
+&lt;td>显示程序启动命令及参数&lt;/td>
+&lt;td>可以用浏览器打开，这里会显示 ./go-pprof-practice&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>goroutine&lt;/td>
+&lt;td>当前所有协程的堆栈信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>heap&lt;/td>
+&lt;td>堆上内存使用情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>mutex&lt;/td>
+&lt;td>锁争用情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>profile&lt;/td>
+&lt;td>CPU 占用情况的采样信息&lt;/td>
+&lt;td>浏览器打开会下载文件&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>threadcreate&lt;/td>
+&lt;td>系统线程创建情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>trace&lt;/td>
+&lt;td>程序运行跟踪信息&lt;/td>
+&lt;td>浏览器打开会下载文件，本文不涉及，可另行参阅《深入浅出 Go trace》&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>排查 CPU 占用过高&lt;/strong>&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>

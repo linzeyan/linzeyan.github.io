@@ -755,7 +755,96 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="匹配模式">匹配模式&lt;/h5>
-&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>golang pprof 实战</title><link>https://linzeyan.github.io/zh-tw/posts/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220622-go-ppof-practice/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.wolfogre.com/posts/go-ppof-practice/" target="_blank" rel="noopener">golang pprof 实战&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/wolfogre/go-pprof-practice" target="_blank" rel="noopener">炸弹程序&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#e6db74">&amp;#34;net/http/pprof&amp;#34;&lt;/span> &lt;span style="color:#75715e">// 会自动注册 handler 到 http server，方便通过 http 接口获取程序运行采样报告&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">GOMAXPROCS&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 限制 CPU 使用数，避免过载&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetMutexProfileFraction&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 开启对锁调用的跟踪&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetBlockProfileRate&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// 开启对阻塞操作的跟踪&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 启动一个 http server，注意 pprof 相关的 handler 已经自动注册过了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// /debug/pprof/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">ListenAndServe&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;:6060&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">nil&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Exit&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 略&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>http://localhost:6060/debug/pprof/&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>类型&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;th>备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>allocs&lt;/td>
+&lt;td>内存分配情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>blocks&lt;/td>
+&lt;td>阻塞操作情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cmdline&lt;/td>
+&lt;td>显示程序启动命令及参数&lt;/td>
+&lt;td>可以用浏览器打开，这里会显示 ./go-pprof-practice&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>goroutine&lt;/td>
+&lt;td>当前所有协程的堆栈信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>heap&lt;/td>
+&lt;td>堆上内存使用情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>mutex&lt;/td>
+&lt;td>锁争用情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>profile&lt;/td>
+&lt;td>CPU 占用情况的采样信息&lt;/td>
+&lt;td>浏览器打开会下载文件&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>threadcreate&lt;/td>
+&lt;td>系统线程创建情况的采样信息&lt;/td>
+&lt;td>可以用浏览器打开，但可读性不高&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>trace&lt;/td>
+&lt;td>程序运行跟踪信息&lt;/td>
+&lt;td>浏览器打开会下载文件，本文不涉及，可另行参阅《深入浅出 Go trace》&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>排查 CPU 占用过高&lt;/strong>&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>

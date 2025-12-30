@@ -269,7 +269,32 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;li>&lt;code>add_header X-XSS-Protection &amp;quot;1; mode=block&amp;quot;;&lt;/code>&lt;/li>
 &lt;li>&lt;code>add_header Strict-Transport-Security &amp;quot;max-age=31536000; includeSubDomains; preload&amp;quot; always;&lt;/code>&lt;/li>
 &lt;li>&lt;/li>
-&lt;/ul></description></item><item><title>Nginx notes</title><link>https://linzeyan.github.io/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211119-nginx/</guid><description>&lt;h1 id="record-nginx-configuration-file-and-explanation">Record Nginx configuration file and explanation.&lt;/h1>
+&lt;/ul></description></item><item><title>Nginx 使用 split_clients 进行简易 A/B 测试</title><link>https://linzeyan.github.io/posts/20220704-nginx-ab-testing/</link><pubDate>Mon, 04 Jul 2022 14:36:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220704-nginx-ab-testing/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://u.sb/nginx-ab-testing/" target="_blank" rel="noopener">Nginx 使用 split_clients 进行简易 A/B 测试&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="ngx_">&lt;a href="https://nginx.org/en/docs/http/ngx_http_split_clients_module.html" target="_blank" rel="noopener">ngx_http_split_clients_module&lt;/a>&lt;/h5>
+&lt;h5 id="configure">configure&lt;/h5>
+&lt;blockquote>
+&lt;p>这里举例，我们想要 20% 的用户跳转到网址 &lt;a href="https://example.com/" target="_blank" rel="noopener">https://example.com/&lt;/a>，30% 的用户跳转到网址 &lt;a href="https://example.org/" target="_blank" rel="noopener">https://example.org/&lt;/a>，剩下的跳转到网址 &lt;a href="https://examle.edu/" target="_blank" rel="noopener">https://examle.edu/&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">split_clients&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>${remote_addr}AAA&amp;#34; $variant {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">20%&lt;/span> &lt;span style="color:#e6db74">https://example.com/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">30%&lt;/span> &lt;span style="color:#e6db74">https://example.org/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#e6db74">https://example.edu/&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">302&lt;/span> ${variant};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述例子中，按照访客请求的 IP 地址 加上 AAA 字符串 会使用 MurmurHash2 转换成数字，如果得出的数字在前 20%，那么 $variant 值为 &lt;a href="https://example.com/" target="_blank" rel="noopener">https://example.com/&lt;/a>，相应的在中间 30% 区间的值为 &lt;a href="https://example.org/" target="_blank" rel="noopener">https://example.org/&lt;/a>，其他的为 &lt;a href="https://example.edu/" target="_blank" rel="noopener">https://example.edu/&lt;/a>。&lt;/p>
+&lt;h6 id="指定不同的目录">指定不同的目录&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">root&lt;/span> &lt;span style="color:#e6db74">/var/www/&lt;/span>${variant};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="指定不同的首页">指定不同的首页&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">index&lt;/span> &lt;span style="color:#e6db74">index-&lt;/span>${variant}.html;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx notes</title><link>https://linzeyan.github.io/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211119-nginx/</guid><description>&lt;h1 id="record-nginx-configuration-file-and-explanation">Record Nginx configuration file and explanation.&lt;/h1>
 &lt;h2 id="files-structure">files structure&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── geoip.conf
