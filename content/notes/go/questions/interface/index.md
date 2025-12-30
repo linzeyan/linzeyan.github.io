@@ -24,9 +24,7 @@ type People interface {
 
 type Student struct{}
 
-func (stu *Student) Show() {
-
-}
+func (stu *Student) Show() {}
 
 func live() People {
 	var stu *Student
@@ -48,8 +46,6 @@ func main() {
 <code class="language-shell">BBBBBBB
 </code></pre></details>
 {{< /note >}}
-
-
 
 {{< note title="interface1" >}}
 
@@ -89,8 +85,6 @@ func main() {
 cannot use Student{} (value of type Student) as People value in variable declaration: Student does not implement People (method Speak has pointer receiver)
 </code></pre></details>
 {{< /note >}}
-
-
 
 {{< note title="interface2" >}}
 
@@ -134,8 +128,6 @@ T2.Error T2.String
 T1.Error T2.String
 </code></pre></details>
 {{< /note >}}
-
-
 
 {{< note title="interface3" >}}
 
