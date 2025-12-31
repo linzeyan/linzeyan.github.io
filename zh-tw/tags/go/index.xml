@@ -851,7 +851,40 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go tool pprof -svg cpu.prof &amp;gt; cpu.svg
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -trace trace.out
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go tool trace trace.out
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Dockertest 极速搭建集成测试环境神器</title><link>https://linzeyan.github.io/zh-tw/posts/20220512-dockertest/</link><pubDate>Thu, 12 May 2022 16:43:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220512-dockertest/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://cn-sec.com/archives/998286.html" target="_blank" rel="noopener">Dockertest 极速搭建集成测试环境神器&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/ory/dockertest" target="_blank" rel="noopener">dockertest&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Go语言高性能编程手册（万字长文）</title><link>https://linzeyan.github.io/zh-tw/posts/20220422-go-high-performance-programming-manual/</link><pubDate>Fri, 22 Apr 2022 18:01:43 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20220422-go-high-performance-programming-manual/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/iSxWFsnNLGgilzKIsSDBgg" target="_blank" rel="noopener">Go 语言高性能编程手册（万字长文）&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="常用数据结构">常用数据结构&lt;/h4>
+&lt;p>&lt;strong>反射虽好，切莫贪杯&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>优先使用 &lt;code>strconv&lt;/code> 而不是 &lt;code>fmt&lt;/code>&lt;/li>
+&lt;li>少量的重复不比反射差&lt;/li>
+&lt;li>慎用 &lt;code>binary.Read&lt;/code> 和 &lt;code>binary.Write&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>binary.Read&lt;/code> 和 &lt;code>binary.Write&lt;/code> 使用反射并且很慢。如果有需要用到这两个函数的地方，我们应该手动实现这两个函数的相关功能，而不是直接去使用它们。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>避免重复的字符串到字节切片的转换&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>指定容器(slice/map)容量&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>字符串拼接方式&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>行内拼接字符串推荐使用运算符 &lt;code>+&lt;/code>&lt;/li>
+&lt;li>非行内拼接字符串推荐使用 &lt;code>strings.Builder&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>遍历 &lt;code>[]struct{}&lt;/code> 使用下标而不是 &lt;code>range&lt;/code>&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>两种通过 index 遍历 &lt;code>[]struct&lt;/code> 性能没有差别，但是 &lt;code>range&lt;/code> 遍历 &lt;code>[]struct&lt;/code> 中元素时，性能非常差。&lt;/p>
+&lt;p>&lt;code>range&lt;/code> 遍历 &lt;code>[]*struct&lt;/code> 中元素时，與下标性能没有差别。&lt;/p>&lt;/blockquote>
+&lt;h4 id="内存管理">内存管理&lt;/h4>
+&lt;p>&lt;strong>使用空结构体节省内存&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>struct 布局要考虑内存对齐&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>CPU 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问。比如 32 位的 CPU ，字长为 4 字节，那么 CPU 访问内存的单位也是 4 字节。
+这么设计的目的，是减少 CPU 访问内存的次数，加大 CPU 访问内存的吞吐量。比如同样读取 8 个字节的数据，一次读取 4 个字节那么只需要读取 2 次。&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
