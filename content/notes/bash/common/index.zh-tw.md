@@ -551,3 +551,37 @@ sudo softwareupdate -i 'Safari18.6VenturaAuto-18.6'
 ```
 
 {{< /note >}}
+
+{{< note title="macchanger" >}}
+
+```bash
+# 將指定的介面卡恢復原樣，所以不用擔心改不回來
+macchanger -p eth0
+
+# 列出製造商清單，MAC地址的前六碼就是表示該製造商，以下節錄指令結果片段
+macchanger -l
+
+Num	MAC	Vendor
+0009	00:00:09	XEROX CORPORATION
+0010	00:00:0a	OMRON TATEISI ELECTRONICS CO.
+0011	00:00:0b	MATRIX CORPORATION
+0012	00:00:0c	CISCO SYSTEMS, INC.
+0013	00:00:0d	FIBRONICS LTD.
+
+
+# 保留當前製造商資訊，產生新的MAC地址
+macchanger -e eth0
+
+# 更換當前製造商資訊，產生新的MAC地址，差別是-a是指定同類，例如都是wireless card
+macchanger -A eth0 or macchanger -a eth0
+
+# 以亂數產生新的MAC地址，所以可能前六碼沒有對應的製造商資訊
+macchanger -r eth0
+
+# 直接指定MAC地址
+macchanger -m aa:aa:aa:aa:aa:aa eth0
+
+## 修改後可以透過ifconfig或是macchanger -s eth0來查看當前的MAC地址
+```
+
+{{< /note >}}
