@@ -364,7 +364,7 @@
 &lt;p>当 err 的值为 io.EOF 时直接返回了。这是最可能出问题的地方。仔细阅读函数文档发现：&lt;/p>
 &lt;blockquote>
 &lt;p>Callers should always process the n &amp;gt; 0 bytes returned before considering the error err. Doing so correctly handles I/O errors that happen after reading some bytes and also both of the allowed EOF behaviors.&lt;/p>&lt;/blockquote>
-&lt;p>所以程序必须先处理 n &amp;gt; 0 的情况，然后再处理 err != nil 的情况！这跟我之前的印象不相符。因为一般来说，当 err 非空时，前面的返回数据一般都是空值。但 io.Reader 并不是这样。&lt;/p></description></item><item><title>Go 使用 selenium 截图</title><link>https://linzeyan.github.io/posts/20221202-go-selenium/</link><pubDate>Fri, 02 Dec 2022 13:40:19 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221202-go-selenium/</guid><description>&lt;ul>
+&lt;p>所以程序必须先处理 n &amp;gt; 0 的情况，然后再处理 err != nil 的情况！这跟我之前的印象不相符。因为一般来说，当 err 非空时，前面的返回数据一般都是空值。但 io.Reader 并不是这样。&lt;/p></description></item><item><title>Go 使用 selenium 截图</title><link>https://linzeyan.github.io/posts/2022/20221202-go-selenium/</link><pubDate>Fri, 02 Dec 2022 13:40:19 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221202-go-selenium/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://dmesg.app/go-selenium.html" target="_blank" rel="noopener">Go 使用 selenium 截图&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
@@ -426,7 +426,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="整页截屏">整页截屏&lt;/h5>
-&lt;p>获取到网页的宽高，然后把浏览器的窗口设置成这么大，然后再截图就好了！需要注意的是只有 headless 模式可以任意设置窗口大小，否则最大高度不能超过你的显示器分辨率&lt;/p></description></item><item><title>善用 Go Fuzzing，幫助你寫出更完整的單元測試</title><link>https://linzeyan.github.io/posts/20221103-utilize-go-fuzzing-to-write-better-unit-tests/</link><pubDate>Thu, 03 Nov 2022 16:57:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/20221103-utilize-go-fuzzing-to-write-better-unit-tests/</guid><description>&lt;ul>
+&lt;p>获取到网页的宽高，然后把浏览器的窗口设置成这么大，然后再截图就好了！需要注意的是只有 headless 模式可以任意设置窗口大小，否则最大高度不能超过你的显示器分辨率&lt;/p></description></item><item><title>善用 Go Fuzzing，幫助你寫出更完整的單元測試</title><link>https://linzeyan.github.io/posts/2022/20221103-utilize-go-fuzzing-to-write-better-unit-tests/</link><pubDate>Thu, 03 Nov 2022 16:57:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221103-utilize-go-fuzzing-to-write-better-unit-tests/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://medium.com/starbugs/utilize-go-fuzzing-to-write-better-unit-tests-80bd37cd4e38" target="_blank" rel="noopener">善用 Go Fuzzing，幫助你寫出更完整的單元測試&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">Pow&lt;/span>(&lt;span style="color:#a6e22e">base&lt;/span> &lt;span style="color:#66d9ef">uint&lt;/span>, &lt;span style="color:#a6e22e">exponent&lt;/span> &lt;span style="color:#66d9ef">uint&lt;/span>) &lt;span style="color:#66d9ef">uint&lt;/span> {
@@ -482,7 +482,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go string format</title><link>https://linzeyan.github.io/posts/20220908-string-format/</link><pubDate>Thu, 08 Sep 2022 11:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220908-string-format/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go string format</title><link>https://linzeyan.github.io/posts/2022/20220908-string-format/</link><pubDate>Thu, 08 Sep 2022 11:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220908-string-format/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://zetcode.com/golang/string-format/" target="_blank" rel="noopener">Go string format&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>The verb at the end defines the type and the interpretation of its corresponding argument.&lt;/p>
@@ -586,7 +586,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%11f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">h&lt;/span>) &lt;span style="color:#75715e">// 455.670000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%12f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">h&lt;/span>) &lt;span style="color:#75715e">// 455.670000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>為你的Go應用建立輕量級Docker映象？ | IT人</title><link>https://linzeyan.github.io/posts/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>為你的Go應用建立輕量級Docker映象？ | IT人</title><link>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://iter01.com/605065.html" target="_blank" rel="noopener">為你的 Go 應用建立輕量級 Docker 映象？ | IT 人&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="go-build">go build&lt;/h5>
@@ -618,7 +618,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ upx --brute test2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.6M test2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>upx 的壓縮選項&lt;/p></description></item><item><title>[Golang] 利用build tags達到不同的build config</title><link>https://linzeyan.github.io/posts/20220718-go-build-config-ldflags/</link><pubDate>Mon, 18 Jul 2022 14:21:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220718-go-build-config-ldflags/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>upx 的壓縮選項&lt;/p></description></item><item><title>[Golang] 利用build tags達到不同的build config</title><link>https://linzeyan.github.io/posts/2022/20220718-go-build-config-ldflags/</link><pubDate>Mon, 18 Jul 2022 14:21:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220718-go-build-config-ldflags/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.evanlin.com/go-build-config-ldflags/" target="_blank" rel="noopener">[Golang] 利用 build tags 達到不同的 build config&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="go-build--ldflags">Go build -ldflags&lt;/h5>
@@ -683,7 +683,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build .
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./main
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This build is test release and it will run every module as no debug tag. it is release.....
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go embed 简明教程</title><link>https://linzeyan.github.io/posts/20220712-go-embed-tutorial/</link><pubDate>Tue, 12 Jul 2022 13:57:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220712-go-embed-tutorial/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go embed 简明教程</title><link>https://linzeyan.github.io/posts/2022/20220712-go-embed-tutorial/</link><pubDate>Tue, 12 Jul 2022 13:57:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220712-go-embed-tutorial/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://colobu.com/2021/01/17/go-embed-tutorial/" target="_blank" rel="noopener">Go embed 简明教程&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="嵌入">嵌入&lt;/h3>
@@ -737,7 +737,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">data&lt;/span>))
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="匹配模式">匹配模式&lt;/h5>
-&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>golang pprof 实战</title><link>https://linzeyan.github.io/posts/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220622-go-ppof-practice/</guid><description>&lt;ul>
+&lt;p>go:embed 指令中可以只写文件夹名，此文件夹中除了.和_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。&lt;/p></description></item><item><title>golang pprof 实战</title><link>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.wolfogre.com/posts/go-ppof-practice/" target="_blank" rel="noopener">golang pprof 实战&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/wolfogre/go-pprof-practice" target="_blank" rel="noopener">炸弹程序&lt;/a>&lt;/li>
 &lt;/ul>
@@ -826,17 +826,17 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>&lt;strong>排查 CPU 占用过高&lt;/strong>&lt;/p></description></item><item><title>Go code refactoring : the 23x performance hunt</title><link>https://linzeyan.github.io/posts/20220607-go-code-refactoring-the-23x-performance-hunt/</link><pubDate>Tue, 07 Jun 2022 13:42:07 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220607-go-code-refactoring-the-23x-performance-hunt/</guid><description>&lt;ul>
+&lt;p>&lt;strong>排查 CPU 占用过高&lt;/strong>&lt;/p></description></item><item><title>Go code refactoring : the 23x performance hunt</title><link>https://linzeyan.github.io/posts/2022/20220607-go-code-refactoring-the-23x-performance-hunt/</link><pubDate>Tue, 07 Jun 2022 13:42:07 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220607-go-code-refactoring-the-23x-performance-hunt/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7" target="_blank" rel="noopener">Go code refactoring : the 23x performance hunt&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -cpuprofile cpu.prof
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go tool pprof -svg cpu.prof &amp;gt; cpu.svg
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -trace trace.out
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go tool trace trace.out
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Dockertest 极速搭建集成测试环境神器</title><link>https://linzeyan.github.io/posts/20220512-dockertest/</link><pubDate>Thu, 12 May 2022 16:43:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220512-dockertest/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Dockertest 极速搭建集成测试环境神器</title><link>https://linzeyan.github.io/posts/2022/20220512-dockertest/</link><pubDate>Thu, 12 May 2022 16:43:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220512-dockertest/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://cn-sec.com/archives/998286.html" target="_blank" rel="noopener">Dockertest 极速搭建集成测试环境神器&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/ory/dockertest" target="_blank" rel="noopener">dockertest&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Go语言高性能编程手册（万字长文）</title><link>https://linzeyan.github.io/posts/20220422-go-high-performance-programming-manual/</link><pubDate>Fri, 22 Apr 2022 18:01:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/20220422-go-high-performance-programming-manual/</guid><description>&lt;ul>
+&lt;/ul></description></item><item><title>Go语言高性能编程手册（万字长文）</title><link>https://linzeyan.github.io/posts/2022/20220422-go-high-performance-programming-manual/</link><pubDate>Fri, 22 Apr 2022 18:01:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220422-go-high-performance-programming-manual/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/iSxWFsnNLGgilzKIsSDBgg" target="_blank" rel="noopener">Go 语言高性能编程手册（万字长文）&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="常用数据结构">常用数据结构&lt;/h4>
@@ -866,7 +866,89 @@
 &lt;p>&lt;strong>struct 布局要考虑内存对齐&lt;/strong>&lt;/p>
 &lt;blockquote>
 &lt;p>CPU 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问。比如 32 位的 CPU ，字长为 4 字节，那么 CPU 访问内存的单位也是 4 字节。
-这么设计的目的，是减少 CPU 访问内存的次数，加大 CPU 访问内存的吞吐量。比如同样读取 8 个字节的数据，一次读取 4 个字节那么只需要读取 2 次。&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+这么设计的目的，是减少 CPU 访问内存的次数，加大 CPU 访问内存的吞吐量。比如同样读取 8 个字节的数据，一次读取 4 个字节那么只需要读取 2 次。&lt;/p></description></item><item><title>怎么选择 Go 文件读取方案</title><link>https://linzeyan.github.io/posts/2022/20220329-go-read-file/</link><pubDate>Tue, 29 Mar 2022 16:15:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220329-go-read-file/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/Z-19Yj8Je7Wb9bqvMR35Cg" target="_blank" rel="noopener">怎么选择 Go 文件读取方案&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Go 提供了可一次性读取文件内容的方法：&lt;code>os.ReadFile&lt;/code> 与 &lt;code>ioutil.ReadFile&lt;/code>。在 Go 1.16 开始，&lt;code>ioutil.ReadFile&lt;/code> 就等价于 &lt;code>os.ReadFile&lt;/code>。&lt;/p>
+&lt;p>一次性加载文件的优缺点非常明显，它能减少 IO 次数，但它会将文件内容都加载至内存中，对于大文件，存在内存撑爆的风险。&lt;/p>&lt;/blockquote>
+&lt;h4 id="逐行读取">逐行读取&lt;/h4>
+&lt;p>Go 中 bufio.Reader 对象提供了一个 ReadLine() 方法，但其实我们更多地是使用 ReadBytes(&amp;rsquo;\n&amp;rsquo;) 或者 ReadString(&amp;rsquo;\n&amp;rsquo;) 代替。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">ReadLines&lt;/span>(&lt;span style="color:#a6e22e">filename&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fi&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Open&lt;/span>(&lt;span style="color:#a6e22e">filename&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">fi&lt;/span>.&lt;span style="color:#a6e22e">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">reader&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">bufio&lt;/span>.&lt;span style="color:#a6e22e">NewReader&lt;/span>(&lt;span style="color:#a6e22e">fi&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> = &lt;span style="color:#a6e22e">reader&lt;/span>.&lt;span style="color:#a6e22e">ReadString&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;\n&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="块读取">块读取&lt;/h4>
+&lt;p>块读取也称为分片读取，这也很好理解，我们可以将内容分成一块块的，每次读取指定大小的块内容。这里，我们将块大小设置为 4KB。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">ReadChunk&lt;/span>(&lt;span style="color:#a6e22e">filename&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">f&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Open&lt;/span>(&lt;span style="color:#a6e22e">filename&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">f&lt;/span>.&lt;span style="color:#a6e22e">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#ae81ff">4&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">bufio&lt;/span>.&lt;span style="color:#a6e22e">NewReader&lt;/span>(&lt;span style="color:#a6e22e">f&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> = &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Read&lt;/span>(&lt;span style="color:#a6e22e">buf&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> panic(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="result">result&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>BenchmarkOsReadFile4KB-8 &lt;span style="color:#ae81ff">92877&lt;/span> &lt;span style="color:#ae81ff">12491&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkOsReadFile4MB-8 &lt;span style="color:#ae81ff">1620&lt;/span> &lt;span style="color:#ae81ff">744460&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkOsReadFile4GB-8 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">7518057733&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>signal: killed
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadLines4KB-8 &lt;span style="color:#ae81ff">90846&lt;/span> &lt;span style="color:#ae81ff">13184&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadLines4MB-8 &lt;span style="color:#ae81ff">493&lt;/span> &lt;span style="color:#ae81ff">2338170&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadLines4GB-8 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">3072629047&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadLines16GB-8 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">12472749187&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadChunk4KB-8 &lt;span style="color:#ae81ff">99848&lt;/span> &lt;span style="color:#ae81ff">12262&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadChunk4MB-8 &lt;span style="color:#ae81ff">913&lt;/span> &lt;span style="color:#ae81ff">1233216&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadChunk4GB-8 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">2095515009&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkReadChunk16GB-8 &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">8547054349&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在本文的测试条件下（每行数据 1KB），对于小对象 4KB 的读取，三种方式差距并不大；在 MB 级别的读取中，直接加载最快，但块读取也慢不了多少；上了 GB 后，块读取方式会最快。&lt;/p></description></item><item><title>Gopher 需要知道的几个结构体骚操作</title><link>https://linzeyan.github.io/posts/2022/20220103-some-struct-notes/</link><pubDate>Mon, 03 Jan 2022 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220103-some-struct-notes/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/A4m1xlFwh9pD0qy3p7ItSA" target="_blank" rel="noopener">Gopher 需要知道的几个结构体骚操作&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="nocopy">NoCopy&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ go vet aaa.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># command-line-arguments&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./aaa.go:7:14: test passes lock by value: sync.WaitGroup contains sync.noCopy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./aaa.go:15:10: call of test copies lock value: sync.WaitGroup contains sync.noCopy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">noCopy&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">WaitGroup&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">noCopy&lt;/span> &lt;span style="color:#a6e22e">noCopy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 64-bit value: high 32 bits are counter, low 32 bits are waiter count.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// 64-bit atomic operations require 64-bit alignment, but 32-bit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// compilers only guarantee that 64-bit fields are 32-bit aligned.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// For this reason on 32 bit architectures we need to check in state()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// if state1 is aligned or not, and dynamically &amp;#34;swap&amp;#34; the field order if&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// needed.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">state1&lt;/span> &lt;span style="color:#66d9ef">uint64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">state2&lt;/span> &lt;span style="color:#66d9ef">uint32&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>noCopy 定义非常简单，空结构体，zero size 不占用空间(前提是非结构体的最后一个字段，否则还要是有 8 byte 空间开销)&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>

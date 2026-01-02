@@ -561,6 +561,33 @@ Install from source is better</p></blockquote><div class=highlight><pre tabindex
 </span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;Script started&#34;</span>
 </span></span></code></pre></div><ol start=9><li>Automating Complex System Administration Tasks:<ol><li>Automated Backups</li><li>System Monitoring</li><li>User Management</li><li>Automated Updates</li><li>Network Configuration</li></ol></li></ol></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>macOS install specific version Safari</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>softwareupdate -l
 </span></span><span style=display:flex><span>sudo softwareupdate -i <span style=color:#e6db74>&#39;Safari18.6VenturaAuto-18.6&#39;</span>
+</span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>macchanger</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 將指定的介面卡恢復原樣，所以不用擔心改不回來</span>
+</span></span><span style=display:flex><span>macchanger -p eth0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 列出製造商清單，MAC地址的前六碼就是表示該製造商，以下節錄指令結果片段</span>
+</span></span><span style=display:flex><span>macchanger -l
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Num	MAC	Vendor
+</span></span><span style=display:flex><span>0009	00:00:09	XEROX CORPORATION
+</span></span><span style=display:flex><span>0010	00:00:0a	OMRON TATEISI ELECTRONICS CO.
+</span></span><span style=display:flex><span>0011	00:00:0b	MATRIX CORPORATION
+</span></span><span style=display:flex><span>0012	00:00:0c	CISCO SYSTEMS, INC.
+</span></span><span style=display:flex><span>0013	00:00:0d	FIBRONICS LTD.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 保留當前製造商資訊，產生新的MAC地址</span>
+</span></span><span style=display:flex><span>macchanger -e eth0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 更換當前製造商資訊，產生新的MAC地址，差別是-a是指定同類，例如都是wireless card</span>
+</span></span><span style=display:flex><span>macchanger -A eth0 or macchanger -a eth0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 以亂數產生新的MAC地址，所以可能前六碼沒有對應的製造商資訊</span>
+</span></span><span style=display:flex><span>macchanger -r eth0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 直接指定MAC地址</span>
+</span></span><span style=display:flex><span>macchanger -m aa:aa:aa:aa:aa:aa eth0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## 修改後可以透過ifconfig或是macchanger -s eth0來查看當前的MAC地址</span>
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Diagrams</span></h5><div class=card><div class=card-body><a href=https://diagrams.mingrammer.com/docs/getting-started/installation target=_blank rel=noopener>https://diagrams.mingrammer.com/docs/getting-started/installation</a></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Build with secret</span></h5><div class=card><div class=card-body><ul><li>Dockerfile</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-dockerfile data-lang=dockerfile><span style=display:flex><span><span style=color:#75715e># syntax = docker/dockerfile:1.6</span><span style=color:#960050;background-color:#1e0010>
 </span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>FROM</span><span style=color:#e6db74> golang:1.21.1-alpine3.18</span><span style=color:#960050;background-color:#1e0010>
 </span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>RUN</span> --mount<span style=color:#f92672>=</span>type<span style=color:#f92672>=</span>secret,id<span style=color:#f92672>=</span>mysecret,target<span style=color:#f92672>=</span>/root/.ssh/id_rsa git clone git@gitlab.com:ricky/repo.git<span style=color:#960050;background-color:#1e0010>
