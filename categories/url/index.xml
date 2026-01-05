@@ -1418,7 +1418,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-150" playsinline controls>
+&lt;video class="video-player" id="video-156" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -3707,7 +3707,180 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">state1&lt;/span> &lt;span style="color:#66d9ef">uint64&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">state2&lt;/span> &lt;span style="color:#66d9ef">uint32&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>noCopy 定义非常简单，空结构体，zero size 不占用空间(前提是非结构体的最后一个字段，否则还要是有 8 byte 空间开销)&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>noCopy 定义非常简单，空结构体，zero size 不占用空间(前提是非结构体的最后一个字段，否则还要是有 8 byte 空间开销)&lt;/p></description></item><item><title>Nginx怎样隐藏上游错误</title><link>https://linzeyan.github.io/posts/20211227-how-nginx-hide-upstream-errors/</link><pubDate>Mon, 27 Dec 2021 15:47:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211227-how-nginx-hide-upstream-errors/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://russelltao.github.io/2021/02/22/nginx/Nginx%E6%80%8E%E6%A0%B7%E9%9A%90%E8%97%8F%E4%B8%8A%E6%B8%B8%E9%94%99%E8%AF%AF/#more" target="_blank" rel="noopener">Nginx 怎样隐藏上游错误&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="nginx-允许对以下-7-种可以进行重试的错误码启用-next-upstream-功能">Nginx 允许对以下 7 种可以进行重试的错误码启用 next upstream 功能&lt;/h5>
+&lt;ul>
+&lt;li>403 Forbidden&lt;/li>
+&lt;li>404 Not Found&lt;/li>
+&lt;li>429 Too Many Requests&lt;/li>
+&lt;li>500 Internal Server Error&lt;/li>
+&lt;li>502 Bad Gateway&lt;/li>
+&lt;li>503 Server Unavailable&lt;/li>
+&lt;li>504 Gateway Timeout&lt;/li>
+&lt;/ul>
+&lt;h5 id="当上游返回-404-错误时改为通过-200-返回一张找不到资源的图片">当上游返回 404 错误时，改为通过 200 返回一张找不到资源的图片&lt;/h5>
+&lt;blockquote>
+&lt;p>此时，可以通过 &lt;code>proxy_intercept_errors&lt;/code> 指令完成这一功能
+当 &lt;code>proxy_intercept_errors&lt;/code> 开启后，对于上游返回的大于等于 300 响应码的请求，都可以基于 error_page 指令继续处理&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/ih&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://ihBackend&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_intercept_errors&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_page&lt;/span> &lt;span style="color:#ae81ff">404&lt;/span> = &lt;span style="color:#e6db74">/404.html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> = &lt;span style="color:#e6db74">/404.html&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">alias&lt;/span> &lt;span style="color:#e6db74">html/404_not_found.html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Argo CD ApplicationSet Controller: 世界為我而轉動！</title><link>https://linzeyan.github.io/posts/20211227-argo-cd-applicationset-controller/</link><pubDate>Mon, 27 Dec 2021 09:41:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211227-argo-cd-applicationset-controller/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/starbugs/argo-cd-applicationset-controller-%E4%B8%96%E7%95%8C%E7%82%BA%E6%88%91%E8%80%8C%E8%BD%89%E5%8B%95-a837f9392298" target="_blank" rel="noopener">Argo CD ApplicationSet Controller: 世界為我而轉動！&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/argoproj/argo-cd" target="_blank" rel="noopener">Argo CD&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kind，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來運行輕量 K8s Cluster 於本地端&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kubectx，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來方便切換不同 k8s context&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kubectx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 helm，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># K8s 套件管理工具&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install helm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kubectl, 其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來與 K8s Cluster API Server 溝通&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kubectl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 argocd cli, 其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來與 Argo CD 溝通&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install argocd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>golang的AES加密和解密的三种模式实现（CBC/ECB/CFB)</title><link>https://linzeyan.github.io/posts/20211222-aes-encryption-and-decryption-three-modes-implementation/</link><pubDate>Wed, 22 Dec 2021 17:40:52 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211222-aes-encryption-and-decryption-three-modes-implementation/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.csdn.net/mirage003/article/details/87868999" target="_blank" rel="noopener">golang 的 AES 加密和解密的三种模式实现（CBC/ECB/CFB)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://levelup.gitconnected.com/a-short-guide-to-encryption-using-go-da97c928259f" target="_blank" rel="noopener">How to encrypt a file using Go&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【理解 Cilium 系列文章】(一) 初識 Cilium</title><link>https://linzeyan.github.io/posts/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211221-understanding-cilium/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener">【理解 Cilium 系列文章】(一) 初識 Cilium&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="當前-k8s-service-負載均衡的實現現狀">當前 k8s Service 負載均衡的實現現狀&lt;/h4>
+&lt;p>在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。&lt;/p>
+&lt;h5 id="userspace">Userspace&lt;/h5>
+&lt;p>當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。&lt;/p>
+&lt;h5 id="iptables">Iptables&lt;/h5>
+&lt;p>存在的問題：&lt;/p>
+&lt;p>1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)&lt;/p>
+&lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
+&lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
+&lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
+&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/posts/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211220-kubeproxy-free/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="quick-start">Quick-Start&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace kube-system &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/posts/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener">Zsh tab-completion not working&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="question">Question&lt;/h4>
+&lt;p>Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
+&lt;code>zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code>&lt;/p>
+&lt;p>I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code>.zshrc&lt;/code>. Restarted my terminal. Typed &lt;code>cd desk&lt;/code>, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code>cd Desktop/&lt;/code>.&lt;/p></description></item><item><title>Linkerd 2.8 - 實現超級簡單又安全的多叢集(multicluster) Kubernetes 架構</title><link>https://linzeyan.github.io/posts/20211209-linkerd-multi-kubernetes-cluster-feature-overview/</link><pubDate>Thu, 09 Dec 2021 09:25:44 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211209-linkerd-multi-kubernetes-cluster-feature-overview/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://rammusxu.github.io/2020/07/28/Linkerd-Multi-Kubernetes-Cluster-Feature-Overview/" target="_blank" rel="noopener">Linkerd 2.8 - 實現超級簡單又安全的多叢集(multicluster) Kubernetes 架構&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Best Practices for Writing Bash Scripts</title><link>https://linzeyan.github.io/posts/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211206-bash-best-practices/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener">Best Practices for Writing Bash Scripts&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener">Shell Scripting - Best Practices&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e"># Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o errexit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o pipefail
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o nounset
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># set -o xtrace&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set magic variables for current file &amp;amp; dir&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__dir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>BASH_SOURCE[0]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> pwd&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>__dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>basename &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>BASH_SOURCE[0]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__base&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>basename &lt;span style="color:#e6db74">${&lt;/span>__file&lt;span style="color:#e6db74">}&lt;/span> .sh&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__root&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>__dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> pwd&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># &amp;lt;-- change this as it depends on your app&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arg1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#66d9ef">:-&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-shift-to-read-function-arguments">Use shift to read function arguments&lt;/h5>
+&lt;blockquote>
+&lt;p>This makes it easier to reorder arguments, if you change your mind later.&lt;/p></description></item><item><title>Day 28 - Kubernetes 第三方好用工具介紹</title><link>https://linzeyan.github.io/posts/20211202-10252675/</link><pubDate>Thu, 02 Dec 2021 13:28:09 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211202-10252675/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10252675" target="_blank" rel="noopener">Day 28 - Kubernetes 第三方好用工具介紹&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubectl get pods
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="sternkail">&lt;a href="https://github.com/wercker/stern" target="_blank" rel="noopener">Stern&lt;/a>/Kail&lt;/h4>
+&lt;blockquote>
+&lt;p>創建出來的 Pod 名稱上面都會有一些不好閱讀的亂數&lt;/p>
+&lt;p>如果使用 kubectl 來觀察個別 Pod 的 log 就必須要於不同的 pod 之間來回切換&lt;/p>
+&lt;p>這方面的工具滿多的，譬如 Stern, Kube-tail, Kail 等都可以&lt;/p>&lt;/blockquote>
+&lt;p>上述範例會有五個 pod，而且這五個 pod 的名稱都是 ithome 開頭，因此我可以直接用 &lt;code>stern ithom&lt;/code> 的方式來抓取這些 pod 的資訊，結果如下圖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ stern ithome
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">367&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">368&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">368&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">372&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">372&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^C
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k9s">K9S&lt;/h4>
+&lt;blockquote>
+&lt;p>過往總是透過 kubectl 指令於各個資源，各 namespace 間切來切去，特別是要使用 &lt;code>exec&lt;/code>, &lt;code>get&lt;/code>, &lt;code>describe&lt;/code>, &lt;code>logs&lt;/code>, &lt;code>delete&lt;/code> 等指令時，常常打的手忙腳亂或是覺得心累，有這種困擾的人可以考慮使用看看 k9s 這個工具&lt;/p></description></item><item><title>5 DevSecOps open source projects to know</title><link>https://linzeyan.github.io/posts/20211130-5-devsecops-open-source-projects-know/</link><pubDate>Tue, 30 Nov 2021 12:41:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211130-5-devsecops-open-source-projects-know/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://enterprisersproject.com/article/2021/8/5-devsecops-open-source-projects-know" target="_blank" rel="noopener">5 DevSecOps open source projects to know&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="clair">&lt;a href="https://github.com/quay/clair" target="_blank" rel="noopener">Clair&lt;/a>&lt;/h4>
+&lt;h4 id="sigstore">&lt;a href="https://www.sigstore.dev/" target="_blank" rel="noopener">Sigstore&lt;/a>&lt;/h4>
+&lt;h4 id="kubelinter">&lt;a href="https://github.com/stackrox/kube-linter" target="_blank" rel="noopener">KubeLinter&lt;/a>&lt;/h4>
+&lt;h4 id="open-policy-agent-and-gatekeeper">&lt;a href="https://github.com/open-policy-agent/gatekeeper" target="_blank" rel="noopener">Open Policy Agent and Gatekeeper&lt;/a>&lt;/h4>
+&lt;h4 id="falco">&lt;a href="https://falco.org/" target="_blank" rel="noopener">Falco&lt;/a>&lt;/h4></description></item><item><title>[Kubernetes] Service Overview</title><link>https://linzeyan.github.io/posts/20211124-k8s-service-overview/</link><pubDate>Wed, 24 Nov 2021 14:00:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211124-k8s-service-overview/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://godleon.github.io/blog/Kubernetes/k8s-Service-Overview/" target="_blank" rel="noopener">[Kubernetes] Service Overview&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="定義-service">定義 Service&lt;/h3>
+&lt;h4 id="搭配-selector">搭配 selector&lt;/h4>
+&lt;blockquote>
+&lt;p>由於要先有 Pod 才會有定義 Service 的需求，因此假設 k8s 中已經有一些 Pod 的存在(同時對外開放 TCP port 9376)，並帶有 app=MyApp 的 label，此時就可以定義一個 Service 來作為這些 pod 前方的抽象層，透過 domain name 的方式提供服務&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">my-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># type 一共有四種(ClusterIP, NodePort, LoadBalancer, ExternalName)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 預設是 ClusterIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">type&lt;/span>: &lt;span style="color:#ae81ff">ClusterIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 選擇帶有 &amp;#34;app=MyApp&amp;#34; 的 pod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">selector&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">app&lt;/span>: &lt;span style="color:#ae81ff">MyApp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Service 實際對外服務的設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">protocol&lt;/span>: &lt;span style="color:#ae81ff">TCP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 此為 Pod 對外開放的 port number&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">targetPort&lt;/span>: &lt;span style="color:#ae81ff">9376&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>

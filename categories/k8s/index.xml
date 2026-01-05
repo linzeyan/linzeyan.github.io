@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>K8s on Ricky</title><link>https://linzeyan.github.io/categories/k8s/</link><description>Recent content in K8s on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 27 Dec 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/k8s/index.xml" rel="self" type="application/rss+xml"/><item><title>Argo CD ApplicationSet Controller: 世界為我而轉動！</title><link>https://linzeyan.github.io/posts/20211227-argo-cd-applicationset-controller/</link><pubDate>Mon, 27 Dec 2021 09:41:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211227-argo-cd-applicationset-controller/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/starbugs/argo-cd-applicationset-controller-%E4%B8%96%E7%95%8C%E7%82%BA%E6%88%91%E8%80%8C%E8%BD%89%E5%8B%95-a837f9392298" target="_blank" rel="noopener">Argo CD ApplicationSet Controller: 世界為我而轉動！&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/argoproj/argo-cd" target="_blank" rel="noopener">Argo CD&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kind，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來運行輕量 K8s Cluster 於本地端&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kubectx，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來方便切換不同 k8s context&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kubectx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 helm，其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># K8s 套件管理工具&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install helm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 kubectl, 其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來與 K8s Cluster API Server 溝通&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install kubectl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 argocd cli, 其他平台安裝方式請參閱官方文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用來與 Argo CD 溝通&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~$ brew install argocd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>【理解 Cilium 系列文章】(一) 初識 Cilium</title><link>https://linzeyan.github.io/posts/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211221-understanding-cilium/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener">【理解 Cilium 系列文章】(一) 初識 Cilium&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="當前-k8s-service-負載均衡的實現現狀">當前 k8s Service 負載均衡的實現現狀&lt;/h4>
+&lt;p>在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。&lt;/p>
+&lt;h5 id="userspace">Userspace&lt;/h5>
+&lt;p>當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。&lt;/p>
+&lt;h5 id="iptables">Iptables&lt;/h5>
+&lt;p>存在的問題：&lt;/p>
+&lt;p>1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)&lt;/p>
+&lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
+&lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
+&lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
+&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/posts/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211220-kubeproxy-free/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="quick-start">Quick-Start&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace kube-system &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Linkerd 2.8 - 實現超級簡單又安全的多叢集(multicluster) Kubernetes 架構</title><link>https://linzeyan.github.io/posts/20211209-linkerd-multi-kubernetes-cluster-feature-overview/</link><pubDate>Thu, 09 Dec 2021 09:25:44 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211209-linkerd-multi-kubernetes-cluster-feature-overview/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://rammusxu.github.io/2020/07/28/Linkerd-Multi-Kubernetes-Cluster-Feature-Overview/" target="_blank" rel="noopener">Linkerd 2.8 - 實現超級簡單又安全的多叢集(multicluster) Kubernetes 架構&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Day 28 - Kubernetes 第三方好用工具介紹</title><link>https://linzeyan.github.io/posts/20211202-10252675/</link><pubDate>Thu, 02 Dec 2021 13:28:09 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211202-10252675/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10252675" target="_blank" rel="noopener">Day 28 - Kubernetes 第三方好用工具介紹&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubectl get pods
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj 1/1 Running &lt;span style="color:#ae81ff">0&lt;/span> 84s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="sternkail">&lt;a href="https://github.com/wercker/stern" target="_blank" rel="noopener">Stern&lt;/a>/Kail&lt;/h4>
+&lt;blockquote>
+&lt;p>創建出來的 Pod 名稱上面都會有一些不好閱讀的亂數&lt;/p>
+&lt;p>如果使用 kubectl 來觀察個別 Pod 的 log 就必須要於不同的 pod 之間來回切換&lt;/p>
+&lt;p>這方面的工具滿多的，譬如 Stern, Kube-tail, Kail 等都可以&lt;/p>&lt;/blockquote>
+&lt;p>上述範例會有五個 pod，而且這五個 pod 的名稱都是 ithome 開頭，因此我可以直接用 &lt;code>stern ithom&lt;/code> 的方式來抓取這些 pod 的資訊，結果如下圖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ stern ithome
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">367&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">368&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">368&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">370&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-947rv netutils Hello! &lt;span style="color:#ae81ff">369&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-k5wtg netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-rrvk4 netutils Hello! &lt;span style="color:#ae81ff">371&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-zhwlj netutils Hello! &lt;span style="color:#ae81ff">372&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ithome-6564f65698-fglr9 netutils Hello! &lt;span style="color:#ae81ff">372&lt;/span> secs elapsed...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^C
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k9s">K9S&lt;/h4>
+&lt;blockquote>
+&lt;p>過往總是透過 kubectl 指令於各個資源，各 namespace 間切來切去，特別是要使用 &lt;code>exec&lt;/code>, &lt;code>get&lt;/code>, &lt;code>describe&lt;/code>, &lt;code>logs&lt;/code>, &lt;code>delete&lt;/code> 等指令時，常常打的手忙腳亂或是覺得心累，有這種困擾的人可以考慮使用看看 k9s 這個工具&lt;/p></description></item><item><title>[Kubernetes] Service Overview</title><link>https://linzeyan.github.io/posts/20211124-k8s-service-overview/</link><pubDate>Wed, 24 Nov 2021 14:00:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211124-k8s-service-overview/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://godleon.github.io/blog/Kubernetes/k8s-Service-Overview/" target="_blank" rel="noopener">[Kubernetes] Service Overview&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="定義-service">定義 Service&lt;/h3>
+&lt;h4 id="搭配-selector">搭配 selector&lt;/h4>
+&lt;blockquote>
+&lt;p>由於要先有 Pod 才會有定義 Service 的需求，因此假設 k8s 中已經有一些 Pod 的存在(同時對外開放 TCP port 9376)，並帶有 app=MyApp 的 label，此時就可以定義一個 Service 來作為這些 pod 前方的抽象層，透過 domain name 的方式提供服務&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">my-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># type 一共有四種(ClusterIP, NodePort, LoadBalancer, ExternalName)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 預設是 ClusterIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">type&lt;/span>: &lt;span style="color:#ae81ff">ClusterIP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 選擇帶有 &amp;#34;app=MyApp&amp;#34; 的 pod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">selector&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">app&lt;/span>: &lt;span style="color:#ae81ff">MyApp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Service 實際對外服務的設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">protocol&lt;/span>: &lt;span style="color:#ae81ff">TCP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 此為 Pod 對外開放的 port number&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">targetPort&lt;/span>: &lt;span style="color:#ae81ff">9376&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item></channel></rss>

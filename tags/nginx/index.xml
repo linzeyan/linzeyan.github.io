@@ -294,6 +294,31 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">root&lt;/span> &lt;span style="color:#e6db74">/var/www/&lt;/span>${variant};
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="指定不同的首页">指定不同的首页&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">index&lt;/span> &lt;span style="color:#e6db74">index-&lt;/span>${variant}.html;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx怎样隐藏上游错误</title><link>https://linzeyan.github.io/posts/20211227-how-nginx-hide-upstream-errors/</link><pubDate>Mon, 27 Dec 2021 15:47:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211227-how-nginx-hide-upstream-errors/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://russelltao.github.io/2021/02/22/nginx/Nginx%E6%80%8E%E6%A0%B7%E9%9A%90%E8%97%8F%E4%B8%8A%E6%B8%B8%E9%94%99%E8%AF%AF/#more" target="_blank" rel="noopener">Nginx 怎样隐藏上游错误&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="nginx-允许对以下-7-种可以进行重试的错误码启用-next-upstream-功能">Nginx 允许对以下 7 种可以进行重试的错误码启用 next upstream 功能&lt;/h5>
+&lt;ul>
+&lt;li>403 Forbidden&lt;/li>
+&lt;li>404 Not Found&lt;/li>
+&lt;li>429 Too Many Requests&lt;/li>
+&lt;li>500 Internal Server Error&lt;/li>
+&lt;li>502 Bad Gateway&lt;/li>
+&lt;li>503 Server Unavailable&lt;/li>
+&lt;li>504 Gateway Timeout&lt;/li>
+&lt;/ul>
+&lt;h5 id="当上游返回-404-错误时改为通过-200-返回一张找不到资源的图片">当上游返回 404 错误时，改为通过 200 返回一张找不到资源的图片&lt;/h5>
+&lt;blockquote>
+&lt;p>此时，可以通过 &lt;code>proxy_intercept_errors&lt;/code> 指令完成这一功能
+当 &lt;code>proxy_intercept_errors&lt;/code> 开启后，对于上游返回的大于等于 300 响应码的请求，都可以基于 error_page 指令继续处理&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/ih&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://ihBackend&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_intercept_errors&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_page&lt;/span> &lt;span style="color:#ae81ff">404&lt;/span> = &lt;span style="color:#e6db74">/404.html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> = &lt;span style="color:#e6db74">/404.html&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">alias&lt;/span> &lt;span style="color:#e6db74">html/404_not_found.html&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx notes</title><link>https://linzeyan.github.io/posts/20211119-nginx/</link><pubDate>Fri, 19 Nov 2021 14:35:58 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211119-nginx/</guid><description>&lt;h1 id="record-nginx-configuration-file-and-explanation">Record Nginx configuration file and explanation.&lt;/h1>
 &lt;h2 id="files-structure">files structure&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>.

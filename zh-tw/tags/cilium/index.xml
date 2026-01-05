@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cilium on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/cilium/</link><description>Recent content in Cilium on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 21 Dec 2021 13:04:38 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/cilium/index.xml" rel="self" type="application/rss+xml"/><item><title>【理解 Cilium 系列文章】(一) 初識 Cilium</title><link>https://linzeyan.github.io/zh-tw/posts/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211221-understanding-cilium/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener">【理解 Cilium 系列文章】(一) 初識 Cilium&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="當前-k8s-service-負載均衡的實現現狀">當前 k8s Service 負載均衡的實現現狀&lt;/h4>
+&lt;p>在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。&lt;/p>
+&lt;h5 id="userspace">Userspace&lt;/h5>
+&lt;p>當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。&lt;/p>
+&lt;h5 id="iptables">Iptables&lt;/h5>
+&lt;p>存在的問題：&lt;/p>
+&lt;p>1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)&lt;/p>
+&lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
+&lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
+&lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
+&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/zh-tw/posts/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211220-kubeproxy-free/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="quick-start">Quick-Start&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace kube-system &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

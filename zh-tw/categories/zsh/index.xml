@@ -19,4 +19,10 @@
 &lt;p>zsh 会在用户登录时(login shell)加载 ~/.zprofile&lt;/p>
 &lt;p>zsh 会在开启新的终端会话时加载 ~/.zshrc&lt;/p>
 &lt;h3 id="需要注意的是首先会加载-etczshenv-下的内容-然后再加载-home-目录下的配置文件">需要注意的是首先会加载 /etc/zshenv 下的内容， 然后再加载 HOME 目录下的配置文件：&lt;/h3>
-&lt;p>&lt;code>.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;code>.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code>&lt;/p></description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/zh-tw/posts/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener">Zsh tab-completion not working&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="question">Question&lt;/h4>
+&lt;p>Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
+&lt;code>zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code>&lt;/p>
+&lt;p>I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code>.zshrc&lt;/code>. Restarted my terminal. Typed &lt;code>cd desk&lt;/code>, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code>cd Desktop/&lt;/code>.&lt;/p></description></item></channel></rss>
