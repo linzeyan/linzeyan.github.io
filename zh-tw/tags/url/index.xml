@@ -1423,7 +1423,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-11" playsinline controls>
+&lt;video class="video-player" id="video-190" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -3906,7 +3906,197 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 此為 Pod 對外開放的 port number&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">targetPort&lt;/span>: &lt;span style="color:#ae81ff">9376&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item><item><title>25秒读取16GB文件，Go怎么做到的？</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-processing-16gb-file-in-seconds-go-lang/</link><pubDate>Mon, 22 Nov 2021 11:07:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-processing-16gb-file-in-seconds-go-lang/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/k6k9bwpKPdfShEEiTLSJ7w" target="_blank" rel="noopener">25 秒读取 16GB 文件，Go 怎么做到的？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/swlh/processing-16gb-file-in-seconds-go-lang-3982c235dfa2" target="_blank" rel="noopener">Reading 16GB File in Seconds, Golang&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>打开文件后，我们有以下两个选项可以选择：&lt;/p>
+&lt;ul>
+&lt;li>逐行读取文件，这有助于减少内存紧张，但需要更多的时间。&lt;/li>
+&lt;li>一次将整个文件读入内存并处理该文件，这将消耗更多内存，但会显著减少时间。&lt;/li>
+&lt;/ul>
+&lt;p>由于文件太大，即 16 GB，因此无法将整个文件加载到内存中。但是第一种选择对我们来说也是不可行的，因为我们希望在几秒钟内处理文件。&lt;/p>
+&lt;p>但你猜怎么着，还有第三种选择。瞧……相比于将整个文件加载到内存中，在 Go 语言中，我们还可以使用 bufio.NewReader()将文件分块加载。&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Now&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">args&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Args&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>:]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(&lt;span style="color:#a6e22e">args&lt;/span>) &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> { &lt;span style="color:#75715e">// for format LogExtractor.exe -f &amp;#34;From Time&amp;#34; -t &amp;#34;To Time&amp;#34; -i &amp;#34;Log file directory location&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Please give proper command line arguments&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">startTimeArg&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">args&lt;/span>[&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">finishTimeArg&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">args&lt;/span>[&lt;span style="color:#ae81ff">3&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fileName&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">args&lt;/span>[&lt;span style="color:#ae81ff">5&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">file&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Open&lt;/span>(&lt;span style="color:#a6e22e">fileName&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cannot able to read the file&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">file&lt;/span>.&lt;span style="color:#a6e22e">Close&lt;/span>() &lt;span style="color:#75715e">// close after checking err&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">queryStartTime&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Parse&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2006-01-02T15:04:05.0000Z&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">startTimeArg&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Could not able to parse the start time&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">startTimeArg&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">queryFinishTime&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Parse&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2006-01-02T15:04:05.0000Z&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">finishTimeArg&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Could not able to parse the finish time&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">finishTimeArg&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">filestat&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">file&lt;/span>.&lt;span style="color:#a6e22e">Stat&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Could not able to get the file stat&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fileSize&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">filestat&lt;/span>.&lt;span style="color:#a6e22e">Size&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">offset&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">fileSize&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lastLineSize&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">file&lt;/span>.&lt;span style="color:#a6e22e">ReadAt&lt;/span>(&lt;span style="color:#a6e22e">b&lt;/span>, &lt;span style="color:#a6e22e">offset&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Error reading file &amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">char&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> string(&lt;span style="color:#a6e22e">b&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">char&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;\n&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">offset&lt;/span>&lt;span style="color:#f92672">--&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lastLineSize&lt;/span> &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lastLine&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#a6e22e">lastLineSize&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> = &lt;span style="color:#a6e22e">file&lt;/span>.&lt;span style="color:#a6e22e">ReadAt&lt;/span>(&lt;span style="color:#a6e22e">lastLine&lt;/span>, &lt;span style="color:#a6e22e">offset&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Could not able to read last line with offset&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">offset&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;and lastline size&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">lastLineSize&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logSlice&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">strings&lt;/span>.&lt;span style="color:#a6e22e">SplitN&lt;/span>(string(&lt;span style="color:#a6e22e">lastLine&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logCreationTimeString&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">logSlice&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lastLogCreationTime&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Parse&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2006-01-02T15:04:05.0000Z&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">logCreationTimeString&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;can not able to parse time : &amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">lastLogCreationTime&lt;/span>.&lt;span style="color:#a6e22e">After&lt;/span>(&lt;span style="color:#a6e22e">queryStartTime&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">lastLogCreationTime&lt;/span>.&lt;span style="color:#a6e22e">Before&lt;/span>(&lt;span style="color:#a6e22e">queryFinishTime&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Process&lt;/span>(&lt;span style="color:#a6e22e">file&lt;/span>, &lt;span style="color:#a6e22e">queryStartTime&lt;/span>, &lt;span style="color:#a6e22e">queryFinishTime&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\nTime taken - &amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Since&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">Process&lt;/span>(&lt;span style="color:#a6e22e">f&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">File&lt;/span>, &lt;span style="color:#a6e22e">start&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>, &lt;span style="color:#a6e22e">end&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>) &lt;span style="color:#66d9ef">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">linesPool&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">Pool&lt;/span>{&lt;span style="color:#a6e22e">New&lt;/span>: &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">interface&lt;/span>{} {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lines&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#ae81ff">250&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">1024&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">lines&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">stringPool&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">Pool&lt;/span>{&lt;span style="color:#a6e22e">New&lt;/span>: &lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">interface&lt;/span>{} {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">lines&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">lines&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">bufio&lt;/span>.&lt;span style="color:#a6e22e">NewReader&lt;/span>(&lt;span style="color:#a6e22e">f&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">wg&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">WaitGroup&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">linesPool&lt;/span>.&lt;span style="color:#a6e22e">Get&lt;/span>().([]&lt;span style="color:#66d9ef">byte&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Read&lt;/span>(&lt;span style="color:#a6e22e">buf&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> = &lt;span style="color:#a6e22e">buf&lt;/span>[:&lt;span style="color:#a6e22e">n&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">nextUntillNewline&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">ReadBytes&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;\n&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> = append(&lt;span style="color:#a6e22e">buf&lt;/span>, &lt;span style="color:#a6e22e">nextUntillNewline&lt;/span>&lt;span style="color:#f92672">...&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ProcessChunk&lt;/span>(&lt;span style="color:#a6e22e">buf&lt;/span>, &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">linesPool&lt;/span>, &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">stringPool&lt;/span>, &lt;span style="color:#a6e22e">start&lt;/span>, &lt;span style="color:#a6e22e">end&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Done&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">ProcessChunk&lt;/span>(&lt;span style="color:#a6e22e">chunk&lt;/span> []&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#a6e22e">linesPool&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">Pool&lt;/span>, &lt;span style="color:#a6e22e">stringPool&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">Pool&lt;/span>, &lt;span style="color:#a6e22e">start&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>, &lt;span style="color:#a6e22e">end&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">wg2&lt;/span> &lt;span style="color:#a6e22e">sync&lt;/span>.&lt;span style="color:#a6e22e">WaitGroup&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logs&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">stringPool&lt;/span>.&lt;span style="color:#a6e22e">Get&lt;/span>().(&lt;span style="color:#66d9ef">string&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logs&lt;/span> = string(&lt;span style="color:#a6e22e">chunk&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">linesPool&lt;/span>.&lt;span style="color:#a6e22e">Put&lt;/span>(&lt;span style="color:#a6e22e">chunk&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logsSlice&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">strings&lt;/span>.&lt;span style="color:#a6e22e">Split&lt;/span>(&lt;span style="color:#a6e22e">logs&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;\n&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">stringPool&lt;/span>.&lt;span style="color:#a6e22e">Put&lt;/span>(&lt;span style="color:#a6e22e">logs&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">chunkSize&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> len(&lt;span style="color:#a6e22e">logsSlice&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">noOfThread&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#a6e22e">chunkSize&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span>&lt;span style="color:#f92672">%&lt;/span>&lt;span style="color:#a6e22e">chunkSize&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">noOfThread&lt;/span>&lt;span style="color:#f92672">++&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; (&lt;span style="color:#a6e22e">noOfThread&lt;/span>); &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg2&lt;/span>.&lt;span style="color:#a6e22e">Add&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>, &lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">defer&lt;/span> &lt;span style="color:#a6e22e">wg2&lt;/span>.&lt;span style="color:#a6e22e">Done&lt;/span>() &lt;span style="color:#75715e">// to avaoid deadlocks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span> &amp;lt; &lt;span style="color:#a6e22e">e&lt;/span>; &lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">text&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">logsSlice&lt;/span>[&lt;span style="color:#a6e22e">i&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> len(&lt;span style="color:#a6e22e">text&lt;/span>) &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logSlice&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">strings&lt;/span>.&lt;span style="color:#a6e22e">SplitN&lt;/span>(&lt;span style="color:#a6e22e">text&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logCreationTimeString&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">logSlice&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logCreationTime&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Parse&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;2006-01-02T15:04:05.0000Z&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">logCreationTimeString&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;\n Could not able to parse the time :%s for log : %v&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">logCreationTimeString&lt;/span>, &lt;span style="color:#a6e22e">text&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">logCreationTime&lt;/span>.&lt;span style="color:#a6e22e">After&lt;/span>(&lt;span style="color:#a6e22e">start&lt;/span>) &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">logCreationTime&lt;/span>.&lt;span style="color:#a6e22e">Before&lt;/span>(&lt;span style="color:#a6e22e">end&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// fmt.Println(text)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }(&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">chunkSize&lt;/span>, int(&lt;span style="color:#a6e22e">math&lt;/span>.&lt;span style="color:#a6e22e">Min&lt;/span>(float64((&lt;span style="color:#a6e22e">i&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">chunkSize&lt;/span>), float64(len(&lt;span style="color:#a6e22e">logsSlice&lt;/span>)))))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">wg2&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">logsSlice&lt;/span> = &lt;span style="color:#66d9ef">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin 框架绑定 JSON 参数使用 jsoniter</title><link>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Gin 框架绑定 JSON 参数使用 jsoniter&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="simple">simple&lt;/h3>
@@ -3975,6 +4165,48 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// binding.JSON 替换成自定义的&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ctx&lt;/span>.&lt;span style="color:#a6e22e">ShouldBindWith&lt;/span>(&lt;span style="color:#a6e22e">ms&lt;/span>, &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ctx&lt;/span>.&lt;span style="color:#a6e22e">ShouldBindBodyWith&lt;/span>(&lt;span style="color:#a6e22e">ms&lt;/span>, &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子</title><link>https://linzeyan.github.io/zh-tw/posts/20200710-bayonet-rope/</link><pubDate>Fri, 10 Jul 2020 12:32:27 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200710-bayonet-rope/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Golang os/exec 使用方法（筆記）</title><link>https://linzeyan.github.io/zh-tw/posts/20211112-golang-ex-exec/</link><pubDate>Fri, 12 Nov 2021 11:34:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211112-golang-ex-exec/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://124.244.86.40/wordpress/2020/10/25/golang-ex-exec-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E7%AD%86%E8%A8%98%EF%BC%89/" target="_blank" rel="noopener">Golang os/exec 使用方法（筆記）&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="加入額外的環境參數再執行指令">加入額外的環境參數再執行指令&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmd&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">exec&lt;/span>.&lt;span style="color:#a6e22e">Command&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;programToExecute&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">additionalEnv&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;FOO=bar&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">newEnv&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> append(&lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Environ&lt;/span>(), &lt;span style="color:#a6e22e">additionalEnv&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmd&lt;/span>.&lt;span style="color:#a6e22e">Env&lt;/span> = &lt;span style="color:#a6e22e">newEnv&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">out&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cmd&lt;/span>.&lt;span style="color:#a6e22e">CombinedOutput&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatalf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cmd.Run() failed with %s\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;%s&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">out&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="在-linux-下使用-osexec--pipe-或-bash-運算式">在 Linux 下使用 os/exec + Pipe 或 Bash 運算式&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">rcmd&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">`iw dev | awk &amp;#39;$1==&amp;#34;Interface&amp;#34;{print $2}&amp;#39;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmd&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">exec&lt;/span>.&lt;span style="color:#a6e22e">Command&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;bash&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;-c&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">rcmd&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">out&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cmd&lt;/span>.&lt;span style="color:#a6e22e">CombinedOutput&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">out&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="在-windows-下使用-osexec--batch-運算式">在 Windows 下使用 os/exec + Batch 運算式&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmd&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">exec&lt;/span>.&lt;span style="color:#a6e22e">Command&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cmd&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/c&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;ffmpeg -i myfile.mp4 myfile.mp3 &amp;amp;&amp;amp; del myfile.mp4&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">out&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cmd&lt;/span>.&lt;span style="color:#a6e22e">CombinedOutput&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">out&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="解決-windows-cmd-在-osexec-時會出現本地語言的問題">解決 Windows CMD 在 os/exec 時會出現本地語言的問題&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmd&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">exec&lt;/span>.&lt;span style="color:#a6e22e">Command&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;cmd&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/c&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;chcp 65001 &amp;amp;&amp;amp; netsh WLAN show drivers&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">out&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">cmd&lt;/span>.&lt;span style="color:#a6e22e">CombinedOutput&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">out&lt;/span>))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用此方法得出的 output string 請記得把回傳的首行（chcp 的回傳結果）刪除掉再進行其他處理和讀取。&lt;/p></description></item><item><title>喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理</title><link>https://linzeyan.github.io/zh-tw/posts/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211110-10253348/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener">喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="規劃時建議要考量的項目">規劃時建議要考量的項目&lt;/h4>
+&lt;h5 id="search-在執行時一個-shard-會分配一個-thread數量太多反而會拖慢速度">Search 在執行時，一個 Shard 會分配一個 Thread，數量太多反而會拖慢速度&lt;/h5>
+&lt;blockquote>
+&lt;p>一個 Node 依照不同的功能分類有多種 Thread pool， 其中 search (count/search/suggest) 的 size 是 &lt;code>int((# of allocated processors * 3) / 2) + 1&lt;/code> 並且 queue_size 預設是 &lt;code>1000&lt;/code> ，而 write (index/delete/update/bulk) 的 size 是 &lt;code># of allocated processors&lt;/code> ，預設的 queue_size 也是 &lt;code>1000&lt;/code>。( 官方文件 - Thread pools )&lt;/p>&lt;/blockquote>
+&lt;p>大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p></description></item><item><title>[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子</title><link>https://linzeyan.github.io/zh-tw/posts/20200710-bayonet-rope/</link><pubDate>Fri, 10 Jul 2020 12:32:27 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200710-bayonet-rope/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.mobile01.com/topicdetail.php?f=637&amp;amp;t=282596" target="_blank" rel="noopener">[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

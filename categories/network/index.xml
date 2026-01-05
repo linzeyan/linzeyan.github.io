@@ -83,4 +83,18 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/posts/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence">Traffic sequence&lt;/h3>
+&lt;p>Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p>
+&lt;ol>
+&lt;li>DDoS&lt;/li>
+&lt;li>URL Rewrites&lt;/li>
+&lt;li>Page Rules&lt;/li>
+&lt;li>IP Access Rules&lt;/li>
+&lt;li>Bots&lt;/li>
+&lt;li>Firewall Rules&lt;/li>
+&lt;li>Rate Limiting&lt;/li>
+&lt;li>Managed Rules&lt;/li>
+&lt;li>Header Modification&lt;/li>
+&lt;li>Access&lt;/li>
+&lt;li>Workers&lt;/li>
+&lt;/ol></description></item></channel></rss>

@@ -32,4 +32,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理</title><link>https://linzeyan.github.io/posts/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211110-10253348/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener">喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="規劃時建議要考量的項目">規劃時建議要考量的項目&lt;/h4>
+&lt;h5 id="search-在執行時一個-shard-會分配一個-thread數量太多反而會拖慢速度">Search 在執行時，一個 Shard 會分配一個 Thread，數量太多反而會拖慢速度&lt;/h5>
+&lt;blockquote>
+&lt;p>一個 Node 依照不同的功能分類有多種 Thread pool， 其中 search (count/search/suggest) 的 size 是 &lt;code>int((# of allocated processors * 3) / 2) + 1&lt;/code> 並且 queue_size 預設是 &lt;code>1000&lt;/code> ，而 write (index/delete/update/bulk) 的 size 是 &lt;code># of allocated processors&lt;/code> ，預設的 queue_size 也是 &lt;code>1000&lt;/code>。( 官方文件 - Thread pools )&lt;/p>&lt;/blockquote>
+&lt;p>大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p></description></item></channel></rss>
