@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VNC on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/vnc/</link><description>Recent content in VNC on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 20 Oct 2021 16:14:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/vnc/index.xml" rel="self" type="application/rss+xml"/><item><title>【筆記】在GCP上建立可Remote dekstop的Ubuntu環境</title><link>https://linzeyan.github.io/zh-tw/posts/20211020-gcp-remote-desktop/</link><pubDate>Wed, 20 Oct 2021 16:14:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211020-gcp-remote-desktop/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@huiqinng/%E7%AD%86%E8%A8%98-%E5%9C%A8gcp%E4%B8%8A%E5%BB%BA%E7%AB%8B%E5%8F%AFremote-dekstop%E7%9A%84ubuntu%E7%92%B0%E5%A2%83-e56fdbd3a4f2" target="_blank" rel="noopener">【筆記】在 GCP 上建立可 Remote dekstop 的 Ubuntu 環境&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install">install&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># dependency&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># VNC Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install vnc4server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝完成後先執行vncserver，會先跳出password設定的選項&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="modify-vncxstartup">modify &lt;code>~/.vnc/xstartup&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Uncomment the following two lines for normal desktop:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># unset SESSION_MANAGER&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># exec /etc/X11/xinit/xinitrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -x /etc/vnc/xstartup &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> exec /etc/vnc/xstartup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -r $HOME/.Xresources &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> xrdb $HOME/.Xresources
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xsetroot -solid grey
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncconfig -iconic &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-terminal-emulator -geometry 80x24+10+10 -ls -title &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$VNCDESKTOP&lt;span style="color:#e6db74"> Desktop&amp;#34;&lt;/span> &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-window-manager &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-panel &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-settings-daemon &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metacity &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nautilus &amp;amp;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="exec">exec&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 殺掉目前執行的vncserver 然後重新執行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver -kill :1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vncserver預設是執行在port 5900上，如果在後面加上：1 就是5901以此類推&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="設定-reboot-的時候自動執行-vncserver">設定 reboot 的時候自動執行 vncserver&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>@reboot /usr/bin/vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

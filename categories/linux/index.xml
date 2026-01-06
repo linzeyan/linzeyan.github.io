@@ -756,4 +756,58 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;code>-o&lt;/code> option represents the short command-line options&lt;/li>
 &lt;li>&lt;code>--long&lt;/code> option represents the long command-line options&lt;/li>
+&lt;/ul></description></item><item><title>Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.</title><link>https://linzeyan.github.io/posts/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</link><pubDate>Wed, 20 Oct 2021 16:15:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/tech-guides/google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows-201e315925a6" target="_blank" rel="noopener">Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This will install GUI and make it as a default startup option and then restart the machine.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo yum install xrdp tigervnc-server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# sudo su
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# passwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable --now xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# netstat -antup | grep xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>【筆記】在GCP上建立可Remote dekstop的Ubuntu環境</title><link>https://linzeyan.github.io/posts/20211020-gcp-remote-desktop/</link><pubDate>Wed, 20 Oct 2021 16:14:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/20211020-gcp-remote-desktop/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@huiqinng/%E7%AD%86%E8%A8%98-%E5%9C%A8gcp%E4%B8%8A%E5%BB%BA%E7%AB%8B%E5%8F%AFremote-dekstop%E7%9A%84ubuntu%E7%92%B0%E5%A2%83-e56fdbd3a4f2" target="_blank" rel="noopener">【筆記】在 GCP 上建立可 Remote dekstop 的 Ubuntu 環境&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install">install&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># dependency&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># VNC Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install vnc4server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝完成後先執行vncserver，會先跳出password設定的選項&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="modify-vncxstartup">modify &lt;code>~/.vnc/xstartup&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Uncomment the following two lines for normal desktop:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># unset SESSION_MANAGER&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># exec /etc/X11/xinit/xinitrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -x /etc/vnc/xstartup &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> exec /etc/vnc/xstartup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -r $HOME/.Xresources &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> xrdb $HOME/.Xresources
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xsetroot -solid grey
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncconfig -iconic &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-terminal-emulator -geometry 80x24+10+10 -ls -title &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$VNCDESKTOP&lt;span style="color:#e6db74"> Desktop&amp;#34;&lt;/span> &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-window-manager &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-panel &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-settings-daemon &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metacity &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nautilus &amp;amp;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="exec">exec&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 殺掉目前執行的vncserver 然後重新執行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver -kill :1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vncserver預設是執行在port 5900上，如果在後面加上：1 就是5901以此類推&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="設定-reboot-的時候自動執行-vncserver">設定 reboot 的時候自動執行 vncserver&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>@reboot /usr/bin/vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SHELL编程之常用技巧</title><link>https://linzeyan.github.io/posts/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">SHELL 编程之常用技巧&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">SHELL 编程之内建命令&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">SHELL 编程之特殊符号&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

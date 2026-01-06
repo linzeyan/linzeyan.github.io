@@ -602,4 +602,64 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e">## access_log off; 不紀錄日誌
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">logs/access.log&lt;/span> &lt;span style="color:#e6db74">json&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 出現 500 Error 修復 (too many open file, connection)</title><link>https://linzeyan.github.io/zh-tw/posts/20211009-nginx-worker-many-file-fix/</link><pubDate>Sat, 09 Oct 2021 11:51:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211009-nginx-worker-many-file-fix/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.longwin.com.tw/2011/05/nginx-worker-many-file-fix-2011/" target="_blank" rel="noopener">Nginx 出現 500 Error 修復 (too many open file, connection)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Nginx 出現 500 Error, 錯誤訊息只能從 Log 查到, 有遇到下述兩種狀況:&lt;/p>
+&lt;h3 id="socket-failed-24-too-many-open-files-while-connecting-to-upstream">socket() failed (24: Too many open files) while connecting to upstream&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo su - www-data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ulimit -n &lt;span style="color:#75715e"># 看目前系統設定的限制 (ulimit -a # 可查看全部參數)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1024&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/security/limits.conf # 由此檔案設定 nofile (nofile - max number of open files) 的大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 增加/修改 下述兩行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* soft nofile &lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* hard nofile &lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ulimit -n &lt;span style="color:#75715e"># 登出後, 在登入, 執行就會出現此值&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若 ulimit -n 沒出現 655360 的話, 可使用 ulimit -n 655360 # 強制設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 再用 ulimit -n 或 ulimit -Sn (驗證軟式設定)、ulimit -Hn (驗證硬式設定) 檢查看看(或 ulimit -a).&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 從系統面另外計算 + 設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsof | wc -l &lt;span style="color:#75715e"># 計算開啟檔案數量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo vim /etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs.file-max &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3268890&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo sysctl -p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="512-worker_connections-are-not-enough-while-connecting-to-upstream">512 worker_connections are not enough while connecting to upstream&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/nginx/nginx.conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_connections 10240;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 參考 Nginx CoreModule&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># worker_processes 2;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># worker_rlimit_nofile 10240;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># events {&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># # worker_connections 10240;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Nginx 的 connection 增加後, 整體速度會變慢很多, 主要原因是 php-cgi 不夠用, 所以要作以下調整.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># php-cgi was started with phpfcgid_children=&amp;#34;10&amp;#34; and phpfcgid_requests=&amp;#34;500&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ab was run on another server, connect via a switch using GBit ethernet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># http://till.klampaeckel.de/blog/archives/30-PHP-performance-III-Running-nginx.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/nginx/nginx.conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_connections 10240;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_rlimit_nofile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/init.d/php-fcgi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_CHILDREN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_MAX_REQUESTS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>改成
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_CHILDREN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">512&lt;/span> &lt;span style="color:#75715e"># 或 150 慢慢加, 注意 MySQL connection 是否夠用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_MAX_REQUESTS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10240&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 上述文章的 phpfcgid_stop(), 寫得還不錯, 有需要可以用看看.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># phpfcgid_stop() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># echo &amp;#34;Stopping $name.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pids=`pgrep php-cgi`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pkill php-cgi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># wait_for_pids $pids&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

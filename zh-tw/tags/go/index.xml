@@ -1263,4 +1263,80 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>.&lt;span style="color:#a6e22e">Error&lt;/span>())
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(string(&lt;span style="color:#a6e22e">out&lt;/span>))
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用此方法得出的 output string 請記得把回傳的首行（chcp 的回傳結果）刪除掉再進行其他處理和讀取。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用此方法得出的 output string 請記得把回傳的首行（chcp 的回傳結果）刪除掉再進行其他處理和讀取。&lt;/p></description></item><item><title>Golang基准测试</title><link>https://linzeyan.github.io/zh-tw/posts/20210902-golang-ji-zhun-ce-shi/</link><pubDate>Thu, 02 Sep 2021 12:50:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210902-golang-ji-zhun-ce-shi/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&amp;amp;mid=2247485595&amp;amp;idx=1&amp;amp;sn=9981e6103a6b33cc3a06be0781a2bf10&amp;amp;chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd" target="_blank" rel="noopener">Golang 基准测试&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="基本使用">基本使用&lt;/h4>
+&lt;blockquote>
+&lt;p>基准测试常用于代码性能测试，函数需要导入 testing 包，并定义以 Benchmark 开头的函数， 参数为 testing.B 指针类型，在测试函数中循环调用函数多次&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">250&lt;/span> &lt;span style="color:#ae81ff">4682682&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.875s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">249&lt;/span> &lt;span style="color:#ae81ff">4686452&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.854s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="bench-的工作原理">bench 的工作原理&lt;/h4>
+&lt;ul>
+&lt;li>基准测试函数会被一直调用直到 &lt;code>b.N&lt;/code> 无效，它是基准测试循环的次数&lt;/li>
+&lt;li>&lt;code>b.N&lt;/code> 从 &lt;code>1&lt;/code> 开始，如果基准测试函数在 &lt;code>1&lt;/code> 秒内就完成 (默认值)，则 &lt;code>b.N&lt;/code> 增加，并再次运行基准测试函数&lt;/li>
+&lt;li>&lt;code>b.N&lt;/code> 的值会按照序列 &lt;code>1,2,5,10,20,50,...&lt;/code> 增加，同时再次运行基准测测试函数&lt;/li>
+&lt;li>上述结果解读代表 &lt;code>1&lt;/code> 秒内运行了 &lt;code>250&lt;/code> 次，每次 &lt;code>4682682 ns&lt;/code>&lt;/li>
+&lt;li>&lt;code>-12&lt;/code> 后缀和用于运行次测试的 &lt;code>GOMAXPROCS&lt;/code> 值有关。与 &lt;code>GOMAXPROCS&lt;/code> 一样，此数字默认为启动时 Go 进程可见的 CPU 数。可以使用 &lt;code>-cpu&lt;/code> 标识更改此值，可以传入多个值以列表形式来运行基准测试&lt;/li>
+&lt;/ul>
+&lt;h4 id="传入-cpu-num-进行测试">传入 cpu num 进行测试&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -cpu&lt;span style="color:#f92672">=&lt;/span>1,2,4 -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib &lt;span style="color:#ae81ff">244&lt;/span> &lt;span style="color:#ae81ff">4694667&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-2 &lt;span style="color:#ae81ff">255&lt;/span> &lt;span style="color:#ae81ff">4721201&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-4 &lt;span style="color:#ae81ff">256&lt;/span> &lt;span style="color:#ae81ff">4756392&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 5.826s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="count-多次运行基准测试">count 多次运行基准测试&lt;/h4>
+&lt;blockquote>
+&lt;p>因为热缩放、内存局部性、后台处理、gc 活动等等会导致单次的误差，所以一般会进行多次测试&lt;/p></description></item><item><title>[译] Go语言inline内联的策略与限制</title><link>https://linzeyan.github.io/zh-tw/posts/20210814-go-inlining-strategy-limitation/</link><pubDate>Sat, 14 Aug 2021 20:33:41 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210814-go-inlining-strategy-limitation/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.pengrl.com/p/20028/" target="_blank" rel="noopener">[译] Go 语言 inline 内联的策略与限制&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/a-journey-with-go/go-inlining-strategy-limitation-6b6d7fc3b1be" target="_blank" rel="noopener">Go: Inlining Strategy &amp;amp; Limitation&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> []&lt;span style="color:#66d9ef">float32&lt;/span>{&lt;span style="color:#ae81ff">120.4&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">46.7&lt;/span>, &lt;span style="color:#ae81ff">32.50&lt;/span>, &lt;span style="color:#ae81ff">34.65&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">67.45&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;The total is %.02f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">sum&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">sum&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span> []&lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> &amp;lt; &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = &lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用参数&lt;code>-gflags=&amp;quot;-m&amp;quot;&lt;/code>运行，可显示被内联的函数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>./op.go:3:6: can inline add
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./op.go:7:6: can inline sub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:16:11: inlining call to sub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:14:11: inlining call to add
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:7:12: inlining call to fmt.Printf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到 add 方法被内联了。但是，为什么 sum 方法没有被内联呢？使用运行参数&lt;code>-gflags=&amp;quot;-m -m&amp;quot;&lt;/code>可以看到原因：&lt;/p></description></item></channel></rss>

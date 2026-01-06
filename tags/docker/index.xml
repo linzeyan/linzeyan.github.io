@@ -363,4 +363,19 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BASE_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;dc=knowhow,dc=fun&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BIND_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cn=admin&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_ADMIN_PASS&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;123qwe&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Security Best Practices: Cheat Sheet</title><link>https://linzeyan.github.io/posts/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</link><pubDate>Fri, 20 Aug 2021 23:14:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gitguardian.com/how-to-improve-your-docker-containers-security-cheat-sheet/" target="_blank" rel="noopener">Docker Security Best Practices: Cheat Sheet&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="image-security">Image Security&lt;/h3>
+&lt;h4 id="use-trusted-images">Use Trusted Images&lt;/h4>
+&lt;h4 id="unprivileged-user">Unprivileged User&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> base_image&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> addgroup -S appgroup &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> adduser -S appuser -G appgroup&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">USER&lt;/span>&lt;span style="color:#e6db74"> appuser&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="user-id-namespace">User ID Namespace&lt;/h4>
+&lt;blockquote>
+&lt;p>Segregate namespaces to prevent container privilege escalation from affecting the host.&lt;/p>&lt;/blockquote>
+&lt;p>To mitigate this risk, configure your host and the Docker daemon to use a separate namespace with the &lt;code>--userns-remap&lt;/code> option.&lt;/p>
+&lt;h3 id="container-runtime-security">Container Runtime Security&lt;/h3>
+&lt;h4 id="forbid-new-privileges">Forbid New Privileges&lt;/h4>
+&lt;p>For enhanced security, it is recommended to explicitly forbid the addition of new privileges after container creation using this option: &lt;code>--security-opt=no-new-privileges&lt;/code>.&lt;/p></description></item></channel></rss>

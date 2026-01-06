@@ -1587,7 +1587,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-190" playsinline controls>
+&lt;video class="video-player" id="video-118" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -4748,7 +4748,176 @@ grep receives the output of tcpflow&lt;/li>
 &lt;li>Header Modification&lt;/li>
 &lt;li>Access&lt;/li>
 &lt;li>Workers&lt;/li>
-&lt;/ol></description></item><item><title>Gitlab-CI Introduction</title><link>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</link><pubDate>Fri, 24 Sep 2021 11:11:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</guid><description>&lt;h1 id="gitlab-ci">Gitlab CI&lt;/h1>
+&lt;/ol></description></item><item><title>Regex for Markdown Syntax</title><link>https://linzeyan.github.io/zh-tw/posts/20211029-regex-for-md/</link><pubDate>Fri, 29 Oct 2021 10:19:41 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211029-regex-for-md/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html" target="_blank" rel="noopener">Regex for Markdown Syntax&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">basic-syntax&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code># Headings
+headerOne = `(#{1}\s)(.*)`
+headeTwo = `(#{2}\s)(.*)`
+headerThree = `(#{3}\s)(.*)`
+headerFour = `(#{4}\s)(.*)`
+headerFive = `(#{5}\s)(.*)`
+headerSix = `(#{6}\s)(.*)`
+# Bold and Italic Text
+boldItalicText = `(\*|\_)+(\S+)(\*|\_)+`
+# Links
+linkText = `(\[.*\])(\((http)(?:s)?(\:\/\/).*\))`
+# Images
+imageFile = `(\!)(\[(?:.*)?\])(\(.*(\.(jpg|png|gif|tiff|bmp))(?:(\s\&amp;#34;|\&amp;#39;)(\w|\W|\d)+(\&amp;#34;|\&amp;#39;))?\)`
+# Unordered List
+listText = `(^(\W{1})(\s)(.*)(?:$)?)+`
+# Numbered Text
+numberedListText = `(^(\d+\.)(\s)(.*)(?:$)?)+`
+# Block Quotes
+blockQuote = `((^(\&amp;gt;{1})(\s)(.*)(?:$)?)+`
+# Inline Code
+inlineCode = &amp;#34;(\\`{1})(.*)(\\`{1})&amp;#34;
+# Code Block
+codeBlock = &amp;#34;(\\`{3}\\n+)(.*)(\\n+\\`{3})&amp;#34;
+# Horizontal Line
+horizontalLine = `(\=|\-|\*){3}`
+# Email Text
+emailText = `(\&amp;lt;{1})(\S+@\S+)(\&amp;gt;{1})`
+# TABLES
+tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}&amp;gt;?(?!-))]+))+(\|))(?:\n)?((\|)(-+))+(\|)(\n)((\|)(\W+|\w+|\S+))+(\|$)`
+&lt;/code>&lt;/pre></description></item><item><title>Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.</title><link>https://linzeyan.github.io/zh-tw/posts/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</link><pubDate>Wed, 20 Oct 2021 16:15:48 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/tech-guides/google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows-201e315925a6" target="_blank" rel="noopener">Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This will install GUI and make it as a default startup option and then restart the machine.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo yum install xrdp tigervnc-server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# sudo su
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# passwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable --now xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# netstat -antup | grep xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>【筆記】在GCP上建立可Remote dekstop的Ubuntu環境</title><link>https://linzeyan.github.io/zh-tw/posts/20211020-gcp-remote-desktop/</link><pubDate>Wed, 20 Oct 2021 16:14:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211020-gcp-remote-desktop/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@huiqinng/%E7%AD%86%E8%A8%98-%E5%9C%A8gcp%E4%B8%8A%E5%BB%BA%E7%AB%8B%E5%8F%AFremote-dekstop%E7%9A%84ubuntu%E7%92%B0%E5%A2%83-e56fdbd3a4f2" target="_blank" rel="noopener">【筆記】在 GCP 上建立可 Remote dekstop 的 Ubuntu 環境&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install">install&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># dependency&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># VNC Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install vnc4server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝完成後先執行vncserver，會先跳出password設定的選項&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="modify-vncxstartup">modify &lt;code>~/.vnc/xstartup&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Uncomment the following two lines for normal desktop:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># unset SESSION_MANAGER&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># exec /etc/X11/xinit/xinitrc&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -x /etc/vnc/xstartup &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> exec /etc/vnc/xstartup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span> -r $HOME/.Xresources &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> xrdb $HOME/.Xresources
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xsetroot -solid grey
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncconfig -iconic &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-terminal-emulator -geometry 80x24+10+10 -ls -title &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$VNCDESKTOP&lt;span style="color:#e6db74"> Desktop&amp;#34;&lt;/span> &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x-window-manager &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-panel &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-settings-daemon &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metacity &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nautilus &amp;amp;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="exec">exec&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 殺掉目前執行的vncserver 然後重新執行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver -kill :1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vncserver預設是執行在port 5900上，如果在後面加上：1 就是5901以此類推&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="設定-reboot-的時候自動執行-vncserver">設定 reboot 的時候自動執行 vncserver&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>@reboot /usr/bin/vncserver :1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash</title><link>https://linzeyan.github.io/zh-tw/posts/20211018-what-are-encoding-encrypt-and-hashing/</link><pubDate>Mon, 18 Oct 2021 14:24:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211018-what-are-encoding-encrypt-and-hashing/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/starbugs/what-are-encoding-encrypt-and-hashing-4b03d40e7b0c" target="_blank" rel="noopener">一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="編碼encoding">編碼（Encoding）&lt;/h3>
+&lt;blockquote>
+&lt;p>不會修改資料、也沒有任何加密的效果，單純就是 換個方式來表達資料 而已，其中最有名的例子就是&lt;code>摩斯密碼&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>JavaScript 中有兩個很實用的 function 分別是 &lt;code>encodeURI&lt;/code> 跟 &lt;code>decodeURI&lt;/code> 把網址中的特殊字元（空白、標點符號等等）編碼成符合 URL 的格式&lt;/li>
+&lt;li>&lt;code>Base64&lt;/code> 是一種可以把二進位的資料編碼成 ASCII 字元的方法&lt;/li>
+&lt;li>&lt;code>霍夫曼編碼（Huffman Coding）&lt;/code> 一種用來進行 無失真壓縮 的編碼演算法，說穿了他的概念就是把常用的字記成縮寫，從而降低資料量、達到壓縮的效果&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;h3 id="加密encrypt">加密（Encrypt）&lt;/h3>
+&lt;blockquote>
+&lt;p>加密跟解密必須要有金鑰（Key）才能進行。以最簡單的 凱薩加密法 來說，他加密的方式就是把每個英文字母加上一個 偏移量，這個偏移量就是用來執行加解密的 Key&lt;/p>
+&lt;ul>
+&lt;li>AES (Advanced Encryption Standard) 是一種對稱加密演算法，所謂的對稱就是說加密解密 都是用同一個 key，這點跟上面說到的凱薩加密法一樣，但 AES 不像凱薩的 key 只有 0-25 這麼少種，而是可以有超過 10³⁸ 種&lt;/li>
+&lt;li>RSA 這類非對稱加密法有個很特別的地方，就是他會產生一組兩個 Key 分別叫公鑰（Public Key）跟私鑰（Private Key），而且 用公鑰加密的內容只能用私鑰解&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;h3 id="雜湊hashing">雜湊（Hashing）&lt;/h3>
+&lt;blockquote>
+&lt;p>各個 欄位/字元 丟進去某個公式計算的方式就叫做雜湊（Hash），而這個計算公式就稱為 雜湊函數（Hash function），過程可能會做各種加減乘除，最後算出一個值或字串，因為不可能由雜湊後的結果回推，所以雜湊的過程是 不可逆的&lt;/p>&lt;/blockquote></description></item><item><title>Nginx 出現 500 Error 修復 (too many open file, connection)</title><link>https://linzeyan.github.io/zh-tw/posts/20211009-nginx-worker-many-file-fix/</link><pubDate>Sat, 09 Oct 2021 11:51:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211009-nginx-worker-many-file-fix/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.longwin.com.tw/2011/05/nginx-worker-many-file-fix-2011/" target="_blank" rel="noopener">Nginx 出現 500 Error 修復 (too many open file, connection)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Nginx 出現 500 Error, 錯誤訊息只能從 Log 查到, 有遇到下述兩種狀況:&lt;/p>
+&lt;h3 id="socket-failed-24-too-many-open-files-while-connecting-to-upstream">socket() failed (24: Too many open files) while connecting to upstream&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo su - www-data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ulimit -n &lt;span style="color:#75715e"># 看目前系統設定的限制 (ulimit -a # 可查看全部參數)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1024&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/security/limits.conf # 由此檔案設定 nofile (nofile - max number of open files) 的大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 增加/修改 下述兩行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* soft nofile &lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* hard nofile &lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ulimit -n &lt;span style="color:#75715e"># 登出後, 在登入, 執行就會出現此值&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">655360&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若 ulimit -n 沒出現 655360 的話, 可使用 ulimit -n 655360 # 強制設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 再用 ulimit -n 或 ulimit -Sn (驗證軟式設定)、ulimit -Hn (驗證硬式設定) 檢查看看(或 ulimit -a).&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 從系統面另外計算 + 設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsof | wc -l &lt;span style="color:#75715e"># 計算開啟檔案數量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo vim /etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fs.file-max &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3268890&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo sysctl -p
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="512-worker_connections-are-not-enough-while-connecting-to-upstream">512 worker_connections are not enough while connecting to upstream&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/nginx/nginx.conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_connections 10240;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 參考 Nginx CoreModule&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># worker_processes 2;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># worker_rlimit_nofile 10240;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># events {&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># # worker_connections 10240;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Nginx 的 connection 增加後, 整體速度會變慢很多, 主要原因是 php-cgi 不夠用, 所以要作以下調整.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># php-cgi was started with phpfcgid_children=&amp;#34;10&amp;#34; and phpfcgid_requests=&amp;#34;500&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ab was run on another server, connect via a switch using GBit ethernet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># http://till.klampaeckel.de/blog/archives/30-PHP-performance-III-Running-nginx.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/nginx/nginx.conf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_connections 10240;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>worker_rlimit_nofile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vim /etc/init.d/php-fcgi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_CHILDREN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_MAX_REQUESTS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>改成
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_CHILDREN&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">512&lt;/span> &lt;span style="color:#75715e"># 或 150 慢慢加, 注意 MySQL connection 是否夠用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PHP_FCGI_MAX_REQUESTS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10240&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 上述文章的 phpfcgid_stop(), 寫得還不錯, 有需要可以用看看.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># phpfcgid_stop() {&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># echo &amp;#34;Stopping $name.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pids=`pgrep php-cgi`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pkill php-cgi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># wait_for_pids $pids&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>超簡單！快速打造漂亮又好用的 zsh 終端環境</title><link>https://linzeyan.github.io/zh-tw/posts/20211009-zsh/</link><pubDate>Thu, 07 Oct 2021 08:44:18 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211009-zsh/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@white1033/%E8%B6%85%E7%B0%A1%E5%96%AE-%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E6%BC%82%E4%BA%AE%E5%8F%88%E5%A5%BD%E7%94%A8%E7%9A%84-zsh-%E7%B5%82%E7%AB%AF%E7%92%B0%E5%A2%83-c81874368264" target="_blank" rel="noopener">超簡單！快速打造漂亮又好用的 zsh 終端環境&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dwye.dev/post/zsh-zim-powerlevel10k/" target="_blank" rel="noopener">用 zsh + zim + powerlevel10k 讓你的 Terminal 潮又快&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/starbugs/%E6%89%93%E9%80%A0-10x-engineer-zsh-shell-97e40db76391" target="_blank" rel="noopener">打造 10X Engineer Shell 工作環境&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>利用 GPG 簽署 git commit</title><link>https://linzeyan.github.io/zh-tw/posts/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/" target="_blank" rel="noopener">利用 GPG 簽署 git commit&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Gitlab-CI Introduction</title><link>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</link><pubDate>Fri, 24 Sep 2021 11:11:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210924-gitlab/</guid><description>&lt;h1 id="gitlab-ci">Gitlab CI&lt;/h1>
 &lt;h2 id="concept">Concept&lt;/h2>
 &lt;h3 id="gitlab">Gitlab&lt;/h3>
 &lt;ul>
@@ -4825,7 +4994,11 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">telegram.sh &amp;#39;ICP check completed.&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">only&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">schedules&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/zh-tw/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SHELL编程之常用技巧</title><link>https://linzeyan.github.io/zh-tw/posts/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">SHELL 编程之常用技巧&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">SHELL 编程之内建命令&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">SHELL 编程之特殊符号&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/zh-tw/posts/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
 &lt;h2 id="concept">Concept&lt;/h2>
 &lt;h3 id="vm-vs-container">VM vs Container&lt;/h3>
 &lt;ul>
@@ -4994,7 +5167,101 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BASE_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;dc=knowhow,dc=fun&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BIND_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cn=admin&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_ADMIN_PASS&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;123qwe&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Golang基准测试</title><link>https://linzeyan.github.io/zh-tw/posts/20210902-golang-ji-zhun-ce-shi/</link><pubDate>Thu, 02 Sep 2021 12:50:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210902-golang-ji-zhun-ce-shi/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&amp;amp;mid=2247485595&amp;amp;idx=1&amp;amp;sn=9981e6103a6b33cc3a06be0781a2bf10&amp;amp;chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd" target="_blank" rel="noopener">Golang 基准测试&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="基本使用">基本使用&lt;/h4>
+&lt;blockquote>
+&lt;p>基准测试常用于代码性能测试，函数需要导入 testing 包，并定义以 Benchmark 开头的函数， 参数为 testing.B 指针类型，在测试函数中循环调用函数多次&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">250&lt;/span> &lt;span style="color:#ae81ff">4682682&lt;/span> ns/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.875s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">249&lt;/span> &lt;span style="color:#ae81ff">4686452&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.854s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="bench-的工作原理">bench 的工作原理&lt;/h4>
+&lt;ul>
+&lt;li>基准测试函数会被一直调用直到 &lt;code>b.N&lt;/code> 无效，它是基准测试循环的次数&lt;/li>
+&lt;li>&lt;code>b.N&lt;/code> 从 &lt;code>1&lt;/code> 开始，如果基准测试函数在 &lt;code>1&lt;/code> 秒内就完成 (默认值)，则 &lt;code>b.N&lt;/code> 增加，并再次运行基准测试函数&lt;/li>
+&lt;li>&lt;code>b.N&lt;/code> 的值会按照序列 &lt;code>1,2,5,10,20,50,...&lt;/code> 增加，同时再次运行基准测测试函数&lt;/li>
+&lt;li>上述结果解读代表 &lt;code>1&lt;/code> 秒内运行了 &lt;code>250&lt;/code> 次，每次 &lt;code>4682682 ns&lt;/code>&lt;/li>
+&lt;li>&lt;code>-12&lt;/code> 后缀和用于运行次测试的 &lt;code>GOMAXPROCS&lt;/code> 值有关。与 &lt;code>GOMAXPROCS&lt;/code> 一样，此数字默认为启动时 Go 进程可见的 CPU 数。可以使用 &lt;code>-cpu&lt;/code> 标识更改此值，可以传入多个值以列表形式来运行基准测试&lt;/li>
+&lt;/ul>
+&lt;h4 id="传入-cpu-num-进行测试">传入 cpu num 进行测试&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -cpu&lt;span style="color:#f92672">=&lt;/span>1,2,4 -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib &lt;span style="color:#ae81ff">244&lt;/span> &lt;span style="color:#ae81ff">4694667&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-2 &lt;span style="color:#ae81ff">255&lt;/span> &lt;span style="color:#ae81ff">4721201&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-4 &lt;span style="color:#ae81ff">256&lt;/span> &lt;span style="color:#ae81ff">4756392&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 5.826s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="count-多次运行基准测试">count 多次运行基准测试&lt;/h4>
+&lt;blockquote>
+&lt;p>因为热缩放、内存局部性、后台处理、gc 活动等等会导致单次的误差，所以一般会进行多次测试&lt;/p></description></item><item><title>使用mydumper备份数据库</title><link>https://linzeyan.github.io/zh-tw/posts/20210901-mydumper/</link><pubDate>Wed, 01 Sep 2021 17:58:48 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210901-mydumper/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.bboy.app/2021/08/09/%E4%BD%BF%E7%94%A8mydumper%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_blank" rel="noopener">使用 mydumper 备份数据库&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/mydumper/mydumper" target="_blank" rel="noopener">MyDumper&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docker Security Best Practices: Cheat Sheet</title><link>https://linzeyan.github.io/zh-tw/posts/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</link><pubDate>Fri, 20 Aug 2021 23:14:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gitguardian.com/how-to-improve-your-docker-containers-security-cheat-sheet/" target="_blank" rel="noopener">Docker Security Best Practices: Cheat Sheet&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="image-security">Image Security&lt;/h3>
+&lt;h4 id="use-trusted-images">Use Trusted Images&lt;/h4>
+&lt;h4 id="unprivileged-user">Unprivileged User&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> base_image&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> addgroup -S appgroup &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> adduser -S appuser -G appgroup&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">USER&lt;/span>&lt;span style="color:#e6db74"> appuser&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="user-id-namespace">User ID Namespace&lt;/h4>
+&lt;blockquote>
+&lt;p>Segregate namespaces to prevent container privilege escalation from affecting the host.&lt;/p>&lt;/blockquote>
+&lt;p>To mitigate this risk, configure your host and the Docker daemon to use a separate namespace with the &lt;code>--userns-remap&lt;/code> option.&lt;/p>
+&lt;h3 id="container-runtime-security">Container Runtime Security&lt;/h3>
+&lt;h4 id="forbid-new-privileges">Forbid New Privileges&lt;/h4>
+&lt;p>For enhanced security, it is recommended to explicitly forbid the addition of new privileges after container creation using this option: &lt;code>--security-opt=no-new-privileges&lt;/code>.&lt;/p></description></item><item><title>[译] Go语言inline内联的策略与限制</title><link>https://linzeyan.github.io/zh-tw/posts/20210814-go-inlining-strategy-limitation/</link><pubDate>Sat, 14 Aug 2021 20:33:41 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210814-go-inlining-strategy-limitation/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.pengrl.com/p/20028/" target="_blank" rel="noopener">[译] Go 语言 inline 内联的策略与限制&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/a-journey-with-go/go-inlining-strategy-limitation-6b6d7fc3b1be" target="_blank" rel="noopener">Go: Inlining Strategy &amp;amp; Limitation&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> []&lt;span style="color:#66d9ef">float32&lt;/span>{&lt;span style="color:#ae81ff">120.4&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">46.7&lt;/span>, &lt;span style="color:#ae81ff">32.50&lt;/span>, &lt;span style="color:#ae81ff">34.65&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">67.45&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;The total is %.02f\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">sum&lt;/span>(&lt;span style="color:#a6e22e">n&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">sum&lt;/span>(&lt;span style="color:#a6e22e">s&lt;/span> []&lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">s&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span> &amp;lt; &lt;span style="color:#ae81ff">0&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = &lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span> = &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#a6e22e">v&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">t&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">add&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">sub&lt;/span>(&lt;span style="color:#a6e22e">a&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span>) &lt;span style="color:#66d9ef">float32&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#a6e22e">b&lt;/span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用参数&lt;code>-gflags=&amp;quot;-m&amp;quot;&lt;/code>运行，可显示被内联的函数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>./op.go:3:6: can inline add
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./op.go:7:6: can inline sub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:16:11: inlining call to sub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:14:11: inlining call to add
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./main.go:7:12: inlining call to fmt.Printf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到 add 方法被内联了。但是，为什么 sum 方法没有被内联呢？使用运行参数&lt;code>-gflags=&amp;quot;-m -m&amp;quot;&lt;/code>可以看到原因：&lt;/p></description></item><item><title>Ansible 簡介</title><link>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20200926-ansible/</guid><description>&lt;h1 id="認識-ansible">認識 Ansible&lt;/h1>
 &lt;h2 id="大綱">大綱&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#%e7%b0%a1%e4%bb%8b">簡介&lt;/a>&lt;/li>
