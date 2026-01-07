@@ -58,4 +58,24 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git push --force-with-lease
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>利用 GPG 簽署 git commit</title><link>https://linzeyan.github.io/zh-tw/posts/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/" target="_blank" rel="noopener">利用 GPG 簽署 git commit&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Little Git Tricks: Use .mailmap to Merge Different Authors</title><link>https://linzeyan.github.io/zh-tw/posts/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</link><pubDate>Thu, 05 Aug 2021 13:42:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/" target="_blank" rel="noopener">Little Git Tricks: Use .mailmap to Merge Different Authors&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>.mailmap&lt;/code> file ==&amp;gt; &lt;code>Name you want to keep &amp;lt;email&amp;gt; Name you no longer want &amp;lt;email&amp;gt;&lt;/code>&lt;/p>
+&lt;pre tabindex="0">&lt;code>John Doe John Doe
+John Doe John Doe
+John Doe john doe
+Max Example Max
+&lt;/code>&lt;/pre>&lt;h5 id="before">before&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git shortlog -se
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> John Doe &amp;lt;John@Doe.org&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> John Doe &amp;lt;John@doe.org&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> John Doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> Max &amp;lt;max@test.co.uk&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> Max Example &amp;lt;hi@test.com&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> john doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="after">after&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git shortlog -se
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> John Doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> Max Example &amp;lt;hi@test.com&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
