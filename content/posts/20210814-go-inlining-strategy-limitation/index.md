@@ -12,6 +12,8 @@ categories: ["URL", "Go"]
 
 - [[译] Go 语言 inline 内联的策略与限制](https://www.pengrl.com/p/20028/)
 - [Go: Inlining Strategy & Limitation](https://medium.com/a-journey-with-go/go-inlining-strategy-limitation-6b6d7fc3b1be)
+- [Visualizing memory management in Golang](https://deepu.tech/memory-management-in-golang/)
+- [Understanding Allocations in Go](https://medium.com/eureka-engineering/understanding-allocations-in-go-stack-heap-memory-9a2631b5035d)
 
 ```go
 package main
@@ -101,3 +103,12 @@ Mandelbrot200-8            3.74ms ± 0%    3.74ms ± 1%     ~
 ```
 
 内联的性能大概要好 5~6%左右。
+
+#### Memory Allocation
+
+- Tiny(size < 16B): Objects of size less than 16 bytes are allocated using the mcache's tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.
+- Small(size 16B ~ 32KB): Objects of size between 16 bytes and 32 Kilobytes are allocated on the corresponding size class(mspan) on mcache of the P where the G is running.
+
+In both tiny and small allocation if the mspan's list is empty the allocator will obtain a run of pages from the mheap to use for the mspan. If the mheap is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
+
+- Large(size > 32KB): Objects of size greater than 32 kilobytes are allocated directly on the corresponding size class of mheap. If the mheap is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
