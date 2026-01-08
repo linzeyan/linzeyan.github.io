@@ -366,4 +366,28 @@
 &lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">SHELL 编程之常用技巧&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">SHELL 编程之内建命令&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">SHELL 编程之特殊符号&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>How to use a here documents to write data to a file in bash script</title><link>https://linzeyan.github.io/posts/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</link><pubDate>Fri, 07 May 2021 11:37:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/" target="_blank" rel="noopener">How to use a here documents to write data to a file in bash script&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="allow-here-documents-within-shell-scripts-to-be-indented-in-a-natural-fashion-using-eof-">allow here-documents within shell scripts to be indented in a natural fashion using &lt;code>EOF&amp;lt;&amp;lt;-&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>command &lt;span style="color:#e6db74">&amp;lt;&amp;lt;-EOF
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> $var on line
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="disabling-pathnameparametervariable-expansion-command-substitution-arithmetic-expansion-with-eof">Disabling pathname/parameter/variable expansion, command substitution, arithmetic expansion with &lt;code>'EOF'&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>OUT&lt;span style="color:#f92672">=&lt;/span>/tmp/output.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting my script...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Doing something...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># No parameter and variable expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If any part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># are not expanded. So EOF is quoted as follows&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39; &amp;gt;$OUT
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Status of backup as on $(date)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Backing up files $HOME and /etc/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

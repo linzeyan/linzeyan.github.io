@@ -1418,7 +1418,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-39" playsinline controls>
+&lt;video class="video-player" id="video-189" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -4635,6 +4635,144 @@ Max Example Max
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-cisco-ucs-cimc-mail-alert.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC Mail Alert&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-cisco-ucs-cimc-40gb-vnic.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC 40Gb vNIC 參數&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/07/ansible-cisco-ucs-cimc-ntp.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC NTP 時間校時&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>SQL queries don't start with SELECT</title><link>https://linzeyan.github.io/posts/20210714-sql-queries-don-t-start-with-select/</link><pubDate>Wed, 14 Jul 2021 18:11:46 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210714-sql-queries-don-t-start-with-select/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/" target="_blank" rel="noopener">SQL queries don&amp;rsquo;t start with SELECT&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="sql-queries-happen-in-this-order">SQL queries happen in this order&lt;/h4>
+&lt;ul>
+&lt;li>&lt;code>FROM/JOIN&lt;/code> and all the &lt;code>ON&lt;/code> conditions&lt;/li>
+&lt;li>&lt;code>WHERE&lt;/code>&lt;/li>
+&lt;li>&lt;code>GROUP BY&lt;/code>&lt;/li>
+&lt;li>&lt;code>HAVING&lt;/code>&lt;/li>
+&lt;li>&lt;code>SELECT&lt;/code> (including window functions)&lt;/li>
+&lt;li>&lt;code>ORDER BY&lt;/code>&lt;/li>
+&lt;li>&lt;code>LIMIT&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>6 YAML Features most programmers don't know</title><link>https://linzeyan.github.io/posts/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener">6 YAML Features most programmers don&amp;rsquo;t know&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="there-are-more-examples-that-are-similarly-dangerous-as-tom-ritchford-pointed-out">There are more examples that are similarly dangerous as Tom Ritchford pointed out&lt;/h4>
+&lt;ul>
+&lt;li>&lt;code>013&lt;/code> is mapped to 11 as the leading zero triggers the octal notation&lt;/li>
+&lt;li>&lt;code>4:30&lt;/code> is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: &lt;code>4*60 + 30 = 270&lt;/code> . Interestingly, this pattern still &amp;ldquo;works&amp;rdquo; with &lt;code>1:1:1:1:1:1:1:1:4:30&lt;/code> .&lt;/li>
+&lt;/ul>
+&lt;h4 id="multi-line-string">Multi-Line String&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">mail_signature&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Martin Thoma
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Tel. +49 123 4567&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;mail_signature&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Martin Thoma\nTel. +49 123 4567&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="anchor">Anchor&lt;/h4>
+&lt;blockquote>
+&lt;p>The &lt;code>&amp;amp;&lt;/code> defined a variable &lt;code>emailAddress&lt;/code> with the value &lt;code>&amp;quot;info@example.de&amp;quot;&lt;/code>. The &lt;code>*&lt;/code> then indicated that the name of a variable follows.&lt;/p></description></item><item><title>Draw Diagrams With Markdown</title><link>https://linzeyan.github.io/posts/20210629-draw-diagrams-with-markdown/</link><pubDate>Tue, 29 Jun 2021 15:55:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210629-draw-diagrams-with-markdown/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://support.typora.io/Draw-Diagrams-With-Markdown/#sequence-diagrams" target="_blank" rel="noopener">Draw Diagrams With Markdown&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>ansible.builtin.slurp - 讀取檔案內容</title><link>https://linzeyan.github.io/posts/20210531-slurp-read-file-content/</link><pubDate>Mon, 31 May 2021 17:15:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210531-slurp-read-file-content/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/slurp-read-file-content/" target="_blank" rel="noopener">ansible.builtin.slurp - 讀取檔案內容&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Use HTTP POST to upload file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#ae81ff">all&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tasks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Read binary file content&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">slurp&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">path&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/bin/ls&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">bin_file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Send HTTP POST Request&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uri&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://your_server/upload.php&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">headers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">Accept&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">Content-Type&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application/octet-stream&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">method&lt;/span>: &lt;span style="color:#ae81ff">POST&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">validate_certs&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">body&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ bin_file.content }}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">status_code&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">200&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">201&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Display upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">debug&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">var&lt;/span>: &lt;span style="color:#ae81ff">upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 slurp，就可以避掉 lookup(&amp;lsquo;file&amp;rsquo;) 的限制。&lt;/p>
+&lt;ul>
+&lt;li>可以讀取受控端主機上的檔案，也可以利用 delegate_to: localhost 來讀取主控端主機上的檔案。&lt;/li>
+&lt;li>可以讀取二進位檔案來做進一步處理，例如做 base64 編碼&lt;/li>
+&lt;/ul></description></item><item><title>Nginx - request_time和upstream_response_time详解</title><link>https://linzeyan.github.io/posts/20210514-105819628/</link><pubDate>Fri, 14 May 2021 16:04:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210514-105819628/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.csdn.net/zzhongcy/article/details/105819628" target="_blank" rel="noopener">Nginx - request_time 和 upstream_response_time 详解&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="time-definition">time definition&lt;/h3>
+&lt;p>&lt;strong>request_time&lt;/strong>&lt;/p>
+&lt;p>从接受用户请求的第一个字节到发送完响应数据的时间，即&lt;code>$request_time&lt;/code> 包括接收客户端请求数据的时间、后端程序响应的时间、发送响应数据给客户端的时间(不包含写日志的时间)。&lt;/p>
+&lt;p>&lt;strong>upstream_response_time&lt;/strong>&lt;/p>
+&lt;p>从 Nginx 向后端建立连接开始到接受完数据然后关闭连接为止的时间&lt;/p>
+&lt;p>&lt;strong>upstream_connect_time&lt;/strong>&lt;/p>
+&lt;p>跟后端 server 建立连接的时间，如果是到后端使用了加密的协议，该时间将包括握手的时间。&lt;/p>
+&lt;p>&lt;strong>upstream_header_time&lt;/strong>&lt;/p>
+&lt;p>接收后端 server 响应头的时间&lt;/p>
+&lt;p>如果把整个过程补充起来的话 应该是：&lt;/p>
+&lt;p>&lt;code>［1用户请求］［2建立 Nginx 连接］［3发送响应］［4接收响应］［5关闭 Nginx 连接］&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>那么 &lt;code>upstream_response_time&lt;/code> 就是 &lt;code>2+3+4+5&lt;/code>&lt;/li>
+&lt;li>但是 一般这里面可以认为 &lt;code>［5关闭 Nginx 连接］&lt;/code> 的耗时接近 0&lt;/li>
+&lt;li>所以 &lt;code>upstream_response_time&lt;/code> 实际上就是 &lt;code>2+3+4&lt;/code>&lt;/li>
+&lt;li>而 &lt;code>request_time&lt;/code> 是 &lt;code>1+2+3+4&lt;/code>&lt;/li>
+&lt;li>二者之间相差的就是 &lt;code>［1用户请求］&lt;/code>的时间。&lt;/li>
+&lt;/ul>
+&lt;h4 id="upstream_response_time-比-request_time-大">upstream_response_time 比 request_time 大&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;a href="https://forum.nginx.org/read.php?21,284448,284450#msg-284450" target="_blank" rel="noopener">https://forum.nginx.org/read.php?21,284448,284450#msg-284450&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;code>$upstream_response_time&lt;/code> 由 &lt;code>clock_gettime(CLOCK_MONOTONIC_COARSE)&lt;/code>计算，默认情况下，它可以过去 4 毫秒，相反，&lt;code>$request_time&lt;/code> 由 &lt;code>gettimeofday()&lt;/code>计算。 所以最终 upstream_response_time 可能比 response_time 更大。&lt;/p></description></item><item><title>How to use a here documents to write data to a file in bash script</title><link>https://linzeyan.github.io/posts/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</link><pubDate>Fri, 07 May 2021 11:37:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/" target="_blank" rel="noopener">How to use a here documents to write data to a file in bash script&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="allow-here-documents-within-shell-scripts-to-be-indented-in-a-natural-fashion-using-eof-">allow here-documents within shell scripts to be indented in a natural fashion using &lt;code>EOF&amp;lt;&amp;lt;-&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>command &lt;span style="color:#e6db74">&amp;lt;&amp;lt;-EOF
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg2
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> $var on line
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="disabling-pathnameparametervariable-expansion-command-substitution-arithmetic-expansion-with-eof">Disabling pathname/parameter/variable expansion, command substitution, arithmetic expansion with &lt;code>'EOF'&lt;/code>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>OUT&lt;span style="color:#f92672">=&lt;/span>/tmp/output.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting my script...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Doing something...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># No parameter and variable expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If any part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># are not expanded. So EOF is quoted as follows&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39; &amp;gt;$OUT
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Status of backup as on $(date)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Backing up files $HOME and /etc/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Upgrade database failed after ugrade to Zabbix 5...</title><link>https://linzeyan.github.io/posts/20210503-upgrade-database-failed-after-ugrade-to-zabbix-5/</link><pubDate>Mon, 03 May 2021 16:33:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210503-upgrade-database-failed-after-ugrade-to-zabbix-5/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/403139-upgrade-database-failed-after-ugrade-to-zabbix-5" target="_blank" rel="noopener">Upgrade database failed after ugrade to Zabbix 5&amp;hellip;&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://bestmonitoringtools.com/upgrade-zabbix-to-the-latest-version/" target="_blank" rel="noopener">Upgrade Zabbix (4.0, 4.2, 4.4) to 5.0 / 5.2 | Step by Step Guide&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>High Performance Go Workshop</title><link>https://linzeyan.github.io/posts/20210428-gophercon-2019/</link><pubDate>Wed, 28 Apr 2021 16:37:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210428-gophercon-2019/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dave.cheney.net/high-performance-go-workshop/gophercon-2019.html" target="_blank" rel="noopener">High Performance Go Workshop&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>通过 Nginx 绕过 X-Frame-Options 限制</title><link>https://linzeyan.github.io/posts/20210426-nginx-x-frame-options/</link><pubDate>Mon, 26 Apr 2021 17:39:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210426-nginx-x-frame-options/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.whezh.com/nginx-x-frame-options/" target="_blank" rel="noopener">通过 Nginx 绕过 X-Frame-Options 限制&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>X-Frame-Options&lt;/code> HTTP 响应头是用来给浏览器指示允许一个页面是否可以在 &lt;code>&amp;lt;frame&amp;gt;&lt;/code>,&lt;code> &amp;lt;iframe&amp;gt;&lt;/code>, &lt;code>&amp;lt;embed&amp;gt;&lt;/code> 或者 &lt;code>&amp;lt;object&amp;gt;&lt;/code> 中展现的标记。站点可以通过确保网站没有被嵌入到别人的站点里面，从而避免 Clickjacking 攻击。通过 Nginx 的作为正向代理，我们可以绕过 &lt;code>X-Frame-Options&lt;/code> 限制成功的将第三方网页嵌入到自己的页面中。&lt;/p>
+&lt;p>X-Frame-Options 响应头有三个可能的值：&lt;/p>
+&lt;ul>
+&lt;li>deny: 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许。&lt;/li>
+&lt;li>sameorigin: 表示该页面可以在相同域名页面的 frame 中展示。&lt;/li>
+&lt;li>allow-from uri: 表示该页面可以在指定来源的 frame 中展示。&lt;/li>
+&lt;/ul>
+&lt;p>在 Chrome 尝试加载 frame 的内容时，如果 X-Frame-Options 响应头设置为禁止访问，那么 Chrome 会在控制台中显示如下错误。
+&lt;code>Refuse to display 'http://192.168.20.101:8080' in a frame because it set 'X-Frame-Options' to 'deny'.&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">8080&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_hide_header&lt;/span> &lt;span style="color:#e6db74">X-Frame-Options&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://&lt;/span>{&lt;span style="color:#f92672">target}&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这也当请求 &lt;code>http://{proxy_server}:8080&lt;/code> 时，nginx 会做代理转发到 &lt;code>http://{target}&lt;/code>，同时在返回结果的时候会隐藏掉 &lt;code>X-Frame-Options&lt;/code> 相应头，这样我们自己的网页就能正常通过 iFrame 载入目标网页了。&lt;/p></description></item><item><title>Setting up JWT Authentication</title><link>https://linzeyan.github.io/posts/20210423-configuring-jwt-authentication/</link><pubDate>Fri, 23 Apr 2021 11:13:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210423-configuring-jwt-authentication/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/" target="_blank" rel="noopener">Setting up JWT Authentication&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://segmentfault.com/a/1190000015677681" target="_blank" rel="noopener">Nginx 实现 JWT 验证-基于 OpenResty 实现&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子</title><link>https://linzeyan.github.io/posts/20200710-bayonet-rope/</link><pubDate>Fri, 10 Jul 2020 12:32:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200710-bayonet-rope/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.mobile01.com/topicdetail.php?f=637&amp;amp;t=282596" target="_blank" rel="noopener">[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

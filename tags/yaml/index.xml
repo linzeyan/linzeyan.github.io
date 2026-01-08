@@ -84,4 +84,19 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">content&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ s5 }}&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dest&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/tmp/s5.txt&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># s5 this is my very very very long string line1 line2 line3%&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>6 YAML Features most programmers don't know</title><link>https://linzeyan.github.io/posts/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener">6 YAML Features most programmers don&amp;rsquo;t know&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="there-are-more-examples-that-are-similarly-dangerous-as-tom-ritchford-pointed-out">There are more examples that are similarly dangerous as Tom Ritchford pointed out&lt;/h4>
+&lt;ul>
+&lt;li>&lt;code>013&lt;/code> is mapped to 11 as the leading zero triggers the octal notation&lt;/li>
+&lt;li>&lt;code>4:30&lt;/code> is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: &lt;code>4*60 + 30 = 270&lt;/code> . Interestingly, this pattern still &amp;ldquo;works&amp;rdquo; with &lt;code>1:1:1:1:1:1:1:1:4:30&lt;/code> .&lt;/li>
+&lt;/ul>
+&lt;h4 id="multi-line-string">Multi-Line String&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">mail_signature&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Martin Thoma
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Tel. +49 123 4567&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;mail_signature&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Martin Thoma\nTel. +49 123 4567&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="anchor">Anchor&lt;/h4>
+&lt;blockquote>
+&lt;p>The &lt;code>&amp;amp;&lt;/code> defined a variable &lt;code>emailAddress&lt;/code> with the value &lt;code>&amp;quot;info@example.de&amp;quot;&lt;/code>. The &lt;code>*&lt;/code> then indicated that the name of a variable follows.&lt;/p></description></item></channel></rss>

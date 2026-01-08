@@ -662,4 +662,50 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pkill php-cgi&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># wait_for_pids $pids&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># }&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx - request_time和upstream_response_time详解</title><link>https://linzeyan.github.io/zh-tw/posts/20210514-105819628/</link><pubDate>Fri, 14 May 2021 16:04:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210514-105819628/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.csdn.net/zzhongcy/article/details/105819628" target="_blank" rel="noopener">Nginx - request_time 和 upstream_response_time 详解&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="time-definition">time definition&lt;/h3>
+&lt;p>&lt;strong>request_time&lt;/strong>&lt;/p>
+&lt;p>从接受用户请求的第一个字节到发送完响应数据的时间，即&lt;code>$request_time&lt;/code> 包括接收客户端请求数据的时间、后端程序响应的时间、发送响应数据给客户端的时间(不包含写日志的时间)。&lt;/p>
+&lt;p>&lt;strong>upstream_response_time&lt;/strong>&lt;/p>
+&lt;p>从 Nginx 向后端建立连接开始到接受完数据然后关闭连接为止的时间&lt;/p>
+&lt;p>&lt;strong>upstream_connect_time&lt;/strong>&lt;/p>
+&lt;p>跟后端 server 建立连接的时间，如果是到后端使用了加密的协议，该时间将包括握手的时间。&lt;/p>
+&lt;p>&lt;strong>upstream_header_time&lt;/strong>&lt;/p>
+&lt;p>接收后端 server 响应头的时间&lt;/p>
+&lt;p>如果把整个过程补充起来的话 应该是：&lt;/p>
+&lt;p>&lt;code>［1用户请求］［2建立 Nginx 连接］［3发送响应］［4接收响应］［5关闭 Nginx 连接］&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>那么 &lt;code>upstream_response_time&lt;/code> 就是 &lt;code>2+3+4+5&lt;/code>&lt;/li>
+&lt;li>但是 一般这里面可以认为 &lt;code>［5关闭 Nginx 连接］&lt;/code> 的耗时接近 0&lt;/li>
+&lt;li>所以 &lt;code>upstream_response_time&lt;/code> 实际上就是 &lt;code>2+3+4&lt;/code>&lt;/li>
+&lt;li>而 &lt;code>request_time&lt;/code> 是 &lt;code>1+2+3+4&lt;/code>&lt;/li>
+&lt;li>二者之间相差的就是 &lt;code>［1用户请求］&lt;/code>的时间。&lt;/li>
+&lt;/ul>
+&lt;h4 id="upstream_response_time-比-request_time-大">upstream_response_time 比 request_time 大&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;a href="https://forum.nginx.org/read.php?21,284448,284450#msg-284450" target="_blank" rel="noopener">https://forum.nginx.org/read.php?21,284448,284450#msg-284450&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;code>$upstream_response_time&lt;/code> 由 &lt;code>clock_gettime(CLOCK_MONOTONIC_COARSE)&lt;/code>计算，默认情况下，它可以过去 4 毫秒，相反，&lt;code>$request_time&lt;/code> 由 &lt;code>gettimeofday()&lt;/code>计算。 所以最终 upstream_response_time 可能比 response_time 更大。&lt;/p></description></item><item><title>通过 Nginx 绕过 X-Frame-Options 限制</title><link>https://linzeyan.github.io/zh-tw/posts/20210426-nginx-x-frame-options/</link><pubDate>Mon, 26 Apr 2021 17:39:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210426-nginx-x-frame-options/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.whezh.com/nginx-x-frame-options/" target="_blank" rel="noopener">通过 Nginx 绕过 X-Frame-Options 限制&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>X-Frame-Options&lt;/code> HTTP 响应头是用来给浏览器指示允许一个页面是否可以在 &lt;code>&amp;lt;frame&amp;gt;&lt;/code>,&lt;code> &amp;lt;iframe&amp;gt;&lt;/code>, &lt;code>&amp;lt;embed&amp;gt;&lt;/code> 或者 &lt;code>&amp;lt;object&amp;gt;&lt;/code> 中展现的标记。站点可以通过确保网站没有被嵌入到别人的站点里面，从而避免 Clickjacking 攻击。通过 Nginx 的作为正向代理，我们可以绕过 &lt;code>X-Frame-Options&lt;/code> 限制成功的将第三方网页嵌入到自己的页面中。&lt;/p>
+&lt;p>X-Frame-Options 响应头有三个可能的值：&lt;/p>
+&lt;ul>
+&lt;li>deny: 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许。&lt;/li>
+&lt;li>sameorigin: 表示该页面可以在相同域名页面的 frame 中展示。&lt;/li>
+&lt;li>allow-from uri: 表示该页面可以在指定来源的 frame 中展示。&lt;/li>
+&lt;/ul>
+&lt;p>在 Chrome 尝试加载 frame 的内容时，如果 X-Frame-Options 响应头设置为禁止访问，那么 Chrome 会在控制台中显示如下错误。
+&lt;code>Refuse to display 'http://192.168.20.101:8080' in a frame because it set 'X-Frame-Options' to 'deny'.&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">8080&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_hide_header&lt;/span> &lt;span style="color:#e6db74">X-Frame-Options&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://&lt;/span>{&lt;span style="color:#f92672">target}&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这也当请求 &lt;code>http://{proxy_server}:8080&lt;/code> 时，nginx 会做代理转发到 &lt;code>http://{target}&lt;/code>，同时在返回结果的时候会隐藏掉 &lt;code>X-Frame-Options&lt;/code> 相应头，这样我们自己的网页就能正常通过 iFrame 载入目标网页了。&lt;/p></description></item><item><title>Setting up JWT Authentication</title><link>https://linzeyan.github.io/zh-tw/posts/20210423-configuring-jwt-authentication/</link><pubDate>Fri, 23 Apr 2021 11:13:34 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20210423-configuring-jwt-authentication/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/" target="_blank" rel="noopener">Setting up JWT Authentication&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://segmentfault.com/a/1190000015677681" target="_blank" rel="noopener">Nginx 实现 JWT 验证-基于 OpenResty 实现&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

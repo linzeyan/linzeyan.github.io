@@ -226,6 +226,40 @@
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-cisco-ucs-cimc-mail-alert.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC Mail Alert&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-cisco-ucs-cimc-40gb-vnic.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC 40Gb vNIC 參數&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/07/ansible-cisco-ucs-cimc-ntp.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC NTP 時間校時&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>ansible.builtin.slurp - 讀取檔案內容</title><link>https://linzeyan.github.io/posts/20210531-slurp-read-file-content/</link><pubDate>Mon, 31 May 2021 17:15:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/20210531-slurp-read-file-content/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/slurp-read-file-content/" target="_blank" rel="noopener">ansible.builtin.slurp - 讀取檔案內容&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Use HTTP POST to upload file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#ae81ff">all&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tasks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Read binary file content&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">slurp&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">path&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/bin/ls&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">bin_file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Send HTTP POST Request&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uri&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;https://your_server/upload.php&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">headers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">Accept&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">Content-Type&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;application/octet-stream&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">method&lt;/span>: &lt;span style="color:#ae81ff">POST&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">validate_certs&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">body&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ bin_file.content }}&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">status_code&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">200&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">201&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Display upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">debug&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">var&lt;/span>: &lt;span style="color:#ae81ff">upload_result&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 slurp，就可以避掉 lookup(&amp;lsquo;file&amp;rsquo;) 的限制。&lt;/p>
+&lt;ul>
+&lt;li>可以讀取受控端主機上的檔案，也可以利用 delegate_to: localhost 來讀取主控端主機上的檔案。&lt;/li>
+&lt;li>可以讀取二進位檔案來做進一步處理，例如做 base64 編碼&lt;/li>
 &lt;/ul></description></item><item><title>Ansible Introduction</title><link>https://linzeyan.github.io/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200926-ansible/</guid><description>&lt;h1 id="getting-to-know-ansible">Getting to know Ansible.&lt;/h1>
 &lt;h2 id="outline">Outline&lt;/h2>
 &lt;ul>
