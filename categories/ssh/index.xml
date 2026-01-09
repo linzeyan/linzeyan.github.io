@@ -91,4 +91,31 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
 &lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description></item><item><title>SSH failing with Error : fatal: daemon() failed: No such device</title><link>https://linzeyan.github.io/posts/2021/20210304-ssh-failing-with-error-fatal-daemon-failed-no-such-device/</link><pubDate>Thu, 04 Mar 2021 18:48:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210304-ssh-failing-with-error-fatal-daemon-failed-no-such-device/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://admin-ahead.com/forum/general-linux/ssh-failing-with-error-fatal-daemon%28%29-failed-no-such-device/" target="_blank" rel="noopener">SSH failing with Error : fatal: daemon() failed: No such device&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>/var/log/secure&lt;/p>
+&lt;p>&lt;code>Oct 10 10:58:05 vps sshd[23799]: fatal: daemon() failed: No such device&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># rm -vf /dev/null&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>removed &lt;span style="color:#e6db74">`&lt;/span>/dev/null&lt;span style="color:#e6db74">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-bash-3.2# mknod /dev/null c &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Started SSH and the SSH started responding:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># service sshd restart&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stopping sshd: &lt;span style="color:#f92672">[&lt;/span> OK &lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting sshd: &lt;span style="color:#f92672">[&lt;/span> OK &lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-bash-3.2# service sshd status
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssh-daemon &lt;span style="color:#f92672">(&lt;/span>pid 30608&lt;span style="color:#f92672">)&lt;/span> is running…
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/posts/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network" target="_blank" rel="noopener">New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="switching-ansible-playbooks-to-use-libssh">Switching Ansible Playbooks to use LibSSH&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Installing LibSSH&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pip install ansible-pylibssh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Using LibSSH in Ansible Playbooks&lt;/p>
+&lt;p>Method 1. The &lt;code>ssh_type&lt;/code> configuration parameter can be set to use libssh in the active &lt;code>ansible.cfg&lt;/code> file of your project&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">persistent_connection&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ssh_type&lt;/span> = &lt;span style="color:#a6e22e">libssh&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 2: Set the &lt;code>ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code> environment variable&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ export ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;span style="color:#f92672">=&lt;/span>libssh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item></channel></rss>

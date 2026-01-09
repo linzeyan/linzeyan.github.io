@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FortiOS on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/fortios/</link><description>Recent content in FortiOS on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 03 Nov 2020 17:59:24 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/fortios/index.xml" rel="self" type="application/rss+xml"/><item><title>Backup FortiOS config with Ansible - with RestAPI</title><link>https://linzeyan.github.io/zh-tw/posts/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI Config Backup - FortiOS 6.0.4&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">Backup FortiOS config with Ansible - with RestAPI&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="create-access-profile">Create access profile&lt;/h5>
+&lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system accprofile
+FGTAWS0004BE1ADE (accprofile) # edit readOnly
+new entry &amp;#39;readOnly&amp;#39; added
+FGTAWS0004BE1ADE (readOnly) # set sysgrp read
+FGTAWS0004BE1ADE (readOnly) # end
+&lt;/code>&lt;/pre>&lt;h5 id="create-api-user-in-fortigate">Create API user in Fortigate&lt;/h5>
+&lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system api-user
+FGTAWS0004BE1ADE (api-user) # edit api-admin
+new entry &amp;#39;api-admin&amp;#39; added
+FGTAWS0004BE1ADE (api-admin) # set accprofile &amp;#34;readOnly&amp;#34;
+FGTAWS0004BE1ADE (api-admin) # set vdom root
+FGTAWS0004BE1ADE (api-admin) # config trusthost
+FGTAWS0004BE1ADE (trusthost) # edit 1
+new entry &amp;#39;1&amp;#39; added
+FGTAWS0004BE1ADE (1) # set ipv4-trusthost &amp;#39;ip_address_of_your_machine&amp;#39; 255.255.255.255
+FGTAWS0004BE1ADE (1) # end
+FGTAWS0004BE1ADE (api-admin) # end
+&lt;/code>&lt;/pre>&lt;h5 id="generate-api-token">Generate API token&lt;/h5>
+&lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # execute api-user generate-key api-admin
+New API key: &amp;#39;your_api_token&amp;#39;
+NOTE: The bearer of this API key will be granted all access privileges assigned to the api-user api-admin.
+&lt;/code>&lt;/pre>&lt;h5 id="test">Test&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fortigate.py&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> requests
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> urllib3 &lt;span style="color:#75715e"># disable security warning for SSL certificate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>urllib3&lt;span style="color:#f92672">.&lt;/span>disable_warnings(urllib3&lt;span style="color:#f92672">.&lt;/span>exceptions&lt;span style="color:#f92672">.&lt;/span>InsecureRequestWarning) &lt;span style="color:#75715e"># disable security warning for SSL certificate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">config_download&lt;/span>(ipaddr, api_token, filename&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;backup.conf&amp;#39;&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> input: ipaddr(string) - target ip address of fortigate
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> input: api_token(string) - api_token for api user(accprofile should have sysgrp.mnt)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> input: filename(string) - file name of the config to be saved. default backup.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> output: True if backup successfule. False if not successful.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Tested on: Fortigate OnDemand on AWS - FortiOS6.0.4
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#39;&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base_url &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;https://&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>ipaddr&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/api/v2/&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;Authorization&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Bearer &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>api_token&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> params &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;scope&amp;#39;&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;global&amp;#39;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> uri &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;monitor/system/config/backup/&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rep &lt;span style="color:#f92672">=&lt;/span> requests&lt;span style="color:#f92672">.&lt;/span>get(base_url &lt;span style="color:#f92672">+&lt;/span> uri, headers&lt;span style="color:#f92672">=&lt;/span>headers, params&lt;span style="color:#f92672">=&lt;/span>params, verify&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> rep&lt;span style="color:#f92672">.&lt;/span>status_code &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Something went wrong. status_code: &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>rep&lt;span style="color:#f92672">.&lt;/span>status_code&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">False&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(filename, &lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(rep&lt;span style="color:#f92672">.&lt;/span>text)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">True&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>&amp;gt;&amp;gt;&amp;gt; import fortigate
+&amp;gt;&amp;gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; ip_addr = &amp;#39;Fortigate_IP_Address&amp;#39;
+&amp;gt;&amp;gt;&amp;gt; api_token = &amp;#39;API_TOKEN&amp;#39;
+&amp;gt;&amp;gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; if (fortigate.config_download(ip_addr, api_token, &amp;#39;backup20190215.conf&amp;#39;)):
+... print(&amp;#39;Done!&amp;#39;)
+... else:
+... print(&amp;#39;Error!!&amp;#39;)
+...
+Done!
+&amp;gt;&amp;gt;&amp;gt;
+&amp;gt;&amp;gt;&amp;gt; with open(&amp;#39;backup20190215.conf&amp;#39;, &amp;#39;r&amp;#39;) as f:
+... f.readline()
+...
+&amp;#39;#config-version=FGTAWS-6.0.4-FW-build0231-190107:opmode=0:vdom=0:user=api-admin\n&amp;#39;
+&amp;gt;&amp;gt;&amp;gt;
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h5 id="configure-ansible-inventory-and-playbook">Configure Ansible inventory and playbook&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat hosts
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>fortigate&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x.x.x.x access_token&lt;span style="color:#f92672">=&lt;/span>w4q9qtfbGry3Nbc40kHjsk9mxG****
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>y.y.y.y access_token&lt;span style="color:#f92672">=&lt;/span>tfy8c9b8Nxw6N3Q5Q5bg9z69dn****
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">$ cat fortigate_backup.yml&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">fortigate config backup&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">connection&lt;/span>: &lt;span style="color:#ae81ff">local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#ae81ff">fortigate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tasks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">get current config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">uri&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;https://{{ ansible_host }}/api/v2/monitor/system/config/backup/?scope=global&amp;amp;access_token={{ access_token }}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return_content&lt;/span>: &lt;span style="color:#66d9ef">yes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">validate_certs&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">register&lt;/span>: &lt;span style="color:#ae81ff">current_config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">write config to local file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">local_action&lt;/span>: &lt;span style="color:#ae81ff">copy content={{ current_config.content }} dest=./{{ inventory_hostname }}_{{ ansible_date_time.date }}.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

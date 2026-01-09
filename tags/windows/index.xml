@@ -7,4 +7,52 @@
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
 &lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description></item><item><title>WSL 2 的 .wslconfig 設定檔說明</title><link>https://linzeyan.github.io/posts/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 的 .wslconfig 設定檔說明&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">在 Windows 10 環境上安裝 WSL 2&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">使用 WSL 2 打造優質的多重 Linux 開發環境&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>安裝 WSL 2 的步驟：&lt;/p>
+&lt;ul>
+&lt;li>加入 Windows Insider Program（此步驟不可省略）&lt;/li>
+&lt;li>啟用 WSL 必要元件&lt;/li>
+&lt;li>安裝 Linux 發行版本&lt;/li>
+&lt;li>設定 WSL 2 支援的 Linux 發行版本&lt;/li>
+&lt;li>WSL 2 問題排除：啟用壓縮功能的虛擬磁碟檔案無法轉換成 WSL 2 架構&lt;/li>
+&lt;li>安裝及啟動 Docker&lt;/li>
+&lt;li>安裝 Docker Desktop v2.2.1.0&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟用 WSL 必要元件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>Microsoft-Windows-Subsystem-Linux /all /norestart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>VirtualMachinePlatform /all /norestart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 WSL 2 支援的 Linux 發行版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-version ubuntu &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-default-version &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;ul>
+&lt;li>
+&lt;p>編輯 &lt;code>%UserProfile%\.wslconfig&lt;/code> 檔案&lt;/p></description></item><item><title>使用 oh-my-posh 美化 PowerShell 樣式</title><link>https://linzeyan.github.io/posts/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener">使用 oh-my-posh 美化 PowerShell 樣式&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 這會從 PowerShell Gallery 下載並安裝 posh-git 和 oh-my-posh 這兩個模組，前者是在命令列中顯示 Git 專案的相關資訊，後者則是美美的樣式套件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module posh-git -Scope CurrentUser
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module oh-my-posh -Scope CurrentUser
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 接著我們要修改 PowerShell 啟動時所載入的設定檔，在 PowerShell 中輸入 $PROFILE 可得到當前使用者啟動 PowerShell 時，會載入的個人設定檔位置。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 你的電腦可能沒有這個實體檔案，這時可以執行下面的指令，如果沒有該設定檔，則建立一個，然後使用 notepad 來開啟該設定檔。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>notepad $PROFILE
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最後在該設定檔中加入下列指令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Import-Module posh-git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Import-Module oh-my-posh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Set-Theme Paradox
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>oh-my-posh 內建了很多樣式，你也可以使用 Get-Theme 這個 Cmdlet 指令取得 oh-my-posh 有提供的所有樣式及相關檔案位置&lt;/p></description></item><item><title>Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy</title><link>https://linzeyan.github.io/posts/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://kwilson.io/blog/provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/" target="_blank" rel="noopener">Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/64242931/how-to-use-a-powershell-script-during-vagrant-up-on-host-correctly" target="_blank" rel="noopener">How to use a powershell script during vagrant up on host correctly?&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://akrabat.com/first-steps-with-windows-on-vagrant/" target="_blank" rel="noopener">First steps with Windows on Vagrant&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/" target="_blank" rel="noopener">https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

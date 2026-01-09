@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Ricky</title><link>https://linzeyan.github.io/categories/wsl/</link><description>Recent content in WSL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Dec 2020 21:24:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL 2 的 .wslconfig 設定檔說明</title><link>https://linzeyan.github.io/posts/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 的 .wslconfig 設定檔說明&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">在 Windows 10 環境上安裝 WSL 2&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">使用 WSL 2 打造優質的多重 Linux 開發環境&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>安裝 WSL 2 的步驟：&lt;/p>
+&lt;ul>
+&lt;li>加入 Windows Insider Program（此步驟不可省略）&lt;/li>
+&lt;li>啟用 WSL 必要元件&lt;/li>
+&lt;li>安裝 Linux 發行版本&lt;/li>
+&lt;li>設定 WSL 2 支援的 Linux 發行版本&lt;/li>
+&lt;li>WSL 2 問題排除：啟用壓縮功能的虛擬磁碟檔案無法轉換成 WSL 2 架構&lt;/li>
+&lt;li>安裝及啟動 Docker&lt;/li>
+&lt;li>安裝 Docker Desktop v2.2.1.0&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟用 WSL 必要元件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>Microsoft-Windows-Subsystem-Linux /all /norestart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>VirtualMachinePlatform /all /norestart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 WSL 2 支援的 Linux 發行版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-version ubuntu &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-default-version &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;ul>
+&lt;li>
+&lt;p>編輯 &lt;code>%UserProfile%\.wslconfig&lt;/code> 檔案&lt;/p></description></item></channel></rss>

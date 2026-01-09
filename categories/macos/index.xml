@@ -349,4 +349,31 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>defaults write -g WebKitDeveloperExtras -bool YES
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ZSH 自动读取 macOS 系统代理配置并设置环境变量</title><link>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</link><pubDate>Mon, 11 Jan 2021 14:50:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/" target="_blank" rel="noopener">ZSH 自动读取 macOS 系统代理配置并设置环境变量&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-zsh" data-lang="zsh">&lt;span style="display:flex;">&lt;span>$ system_profiler SPNetworkDataType &lt;span style="color:#75715e"># 获取完整网络配置信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -listallnetworkservices &lt;span style="color:#75715e"># 列举所有网络设备&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -getwebproxy Wi-Fi &lt;span style="color:#75715e"># 获取特定网络设备的系统代理配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scutil --proxy &lt;span style="color:#75715e"># 获取当前已启用的代理配置，是对 system_profiler 的封装&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量</title><link>https://linzeyan.github.io/posts/20201106-sslkeylog/</link><pubDate>Fri, 06 Nov 2020 20:02:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201106-sslkeylog/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.luwenpeng.cn/2020/04/29/MacBook%E8%AE%BE%E7%BD%AESSLKEYLOGFILE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%A7%A3%E5%AF%86HTTPS%E6%B5%81%E9%87%8F/" target="_blank" rel="noopener">MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>创建 keylogfile&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir ~/sslkeylogfile &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> touch ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 创建 keylogfile.log 文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chmod &lt;span style="color:#ae81ff">777&lt;/span> ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 更改权限，确保 chrome 启动时能写入数据&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置环境变量&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim ~/.zshrc &lt;span style="color:#75715e"># 打开配置文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export SSLKEYLOGFILE&lt;span style="color:#f92672">=&lt;/span>~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 配置环境变量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source ~/.zshrc &lt;span style="color:#75715e"># 使配置文件生效&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 wireshark&lt;/p>
+&lt;p>perferences -&amp;gt; Protocols -&amp;gt; TLS&lt;/p>
+&lt;ul>
+&lt;li>配置 TSL debug file 记录解密日志&lt;/li>
+&lt;li>配置 (Pre)-Master-Secret log filename 路径为 keylogfile.log 的绝对路径&lt;/li>
+&lt;/ul>
+&lt;p>使用 termial 启动 chrome&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>open -a &lt;span style="color:#e6db74">&amp;#39;Google Chrome&amp;#39;&lt;/span> https://www.baidu.com/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：从 termial 启动 chrome，为了确保 chrome 可以读取 SSLKEYLOGFILE 环境变量。&lt;/p></description></item></channel></rss>
