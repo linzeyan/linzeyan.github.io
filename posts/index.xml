@@ -1582,7 +1582,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-48" playsinline controls>
+&lt;video class="video-player" id="video-114" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -5857,7 +5857,406 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make install
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="geoip2-ip-地址库下载">geoip2 IP 地址库下载&lt;/h5>
-&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item><item><title>Ansible Introduction</title><link>https://linzeyan.github.io/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200926-ansible/</guid><description>&lt;h1 id="getting-to-know-ansible">Getting to know Ansible.&lt;/h1>
+&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item><item><title>Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen</title><link>https://linzeyan.github.io/posts/20201017-38e044411a02530ec3481078fe2d81d8/</link><pubDate>Sat, 17 Oct 2020 12:31:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201017-38e044411a02530ec3481078fe2d81d8/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8" target="_blank" rel="noopener">Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">esxi.hackion.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">301&lt;/span> &lt;span style="color:#e6db74">https://&lt;/span>$server_name$request_uri;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">esxi.hackion.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">/mycert.crt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">/mykey.key&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Restricted&lt;/span> &lt;span style="color:#e6db74">Content&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic_user_file&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/.htpasswd&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Forwarded-For&lt;/span> $proxy_add_x_forwarded_for;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Origin&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Authorization&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>; &lt;span style="color:#75715e">#Don&amp;#39;t pass the Nginx Basic Auth to ESXi or it will break VMRC.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_pass_header&lt;/span> &lt;span style="color:#e6db74">X-XSRF-TOKEN&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">https://esxi_server&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_send_timeout&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_read_timeout&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">send_timeout&lt;/span> &lt;span style="color:#ae81ff">300&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">client_max_body_size&lt;/span> &lt;span style="color:#ae81ff">1000m&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># enables WS support
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_http_version&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#e6db74">.1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Connection&lt;/span> &lt;span style="color:#e6db74">&amp;#34;upgrade&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">http2&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ssl_certificate and ssl_certificate_key are required
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">/etc/letsencrypt/live/myletsencryptdomain/fullchain.pem&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">/etc/letsencrypt/live/myletsencryptdomain/privkey.pem&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/snippets/ssl-params.conf&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># removed DH params as my ssl-params.conf specifies to only use ECDHE key exchange.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">fqdn.extern&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> $http_host;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_ssl_verify&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>; &lt;span style="color:#75715e"># No need on isolated LAN
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">https://vcenter.ip&lt;/span>; &lt;span style="color:#75715e"># esxi IP Address
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_http_version&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#e6db74">.1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Connection&lt;/span> &lt;span style="color:#e6db74">&amp;#34;upgrade&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_buffering&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">client_max_body_size&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_read_timeout&lt;/span> &lt;span style="color:#e6db74">36000s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_redirect&lt;/span> &lt;span style="color:#e6db74">https://fqdn.local/&lt;/span> &lt;span style="color:#e6db74">https://fqdn.extern/&lt;/span>; &lt;span style="color:#75715e"># read comment below
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e"># replace vcenter-hostname with your actual vcenter&amp;#39;s hostname, and esxi with your nginx&amp;#39;s server_name.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/websso/SAML2&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Host&lt;/span> &lt;span style="color:#e6db74">fqdn.local&lt;/span>; &lt;span style="color:#75715e"># your actual vcenter&amp;#39;s hostname
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">X-Real-IP&lt;/span> $remote_addr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_ssl_verify&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>; &lt;span style="color:#75715e"># No need on isolated LAN
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">https://vcenter.ip&lt;/span>; &lt;span style="color:#75715e"># esxi IP Address
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_http_version&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#e6db74">.1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Upgrade&lt;/span> $http_upgrade;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_set_header&lt;/span> &lt;span style="color:#e6db74">Connection&lt;/span> &lt;span style="color:#e6db74">&amp;#34;upgrade&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_buffering&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">client_max_body_size&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_read_timeout&lt;/span> &lt;span style="color:#e6db74">36000s&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_ssl_session_reuse&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_redirect&lt;/span> &lt;span style="color:#e6db74">https://fqdn.local/&lt;/span> &lt;span style="color:#e6db74">https://fqdn.extern/&lt;/span>; &lt;span style="color:#75715e"># read comment below
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e"># replace vcenter-hostname with your actual vcenter&amp;#39;s hostname, and esxi with your nginx&amp;#39;s server_name.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Running GitHub Actions for Certain Commit Messages</title><link>https://linzeyan.github.io/posts/20201011-running-github-actions-for-certain-commit-messages/</link><pubDate>Sun, 11 Oct 2020 23:13:22 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201011-running-github-actions-for-certain-commit-messages/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ryangjchandler.co.uk/articles/running-github-actions-for-certain-commit-messages" target="_blank" rel="noopener">Running GitHub Actions for Certain Commit Messages&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Now, whenever I push a &lt;code>wip&lt;/code> commit or any commit that contains the word &lt;code>wip&lt;/code>, it will be marked as skipped inside of GitHub actions.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">format&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;! contains(github.event.head_commit.message, &amp;#39;wip&amp;#39;)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Any commit that contains &lt;code>[build]&lt;/code> will now trigger these jobs, everything else will be skipped.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">format&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;contains(github.event.head_commit.message, &amp;#39;[build]&amp;#39;)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Using Vagrant to Deploy Multiple VMs on vSphere</title><link>https://linzeyan.github.io/posts/20201005-using-vagrant-to-deploy-multiple-vms-on-vsphere/</link><pubDate>Mon, 05 Oct 2020 09:53:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201005-using-vagrant-to-deploy-multiple-vms-on-vsphere/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://buildvirtual.net/using-vagrant-to-deploy-multiple-vms-on-vsphere/" target="_blank" rel="noopener">Using Vagrant to Deploy Multiple VMs on vSphere&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>vm1 &lt;span style="color:#f92672">=&lt;/span> { &lt;span style="color:#e6db74">&amp;#39;name&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;PhotonVM1&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ip&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;192.168.5.224&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vm2 &lt;span style="color:#f92672">=&lt;/span> { &lt;span style="color:#e6db74">&amp;#39;name&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;PhotonVM2&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;ip&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;192.168.5.225&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vms &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span> vm1, vm2&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">Vagrant&lt;/span>&lt;span style="color:#f92672">.&lt;/span>configure(&lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>config&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vms&lt;span style="color:#f92672">.&lt;/span>each &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>node&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vm_name &lt;span style="color:#f92672">=&lt;/span> node&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vm_ip &lt;span style="color:#f92672">=&lt;/span> node&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;ip&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>define vm_name &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>node_config&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node_config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>network &lt;span style="color:#e6db74">&amp;#39;private_network&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">ip&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>vm_ip&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node_config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;dummy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node_config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box_url &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;./example_box/dummy.box&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node_config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:vsphere&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vsphere&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>host &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;vc01.testlab.local&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>compute_resource_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;esxi01.testlab.local&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">=&lt;/span> vm_name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>customization_spec_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;centos66&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>template_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;PhotonTemplate&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>user &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;administrator@vsphere.local&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>password &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;password&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>insecure &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Vagrantfile and Provider</title><link>https://linzeyan.github.io/posts/20201002-10158898/</link><pubDate>Fri, 02 Oct 2020 19:41:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201002-10158898/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10158898" target="_blank" rel="noopener">Day 8 - Vagrantfile and Provider&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10159037" target="_blank" rel="noopener">Day 9 - Advanced Vagrantfile(編輯中)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>用以下這個範例
+你只要使用 Vagrant up 加上 provider 參數，就可開啟不同來源的機器&lt;/p>
+&lt;p>例如我要開啟 Vsphere 的機器，我只要下 &lt;code>vagrant up --provider=vsphere&lt;/code>&lt;/p>
+&lt;p>要開 AWS 的機器，我只要下 &lt;code>vagrant up --provider=aws&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">VAGRANTFILE_API_VERSION&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">Vagrant&lt;/span>&lt;span style="color:#f92672">.&lt;/span>configure(&lt;span style="color:#66d9ef">VAGRANTFILE_API_VERSION&lt;/span>) &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>config&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 我們定義一個 Ubuntu 的機器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># box 的需求是對於 local 的 VM 才需要的&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 所以在 provider 是 vmware_fusion 或 Virtualbox 時，才會用到這個設定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;hashicorp/precise64&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vmware_fusion&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">&amp;#34;vmware_fusion&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>v, override&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;precise64_vmware&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v&lt;span style="color:#f92672">.&lt;/span>gui &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vsphere&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:vsphere&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vsphere&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 對於私有雲及公有雲，要clone 的vm 是儲存在雲端上的&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 所以 box 使用 dummy box 來達到這個目的&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;nkhasanov/vsphere-simple&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>host &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;YOURIP&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>compute_resource_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;YOUR DATACENTER&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>resource_pool_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;YOUR RESOURCE POOL&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>insecure &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>template_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;VM TEMPLATE&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-test-machine&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>user &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;administrator&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>password &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;$p1unK_Lab&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>vm_base_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;vmware_template&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>linked_clone &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># virtual box&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">&amp;#34;virtualbox&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vb&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vb&lt;span style="color:#f92672">.&lt;/span>gui &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:aws&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>aws, override&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws configurations&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>access_key_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_ACCESS_KEY_ID&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>secret_access_key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_ACCESS_KEY&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>keypair_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>security_groups &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>instance_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;t2.small&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ubuntu 14.04 x64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>ami &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-864d84ee&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># override info&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>ssh&lt;span style="color:#f92672">.&lt;/span>username &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ubuntu&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>ssh&lt;span style="color:#f92672">.&lt;/span>private_key_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_PRIVATE_KEY_PATH&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>synced_folder &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_SYNC_FOLDER&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/vagrant&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">type&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;rsync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;dimroc/awsdummy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">LOCAL_BOXS&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ubuntu1404x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ubuntu/trusty64&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ubuntu1210x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;chef/ubuntu-12.10&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">AWS_AMIS&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ubuntu1404x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-864d84ee&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ubuntu1210x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-02df496b&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;windows2012r2x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-9ade1df2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;windows2012x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-5ce32034&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;windows2008r2x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-2ae02342&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;windows2008x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-5e24e936&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;windows2003r2x64&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-b0e320d8&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">VAGRANTFILE_API_VERSION&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">Vagrant&lt;/span>&lt;span style="color:#f92672">.&lt;/span>configure(&lt;span style="color:#66d9ef">VAGRANTFILE_API_VERSION&lt;/span>) &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>config&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;precise64_vmware&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vmware_fusion&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">&amp;#34;vmware_fusion&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>v, override&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;precise64_vmware&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v&lt;span style="color:#f92672">.&lt;/span>gui &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v&lt;span style="color:#f92672">.&lt;/span>vmx&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;memsize&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1024&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> v&lt;span style="color:#f92672">.&lt;/span>vmx&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;numvcpus&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vsphere&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:vsphere&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vsphere&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;nkhasanov/vsphere-simple&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>host &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;#{}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>compute_resource_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;#{}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vsphere.resource_pool_name = &amp;#39;YOUR RESOURCE POOL&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>insecure &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>template_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;qasus-tw-centos7x64-01&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-test-machine&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>user &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;administrator&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>password &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;#{}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>vm_base_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;vmware_template&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vsphere&lt;span style="color:#f92672">.&lt;/span>linked_clone &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># virtual box&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">&amp;#34;virtualbox&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vb&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vb&lt;span style="color:#f92672">.&lt;/span>gui &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vb&lt;span style="color:#f92672">.&lt;/span>memory &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vb&lt;span style="color:#f92672">.&lt;/span>cpus &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:aws&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>aws, override&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws configurations&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>access_key_id &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_ACCESS_KEY_ID&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>secret_access_key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_ACCESS_KEY&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>keypair_name &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>security_groups &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>instance_type &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;t2.small&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ubuntu 14.04 x64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>ami &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-864d84ee&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># override info&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>ssh&lt;span style="color:#f92672">.&lt;/span>username &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ubuntu&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>ssh&lt;span style="color:#f92672">.&lt;/span>private_key_path &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_AWS_PRIVATE_KEY_PATH&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>synced_folder &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_SYNC_FOLDER&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/vagrant&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">type&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;rsync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> override&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;dimroc/awsdummy&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># VMs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">..&lt;/span>&lt;span style="color:#66d9ef">MAX_VM_NUMBER&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>each &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>i&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># define linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>define &lt;span style="color:#e6db74">&amp;#34;l&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>node&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:aws&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>aws&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>tags &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-linux-&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># node.vm.network &amp;#34;private_network&amp;#34;, ip: &amp;#34;192.168.33.%d&amp;#34; % (i+2)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>hostname &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ftan-linux-&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># define windows&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>define &lt;span style="color:#e6db74">&amp;#34;w&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>node&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:aws&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>aws&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>ami &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ami-2ae02342&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>tags &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-windows-&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>i&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># define customer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">YOUR_CUSTOMIZED_VM&lt;/span>&lt;span style="color:#f92672">.&lt;/span>each &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>vm&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>define &lt;span style="color:#e6db74">&amp;#34;%s&amp;#34;&lt;/span> &lt;span style="color:#f92672">%&lt;/span> vm&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>node&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:aws&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>aws&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>ami &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">AWS_AMIS&lt;/span>&lt;span style="color:#f92672">[&lt;/span>vm&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;platform&amp;#34;&lt;/span>&lt;span style="color:#f92672">]]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> aws&lt;span style="color:#f92672">.&lt;/span>tags &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-%s&amp;#34;&lt;/span> &lt;span style="color:#f92672">%&lt;/span> vm&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vmware fusion&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vmware workstation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>provider &lt;span style="color:#e6db74">:vmware_fusion&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> &lt;span style="color:#f92672">|&lt;/span>fusion&lt;span style="color:#f92672">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fusion&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>box &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">LOCAL_BOXS&lt;/span>&lt;span style="color:#f92672">[&lt;/span>vm&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;platform&amp;#34;&lt;/span>&lt;span style="color:#f92672">]]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fusion&lt;span style="color:#f92672">.&lt;/span>vm&lt;span style="color:#f92672">.&lt;/span>hostname &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">#{&lt;/span>&lt;span style="color:#66d9ef">YOUR_NAME&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">-%s&amp;#34;&lt;/span> &lt;span style="color:#f92672">%&lt;/span> vm&lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># vsphere&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># azure&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>如何設定時區與NTP服務在RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">如何設定時區與 NTP 服務在 RHEL7/CentOS7&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>chrony 包含兩個程序，chronyd 是一個可以在啟動時啟動的守護進程，chronyc 是一個命令行界面程序，可用於監控 chronyd 的性能並在運行時更改各種運行參數。&lt;/p>
+&lt;p>注意 ntpd 和 chronyd 擇一就可，不要同時運作。&lt;/p>
+&lt;h5 id="設定時區">設定時區&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# timedatectl set-timezone Asia/Taipei
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# timedatectl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Local time: Tue 2018-03-27 14:13:38 CST
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Universal time: Tue 2018-03-27 06:13:38 UTC
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RTC time: Tue 2018-03-27 06:13:40
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Time zone: Asia/Taipei &lt;span style="color:#f92672">(&lt;/span>CST, +0800&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> NTP enabled: no
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NTP synchronized: no
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RTC in local TZ: no
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DST active: n/a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="設定-chronyd">設定 chronyd&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# yum install -y chrony
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 配置設定檔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# cat /etc/chrony.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use public servers from the pool.ntp.org project.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Please consider joining the pool (http://www.pool.ntp.org/join.html).&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 0.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 1.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 2.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 3.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟動服務和設為開機時啟動&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable chronyd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl start chronyd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="racking-參數顯示有關系統時間效能">racking 參數顯示有關系統時間效能&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc tracking
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Reference ID : 3DD8996B &lt;span style="color:#f92672">(&lt;/span>61-216-153-107.hinet-ip.hinet.net&lt;span style="color:#f92672">)&lt;/span> ---&amp;gt;表示現在同步的時間伺服器，如果沒有id表示沒有同步
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stratum : &lt;span style="color:#ae81ff">4&lt;/span> ---&amp;gt;表示計算機有多少&lt;span style="color:#e6db74">&amp;#34;跳hop&amp;#34;&lt;/span> 表示本地的是第四層
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Ref time &lt;span style="color:#f92672">(&lt;/span>UTC&lt;span style="color:#f92672">)&lt;/span> : Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 06:03:38 &lt;span style="color:#ae81ff">2018&lt;/span> ---&amp;gt;最後一次測量的時間
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>System time : 0.000040356 seconds fast of NTP time ---&amp;gt;調整系統時間
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Last offset : +0.000163738 seconds
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RMS offset : 0.000163738 seconds
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Frequency : 21.384 ppm fast
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Residual freq : +0.000 ppm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Skew : 675.319 ppm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Root delay : 0.008527911 seconds
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Root dispersion : 0.066466033 seconds
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Update interval : 2.0 seconds
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Leap status : Normal ---&amp;gt;Normal要顯示此值, Insert second, Delete second or Not synchronised.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc sources -v
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span> Number of sources &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .-- Source mode &lt;span style="color:#e6db74">&amp;#39;^&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> server, &lt;span style="color:#e6db74">&amp;#39;=&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> peer, &lt;span style="color:#e6db74">&amp;#39;#&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> local clock.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / .- Source state &lt;span style="color:#e6db74">&amp;#39;*&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> current synced, &lt;span style="color:#e6db74">&amp;#39;+&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> combined , &lt;span style="color:#e6db74">&amp;#39;-&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> not combined,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| / &lt;span style="color:#e6db74">&amp;#39;?&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> unreachable, &lt;span style="color:#e6db74">&amp;#39;x&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> time may be in error, &lt;span style="color:#e6db74">&amp;#39;~&amp;#39;&lt;/span> &lt;span style="color:#f92672">=&lt;/span> time too variable.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">||&lt;/span> .- xxxx &lt;span style="color:#f92672">[&lt;/span> yyyy &lt;span style="color:#f92672">]&lt;/span> +/- zzzz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">||&lt;/span> Reachability register &lt;span style="color:#f92672">(&lt;/span>octal&lt;span style="color:#f92672">)&lt;/span> -. | xxxx &lt;span style="color:#f92672">=&lt;/span> adjusted offset,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">||&lt;/span> Log2&lt;span style="color:#f92672">(&lt;/span>Polling interval&lt;span style="color:#f92672">)&lt;/span> --. | | yyyy &lt;span style="color:#f92672">=&lt;/span> measured offset,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#ae81ff">\ &lt;/span> | | zzzz &lt;span style="color:#f92672">=&lt;/span> estimated error.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">||&lt;/span> | | &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>MS Name/IP address Stratum Poll Reach LastRx Last sample
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">===============================================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^* 59-124-29-241.hinet-ip.h&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">24&lt;/span> -1462us&lt;span style="color:#f92672">[&lt;/span>-2363us&lt;span style="color:#f92672">]&lt;/span> +/- 49ms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^+ 61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -556us&lt;span style="color:#f92672">[&lt;/span> -556us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^? 59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> - +0ns&lt;span style="color:#f92672">[&lt;/span> +0ns&lt;span style="color:#f92672">]&lt;/span> +/- 0ns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^- 61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -280us&lt;span style="color:#f92672">[&lt;/span> -280us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="看同步源頭的資訊">看同步源頭的資訊&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc sourcestats -v
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span> Number of sources &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .- Number of sample points in measurement set.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> / .- Number of residual runs with same sign.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | / .- Length of measurement set &lt;span style="color:#f92672">(&lt;/span>time&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | / .- Est. clock freq error &lt;span style="color:#f92672">(&lt;/span>ppm&lt;span style="color:#f92672">)&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | | / .- Est. error in freq.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | | | / .- Est. offset.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | | | | | On the -.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | | | | | samples. &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> | | | | | | |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Name/IP Address NP NR Span Frequency Freq Skew Offset Std Dev
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">==============================================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>59-124-29-241.hinet-ip.h&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#ae81ff">135&lt;/span> -0.454 4.553 -784us 66us
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">135&lt;/span> +4.455 19.761 +622us 247us
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> +0.000 2000.000 +0ns 4000ms
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">136&lt;/span> +8.965 42.440 +1250us 495us
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="將系統時間寫到硬體主機板上的時間上">將系統時間寫到硬體(主機板上的時間)上&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# hwclock --systohc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# date ; hwclock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 14:07:57 CST &lt;span style="color:#ae81ff">2018&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue &lt;span style="color:#ae81ff">27&lt;/span> Mar &lt;span style="color:#ae81ff">2018&lt;/span> 02:07:58 PM CST -0.938012 seconds
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Ansible Introduction</title><link>https://linzeyan.github.io/posts/20200926-ansible/</link><pubDate>Sat, 26 Sep 2020 16:57:21 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200926-ansible/</guid><description>&lt;h1 id="getting-to-know-ansible">Getting to know Ansible.&lt;/h1>
 &lt;h2 id="outline">Outline&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#Introduction">Introduction&lt;/a>&lt;/li>

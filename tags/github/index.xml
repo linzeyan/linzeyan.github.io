@@ -22,4 +22,17 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># See custom `Host github-plnx` in ~/.ssh/config&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>url &lt;span style="color:#e6db74">&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> insteadOf &lt;span style="color:#f92672">=&lt;/span> git@github.com:planet-express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Running GitHub Actions for Certain Commit Messages</title><link>https://linzeyan.github.io/posts/20201011-running-github-actions-for-certain-commit-messages/</link><pubDate>Sun, 11 Oct 2020 23:13:22 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201011-running-github-actions-for-certain-commit-messages/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ryangjchandler.co.uk/articles/running-github-actions-for-certain-commit-messages" target="_blank" rel="noopener">Running GitHub Actions for Certain Commit Messages&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>Now, whenever I push a &lt;code>wip&lt;/code> commit or any commit that contains the word &lt;code>wip&lt;/code>, it will be marked as skipped inside of GitHub actions.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">format&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;! contains(github.event.head_commit.message, &amp;#39;wip&amp;#39;)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Any commit that contains &lt;code>[build]&lt;/code> will now trigger these jobs, everything else will be skipped.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">format&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;contains(github.event.head_commit.message, &amp;#39;[build]&amp;#39;)&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
