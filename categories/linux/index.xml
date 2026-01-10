@@ -914,4 +914,150 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# date ; hwclock
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 14:07:57 CST &lt;span style="color:#ae81ff">2018&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue &lt;span style="color:#ae81ff">27&lt;/span> Mar &lt;span style="color:#ae81ff">2018&lt;/span> 02:07:58 PM CST -0.938012 seconds
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04</title><link>https://linzeyan.github.io/posts/20200925-install-powerdns-and-powerdns-admin-on-ubuntu/</link><pubDate>Fri, 25 Sep 2020 09:38:17 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200925-install-powerdns-and-powerdns-admin-on-ubuntu/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://computingforgeeks.com/install-powerdns-and-powerdns-admin-on-ubuntu/" target="_blank" rel="noopener">Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.zswap.net/master-master-powerdns-with-galera-replication/" target="_blank" rel="noopener">Master-Master PowerDNS with Galera Replication&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.scaleway.com/en/docs/installing-powerdns-server-on-ubuntu-bionic/" target="_blank" rel="noopener">https://www.scaleway.com/en/docs/installing-powerdns-server-on-ubuntu-bionic/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install-powerdns">Install PowerDNS&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo apt install mariadb-server -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo mysql -u root
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">DATABASE&lt;/span> powerdns;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">GRANT&lt;/span> &lt;span style="color:#66d9ef">ALL&lt;/span> &lt;span style="color:#66d9ef">ON&lt;/span> powerdns.&lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">TO&lt;/span> &lt;span style="color:#e6db74">&amp;#39;powerdns&amp;#39;&lt;/span>&lt;span style="color:#f92672">@&lt;/span>&lt;span style="color:#e6db74">&amp;#39;localhost&amp;#39;&lt;/span> IDENTIFIED &lt;span style="color:#66d9ef">BY&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Str0ngPasswOrd&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FLUSH &lt;span style="color:#66d9ef">PRIVILEGES&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>USE powerdns;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> domains (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id INT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> master VARCHAR(&lt;span style="color:#ae81ff">128&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> last_check INT &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> VARCHAR(&lt;span style="color:#ae81ff">6&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> notified_serial INT UNSIGNED &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> account VARCHAR(&lt;span style="color:#ae81ff">40&lt;/span>) CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;utf8&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">UNIQUE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> name_index &lt;span style="color:#66d9ef">ON&lt;/span> domains(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> records (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id BIGINT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain_id INT &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> VARCHAR(&lt;span style="color:#ae81ff">10&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content VARCHAR(&lt;span style="color:#ae81ff">64000&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ttl INT &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prio INT &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> change_date INT &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> disabled TINYINT(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ordername VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>) BINARY &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> auth TINYINT(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> nametype_index &lt;span style="color:#66d9ef">ON&lt;/span> records(name,&lt;span style="color:#66d9ef">type&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> domain_id &lt;span style="color:#66d9ef">ON&lt;/span> records(domain_id);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> ordername &lt;span style="color:#66d9ef">ON&lt;/span> records (ordername);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> supermasters (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ip VARCHAR(&lt;span style="color:#ae81ff">64&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nameserver VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> account VARCHAR(&lt;span style="color:#ae81ff">40&lt;/span>) CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;utf8&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (ip, nameserver)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> comments (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id INT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain_id INT &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> VARCHAR(&lt;span style="color:#ae81ff">10&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> modified_at INT &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> account VARCHAR(&lt;span style="color:#ae81ff">40&lt;/span>) CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;utf8&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">comment&lt;/span> TEXT CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;utf8&amp;#39;&lt;/span> &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> comments_name_type_idx &lt;span style="color:#66d9ef">ON&lt;/span> comments (name, &lt;span style="color:#66d9ef">type&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> comments_order_idx &lt;span style="color:#66d9ef">ON&lt;/span> comments (domain_id, modified_at);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> domainmetadata (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id INT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain_id INT &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind VARCHAR(&lt;span style="color:#ae81ff">32&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content TEXT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> domainmetadata_idx &lt;span style="color:#66d9ef">ON&lt;/span> domainmetadata (domain_id, kind);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> cryptokeys (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id INT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain_id INT &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flags INT &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> active BOOL,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content TEXT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>(id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> domainidindex &lt;span style="color:#66d9ef">ON&lt;/span> cryptokeys(domain_id);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> tsigkeys (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id INT AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> algorithm VARCHAR(&lt;span style="color:#ae81ff">50&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> secret VARCHAR(&lt;span style="color:#ae81ff">255&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (id)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) Engine&lt;span style="color:#f92672">=&lt;/span>InnoDB CHARACTER &lt;span style="color:#66d9ef">SET&lt;/span> &lt;span style="color:#e6db74">&amp;#39;latin1&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">UNIQUE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> namealgoindex &lt;span style="color:#66d9ef">ON&lt;/span> tsigkeys(name, algorithm);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ sudo systemctl disable systemd-resolved
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo systemctl stop systemd-resolved
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls -lh /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lrwxrwxrwx &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">39&lt;/span> Jul &lt;span style="color:#ae81ff">24&lt;/span> 15:50 /etc/resolv.conf -&amp;gt; ../run/systemd/resolve/stub-resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo unlink /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#e6db74">&amp;#34;nameserver 8.8.8.8&amp;#34;&lt;/span> | sudo tee /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.&lt;/p></description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/posts/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/20200918-ubuntu-18-04/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>sudo apt-get remove cloud-init&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;p>然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">192.168.32.231&lt;/span>&lt;span style="color:#ae81ff">/24]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway4&lt;/span>: &lt;span style="color:#ae81ff">192.168.32.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item></channel></rss>
