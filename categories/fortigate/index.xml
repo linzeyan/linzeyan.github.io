@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Fortigate on Ricky</title><link>https://linzeyan.github.io/categories/fortigate/</link><description>Recent content in Fortigate on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Sep 2020 09:47:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/fortigate/index.xml" rel="self" type="application/rss+xml"/><item><title>Fortigate Management Interface in HA Mode</title><link>https://linzeyan.github.io/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</link><pubDate>Tue, 08 Sep 2020 09:47:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/" target="_blank" rel="noopener">Fortigate Management Interface in HA Mode&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="first-you-activate-the-feature">First you activate the feature&lt;/h5>
+&lt;pre tabindex="0">&lt;code>config system ha
+set ha-mgmt-status enable
+config ha-mgmt-interfaces
+edit 1
+set interface wan2
+set gateway 192.168.147.254
+next
+end
+end
+&lt;/code>&lt;/pre>&lt;p>Do not forget to set a default gateway. This interface is isolated and requires its own routing.&lt;/p>
+&lt;h5 id="then-you-assign-an-individual-ip-address-to-every-node-in-the-cluster">Then you assign an individual IP address to every node in the cluster&lt;/h5>
+&lt;p>System1&lt;/p>
+&lt;pre tabindex="0">&lt;code>config system interface
+edit wan2
+set ip 10.11.101.101/24
+set allowaccess https ping ssh snmp
+next
+end
+&lt;/code>&lt;/pre>&lt;p>System2&lt;/p></description></item></channel></rss>

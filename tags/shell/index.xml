@@ -390,4 +390,32 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程</title><link>https://linzeyan.github.io/posts/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/20191230-mktemp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="mktemp-命令">&lt;code>mktemp&lt;/code> 命令&lt;/h4>
+&lt;ul>
+&lt;li>生成的临时文件名是随机的，而且权限是只有用户本人可读写&lt;/li>
+&lt;li>为了确保临时文件创建成功，&lt;code>mktemp&lt;/code> 命令后面最好使用 OR 运算符（&lt;code>||&lt;/code>），指定创建失败时退出脚本&lt;/li>
+&lt;li>为了保证脚本退出时临时文件被删除，可以使用&lt;code>trap&lt;/code>命令指定退出时的清除操作&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trap &lt;span style="color:#e6db74">&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span> EXIT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TMPFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>mktemp&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#f92672">||&lt;/span> exit &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Our temp file is &lt;/span>$TMPFILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-命令的参数">mktemp 命令的参数&lt;/h5>
+&lt;ul>
+&lt;li>&lt;code>-d&lt;/code> 参数可以创建一个临时目录&lt;/li>
+&lt;li>&lt;code>-p&lt;/code> 参数可以指定临时文件所在的目录。默认是使用 &lt;code>$TMPDIR&lt;/code> 环境变量指定的目录，如果这个变量没设置，那么使用 &lt;code>/tmp&lt;/code> 目录。&lt;/li>
+&lt;li>&lt;code>-t&lt;/code> 参数可以指定临时文件的文件名模板，模板的末尾必须至少包含三个连续的 &lt;code>X&lt;/code> 字符，表示随机字符，建议至少使用六个 &lt;code>X&lt;/code>。默认的文件名模板是 &lt;code>tmp.后接十个随机字符&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="trap-命令的用法">&lt;code>trap&lt;/code> 命令的用法&lt;/h4>
+&lt;p>trap 命令用来在 Bash 脚本中响应系统信号。&lt;/p>
+&lt;p>最常见的系统信号就是 SIGINT（中断），即按 Ctrl + C 所产生的信号。trap 命令的-l 参数，可以列出所有的系统信号。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ trap -l
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> SIGHUP 2&lt;span style="color:#f92672">)&lt;/span> SIGINT 3&lt;span style="color:#f92672">)&lt;/span> SIGQUIT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> SIGILL 5&lt;span style="color:#f92672">)&lt;/span> SIGTRAP 6&lt;span style="color:#f92672">)&lt;/span> SIGABRT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ... ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下。&lt;/p></description></item></channel></rss>

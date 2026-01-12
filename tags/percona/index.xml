@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Percona on Ricky</title><link>https://linzeyan.github.io/tags/percona/</link><description>Recent content in Percona on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Feb 2020 21:13:57 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/percona/index.xml" rel="self" type="application/rss+xml"/><item><title>Percona config</title><link>https://linzeyan.github.io/posts/2020/20200207-my.cnf/</link><pubDate>Fri, 07 Feb 2020 21:13:57 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200207-my.cnf/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-ini" data-lang="ini">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Percona Server template configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">[mysqld]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Remove leading # and set to the amount of RAM for the most important data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># innodb_buffer_pool_size = 128M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Remove leading # to turn on a very important data integrity option: logging&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># changes to the binary log between backups.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># log_bin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Remove leading # to set options mainly useful for reporting servers.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The server defaults are faster for transactions and fast SELECTs.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Adjust sizes as needed, experiment to find the optimal values.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># join_buffer_size = 128M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># sort_buffer_size = 2M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># read_rnd_buffer_size = 2M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">port&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">3306&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">datadir&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/data/mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">socket&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/data/mysql/mysql.sock&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">pid_file&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/data/mysql/mysqld.pid&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 服务端编码&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">character_set_server&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">utf8mb4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 服务端排序&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">collation_server&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">utf8mb4_general_ci&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 强制使用 utf8mb4 编码集，忽略客户端设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">skip_character_set_client_handshake&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 日志输出到文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log_output&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">FILE&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 开启常规日志输出&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">general_log&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 常规日志输出文件位置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">general_log_file&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/var/log/mysql/mysqld.log&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 错误日志位置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log_error&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/var/log/mysql/mysqld-error.log&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 记录慢查询&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">slow_query_log&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 慢查询时间(大于 1s 被视为慢查询)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">long_query_time&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 慢查询日志文件位置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">slow_query_log_file&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/var/log/mysql/mysqld-slow.log&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 临时文件位置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">tmpdir&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">/data/mysql_tmp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 线程池缓存(refs https://my.oschina.net/realfighter/blog/363853)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">thread_cache_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The number of open tables for all threads.(refs https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_open_cache)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">table_open_cache&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 文件描述符(此处修改不生效，请修改 systemd service 配置)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.percona.com/blog/2017/10/12/open_files_limit-mystery/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.cnblogs.com/wxxjianchi/p/10370419.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#open_files_limit=65535&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 表定义缓存(5.7 以后自动调整)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_table_definition_cache&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs http://mysql.taobao.org/monthly/2015/08/10/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#table_definition_cache=16384&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sort_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">join_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># MyiSAM 引擎专用(内部临时磁盘表可能会用)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">read_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">read_rnd_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># MyiSAM 引擎专用(内部临时磁盘表可能会用)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">key_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">32M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># MyiSAM 引擎专用(内部临时磁盘表可能会用)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">bulk_insert_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">16M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># myisam_sort_buffer_size 与 sort_buffer_size 区别请参考(https://stackoverflow.com/questions/7871027/myisam-sort-buffer-size-vs-sort-buffer-size)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">myisam_sort_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">64M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 内部内存临时表大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">tmp_table_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">32M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 用户创建的 MEMORY 表最大大小(tmp_table_size 受此值影响)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">max_heap_table_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">32M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 开启查询缓存&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">query_cache_type&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查询缓存大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">query_cache_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">32M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># sql mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sql_mode&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">########### Network ###########&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 最大连接数(该参数受到最大文件描述符影响，如果不生效请检查最大文件描述符设置)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://stackoverflow.com/questions/39976756/the-max-connections-in-mysql-5-7&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">max_connections&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1500&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># mysql 堆栈内暂存的链接数量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 当短时间内链接数量超过 max_connections 时，部分链接会存储在堆栈内，存储数量受此参数控制&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">back_log&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">256&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 最大链接错误，针对于 client 主机，超过此数量的链接错误将会导致 mysql server 针对此主机执行锁定(禁止链接 ERROR 1129 )&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 此错误计数仅在 mysql 链接握手失败才会计算，一般出现问题时都是网络故障&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.cnblogs.com/kerrycode/p/8405862.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">max_connect_errors&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">100000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># mysql server 允许的最大数据包大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">max_allowed_packet&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">64M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 交互式客户端链接超时(30分钟自动断开)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">interactive_timeout&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1800&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 非交互式链接超时时间(10分钟)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果客户端有连接池，则需要协商此参数(refs https://database.51cto.com/art/201909/603519.htm)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">wait_timeout&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">600&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 跳过外部文件系统锁定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If you run multiple servers that use the same database directory (not recommended),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># each server must have external locking enabled.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://dev.mysql.com/doc/refman/5.7/en/external-locking.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">skip_external_locking&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 跳过链接的域名解析(开启此选项后 mysql 用户授权的 host 方式失效)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">skip_name_resolve&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 禁用主机名缓存，每次都会走 DNS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">host_cache_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ini&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">########### REPL ###########&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 开启 binlog&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log_bin&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">mysql-bin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 作为从库时，同步信息依然写入 binlog，方便此从库再作为其他从库的主库&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">log_slave_updates&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># server id，默认为 ipv4 地址去除第一段&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># eg: 172.16.10.11 =&amp;gt; 161011&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">server_id&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">161011&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每次次事务 binlog 刷新到磁盘&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs http://liyangliang.me/posts/2014/03/innodb_flush_log_at_trx_commit-and-sync_binlog/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sync_binlog&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># binlog 格式(refs https://zhuanlan.zhihu.com/p/33504555)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">binlog_format&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">row&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># binlog 自动清理时间&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">expire_logs_days&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 开启 relay-log，一般作为 slave 时开启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">relay_log&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">mysql-replay&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 主从复制时跳过 test 库&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">replicate_ignore_db&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每个 session binlog 缓存&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">binlog_cache_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">4M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># binlog 滚动大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">max_binlog_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1024M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># GTID 相关(refs https://keithlan.github.io/2016/06/23/gtid/)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#gtid_mode=1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#enforce_gtid_consistency=1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">########### InnoDB ###########&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 永久表默认存储引擎&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">default_storage_engine&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">InnoDB&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 系统表空间数据文件大小(初始化为 1G，并且自动增长)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_data_file_path&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">ibdata1:1G:autoextend&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 缓存池大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># innodb_buffer_pool_size 必须等于 innodb_buffer_pool_chunk_size*innodb_buffer_pool_instances，或者是其整数倍&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://zhuanlan.zhihu.com/p/60089484&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_buffer_pool_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">7680M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_buffer_pool_instances&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_buffer_pool_chunk_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">128M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 强制恢复(refs https://www.askmaclean.com/archives/mysql-innodb-innodb_force_recovery.html)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_force_recovery&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB buffer 预热(refs http://www.dbhelp.net/2017/01/12/mysql-innodb-buffer-pool-warmup.html)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_buffer_pool_dump_at_shutdown&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_buffer_pool_load_at_startup&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 日志组中的日志文件数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_log_files_in_group&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB redo 日志大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_log_file_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">256MB&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 缓存还未提交的事务的缓冲区大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_log_buffer_size&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">16M&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 在事务提交后的日志写入频率&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs http://liyangliang.me/posts/2014/03/innodb_flush_log_at_trx_commit-and-sync_binlog/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_flush_log_at_trx_commit&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB DML 操作行级锁等待时间&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 超时返回 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://ningyu1.github.io/site/post/75-mysql-lock-wait-timeout-exceeded/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_lock_wait_timeout&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 行级锁超时是否回滚整个事务，默认为 OFF 仅回滚上一条语句&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 此时应用程序可以接受到错误后选择是否继续提交事务(并没有违反 ACID 原子性)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.cnblogs.com/hustcat/archive/2012/11/18/2775487.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#innodb_rollback_on_timeout=ON&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 数据写入磁盘的方式，具体见博客文章&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.cnblogs.com/gomysql/p/3595806.html&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_flush_method&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">O_DIRECT&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 缓冲池脏页刷新百分比&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://dbarobin.com/2015/08/29/mysql-optimization-under-ssd&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_max_dirty_pages_pct&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 每秒执行的写IO量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.centos.bz/2016/11/mysql-performance-tuning-15-config-item/#10.INNODB_IO_CAPACITY,%20INNODB_IO_CAPACITY_MAX&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_io_capacity&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">500&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_io_capacity_max&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 请求并发 InnoDB 线程数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://www.cnblogs.com/xinysu/p/6439715.html#_lab2_1_0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_thread_concurrency&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">60&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 再使用多个 InnoDB 表空间时，允许打开的最大 &amp;#34;.ibd&amp;#34; 文件个数，不设置默认 300，&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 并且取与 table_open_cache 相比较大的一个，此选项独立于 open_files_limit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># refs https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_open_files&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_open_files&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">65535&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每个 InnoDB 表都存储在独立的表空间(.ibd)中&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_file_per_table&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 事务级别(可重复读，会出幻读)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">transaction_isolation&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">REPEATABLE-READ&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 是否在搜索和索引扫描中使用间隙锁(gap locking)，不建议使用未来将删除&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_locks_unsafe_for_binlog&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># InnoDB 后台清理线程数，更大的值有助于 DML 执行性能，&amp;gt;= 5.7.8 默认为 4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">innodb_purge_threads&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

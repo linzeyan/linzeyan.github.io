@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Virtualization on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/virtualization/</link><description>Recent content in Virtualization on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 29 Jul 2020 21:11:45 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/virtualization/index.xml" rel="self" type="application/rss+xml"/><item><title>确定虚拟化技术的简便方法</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</link><pubDate>Wed, 29 Jul 2020 21:11:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://qastack.cn/unix/89714/easy-way-to-determine-virtualization-technology" target="_blank" rel="noopener">确定虚拟化技术的简便方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="dmidecode--s-system-product-name">&lt;code>dmidecode -s system-product-name&lt;/code>&lt;/h3>
+&lt;p>虚拟化技术&lt;/p>
+&lt;h4 id="vmware-工作站">VMware 工作站&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VMware Virtual Platform
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="虚拟盒子">虚拟盒子&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VirtualBox
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="qemu-与-kvm">Qemu 与 KVM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KVM
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Qemu（模拟）&lt;/p>
+&lt;h4>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bochs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="microsoft-虚拟-pc">Microsoft 虚拟 PC&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | egrep -i &lt;span style="color:#e6db74">&amp;#39;manufacturer|product&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Manufacturer: Microsoft Corporation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: Virtual Machine
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="维尔图佐">维尔图佐&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dev/mem: Permission denied
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="en">en&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | grep -i domU
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: HVM domU
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="devdiskby-id">&lt;code>/dev/disk/by-id&lt;/code>&lt;/h3>
+&lt;p>如果您没有 &lt;code>dmidecode&lt;/code> 运行权， 则可以使用： &lt;code>ls -1 /dev/disk/by-id/&lt;/code>&lt;/p></description></item></channel></rss>

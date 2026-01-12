@@ -106,7 +106,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting sshd: &lt;span style="color:#f92672">[&lt;/span> OK &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-bash-3.2# service sshd status
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssh-daemon &lt;span style="color:#f92672">(&lt;/span>pid 30608&lt;span style="color:#f92672">)&lt;/span> is running…
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/posts/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/posts/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network" target="_blank" rel="noopener">New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="switching-ansible-playbooks-to-use-libssh">Switching Ansible Playbooks to use LibSSH&lt;/h5>
@@ -118,4 +118,47 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ssh_type&lt;/span> = &lt;span style="color:#a6e22e">libssh&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 2: Set the &lt;code>ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code> environment variable&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ export ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;span style="color:#f92672">=&lt;/span>libssh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item><item><title>SSH 证书登录教程</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener">SSH 证书登录教程&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="证书登录的流程">证书登录的流程&lt;/h3>
+&lt;p>SSH 证书登录之前，如果还没有证书，需要生成证书。具体方法是：&lt;/p>
+&lt;ol>
+&lt;li>用户和服务器都将自己的公钥，发给 CA&lt;/li>
+&lt;li>CA 使用服务器公钥，生成服务器证书，发给服务器&lt;/li>
+&lt;li>CA 使用用户的公钥，生成用户证书，发给用户。&lt;/li>
+&lt;/ol>
+&lt;p>有了证书以后，用户就可以登录服务器了。整个过程都是 SSH 自动处理，用户无感知。&lt;/p>
+&lt;ol>
+&lt;li>用户登录服务器时，SSH 自动将用户证书发给服务器。&lt;/li>
+&lt;li>服务器检查用户证书是否有效，以及是否由可信的 CA 颁发。&lt;/li>
+&lt;li>SSH 自动将服务器证书发给用户。&lt;/li>
+&lt;li>用户检查服务器证书是否有效，以及是否由信任的 CA 颁发。&lt;/li>
+&lt;li>双方建立连接，服务器允许用户登录。&lt;/li>
+&lt;/ol>
+&lt;h3 id="生成-ca-的密钥">生成 CA 的密钥&lt;/h3>
+&lt;p>虽然 CA 可以用同一对密码签发用户证书和服务器证书，但是出于安全性和灵活性，最好用不同的密钥分别签发。所以，CA 至少需要两对密钥，一对是签发用户证书的密钥，假设叫做 &lt;code>user_ca&lt;/code>，另一对是签发服务器证书的密钥，假设叫做 &lt;code>host_ca&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发用户证书的密钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：user_ca（私钥）和user_ca.pub（公钥）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 各个参数含义如下&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -t rsa：指定密钥算法 RSA。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -C user_ca：指定密钥的识别字符串，相当于注释，可以随意设置。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f ~/.ssh/user_ca -C user_ca
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发服务器证书的密钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：host_ca（私钥）和host_ca.pub（公钥）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 现在，~/.ssh目录应该至少有四把密钥。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca.pub&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca.pub&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f host_ca -C host_ca
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="服务器安装-ca-公钥">服务器安装 CA 公钥&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 为了让服务器信任用户证书，必须将 CA 签发用户证书的公钥`user_ca.pub`，拷贝到服务器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scp ~/.ssh/user_ca.pub root@host.example.com:/etc/ssh/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="然后将下面一行添加到服务器配置文件-etcsshsshd_config">然后，将下面一行添加到服务器配置文件 &lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/h5>
+&lt;pre tabindex="0">&lt;code>TrustedUserCAKeys /etc/ssh/user_ca.pub
+&lt;/code>&lt;/pre>&lt;p>上面的做法是将&lt;code>user_ca.pub&lt;/code>加到&lt;code>/etc/ssh/sshd_config&lt;/code>，这会产生全局效果，即服务器的所有账户都会信任&lt;code>user_ca&lt;/code>签发的所有用户证书。&lt;/p></description></item></channel></rss>

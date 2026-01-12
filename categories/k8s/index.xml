@@ -110,4 +110,21 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 此為 Pod 對外開放的 port number&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">targetPort&lt;/span>: &lt;span style="color:#ae81ff">9376&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>Pod &amp;lt;---&amp;gt; Endpoint(tcp:9376) &amp;lt;---&amp;gt; Service(tcp:80, with VIP)&lt;/code>&lt;/p></description></item><item><title>应大多数人要求写下kubeadm的基础使用</title><link>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</link><pubDate>Tue, 24 Mar 2020 16:00:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/" target="_blank" rel="noopener">应大多数人要求写下 kubeadm 的基础使用&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.frognew.com/2018/10/kubernetes-kube-proxy-enable-ipvs.html" target="_blank" rel="noopener">Kubernetes 从 1.10 到 1.11 升级记录(续)：Kubernetes kube-proxy 开启 IPVS 模式&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://lingxiankong.github.io/2018-07-20-katacontainer-docker-k8s.html" target="_blank" rel="noopener">Katacontainers 与 Docker 和 Kubernetes 的集成&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Vim Tips - Edit Remote Files With Vim On Linux</title><link>https://linzeyan.github.io/posts/2020/20200314-vim-tips-edit-remote-files-with-vim-on-linux/</link><pubDate>Sat, 14 Mar 2020 15:43:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200314-vim-tips-edit-remote-files-with-vim-on-linux/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ostechnix.com/vim-tips-edit-remote-files-with-vim-on-linux/" target="_blank" rel="noopener">Vim Tips - Edit Remote Files With Vim On Linux&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="edit-remote-files-with-vim-on-linux">Edit remote files with Vim on Linux&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ vim scp://sk@192.168.225.22/info.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;li>
+&lt;p>&lt;code>user@remotesystem:port&lt;/code> (E.g. &lt;code>sk@192.168.225.22&lt;/code>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Single slash (&lt;code>/&lt;/code>) - If you want to edit a file that is stored in the $HOME directory of a remote system, you must use a trailing slash to separate remote system&amp;rsquo;s IP address or hostname from the file path.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Double slashes (&lt;code>//&lt;/code>) - To specify full path of a file, you must use double slashes. For example, let us say you are editing a file named info.txt that is located in /home/sk/Documents/ directory of your remote system. In this case, the command would be: &lt;code>vim scp://sk@192.168.225.22//home/sk/Documents/info.txt&lt;/code>&lt;/p></description></item></channel></rss>

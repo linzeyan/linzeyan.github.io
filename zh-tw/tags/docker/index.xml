@@ -393,4 +393,62 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">2222&lt;/span>:&lt;span style="color:#ae81ff">22&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>YAML supports so-called &amp;ldquo;base-60 floating-point numbers,&amp;rdquo; which is useful for time calculations.&lt;/p>
-&lt;p>Therefore, &lt;code>2222:22&lt;/code> is interpreted as &lt;code>2222 * 60 + 22&lt;/code>, which is 133342.&lt;/p></description></item></channel></rss>
+&lt;p>Therefore, &lt;code>2222:22&lt;/code> is interpreted as &lt;code>2222 * 60 + 22&lt;/code>, which is 133342.&lt;/p></description></item><item><title>Docker Tips: Using Docker Config</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</link><pubDate>Mon, 14 Sep 2020 11:13:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83" target="_blank" rel="noopener">Docker Tips: Using Docker Config&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> nginx:1.13.6&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> nginx.conf /etc/nginx/nginx.conf&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Using the Docker CLI, we can create a &lt;code>config&lt;/code> from this configuration file, we name this config &lt;code>proxy&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker config create proxy nginx.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mdcfnxud53ve6jgcgjkhflg0s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker config inspect proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;ID&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;x06uaozphg9kbnf8g4az4mucn&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Version&amp;#34;&lt;/span>: &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Index&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">2723&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;CreatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2017-11-21T07:49:09.553666064Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;UpdatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2017-11-21T07:49:09.553666064Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Spec&amp;#34;&lt;/span>: &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;proxy&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Labels&amp;#34;&lt;/span>: &lt;span style="color:#f92672">{}&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Data&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;dXNlciB3d3ctZGF0YTsKd29y...ogIgICAgIH0KICAgIH0KfQo=&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-a-config">Use a Config&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker network create --driver overlay front
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker service create --name api --network front lucj/api
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker service create --name proxy &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --network front &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --config src&lt;span style="color:#f92672">=&lt;/span>proxy,target&lt;span style="color:#f92672">=&lt;/span>/etc/nginx/nginx.conf &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --port 8000:8000 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> nginx:1.13.6
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="service-update">Service Update&lt;/h5>
+&lt;p>When the content of a configuration needs to be modified, it&amp;rsquo;s a common pattern to create a new config (using &lt;code>docker config create&lt;/code>), and then to update the service order to remove the access to the previous config, and to add the access to the new one. The service commands are&lt;code>--config-rm&lt;/code> and &lt;code>--config-add&lt;/code>.&lt;/p></description></item><item><title>How to deploy on remote Docker hosts with docker-compose</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</link><pubDate>Wed, 25 Mar 2020 19:30:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/" target="_blank" rel="noopener">How to deploy on remote Docker hosts with docker-compose&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="manual-deployment-by-copying-project-files-install-docker-compose-and-running-it">Manual deployment by copying project files, install docker-compose and running it&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ scp -r hello-docker user@remotehost:/path/to/src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh user@remotehost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ pip install docker-compose
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd /path/to/src/hello-docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker-compose up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-docker_host-environment-variable-to-set-up-the-target-engine">Using DOCKER_HOST environment variable to set up the target engine&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd hello-docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ DOCKER_HOST&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ssh://user@remotehost&amp;#34;&lt;/span> docker-compose up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-docker-contexts">Using docker contexts&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker context create remote ‐‐docker &lt;span style="color:#e6db74">&amp;#34;host=ssh://user@remotemachine&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>remote
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully created context &lt;span style="color:#e6db74">&amp;#34;remote&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker context ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME DESCRIPTION DOCKER ENDPOINT KUBERNETES ENDPOINT ORCHESTRATOR
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default * Current DOCKER_HOST… unix:///var/run/docker.sock swarm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>remote ssh://user@remotemachine
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd hello-docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker-compose ‐‐context remote up -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

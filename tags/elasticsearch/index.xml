@@ -39,4 +39,29 @@
 &lt;h5 id="search-在執行時一個-shard-會分配一個-thread數量太多反而會拖慢速度">Search 在執行時，一個 Shard 會分配一個 Thread，數量太多反而會拖慢速度&lt;/h5>
 &lt;blockquote>
 &lt;p>一個 Node 依照不同的功能分類有多種 Thread pool， 其中 search (count/search/suggest) 的 size 是 &lt;code>int((# of allocated processors * 3) / 2) + 1&lt;/code> 並且 queue_size 預設是 &lt;code>1000&lt;/code> ，而 write (index/delete/update/bulk) 的 size 是 &lt;code># of allocated processors&lt;/code> ，預設的 queue_size 也是 &lt;code>1000&lt;/code>。( 官方文件 - Thread pools )&lt;/p>&lt;/blockquote>
-&lt;p>大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p></description></item></channel></rss>
+&lt;p>大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p></description></item><item><title>go-mysql-elasticsearch-benchmarking</title><link>https://linzeyan.github.io/posts/2020/20200120-go-mysql-elasticsearch/</link><pubDate>Mon, 20 Jan 2020 09:18:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200120-go-mysql-elasticsearch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/go-mysql-org/go-mysql-elasticsearch" target="_blank" rel="noopener">go-mysql-elasticsearch&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div
+class="pdf-viewer"
+data-url="./go-mysql-elasticsearch-benchmarking.pdf"
+data-hide-paginator="false"
+data-hide-loader="false"
+data-page-num="1"
+>
+&lt;div class="paginator">
+&lt;div class="page-number-indicator">
+&lt;span>Page: &lt;span class="page-num">&lt;/span> / &lt;span class="page-count">&lt;/span>&lt;/span>
+&lt;/div>
+&lt;div class="next-prev-btn">
+&lt;button class="prev btn btn-sm btn-info">Previous&lt;/button>
+&lt;button class="next btn btn-sm btn-info">Next&lt;/button>
+&lt;/div>
+&lt;/div>
+&lt;div class="embed-pdf-container">
+&lt;div class="loading-wrapper">
+&lt;div class="loading">&lt;/div>
+&lt;/div>
+&lt;canvas class="pdf-canvas">&lt;/canvas>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
