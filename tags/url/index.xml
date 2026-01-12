@@ -1418,7 +1418,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-16" playsinline controls>
+&lt;video class="video-player" id="video-126" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -1441,7 +1441,47 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://datavizproject.com" target="_blank" rel="noopener">https://datavizproject.com&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>朋友旅行防止絕交檢查表</title><link>https://linzeyan.github.io/posts/2023/20230926-checklist/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-checklist/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://travel-questions.gnehs.net/" target="_blank" rel="noopener">https://travel-questions.gnehs.net/&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
+&lt;/ul></description></item><item><title>Cloudflare tunnel on Synology</title><link>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="setup-synology">Setup Synology&lt;/h2>
+&lt;ol>
+&lt;li>Create a directory in docker directory, such as &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>Download cloudflared/cloudflared image to registry.&lt;/li>
+&lt;li>ssh to admin@synology&lt;/li>
+&lt;li>Change &lt;code>cloudflare-tunnel&lt;/code> owner, &lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h3 id="run-containers">Run containers&lt;/h3>
+&lt;h4 id="--cloudflared-tunnel-login">- &lt;code>cloudflared tunnel login&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Run container and mount volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>.&lt;/li>
+&lt;li>Select &lt;code>Use the same network as Docker Host&lt;/code> in network tab.&lt;/li>
+&lt;li>Add command &lt;code>tunnel login&lt;/code> in envorinment tab.&lt;/li>
+&lt;li>Go to container log, and copy login url.&lt;/li>
+&lt;li>Paste url to browser and authorize the zone.&lt;/li>
+&lt;li>Export the container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel">- &lt;code>cloudflared tunnel create synology-tunnel&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel create synology-tunnel&lt;/code>.&lt;/li>
+&lt;li>Import the container setting json and run a new container.&lt;/li>
+&lt;li>The container will stop and create tunnel config json in &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>Create config.yml and write ingress rules.&lt;/li>
+&lt;li>In config.yml, tunnel value is the same as the tunnel config json name, and credentials-file is &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>&lt;/li>
+&lt;li>Export the second container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com">- &lt;code>cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>.&lt;/li>
+&lt;li>Import the second container setting json and run a new container.&lt;/li>
+&lt;li>The container will stop and create a dns record mapping domain to the tunnel.&lt;/li>
+&lt;/ol>
+&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel">- &lt;code>cloudflared tunnel run synology-tunnel&lt;/code>&lt;/h4>
+&lt;ol>
+&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel run synology-tunnel&lt;/code>.&lt;/li>
+&lt;li>Import the second container setting json and run a new container.&lt;/li>
+&lt;li>The tunnel now is connectable.&lt;/li>
+&lt;/ol></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="method">method&lt;/h3>
@@ -1781,7 +1821,7 @@ TARGETVARIANT
 &lt;li>預設的 shell 是使用 cmd，照文件說，若需要修改，是要改 ansible_shell_type 變數，這應該是要在 inventory 主機裡加入主機變數：ansible_shell_type，變數內容可以是 cmd 或 powershell。&lt;/li>
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
-&lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
+&lt;li>Playbook 裡可以使用 &lt;code>win_&lt;/code> 開頭的模組，或是使用 raw 模組&lt;/li>
 &lt;/ol></description></item><item><title>Terraform Provider 開發紀錄</title><link>https://linzeyan.github.io/posts/2022/20221228-terraform-provider-development/</link><pubDate>Wed, 28 Dec 2022 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221228-terraform-provider-development/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://hazel.style/2022/12/06/Terraform-Provider-Development/" target="_blank" rel="noopener">Terraform Provider 開發紀錄&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Inspecting Web Views in macOS</title><link>https://linzeyan.github.io/posts/2022/20221202-inspecting-web-views-in-macos/</link><pubDate>Fri, 02 Dec 2022 13:51:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221202-inspecting-web-views-in-macos/</guid><description>&lt;ul>

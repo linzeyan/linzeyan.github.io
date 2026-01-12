@@ -6,7 +6,7 @@
 &lt;li>預設的 shell 是使用 cmd，照文件說，若需要修改，是要改 ansible_shell_type 變數，這應該是要在 inventory 主機裡加入主機變數：ansible_shell_type，變數內容可以是 cmd 或 powershell。&lt;/li>
 &lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
 &lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
-&lt;li>Playbook 裡可以使用 win_ 開頭的模組，或是使用 raw 模組&lt;/li>
+&lt;li>Playbook 裡可以使用 &lt;code>win_&lt;/code> 開頭的模組，或是使用 raw 模組&lt;/li>
 &lt;/ol></description></item><item><title>WSL 2 的 .wslconfig 設定檔說明</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 的 .wslconfig 設定檔說明&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
