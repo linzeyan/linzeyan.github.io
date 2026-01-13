@@ -34,4 +34,87 @@ or
 &lt;p>Single slash (&lt;code>/&lt;/code>) - If you want to edit a file that is stored in the $HOME directory of a remote system, you must use a trailing slash to separate remote system&amp;rsquo;s IP address or hostname from the file path.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Double slashes (&lt;code>//&lt;/code>) - To specify full path of a file, you must use double slashes. For example, let us say you are editing a file named info.txt that is located in /home/sk/Documents/ directory of your remote system. In this case, the command would be: &lt;code>vim scp://sk@192.168.225.22//home/sk/Documents/info.txt&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>Double slashes (&lt;code>//&lt;/code>) - To specify full path of a file, you must use double slashes. For example, let us say you are editing a file named info.txt that is located in /home/sk/Documents/ directory of your remote system. In this case, the command would be: &lt;code>vim scp://sk@192.168.225.22//home/sk/Documents/info.txt&lt;/code>&lt;/p></description></item><item><title>vimrc設定教學</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181103-vimrc/</link><pubDate>Sat, 03 Nov 2018 23:30:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181103-vimrc/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://wiki.csie.ncku.edu.tw/vim/vimrc" target="_blank" rel="noopener">vimrc 設定教學&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>:set nu&lt;/p>
+&lt;ul>
+&lt;li>顯示行號：對於 debug 相當有幫助!&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set ai&lt;/p>
+&lt;ul>
+&lt;li>自動對齊縮排：如果上一行有兩個 tab 的寬度，按 enter 繼續編輯下一行時會自動保留兩個 tab 鍵的寬度。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set cursorline&lt;/p>
+&lt;ul>
+&lt;li>光標底線：光標所在的那一行會有底線，幫助尋找光標位置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set bg=light&lt;/p>
+&lt;ul>
+&lt;li>上色模式-針對亮背景上色&lt;/li>
+&lt;li>預設為亮背景(白色等)上色，但是終端機的初始背景色為深紫色，會出現文字失蹤 ( 例如註解為深藍色 ) 的情況。將這一行換成 :set bg=dark 即可。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set tabstop=4&lt;/p>
+&lt;ul>
+&lt;li>縮排間隔數 ( 預設為 8 個空白對齊 )&lt;/li>
+&lt;li>也就是說按一次 tab 鍵，游標會自動跳 4 格空白字元的寬度。雖有多個空格但實際上只有一個 tab 字元。&lt;/li>
+&lt;li>注意：也就是說，在其他環境下，看到 tab 字元，依舊是 8 個空白寬&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set shiftwidth=4&lt;/p>
+&lt;ul>
+&lt;li>自動縮排對齊間隔數：向右或向左一個縮排的寬度&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>以下可以斟酌使用&lt;/p>
+&lt;ul>
+&lt;li>:set mouse=a
+&lt;ul>
+&lt;li>啟用游標選取：游標可以直接選取文字，滾輪可以直接滑動頁面 ( 非移動游標 )。&lt;/li>
+&lt;li>可以取代用 v 選取字元的功能，配合 ctrl+insert ( 複製 ) 及 shift+inset ( 貼上 )，相當方便&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set mouse=&amp;quot;&amp;quot;
+&lt;ul>
+&lt;li>停用游標選取：游標無法選取文字，滾輪只會移動光標的位置。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set ruler
+&lt;ul>
+&lt;li>( 預設就有 ) 顯示右下角的 行,列 目前在文件的位置 % 的資訊&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set backspace=2
+&lt;ul>
+&lt;li>( 預設就有 ) 在 insert 模式啟用 backspace 鍵&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set formatoptions+=r
+&lt;ul>
+&lt;li>自動註解(注意：若要貼上的文件某一行有註解，會因為此項設定而讓其以下每一行都變成註解)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set history=100
+&lt;ul>
+&lt;li>保留 100 個使用過的指令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set incsearch
+&lt;ul>
+&lt;li>在關鍵字尚未完全輸入完畢前就顯示結果&lt;/li>
+&lt;li>如果覺得這功能太過熱心的話，可以使用 ctrl+n 來達成自動補完的功能&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

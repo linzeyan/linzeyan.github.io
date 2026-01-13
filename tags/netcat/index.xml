@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Netcat on Ricky</title><link>https://linzeyan.github.io/tags/netcat/</link><description>Recent content in Netcat on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 09 Nov 2018 00:17:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/netcat/index.xml" rel="self" type="application/rss+xml"/><item><title>Netcat（Linux nc 指令）網路管理者工具實用範例</title><link>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gtwang.org/linux/linux-utility-netcat-examples/" target="_blank" rel="noopener">Netcat（Linux nc 指令）網路管理者工具實用範例&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="傳送測試用的-udp-封包到遠端伺服器">傳送測試用的 UDP 封包到遠端伺服器&lt;/h4>
+&lt;p>下面這行指令會傳送 UDP 的測試封包到指定的機器與連接埠，&lt;code>-w1&lt;/code> 參數是指定 timeout 的時間為 1 秒。&lt;/p>
+&lt;p>&lt;code>echo -n &amp;quot;foo&amp;quot; | nc -u -w1 192.168.1.8 5000&lt;/code>&lt;/p>
+&lt;h4 id="開啟-udp-連接埠接收資料">開啟 UDP 連接埠接收資料&lt;/h4>
+&lt;p>&lt;code>nc -lu localhost 5000&lt;/code>&lt;/p>
+&lt;h4 id="遠端機器的連接埠掃描port-scanning">遠端機器的連接埠掃描（Port Scanning）&lt;/h4>
+&lt;p>這行指令會掃描指定機器 1 ~ 1000 與 2000 ~ 3000 這兩個範圍的 TCP 連接埠，看看哪些埠號有開啟。&lt;/p>
+&lt;p>&lt;code>nc -vnz -w 1 192.168.233.208 1-1000 2000-3000&lt;/code>&lt;/p>
+&lt;p>這行則是掃描 UDP 的連接埠&lt;/p>
+&lt;p>&lt;code>nc -vnzu 192.168.1.8 1-65535&lt;/code>&lt;/p>
+&lt;h4 id="在兩台主機之間複製檔案">在兩台主機之間複製檔案&lt;/h4>
+&lt;p>假設現在有兩台主機，分別為 A 主機與 B 主機，若要將一個檔案從 A 主機複製到 B 主機，可以先在 B 主機（檔案接收者）上執行：&lt;/p>
+&lt;p>&lt;code>nc -l 5000 &amp;gt; my.jpg&lt;/code>&lt;/p></description></item></channel></rss>

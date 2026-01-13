@@ -635,4 +635,12 @@
 &lt;/tbody>
 &lt;/table>
 &lt;h3 id="文件包含">文件包含&lt;/h3>
-&lt;p>使用&lt;code>.&lt;/code>或者&lt;code>source&lt;/code>包含文件&lt;/p></description></item></channel></rss>
+&lt;p>使用&lt;code>.&lt;/code>或者&lt;code>source&lt;/code>包含文件&lt;/p></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">What does &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> mean in the shell?&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r -d &lt;span style="color:#e6db74">$&amp;#39;\0&amp;#39;&lt;/span> file; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dosomethingwith &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># do something with each file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &amp;lt;&lt;span style="color:#f92672">(&lt;/span>find /bar -name *foo* -print0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;()&lt;/code> is called &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener">&lt;strong>process substitution&lt;/strong>&lt;/a> in the manual, and is similar to a pipe but passes an argument of the form &lt;code>/dev/fd/63&lt;/code> instead of using stdin.&lt;/p>
+&lt;p>&lt;code>&amp;lt;&lt;/code> reads the input from a file named on command line.&lt;/p>
+&lt;p>Together, these two operators function exactly like a pipe, so it could be rewritten as&lt;/p></description></item></channel></rss>

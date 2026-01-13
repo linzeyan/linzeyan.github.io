@@ -1587,7 +1587,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-199" playsinline controls>
+&lt;video class="video-player" id="video-79" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -8382,7 +8382,176 @@ server srv2 192.168.1.3:80 check maxconn 1000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dir&amp;gt;/usr/shared/fonts/chinese&amp;lt;dir&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>刷新內存中的字體緩存&lt;/p>
-&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item><item><title>Ansible Command</title><link>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</guid><description>&lt;div class="note-card ">
+&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item><item><title>What is the SHA256 that comes on the sshd entry in auth.log?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</link><pubDate>Mon, 17 Dec 2018 16:11:43 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://serverfault.com/questions/888281/what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log" target="_blank" rel="noopener">What is the SHA256 that comes on the sshd entry in auth.log?&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>ssh-keygen -lf .ssh/id_rsa.pub&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>cat .ssh/id_rsa.pub |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $2 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># Only the actual key data without prefix or comments&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 -d | &lt;span style="color:#75715e"># decode as base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sha256sum | &lt;span style="color:#75715e"># SHA256 hash (returns hex)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $1 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># only the hex data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xxd -r -p | &lt;span style="color:#75715e"># hex to bytes&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 &lt;span style="color:#75715e"># encode as base64&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">What does &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> mean in the shell?&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r -d &lt;span style="color:#e6db74">$&amp;#39;\0&amp;#39;&lt;/span> file; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dosomethingwith &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># do something with each file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &amp;lt;&lt;span style="color:#f92672">(&lt;/span>find /bar -name *foo* -print0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;()&lt;/code> is called &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener">&lt;strong>process substitution&lt;/strong>&lt;/a> in the manual, and is similar to a pipe but passes an argument of the form &lt;code>/dev/fd/63&lt;/code> instead of using stdin.&lt;/p>
+&lt;p>&lt;code>&amp;lt;&lt;/code> reads the input from a file named on command line.&lt;/p>
+&lt;p>Together, these two operators function exactly like a pipe, so it could be rewritten as&lt;/p></description></item><item><title>Netcat（Linux nc 指令）網路管理者工具實用範例</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gtwang.org/linux/linux-utility-netcat-examples/" target="_blank" rel="noopener">Netcat（Linux nc 指令）網路管理者工具實用範例&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="傳送測試用的-udp-封包到遠端伺服器">傳送測試用的 UDP 封包到遠端伺服器&lt;/h4>
+&lt;p>下面這行指令會傳送 UDP 的測試封包到指定的機器與連接埠，&lt;code>-w1&lt;/code> 參數是指定 timeout 的時間為 1 秒。&lt;/p>
+&lt;p>&lt;code>echo -n &amp;quot;foo&amp;quot; | nc -u -w1 192.168.1.8 5000&lt;/code>&lt;/p>
+&lt;h4 id="開啟-udp-連接埠接收資料">開啟 UDP 連接埠接收資料&lt;/h4>
+&lt;p>&lt;code>nc -lu localhost 5000&lt;/code>&lt;/p>
+&lt;h4 id="遠端機器的連接埠掃描port-scanning">遠端機器的連接埠掃描（Port Scanning）&lt;/h4>
+&lt;p>這行指令會掃描指定機器 1 ~ 1000 與 2000 ~ 3000 這兩個範圍的 TCP 連接埠，看看哪些埠號有開啟。&lt;/p>
+&lt;p>&lt;code>nc -vnz -w 1 192.168.233.208 1-1000 2000-3000&lt;/code>&lt;/p>
+&lt;p>這行則是掃描 UDP 的連接埠&lt;/p>
+&lt;p>&lt;code>nc -vnzu 192.168.1.8 1-65535&lt;/code>&lt;/p>
+&lt;h4 id="在兩台主機之間複製檔案">在兩台主機之間複製檔案&lt;/h4>
+&lt;p>假設現在有兩台主機，分別為 A 主機與 B 主機，若要將一個檔案從 A 主機複製到 B 主機，可以先在 B 主機（檔案接收者）上執行：&lt;/p>
+&lt;p>&lt;code>nc -l 5000 &amp;gt; my.jpg&lt;/code>&lt;/p></description></item><item><title>vimrc設定教學</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181103-vimrc/</link><pubDate>Sat, 03 Nov 2018 23:30:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181103-vimrc/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://wiki.csie.ncku.edu.tw/vim/vimrc" target="_blank" rel="noopener">vimrc 設定教學&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>:set nu&lt;/p>
+&lt;ul>
+&lt;li>顯示行號：對於 debug 相當有幫助!&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set ai&lt;/p>
+&lt;ul>
+&lt;li>自動對齊縮排：如果上一行有兩個 tab 的寬度，按 enter 繼續編輯下一行時會自動保留兩個 tab 鍵的寬度。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set cursorline&lt;/p>
+&lt;ul>
+&lt;li>光標底線：光標所在的那一行會有底線，幫助尋找光標位置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set bg=light&lt;/p>
+&lt;ul>
+&lt;li>上色模式-針對亮背景上色&lt;/li>
+&lt;li>預設為亮背景(白色等)上色，但是終端機的初始背景色為深紫色，會出現文字失蹤 ( 例如註解為深藍色 ) 的情況。將這一行換成 :set bg=dark 即可。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set tabstop=4&lt;/p>
+&lt;ul>
+&lt;li>縮排間隔數 ( 預設為 8 個空白對齊 )&lt;/li>
+&lt;li>也就是說按一次 tab 鍵，游標會自動跳 4 格空白字元的寬度。雖有多個空格但實際上只有一個 tab 字元。&lt;/li>
+&lt;li>注意：也就是說，在其他環境下，看到 tab 字元，依舊是 8 個空白寬&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>:set shiftwidth=4&lt;/p>
+&lt;ul>
+&lt;li>自動縮排對齊間隔數：向右或向左一個縮排的寬度&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>以下可以斟酌使用&lt;/p>
+&lt;ul>
+&lt;li>:set mouse=a
+&lt;ul>
+&lt;li>啟用游標選取：游標可以直接選取文字，滾輪可以直接滑動頁面 ( 非移動游標 )。&lt;/li>
+&lt;li>可以取代用 v 選取字元的功能，配合 ctrl+insert ( 複製 ) 及 shift+inset ( 貼上 )，相當方便&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set mouse=&amp;quot;&amp;quot;
+&lt;ul>
+&lt;li>停用游標選取：游標無法選取文字，滾輪只會移動光標的位置。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set ruler
+&lt;ul>
+&lt;li>( 預設就有 ) 顯示右下角的 行,列 目前在文件的位置 % 的資訊&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set backspace=2
+&lt;ul>
+&lt;li>( 預設就有 ) 在 insert 模式啟用 backspace 鍵&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set formatoptions+=r
+&lt;ul>
+&lt;li>自動註解(注意：若要貼上的文件某一行有註解，會因為此項設定而讓其以下每一行都變成註解)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set history=100
+&lt;ul>
+&lt;li>保留 100 個使用過的指令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>:set incsearch
+&lt;ul>
+&lt;li>在關鍵字尚未完全輸入完畢前就顯示結果&lt;/li>
+&lt;li>如果覺得這功能太過熱心的話，可以使用 ctrl+n 來達成自動補完的功能&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>為什麼瀏覽器 user-agent string 總是包含 Mozilla/5.0 ?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181017-mozilla5-0-always-user-agent-string/</link><pubDate>Wed, 17 Oct 2018 12:03:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181017-mozilla5-0-always-user-agent-string/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://yulun.me/2013/mozilla5-0-always-user-agent-string/" target="_blank" rel="noopener">為什麼瀏覽器 user-agent string 總是包含 Mozilla/5.0 ?&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://stackoverflow.com/questions/12288452/what-does-mozilla-5-0-in-user-agent-string-signify" target="_blank" rel="noopener">What does &amp;ldquo;Mozilla/5.0&amp;rdquo; in user agent string signify?&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://webaim.org/blog/user-agent-string-history/" target="_blank" rel="noopener">History of the browser user-agent string&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>快速結論&lt;/p>
+&lt;p>因為網站開發者可能會因為你是某瀏覽器(這裡是 Mozilla)，所以輸出一些特殊功能的程式碼(這裡指好的特殊功能)，所以當其他瀏覽器也支援這種好功能時，就試圖去模仿 Mozilla 瀏覽器讓網站輸出跟 Mozilla 一樣的內容，而不是輸出被閹割功能的程式碼。&lt;/p></description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">使用 TC 和 Netem 模拟网络异常&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Netem 与 TC 简要说明&lt;/p>
+&lt;p>Netem 是 Linux 2.6 及以上内核版本提供的一个网络模拟功能模块。该功能模块可以用来在性能良好的局域网中，模拟出复杂的互联网传输性能。例如:低带宽、传输延迟、丢包等等情况。使用 Linux 2.6 (或以上) 版本内核的很多 Linux 发行版都默认开启了该内核模块，比如：Fedora、Ubuntu、Redhat、OpenSuse、CentOS、Debian 等等。&lt;/p>
+&lt;p>TC 是 Linux 系统中的一个用户态工具，全名为 Traffic Control (流量控制)。TC 可以用来控制 Netem 模块的工作模式，也就是说如果想使用 Netem 需要至少两个条件，一是内核中的 Netem 模块被启用，另一个是要有对应的用户态工具 TC 。&lt;/p>&lt;/blockquote>
+&lt;ol>
+&lt;li>所有的报文延迟 100ms 发送: &lt;code>$ tc qdisc add dev enp0s5 root netem delay 100ms&lt;/code>&lt;/li>
+&lt;li>模拟丢包率: &lt;code>$ tc qdisc change dev enp0s5 root netem loss 50%&lt;/code>&lt;/li>
+&lt;li>模拟包重复: &lt;code>$ tc qdisc change dev enp0s5 root netem duplicate 50%&lt;/code>&lt;/li>
+&lt;li>模拟包损坏: &lt;code>tc qdisc change dev enp0s5 root netem corrupt 2%&lt;/code>&lt;/li>
+&lt;li>模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code>tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
+&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Systemd 入门教程：实战篇</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180809-systemd-tutorial-part-two/</link><pubDate>Thu, 09 Aug 2018 13:53:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180809-systemd-tutorial-part-two/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ systemctl cat sshd.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>OpenSSH server daemon
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Documentation&lt;span style="color:#f92672">=&lt;/span>man:sshd&lt;span style="color:#f92672">(&lt;/span>8&lt;span style="color:#f92672">)&lt;/span> man:sshd_config&lt;span style="color:#f92672">(&lt;/span>5&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>network.target sshd-keygen.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Wants&lt;span style="color:#f92672">=&lt;/span>sshd-keygen.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>EnvironmentFile&lt;span style="color:#f92672">=&lt;/span>/etc/sysconfig/sshd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/usr/sbin/sshd -D $OPTIONS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecReload&lt;span style="color:#f92672">=&lt;/span>/bin/kill -HUP $MAINPID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>simple
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KillMode&lt;span style="color:#f92672">=&lt;/span>process
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Restart&lt;span style="color:#f92672">=&lt;/span>on-failure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RestartSec&lt;span style="color:#f92672">=&lt;/span>42s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="unit-区块启动顺序与依赖关系">[Unit] 区块：启动顺序与依赖关系&lt;/h4>
+&lt;p>&lt;code>After&lt;/code> 字段：表示如果 &lt;code>network.target&lt;/code> 或 &lt;code>sshd-keygen.service&lt;/code> 需要启动，那么 &lt;code>sshd.service&lt;/code> 应该在它们之后启动。&lt;/p>
+&lt;p>相应地，还有一个 &lt;code>Before&lt;/code> 字段，定义 &lt;code>sshd.service&lt;/code> 应该在哪些服务之前启动。&lt;/p>
+&lt;p>注意，After 和 Before 字段只涉及启动顺序，不涉及依赖关系。&lt;/p>
+&lt;p>设置依赖关系，需要使用 Wants 字段和 Requires 字段&lt;/p>
+&lt;p>&lt;code>Wants&lt;/code> 字段：表示 &lt;code>sshd.service&lt;/code> 与 &lt;code>sshd-keygen.service&lt;/code> 之间存在&amp;quot;弱依赖&amp;quot;关系，即如果&amp;quot;sshd-keygen.service&amp;quot;启动失败或停止运行，不影响 &lt;code>sshd.service&lt;/code> 继续执行。&lt;/p>
+&lt;p>&lt;code>Requires&lt;/code> 字段则表示&amp;quot;强依赖&amp;quot;关系，即如果该服务启动失败或异常退出，那么 &lt;code>sshd.service&lt;/code> 也必须退出。&lt;/p>
+&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item><item><title>Ansible Command</title><link>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</guid><description>&lt;div class="note-card ">
 &lt;div class="item">
 &lt;h5 class="note-title">&lt;span>Lookup&lt;/span>&lt;/h5>
 &lt;div class="card">
