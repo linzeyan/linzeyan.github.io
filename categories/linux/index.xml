@@ -1354,4 +1354,22 @@ grep receives the output of tcpflow&lt;/li>
 &lt;h5 id="用-df--ah-命令-du--h---max-depth1">用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
 &lt;p>&lt;code>du&lt;/code> 之和遠遠小於 &lt;code>df&lt;/code> 得到的總量&lt;/p>
 &lt;p>程序使用的檔案資源被刪除後，程序還活著，導致檔案未被真正刪除，無法釋放磁碟空間，卻並不能被統計到。&lt;/p>
-&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Linux CentOS 7 安裝字體庫 &amp; 中文本體</title><link>https://linzeyan.github.io/posts/2018/20181218-fonts/</link><pubDate>Tue, 18 Dec 2018 22:13:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181218-fonts/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://hk.saowen.com/a/8e1349c5e25aaca06614d56d65fcd43156684d591da80b5a886806ceac06e199" target="_blank" rel="noopener">Linux CentOS 7 安裝字體庫 &amp;amp; 中文本體&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>yum -y install fontconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這時在 /usr/shared 目錄就可以看到 fonts 和 fontconfig 目錄了（之前是沒有的）&lt;/p>
+&lt;p>在這之前我們還需要新建目錄，首先在 /usr/shared/fonts 目錄下新建一個目錄 chinese&lt;/p>
+&lt;p>&lt;code>mkdir /usr/shared/fonts/chinese&lt;/code>&lt;/p>
+&lt;p>只需要將我們需要的字體拷貝出來並上傳至 linux 服務器 /usr/shared/fonts/chinese 目錄下即可，在這裏我選擇宋體和黑體（報表中用到了這兩種字體），可以看到是兩個後綴名為 ttf 和 ttc 的文檔&lt;/p>
+&lt;p>&lt;code>chmod -R 755 /usr/share/fonts/chinese&lt;/code>&lt;/p>
+&lt;p>接下來需要安裝 ttmkfdir 來搜索目錄中所有的字體信息，並彙總生成 fonts.scale 文檔&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install ttmkfdir
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttmkfdir -e /usr/share/X11/fonts/encodings/encodings.dir
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>vi /etc/fonts/fonts.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dir&amp;gt;/usr/shared/fonts/chinese&amp;lt;dir&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>刷新內存中的字體緩存&lt;/p>
+&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item></channel></rss>

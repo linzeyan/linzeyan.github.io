@@ -1418,7 +1418,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-147" playsinline controls>
+&lt;video class="video-player" id="video-133" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -7226,4 +7226,25 @@ server srv2 192.168.1.3:80 check maxconn 1000
 &lt;p>访问权限控制的后一阶段，该阶段根据权限控制阶段的执行结果进行相应处理，向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝。&lt;/p>
 &lt;p>9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p>
 &lt;p>为访问静态文件资源而设置，try_files 指令的处理阶段，如果没有配置 try_files 指令，则该阶段被跳过。&lt;/p>
-&lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item></channel></rss>
+&lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item><item><title>阿瓦隆(The Resistance：Avalon)</title><link>https://linzeyan.github.io/posts/2018/20181224-avalon/</link><pubDate>Mon, 24 Dec 2018 13:22:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181224-avalon/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mj9981168.pixnet.net/blog/posts/8196168065" target="_blank" rel="noopener">阿瓦隆(The Resistance：Avalon)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://synn-solis.blogspot.com/2013/02/ks-resistance-avalon-kickstarter-promo.html" target="_blank" rel="noopener">[桌遊開箱][規則] 阿瓦隆 KS 特典 The Resistance: Avalon: Kickstarter Promo&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Linux CentOS 7 安裝字體庫 &amp; 中文本體</title><link>https://linzeyan.github.io/posts/2018/20181218-fonts/</link><pubDate>Tue, 18 Dec 2018 22:13:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181218-fonts/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://hk.saowen.com/a/8e1349c5e25aaca06614d56d65fcd43156684d591da80b5a886806ceac06e199" target="_blank" rel="noopener">Linux CentOS 7 安裝字體庫 &amp;amp; 中文本體&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>yum -y install fontconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這時在 /usr/shared 目錄就可以看到 fonts 和 fontconfig 目錄了（之前是沒有的）&lt;/p>
+&lt;p>在這之前我們還需要新建目錄，首先在 /usr/shared/fonts 目錄下新建一個目錄 chinese&lt;/p>
+&lt;p>&lt;code>mkdir /usr/shared/fonts/chinese&lt;/code>&lt;/p>
+&lt;p>只需要將我們需要的字體拷貝出來並上傳至 linux 服務器 /usr/shared/fonts/chinese 目錄下即可，在這裏我選擇宋體和黑體（報表中用到了這兩種字體），可以看到是兩個後綴名為 ttf 和 ttc 的文檔&lt;/p>
+&lt;p>&lt;code>chmod -R 755 /usr/share/fonts/chinese&lt;/code>&lt;/p>
+&lt;p>接下來需要安裝 ttmkfdir 來搜索目錄中所有的字體信息，並彙總生成 fonts.scale 文檔&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install ttmkfdir
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttmkfdir -e /usr/share/X11/fonts/encodings/encodings.dir
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>vi /etc/fonts/fonts.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dir&amp;gt;/usr/shared/fonts/chinese&amp;lt;dir&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>刷新內存中的字體緩存&lt;/p>
+&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item></channel></rss>
