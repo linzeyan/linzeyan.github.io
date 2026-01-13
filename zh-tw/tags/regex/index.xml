@@ -37,4 +37,25 @@ horizontalLine = `(\=|\-|\*){3}`
 emailText = `(\&amp;lt;{1})(\S+@\S+)(\&amp;gt;{1})`
 # TABLES
 tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}&amp;gt;?(?!-))]+))+(\|))(?:\n)?((\|)(-+))+(\|)(\n)((\|)(\W+|\w+|\S+))+(\|$)`
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description></item><item><title>Is there a regular expression to detect a valid regular expression?</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">Is there a regular expression to detect a valid regular expression?&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>This is a recursive regex, and is not supported by many regex engines. PCRE based ones should support it.&lt;/p>
+&lt;pre tabindex="0">&lt;code>/
+^ # start of string
+( # first group start
+(?:
+(?:[^?+*{}()[\]\\|]+ # literals and ^, $
+| \\. # escaped characters
+| \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
+(?: [^\]\\]+ | \\. )* \]
+| \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
+| \(\? (?:R|[+-]?\d+) \) # recursive matching
+)
+(?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
+| \| # alternative
+)* # repeat content
+) # end first group
+$ # end of string
+/
+&lt;/code>&lt;/pre>&lt;p>Without whitespace and comments&lt;/p></description></item></channel></rss>

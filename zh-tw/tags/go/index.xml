@@ -1474,4 +1474,23 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;blockquote>
 &lt;p>使用 SecureJSON 可以防止 json 劫持，如果返回的数据是数组，则会默认在返回值前加上&amp;quot;while(1)&amp;quot;&lt;/p></description></item><item><title>High Performance Go Workshop</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210428-gophercon-2019/</link><pubDate>Wed, 28 Apr 2021 16:37:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210428-gophercon-2019/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://dave.cheney.net/high-performance-go-workshop/gophercon-2019.html" target="_blank" rel="noopener">High Performance Go Workshop&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>golang服务的文件句柄超出系统限制(too many open files)</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</link><pubDate>Mon, 16 Dec 2019 10:14:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://studygolang.com/articles/23828" target="_blank" rel="noopener">golang 服务的文件句柄超出系统限制(too many open files)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>
+&lt;p>查看系统的配置 &lt;code>ulimit -a | grep open&lt;/code>，发现系统的配置正常。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>查看程序服务的打开文件限制，&lt;code>cat /proc/40636/limits&lt;/code>，发现服务的限制并没有继承系统设置的，还是系统默认的 1024 限制。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>查看程序服务打开文件数（连接数）情况，&lt;code>lsof -p 40636 | wc -l&lt;/code>，发现已经超出限制，所以报错。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>再看看程序服务打开了哪些连接，&lt;code>lsof -p 40636 &amp;gt; openfiles.log&lt;/code>，发现很多 http 连接打开没有关闭，看 ip 是报警服务的接口，于是顺着这条线索，终于找到了原因，因为程序中读取到的配置解析时报错给报警服务，大量的报警服务连接后未关闭，才导致的 too many open files，这是问题的关键，但是程序为什么没有继承系统设置的最大配置限制，还需要继续查看。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>最终原因找到，因为程序服务是 supervisor 管理的，supervisor 启动服务默认的 minfds 配置是 1024，也就是打开文件限制是 1024，在 supervisor 的配置中加入 &lt;code>minfds=81920&lt;/code>; 重启 &lt;code>supervisorctl reload&lt;/code>。&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

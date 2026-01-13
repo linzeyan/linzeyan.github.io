@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HAProxy on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/haproxy/</link><description>Recent content in HAProxy on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 17 Jun 2019 11:07:13 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/haproxy/index.xml" rel="self" type="application/rss+xml"/><item><title>設定 Haproxy 以防止 DDOS 攻擊</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</link><pubDate>Mon, 17 Jun 2019 11:07:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html" target="_blank" rel="noopener">設定 Haproxy 以防止 DDOS 攻擊&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="tcp-syn-flood-attacks">TCP syn flood attacks&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>vi /etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Protection from SYN flood&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_syncookies &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.conf.all.rp_filter &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_max_syn_backlog &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="slowloris-like-attacks">Slowloris like attacks&lt;/h3>
+&lt;pre tabindex="0">&lt;code>defaults
+option http-server-close
+timeout http-request 5s
+timeout connect 5s
+timeout client 30s
+timeout server 10s
+timeout tunnel 1h
+&lt;/code>&lt;/pre>&lt;h3 id="限制每一個-user-的連線數量">限制每一個 user 的連線數量&lt;/h3>
+&lt;p>普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p>
+&lt;p>但如果有很多使用者，是從某一個私有網段，透過 NAT 的方式連線到 Server 時，且實際上我們也不知道，到底哪一個會是 NAT 的轉址後的 IP，不知道該將哪個 IP 設定為白名單，這樣的限制就會造成問題，因此我們認為實際的環境，這樣的設定應該要保留不處理。&lt;/p>
+&lt;p>以下是一個設定的範例，最重要的地方是在 frontend ft_web 區塊的設定。&lt;/p>
+&lt;pre tabindex="0">&lt;code>global
+stats socket ./haproxy.stats level admin
+defaults
+option http-server-close
+mode http
+timeout http-request 5s
+timeout connect 5s
+timeout server 10s
+timeout client 30s
+listen stats
+bind 0.0.0.0:8880
+stats enable
+stats hide-version
+stats uri /
+stats realm HAProxy Statistics
+stats auth admin:admin
+frontend ft_web
+bind 0.0.0.0:8080
+# Table definition
+stick-table type ip size 100k expire 30s store conn_cur
+# Allow clean known IPs to bypass the filter
+tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
+# Shut the new connection as long as the client has already 10 opened
+tcp-request connection reject if { src_conn_cur ge 10 }
+tcp-request connection track-sc1 src
+# Split static and dynamic traffic since these requests have different impacts on the servers
+use_backend bk_web_static if { path_end .jpg .png .gif .css .js }
+default_backend bk_web
+# Dynamic part of the application
+backend bk_web
+balance roundrobin
+cookie MYSRV insert indirect nocache
+server srv1 192.168.1.2:80 check cookie srv1 maxconn 100
+server srv2 192.168.1.3:80 check cookie srv2 maxconn 100
+# Static objects
+backend bk_web_static
+balance roundrobin
+server srv1 192.168.1.2:80 check maxconn 1000
+server srv2 192.168.1.3:80 check maxconn 1000
+&lt;/code>&lt;/pre>&lt;h3 id="限制每個-user-產生新連線的速率-limiting-the-connection-rate-per-user">限制每個 user 產生新連線的速率 Limiting the connection rate per user&lt;/h3>
+&lt;p>惡意的使用者會在短時間內建立很多連線，但如果產生新連線的速度太高，就會消耗掉過多的資源服務一個使用者。&lt;/p></description></item></channel></rss>

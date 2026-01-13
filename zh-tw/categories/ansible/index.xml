@@ -500,4 +500,19 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">show version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vars&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_command_timeout&lt;/span>: &lt;span style="color:#ae81ff">40&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Trellis Ansible Bad Interpreter Error</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://wpvilla.in/trellis-ansible-bad-interpreter-error/" target="_blank" rel="noopener">Trellis Ansible Bad Interpreter Error&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="bad-interpreter-error">Bad Interpreter Error&lt;/h4>
+&lt;p>Error we got using Ansible was a bad interpreter error. Python 2.7 is not to be found:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And that was correct because when we checked /usr/local/opt we only had Python 3.&lt;/p>
+&lt;h4 id="installation-python-2">Installation Python 2&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install python@2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-crashing-hard">Python Crashing Hard&lt;/h5>
+&lt;p>Next, on Ansible version check I got another error&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ trellis git:&lt;span style="color:#f92672">(&lt;/span>master&lt;span style="color:#f92672">)&lt;/span> ansible --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>1&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#ae81ff">19153&lt;/span> abort ansible --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It was somehow crashing Python 2.7 though it should just work with it. I decided to upgrade Ansible as well&lt;/p></description></item><item><title>Jinja docx template, avoiding new line in nested for</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx template, avoiding new line in nested for&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

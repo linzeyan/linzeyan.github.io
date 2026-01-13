@@ -911,4 +911,92 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/ol>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>example&lt;/strong>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;strong>example&lt;/strong>&lt;/p></description></item><item><title>Nginx如何防禦DDoS攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener">Nginx 如何防禦 DDoS 攻擊？&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit (防止 DDOS 攻擊)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="ngx_http_limit_req_module">ngx_http_limit_req_module&lt;/h4>
+&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="编译-ngx_pagespeed">编译 ngx_pagespeed&lt;/h4>
+&lt;blockquote>
+&lt;p>首先确保 Nginx 有 &lt;code>--with-compat&lt;/code> 编译参数，这样我们就不需要按照一些奇怪的教程让大家从头开始编译 Nginx&lt;/p>
+&lt;p>incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener">https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切换到 nginx 源代码目录下开始配置编译环境&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-compat --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>../incubator-pagespeed-ngx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译 modules&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make modules
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 将对应编译好的 module 放到 nginx 目录下：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建好缓存文件夹以便存放自动转换的图片&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /var/ngx_pagespeed_cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_pagespeed.so&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># enable pagespeed module on this server block
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Needs to exist and be writable by nginx. Use tmpfs for best performance.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#e6db74">FileCachePath&lt;/span> &lt;span style="color:#e6db74">/var/ngx_pagespeed_cache&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Ensure requests for pagespeed optimized resources go to the pagespeed handler
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># and no extraneous headers get set.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span>{&lt;span style="color:#f92672">2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span> { }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span> { }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagespeed&lt;/span> &lt;span style="color:#e6db74">RewriteLevel&lt;/span> &lt;span style="color:#e6db74">CoreFilters&lt;/span>;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最后一个部分（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示启用的优化方式，其中包括了一些基础的优化，比如&lt;/p></description></item><item><title>Force file download with Nginx</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">Force file download with Nginx&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>add_header Content-Disposition 'attachment;';&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">my.domain.com&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">^.*/(?P&amp;lt;request_basename&amp;gt;[^/]+\.(mp3))$&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/path/to/mp3/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">add_header&lt;/span> &lt;span style="color:#e6db74">Content-Disposition&lt;/span> &lt;span style="color:#e6db74">&amp;#39;attachment&lt;/span>; &lt;span style="color:#f92672">filename=&amp;#34;$request_basename&amp;#34;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">server_name&lt;/span> &lt;span style="color:#e6db74">backup.baifu-tech.net&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">root&lt;/span> &lt;span style="color:#e6db74">/data/backup/rechargecent-mago&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic&lt;/span> &lt;span style="color:#e6db74">&amp;#34;baifu&lt;/span> &lt;span style="color:#e6db74">backup&lt;/span> &lt;span style="color:#e6db74">center&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic_user_file&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/ssl/htpasswd&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_exact_size&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_localtime&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx请求处理流程你了解吗？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 请求处理流程你了解吗？&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="11-个处理阶段">11 个处理阶段&lt;/h3>
+&lt;p>1）NGX_HTTP_POST_READ_PHASE：&lt;/p>
+&lt;p>接收到完整的 HTTP 头部后处理的阶段，它位于 uri 重写之前，实际上很少有模块会注册在该阶段，默认的情况下，该阶段被跳过。&lt;/p>
+&lt;p>2）NGX_HTTP_SERVER_REWRITE_PHASE：&lt;/p>
+&lt;p>URI 与 location 匹配前，修改 URI 的阶段，用于重定向，也就是该阶段执行处于 server 块内，location 块外的重写指令，在读取请求头的过程中 nginx 会根据 host 及端口找到对应的虚拟主机配置。&lt;/p>
+&lt;p>3）NGX_HTTP_FIND_CONFIG_PHASE：&lt;/p>
+&lt;p>根据 URI 寻找匹配的 location 块配置项阶段，该阶段使用重写之后的 uri 来查找对应的 location，值得注意的是该阶段可能会被执行多次，因为也可能有 location 级别的重写指令。&lt;/p>
+&lt;p>4）NGX_HTTP_REWRITE_PHASE：&lt;/p>
+&lt;p>上一阶段找到 location 块后再修改 URI，location 级别的 uri 重写阶段，该阶段执行 location 基本的重写指令，也可能会被执行多次。&lt;/p>
+&lt;p>5）NGX_HTTP_POST_REWRITE_PHASE：&lt;/p>
+&lt;p>防止重写 URL 后导致的死循环，location 级别重写的后一阶段，用来检查上阶段是否有 uri 重写，并根据结果跳转到合适的阶段。&lt;/p>
+&lt;p>6）NGX_HTTP_PREACCESS_PHASE：&lt;/p>
+&lt;p>下一阶段之前的准备，访问权限控制的前一阶段，该阶段在权限控制阶段之前，一般也用于访问控制，比如限制访问频率，链接数等。&lt;/p>
+&lt;p>7）NGX_HTTP_ACCESS_PHASE：&lt;/p>
+&lt;p>让 HTTP 模块判断是否允许这个请求进入 Nginx 服务器，访问权限控制阶段，比如基于 ip 黑白名单的权限控制，基于用户名密码的权限控制等。&lt;/p>
+&lt;p>8）NGX_HTTP_POST_ACCESS_PHASE：&lt;/p>
+&lt;p>访问权限控制的后一阶段，该阶段根据权限控制阶段的执行结果进行相应处理，向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝。&lt;/p>
+&lt;p>9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p>
+&lt;p>为访问静态文件资源而设置，try_files 指令的处理阶段，如果没有配置 try_files 指令，则该阶段被跳过。&lt;/p>
+&lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item></channel></rss>

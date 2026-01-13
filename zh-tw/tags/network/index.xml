@@ -141,4 +141,13 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item><item><title>BIRD 与 BGP 的新手开场</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD 与 BGP 的新手开场&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener">BIRD Internet Routing Daemon&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="起因">起因&lt;/h5>
+&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
+&lt;h5 id="解决">解决&lt;/h5>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
+&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
+&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item></channel></rss>

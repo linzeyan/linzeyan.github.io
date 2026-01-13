@@ -1293,4 +1293,65 @@ grep receives the output of tcpflow&lt;/li>
 &lt;h4 id="lsix">Lsix&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>sudo apt-get install imagemagick&lt;/code>&lt;/p>
-&lt;p>&lt;code>wget https://github.com/hackerb9/lsix/archive/master.zip&lt;/code>&lt;/p>&lt;/blockquote></description></item></channel></rss>
+&lt;p>&lt;code>wget https://github.com/hackerb9/lsix/archive/master.zip&lt;/code>&lt;/p>&lt;/blockquote></description></item><item><title>用 iptables 和 ip rule 做负载均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做负载均衡&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="操作">操作&lt;/h4>
+&lt;p>这里以一台通过有线 + 无线出口连接到互联网的 Arch Linux 设备为例。其中共有两个出口，分别使用网卡 eth0 和 eth1。大概的对应关系是：&lt;/p>
+&lt;ul>
+&lt;li>标记 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
+&lt;li>标记 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
+&lt;/ul>
+&lt;p>我们会根据数据包上包含的标记值来判断它应该走什么出口。首先，使用 ip rule 为每个标记值指定一张使用的路由表。&lt;/p>
+&lt;p>通常默认路由表的权重是 32768。为了让我们的路由表用得上，我们需要把它们的权重调得高一些（例如 31000）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 10 (0xa) 的数据包使用 110 号路由表，权重 31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">10&lt;/span> table &lt;span style="color:#ae81ff">110&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 11 (0xb) 的数据包使用 111 号路由表，权重 31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">11&lt;/span> table &lt;span style="color:#ae81ff">111&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的连接更多，可以继续添加标记 &amp;lt;-&amp;gt; 路由表的对应关系&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #110 路由表的路由&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#ae81ff">110&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.20.0.254 table &lt;span style="color:#ae81ff">110&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #111 路由表的路由&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#ae81ff">111&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.25.0.254 table &lt;span style="color:#ae81ff">111&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果这条连接已经被标记，那么把标记设置到数据包上&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包已经有标记，直接放行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#ae81ff">0&lt;/span> -j ACCEPT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包没被标记的话&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包包的标记设置为 11 (0xb)...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 并且每 2 个包就把一个包的标记设置为 10 (0xa)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#ae81ff">2&lt;/span> --packet &lt;span style="color:#ae81ff">0&lt;/span> -j MARK --set-mark &lt;span style="color:#ae81ff">11&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三条出口的话，这里可以类似于&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包的标记存储到整条连接上，这样整个连接过程都会使用同一条出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 我们还需要让数据包上标示的出口是我们为其选择的出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下自己所设置的规则是否正确。然后就可以用 Wiresharks 看一看自己的连接是不是真的分流啦。&lt;/p></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="起因">起因&lt;/h5>
+&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
+&lt;h5 id="解决">解决&lt;/h5>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
+&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
+&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item><item><title>linux磁碟空間沒釋放的解決方法</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">linux 磁碟空間沒釋放的解決方法&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="用-df--ah-命令-du--h---max-depth1">用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
+&lt;p>&lt;code>du&lt;/code> 之和遠遠小於 &lt;code>df&lt;/code> 得到的總量&lt;/p>
+&lt;p>程序使用的檔案資源被刪除後，程序還活著，導致檔案未被真正刪除，無法釋放磁碟空間，卻並不能被統計到。&lt;/p>
+&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item></channel></rss>

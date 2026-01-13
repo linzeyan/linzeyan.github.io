@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2025 on Ricky</title><link>https://linzeyan.github.io/posts/2025/</link><description>Recent content in 2025 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 18 Nov 2025 20:49:44 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/2025/index.xml" rel="self" type="application/rss+xml"/><item><title>parqeye</title><link>https://linzeyan.github.io/posts/2025/20251118-parqeye/</link><pubDate>Tue, 18 Nov 2025 20:49:44 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251118-parqeye/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaushiksrini/parqeye" target="_blank" rel="noopener">parqeye&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="install-methods">install methods&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>cargo install parqeye&lt;/code>&lt;/li>
+&lt;li>&lt;code>brew install kaushiksrini/parqeye/parqeye&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>Mosdns-X</title><link>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</link><pubDate>Sun, 09 Nov 2025 20:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/pmkol/mosdns-x" target="_blank" rel="noopener">Mosdns-X&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/OxpX7FQ1" target="_blank" rel="noopener">让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="install">install&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>curl -sL https://raw.githubusercontent.com/lidebyte/bashshell/refs/heads/main/mosdns-x-manager.sh&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="config">config&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo tee /etc/mosdns-x/config.yaml &amp;gt; /dev/null &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># mosdns-x 并发查询（无分流）配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">log:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> level: info
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> file: /var/log/mosdns-x/mosdns-x.log
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">plugins:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 缓存插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: cache
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: cache
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> size: 1024
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> lazy_cache_ttl: 1800
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 并发上游：取最先返回的可用答案
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: forward_all
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: fast_forward
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> upstream:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 阿里
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://223.5.5.5&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://dns.alidns.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # DNSPod / doh.pub
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://119.29.29.29&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://dot.pub&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # Cloudflare
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://1.1.1.1&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://cloudflare-dns.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # Google
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://8.8.8.8&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://dns.google&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 主流水线：小缓存 → 并发优选
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: sequence
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> exec:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - cache
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - forward_all
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># 监听（双栈 UDP/TCP 53）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">servers:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - exec: main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> listeners:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: :53
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> protocol: udp
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: :53
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> protocol: tcp
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="systemd">systemd&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo tee /etc/systemd/system/mosdns.service &amp;gt; /dev/null &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">[Unit]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">Description=Mosdns-X DNS Accelerator
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">After=network.target
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">[Service]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">Type=simple
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">User=root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">Group=root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">ExecStart=/usr/local/bin/mosdns-x start --as-service -d /usr/local/bin -c /etc/mosdns-x/config.yaml
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">Restart=always
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">RestartSec=5
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">StandardOutput=journal
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">StandardError=journal
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">SyslogIdentifier=mosdns
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">[Install]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">WantedBy=multi-user.target
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl enable --now mosdns
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 备份系统 DNS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp -n /etc/resolv.conf /etc/resolv.conf.mosdns-backup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 改为使用本地 Mosdns-X&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;nameserver 127.0.0.1\noptions edns0&amp;#34;&lt;/span> | sudo tee /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若 53 端口被 systemd-resolved 占用，可禁用它&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl disable --now systemd-resolved 2&amp;gt;/dev/null &lt;span style="color:#f92672">||&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果想顺便加锁（防止被 DHCP 修改），加上 chattr 一起执行：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;nameserver 127.0.0.1\n&amp;#34;&lt;/span> &amp;gt; /etc/resolv.conf &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> chattr +i /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看进程状态&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl status mosdns --no-pager
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 测试解析速度（第二次命中缓存更快）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dig +stats www.google.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dig +stats www.baidu.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看实时日志&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tail -f /var/log/mosdns-x/mosdns-x.log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>go-synctest</title><link>https://linzeyan.github.io/posts/2025/20251107-go-synctest/</link><pubDate>Fri, 07 Nov 2025 14:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251107-go-synctest/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ganhua.wang/go-synctest" target="_blank" rel="noopener">go-synctest&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">TestAfterFunc&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">testing&lt;/span>.&lt;span style="color:#a6e22e">T&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">synctest&lt;/span>.&lt;span style="color:#a6e22e">Test&lt;/span>(&lt;span style="color:#a6e22e">t&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">testing&lt;/span>.&lt;span style="color:#a6e22e">T&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ctx&lt;/span>, &lt;span style="color:#a6e22e">cancel&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">WithCancel&lt;/span>(&lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">Background&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">called&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">context&lt;/span>.&lt;span style="color:#a6e22e">AfterFunc&lt;/span>(&lt;span style="color:#a6e22e">ctx&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>() { &lt;span style="color:#a6e22e">called&lt;/span> = &lt;span style="color:#66d9ef">true&lt;/span> })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">synctest&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>() &lt;span style="color:#75715e">// 等到所有 goroutine 都卡住&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">called&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;AfterFunc 在 cancel 前就被呼叫&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">cancel&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">synctest&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>() &lt;span style="color:#75715e">// 再等一次&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> !&lt;span style="color:#a6e22e">called&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">t&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;AfterFunc 沒有在 cancel 後被呼叫&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>onion-mirror</title><link>https://linzeyan.github.io/posts/2025/20251030-onion-mirror/</link><pubDate>Thu, 30 Oct 2025 17:49:44 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251030-onion-mirror/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://flower.codes/2025/10/23/onion-mirror.html" target="_blank" rel="noopener">onion-mirror&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="install-tor">Install Tor&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install tor
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configure-tor">Configure Tor&lt;/h3>
+&lt;pre tabindex="0">&lt;code># Disable SOCKS proxy since we aren&amp;#39;t making outbound connections
+# through Tor
+SocksPort 0
+# Make sure Tor runs as a daemon (i.e. in the background)
+RunAsDaemon 1
+# Setup the hidden service on port 80, this is where we tell Tor to
+# create a .onion service for our web server
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80
+# Disable inbound connections, since we aren&amp;#39;t running a relay or
+# exit node
+ORPort 0
+# Disable directory services, since we won&amp;#39;t be mirroring directory
+# information to other Tor nodes
+DirPort 0
+&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo systemctl restart tor
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="get-your-onion-address">Get Your .onion Address&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo cat /var/lib/tor/hidden_service/hostname
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="configure-caddy">Configure Caddy&lt;/h3>
+&lt;pre tabindex="0">&lt;code>http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
+# Set up a reverse proxy, or serve static files, etc.
+}
+&lt;/code>&lt;/pre>&lt;h3 id="advertise-your-onion-address">Advertise Your .onion Address&lt;/h3>
+&lt;pre tabindex="0">&lt;code>header {
+Onion-Location http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion{uri}
+}
+&lt;/code>&lt;/pre></description></item><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/posts/2025/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251020-nginx-acme-module/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="ngx_http_acme_module">&lt;code>ngx_http_acme_module&lt;/code>&lt;/h2>
+&lt;ul>
+&lt;li>NGINX 1.25.1&lt;/li>
+&lt;/ul>
+&lt;h2 id="pre-install">pre-install&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 Debian/Ubuntu 系统上安装基础编译工具和 NGINX 依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install build-essential libpcre3-dev zlib1g-dev libssl-dev pkg-config libclang-dev git -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装 Rust 工具链 (cargo 和 rustc)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --proto &lt;span style="color:#e6db74">&amp;#39;=https&amp;#39;&lt;/span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source $HOME/.cargo/env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -pv /app/nginx/&lt;span style="color:#f92672">{&lt;/span>logs,conf,cache, acme&lt;span style="color:#f92672">}&lt;/span> /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /app/nginx-build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 克隆 ACME 模块的源码&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/nginx/nginx-acme.git /app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 或者&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># git clone git@github.com:nginx/nginx-acme.git /app/nginx-build/nginx-acme&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 下载 NGINX 源码（请替换为您需要的版本）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://nginx.org/download/nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxf nginx-1.28.0.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="compile">compile&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd nginx-1.28.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prefix&lt;span style="color:#f92672">=&lt;/span>/app/nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --error-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/error.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-log-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/access.log &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --pid-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.pid &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --lock-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/nginx.lock &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-client-body-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/client_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-proxy-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/proxy_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-fastcgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/fastcgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-uwsgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/uwsgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --http-scgi-temp-path&lt;span style="color:#f92672">=&lt;/span>/app/nginx/cache/scgi_temp &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --user&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --group&lt;span style="color:#f92672">=&lt;/span>nginx &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-compat &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-file-aio &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-threads &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_addition_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_auth_request_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_dav_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_flv_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gunzip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_gzip_static_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_mp4_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_random_index_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_secure_link_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_slice_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_stub_status_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_sub_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v2_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-http_v3_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-mail_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_realip_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-stream_ssl_preread_module &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-cc-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-g -O2 -ffile-prefix-map=/home/builder/debuild/nginx-1.28.0/debian/debuild-base/nginx-1.28.0=. -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with-ld-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>/app/nginx-build/nginx-acme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make modules &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> make install
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 运行配置脚本，这里的关键是 --add-dynamic-module&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注意：您需要在这里包含您当前 NGINX 已有的所有编译参数，可以通过 nginx -V 查看&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译模块，注意是 make modules 而不是 make install&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="config">config&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /app/nginx/conf/nginx.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">user&lt;/span> &lt;span style="color:#e6db74">nginx&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_log&lt;/span> &lt;span style="color:#e6db74">error.log&lt;/span> &lt;span style="color:#e6db74">debug&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">pid&lt;/span> &lt;span style="color:#e6db74">nginx.pid&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_http_acme_module.so&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">events&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">worker_connections&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">multi_accept&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include&lt;/span> &lt;span style="color:#e6db74">mime.types&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">application/octet-stream&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_local] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$host&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_log&lt;/span> &lt;span style="color:#e6db74">access.log&lt;/span> &lt;span style="color:#e6db74">main&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">sendfile&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tcp_nopush&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">charset&lt;/span> &lt;span style="color:#e6db74">utf-8&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keepalive_timeout&lt;/span> &lt;span style="color:#ae81ff">65&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gzip&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resolver&lt;/span> 8.8.8.8 1.1.1.1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 定义一个名为 letsencrypt 的 ACME 颁发机构实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_issuer&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定 ACME 服务提供商的目录 URL，这里是 Let&amp;#39;s Encrypt 的生产环境
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">uri&lt;/span> &lt;span style="color:#e6db74">https://acme-v02.api.letsencrypt.org/directory&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 提供一个联系邮箱，用于接收 CA 的重要通知（如证书即将过期）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">contact&lt;/span> &lt;span style="color:#e6db74">mailto:security-alerts@aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 指定状态文件的存储路径，用于保存 ACME 账户密钥，非常重要
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">state_path&lt;/span> &lt;span style="color:#e6db74">acme/letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 同意服务条款，对于 Let&amp;#39;s Encrypt 等 CA 这是必需的步骤
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">accept_terms_of_service&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 可选指令 acme_shared_zone，用于存储所有配置的证书颁发者的证书、私钥和挑战数据。该区域默认大小为 256K，可根据需要增加
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_shared_zone&lt;/span> &lt;span style="color:#e6db74">zone=acme_shared:1M&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">443&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">ssl.aidig.co&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤一：声明此 server 块启用 ACME，并指定使用上面定义的 letsencrypt 颁发机构
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">acme_certificate&lt;/span> &lt;span style="color:#e6db74">letsencrypt&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 步骤二：使用动态变量加载由 ACME 模块在内存中管理的证书和私钥
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> $acme_certificate;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> $acme_certificate_key;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_cache&lt;/span> &lt;span style="color:#e6db74">max=2&lt;/span>; &lt;span style="color:#75715e"># required ngx 1.27.4+
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default_type&lt;/span> &lt;span style="color:#e6db74">text/plain&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">200&lt;/span> &lt;span style="color:#e6db74">&amp;#39;OK&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ACME 模块会自动处理 /.well-known/acme-challenge/ 的请求，此 location 用于处理所有其他请求
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">301&lt;/span> &lt;span style="color:#e6db74">https://&lt;/span>$host$request_uri;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服务被通报的概率</title><link>https://linzeyan.github.io/posts/2025/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251002-hide-web/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服务被通报的概率&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 error_page 指令为 497 状态码设置虚拟路径@close，Nginx 在处理的@close 时发现是返回 444 状态码，于是直接关闭连接。&lt;/p>
+&lt;p>这个时候你再用 curl 访问对应的端口就会收到如下报错：&lt;/p>
+&lt;p>curl &lt;a href="http://example.zz.ac:5678" target="_blank" rel="noopener">http://example.zz.ac:5678&lt;/a>
+curl: (52) Empty reply from server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">example.zz.ac&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">...&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">..&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#e6db74">[::]:5678&lt;/span> &lt;span style="color:#e6db74">ssl&lt;/span> &lt;span style="color:#e6db74">default_server&lt;/span>;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">_&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate&lt;/span> &lt;span style="color:#e6db74">...&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ssl_certificate_key&lt;/span> &lt;span style="color:#e6db74">..&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤</title><link>https://linzeyan.github.io/posts/2025/20250929-eff-browser-extension/</link><pubDate>Mon, 29 Sep 2025 16:41:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250929-eff-browser-extension/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://privacybadger.org/" target="_blank" rel="noopener">Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Containers From Scratch by Golang (feat. Liz Rice)</title><link>https://linzeyan.github.io/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</link><pubDate>Wed, 10 Sep 2025 09:50:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://baconyao.notion.site/Containers-From-Scratch-by-Golang-feat-Liz-Rice-2638a3a7d9d48053ae1dce0763fb52e8" target="_blank" rel="noopener">Containers From Scratch by Golang (feat. Liz Rice)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/baconYao/container-from-scratch-golang" target="_blank" rel="noopener">container-from-scratch-golang&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>As we enhance the functionality of our small program, we will explore the following topics, allowing us to create a basic simulation of a non-production container environment.&lt;/p>
+&lt;ol>
+&lt;li>UTS Namespace&lt;/li>
+&lt;li>Chroot&lt;/li>
+&lt;li>PID Namespace&lt;/li>
+&lt;li>Mount Namespace&lt;/li>
+&lt;li>Control Group&lt;/li>
+&lt;li>Rootless Container&lt;/li>
+&lt;/ol></description></item><item><title>淺談 Go Iterator</title><link>https://linzeyan.github.io/posts/2025/20250906-golang-iterator/</link><pubDate>Sat, 06 Sep 2025 21:30:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250906-golang-iterator/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ganhua.wang/go-iterator" target="_blank" rel="noopener">淺談 Go Iterator&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Seq&lt;/span>[&lt;span style="color:#a6e22e">V&lt;/span> &lt;span style="color:#66d9ef">any&lt;/span>] &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">yield&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">V&lt;/span>) &lt;span style="color:#66d9ef">bool&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Seq2&lt;/span>[&lt;span style="color:#a6e22e">K&lt;/span>, &lt;span style="color:#a6e22e">V&lt;/span> &lt;span style="color:#66d9ef">any&lt;/span>] &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">yield&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">K&lt;/span>, &lt;span style="color:#a6e22e">V&lt;/span>) &lt;span style="color:#66d9ef">bool&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 容器无法访问外网？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器无法访问外网？nftables 下的 NAT 配置指南&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>独立服务器 CPU 频率最大化配置指南</title><link>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</link><pubDate>Tue, 02 Sep 2025 08:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306" target="_blank" rel="noopener">独立服务器 CPU 频率最大化配置指南&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="看看-cpu-现在混哪种模式">看看 CPU 现在混哪种模式&lt;/h2>
+&lt;p>前提条件
+系统：Linux（Debian、Ubuntu、Proxmox 等都行）&lt;/p>
+&lt;p>权限：root&lt;/p>
+&lt;p>CPU：支持动态调频（Intel Xeon、AMD EPYC / Ryzen 等）&lt;/p>
+&lt;h3 id="governor">governor&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>powersave：节能小绵羊（频率锁低，省电但废武功）&lt;/li>
+&lt;li>ondemand：按需加速（要用时才升频，可能反应慢半拍）&lt;/li>
+&lt;li>performance：全程高能（我们要的就是它！💪）&lt;/li>
+&lt;/ul>
+&lt;h3 id="确认内核到底用的哪种驱动intel--amd">确认内核到底用的哪种驱动（Intel / AMD）&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver&lt;/code>&lt;/p>
+&lt;h2 id="临时拉满性能">临时拉满性能&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> cpu in /sys/devices/system/cpu/cpu&lt;span style="color:#f92672">[&lt;/span>0-9&lt;span style="color:#f92672">]&lt;/span>*; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo performance &amp;gt; $cpu/cpufreq/scaling_governor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="重启后也保持高能">重启后也保持高能&lt;/h2>
+&lt;h3 id="方案-a最稳妥推荐">方案 A：最稳妥推荐&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install cpufrequtils -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;GOVERNOR=&amp;#34;performance&amp;#34;&amp;#39;&lt;/span> &amp;gt;/etc/default/cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable cpufrequtils
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl start cpufrequtils
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方案-bsystemd-自定义服务">方案 B：systemd 自定义服务&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/systemd/system/cpu-performance.service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>Set CPU governor to performance
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>oneshot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/bin/bash -c &lt;span style="color:#e6db74">&amp;#39;for cpu in /sys/devices/system/cpu/cpu[0-9]*; do echo performance &amp;gt; $cpu/cpufreq/scaling_governor; done&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl daemon-reexec
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable --now cpu-performance.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>6首國際最強公認催眠曲</title><link>https://linzeyan.github.io/posts/2025/20250829-music/</link><pubDate>Fri, 29 Aug 2025 15:58:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250829-music/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.instagram.com/p/DNakVD4P_t9" target="_blank" rel="noopener">6 首國際最強公認催眠曲&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Marconi Union - Weightless&lt;/li>
+&lt;li>432Hz (深度治癒身心靈 連接宇宙能量)&lt;/li>
+&lt;li>Clair de Lune&lt;/li>
+&lt;li>Deep sleep delta waves - Binaural beats sleep (30 分鐘版本)&lt;/li>
+&lt;li>Erik SATIE - Gymnopédie No. 1 (鋼琴慢速版)&lt;/li>
+&lt;li>Himalayan Healing - Tibetan Singing Bowls Meditation (15 分鐘版本)&lt;/li>
+&lt;/ol></description></item><item><title>透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用</title><link>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">透過 LinuxServer.io 打包的 Docker 映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io 官網&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學</title><link>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="gluetun">Gluetun&lt;/h2>
+&lt;ul>
+&lt;li>OpenVPN&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gluetun&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">qmcgaw/gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">unless-stopped&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cap_add&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">NET_ADMIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">devices&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/dev/net/tun:/dev/net/tun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8888&lt;/span>:&lt;span style="color:#ae81ff">8888&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># HTTP proxy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># 按照VPN供應商的OpenVPN設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=openvpn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN帳號&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>WireGuard&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gluetun&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">qmcgaw/gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">unless-stopped&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cap_add&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">NET_ADMIN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">devices&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/dev/net/tun:/dev/net/tun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8888&lt;/span>:&lt;span style="color:#ae81ff">8888&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># HTTP proxy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># 按照VPN供應商的WireGuard設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=wireguard&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># 預共享密鑰&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># 私鑰&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># 填IPV4與IPV6位址，以逗號分隔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="讓容器走-gluetun-的-vpn-連線">讓容器走 Gluetun 的 VPN 連線&lt;/h2>
+&lt;ul>
+&lt;li>如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
+&lt;li>如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
+&lt;li>開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
+&lt;li>依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li>
+&lt;li>容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li>
+&lt;/ul></description></item><item><title>Go实战指南：使用 go-redis 执行 Lua 脚本</title><link>https://linzeyan.github.io/posts/2025/20250722-go-redis-lua/</link><pubDate>Tue, 22 Jul 2025 16:56:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250722-go-redis-lua/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.liwenzhou.com/posts/Go/go-redis-lua/" target="_blank" rel="noopener">Go 实战指南：使用 go-redis 执行 Lua 脚本&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Redis command &lt;code>Eval&lt;/code>&lt;/li>
+&lt;li>Redis package &lt;code>redis.NewScript&lt;/code>, &lt;code>script.Run&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>TIL: timeout in Bash scripts</title><link>https://linzeyan.github.io/posts/2025/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250612-bash-timeout/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL: timeout in Bash scripts&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>timeout 1m ./until.sh&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>wrap&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>timeout 1m bash -c &lt;span style="color:#e6db74">&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">done&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>TaigiTube 台語水管</title><link>https://linzeyan.github.io/posts/2025/20250508-taigitube/</link><pubDate>Thu, 08 May 2025 08:43:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250508-taigitube/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://taigitube.com/" target="_blank" rel="noopener">TaigiTube 台語水管&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>I use Zip Bombs to Protect my Server</title><link>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener">I use Zip Bombs to Protect my Server&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>What happens is, they receive the file, read the header that instructs them that it is a compressed file. So they try to decompress the 1MB file to find whatever content they are looking for. But the file expands, and expands, and expands, until they run out of memory and their server crashes. The 1MB file decompresses into a 1GB. This is more than enough to break most bots. However, for those pesky scripts that won&amp;rsquo;t stop, I serve them the 10MB file. This one decompresses into 10GB and instantly kills the script.&lt;/p></description></item><item><title>人人都需要一個 HTTP proxy 來 debug</title><link>https://linzeyan.github.io/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</link><pubDate>Fri, 25 Apr 2025 16:58:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/" target="_blank" rel="noopener">人人都需要一個 HTTP proxy 來 debug&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>&lt;a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://portswigger.net/burp/communitydownload" target="_blank" rel="noopener">Burp Suite&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://mitmproxy.org/" target="_blank" rel="noopener">mitmproxy&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Why are QR Codes with capital letters smaller than QR codes with lower-case letters?</title><link>https://linzeyan.github.io/posts/2025/20250423-why-are-qr-codes-with-capital-letters-smaller-than-qr-codes-with-lower-case-letters/</link><pubDate>Wed, 23 Apr 2025 15:45:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250423-why-are-qr-codes-with-capital-letters-smaller-than-qr-codes-with-lower-case-letters/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://shkspr.mobi/blog/2025/02/why-are-qr-codes-with-capital-letters-smaller-than-qr-codes-with-lower-case-letters/" target="_blank" rel="noopener">Why are QR Codes with capital letters smaller than QR codes with lower-case letters?&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you want the smallest possible physical size for a QR code which contains a URl, make sure the text is all in capital letters.&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>Marp教學：Markdown搭配VS Code做簡報，快速輸出為PPTX或PDF，提昇做簡報效率</title><link>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</link><pubDate>Tue, 08 Apr 2025 09:12:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/vscode-marp-presentation/" target="_blank" rel="noopener">Marp 教學：Markdown 搭配 VS Code 做簡報，快速輸出為 PPTX 或 PDF，提昇做簡報效率&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Install &amp;lsquo;Marp for VS Code&amp;rsquo;&lt;/li>
+&lt;li>在 Markdown 最前面的 FrontMatter，插入以下屬性，啟用 Marp，並開啟顯示頁數功能&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>---
+marp:true
+paginate: true
+---
+&lt;/code>&lt;/pre>&lt;ol start="3">
+&lt;li>Markdown 文字都是直排排列的，需要換行請加上&lt;code>\&lt;/code>。&lt;/li>
+&lt;li>輸入三條橫線&lt;code>---&lt;/code>分隔投影片。&lt;/li>
+&lt;li>插入註解請用&lt;code>&amp;lt;!-- --&amp;gt;&lt;/code>語法。&lt;/li>
+&lt;/ol></description></item><item><title>Go Protobuf：新的 Opaque API</title><link>https://linzeyan.github.io/posts/2025/20250407-protobuf-opaque/</link><pubDate>Mon, 07 Apr 2025 13:53:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250407-protobuf-opaque/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.liwenzhou.com/posts/Go/protobuf-opaque/" target="_blank" rel="noopener">[译]Go Protobuf：新的 Opaque API&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>protoc --proto_path=. \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --go_out=./ \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ --go_opt=default_api_level=API_OPAQUE \
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>macOS Tips &amp; Tricks</title><link>https://linzeyan.github.io/posts/2025/20250307-macos-tips/</link><pubDate>Fri, 07 Mar 2025 16:05:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250307-macos-tips/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://saurabhs.org/macos-tips" target="_blank" rel="noopener">macOS Tips &amp;amp; Tricks&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="general">General&lt;/h3>
+&lt;h4 id="native-ui-conventions">Native UI Conventions&lt;/h4>
+&lt;ul>
+&lt;li>Press ⇧⌘/ to search all of the current app&amp;rsquo;s menu items. Then use the Up/Down arrow keys to navigate the results and press &lt;code>Return&lt;/code> to execute that menu bar action.&lt;/li>
+&lt;li>Press ⌃F2 to move keyboard focus to the application&amp;rsquo;s menu bar. Start typing the first few letters of a menu title to jump to that menu.&lt;/li>
+&lt;li>Hold the &lt;code>Option&lt;/code> key while expanding an outline view to recursively expand all children. (The easiest place to test this is in Finder&amp;rsquo;s List view.)&lt;/li>
+&lt;li>On modal dialogs/sheets, press &lt;code>Command&lt;/code> + the first letter of the button to press that button. ⌘. is the shortcut equivalent of the &lt;code>Escape&lt;/code> key.&lt;/li>
+&lt;li>Hold &lt;code>Control&lt;/code> and &lt;code>Option&lt;/code> while clicking on a window to switch focus to that window without raising it.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> while dragging a toolbar icon to move it to a new position.&lt;/li>
+&lt;li>By default, clicking inside a scroll bar will scroll partially towards the clicked location. Hold &lt;code>Option&lt;/code> while clicking in the scroll bar to jump directly to the clicked location.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while dragging the scroller to slowly scroll.&lt;/li>
+&lt;li>In a scroll view, use the Up/Down keys to scroll in small increments. Hold &lt;code>Option&lt;/code> to scroll in larger increments, and hold &lt;code>Command&lt;/code> to scroll to the beginning or end.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while pressing the Page Up/Page Down keys to also move the cursor while scrolling.&lt;/li>
+&lt;li>In a text field that treats the Tab key as an input, press &lt;code>Control-Tab&lt;/code> and &lt;code>Control-Shift-Tab&lt;/code> to move focus to the previous or next control.&lt;/li>
+&lt;li>Press ⌃⌘D while holding the pointer over a word to view an inline dictionary definition of the word.&lt;/li>
+&lt;li>Press ⌃F6 to move focus to a floating window.&lt;/li>
+&lt;li>To quickly find text, select some text and press ⌘E followed by ⌘G.&lt;/li>
+&lt;li>Press ⌃⌫ to delete only the accent mark from the previous character (e.g. é will become e).&lt;/li>
+&lt;li>In Fonts windows, enter &lt;code>*X&lt;/code> to scale the current font size, e.g. &lt;code>*1.5&lt;/code>.&lt;/li>
+&lt;li>When entering text, press ⌥⇧K (on U.S. keyboards) to insert an Apple logo.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> while dragging a Picture-in-Picture (PiP) video player to move it anywhere without having it snap to one of the screen corners.&lt;/li>
+&lt;/ul>
+&lt;h4 id="screenshots">Screenshots&lt;/h4>
+&lt;ul>
+&lt;li>After pressing ⇧⌘4 and while drawing the screen capture area, hold &lt;code>Option&lt;/code> while resizing to resize from the center, and hold &lt;code>Shift&lt;/code> while resizing to adjust only one axis. After drawing the area, hold the Space bar and drag to move the selected area.&lt;/li>
+&lt;li>After pressing ⇧⌘4, hold &lt;code>Control&lt;/code> while taking the screenshot to copy to the clipboard instead of saving to file.&lt;/li>
+&lt;li>After pressing ⇧⌘4, press the Space bar to select a window to screenshot. Hold down &lt;code>Option&lt;/code> while taking the screenshot to remove the window&amp;rsquo;s shadow.&lt;/li>
+&lt;li>Right click on the floating screenshot preview to access additional actions.&lt;/li>
+&lt;/ul>
+&lt;h4 id="opensave-dialogs">Open/Save Dialogs&lt;/h4>
+&lt;ul>
+&lt;li>Drag a file or folder from Finder into an open/save dialog to jump directly to that file.&lt;/li>
+&lt;li>In save dialogs, press ⌘= to switch between the compact and expanded layout.&lt;/li>
+&lt;li>In save dialogs, press ⌘⌫ to activate the Delete button, ⌘D to activate the Don&amp;rsquo;t Save button, and ⌘. (or &lt;code>Esc&lt;/code>) to activate the Cancel button.&lt;/li>
+&lt;li>Press &lt;code>~&lt;/code> to open a Go To File dialog prefilled with the home directory. Press &lt;code>/&lt;/code> to open it prefilled with the root directory.&lt;/li>
+&lt;li>Press ⌘R to reveal the selected item in Finder.&lt;/li>
+&lt;/ul>
+&lt;h4 id="mission-control--window-management">Mission Control / Window Management&lt;/h4>
+&lt;ul>
+&lt;li>When a window is inactive, use the &lt;code>Command&lt;/code> key to interact with it without making it active.&lt;/li>
+&lt;li>Hold &lt;code>Control&lt;/code> when pressing the Mission Control function key to only show the current app&amp;rsquo;s windows.
+Hold &lt;code>Command&lt;/code> when pressing the Mission Control function key to show the desktop.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while double-clicking a window&amp;rsquo;s corner to expand the window to fill the screen.&lt;/li>
+&lt;li>&lt;code>Option&lt;/code>-Click to switch windows while hiding the previous app. &lt;code>Command-Option&lt;/code>-Click to switch windows and hide all other apps.&lt;/li>
+&lt;li>In the Command-Tab app switcher, press the Up or Down arrow keys (or the 1 key) on an app to view that app&amp;rsquo;s windows.&lt;/li>
+&lt;li>In the Command-Tab app switcher, hold &lt;code>Option&lt;/code> while switching to an app to un-minimize all its windows.&lt;/li>
+&lt;li>Press ⌘` to cycle between windows of the foreground application.&lt;/li>
+&lt;li>Press ⌃F4 to cycle between windows across all applications in the current desktop space.&lt;/li>
+&lt;li>Drag a window to the top of the screen and push it against the top of the screen to enter Mission Control with that window selected.&lt;/li>
+&lt;li>Press ⌥⌘W or hold &lt;code>Option&lt;/code> while clicking the red close button, to close &lt;em>all&lt;/em> of the foreground application&amp;rsquo;s open windows.&lt;/li>
+&lt;li>Press ⌥⌘M, or hold &lt;code>Option&lt;/code> while clicking the yellow minimize button, to minimize &lt;em>all&lt;/em> of the foreground application&amp;rsquo;s open windows.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while clicking the green zoom button to fill the window to the screen instead of entering full-screen mode.&lt;/li>
+&lt;li>When configuring Hot Corners in System Settings, hold any or all of &lt;code>Control&lt;/code>, &lt;code>Option&lt;/code>, &lt;code>Command&lt;/code>, or &lt;code>Shift&lt;/code> to only activate the corner while the selected keys are also held down.&lt;/li>
+&lt;li>On a trackpad, use two fingers to double-tap (&lt;em>tap&lt;/em>, not click) on an app&amp;rsquo;s Dock icon to show all of the app&amp;rsquo;s windows. Alternatively, perform the App Exposé trackpad gesture over an app&amp;rsquo;s Dock icon.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while resizing a window to resize from the center of the window.
+Hold &lt;code>Shift&lt;/code> while resizing a window to lock the aspect ratio.&lt;/li>
+&lt;li>Double-click a window&amp;rsquo;s border to resize that edge to fill the screen. Hold &lt;code>Option&lt;/code> while double-clicking to expand both edges.&lt;/li>
+&lt;li>In Mission Control, perform a scroll up over a group of app windows to reveal the individual windows. Press the Space bar while holding the pointer over any window to magnify it.&lt;/li>
+&lt;li>In Mission Control, Option-click another desktop space to switch to that space while staying in Mission Control.&lt;/li>
+&lt;li>In Mission Control, drag the application icon underneath the windows to move all of an app&amp;rsquo;s windows to another space.&lt;/li>
+&lt;li>In Mission Control app window mode, press &lt;code>Tab&lt;/code> and &lt;code>Shift-Tab&lt;/code> to switch applications.&lt;/li>
+&lt;li>If a window was minimized in a different space, hold &lt;code>Command&lt;/code> while un-minimizing to restore it to the current space.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while un-minimizing a window to un-minimize all windows from that app.&lt;/li>
+&lt;li>If an app has windows in multiple spaces, click the app&amp;rsquo;s Dock icon repeatedly to cycle through the spaces with that app&amp;rsquo;s windows.&lt;/li>
+&lt;li>If keyboard shortcuts are enabled for switching desktop spaces, pressing a shortcut while clicking and holding a window will move the window to that space.&lt;/li>
+&lt;li>In Stage Manager, hold &lt;code>Shift&lt;/code> while clicking on a window to add that window to the current stage instead of replacing it.&lt;/li>
+&lt;/ul>
+&lt;h4 id="function-keys">Function Keys&lt;/h4>
+&lt;ul>
+&lt;li>Hold down &lt;code>Shift&lt;/code> and &lt;code>Option&lt;/code> when changing the volume or brightness to make smaller adjustments.&lt;/li>
+&lt;li>Hold down &lt;code>Option&lt;/code> while changing the brightness to quickly open Display settings, or while changing the volume to open Sound settings.&lt;/li>
+&lt;li>Hold down &lt;code>Shift&lt;/code> while changing the volume to audibly preview the volume level.&lt;/li>
+&lt;li>When connected to an external display, hold down &lt;code>Control&lt;/code> while changing the brightness to adjust the brightness of the non-active display.&lt;/li>
+&lt;li>Press and hold down on the Mission Control function key to automatically exit Mission Control after letting go of the key.&lt;/li>
+&lt;/ul>
+&lt;h4 id="menu-bar--notification-center">Menu Bar / Notification Center&lt;/h4>
+&lt;ul>
+&lt;li>Hold &lt;code>Option&lt;/code> while opening the Wi-Fi and Bluetooth menus to access extra options.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> while dragging a menu bar icon to move it to a new position.&lt;/li>
+&lt;li>Add new menu bar items by dragging icons from Control Center to the menu bar.&lt;/li>
+&lt;li>Option-click the date/time in the menu bar to toggle Do Not Disturb.&lt;/li>
+&lt;li>Right-click a widget to change its size.&lt;/li>
+&lt;li>On a trackpad, swipe horizontally with two fingers over a notification to dismiss that notification.&lt;/li>
+&lt;/ul>
+&lt;h3 id="finder">Finder&lt;/h3>
+&lt;ul>
+&lt;li>After copying a file, press ⌥⌘V to move the file instead of pasting a copy of it.&lt;/li>
+&lt;li>Press ⌃⌘N with multiple files selected to create a new folder with those items.&lt;/li>
+&lt;li>Press &lt;code>Tab&lt;/code> and &lt;code>Shift-Tab&lt;/code> to navigate through files alphabetically, regardless of the current sort ordering (only in Icons and List view).&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while activating Quick Look to immediately launch into full-screen view.&lt;/li>
+&lt;li>After opening Quick Look with multiple files selected, press ⌘⏎ to display a grid view of all items. Use the arrow keys to navigate and press Return to select an item to focus on.&lt;/li>
+&lt;li>In Quick Look, right-click on the &amp;ldquo;Open with&amp;rdquo; button to select a different app to use to open the file.&lt;/li>
+&lt;li>In Columns view, hold &lt;code>Option&lt;/code> while resizing a column to simultaneously resize all columns.&lt;/li>
+&lt;li>In Columns view, double-click a column separator to auto-resize that column. Hold &lt;code>Option&lt;/code> while double-clicking on any separator to auto-resize all columns.&lt;/li>
+&lt;li>In Columns view, click the empty space at the bottom of a folder to go to the parent folder.&lt;/li>
+&lt;li>In Columns view, and when in a deeply nested file, press &lt;code>Shift-Tab&lt;/code> and &lt;code>Tab&lt;/code> to navigate through the parent directories without losing the path to the file.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while dragging a file to make a new copy instead of moving the original. Hold &lt;code>Command&lt;/code> and &lt;code>Option&lt;/code> to create an alias to the file.&lt;/li>
+&lt;li>In List view, press ⌘+ and ⌘- to increase and decrease the row size.&lt;/li>
+&lt;li>In List view, press ⌥↑ and ⌥↓ to select the top-most and bottom-most item.&lt;/li>
+&lt;li>In List view, use the Left and Right arrow keys to collapse and expand directories. When a file is selected, press the Left arrow key to jump to the parent folder.&lt;/li>
+&lt;li>Press ⌘I to show the inspector for the current file.
+Press ⌥⌘I to show a floating inspector that updates with the selected file.&lt;/li>
+&lt;li>Press ⌥⌘C to copy the full pathname of the currently selected file.&lt;/li>
+&lt;li>Press ⇧⌘. to toggle showing hidden files.&lt;/li>
+&lt;li>Press ⌥⌘⌫ to immediately delete a file without sending it to the Trash.&lt;/li>
+&lt;li>Merge folders by holding &lt;code>Option&lt;/code> while dragging one folder on top of another folder.&lt;/li>
+&lt;li>Set a custom icon for a folder by copying the new icon, inspecting the folder (⌘I), and pasting the icon by selecting the folder icon in the upper-left of the inspector window and pressing ⌘V.&lt;/li>
+&lt;li>Drag selected text into a Finder window to quickly create and save a text clipping. (Text clippings are text files that can&amp;rsquo;t be edited and don&amp;rsquo;t require a filename to be saved.)&lt;/li>
+&lt;li>Press ⌥⌘O to open the selected file &lt;em>and&lt;/em> automatically close the Finder window.&lt;/li>
+&lt;li>Press ⌥⇧⌘V to paste an item while preserving the file permission flags.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> while dragging an icon in Icon view to align it to a grid.&lt;/li>
+&lt;li>Restart Finder by holding &lt;code>Option&lt;/code> while right-clicking the Finder dock icon and selecting Relaunch.&lt;/li>
+&lt;li>Drag a folder to the new tab button (only visible if multiple tabs are already open) to open the folder in a new tab.&lt;/li>
+&lt;li>Press ⌃⌘↑ to open the parent folder in a new window.&lt;/li>
+&lt;li>If the toolbar is hidden (⌥⌘T), Finder will open folders in a new window.&lt;/li>
+&lt;li>Press ⌘R with an image selected to rotate it clockwise, and ⌘L to rotate it counter-clockwise.&lt;/li>
+&lt;/ul>
+&lt;h3 id="dock">Dock&lt;/h3>
+&lt;ul>
+&lt;li>Press ⌥⌘D to hide and show the dock.&lt;/li>
+&lt;li>Press ⌃F3 to move keyboard focus to the Dock. Then use the Left and Right arrow keys to select an app, or type the first few letters of an app. Press &lt;code>Enter&lt;/code> to open the selected app, or press the Up arrow key to open the app&amp;rsquo;s menu.&lt;/li>
+&lt;li>Hold &lt;code>Control&lt;/code> and &lt;code>Shift&lt;/code> while mousing over the Dock to temporarily turn on magnification.&lt;/li>
+&lt;li>Quickly move the Dock to a different side of the screen by holding &lt;code>Shift&lt;/code> while dragging the resize handle.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while resizing the Dock to resize in multiples of 16 points.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> and &lt;code>Command&lt;/code> while clicking a running app&amp;rsquo;s Dock icon to hide all other applications.&lt;/li>
+&lt;li>Open a file in a specific application by dragging the file to the application&amp;rsquo;s Dock icon. If the application doesn&amp;rsquo;t accept the file type by default, force open the file by holding &lt;code>Option&lt;/code> and &lt;code>Command&lt;/code> while dragging the file.&lt;/li>
+&lt;li>If a dock icon is bouncing repeatedly, stop the bouncing by mousing over the icon.&lt;/li>
+&lt;li>Hold &lt;code>Control&lt;/code> and &lt;code>Command&lt;/code> when right-clicking a Dock icon to only see the default system menu options.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> and &lt;code>Command&lt;/code> when clicking on a folder in the Dock to open the folder in a new Finder window.&lt;/li>
+&lt;li>To open multiple items from a stack, hold &lt;code>Option&lt;/code> while selecting an item to open it in the background while keeping the stack open.&lt;/li>
+&lt;li>After opening a stack, hover the cursor over an item and press the Space bar to preview the item with quick look.&lt;/li>
+&lt;li>Right-click the Launchpad dock icon to open an app from an inline menu.&lt;/li>
+&lt;li>In Launchpad, hold &lt;code>Option&lt;/code> to enter &amp;ldquo;jiggle mode&amp;rdquo; to re-arrange and delete apps.&lt;/li>
+&lt;li>To add AirDrop to the Dock, navigate to &lt;code>/System/Library/CoreServices/Finder.app/Contents/Applications&lt;/code> in Finder and drag the AirDrop icon to the Dock.&lt;/li>
+&lt;/ul>
+&lt;h3 id="spotlight">Spotlight&lt;/h3>
+&lt;ul>
+&lt;li>Press ⌘B to search the web for the current query.&lt;/li>
+&lt;li>Press ⌘C to copy the full path to the selected file, or to copy the result of the current calculation.&lt;/li>
+&lt;li>Press ⌘D to open the Dictionary app with the current query.&lt;/li>
+&lt;li>Press ⌘L to jump to the dictionary section in the results (if present).&lt;/li>
+&lt;li>Press ⌘⏎ or ⌘R to reveal the selected file in Finder.&lt;/li>
+&lt;li>Use the &lt;code>name:&lt;/code> filter to only search in the filename.&lt;/li>
+&lt;li>Add &lt;code>kind:folder&lt;/code> to only search for folder names.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> to show the path to the currently selected file.&lt;/li>
+&lt;/ul>
+&lt;h3 id="safari">Safari&lt;/h3>
+&lt;ul>
+&lt;li>Tab groups organize tabs spatially. Use ⌥⌘{↑,↓,←,→} to navigate tabs in 2D space.&lt;/li>
+&lt;li>When a video is playing, right click the speaker icon in the address bar or tab to enter Picture-in-Picture (PiP) mode.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while closing a tab to close all other tabs &lt;em>except&lt;/em> the current tab.&lt;/li>
+&lt;li>Click and hold the back button to see recent browsing history. Hold &lt;code>Option&lt;/code> to see page URLs instead of page titles.&lt;/li>
+&lt;li>Drag selected text onto the Safari dock icon to quickly search the web for that text.&lt;/li>
+&lt;li>Press ⇧⌘T to re-open the most recently closed tab or window.&lt;/li>
+&lt;li>Click and hold on the new tab icon in the toolbar to view recently closed tabs.&lt;/li>
+&lt;li>Press the Space bar at the beginning of the address bar to change the search engine and to see recent web searches.&lt;/li>
+&lt;li>Add &lt;code>kind:bookmark&lt;/code> to Spotlight searches to search Safari bookmarks and browsing history.&lt;/li>
+&lt;li>&lt;code>Shift&lt;/code>-click a link to add it to Reading List.&lt;/li>
+&lt;li>Click and hold a bookmark in the bookmarks bar to edit its display title.&lt;/li>
+&lt;li>Option-click the reload icon or press ⌥⌘R to force a fresh reload of the current webpage.&lt;/li>
+&lt;li>Right-click the reader icon in the address bar to automatically turn on Reader Mode for all pages on the current website.&lt;/li>
+&lt;li>After performing a web search and opening a result in the same tab, press ⌥⌘S to go back to the search results page.&lt;/li>
+&lt;li>Press ⇧⌘I to create a new email message with the contents of the current page.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> over the History &amp;gt; Clear History menu item to only clear browsing history while preserving website data.&lt;/li>
+&lt;li>Press ⌃⌘D while hovering over a link to open an inline preview of the link.&lt;/li>
+&lt;/ul>
+&lt;h3 id="mail">Mail&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>Command&lt;/code>-click multiple mailboxes in the left sidebar to simultaneously view all messages from the selected mailboxes.&lt;/li>
+&lt;li>Select part of a message&amp;rsquo;s text before replying or forwarding to only include the selected text in the new message.&lt;/li>
+&lt;li>Drag a file to the Mail dock icon to compose a new message with the file already attached.&lt;/li>
+&lt;li>Press ⌥⇧⌘N to create a new tab.&lt;/li>
+&lt;li>Press the Space bar at the end of a message to go to the next message. Hold &lt;code>Shift&lt;/code> while pressing the Space bar at the top of a message to go to the previous message.&lt;/li>
+&lt;li>Start typing the first few characters of the sender, subject, or body to jump to that message in the messages list.&lt;/li>
+&lt;li>Press ⌥⌘↑ and ⌥⌘↓ to jump to the top-most or bottom-most message in the messages list.&lt;/li>
+&lt;li>Save an extra copy of an important message by dragging it to the Finder.&lt;/li>
+&lt;li>If a message bounces, use &lt;code>Message &amp;gt; Send Again&lt;/code> on the bounced message to re-send it to a different address.&lt;/li>
+&lt;li>To add a message to multiple folders, hold Command while dragging the message to each folder.&lt;/li>
+&lt;li>Press ⇧⌘C to assign a color to a message.&lt;/li>
+&lt;li>Drag a message into the Notes or Reminders app to add a link to the message.&lt;/li>
+&lt;li>Press ⌘R and ⇧⌘R while replying to a message to switch between reply and reply-all.&lt;/li>
+&lt;li>Press ⌥⌫ to delete a message without automatically opening the next message.&lt;/li>
+&lt;li>&lt;code>Command&lt;/code>-click on the currently selected message to unselect it.&lt;/li>
+&lt;li>If a message has already been replied to, click on the reply icon in the message list to open the reply in a new window.&lt;/li>
+&lt;li>When creating a new mailbox, add a forward slash to create a nested mailbox.&lt;/li>
+&lt;li>After performing a search, select a mailbox from the left sidebar to filter the search to that mailbox.&lt;/li>
+&lt;li>Hold &lt;code>Shift&lt;/code> while launching Mail to reset the index.&lt;/li>
+&lt;/ul>
+&lt;h3 id="preview">Preview&lt;/h3>
+&lt;ul>
+&lt;li>Press ` to bring up a magnifier, and then press &lt;code>+&lt;/code> and &lt;code>-&lt;/code> to resize it.&lt;/li>
+&lt;li>In a PDF document, re-order the pages in the document by re-ordering the pages in the sidebar.&lt;/li>
+&lt;li>Merge two PDF documents by dragging pages from one document&amp;rsquo;s sidebar to the other document&amp;rsquo;s sidebar.&lt;/li>
+&lt;li>In the save dialog for an image, hold &lt;code>Option&lt;/code> while opening the Format menu to access an extended list of formats.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> and the Space bar to activate the pan tool.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while in text selection mode to switch to rectangular text selection.&lt;/li>
+&lt;/ul>
+&lt;h3 id="calendar">Calendar&lt;/h3>
+&lt;ul>
+&lt;li>Hold &lt;code>Shift&lt;/code> while dragging an event to set a more precise time instead of snapping to 15-minute intervals.&lt;/li>
+&lt;li>Click and hold the &lt;code>Accept&lt;/code> button in a calendar invite to change which calendar the event is accepted to.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while pressing the &lt;code>Accept&lt;/code> button in a calendar invite to accept all events.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> while clicking any calendar&amp;rsquo;s checkbox in the left sidebar to show or hide all calendars.&lt;/li>
+&lt;li>Hold &lt;code>Command&lt;/code> and &lt;code>Option&lt;/code> while clicking a calendar&amp;rsquo;s checkbox to only show that calendar.&lt;/li>
+&lt;li>Add &lt;code>kind:event&lt;/code> to Spotlight searches to search calendar events.&lt;/li>
+&lt;li>Resize the mini-calendar in the bottom-left to preview more months.&lt;/li>
+&lt;li>With an event selected, press ⌃⌥↑ and ⌃⌥↓ to adjust the time of the event. This also works with multiple events selected.&lt;/li>
+&lt;li>In Week view, press ⌥⌘← and ⌥⌘→ to shift the view by a single day.&lt;/li>
+&lt;/ul>
+&lt;h3 id="messages">Messages&lt;/h3>
+&lt;ul>
+&lt;li>Press ⌘R to directly reply to the latest message in the conversation.
+Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
+&lt;li>Press ⌘T to bring up the tapback selector for the latest message. Use the 1-6 number keys to select a reaction.&lt;/li>
+&lt;li>Press ⌘E to edit the latest sent message.&lt;/li>
+&lt;li>Press ⌥↑ and ⌥↓ in the message input field to cycle through previously sent messages.&lt;/li>
+&lt;li>Press ⌘1-9 to jump to a pinned conversation.&lt;/li>
+&lt;li>Right-click on a message and select Show Times to view exact timestamps for each message.&lt;/li>
+&lt;li>Right-click the Messages icon in the Dock to quickly view and jump to unread conversations.&lt;/li>
+&lt;/ul>
+&lt;h3 id="photos">Photos&lt;/h3>
+&lt;ul>
+&lt;li>Drag an item to the &amp;ldquo;My Albums&amp;rdquo; header section to quickly create an album with that item.&lt;/li>
+&lt;li>After adding an item to an album, use ⌃⌘A to add other items to that same album.&lt;/li>
+&lt;li>When editing an image, hold down the &lt;code>M&lt;/code> key to compare the modifications to the original.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while launching Photos to choose a different photo library to open.&lt;/li>
+&lt;li>Drag a photo from the Photos app into a Finder window to quickly export the photo, or into the Mail or Messages app to attach the photo.&lt;/li>
+&lt;li>When editing an image, double-click an adjustment slider to reset it.&lt;/li>
+&lt;li>When editing an image, hold &lt;code>Option&lt;/code> while holding the pointer over an adjustment slider to extend the adjustment range.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while clicking the rotate button to reverse the rotation direction.&lt;/li>
+&lt;li>Hold &lt;code>Shift&lt;/code> while cropping a photo to maintain the current aspect ratio, and hold &lt;code>Option&lt;/code> to crop from the center of the photo.&lt;/li>
+&lt;/ul>
+&lt;h3 id="textedit">TextEdit&lt;/h3>
+&lt;ul>
+&lt;li>In rich text mode, press &lt;code>Option-Tab&lt;/code> to insert an outlined list.&lt;/li>
+&lt;li>Press &lt;code>Option-Escape&lt;/code> to autocomplete the current word.&lt;/li>
+&lt;li>Press ⌃⌥⌘P in the find text field (⌘F) to access special search tokens.&lt;/li>
+&lt;li>Hold &lt;code>Option&lt;/code> while selecting text to make vertical text selections.&lt;/li>
+&lt;li>The select line dialog (⌘L) supports the following formats:
+&lt;code>1-3&lt;/code> selects lines 1-3 in the document
+&lt;code>+2&lt;/code> selects the 2nd line below the cursor
+&lt;code>-2&lt;/code> selects the 2nd line above the cursor
+&lt;code>+2-4&lt;/code> selects 3 lines, starting from 2 lines below the cursor
+&lt;code>-2-4&lt;/code> selects 3 lines, starting from 2 lines above the cursor&lt;/li>
+&lt;/ul>
+&lt;h3 id="terminal">Terminal&lt;/h3>
+&lt;ul>
+&lt;li>Press ⇧⌘A to select the output from the previous command.&lt;/li>
+&lt;li>Press ⌘L to clear the output from the previous command.&lt;/li>
+&lt;li>Press ⌃⌘V to paste and format text that is properly escaped for the shell.&lt;/li>
+&lt;li>Press ⌃T while a command is executing to view runtime statistics about the execution so far.&lt;/li>
+&lt;li>Press ⌘{↑,↓} to select the previous/next commands. Then press ⇧⌘A to select the output of the currently selected command.&lt;/li>
+&lt;li>Press ⇧⌘I to set a title for the current window and tab.&lt;/li>
+&lt;li>Drag a file or folder into a Terminal window to insert its full path. Alternatively, copy a file or folder in Finder and paste it in Terminal to insert its path.&lt;/li>
+&lt;/ul>
+&lt;h3 id="calculator">Calculator&lt;/h3>
+&lt;ul>
+&lt;li>Press ⌘T to open a new window that keeps a running history of calculations.&lt;/li>
+&lt;li>Press ⌘R to enable Reverse Polish notation (RPN) mode.&lt;/li>
+&lt;li>Press &lt;code>p&lt;/code> to insert pi.&lt;/li>
+&lt;li>Right-click the number display and select &amp;ldquo;Large Type&amp;rdquo; to view the current result in a large overlay window.&lt;/li>
+&lt;li>Use the Convert menu to perform various unit conversions.&lt;/li>
+&lt;li>In Programmer view (⌘3), click the individual binary bits to toggle between 0 and 1.&lt;/li>
+&lt;/ul>
+&lt;h3 id="quicktime-player">QuickTime Player&lt;/h3>
+&lt;ul>
+&lt;li>Grab a single frame from a video by pausing on the desired frame (using the Left and Right arrow keys to navigate individual frames) and pressing ⌘C.&lt;/li>
+&lt;/ul>
+&lt;h3 id="photo-booth">Photo Booth&lt;/h3>
+&lt;ul>
+&lt;li>Hold &lt;code>Option&lt;/code> while taking a picture to skip the countdown.&lt;/li>
+&lt;li>Hold &lt;code>Shift&lt;/code> while taking a picture to disable the screen flash.&lt;/li>
+&lt;li>When choosing one of the distortion effects (on the third page), click and drag the cursor on the image preview to change the effects origin.&lt;/li>
+&lt;/ul></description></item><item><title>How Core Git Developers Configure Git</title><link>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</link><pubDate>Fri, 07 Mar 2025 15:46:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gitbutler.com/how-git-core-devs-configure-git/" target="_blank" rel="noopener">How Core Git Developers Configure Git&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># clearly makes git better&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>column&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ui &lt;span style="color:#f92672">=&lt;/span> auto
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>branch&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sort &lt;span style="color:#f92672">=&lt;/span> -committerdate
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>tag&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sort &lt;span style="color:#f92672">=&lt;/span> version:refname
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>init&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultBranch &lt;span style="color:#f92672">=&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>diff&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> algorithm &lt;span style="color:#f92672">=&lt;/span> histogram
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> colorMoved &lt;span style="color:#f92672">=&lt;/span> plain
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mnemonicPrefix &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> renames &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>push&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> default &lt;span style="color:#f92672">=&lt;/span> simple
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoSetupRemote &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> followTags &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>fetch&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prune &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pruneTags &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># why the hell not?&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>help&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autocorrect &lt;span style="color:#f92672">=&lt;/span> prompt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>commit&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> verbose &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>rerere&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enabled &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoupdate &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>core&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> excludesfile &lt;span style="color:#f92672">=&lt;/span> ~/.gitignore
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>rebase&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoSquash &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoStash &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> updateRefs &lt;span style="color:#f92672">=&lt;/span> true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># a matter of taste (uncomment if you dare)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>core&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># fsmonitor = true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># untrackedCache = true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>merge&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># (just &amp;#39;diff3&amp;#39; if git version &amp;lt; 2.3)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># conflictstyle = zdiff3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>pull&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># rebase = true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Configuring SSH Keys for Multiple GitHub Accounts</title><link>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</link><pubDate>Tue, 11 Feb 2025 15:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts" target="_blank" rel="noopener">Configuring SSH Keys for Multiple GitHub Accounts&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="use-different-host-values">Use Different Host values&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Host github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_ed25519
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Host github-plnx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HostName github.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IdentityFile ~/.ssh/id_fry_plnx_ed25519
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Instead of the actual URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github.com:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Substitue in our custom Host value for the `github.com` part&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone git@github-plnx:planet-express/delivery_service.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="automate-substituting-the-host">Automate Substituting the Host&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>include&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path &lt;span style="color:#f92672">=&lt;/span> ~/.gitconfig_custom
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># See custom `Host github-plnx` in ~/.ssh/config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>url &lt;span style="color:#e6db74">&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> insteadOf &lt;span style="color:#f92672">=&lt;/span> git@github.com:planet-express
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>iTerm2 features I find useful</title><link>https://linzeyan.github.io/posts/2025/20250209-iterm2-features-i-find-useful/</link><pubDate>Sun, 09 Feb 2025 08:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250209-iterm2-features-i-find-useful/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://danielde.dev/blog/iterm2-features-i-find-useful" target="_blank" rel="noopener">iTerm2 features I find useful&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Show Timestamps ==&amp;gt; &lt;code>⌘+Shift+E&lt;/code>&lt;/li>
+&lt;li>Alert on next prompt ==&amp;gt; &lt;code>⌘+Option+A&lt;/code>&lt;/li>
+&lt;li>Jump between prompts ==&amp;gt; &lt;code>⌘+Shift+Down&lt;/code>&lt;/li>
+&lt;li>Hotkeys to scroll one line at a time ==&amp;gt; &lt;code>⌘+Up&lt;/code> and &lt;code>⌘+Down&lt;/code>&lt;/li>
+&lt;li>Rearrange tabs with hotkeys ==&amp;gt; &lt;code>Ctrl+Shift+B&lt;/code> and &lt;code>Ctrl+Shift+F&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>GraphQL Introspection Query</title><link>https://linzeyan.github.io/posts/2025/20250102-gql-introspection-query/</link><pubDate>Thu, 02 Jan 2025 15:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250102-gql-introspection-query/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-graphql" data-lang="graphql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">query&lt;/span> &lt;span style="color:#a6e22e">IntrospectionQuery&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> __schema {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">query&lt;/span>&lt;span style="color:#a6e22e">Type&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">mutation&lt;/span>&lt;span style="color:#a6e22e">Type&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">subscription&lt;/span>&lt;span style="color:#a6e22e">Type&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span>&lt;span style="color:#a6e22e">s&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>FullType
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">directive&lt;/span>s {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> locations
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> args {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>InputValue
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fragment&lt;/span> &lt;span style="color:#a6e22e">FullType&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span> __Type {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fields(includeDeprecated: &lt;span style="color:#a6e22e">true&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> args {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>InputValue
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>&lt;span style="color:#a6e22e">TypeRef&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> isDeprecated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deprecationReason
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">input&lt;/span>&lt;span style="color:#a6e22e">Fields&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>InputValue
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">interface&lt;/span>&lt;span style="color:#a6e22e">s&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>TypeRef
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">enum&lt;/span>&lt;span style="color:#a6e22e">Values&lt;/span>(includeDeprecated: &lt;span style="color:#a6e22e">true&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> isDeprecated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deprecationReason
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> possibleTypes {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>TypeRef
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fragment&lt;/span> &lt;span style="color:#a6e22e">InputValue&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span> __InputValue {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">type&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">...&lt;/span>&lt;span style="color:#a6e22e">TypeRef&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultValue
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fragment&lt;/span> &lt;span style="color:#a6e22e">TypeRef&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span> __Type {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ofType {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> kind
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

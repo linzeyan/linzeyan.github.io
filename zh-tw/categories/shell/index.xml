@@ -390,7 +390,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程</title><link>https://linzeyan.github.io/zh-tw/posts/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/20191230-mktemp/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="mktemp-命令">&lt;code>mktemp&lt;/code> 命令&lt;/h4>
@@ -418,4 +418,221 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> SIGHUP 2&lt;span style="color:#f92672">)&lt;/span> SIGINT 3&lt;span style="color:#f92672">)&lt;/span> SIGQUIT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> SIGILL 5&lt;span style="color:#f92672">)&lt;/span> SIGTRAP 6&lt;span style="color:#f92672">)&lt;/span> SIGABRT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ... ...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下。&lt;/p></description></item><item><title>Shell脚本学习笔记</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell 脚本学习笔记&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="执行算术运算">执行算术运算&lt;/h3>
+&lt;pre>&lt;code>val=`expr $a + $b`
+&lt;/code>&lt;/pre>
+&lt;h3 id="运算符">运算符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>符号&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>!&lt;/td>
+&lt;td>非运算&lt;/td>
+&lt;td>[ ! false ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-o&lt;/td>
+&lt;td>或运算&lt;/td>
+&lt;td>[ $a -lt 20 -o $b -gt 20 ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-a&lt;/td>
+&lt;td>与运算&lt;/td>
+&lt;td>[ $a -lt 20 -a $b -gt 20 ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>=&lt;/td>
+&lt;td>相等检测&lt;/td>
+&lt;td>[ $a = $b ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>!=&lt;/td>
+&lt;td>不相等检测&lt;/td>
+&lt;td>[ $a != $b ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-z&lt;/td>
+&lt;td>字符串长度是否为 0，为 0 则返回 true&lt;/td>
+&lt;td>[ -z $a ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-n&lt;/td>
+&lt;td>字符串长度不为 0， 不为 0 返回 true&lt;/td>
+&lt;td>[ -n $a ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>str&lt;/td>
+&lt;td>检测字符串是否为空，不为空返回 true&lt;/td>
+&lt;td>[ $a ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-b&lt;/td>
+&lt;td>检测文件是否是块设备文件&lt;/td>
+&lt;td>[ -b $file ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-c&lt;/td>
+&lt;td>检测文件是否是字符设备&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-d&lt;/td>
+&lt;td>检测文件是否为目录&lt;/td>
+&lt;td>[ -d $file ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-f&lt;/td>
+&lt;td>检测文件是否为普通文件&lt;/td>
+&lt;td>[ -f $file ]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-r&lt;/td>
+&lt;td>检测文件是否可读&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-w&lt;/td>
+&lt;td>检测文件是否可写&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-x&lt;/td>
+&lt;td>检测文件是否可执行&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-s&lt;/td>
+&lt;td>检测文件是否为空&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>-e&lt;/td>
+&lt;td>检测文件是否存在&lt;/td>
+&lt;td>..&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="特殊变量">特殊变量&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>变量&lt;/th>
+&lt;th>含义&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$0&lt;/td>
+&lt;td>当前脚本的文件名&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$n&lt;/td>
+&lt;td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$#&lt;/td>
+&lt;td>传递给脚本或函数的参数个数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$*&lt;/td>
+&lt;td>传递给脚本或函数的所有参数，所有参数被当做一个词，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$@&lt;/td>
+&lt;td>传递给脚本或函数的所有参数，每个参数当做一个词，用双引号包含，例如&amp;quot;1&amp;quot; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$?&lt;/td>
+&lt;td>上个命令的退出状态，或函数的返回值&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$$&lt;/td>
+&lt;td>当前 Shell 进程 ID。对于 Shell 脚本，就是这些脚本所在的进程 ID&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="posix-程序退出状态">POSIX 程序退出状态&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>状态码&lt;/th>
+&lt;th>含义&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>0&lt;/td>
+&lt;td>命令成功退出&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>在重定向或者单词展开期间(~、变量、命令、算术展开以及单词切割)失败&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1 - 125&lt;/td>
+&lt;td>命令不成功退出。特定的退出值的含义，有各个命令自行定义&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>126&lt;/td>
+&lt;td>命令找到了，但是文件无法执行&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>127&lt;/td>
+&lt;td>命令没有找到&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;gt; 128&lt;/td>
+&lt;td>命令因收到信号而死亡&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="输入输出重定向">输入输出重定向&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>命令&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>command &amp;gt; file&lt;/td>
+&lt;td>将输出重定向到 file。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>command &amp;gt; file&lt;/td>
+&lt;td>将输出以追加的方式重定向到 file。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>n &amp;gt; file&lt;/td>
+&lt;td>将文件描述符为 n 的文件重定向到 file。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>n &amp;raquo; file&lt;/td>
+&lt;td>将文件描述符为 n 的文件以追加的方式重定向到 file。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>n &amp;gt;&amp;amp; m&lt;/td>
+&lt;td>将输出文件 m 和 n 合并。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>n &amp;lt;&amp;amp; m&lt;/td>
+&lt;td>将输入文件 m 和 n 合并。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;laquo; tag&lt;/td>
+&lt;td>将开始标记 tag 和结束标记 tag 之间的内容作为输入。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="文件包含">文件包含&lt;/h3>
+&lt;p>使用&lt;code>.&lt;/code>或者&lt;code>source&lt;/code>包含文件&lt;/p></description></item></channel></rss>

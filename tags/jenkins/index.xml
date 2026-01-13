@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jenkins on Ricky</title><link>https://linzeyan.github.io/tags/jenkins/</link><description>Recent content in Jenkins on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Nov 2019 17:29:46 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml"/><item><title>Some Jenkinsfile examples</title><link>https://linzeyan.github.io/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c" target="_blank" rel="noopener">Some Jenkinsfile examples&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h5 id="parallel">Parallel&lt;/h5>
+&lt;pre tabindex="0">&lt;code>#!/usr/bin/env groovy
+pipeline {
+agent any
+stages {
+stage(&amp;#34;Build&amp;#34;) {
+steps {
+sh &amp;#39;mvn -v&amp;#39;
+}
+}
+stage(&amp;#34;Testing&amp;#34;) {
+parallel {
+stage(&amp;#34;Unit Tests&amp;#34;) {
+agent { docker &amp;#39;openjdk:7-jdk-alpine&amp;#39; }
+steps {
+sh &amp;#39;java -version&amp;#39;
+}
+}
+stage(&amp;#34;Functional Tests&amp;#34;) {
+agent { docker &amp;#39;openjdk:8-jdk-alpine&amp;#39; }
+steps {
+sh &amp;#39;java -version&amp;#39;
+}
+}
+stage(&amp;#34;Integration Tests&amp;#34;) {
+steps {
+sh &amp;#39;java -version&amp;#39;
+}
+}
+}
+}
+stage(&amp;#34;Deploy&amp;#34;) {
+steps {
+echo &amp;#34;Deploy!&amp;#34;
+}
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;h5 id="when">When&lt;/h5>
+&lt;pre tabindex="0">&lt;code>#!/usr/bin/env groovy
+pipeline {
+agent any
+environment {
+VALUE_ONE = &amp;#39;1&amp;#39;
+VALUE_TWO = &amp;#39;2&amp;#39;
+VALUE_THREE = &amp;#39;3&amp;#39;
+}
+stages {
+// skip a stage while creating the pipeline
+stage(&amp;#34;A stage to be skipped&amp;#34;) {
+when {
+expression { false } //skip this stage
+}
+steps {
+echo &amp;#39;This step will never be run&amp;#39;
+}
+}
+// Execute when branch = &amp;#39;master&amp;#39;
+stage(&amp;#34;BASIC WHEN - Branch&amp;#34;) {
+when {
+branch &amp;#39;master&amp;#39;
+}
+steps {
+echo &amp;#39;BASIC WHEN - Master Branch!&amp;#39;
+}
+}
+// Expression based when example with AND
+stage(&amp;#39;WHEN EXPRESSION with AND&amp;#39;) {
+when {
+expression {
+VALUE_ONE == &amp;#39;1&amp;#39; &amp;amp;&amp;amp; VALUE_THREE == &amp;#39;3&amp;#39;
+}
+}
+steps {
+echo &amp;#39;WHEN with AND expression works!&amp;#39;
+}
+}
+// Expression based when example
+stage(&amp;#39;WHEN EXPRESSION with OR&amp;#39;) {
+when {
+expression {
+VALUE_ONE == &amp;#39;1&amp;#39; || VALUE_THREE == &amp;#39;2&amp;#39;
+}
+}
+steps {
+echo &amp;#39;WHEN with OR expression works!&amp;#39;
+}
+}
+// When - AllOf Example
+stage(&amp;#34;AllOf&amp;#34;) {
+when {
+allOf {
+environment name:&amp;#39;VALUE_ONE&amp;#39;, value: &amp;#39;1&amp;#39;
+environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;2&amp;#39;
+}
+}
+steps {
+echo &amp;#34;AllOf Works!!&amp;#34;
+}
+}
+// When - Not AnyOf Example
+stage(&amp;#34;Not AnyOf&amp;#34;) {
+when {
+not {
+anyOf {
+branch &amp;#34;development&amp;#34;
+environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;4&amp;#39;
+}
+}
+}
+steps {
+echo &amp;#34;Not AnyOf - Works!&amp;#34;
+}
+}
+}
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>
