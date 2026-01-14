@@ -98,7 +98,41 @@
 &lt;li>User Management&lt;/li>
 &lt;li>Automated Updates&lt;/li>
 &lt;li>Network Configuration&lt;/li>
-&lt;/ol></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
+&lt;/ol></description></item><item><title>寫 Web 也可以用 Makefile：好好管理你的環境流程</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">寫 Web 也可以用 Makefile：好好管理你的環境流程&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener">How I stopped worrying and loved Makefiles&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>注意：Makefile 的縮排應使用 Tab，否則會出現語法問題。&lt;/strong>&lt;/p>
+&lt;h2 id="makefile-的主要本體target">Makefile 的主要本體：Target&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">stop&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose stop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">zsh&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose exec workspace zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>本例有三個 Target：&lt;code>up&lt;/code>、&lt;code>stop&lt;/code>、&lt;code>zsh&lt;/code>。Makefile 預設將第一個 Target 視為 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener">Goal&lt;/a>(不能是點（dot）開頭的 Target)，是專案的最主要流程，可以直接用 &lt;code>make&lt;/code> 執行。以本例來說，執行 &lt;code>make&lt;/code> 和 &lt;code>make up&lt;/code> 是一樣的結果。&lt;/li>
+&lt;li>但其實剛剛複製檔案的例子不是常見的 Make 用法。Make 的強項是在自動判斷有沒有必要執行每個 Target 的流程。例如我們常常將機敏資料放在 .env 中，若 .env 已經存在，就不應該再複製 .env.example 覆寫過去了。這時候我們可以把 .env 做成一個 Target：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span> .env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.env&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Target 名稱預設是被視為檔名的。Make 之所以稱為 make，就是想要「製作」出指定的 Target，當符合指定條件時（如檔案不存在）才會執行 Target 的內容。
+&lt;ul>
+&lt;li>以本例來說，我們執行 &lt;code>up&lt;/code> Target 時，如果 .env 不存在，就會先執行 &lt;code>.env&lt;/code> Target 以複製出 .env，接著才會啟動 workspace container。如果執行 &lt;code>up&lt;/code> Target 時 .env 已經存在，就會略過 &lt;code>.env&lt;/code> Target，直接啟動 workspace container。&lt;/li>
+&lt;li>同樣地，如果我們目錄中有「up」這個檔案， &lt;code>up&lt;/code> Target 就不會被執行了。這時我們可以設定 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener">Phony Target&lt;/a>，告訴 Make 哪些 Target 不是檔案的名稱，而是單純流程的命名。寫法如下：&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> up stop zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="來點變數">來點變數&lt;/h2>
+&lt;p>Make 當然也支援變數（&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>），與常見的 Unix 環境變數慣例相同，我們習慣用 SCREAMING_SNAKE_CASE 表示法（全大寫和底線的表示法）。並且在使用時以 &lt;code>$()&lt;/code> 包裹變數名稱。&lt;/p></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>

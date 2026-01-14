@@ -51,12 +51,40 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># conflictstyle = zdiff3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>pull&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># rebase = true&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Git force push</title><link>https://linzeyan.github.io/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240726-git/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How I configure my Git identities</title><link>https://linzeyan.github.io/posts/2024/20241125-git-config/</link><pubDate>Mon, 25 Nov 2024 17:35:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241125-git-config/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.benji.dog/articles/git-config/" target="_blank" rel="noopener">How I configure my Git identities&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>includeIf&lt;/em>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;gitdir:~/code/**&amp;#34;]
+path = ~/.config/git/personal
+[includeIf &amp;#34;gitdir:~/work/**&amp;#34;]
+path = ~/.config/git/work
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;code>hasconfig:remote.*.url:&lt;/code>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:*/**&amp;#34;]
+path = ~/.config/git/config-gh
+[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:orgname/**&amp;#34;]
+path = ~/.config/git/config-gh-org
+[includeIf &amp;#34;hasconfig:remote.*.url:git@gitlab.com:*/**&amp;#34;]
+path = ~/.config/git/config-gl
+[includeIf &amp;#34;hasconfig:remote.*.url:git@git.sr.ht:*/**&amp;#34;]
+path = ~/.config/git/config-srht
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;em>insteadOf&lt;/em>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[url &amp;#34;gh-work:orgname&amp;#34;]
+insteadOf = git@github.com:orgname
+&lt;/code>&lt;/pre></description></item><item><title>Git force push</title><link>https://linzeyan.github.io/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240726-git/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.jvt.me/posts/2021/10/23/undo-force-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2021/10/23/undo-force-push/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.jvt.me/posts/2018/09/18/safely-force-git-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2018/09/18/safely-force-git-push/&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git push --force-with-lease
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>利用 GPG 簽署 git commit</title><link>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Tracking SQLite Database Changes in Git</title><link>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</link><pubDate>Wed, 07 Feb 2024 19:20:15 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://lobste.rs/s/gnv9ho/tracking_sqlite_database_changes_git" target="_blank" rel="noopener">Tracking SQLite Database Changes in Git&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://stackoverflow.com/a/21789167" target="_blank" rel="noopener">Git hook for diff sqlite table&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>First, add a diff type called &amp;ldquo;sqlite3&amp;rdquo; to your config. The simplest way is to just run these commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config diff.sqlite3.binary true git config diff.sqlite3.textconv &lt;span style="color:#e6db74">&amp;#34;echo .dump | sqlite3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Alternatively, you can add this snippet to your &lt;code>~/.gitconfig&lt;/code> or &lt;code>.git/config&lt;/code> in your repository:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-gitconfig" data-lang="gitconfig">[diff &amp;#34;sqlite3&amp;#34;] binary = true textconv = &amp;#34;echo .dump | sqlite3&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Next, create a file called &lt;code>.gitattributes&lt;/code> if it&amp;rsquo;s not already present and add this line:&lt;/p></description></item><item><title>利用 GPG 簽署 git commit</title><link>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/" target="_blank" rel="noopener">利用 GPG 簽署 git commit&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Little Git Tricks: Use .mailmap to Merge Different Authors</title><link>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</link><pubDate>Thu, 05 Aug 2021 13:42:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/" target="_blank" rel="noopener">Little Git Tricks: Use .mailmap to Merge Different Authors&lt;/a>&lt;/li>

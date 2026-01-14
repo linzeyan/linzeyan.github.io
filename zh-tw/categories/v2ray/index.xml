@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>V2Ray on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/v2ray/</link><description>Recent content in V2Ray on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 08 Feb 2018 10:56:54 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/v2ray/index.xml" rel="self" type="application/rss+xml"/><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>V2Ray on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/v2ray/</link><description>Recent content in V2Ray on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/v2ray/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Cloudflare 中转 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">使用 Cloudflare 中转 V2Ray 流量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray 脚本 DNS 设置&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray 脚本中转教程&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装脚本">安装脚本&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="准备">准备&lt;/h2>
+&lt;p>我们现在就添加一个 DNS 记录，名称：&lt;code>ai&lt;/code>，IPv4 地址：&lt;code>写你的 VPS IP&lt;/code>，代理状态必须关闭，云朵图标为灰色。&lt;/p>
+&lt;p>提示：你可以使用 &lt;code>v2ray ip&lt;/code> 查看你的 VPS IP。&lt;/p>
+&lt;h2 id="添加中转配置">添加中转配置&lt;/h2>
+&lt;p>使用 &lt;code>v2ray add ws ai.233boy.com&lt;/code> 添加一个 vmess-ws-tls 配置；记得把 &lt;code>ai.233boy.com&lt;/code> 改成你的域名&lt;/p>
+&lt;p>就是刚才添加记录的那个域名，假设你的域名是 233boy.com ，添加的名称是 ai，域名就是 ai.233boy.com&lt;/p>
+&lt;h2 id="开启中转">开启中转&lt;/h2>
+&lt;p>在 Cloudflare 后台主页，点击你的域名进去，在左侧选项菜单选择 &lt;code>SSL/TLS&lt;/code>&lt;/p>
+&lt;p>将 SSL/TLS 加密模式更改为 &lt;code>完全&lt;/code>&lt;/p>
+&lt;p>然后在左侧选项菜单选择 &lt;code>DNS&lt;/code>&lt;/p>
+&lt;p>编辑添加的那个记录，把代理状态打开，即是 &lt;code>已代理&lt;/code>，云朵图标为点亮状态，然后保存&lt;/p>
+&lt;p>把云朵点亮之后，流量就是走的 Cloudflare 中转了。&lt;/p>
+&lt;p>提醒，把云朵点亮就是流量通过 Cloudflare 中转，点灰云朵图标就是直连，不走 Cloudflare 中转。&lt;/p></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

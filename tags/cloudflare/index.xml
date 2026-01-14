@@ -1,4 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudflare on Ricky</title><link>https://linzeyan.github.io/tags/cloudflare/</link><description>Recent content in Cloudflare on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 26 Sep 2023 09:01:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/cloudflare/index.xml" rel="self" type="application/rss+xml"/><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudflare on Ricky</title><link>https://linzeyan.github.io/tags/cloudflare/</link><description>Recent content in Cloudflare on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Nov 2024 17:47:06 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/cloudflare/index.xml" rel="self" type="application/rss+xml"/><item><title>把 Cloudflare WARP 转换为 http 代理</title><link>https://linzeyan.github.io/posts/2024/20241106-warp-http-proxy/</link><pubDate>Wed, 06 Nov 2024 17:47:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241106-warp-http-proxy/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/warp-http-proxy.html" target="_blank" rel="noopener">把 Cloudflare WARP 转换为 http 代理&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli proxy port &lt;span style="color:#ae81ff">60606&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli mode proxy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然而，Go 的程序不支持 socks 代理，要手动加 transport 我可没那个功夫去加。&lt;/p>
+&lt;p>好消息是，Go 默认是尊重环境变量 http_proxy 的。那么就要想办法给 socks 代理转换为 http 代理&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 http_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 curl ipv4.win
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl: &lt;span style="color:#f92672">(&lt;/span>52&lt;span style="color:#f92672">)&lt;/span> Empty reply from server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pproxy logs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Serving on ipv? 127.0.0.1:8118 by http
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http 127.0.0.1:45012 -&amp;gt; socks5 127.0.0.1:60606 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Unknown remote protocol from 127.0.0.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可能是 pproxy 的问题，那么用 gost&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>gost -L http://127.0.0.1:8118 -F socks5://127.0.0.1:60606
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:43 route.go:700: http://127.0.0.1:8118 on 127.0.0.1:8118
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:162: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:257: &lt;span style="color:#f92672">[&lt;/span>route&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; 1@socks5://127.0.0.1:60606 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:280: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; 127.0.0.1:8118 : unexpected EOF
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>那……Privoxy&lt;/p></description></item><item><title>隐藏于 Cloudflare 的全球网络之中</title><link>https://linzeyan.github.io/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/hide-in-cf.html" target="_blank" rel="noopener">隐藏于 Cloudflare 的全球网络之中&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>一种方式是走 Cloudflare WARP，WARP 可以运行在 proxy mode 而不是接管全局流量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli register
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp 监听本地的11111端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-proxy-port &lt;span style="color:#ae81ff">11111&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp proxy mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-mode proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 永久开启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli enable-always-on
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 http_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 go run main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>还有一种方式是使用 Cloudflare Workers，请求由 Workers 转发&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#66d9ef">default&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">request&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">Request&lt;/span>)&lt;span style="color:#f92672">:&lt;/span> Promise {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Replace `remote` with the host you wish to send requests to
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">remote&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;https://example.com&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">remote&lt;/span>, &lt;span style="color:#a6e22e">request&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>WebP Cloud uses Cloudflare Workers to fetch content from the origin server in order to protect the origin server and start providing origin fetch time information.</title><link>https://linzeyan.github.io/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.webp.se/cloudflare-workers-origin-en/" target="_blank" rel="noopener">WebP Cloud uses Cloudflare Workers to fetch content from the origin server in order to protect the origin server and start providing origin fetch time information.&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener">Connect private networks&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/" target="_blank" rel="noopener">Configure Local Domain Fallback&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener">Configure Split Tunnels&lt;/a>&lt;/li>

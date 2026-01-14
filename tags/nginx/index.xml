@@ -189,7 +189,28 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Avoiding the Top 10 NGINX Configuration Mistakes - NGINX</title><link>https://linzeyan.github.io/posts/2022/20220916-avoiding-top-10-nginx-configuration-mistakes/</link><pubDate>Fri, 16 Sep 2022 15:22:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220916-avoiding-top-10-nginx-configuration-mistakes/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx if 避坑指南</title><link>https://linzeyan.github.io/posts/2024/20240615-if-is-evil/</link><pubDate>Sat, 15 Jun 2024 19:55:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240615-if-is-evil/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://taoshu.in/nginx/if-is-evil.html" target="_blank" rel="noopener">Nginx if 避坑指南&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.ph/hyEoc" target="_blank" rel="noopener">If is Evil&amp;hellip; when used in location context&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>if 指令由 rewrite 模块提供，显然它主要是用于 URL 重写领域。典型的 if 用法如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">8080&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span> &lt;span style="color:#e6db74">(&lt;/span>$http_user_agent ~ &lt;span style="color:#e6db74">MSIE)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">^(.*)&lt;/span>$ &lt;span style="color:#e6db74">/msie/&lt;/span>$1 &lt;span style="color:#e6db74">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span> &lt;span style="color:#e6db74">(&lt;/span>$request_method = &lt;span style="color:#e6db74">POST)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">405&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上例中第一个 if 检查如果 user agent 字符串中包含 MSIE，就把 URL 重写为 /msie 开头的路径，这样就可以给微软的 IE 浏览器提供特供版本内容。&lt;/p>
+&lt;p>第二个 if 检查当前请求的 HTTP 方法，如果是 POST 请求则直接返回 405 状态码。&lt;/p>
+&lt;p>以上就是 if 最典型的用法，也是 Nginx 最初设想的用法～但很快就被用户玩坏了 😂&lt;/p>
+&lt;p>天下苦静态配置久矣，Nginx 终于支持动态配置了 👏 这个 if 不就是 c 语言里的条件判断吗？大家玩起来 🎢&lt;/p></description></item><item><title>Avoiding the Top 10 NGINX Configuration Mistakes - NGINX</title><link>https://linzeyan.github.io/posts/2022/20220916-avoiding-top-10-nginx-configuration-mistakes/</link><pubDate>Fri, 16 Sep 2022 15:22:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220916-avoiding-top-10-nginx-configuration-mistakes/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/" target="_blank" rel="noopener">Avoiding the Top 10 NGINX Configuration Mistakes - NGINX&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="1-not-enough-file-descriptors-fds-per-worker">1) Not enough file descriptors (FDs) per worker&lt;/h2>

@@ -981,7 +981,29 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;p>&lt;strong>&lt;em>Cookies&lt;/em>&lt;/strong>&lt;/p>
 &lt;p>Cookies store small pieces of key-value data that are mainly used for session management, personalization, and tracking. Cookies can have several security settings like a time-to-live or the domain attribute to share the cookies between several subdomains.&lt;/p>
 &lt;p>&lt;strong>&lt;em>LocalStorage&lt;/em>&lt;/strong>&lt;/p>
-&lt;p>LocalStorage is only suitable for storing small amounts of data that need to persist across sessions and it is limited by a 5MB storage cap. Storing complex data is only possible by transforming it into a string for example with JSON.stringify(). The API is not asynchronous which means if fully blocks your JavaScript process while doing stuff. Therefore running heavy operations on it might block your UI from rendering.&lt;/p></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
+&lt;p>LocalStorage is only suitable for storing small amounts of data that need to persist across sessions and it is limited by a 5MB storage cap. Storing complex data is only possible by transforming it into a string for example with JSON.stringify(). The API is not asynchronous which means if fully blocks your JavaScript process while doing stuff. Therefore running heavy operations on it might block your UI from rendering.&lt;/p></description></item><item><title>How I configure my Git identities</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241125-git-config/</link><pubDate>Mon, 25 Nov 2024 17:35:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241125-git-config/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.benji.dog/articles/git-config/" target="_blank" rel="noopener">How I configure my Git identities&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>includeIf&lt;/em>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;gitdir:~/code/**&amp;#34;]
+path = ~/.config/git/personal
+[includeIf &amp;#34;gitdir:~/work/**&amp;#34;]
+path = ~/.config/git/work
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;code>hasconfig:remote.*.url:&lt;/code>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:*/**&amp;#34;]
+path = ~/.config/git/config-gh
+[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:orgname/**&amp;#34;]
+path = ~/.config/git/config-gh-org
+[includeIf &amp;#34;hasconfig:remote.*.url:git@gitlab.com:*/**&amp;#34;]
+path = ~/.config/git/config-gl
+[includeIf &amp;#34;hasconfig:remote.*.url:git@git.sr.ht:*/**&amp;#34;]
+path = ~/.config/git/config-srht
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;em>insteadOf&lt;/em>&lt;/strong>&lt;/p>
+&lt;pre tabindex="0">&lt;code>[url &amp;#34;gh-work:orgname&amp;#34;]
+insteadOf = git@github.com:orgname
+&lt;/code>&lt;/pre></description></item><item><title>Speeding up the Rust edit-build-run cycle</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241118-speeding-up-the-rust-edit-build-run-cycle/</link><pubDate>Mon, 18 Nov 2024 09:10:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241118-speeding-up-the-rust-edit-build-run-cycle/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html" target="_blank" rel="noopener">Speeding up the Rust edit-build-run cycle&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.ursb.me/posts/mac-app-share-2024/" target="_blank" rel="noopener">Mac 小众软件推荐与工作流分享(2024)&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</link><pubDate>Wed, 13 Nov 2024 09:44:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://t.me/misakatech/1349" target="_blank" rel="noopener">Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织&lt;/a>&lt;/li>
@@ -1004,7 +1026,51 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;p>&lt;a href="https://objective-see.org/products/blockblock.html" target="_blank" rel="noopener">BlockBlock&lt;/a>: 可以阻止后台的持久化安装，RansomWhere 可以检测文件被加密的行为，还有一些杂七杂八的独立工具。&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul>
+&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item><item><title>工欲善其事，必先利其器 —— 我的家庭网络组网方案</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241111-home-network-setup/</link><pubDate>Mon, 11 Nov 2024 09:25:57 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241111-home-network-setup/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skk.moe/post/home-network-setup/" target="_blank" rel="noopener">工欲善其事，必先利其器 —— 我的家庭网络组网方案&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>把 Cloudflare WARP 转换为 http 代理</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</link><pubDate>Wed, 06 Nov 2024 17:47:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/warp-http-proxy.html" target="_blank" rel="noopener">把 Cloudflare WARP 转换为 http 代理&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli proxy port &lt;span style="color:#ae81ff">60606&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli mode proxy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然而，Go 的程序不支持 socks 代理，要手动加 transport 我可没那个功夫去加。&lt;/p>
+&lt;p>好消息是，Go 默认是尊重环境变量 http_proxy 的。那么就要想办法给 socks 代理转换为 http 代理&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 http_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 curl ipv4.win
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl: &lt;span style="color:#f92672">(&lt;/span>52&lt;span style="color:#f92672">)&lt;/span> Empty reply from server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pproxy logs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Serving on ipv? 127.0.0.1:8118 by http
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http 127.0.0.1:45012 -&amp;gt; socks5 127.0.0.1:60606 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Unknown remote protocol from 127.0.0.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可能是 pproxy 的问题，那么用 gost&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>gost -L http://127.0.0.1:8118 -F socks5://127.0.0.1:60606
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:43 route.go:700: http://127.0.0.1:8118 on 127.0.0.1:8118
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:162: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:257: &lt;span style="color:#f92672">[&lt;/span>route&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; 1@socks5://127.0.0.1:60606 -&amp;gt; ipv4.win:80
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:280: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; 127.0.0.1:8118 : unexpected EOF
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>那……Privoxy&lt;/p></description></item><item><title>使用 Cloudflare 中转 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">使用 Cloudflare 中转 V2Ray 流量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray 脚本 DNS 设置&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray 脚本中转教程&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装脚本">安装脚本&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="准备">准备&lt;/h2>
+&lt;p>我们现在就添加一个 DNS 记录，名称：&lt;code>ai&lt;/code>，IPv4 地址：&lt;code>写你的 VPS IP&lt;/code>，代理状态必须关闭，云朵图标为灰色。&lt;/p>
+&lt;p>提示：你可以使用 &lt;code>v2ray ip&lt;/code> 查看你的 VPS IP。&lt;/p>
+&lt;h2 id="添加中转配置">添加中转配置&lt;/h2>
+&lt;p>使用 &lt;code>v2ray add ws ai.233boy.com&lt;/code> 添加一个 vmess-ws-tls 配置；记得把 &lt;code>ai.233boy.com&lt;/code> 改成你的域名&lt;/p>
+&lt;p>就是刚才添加记录的那个域名，假设你的域名是 233boy.com ，添加的名称是 ai，域名就是 ai.233boy.com&lt;/p>
+&lt;h2 id="开启中转">开启中转&lt;/h2>
+&lt;p>在 Cloudflare 后台主页，点击你的域名进去，在左侧选项菜单选择 &lt;code>SSL/TLS&lt;/code>&lt;/p>
+&lt;p>将 SSL/TLS 加密模式更改为 &lt;code>完全&lt;/code>&lt;/p>
+&lt;p>然后在左侧选项菜单选择 &lt;code>DNS&lt;/code>&lt;/p>
+&lt;p>编辑添加的那个记录，把代理状态打开，即是 &lt;code>已代理&lt;/code>，云朵图标为点亮状态，然后保存&lt;/p>
+&lt;p>把云朵点亮之后，流量就是走的 Cloudflare 中转了。&lt;/p>
+&lt;p>提醒，把云朵点亮就是流量通过 Cloudflare 中转，点灰云朵图标就是直连，不走 Cloudflare 中转。&lt;/p></description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener">Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="use-built-in-commands">Use Built-in Commands&lt;/h4>
@@ -1184,13 +1250,150 @@ eqcsfield：约束统一结构体中字段等于另一个字段（相对），�
 nefield：用来约束两个字段是否相同，确认两种颜色是否一致时可以使用，例如：nefield=Color1
 necsfield：约束两个字段是否相同（相对）&lt;/p>
 &lt;h3 id="常用约束">常用约束&lt;/h3>
-&lt;p>unique：指定唯一性约束，不同类型处理不同：&lt;/p></description></item><item><title>Git force push</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240726-git/</guid><description>&lt;ul>
+&lt;p>unique：指定唯一性约束，不同类型处理不同：&lt;/p></description></item><item><title>Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</link><pubDate>Tue, 06 Aug 2024 12:26:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/05/best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly.html" target="_blank" rel="noopener">Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/soulteary/traefik-minio-example.git" target="_blank" rel="noopener">https://github.com/soulteary/traefik-minio-example.git&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/04/best-practices-for-traefik-3-in-docker-getting-started-quickly.html#docker-%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener">Docker 环境下使用 Traefik 3 的最佳实践：快速上手&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>寫 Web 也可以用 Makefile：好好管理你的環境流程</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">寫 Web 也可以用 Makefile：好好管理你的環境流程&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener">How I stopped worrying and loved Makefiles&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>注意：Makefile 的縮排應使用 Tab，否則會出現語法問題。&lt;/strong>&lt;/p>
+&lt;h2 id="makefile-的主要本體target">Makefile 的主要本體：Target&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">stop&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose stop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">zsh&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose exec workspace zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>本例有三個 Target：&lt;code>up&lt;/code>、&lt;code>stop&lt;/code>、&lt;code>zsh&lt;/code>。Makefile 預設將第一個 Target 視為 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener">Goal&lt;/a>(不能是點（dot）開頭的 Target)，是專案的最主要流程，可以直接用 &lt;code>make&lt;/code> 執行。以本例來說，執行 &lt;code>make&lt;/code> 和 &lt;code>make up&lt;/code> 是一樣的結果。&lt;/li>
+&lt;li>但其實剛剛複製檔案的例子不是常見的 Make 用法。Make 的強項是在自動判斷有沒有必要執行每個 Target 的流程。例如我們常常將機敏資料放在 .env 中，若 .env 已經存在，就不應該再複製 .env.example 覆寫過去了。這時候我們可以把 .env 做成一個 Target：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span> .env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.env&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Target 名稱預設是被視為檔名的。Make 之所以稱為 make，就是想要「製作」出指定的 Target，當符合指定條件時（如檔案不存在）才會執行 Target 的內容。
+&lt;ul>
+&lt;li>以本例來說，我們執行 &lt;code>up&lt;/code> Target 時，如果 .env 不存在，就會先執行 &lt;code>.env&lt;/code> Target 以複製出 .env，接著才會啟動 workspace container。如果執行 &lt;code>up&lt;/code> Target 時 .env 已經存在，就會略過 &lt;code>.env&lt;/code> Target，直接啟動 workspace container。&lt;/li>
+&lt;li>同樣地，如果我們目錄中有「up」這個檔案， &lt;code>up&lt;/code> Target 就不會被執行了。這時我們可以設定 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener">Phony Target&lt;/a>，告訴 Make 哪些 Target 不是檔案的名稱，而是單純流程的命名。寫法如下：&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> up stop zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="來點變數">來點變數&lt;/h2>
+&lt;p>Make 當然也支援變數（&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>），與常見的 Unix 環境變數慣例相同，我們習慣用 SCREAMING_SNAKE_CASE 表示法（全大寫和底線的表示法）。並且在使用時以 &lt;code>$()&lt;/code> 包裹變數名稱。&lt;/p></description></item><item><title>隐藏于 Cloudflare 的全球网络之中</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/hide-in-cf.html" target="_blank" rel="noopener">隐藏于 Cloudflare 的全球网络之中&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>一种方式是走 Cloudflare WARP，WARP 可以运行在 proxy mode 而不是接管全局流量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli register
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp 监听本地的11111端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-proxy-port &lt;span style="color:#ae81ff">11111&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp proxy mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-mode proxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 永久开启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli enable-always-on
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 http_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 go run main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>还有一种方式是使用 Cloudflare Workers，请求由 Workers 转发&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#66d9ef">default&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">request&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">Request&lt;/span>)&lt;span style="color:#f92672">:&lt;/span> Promise {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Replace `remote` with the host you wish to send requests to
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">remote&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;https://example.com&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">remote&lt;/span>, &lt;span style="color:#a6e22e">request&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Git force push</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240726-git/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.jvt.me/posts/2021/10/23/undo-force-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2021/10/23/undo-force-push/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.jvt.me/posts/2018/09/18/safely-force-git-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2018/09/18/safely-force-git-push/&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git push --force-with-lease
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go leetcode</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240620-leetcode/</link><pubDate>Thu, 20 Jun 2024 18:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240620-leetcode/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Python's many command-line utilities</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240706-cli-tools/</link><pubDate>Sat, 06 Jul 2024 20:39:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240706-cli-tools/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.pythonmorsels.com/cli-tools/" target="_blank" rel="noopener">Python&amp;rsquo;s many command-line utilities&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>These are Python&amp;rsquo;s most helpful general-purpose command-line tools.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Command&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;th>More&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>python -m http.server&lt;/code>&lt;/td>
+&lt;td>Start a simple web server&lt;/td>
+&lt;td>&lt;a href="https://www.pythonmorsels.com/http-server/" target="_blank" rel="noopener">Video&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>python -m webbrowser&lt;/code>&lt;/td>
+&lt;td>Launch your web browser&lt;/td>
+&lt;td>&lt;a href="https://docs.python.org/3/library/webbrowser.html#command-line-interface" target="_blank" rel="noopener">Docs&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>python -m json.tool&lt;/code>&lt;/td>
+&lt;td>Nicely format JSON data&lt;/td>
+&lt;td>&lt;a href="https://docs.python.org/3/library/json.html#module-json.tool" target="_blank" rel="noopener">Docs&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>python -m calendar&lt;/code>&lt;/td>
+&lt;td>Show a command-line calendar&lt;/td>
+&lt;td>&lt;a href="https://docs.python.org/3/library/calendar.html#command-line-usage" target="_blank" rel="noopener">Docs&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="httpserver">&lt;code>http.server&lt;/code>&lt;/h3>
+&lt;p>Running the &lt;code>http.server&lt;/code> module as a script will start a web server on port 8000 that hosts files from the current directory. I use this &lt;em>all the time&lt;/em> to preview Sphinx documentation sites (especially when using Sphinx&amp;rsquo;s &lt;code>dirhtml&lt;/code> option which is &lt;em>all about&lt;/em> subdirectories of &lt;code>index.html&lt;/code> files).&lt;/p></description></item><item><title>Go leetcode</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240620-leetcode/</link><pubDate>Thu, 20 Jun 2024 18:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240620-leetcode/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://books.halfrost.com/leetcode/" target="_blank" rel="noopener">https://books.halfrost.com/leetcode/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Nginx if 避坑指南</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240615-if-is-evil/</link><pubDate>Sat, 15 Jun 2024 19:55:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240615-if-is-evil/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://taoshu.in/nginx/if-is-evil.html" target="_blank" rel="noopener">Nginx if 避坑指南&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.ph/hyEoc" target="_blank" rel="noopener">If is Evil&amp;hellip; when used in location context&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>if 指令由 rewrite 模块提供，显然它主要是用于 URL 重写领域。典型的 if 用法如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">8080&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span> &lt;span style="color:#e6db74">(&lt;/span>$http_user_agent ~ &lt;span style="color:#e6db74">MSIE)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite&lt;/span> &lt;span style="color:#e6db74">^(.*)&lt;/span>$ &lt;span style="color:#e6db74">/msie/&lt;/span>$1 &lt;span style="color:#e6db74">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">if&lt;/span> &lt;span style="color:#e6db74">(&lt;/span>$request_method = &lt;span style="color:#e6db74">POST)&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">405&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上例中第一个 if 检查如果 user agent 字符串中包含 MSIE，就把 URL 重写为 /msie 开头的路径，这样就可以给微软的 IE 浏览器提供特供版本内容。&lt;/p>
+&lt;p>第二个 if 检查当前请求的 HTTP 方法，如果是 POST 请求则直接返回 405 状态码。&lt;/p>
+&lt;p>以上就是 if 最典型的用法，也是 Nginx 最初设想的用法～但很快就被用户玩坏了 😂&lt;/p>
+&lt;p>天下苦静态配置久矣，Nginx 终于支持动态配置了 👏 这个 if 不就是 c 语言里的条件判断吗？大家玩起来 🎢&lt;/p></description></item><item><title>Mount AWS S3 Bucket On Amazon EC2</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</link><pubDate>Sun, 09 Jun 2024 15:37:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04" target="_blank" rel="noopener">Mount AWS S3 Bucket On Amazon EC2&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Use Cases&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Data Backup and Archiving: Efficiently store and retrieve data from S3 to perform reliable backups and long-term archiving.&lt;/li>
+&lt;li>Big Data and Analytics: Directly access large datasets in S3 for seamless data processing and analytics.&lt;/li>
+&lt;li>Web Hosting and Content Distribution: Serve static content from S3 to host websites and media files efficiently.&lt;/li>
+&lt;li>Log Collection and Analysis: Centrally store logs in S3 for easy log analysis and monitoring.&lt;/li>
+&lt;li>File Sharing and Collaboration: Share and collaborate on files among multiple EC2 instances using S3 as a shared data repository.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Prerequisites&lt;/em>&lt;/strong>&lt;/p></description></item><item><title>WebP Cloud 使用 Cloudflare Workers 回源以保护回源服务器并开始提供回源时间信息</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.webp.se/cloudflare-workers-origin-zh/" target="_blank" rel="noopener">WebP Cloud 使用 Cloudflare Workers 回源以保护回源服务器并开始提供回源时间信息&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Emoji 正则匹配</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240519-emoji-regexp/</link><pubDate>Sun, 19 May 2024 14:37:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240519-emoji-regexp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://taxodium.ink/post/emoji-regexp/" target="_blank" rel="noopener">Emoji 正则匹配&lt;/a>&lt;/li>
 &lt;/ul>
@@ -1200,6 +1403,7 @@ necsfield：约束两个字段是否相同（相对）&lt;/p>
 &lt;p>而 Extended_Pictographic 表示的 Emoji 才是我们认为的那些表情符号。&lt;/p></description></item><item><title>Prometheus relabeling and linux metrics</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240514-prometheus/</link><pubDate>Tue, 14 May 2024 13:49:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240514-prometheus/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://valyala.medium.com/how-to-use-relabeling-in-prometheus-and-victoriametrics-8b90fc22c4b2" target="_blank" rel="noopener">How to use relabeling in Prometheus and VictoriaMetrics&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://brian-candler.medium.com/interpreting-prometheus-metrics-for-linux-disk-i-o-utilization-4db53dfedcfc" target="_blank" rel="noopener">Interpreting Prometheus metrics for Linux disk I/O utilization&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://tao.zz.ac/sre/prom.html" target="_blank" rel="noopener">Prometheus 简介&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;em>Adding new label&lt;/em>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">target_label&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;foo&amp;#34;&lt;/span>
@@ -1353,9 +1557,24 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://google.github.io/styleguide/go/decisions.html#pass-values" target="_blank" rel="noopener">Go Style Decisions - Pass values&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>不要僅僅為了節省一些位元組而將指標作為函數參數傳遞。如果函數始終將其參數 &lt;code>x&lt;/code> 讀取為 &lt;code>*x&lt;/code>，則該參數不應該是指標。常見的實例包括傳遞指向字串的指標 (&lt;code>*string&lt;/code>) 或指向介面值的指標 (&lt;code>*io.Reader&lt;/code>)。在這兩種情況下，值本身都是固定大小的，可以直接傳遞。&lt;/p>
-&lt;p>此建議不適用於大型結構，甚至不適用於可能增加大小的小型結構。特別是，協定緩衝區訊息通常應透過指標而不是值來處理。指標類型滿足 &lt;code>proto.Message&lt;/code> 介面（被 &lt;code>proto.Marshal&lt;/code> 、 &lt;code>protocmp.Transform&lt;/code> 等接受），且協定緩衝區訊息可能非常大，並且通常會隨著時間的推移而變得更大。&lt;/p></description></item><item><title>LLM Visualization</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llm/</link><pubDate>Sun, 21 Jan 2024 12:40:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llm/</guid><description>&lt;ul>
+&lt;p>此建議不適用於大型結構，甚至不適用於可能增加大小的小型結構。特別是，協定緩衝區訊息通常應透過指標而不是值來處理。指標類型滿足 &lt;code>proto.Message&lt;/code> 介面（被 &lt;code>proto.Marshal&lt;/code> 、 &lt;code>protocmp.Transform&lt;/code> 等接受），且協定緩衝區訊息可能非常大，並且通常會隨著時間的推移而變得更大。&lt;/p></description></item><item><title>Tracking SQLite Database Changes in Git</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240207-tracking_sqlite_database_changes_git/</link><pubDate>Wed, 07 Feb 2024 19:20:15 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240207-tracking_sqlite_database_changes_git/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://lobste.rs/s/gnv9ho/tracking_sqlite_database_changes_git" target="_blank" rel="noopener">Tracking SQLite Database Changes in Git&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://stackoverflow.com/a/21789167" target="_blank" rel="noopener">Git hook for diff sqlite table&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>First, add a diff type called &amp;ldquo;sqlite3&amp;rdquo; to your config. The simplest way is to just run these commands:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config diff.sqlite3.binary true git config diff.sqlite3.textconv &lt;span style="color:#e6db74">&amp;#34;echo .dump | sqlite3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Alternatively, you can add this snippet to your &lt;code>~/.gitconfig&lt;/code> or &lt;code>.git/config&lt;/code> in your repository:&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-gitconfig" data-lang="gitconfig">[diff &amp;#34;sqlite3&amp;#34;] binary = true textconv = &amp;#34;echo .dump | sqlite3&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>Next, create a file called &lt;code>.gitattributes&lt;/code> if it&amp;rsquo;s not already present and add this line:&lt;/p></description></item><item><title>LLM Visualization</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llm/</link><pubDate>Sun, 21 Jan 2024 12:40:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llm/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://bbycroft.net/llm" target="_blank" rel="noopener">LLM Visualization&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/bbycroft/llm-viz" target="_blank" rel="noopener">Github&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240121-scale-emqx-one-million-connections-kubernetes/</link><pubDate>Sun, 21 Jan 2024 12:34:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240121-scale-emqx-one-million-connections-kubernetes/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener">Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>llamafile - Distribute and run LLMs with a single file.</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llamafile/</link><pubDate>Sun, 21 Jan 2024 09:30:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240121-llamafile/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/mozilla-Ocho/llamafile" target="_blank" rel="noopener">llamafile - Distribute and run LLMs with a single file.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://justine.lol/oneliners/" target="_blank" rel="noopener">Bash One-Liners for LLMs&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Database Fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240101-database-fundementals/</link><pubDate>Mon, 01 Jan 2024 18:46:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240101-database-fundementals/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://tontinton.com/posts/database-fundementals/" target="_blank" rel="noopener">Database Fundamentals&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Terraform Provider 開發紀錄</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221228-terraform-provider-development/</link><pubDate>Thu, 28 Dec 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221228-terraform-provider-development/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://hazel.style/2022/12/06/Terraform-Provider-Development/" target="_blank" rel="noopener">Terraform Provider 開發紀錄&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>A python script that allows your terminal to snow.</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20231224-snow/</link><pubDate>Sun, 24 Dec 2023 15:40:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20231224-snow/</guid><description>&lt;ul>
@@ -1363,7 +1582,13 @@ Unit: bytes per second&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run --rm -ti sontek/snowmachine tree --color rainbow --particle &lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span> --snow true --lights-color rainbow
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/?s=container%20security%20fundamentals" target="_blank" rel="noopener">Container security fundamentals&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener">Container security fundamentals: Exploring containers as processes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener">Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-3/" target="_blank" rel="noopener">Container security fundamentals part 3: Capabilities&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-4/" target="_blank" rel="noopener">Container security fundamentals part 4: Cgroups&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener">Container security fundamentals part 5: AppArmor and SELinux&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener">Container security fundamentals part 6: seccomp
+&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>調整系統使得 EMQX 可以支援 1M 連線</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230927-mqtt/</link><pubDate>Wed, 27 Sep 2023 10:36:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230927-mqtt/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener">Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning" target="_blank" rel="noopener">Performance Tuning (Linux)&lt;/a>&lt;/li>
@@ -1430,7 +1655,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-130" playsinline controls>
+&lt;video class="video-player" id="video-118" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -1470,6 +1695,9 @@ Go 语言是一个高性能的语言，但并不是说这样我们就不用关�
 &lt;li>&lt;a href="https://datavizproject.com" target="_blank" rel="noopener">https://datavizproject.com&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>朋友旅行防止絕交檢查表</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-checklist/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-checklist/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://travel-questions.gnehs.net/" target="_blank" rel="noopener">https://travel-questions.gnehs.net/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Go Patterns</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230916-go-patterns/</link><pubDate>Sat, 16 Sep 2023 16:08:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230916-go-patterns/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/tmrts/go-patterns" target="_blank" rel="noopener">Go Patterns&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/mohuishou/go-design-pattern" target="_blank" rel="noopener">go-design-pattern&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a>&lt;/li>
 &lt;/ul>
