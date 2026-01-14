@@ -188,4 +188,291 @@
 &lt;p>设置依赖关系，需要使用 Wants 字段和 Requires 字段&lt;/p>
 &lt;p>&lt;code>Wants&lt;/code> 字段：表示 &lt;code>sshd.service&lt;/code> 与 &lt;code>sshd-keygen.service&lt;/code> 之间存在&amp;quot;弱依赖&amp;quot;关系，即如果&amp;quot;sshd-keygen.service&amp;quot;启动失败或停止运行，不影响 &lt;code>sshd.service&lt;/code> 继续执行。&lt;/p>
 &lt;p>&lt;code>Requires&lt;/code> 字段则表示&amp;quot;强依赖&amp;quot;关系，即如果该服务启动失败或异常退出，那么 &lt;code>sshd.service&lt;/code> 也必须退出。&lt;/p>
-&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item></channel></rss>
+&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item><item><title>Raid10 徹底崩壞 ,壞就壞在同組作Mirror硬碟一起故障。</title><link>https://linzeyan.github.io/posts/2018/20180801-raid/</link><pubDate>Wed, 01 Aug 2018 18:21:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180801-raid/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jerry2yang.wordpress.com/2013/01/09/raid10-%E5%BE%B9%E5%BA%95%E5%B4%A9%E5%A3%9E-%E5%A3%9E%E5%B0%B1%E5%A3%9E%E5%9C%A8%E5%90%8C%E7%B5%84%E4%BD%9Cmirror%E7%A1%AC%E7%A2%9F%E4%B8%80%E8%B5%B7%E6%95%85%E9%9A%9C%E3%80%82/" target="_blank" rel="noopener">Raid10 徹底崩壞 ,壞就壞在同組作 Mirror 硬碟一起故障。&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zh.wikipedia.org/wiki/RAID" target="_blank" rel="noopener">RAID&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>CDN 相关 https 证书的申请</title><link>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</link><pubDate>Tue, 24 Jul 2018 18:35:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/lukas2511/dehydrated" target="_blank" rel="noopener">dehydrated&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/kappataumu/letsencrypt-cloudflare-hook" target="_blank" rel="noopener">letsencrypt-cloudflare-hook&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>由于我们不能上传文件到 CDN 服务器，所以我们不能采用文件验证方式来申请 https 证书。所幸 Let&amp;rsquo;s Encrypt 支持 dns-01 challenge 通过 DNS 验证方式来申请 https 证书。我们使用 Dehydrated 配合 CloudFlare hook 来申请 https 证书。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 首先 clone dehydrated 这个仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/lukas2511/dehydrated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 clone 出来的 dehydrated 目录下创建 config 文件，内容参考 config 文件(https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 config 文件的末尾加上 Cloudflare 相关的信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_EMAIL=user@example.com&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_KEY=K9uX2HyUjeWg5AhAb&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># clone Cloudflare hook&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir hooks
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pip install -r hooks/cloudflare/requirements-python-2.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建 domains.txt 文件，每行一个域名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>root@db-slave01 dehydrated&lt;span style="color:#f92672">]&lt;/span>&lt;span style="color:#75715e"># cat domains.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apk.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sp-res.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpweb.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 申请 https 证书&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./dehydrated -c -k hooks/cloudflare/hook.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 使用 Python 脚本上传证书。脚本需在 dehydrated 目录下&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env python&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> aliyunsdkcore &lt;span style="color:#f92672">import&lt;/span> client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> aliyunsdkcdn.request.v20141111 &lt;span style="color:#f92672">import&lt;/span> SetDomainServerCertificateRequest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> uuid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">upload&lt;/span>(domain):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cli &lt;span style="color:#f92672">=&lt;/span> client&lt;span style="color:#f92672">.&lt;/span>AcsClient(&lt;span style="color:#e6db74">&amp;#34;LTAI7zSXga2D&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;ed03Mt9xcNkRgmadx0XtpyDje&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;cn-hongkong&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request &lt;span style="color:#f92672">=&lt;/span> SetDomainServerCertificateRequest&lt;span style="color:#f92672">.&lt;/span>SetDomainServerCertificateRequest()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_accept_format(&lt;span style="color:#e6db74">&amp;#34;json&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_DomainName(domain)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_CertName(domain &lt;span style="color:#f92672">+&lt;/span> str(uuid&lt;span style="color:#f92672">.&lt;/span>uuid1()))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#request.set_CertName(domain)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#certificate = open(&amp;#34;certs/&amp;#34; + domain + &amp;#34;/fullchain.pem&amp;#34;).read()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> certificate &lt;span style="color:#f92672">=&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/cert.pem&amp;#34;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/chain.pem&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>readline()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>readline()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chain &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> certificate &lt;span style="color:#f92672">+=&lt;/span> chain
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> key &lt;span style="color:#f92672">=&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/privkey.pem&amp;#34;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_ServerCertificateStatus(&lt;span style="color:#e6db74">&amp;#39;on&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_ServerCertificate(certificate)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_PrivateKey(key)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result &lt;span style="color:#f92672">=&lt;/span> cli&lt;span style="color:#f92672">.&lt;/span>do_action_with_exception(request)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>domain_file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;domains.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(domain_file) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> line &lt;span style="color:#f92672">in&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain &lt;span style="color:#f92672">=&lt;/span> line&lt;span style="color:#f92672">.&lt;/span>split()[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> upload(domain)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 访问日志中记录毫秒级别的时间精度</title><link>https://linzeyan.github.io/posts/2018/20180724-milliseconds-server-time/</link><pubDate>Tue, 24 Jul 2018 18:31:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180724-milliseconds-server-time/</guid><description>&lt;p>Nginx 的 access log 可以记录毫秒级的时间戳，但是是以 &lt;code>EPOCH&lt;/code> 开始的毫秒数，比如 &lt;code>1503544071.865&lt;/code>, 另一个变量 &lt;code>$time_local&lt;/code> 记录的是秒级别的时间格式，比如 &lt;code>24/Aug/2017:11:07:51 +0800&lt;/code>，在业务量大的时候，我们需要记录毫秒精度的时间格式，比如 &lt;code>24/Aug/2017:11:07:51.865 +0800&lt;/code>, 这个可以通过 Lua 实现。&lt;/p>
+&lt;p>首先需要在 nginx.conf 中定义一个变量，叫做 &lt;code>time_millis&lt;/code>，并初始化为空。类似于使用 &lt;code>auto-ssl&lt;/code> 获取证书的时候需要指定一个 fallback 的自签证书。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">map&lt;/span> $host $time_millis {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不定义这个变量，在 &lt;code>log_format&lt;/code> 中引用的时候会报错。&lt;/p>
+&lt;p>使用 Lua 获取毫秒数，并追加到 &lt;code>$time_local&lt;/code> 的末尾。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">log_by_lua_block&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.msec,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(%d+).(%d+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">ngx.var.time_millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.time_local,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(.+)&lt;/span> &lt;span style="color:#e6db74">(.+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%1.&amp;#34;&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">millis&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>log_format&lt;/code> 中将 &lt;code>$time_local&lt;/code> 改为 &lt;code>$time_millis&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">map&lt;/span> $host $time_millis {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_by_lua_block&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.msec,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(%d+).(%d+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">ngx.var.time_millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.time_local,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(.+)&lt;/span> &lt;span style="color:#e6db74">(.+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%1.&amp;#34;&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">millis&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_millis] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; $msec &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34; $host $request_time $upstream_response_time $scheme &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request_body&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HA command</title><link>https://linzeyan.github.io/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
+# 全新設備上面沒啟用過HA 必須先定義Cluster ID
+# ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
+#
+request system zeroize
+# 以下command 必須在 &amp;gt; 模式使用
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 0 # 這個是在 node 0 的設備下的
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 1 # 這個是在 node 1 的設備下的
+在secondary node 下 這個command
+request chassis cluster configuration-synchronize
+# 等待機器重開機後，會出現Hold 或stanby 字樣 ，看到Cluster 是否有起來
+show chassis cluster status
+# 這個是RETH interface 建立好才會出現，必須先做config才會有
+show chassis cluster interfaces
+# 以下command 則是在 Config mode 下使用 ，先把設定檔建起來
+---
+# 這邊需要 backup-router 是給 HA裡面的Standby Device 的管理介面 (fxp) 一筆routing 可以回應，預設Standby 不會啟用routing engine，所以需要這筆設定
+set groups node0 system host-name SRX-node0
+set groups node0 system backup-router 10.10.0.254
+set groups node0 system backup-router destination 0.0.0.0/0
+set groups node0 interfaces fxp0 unit 0 family inet address 10.10.0.2/24
+set groups node1 system host-name SRX-node1
+set groups node1 system backup-router 10.10.0.254
+set groups node1 system backup-router destination 0.0.0.0/0
+set groups node1 interfaces fxp0 unit 0 family inet address 10.10.0.3/24
+set apply-groups &amp;#34;${node}&amp;#34;
+set system time-zone Asia/Taipei
+set chassis cluster control-link-recovery
+set chassis cluster reth-count 10
+set chassis cluster heartbeat-interval 2000
+# 另外建議在建置期間先將IPv6 打開，可以使用以下指令，因為日後開啟IPv6功能則必須要將設備重開機
+set security forwarding-options family inet6 mode flow-based
+# 這邊的interface 號碼要看每一台Chassis 的型號不同而會有所不同
+# 最簡單的識別方式是看那台設備的Slot 有幾個，像SRX550HM 是 0~ 8都有擴充可以使用，所以預設HA會在 9開始 ，所以會是 ge-9/x/x
+set chassis cluster redundancy-group 0 node 0 priority 150
+set chassis cluster redundancy-group 0 node 1 priority 100
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/5 weight 100
+set chassis cluster redundancy-group 1 node 0 priority 150
+set chassis cluster redundancy-group 1 node 1 priority 100
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
+# 這裡是作為Redundancy group: 1 的 Data sync 設定 ，請務必設定上去才會啟用ge-0/0/2 的 heartbeat link
+set interfaces fab0 fabric-options member-interfaces ge-0/0/2
+set interfaces fab1 fabric-options member-interfaces ge-9/0/2
+# 設定interface 加入reth Group
+set interfaces ge-0/0/3 gigether-options redundant-parent reth0
+set interfaces ge-0/0/4 gigether-options redundant-parent reth0
+set interfaces ge-9/0/3 gigether-options redundant-parent reth0
+set interfaces ge-9/0/4 gigether-options redundant-parent reth0
+set interfaces ge-0/0/5 gigether-options redundant-parent reth1
+set interfaces ge-9/0/5 gigether-options redundant-parent reth1
+set interfaces reth0 vlan-tagging
+# 務必要將RETH 加入 data sync Group 裡面，不然不會動
+set interfaces reth0 redundant-ether-options redundancy-group 1
+# 特別注意，在SRX雖然是LACP Passive mode ，在Switch 請務必使用LACP Activate mode
+set interfaces reth0 redundant-ether-options lacp passive
+set interfaces reth0 redundant-ether-options lacp periodic slow
+set interfaces reth1 redundant-ether-options redundancy-group 1
+set interfaces reth1 unit 0 family inet address 202.99.240.100/26
+&lt;/code>&lt;/pre></description></item><item><title>與 DDoS 奮戰：nginx, iptables 與 fail2ban</title><link>https://linzeyan.github.io/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</link><pubDate>Fri, 20 Jul 2018 18:47:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.techbridge.cc/2016/08/12/defend-against-ddos-with-nginx-iptable-and-fail2ban/" target="_blank" rel="noopener">與 DDoS 奮戰：nginx, iptables 與 fail2ban&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180627-juniper/</guid><description>&lt;p>下列操作命令在操作模式下使用，或在配置模式下 run show…&lt;/p>
+&lt;p>查看當前防火牆 session 數&lt;/p>
+&lt;pre tabindex="0">&lt;code>show security flow session | match 10.22.12.104
+show security flow session source-prefix 10.22.12.104
+&lt;/code>&lt;/pre>&lt;p>清除當前 session&lt;/p>
+&lt;pre tabindex="0">&lt;code>clear security flow session all
+&lt;/code>&lt;/pre>&lt;p>查 OID&lt;/p>
+&lt;pre tabindex="0">&lt;code>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+&lt;/code>&lt;/pre>&lt;p>查看當前軟體版本號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system software
+&lt;/code>&lt;/pre>&lt;p>查看系統啟動時間&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system uptime
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡及序列號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis haredware
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡當前狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis environment
+&lt;/code>&lt;/pre>&lt;p>查看路由表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show route
+&lt;/code>&lt;/pre>&lt;p>設備商的 Administrative distance / Route preference 預設值比較&lt;/p>
+&lt;p>查看 ARP 表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show arp
+&lt;/code>&lt;/pre>&lt;p>查看系統 log&lt;/p>
+&lt;pre tabindex="0">&lt;code>show log messages
+&lt;/code>&lt;/pre>&lt;p>查看所有介面運行狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface terse
+&lt;/code>&lt;/pre>&lt;p>查看介面運行細節資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface ge-x/y/z detail
+&lt;/code>&lt;/pre>&lt;p>動態統計介面資料包轉發資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>monitor interface ge-x/y/z
+&lt;/code>&lt;/pre>&lt;p>檢查 ALG 開啟情況&lt;/p></description></item><item><title>Switch版本更新</title><link>https://linzeyan.github.io/posts/2018/20180614-cisco-firmware-version-update/</link><pubDate>Thu, 14 Jun 2018 12:28:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180614-cisco-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>將裝有更新檔的 usb 插入要更新版本的 Switch 上，此時畫面會顯示偵測到 device name&lt;/li>
+&lt;li>將 usb 裡的更新檔複製到 switch 的 flash 裡面: &lt;code>copy usbflash0(device name):更新檔 flash:&lt;/code>
+&lt;ol>
+&lt;li>此時按 enter 後他會問你檔名是否要用這個，再按一次 enter 即可，看到一堆 ccccccccc 就代表有在複製&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>複製完後，&lt;code>dir flash&lt;/code> 查看底下有沒有剛剛複製過去的更新檔&lt;/li>
+&lt;li>&lt;code>conf t&lt;/code> 進入編輯模式，&lt;code>boot system flash:更新檔&lt;/code> ，指定 Switch 使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>exit&lt;/code> 離開編輯模式，&lt;code>show boot&lt;/code>，確定是否使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>write memory&lt;/code>，套用設定至 Running-Config&lt;/li>
+&lt;li>reload&lt;/li>
+&lt;li>大概會跑 15~20 分鐘左右，等他跑完就可以查看版本是否升級成功&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>copy usbflash0:cat.bin flash:
+copy usbflash0:cat.bin flash0-2:
+software install file flash:cat.bin switch 1-2
+software clean
+&lt;/code>&lt;/pre></description></item><item><title>防火牆更新</title><link>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>&lt;code>start shell&lt;/code>&lt;/li>
+&lt;li>&lt;code>su成root身分&lt;/code>&lt;/li>
+&lt;li>&lt;code>建資料夾mkdir /var/tmp/usb(名字可自取)&lt;/code>&lt;/li>
+&lt;li>插入 USB，這邊要注意 da 後面的數字，目前是 da1&lt;/li>
+&lt;li>掛載 &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (如果是 da0，就要變成 da0s1，以此類推)&lt;/li>
+&lt;li>跑完後 &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
+&lt;ol>
+&lt;li>&lt;code>ls&lt;/code> (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>cli 切換成 operational mode
+&lt;ol>
+&lt;li>&lt;code>request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
+&lt;li>&lt;code>show version&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>如何在 Switch 上啟用 snmp 設定</title><link>https://linzeyan.github.io/posts/2018/20180204-switchsnmp/</link><pubDate>Sun, 04 Feb 2018 14:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180204-switchsnmp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://itlocation.blogspot.com/2013/10/switchsnmp.html" target="_blank" rel="noopener">如何在 Switch 上啟用 snmp 設定&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>以 snmp-server 為主要指令&lt;/p>
+&lt;p>&lt;code>C3750(Config)#snmp-server community RO&lt;/code>&lt;/p>
+&lt;p>指的是 SNMP 協定時互相溝通的密碼
+RO 指的是 Read Only (SNMP 工具不允許修改設定)
+RW 指的是 Read and Write (SNMP 工具可以修改設定)&lt;/p>
+&lt;p>&lt;code>C3750(config)#snmp-server group SNMP_ROA v3 priv match exact&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>設定 SNMP Group 名： SNMP_ROA&lt;/li>
+&lt;li>Version ： V3&lt;/li>
+&lt;li>最高的 priv&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server user cater SNMP_ROA v3 auth MD5 cisco12345 priv des56 test12345&lt;/code>&lt;/p>
+&lt;p>這行設定跟 PRTG 設定有關聯，一定要記清楚&lt;/p>
+&lt;ol>
+&lt;li>使用者 ：cater&lt;/li>
+&lt;li>隸屬 Group 為：SNMP_ROA&lt;/li>
+&lt;li>驗證模式 ：MD5&lt;/li>
+&lt;li>密碼(MD5) ：cisco12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;li>Priv 驗證密碼 ：test12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server host 192.168.3.100 version 3 priv cater&lt;/code>&lt;/p></description></item><item><title>A10</title><link>https://linzeyan.github.io/posts/2018/20180110-a10/</link><pubDate>Wed, 10 Jan 2018 03:44:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180110-a10/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jal.tw/a10:l2:link-aggregation" target="_blank" rel="noopener">A10 Link Aggregation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:healthmonitor:tcl" target="_blank" rel="noopener">Health Monitor use TCL&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ssl-cipher" target="_blank" rel="noopener">A10 SSL Offload Cipher Suite Support List&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:compression" target="_blank" rel="noopener">Compression&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ramcache" target="_blank" rel="noopener">A10 RAM Cache 加速&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:nat" target="_blank" rel="noopener">A10 NAT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:basic:config" target="_blank" rel="noopener">A10 configuration template&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="a10-link-aggregation">A10 Link Aggregation&lt;/h4>
+&lt;h5 id="8023ad-lacp">802.3ad LACP&lt;/h5>
+&lt;blockquote>
+&lt;p>A10 trunk can config a maximnm of 16 LACP trunks per device.&lt;/p>&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code>interface ethernet 1
+lacp trunk 1 mode active
+lacp timeout long
+!
+interface ethernet 2
+lacp trunk 1 mode active
+lacp timeout long
+&lt;/code>&lt;/pre>&lt;h5 id="static-link-aggregation">Static Link Aggregation&lt;/h5>
+&lt;blockquote>
+&lt;p>None LACP.&lt;/p>
+&lt;p>Up to 8 static trunks.&lt;/p></description></item></channel></rss>

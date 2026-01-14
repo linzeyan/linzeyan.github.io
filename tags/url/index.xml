@@ -972,7 +972,14 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;p>&lt;strong>syntax&lt;/strong>&lt;/p>
 &lt;p>&lt;code>https://example.com/page.html#:~:text=[prefix-,]textStart[,textEnd][,-suffix]&lt;/code>&lt;/p>
 &lt;p>&lt;strong>example&lt;/strong>&lt;/p>
-&lt;p>&lt;code>https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments#:~:text=without%20relying%20on%20the%20presence%20of%20IDs&lt;/code>&lt;/p></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
+&lt;p>&lt;code>https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments#:~:text=without%20relying%20on%20the%20presence%20of%20IDs&lt;/code>&lt;/p></description></item><item><title>LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite</title><link>https://linzeyan.github.io/posts/2024/20241129-localstorage-indexeddb-cookies-opfs-sqlite-wasm/</link><pubDate>Fri, 29 Nov 2024 14:58:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241129-localstorage-indexeddb-cookies-opfs-sqlite-wasm/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://rxdb.info/articles/localstorage-indexeddb-cookies-opfs-sqlite-wasm.html" target="_blank" rel="noopener">LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="the-available-storage-apis-in-a-modern-browser">The available Storage APIs in a modern Browser&lt;/h4>
+&lt;p>&lt;strong>&lt;em>Cookies&lt;/em>&lt;/strong>&lt;/p>
+&lt;p>Cookies store small pieces of key-value data that are mainly used for session management, personalization, and tracking. Cookies can have several security settings like a time-to-live or the domain attribute to share the cookies between several subdomains.&lt;/p>
+&lt;p>&lt;strong>&lt;em>LocalStorage&lt;/em>&lt;/strong>&lt;/p>
+&lt;p>LocalStorage is only suitable for storing small amounts of data that need to persist across sessions and it is limited by a 5MB storage cap. Storing complex data is only possible by transforming it into a string for example with JSON.stringify(). The API is not asynchronous which means if fully blocks your JavaScript process while doing stuff. Therefore running heavy operations on it might block your UI from rendering.&lt;/p></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.ursb.me/posts/mac-app-share-2024/" target="_blank" rel="noopener">Mac 小众软件推荐与工作流分享(2024)&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织</title><link>https://linzeyan.github.io/posts/2024/20241113-objective-see/</link><pubDate>Wed, 13 Nov 2024 09:44:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241113-objective-see/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://t.me/misakatech/1349" target="_blank" rel="noopener">Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织&lt;/a>&lt;/li>
@@ -1418,7 +1425,7 @@ Unit: bytes per second&lt;/li>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-33" playsinline controls>
+&lt;video class="video-player" id="video-119" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -7416,4 +7423,60 @@ server srv2 192.168.1.3:80 check maxconn 1000
 &lt;p>设置依赖关系，需要使用 Wants 字段和 Requires 字段&lt;/p>
 &lt;p>&lt;code>Wants&lt;/code> 字段：表示 &lt;code>sshd.service&lt;/code> 与 &lt;code>sshd-keygen.service&lt;/code> 之间存在&amp;quot;弱依赖&amp;quot;关系，即如果&amp;quot;sshd-keygen.service&amp;quot;启动失败或停止运行，不影响 &lt;code>sshd.service&lt;/code> 继续执行。&lt;/p>
 &lt;p>&lt;code>Requires&lt;/code> 字段则表示&amp;quot;强依赖&amp;quot;关系，即如果该服务启动失败或异常退出，那么 &lt;code>sshd.service&lt;/code> 也必须退出。&lt;/p>
-&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item></channel></rss>
+&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item><item><title>Raid10 徹底崩壞 ,壞就壞在同組作Mirror硬碟一起故障。</title><link>https://linzeyan.github.io/posts/2018/20180801-raid/</link><pubDate>Wed, 01 Aug 2018 18:21:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180801-raid/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jerry2yang.wordpress.com/2013/01/09/raid10-%E5%BE%B9%E5%BA%95%E5%B4%A9%E5%A3%9E-%E5%A3%9E%E5%B0%B1%E5%A3%9E%E5%9C%A8%E5%90%8C%E7%B5%84%E4%BD%9Cmirror%E7%A1%AC%E7%A2%9F%E4%B8%80%E8%B5%B7%E6%95%85%E9%9A%9C%E3%80%82/" target="_blank" rel="noopener">Raid10 徹底崩壞 ,壞就壞在同組作 Mirror 硬碟一起故障。&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zh.wikipedia.org/wiki/RAID" target="_blank" rel="noopener">RAID&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>與 DDoS 奮戰：nginx, iptables 與 fail2ban</title><link>https://linzeyan.github.io/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</link><pubDate>Fri, 20 Jul 2018 18:47:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.techbridge.cc/2016/08/12/defend-against-ddos-with-nginx-iptable-and-fail2ban/" target="_blank" rel="noopener">與 DDoS 奮戰：nginx, iptables 與 fail2ban&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>如何在 Switch 上啟用 snmp 設定</title><link>https://linzeyan.github.io/posts/2018/20180204-switchsnmp/</link><pubDate>Sun, 04 Feb 2018 14:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180204-switchsnmp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://itlocation.blogspot.com/2013/10/switchsnmp.html" target="_blank" rel="noopener">如何在 Switch 上啟用 snmp 設定&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>以 snmp-server 為主要指令&lt;/p>
+&lt;p>&lt;code>C3750(Config)#snmp-server community RO&lt;/code>&lt;/p>
+&lt;p>指的是 SNMP 協定時互相溝通的密碼
+RO 指的是 Read Only (SNMP 工具不允許修改設定)
+RW 指的是 Read and Write (SNMP 工具可以修改設定)&lt;/p>
+&lt;p>&lt;code>C3750(config)#snmp-server group SNMP_ROA v3 priv match exact&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>設定 SNMP Group 名： SNMP_ROA&lt;/li>
+&lt;li>Version ： V3&lt;/li>
+&lt;li>最高的 priv&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server user cater SNMP_ROA v3 auth MD5 cisco12345 priv des56 test12345&lt;/code>&lt;/p>
+&lt;p>這行設定跟 PRTG 設定有關聯，一定要記清楚&lt;/p>
+&lt;ol>
+&lt;li>使用者 ：cater&lt;/li>
+&lt;li>隸屬 Group 為：SNMP_ROA&lt;/li>
+&lt;li>驗證模式 ：MD5&lt;/li>
+&lt;li>密碼(MD5) ：cisco12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;li>Priv 驗證密碼 ：test12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server host 192.168.3.100 version 3 priv cater&lt;/code>&lt;/p></description></item><item><title>A10</title><link>https://linzeyan.github.io/posts/2018/20180110-a10/</link><pubDate>Wed, 10 Jan 2018 03:44:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180110-a10/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jal.tw/a10:l2:link-aggregation" target="_blank" rel="noopener">A10 Link Aggregation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:healthmonitor:tcl" target="_blank" rel="noopener">Health Monitor use TCL&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ssl-cipher" target="_blank" rel="noopener">A10 SSL Offload Cipher Suite Support List&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:compression" target="_blank" rel="noopener">Compression&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ramcache" target="_blank" rel="noopener">A10 RAM Cache 加速&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:nat" target="_blank" rel="noopener">A10 NAT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:basic:config" target="_blank" rel="noopener">A10 configuration template&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="a10-link-aggregation">A10 Link Aggregation&lt;/h4>
+&lt;h5 id="8023ad-lacp">802.3ad LACP&lt;/h5>
+&lt;blockquote>
+&lt;p>A10 trunk can config a maximnm of 16 LACP trunks per device.&lt;/p>&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code>interface ethernet 1
+lacp trunk 1 mode active
+lacp timeout long
+!
+interface ethernet 2
+lacp trunk 1 mode active
+lacp timeout long
+&lt;/code>&lt;/pre>&lt;h5 id="static-link-aggregation">Static Link Aggregation&lt;/h5>
+&lt;blockquote>
+&lt;p>None LACP.&lt;/p>
+&lt;p>Up to 8 static trunks.&lt;/p></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

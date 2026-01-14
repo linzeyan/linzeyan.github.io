@@ -1,3 +1,87 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Switch on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/switch/</link><description>Recent content in Switch on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 24 Sep 2024 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/switch/index.xml" rel="self" type="application/rss+xml"/><item><title>Google Infra</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener">Google 的十年五代网络架构&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Switch版本更新</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180614-cisco-firmware-version-update/</link><pubDate>Thu, 14 Jun 2018 12:28:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180614-cisco-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>將裝有更新檔的 usb 插入要更新版本的 Switch 上，此時畫面會顯示偵測到 device name&lt;/li>
+&lt;li>將 usb 裡的更新檔複製到 switch 的 flash 裡面: &lt;code>copy usbflash0(device name):更新檔 flash:&lt;/code>
+&lt;ol>
+&lt;li>此時按 enter 後他會問你檔名是否要用這個，再按一次 enter 即可，看到一堆 ccccccccc 就代表有在複製&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>複製完後，&lt;code>dir flash&lt;/code> 查看底下有沒有剛剛複製過去的更新檔&lt;/li>
+&lt;li>&lt;code>conf t&lt;/code> 進入編輯模式，&lt;code>boot system flash:更新檔&lt;/code> ，指定 Switch 使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>exit&lt;/code> 離開編輯模式，&lt;code>show boot&lt;/code>，確定是否使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>write memory&lt;/code>，套用設定至 Running-Config&lt;/li>
+&lt;li>reload&lt;/li>
+&lt;li>大概會跑 15~20 分鐘左右，等他跑完就可以查看版本是否升級成功&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>copy usbflash0:cat.bin flash:
+copy usbflash0:cat.bin flash0-2:
+software install file flash:cat.bin switch 1-2
+software clean
+&lt;/code>&lt;/pre></description></item><item><title>如何在 Switch 上啟用 snmp 設定</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</link><pubDate>Sun, 04 Feb 2018 14:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://itlocation.blogspot.com/2013/10/switchsnmp.html" target="_blank" rel="noopener">如何在 Switch 上啟用 snmp 設定&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>以 snmp-server 為主要指令&lt;/p>
+&lt;p>&lt;code>C3750(Config)#snmp-server community RO&lt;/code>&lt;/p>
+&lt;p>指的是 SNMP 協定時互相溝通的密碼
+RO 指的是 Read Only (SNMP 工具不允許修改設定)
+RW 指的是 Read and Write (SNMP 工具可以修改設定)&lt;/p>
+&lt;p>&lt;code>C3750(config)#snmp-server group SNMP_ROA v3 priv match exact&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>設定 SNMP Group 名： SNMP_ROA&lt;/li>
+&lt;li>Version ： V3&lt;/li>
+&lt;li>最高的 priv&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server user cater SNMP_ROA v3 auth MD5 cisco12345 priv des56 test12345&lt;/code>&lt;/p>
+&lt;p>這行設定跟 PRTG 設定有關聯，一定要記清楚&lt;/p>
+&lt;ol>
+&lt;li>使用者 ：cater&lt;/li>
+&lt;li>隸屬 Group 為：SNMP_ROA&lt;/li>
+&lt;li>驗證模式 ：MD5&lt;/li>
+&lt;li>密碼(MD5) ：cisco12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;li>Priv 驗證密碼 ：test12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server host 192.168.3.100 version 3 priv cater&lt;/code>&lt;/p></description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch">Switch&lt;/h4>
+&lt;p>&lt;strong>&lt;em>Switch 通常是 L2 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>只會將封包傳送到指定目的地的電腦（透過 MAC Table），相對上能減少資料碰撞及資料被竊聽的機會。交換器更能將同時傳到的封包分別處理，而集線器則不能。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Hub 則是 L1 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>會將網路內某一使用者傳送的封包傳至所有已連接到集線器的電腦，因會碰撞所以 random retry。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>MAC Table&lt;/em>&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Learning
+&lt;ul>
+&lt;li>從某個 Port 收到某網段（設為 A）MAC 位址為 X 的計算機發給 MAC 位址為 Y 的計算機的資料包。交換機從而記下了 MAC 位址 X 在網段 A。這稱為學習(learning)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Flooding
+&lt;ul>
+&lt;li>交換機還不知道 MAC 位址 Y 在哪個網段上，於是向除了 A 以外的所有網段轉發該資料包。這稱為洪水(flooding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Forwarding
+&lt;ul>
+&lt;li>MAC 位址 Y 的電腦收到該封包，向 MAC 位址 X 發出確認包。交換器收到該包後，從而記錄下 MAC 位址 Y 所在的網段。交換機向 MAC 位址 X 轉發確認包。這稱為轉發(forwarding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Filtering
+&lt;ul>
+&lt;li>交換機收到一個資料包，查表後發現該資料包的來源位址與目的位址屬於同一網段。交換機將不處理該資料包，這稱為過濾(filtering)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Aging
+&lt;ul>
+&lt;li>交換機內部的 MAC 位址-網段查詢表的每條記錄採用時間戳記錄最後一次存取的時間。早於某個閾值（用戶可配置）的記錄被清除，這稱為老化(aging)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h5 id="vlan">Vlan&lt;/h5>
+&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item></channel></rss>

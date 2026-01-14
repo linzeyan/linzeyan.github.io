@@ -1073,7 +1073,14 @@ Press ⇧⌘R to reply to the latest thread in the conversation.&lt;/li>
 &lt;p>&lt;strong>syntax&lt;/strong>&lt;/p>
 &lt;p>&lt;code>https://example.com/page.html#:~:text=[prefix-,]textStart[,textEnd][,-suffix]&lt;/code>&lt;/p>
 &lt;p>&lt;strong>example&lt;/strong>&lt;/p>
-&lt;p>&lt;code>https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments#:~:text=without%20relying%20on%20the%20presence%20of%20IDs&lt;/code>&lt;/p></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
+&lt;p>&lt;code>https://developer.mozilla.org/en-US/docs/Web/URI/Fragment/Text_fragments#:~:text=without%20relying%20on%20the%20presence%20of%20IDs&lt;/code>&lt;/p></description></item><item><title>LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241129-localstorage-indexeddb-cookies-opfs-sqlite-wasm/</link><pubDate>Fri, 29 Nov 2024 14:58:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241129-localstorage-indexeddb-cookies-opfs-sqlite-wasm/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://rxdb.info/articles/localstorage-indexeddb-cookies-opfs-sqlite-wasm.html" target="_blank" rel="noopener">LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="the-available-storage-apis-in-a-modern-browser">The available Storage APIs in a modern Browser&lt;/h4>
+&lt;p>&lt;strong>&lt;em>Cookies&lt;/em>&lt;/strong>&lt;/p>
+&lt;p>Cookies store small pieces of key-value data that are mainly used for session management, personalization, and tracking. Cookies can have several security settings like a time-to-live or the domain attribute to share the cookies between several subdomains.&lt;/p>
+&lt;p>&lt;strong>&lt;em>LocalStorage&lt;/em>&lt;/strong>&lt;/p>
+&lt;p>LocalStorage is only suitable for storing small amounts of data that need to persist across sessions and it is limited by a 5MB storage cap. Storing complex data is only possible by transforming it into a string for example with JSON.stringify(). The API is not asynchronous which means if fully blocks your JavaScript process while doing stuff. Therefore running heavy operations on it might block your UI from rendering.&lt;/p></description></item><item><title>Mac 小众软件推荐与工作流分享(2024)</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</link><pubDate>Thu, 14 Nov 2024 09:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241114-mac-app-share/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.ursb.me/posts/mac-app-share-2024/" target="_blank" rel="noopener">Mac 小众软件推荐与工作流分享(2024)&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</link><pubDate>Wed, 13 Nov 2024 09:44:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://t.me/misakatech/1349" target="_blank" rel="noopener">Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织&lt;/a>&lt;/li>
@@ -1587,7 +1594,7 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;!--
-&lt;video class="video-player" id="video-79" playsinline controls>
+&lt;video class="video-player" id="video-130" playsinline controls>
 &lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
 &lt;/video>
 --></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-golang/</guid><description>&lt;ul>
@@ -8551,7 +8558,476 @@ server srv2 192.168.1.3:80 check maxconn 1000
 &lt;p>设置依赖关系，需要使用 Wants 字段和 Requires 字段&lt;/p>
 &lt;p>&lt;code>Wants&lt;/code> 字段：表示 &lt;code>sshd.service&lt;/code> 与 &lt;code>sshd-keygen.service&lt;/code> 之间存在&amp;quot;弱依赖&amp;quot;关系，即如果&amp;quot;sshd-keygen.service&amp;quot;启动失败或停止运行，不影响 &lt;code>sshd.service&lt;/code> 继续执行。&lt;/p>
 &lt;p>&lt;code>Requires&lt;/code> 字段则表示&amp;quot;强依赖&amp;quot;关系，即如果该服务启动失败或异常退出，那么 &lt;code>sshd.service&lt;/code> 也必须退出。&lt;/p>
-&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item><item><title>Ansible Command</title><link>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</guid><description>&lt;div class="note-card ">
+&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item><item><title>Raid10 徹底崩壞 ,壞就壞在同組作Mirror硬碟一起故障。</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</link><pubDate>Wed, 01 Aug 2018 18:21:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jerry2yang.wordpress.com/2013/01/09/raid10-%E5%BE%B9%E5%BA%95%E5%B4%A9%E5%A3%9E-%E5%A3%9E%E5%B0%B1%E5%A3%9E%E5%9C%A8%E5%90%8C%E7%B5%84%E4%BD%9Cmirror%E7%A1%AC%E7%A2%9F%E4%B8%80%E8%B5%B7%E6%95%85%E9%9A%9C%E3%80%82/" target="_blank" rel="noopener">Raid10 徹底崩壞 ,壞就壞在同組作 Mirror 硬碟一起故障。&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zh.wikipedia.org/wiki/RAID" target="_blank" rel="noopener">RAID&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>CDN 相关 https 证书的申请</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180724-dehydrated/</link><pubDate>Tue, 24 Jul 2018 18:35:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180724-dehydrated/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/lukas2511/dehydrated" target="_blank" rel="noopener">dehydrated&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/kappataumu/letsencrypt-cloudflare-hook" target="_blank" rel="noopener">letsencrypt-cloudflare-hook&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>由于我们不能上传文件到 CDN 服务器，所以我们不能采用文件验证方式来申请 https 证书。所幸 Let&amp;rsquo;s Encrypt 支持 dns-01 challenge 通过 DNS 验证方式来申请 https 证书。我们使用 Dehydrated 配合 CloudFlare hook 来申请 https 证书。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 首先 clone dehydrated 这个仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/lukas2511/dehydrated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 clone 出来的 dehydrated 目录下创建 config 文件，内容参考 config 文件(https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 config 文件的末尾加上 Cloudflare 相关的信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_EMAIL=user@example.com&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_KEY=K9uX2HyUjeWg5AhAb&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># clone Cloudflare hook&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir hooks
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pip install -r hooks/cloudflare/requirements-python-2.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建 domains.txt 文件，每行一个域名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>root@db-slave01 dehydrated&lt;span style="color:#f92672">]&lt;/span>&lt;span style="color:#75715e"># cat domains.txt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apk.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sp-res.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpweb.kosungames.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 申请 https 证书&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./dehydrated -c -k hooks/cloudflare/hook.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 使用 Python 脚本上传证书。脚本需在 dehydrated 目录下&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env python&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> aliyunsdkcore &lt;span style="color:#f92672">import&lt;/span> client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> aliyunsdkcdn.request.v20141111 &lt;span style="color:#f92672">import&lt;/span> SetDomainServerCertificateRequest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> uuid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">upload&lt;/span>(domain):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cli &lt;span style="color:#f92672">=&lt;/span> client&lt;span style="color:#f92672">.&lt;/span>AcsClient(&lt;span style="color:#e6db74">&amp;#34;LTAI7zSXga2D&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;ed03Mt9xcNkRgmadx0XtpyDje&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;cn-hongkong&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request &lt;span style="color:#f92672">=&lt;/span> SetDomainServerCertificateRequest&lt;span style="color:#f92672">.&lt;/span>SetDomainServerCertificateRequest()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_accept_format(&lt;span style="color:#e6db74">&amp;#34;json&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_DomainName(domain)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_CertName(domain &lt;span style="color:#f92672">+&lt;/span> str(uuid&lt;span style="color:#f92672">.&lt;/span>uuid1()))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#request.set_CertName(domain)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">#certificate = open(&amp;#34;certs/&amp;#34; + domain + &amp;#34;/fullchain.pem&amp;#34;).read()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> certificate &lt;span style="color:#f92672">=&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/cert.pem&amp;#34;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/chain.pem&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>readline()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>readline()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chain &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> certificate &lt;span style="color:#f92672">+=&lt;/span> chain
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> key &lt;span style="color:#f92672">=&lt;/span> open(&lt;span style="color:#e6db74">&amp;#34;certs/&amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> domain &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/privkey.pem&amp;#34;&lt;/span>)&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_ServerCertificateStatus(&lt;span style="color:#e6db74">&amp;#39;on&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_ServerCertificate(certificate)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request&lt;span style="color:#f92672">.&lt;/span>set_PrivateKey(key)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result &lt;span style="color:#f92672">=&lt;/span> cli&lt;span style="color:#f92672">.&lt;/span>do_action_with_exception(request)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>domain_file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;domains.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> open(domain_file) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> line &lt;span style="color:#f92672">in&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> domain &lt;span style="color:#f92672">=&lt;/span> line&lt;span style="color:#f92672">.&lt;/span>split()[&lt;span style="color:#ae81ff">0&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> upload(domain)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 访问日志中记录毫秒级别的时间精度</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180724-milliseconds-server-time/</link><pubDate>Tue, 24 Jul 2018 18:31:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180724-milliseconds-server-time/</guid><description>&lt;p>Nginx 的 access log 可以记录毫秒级的时间戳，但是是以 &lt;code>EPOCH&lt;/code> 开始的毫秒数，比如 &lt;code>1503544071.865&lt;/code>, 另一个变量 &lt;code>$time_local&lt;/code> 记录的是秒级别的时间格式，比如 &lt;code>24/Aug/2017:11:07:51 +0800&lt;/code>，在业务量大的时候，我们需要记录毫秒精度的时间格式，比如 &lt;code>24/Aug/2017:11:07:51.865 +0800&lt;/code>, 这个可以通过 Lua 实现。&lt;/p>
+&lt;p>首先需要在 nginx.conf 中定义一个变量，叫做 &lt;code>time_millis&lt;/code>，并初始化为空。类似于使用 &lt;code>auto-ssl&lt;/code> 获取证书的时候需要指定一个 fallback 的自签证书。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">map&lt;/span> $host $time_millis {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不定义这个变量，在 &lt;code>log_format&lt;/code> 中引用的时候会报错。&lt;/p>
+&lt;p>使用 Lua 获取毫秒数，并追加到 &lt;code>$time_local&lt;/code> 的末尾。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">log_by_lua_block&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.msec,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(%d+).(%d+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">ngx.var.time_millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.time_local,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(.+)&lt;/span> &lt;span style="color:#e6db74">(.+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%1.&amp;#34;&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">millis&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>log_format&lt;/code> 中将 &lt;code>$time_local&lt;/code> 改为 &lt;code>$time_millis&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">map&lt;/span> $host $time_millis {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">log_by_lua_block&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.msec,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(%d+).(%d+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">ngx.var.time_millis&lt;/span> = &lt;span style="color:#e6db74">string.gsub(ngx.var.time_local,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;(.+)&lt;/span> &lt;span style="color:#e6db74">(.+)&amp;#34;,&lt;/span> &lt;span style="color:#e6db74">&amp;#34;%1.&amp;#34;&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">millis&lt;/span> &lt;span style="color:#e6db74">..&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">%2&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">log_format&lt;/span> &lt;span style="color:#e6db74">main&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$remote_addr &lt;span style="color:#e6db74">-&lt;/span> $remote_user &lt;span style="color:#e6db74">[&lt;/span>$time_millis] &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&lt;/span>$status $body_bytes_sent &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_referer&amp;#34; &lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#39;&amp;#34;&lt;/span>$http_user_agent&amp;#34; $msec &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$http_x_forwarded_for&amp;#34; $host $request_time $upstream_response_time $scheme &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$request_body&amp;#34;&amp;#39;;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>HA command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
+# 全新設備上面沒啟用過HA 必須先定義Cluster ID
+# ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
+#
+request system zeroize
+# 以下command 必須在 &amp;gt; 模式使用
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 0 # 這個是在 node 0 的設備下的
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 1 # 這個是在 node 1 的設備下的
+在secondary node 下 這個command
+request chassis cluster configuration-synchronize
+# 等待機器重開機後，會出現Hold 或stanby 字樣 ，看到Cluster 是否有起來
+show chassis cluster status
+# 這個是RETH interface 建立好才會出現，必須先做config才會有
+show chassis cluster interfaces
+# 以下command 則是在 Config mode 下使用 ，先把設定檔建起來
+---
+# 這邊需要 backup-router 是給 HA裡面的Standby Device 的管理介面 (fxp) 一筆routing 可以回應，預設Standby 不會啟用routing engine，所以需要這筆設定
+set groups node0 system host-name SRX-node0
+set groups node0 system backup-router 10.10.0.254
+set groups node0 system backup-router destination 0.0.0.0/0
+set groups node0 interfaces fxp0 unit 0 family inet address 10.10.0.2/24
+set groups node1 system host-name SRX-node1
+set groups node1 system backup-router 10.10.0.254
+set groups node1 system backup-router destination 0.0.0.0/0
+set groups node1 interfaces fxp0 unit 0 family inet address 10.10.0.3/24
+set apply-groups &amp;#34;${node}&amp;#34;
+set system time-zone Asia/Taipei
+set chassis cluster control-link-recovery
+set chassis cluster reth-count 10
+set chassis cluster heartbeat-interval 2000
+# 另外建議在建置期間先將IPv6 打開，可以使用以下指令，因為日後開啟IPv6功能則必須要將設備重開機
+set security forwarding-options family inet6 mode flow-based
+# 這邊的interface 號碼要看每一台Chassis 的型號不同而會有所不同
+# 最簡單的識別方式是看那台設備的Slot 有幾個，像SRX550HM 是 0~ 8都有擴充可以使用，所以預設HA會在 9開始 ，所以會是 ge-9/x/x
+set chassis cluster redundancy-group 0 node 0 priority 150
+set chassis cluster redundancy-group 0 node 1 priority 100
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/5 weight 100
+set chassis cluster redundancy-group 1 node 0 priority 150
+set chassis cluster redundancy-group 1 node 1 priority 100
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
+# 這裡是作為Redundancy group: 1 的 Data sync 設定 ，請務必設定上去才會啟用ge-0/0/2 的 heartbeat link
+set interfaces fab0 fabric-options member-interfaces ge-0/0/2
+set interfaces fab1 fabric-options member-interfaces ge-9/0/2
+# 設定interface 加入reth Group
+set interfaces ge-0/0/3 gigether-options redundant-parent reth0
+set interfaces ge-0/0/4 gigether-options redundant-parent reth0
+set interfaces ge-9/0/3 gigether-options redundant-parent reth0
+set interfaces ge-9/0/4 gigether-options redundant-parent reth0
+set interfaces ge-0/0/5 gigether-options redundant-parent reth1
+set interfaces ge-9/0/5 gigether-options redundant-parent reth1
+set interfaces reth0 vlan-tagging
+# 務必要將RETH 加入 data sync Group 裡面，不然不會動
+set interfaces reth0 redundant-ether-options redundancy-group 1
+# 特別注意，在SRX雖然是LACP Passive mode ，在Switch 請務必使用LACP Activate mode
+set interfaces reth0 redundant-ether-options lacp passive
+set interfaces reth0 redundant-ether-options lacp periodic slow
+set interfaces reth1 redundant-ether-options redundancy-group 1
+set interfaces reth1 unit 0 family inet address 202.99.240.100/26
+&lt;/code>&lt;/pre></description></item><item><title>與 DDoS 奮戰：nginx, iptables 與 fail2ban</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</link><pubDate>Fri, 20 Jul 2018 18:47:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180720-defend-against-ddos-with-nginx-iptable-and-fail2ban/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.techbridge.cc/2016/08/12/defend-against-ddos-with-nginx-iptable-and-fail2ban/" target="_blank" rel="noopener">與 DDoS 奮戰：nginx, iptables 與 fail2ban&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180627-juniper/</guid><description>&lt;p>下列操作命令在操作模式下使用，或在配置模式下 run show…&lt;/p>
+&lt;p>查看當前防火牆 session 數&lt;/p>
+&lt;pre tabindex="0">&lt;code>show security flow session | match 10.22.12.104
+show security flow session source-prefix 10.22.12.104
+&lt;/code>&lt;/pre>&lt;p>清除當前 session&lt;/p>
+&lt;pre tabindex="0">&lt;code>clear security flow session all
+&lt;/code>&lt;/pre>&lt;p>查 OID&lt;/p>
+&lt;pre tabindex="0">&lt;code>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+&lt;/code>&lt;/pre>&lt;p>查看當前軟體版本號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system software
+&lt;/code>&lt;/pre>&lt;p>查看系統啟動時間&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system uptime
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡及序列號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis haredware
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡當前狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis environment
+&lt;/code>&lt;/pre>&lt;p>查看路由表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show route
+&lt;/code>&lt;/pre>&lt;p>設備商的 Administrative distance / Route preference 預設值比較&lt;/p>
+&lt;p>查看 ARP 表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show arp
+&lt;/code>&lt;/pre>&lt;p>查看系統 log&lt;/p>
+&lt;pre tabindex="0">&lt;code>show log messages
+&lt;/code>&lt;/pre>&lt;p>查看所有介面運行狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface terse
+&lt;/code>&lt;/pre>&lt;p>查看介面運行細節資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface ge-x/y/z detail
+&lt;/code>&lt;/pre>&lt;p>動態統計介面資料包轉發資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>monitor interface ge-x/y/z
+&lt;/code>&lt;/pre>&lt;p>檢查 ALG 開啟情況&lt;/p></description></item><item><title>Switch版本更新</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180614-cisco-firmware-version-update/</link><pubDate>Thu, 14 Jun 2018 12:28:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180614-cisco-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>將裝有更新檔的 usb 插入要更新版本的 Switch 上，此時畫面會顯示偵測到 device name&lt;/li>
+&lt;li>將 usb 裡的更新檔複製到 switch 的 flash 裡面: &lt;code>copy usbflash0(device name):更新檔 flash:&lt;/code>
+&lt;ol>
+&lt;li>此時按 enter 後他會問你檔名是否要用這個，再按一次 enter 即可，看到一堆 ccccccccc 就代表有在複製&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>複製完後，&lt;code>dir flash&lt;/code> 查看底下有沒有剛剛複製過去的更新檔&lt;/li>
+&lt;li>&lt;code>conf t&lt;/code> 進入編輯模式，&lt;code>boot system flash:更新檔&lt;/code> ，指定 Switch 使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>exit&lt;/code> 離開編輯模式，&lt;code>show boot&lt;/code>，確定是否使用新版的 IOS 來開機&lt;/li>
+&lt;li>&lt;code>write memory&lt;/code>，套用設定至 Running-Config&lt;/li>
+&lt;li>reload&lt;/li>
+&lt;li>大概會跑 15~20 分鐘左右，等他跑完就可以查看版本是否升級成功&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>copy usbflash0:cat.bin flash:
+copy usbflash0:cat.bin flash0-2:
+software install file flash:cat.bin switch 1-2
+software clean
+&lt;/code>&lt;/pre></description></item><item><title>防火牆更新</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>&lt;code>start shell&lt;/code>&lt;/li>
+&lt;li>&lt;code>su成root身分&lt;/code>&lt;/li>
+&lt;li>&lt;code>建資料夾mkdir /var/tmp/usb(名字可自取)&lt;/code>&lt;/li>
+&lt;li>插入 USB，這邊要注意 da 後面的數字，目前是 da1&lt;/li>
+&lt;li>掛載 &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (如果是 da0，就要變成 da0s1，以此類推)&lt;/li>
+&lt;li>跑完後 &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
+&lt;ol>
+&lt;li>&lt;code>ls&lt;/code> (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>cli 切換成 operational mode
+&lt;ol>
+&lt;li>&lt;code>request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
+&lt;li>&lt;code>show version&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>如何在 Switch 上啟用 snmp 設定</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</link><pubDate>Sun, 04 Feb 2018 14:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://itlocation.blogspot.com/2013/10/switchsnmp.html" target="_blank" rel="noopener">如何在 Switch 上啟用 snmp 設定&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>以 snmp-server 為主要指令&lt;/p>
+&lt;p>&lt;code>C3750(Config)#snmp-server community RO&lt;/code>&lt;/p>
+&lt;p>指的是 SNMP 協定時互相溝通的密碼
+RO 指的是 Read Only (SNMP 工具不允許修改設定)
+RW 指的是 Read and Write (SNMP 工具可以修改設定)&lt;/p>
+&lt;p>&lt;code>C3750(config)#snmp-server group SNMP_ROA v3 priv match exact&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>設定 SNMP Group 名： SNMP_ROA&lt;/li>
+&lt;li>Version ： V3&lt;/li>
+&lt;li>最高的 priv&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server user cater SNMP_ROA v3 auth MD5 cisco12345 priv des56 test12345&lt;/code>&lt;/p>
+&lt;p>這行設定跟 PRTG 設定有關聯，一定要記清楚&lt;/p>
+&lt;ol>
+&lt;li>使用者 ：cater&lt;/li>
+&lt;li>隸屬 Group 為：SNMP_ROA&lt;/li>
+&lt;li>驗證模式 ：MD5&lt;/li>
+&lt;li>密碼(MD5) ：cisco12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;li>Priv 驗證密碼 ：test12345 (PRTG 要求要 8 碼以上)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>C3750(config)#snmp-server host 192.168.3.100 version 3 priv cater&lt;/code>&lt;/p></description></item><item><title>A10</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180110-a10/</link><pubDate>Wed, 10 Jan 2018 03:44:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180110-a10/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jal.tw/a10:l2:link-aggregation" target="_blank" rel="noopener">A10 Link Aggregation&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:healthmonitor:tcl" target="_blank" rel="noopener">Health Monitor use TCL&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ssl-cipher" target="_blank" rel="noopener">A10 SSL Offload Cipher Suite Support List&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:compression" target="_blank" rel="noopener">Compression&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:slb:ramcache" target="_blank" rel="noopener">A10 RAM Cache 加速&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:nat" target="_blank" rel="noopener">A10 NAT&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://jal.tw/a10:basic:config" target="_blank" rel="noopener">A10 configuration template&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="a10-link-aggregation">A10 Link Aggregation&lt;/h4>
+&lt;h5 id="8023ad-lacp">802.3ad LACP&lt;/h5>
+&lt;blockquote>
+&lt;p>A10 trunk can config a maximnm of 16 LACP trunks per device.&lt;/p>&lt;/blockquote>
+&lt;pre tabindex="0">&lt;code>interface ethernet 1
+lacp trunk 1 mode active
+lacp timeout long
+!
+interface ethernet 2
+lacp trunk 1 mode active
+lacp timeout long
+&lt;/code>&lt;/pre>&lt;h5 id="static-link-aggregation">Static Link Aggregation&lt;/h5>
+&lt;blockquote>
+&lt;p>None LACP.&lt;/p>
+&lt;p>Up to 8 static trunks.&lt;/p></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch">Switch&lt;/h4>
+&lt;p>&lt;strong>&lt;em>Switch 通常是 L2 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>只會將封包傳送到指定目的地的電腦（透過 MAC Table），相對上能減少資料碰撞及資料被竊聽的機會。交換器更能將同時傳到的封包分別處理，而集線器則不能。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Hub 則是 L1 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>會將網路內某一使用者傳送的封包傳至所有已連接到集線器的電腦，因會碰撞所以 random retry。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>MAC Table&lt;/em>&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Learning
+&lt;ul>
+&lt;li>從某個 Port 收到某網段（設為 A）MAC 位址為 X 的計算機發給 MAC 位址為 Y 的計算機的資料包。交換機從而記下了 MAC 位址 X 在網段 A。這稱為學習(learning)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Flooding
+&lt;ul>
+&lt;li>交換機還不知道 MAC 位址 Y 在哪個網段上，於是向除了 A 以外的所有網段轉發該資料包。這稱為洪水(flooding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Forwarding
+&lt;ul>
+&lt;li>MAC 位址 Y 的電腦收到該封包，向 MAC 位址 X 發出確認包。交換器收到該包後，從而記錄下 MAC 位址 Y 所在的網段。交換機向 MAC 位址 X 轉發確認包。這稱為轉發(forwarding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Filtering
+&lt;ul>
+&lt;li>交換機收到一個資料包，查表後發現該資料包的來源位址與目的位址屬於同一網段。交換機將不處理該資料包，這稱為過濾(filtering)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Aging
+&lt;ul>
+&lt;li>交換機內部的 MAC 位址-網段查詢表的每條記錄採用時間戳記錄最後一次存取的時間。早於某個閾值（用戶可配置）的記錄被清除，這稱為老化(aging)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h5 id="vlan">Vlan&lt;/h5>
+&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
+&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
+&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+set security zones security-zone JC32 host-inbound-traffic system-services ping
+set security zones security-zone JC32 interfaces gr-0/0/0.32
+set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item><item><title>機房 notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</guid><description>&lt;p>第一張網卡-藍色線&lt;/p>
+&lt;p>第二張網卡-綠色線&lt;/p>
+&lt;p>交換機互連-白色線&lt;/p>
+&lt;p>黃、紅&lt;/p>
+&lt;p>Storage 有磁碟陣列，數據交換量大，用光纖連接，使用光纖專用的交換機。&lt;/p>
+&lt;p>光纖顏色：&lt;/p>
+&lt;p>多模 (Multi-mode)或單模 (Single-mode)的光纖線&lt;/p>
+&lt;p>單模光纖是黃色，多模光纖 50μm 或是 62.5μm 通常都是橘色。10GB 多模光纖通常是水藍色(Aqua)。&lt;/p>
+&lt;p>以下是一些常見的規格區分方式。&lt;/p>
+&lt;ul>
+&lt;li>OS1, OS2, 9µm, 9/125 = 單模光纖&lt;/li>
+&lt;li>OM1, 62.5µm, 62.5/125 = 多模光纖 62.5&lt;/li>
+&lt;li>OM2, 50µ, 50/125 = 多模光纖 50&lt;/li>
+&lt;li>OM3, 10GB, 50µm, 50/125 = 多模光纖 10GB&lt;/li>
+&lt;li>OM4, 100GB, 50µm, 50/125 = 多模光纖 100GB&lt;/li>
+&lt;/ul>
+&lt;p>光纖結構&lt;/p>
+&lt;p>光纖裸纖的構成主要分為三層：&lt;/p>
+&lt;ul>
+&lt;li>中心：高折射率玻璃芯(芯徑一般為單模 9μm，多模 50 或 62.5μm) 。&lt;/li>
+&lt;li>夾層：低折射率硅玻璃包層(直徑為 125μm) 。&lt;/li>
+&lt;li>外層：加強用樹脂塗層(直徑為 250μm)。&lt;/li>
+&lt;/ul>
+&lt;p>光纖的種類&lt;/p>
+&lt;ol>
+&lt;li>一般依光波長在光纖中的傳輸模式可分為：單模態光纖和多模態光纖。
+&lt;ol>
+&lt;li>多模態光纖：中心玻璃芯(纖核)較粗(50 或 62.5μm)，外層纖殼為 125μm 可傳輸多種模代的光波長。但其模間色散較大，因而限制了傳輸信號的頻率，而隨著距離的增加會更加嚴重。例如：600MB/KM 的光纖再 2KM 時則只有 300MB 的頻寬了。因此，多模光纖傳輸的距離就比較近，一般只有幾公里的距離。&lt;/li>
+&lt;li>單模態光纖：中心玻璃芯較細(纖核一般為 9 或 10μm)，只能傳一種模式的光。因此，其模間色散很小，適用於遠距離通訊，但其色度色散起了主要作用，這樣單模光纖對光源的譜寬和穩定性有較高的要求，即譜寬要窄，穩定性要好。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>按最佳傳輸頻率窗口分： 常規型單模光纖和色散位移型單模光纖。
+&lt;ol>
+&lt;li>常規型：光纖生產廠將光纖傳輸頻率最佳化在單一波長的光上，如 1300μm。&lt;/li>
+&lt;li>色散位移型：光纖生產廠將 光纖傳輸頻率最佳兩個波長的光上，如 1300μm 和 1550μm。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>按折射率分佈情況分：突變型和漸變型光纖。&lt;/li>
+&lt;/ol>
+&lt;p>常用光纖規格&lt;/p></description></item><item><title>Route notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</guid><description>&lt;p>Router - 善於運算路由表的機器，L3 的設備。&lt;/p>
+&lt;p>Routing Table&lt;/p>
+&lt;ul>
+&lt;li>一張網卡綁了一個 IP，天生就有了 2 筆 route，不能被改變。192.168.1.1/24
+&lt;ul>
+&lt;li>自己本身。Local route / Host route：192.168.1.1/32&lt;/li>
+&lt;li>整個網段。Direct route / Connect route：192.168.1.0/24&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Static route 想設幾個就設幾個。
+&lt;ul>
+&lt;li>172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li>
+&lt;li>2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Default route - gateway 只有一個。
+&lt;ul>
+&lt;li>0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>小數優先 - 優先走範圍小的 route。&lt;/li>
+&lt;li>BGPv4&lt;/li>
+&lt;/ul></description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</guid><description>&lt;p>封包出去前&lt;/p>
+&lt;ul>
+&lt;li>對 Arp Table 找 IP 對應的 MAC
+&lt;ul>
+&lt;li>有 MAC - 封裝&lt;/li>
+&lt;li>無 MAC - 廣播
+&lt;ul>
+&lt;li>同網段 - OK&lt;/li>
+&lt;li>不同網段 - 對 Arp Table 找 Router 的 MAC
+&lt;ul>
+&lt;li>有 - OK&lt;/li>
+&lt;li>無 - 廣播&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>Ansible Command</title><link>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/bash/ansible/</guid><description>&lt;div class="note-card ">
 &lt;div class="item">
 &lt;h5 class="note-title">&lt;span>Lookup&lt;/span>&lt;/h5>
 &lt;div class="card">

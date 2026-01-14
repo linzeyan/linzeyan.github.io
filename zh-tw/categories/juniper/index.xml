@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Juniper on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/juniper/</link><description>Recent content in Juniper on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sat, 21 Jul 2018 14:45:29 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/juniper/index.xml" rel="self" type="application/rss+xml"/><item><title>HA command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
+# 全新設備上面沒啟用過HA 必須先定義Cluster ID
+# ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
+#
+request system zeroize
+# 以下command 必須在 &amp;gt; 模式使用
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 0 # 這個是在 node 0 的設備下的
+set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 1 # 這個是在 node 1 的設備下的
+在secondary node 下 這個command
+request chassis cluster configuration-synchronize
+# 等待機器重開機後，會出現Hold 或stanby 字樣 ，看到Cluster 是否有起來
+show chassis cluster status
+# 這個是RETH interface 建立好才會出現，必須先做config才會有
+show chassis cluster interfaces
+# 以下command 則是在 Config mode 下使用 ，先把設定檔建起來
+---
+# 這邊需要 backup-router 是給 HA裡面的Standby Device 的管理介面 (fxp) 一筆routing 可以回應，預設Standby 不會啟用routing engine，所以需要這筆設定
+set groups node0 system host-name SRX-node0
+set groups node0 system backup-router 10.10.0.254
+set groups node0 system backup-router destination 0.0.0.0/0
+set groups node0 interfaces fxp0 unit 0 family inet address 10.10.0.2/24
+set groups node1 system host-name SRX-node1
+set groups node1 system backup-router 10.10.0.254
+set groups node1 system backup-router destination 0.0.0.0/0
+set groups node1 interfaces fxp0 unit 0 family inet address 10.10.0.3/24
+set apply-groups &amp;#34;${node}&amp;#34;
+set system time-zone Asia/Taipei
+set chassis cluster control-link-recovery
+set chassis cluster reth-count 10
+set chassis cluster heartbeat-interval 2000
+# 另外建議在建置期間先將IPv6 打開，可以使用以下指令，因為日後開啟IPv6功能則必須要將設備重開機
+set security forwarding-options family inet6 mode flow-based
+# 這邊的interface 號碼要看每一台Chassis 的型號不同而會有所不同
+# 最簡單的識別方式是看那台設備的Slot 有幾個，像SRX550HM 是 0~ 8都有擴充可以使用，所以預設HA會在 9開始 ，所以會是 ge-9/x/x
+set chassis cluster redundancy-group 0 node 0 priority 150
+set chassis cluster redundancy-group 0 node 1 priority 100
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 0 interface-monitor ge-9/0/5 weight 100
+set chassis cluster redundancy-group 1 node 0 priority 150
+set chassis cluster redundancy-group 1 node 1 priority 100
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/3 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-0/0/5 weight 150
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
+set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
+# 這裡是作為Redundancy group: 1 的 Data sync 設定 ，請務必設定上去才會啟用ge-0/0/2 的 heartbeat link
+set interfaces fab0 fabric-options member-interfaces ge-0/0/2
+set interfaces fab1 fabric-options member-interfaces ge-9/0/2
+# 設定interface 加入reth Group
+set interfaces ge-0/0/3 gigether-options redundant-parent reth0
+set interfaces ge-0/0/4 gigether-options redundant-parent reth0
+set interfaces ge-9/0/3 gigether-options redundant-parent reth0
+set interfaces ge-9/0/4 gigether-options redundant-parent reth0
+set interfaces ge-0/0/5 gigether-options redundant-parent reth1
+set interfaces ge-9/0/5 gigether-options redundant-parent reth1
+set interfaces reth0 vlan-tagging
+# 務必要將RETH 加入 data sync Group 裡面，不然不會動
+set interfaces reth0 redundant-ether-options redundancy-group 1
+# 特別注意，在SRX雖然是LACP Passive mode ，在Switch 請務必使用LACP Activate mode
+set interfaces reth0 redundant-ether-options lacp passive
+set interfaces reth0 redundant-ether-options lacp periodic slow
+set interfaces reth1 redundant-ether-options redundancy-group 1
+set interfaces reth1 unit 0 family inet address 202.99.240.100/26
+&lt;/code>&lt;/pre></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180627-juniper/</guid><description>&lt;p>下列操作命令在操作模式下使用，或在配置模式下 run show…&lt;/p>
+&lt;p>查看當前防火牆 session 數&lt;/p>
+&lt;pre tabindex="0">&lt;code>show security flow session | match 10.22.12.104
+show security flow session source-prefix 10.22.12.104
+&lt;/code>&lt;/pre>&lt;p>清除當前 session&lt;/p>
+&lt;pre tabindex="0">&lt;code>clear security flow session all
+&lt;/code>&lt;/pre>&lt;p>查 OID&lt;/p>
+&lt;pre tabindex="0">&lt;code>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+&lt;/code>&lt;/pre>&lt;p>查看當前軟體版本號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system software
+&lt;/code>&lt;/pre>&lt;p>查看系統啟動時間&lt;/p>
+&lt;pre tabindex="0">&lt;code>show system uptime
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡及序列號&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis haredware
+&lt;/code>&lt;/pre>&lt;p>查看硬體板卡當前狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show chassis environment
+&lt;/code>&lt;/pre>&lt;p>查看路由表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show route
+&lt;/code>&lt;/pre>&lt;p>設備商的 Administrative distance / Route preference 預設值比較&lt;/p>
+&lt;p>查看 ARP 表&lt;/p>
+&lt;pre tabindex="0">&lt;code>show arp
+&lt;/code>&lt;/pre>&lt;p>查看系統 log&lt;/p>
+&lt;pre tabindex="0">&lt;code>show log messages
+&lt;/code>&lt;/pre>&lt;p>查看所有介面運行狀態&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface terse
+&lt;/code>&lt;/pre>&lt;p>查看介面運行細節資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>show interface ge-x/y/z detail
+&lt;/code>&lt;/pre>&lt;p>動態統計介面資料包轉發資訊&lt;/p>
+&lt;pre tabindex="0">&lt;code>monitor interface ge-x/y/z
+&lt;/code>&lt;/pre>&lt;p>檢查 ALG 開啟情況&lt;/p></description></item><item><title>防火牆更新</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
+&lt;p>插 console&lt;/p>
+&lt;p>將更新檔丟到 usb 裡&lt;/p>
+&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;ol>
+&lt;li>&lt;code>start shell&lt;/code>&lt;/li>
+&lt;li>&lt;code>su成root身分&lt;/code>&lt;/li>
+&lt;li>&lt;code>建資料夾mkdir /var/tmp/usb(名字可自取)&lt;/code>&lt;/li>
+&lt;li>插入 USB，這邊要注意 da 後面的數字，目前是 da1&lt;/li>
+&lt;li>掛載 &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (如果是 da0，就要變成 da0s1，以此類推)&lt;/li>
+&lt;li>跑完後 &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
+&lt;ol>
+&lt;li>&lt;code>ls&lt;/code> (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>cli 切換成 operational mode
+&lt;ol>
+&lt;li>&lt;code>request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
+&lt;li>&lt;code>show version&lt;/code>&lt;/li>
+&lt;/ol></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
+&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
+&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+set security zones security-zone JC32 host-inbound-traffic system-services ping
+set security zones security-zone JC32 interfaces gr-0/0/0.32
+set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item></channel></rss>

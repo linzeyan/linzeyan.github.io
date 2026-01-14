@@ -167,4 +167,189 @@ grep receives the output of tcpflow&lt;/li>
 &lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
 &lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch">Switch&lt;/h4>
+&lt;p>&lt;strong>&lt;em>Switch 通常是 L2 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>只會將封包傳送到指定目的地的電腦（透過 MAC Table），相對上能減少資料碰撞及資料被竊聽的機會。交換器更能將同時傳到的封包分別處理，而集線器則不能。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Hub 則是 L1 設備&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>會將網路內某一使用者傳送的封包傳至所有已連接到集線器的電腦，因會碰撞所以 random retry。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>MAC Table&lt;/em>&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Learning
+&lt;ul>
+&lt;li>從某個 Port 收到某網段（設為 A）MAC 位址為 X 的計算機發給 MAC 位址為 Y 的計算機的資料包。交換機從而記下了 MAC 位址 X 在網段 A。這稱為學習(learning)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Flooding
+&lt;ul>
+&lt;li>交換機還不知道 MAC 位址 Y 在哪個網段上，於是向除了 A 以外的所有網段轉發該資料包。這稱為洪水(flooding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Forwarding
+&lt;ul>
+&lt;li>MAC 位址 Y 的電腦收到該封包，向 MAC 位址 X 發出確認包。交換器收到該包後，從而記錄下 MAC 位址 Y 所在的網段。交換機向 MAC 位址 X 轉發確認包。這稱為轉發(forwarding)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Filtering
+&lt;ul>
+&lt;li>交換機收到一個資料包，查表後發現該資料包的來源位址與目的位址屬於同一網段。交換機將不處理該資料包，這稱為過濾(filtering)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Aging
+&lt;ul>
+&lt;li>交換機內部的 MAC 位址-網段查詢表的每條記錄採用時間戳記錄最後一次存取的時間。早於某個閾值（用戶可配置）的記錄被清除，這稱為老化(aging)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h5 id="vlan">Vlan&lt;/h5>
+&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
+&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
+&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+set security zones security-zone JC32 host-inbound-traffic system-services ping
+set security zones security-zone JC32 interfaces gr-0/0/0.32
+set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item><item><title>機房 notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</guid><description>&lt;p>第一張網卡-藍色線&lt;/p>
+&lt;p>第二張網卡-綠色線&lt;/p>
+&lt;p>交換機互連-白色線&lt;/p>
+&lt;p>黃、紅&lt;/p>
+&lt;p>Storage 有磁碟陣列，數據交換量大，用光纖連接，使用光纖專用的交換機。&lt;/p>
+&lt;p>光纖顏色：&lt;/p>
+&lt;p>多模 (Multi-mode)或單模 (Single-mode)的光纖線&lt;/p>
+&lt;p>單模光纖是黃色，多模光纖 50μm 或是 62.5μm 通常都是橘色。10GB 多模光纖通常是水藍色(Aqua)。&lt;/p>
+&lt;p>以下是一些常見的規格區分方式。&lt;/p>
+&lt;ul>
+&lt;li>OS1, OS2, 9µm, 9/125 = 單模光纖&lt;/li>
+&lt;li>OM1, 62.5µm, 62.5/125 = 多模光纖 62.5&lt;/li>
+&lt;li>OM2, 50µ, 50/125 = 多模光纖 50&lt;/li>
+&lt;li>OM3, 10GB, 50µm, 50/125 = 多模光纖 10GB&lt;/li>
+&lt;li>OM4, 100GB, 50µm, 50/125 = 多模光纖 100GB&lt;/li>
+&lt;/ul>
+&lt;p>光纖結構&lt;/p>
+&lt;p>光纖裸纖的構成主要分為三層：&lt;/p>
+&lt;ul>
+&lt;li>中心：高折射率玻璃芯(芯徑一般為單模 9μm，多模 50 或 62.5μm) 。&lt;/li>
+&lt;li>夾層：低折射率硅玻璃包層(直徑為 125μm) 。&lt;/li>
+&lt;li>外層：加強用樹脂塗層(直徑為 250μm)。&lt;/li>
+&lt;/ul>
+&lt;p>光纖的種類&lt;/p>
+&lt;ol>
+&lt;li>一般依光波長在光纖中的傳輸模式可分為：單模態光纖和多模態光纖。
+&lt;ol>
+&lt;li>多模態光纖：中心玻璃芯(纖核)較粗(50 或 62.5μm)，外層纖殼為 125μm 可傳輸多種模代的光波長。但其模間色散較大，因而限制了傳輸信號的頻率，而隨著距離的增加會更加嚴重。例如：600MB/KM 的光纖再 2KM 時則只有 300MB 的頻寬了。因此，多模光纖傳輸的距離就比較近，一般只有幾公里的距離。&lt;/li>
+&lt;li>單模態光纖：中心玻璃芯較細(纖核一般為 9 或 10μm)，只能傳一種模式的光。因此，其模間色散很小，適用於遠距離通訊，但其色度色散起了主要作用，這樣單模光纖對光源的譜寬和穩定性有較高的要求，即譜寬要窄，穩定性要好。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>按最佳傳輸頻率窗口分： 常規型單模光纖和色散位移型單模光纖。
+&lt;ol>
+&lt;li>常規型：光纖生產廠將光纖傳輸頻率最佳化在單一波長的光上，如 1300μm。&lt;/li>
+&lt;li>色散位移型：光纖生產廠將 光纖傳輸頻率最佳兩個波長的光上，如 1300μm 和 1550μm。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>按折射率分佈情況分：突變型和漸變型光纖。&lt;/li>
+&lt;/ol>
+&lt;p>常用光纖規格&lt;/p></description></item><item><title>Route notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</guid><description>&lt;p>Router - 善於運算路由表的機器，L3 的設備。&lt;/p>
+&lt;p>Routing Table&lt;/p>
+&lt;ul>
+&lt;li>一張網卡綁了一個 IP，天生就有了 2 筆 route，不能被改變。192.168.1.1/24
+&lt;ul>
+&lt;li>自己本身。Local route / Host route：192.168.1.1/32&lt;/li>
+&lt;li>整個網段。Direct route / Connect route：192.168.1.0/24&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Static route 想設幾個就設幾個。
+&lt;ul>
+&lt;li>172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li>
+&lt;li>2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Default route - gateway 只有一個。
+&lt;ul>
+&lt;li>0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>小數優先 - 優先走範圍小的 route。&lt;/li>
+&lt;li>BGPv4&lt;/li>
+&lt;/ul></description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</guid><description>&lt;p>封包出去前&lt;/p>
+&lt;ul>
+&lt;li>對 Arp Table 找 IP 對應的 MAC
+&lt;ul>
+&lt;li>有 MAC - 封裝&lt;/li>
+&lt;li>無 MAC - 廣播
+&lt;ul>
+&lt;li>同網段 - OK&lt;/li>
+&lt;li>不同網段 - 對 Arp Table 找 Router 的 MAC
+&lt;ul>
+&lt;li>有 - OK&lt;/li>
+&lt;li>無 - 廣播&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ul></description></item></channel></rss>
