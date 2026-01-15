@@ -1,0 +1,22 @@
+services:
+  app-dev:
+    image: 891377177527.dkr.ecr.ap-northeast-1.amazonaws.com/future-ai:beta-aics-chat-latest
+    container_name: app-dev
+    network_mode: host
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.repository=891377177527.dkr.ecr.ap-northeast-1.amazonaws.com/future-ai:beta-aics-chat-latest"
+
+  watchtower:
+    image: zeyanlin/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - "AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXX"
+      - "AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXXX"
+      - "AWS_DEFAULT_REGION=ap-northeast-1"
+    command: --interval 10 --label-enable --cleanup

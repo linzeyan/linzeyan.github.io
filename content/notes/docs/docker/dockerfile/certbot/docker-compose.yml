@@ -1,0 +1,21 @@
+services:
+  certbot:
+    image: zeyanlin/certbot:v1.0.0
+    container_name: dns
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "700M"
+    environment:
+      - "AWS_ACCESS_KEY_ID=XXXXXXXXXXXXX"
+      - "AWS_DEFAULT_REGION=ap-northeast-1"
+      - "AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXX"
+    volumes:
+      - ../../cert/letencrypt:/etc/letsencrypt
+    command: /usr/bin/bash -c "/usr/bin/certbot certonly --dns-route53 -d '*.newfuturetv.com' --quiet --email ricky@newfuturetv.com --agree-tos && /usr/bin/certbot certonly --dns-route53 -d '*.777game-api.com' --quiet --email ricky@newfuturetv.com --agree-tos"
