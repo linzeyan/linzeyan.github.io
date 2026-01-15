@@ -4,8 +4,8 @@ services:
     image: provectuslabs/kafka-ui:latest
     restart: always
     network_mode: host
-      #ports:
-      #  - 8080:8080
+    # ports:
+    #   - 8080:8080
     environment:
       DYNAMIC_CONFIG_ENABLED: "true"
     logging:
@@ -18,9 +18,9 @@ services:
           cpus: "1"
           memory: 1G
 
-  redis:
+  redis-ui:
     image: redis/redisinsight:latest
-    container_name: redis
+    container_name: redis-ui
     restart: always
     ports:
       - 6379:5540
@@ -36,11 +36,12 @@ services:
           cpus: "0.5"
           memory: 512M
 
-  mysql:
+  mysql-ui:
     image: dbeaver/cloudbeaver
-    container_name: mysql
+    container_name: mysql-ui
     restart: always
-    network_mode: host
+    network_mode:
+      host
       #    ports:
       #      - 8080:8978
     volumes:
@@ -54,3 +55,24 @@ services:
         limits:
           cpus: "0.5"
           memory: 512M
+
+  etcd-workbench:
+    image: tzfun/etcd-workbench
+    container_name: etcd-workbench
+    restart: always
+    networks:
+      - local_net
+    ports:
+      - "8002:8002"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+    volumes:
+      - ./database/etcd-workbench/data:/usr/tzfun/etcd-workbench/data/system/config

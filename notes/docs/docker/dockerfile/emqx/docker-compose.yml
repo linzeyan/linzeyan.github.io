@@ -1,0 +1,38 @@
+volumes:
+  vol:
+
+services:
+  mqtt:
+    image: test
+    container_name: emqx
+    restart: always
+    environment:
+      - "EMQX_CONNECTORS__HTTP__CLIENTCONNECTED.URL=http://192.168.68.82:18083"
+      - "EMQX_CONNECTORS__HTTP__CLIENTDISCONNECTED.URL=http://192.168.68.82:18083"
+      - "EMQX_CONNECTORS__HTTP__PUBLISHED.URL=http://192.168.68.82:18083"
+      - "EMQX_CONNECTORS__HTTP__SUBSCRIBED.URL=http://192.168.68.82:18083"
+      - "EMQX_CONNECTORS__HTTP__UNSUBSCRIBED.URL=http://192.168.68.82:18083"
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+    volumes:
+      - vol:/opt/emqx
+    ports:
+      # - "1883:1883"
+      # - "8083:8083"
+      # - "8084:8084"
+      # - "8883:8883"
+      # - "18083:18083"
+      - "11111:18083"

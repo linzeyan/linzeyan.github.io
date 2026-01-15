@@ -1,0 +1,62 @@
+name: "kafka"
+services:
+  kafka:
+    image: bitnami/kafka:3.7.0
+    container_name: kafka
+    restart: always
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "3"
+          memory: 15G
+    environment:
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_BROKER_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@192.168.68.84:9093,2@192.168.90.30:9093,3@192.168.195.50:9093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=BROKER
+      - KAFKA_CFG_LISTENERS=BROKER://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=BROKER://192.168.68.84:9092,EXTERNAL://54.249.169.109:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,BROKER:PLAINTEXT
+      - KAFKA_CLUSTER_ID=rROQbDAIT1OgGximRtJsXQ
+      - KAFKA_KRAFT_CLUSTER_ID=rROQbDAIT1OgGximRtJsXQ
+      - KAFKA_HEAP_OPTS=-Xms2g -Xmx12g
+    volumes:
+      - data:/bitnami/kafka
+      - config:/opt/bitnami/kafka/config
+
+volumes:
+  data:
+  config:
+
+# cluster.id 要相同 /var/lib/docker/volumes/kafka_data/_data/data/meta.properties
+# kafka-storage.sh random-uuid
+# NnRAQmlvRgGU8KwOtp7aMg
+# sgH58-VVQvmNe6bjV4l02Q
+# 4E1I-tsgRlmbXxsQqjCh_w
+# q2ssnkPeQkebkwzvi7yAag
+# PaWIB1eKRKKf7wfxHDCgJg
+# T-ngumRmSKeA4iWrRi58kg
+# supdo7SoQdKSIKHaiCCaKw
+# NU1VFlsZTRqRXFEUYrka8g
+# 8qxySxihQACnKTVerAl0Ng
+# CcvOpcVLSFKxY2uDgYKohg
+# H9YjIvX1Qf-axUCOF1NhdQ
+# n4RB9GqvRmOGvdbJGJTtGw
+# 43nW-5qwSc2wTG4-iw4gsA
+# HKtI7iaiQemZIgN45UTApQ
+# 00Z1379FQ0yrTo_sgbtKvw
+# UR9jg34mSseeCqIFOm8Cog
+# DbzsiAHtQFK12hqBzZCvvw
+# Gr6wVl-zQKyLHBkemVjvIA
+# ac5F40e0S7uzfd8BEkx3SQ
+# sTEHy06mQp-qMaaC5u4pMw
+# RITjyJOHTG-uEtd_UicJdg

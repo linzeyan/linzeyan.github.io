@@ -1,0 +1,27 @@
+name: "outline"
+
+services:
+  shadowbox:
+    image: quay.io/outline/shadowbox:stable
+    restart: always
+    container_name: shadowbox
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1G
+    volumes:
+      - /opt/outline/persisted-state:/opt/outline/persisted-state
+    environment:
+      - "SB_API_PORT=25312"
+      - "SB_API_PREFIX=YlbmxVPhnP542uBXoPG2pg"
+      - "SB_CERTIFICATE_FILE=/opt/outline/persisted-state/shadowbox-selfsigned.crt"
+      - "SB_PRIVATE_KEY_FILE=/opt/outline/persisted-state/shadowbox-selfsigned.key"
+      - "SB_METRICS_URL="
+      - "SB_STATE_DIR=/opt/outline/persisted-state"
