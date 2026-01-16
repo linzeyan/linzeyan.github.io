@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/linux/</link><description>Recent content in Linux on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 09 Nov 2025 20:32:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Mosdns-X</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251109-mosdns-x/</link><pubDate>Sun, 09 Nov 2025 20:32:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251109-mosdns-x/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/linux/</link><description>Recent content in Linux on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 11 Dec 2025 10:18:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>如何在Surface Go 2安裝Fedora Linux，提昇低階平板效能</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251211-install-linux-on-surface-go-2/</link><pubDate>Thu, 11 Dec 2025 10:18:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251211-install-linux-on-surface-go-2/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/install-linux-on-surface-go-2/" target="_blank" rel="noopener">如何在 Surface Go 2 安裝 Fedora Linux，提昇低階平板效能&lt;/a>
+&lt;blockquote>
+&lt;p>Surface Go 2 (Intel Pentium 4425Y，4G/64G) Wifi 版&lt;/p>
+&lt;p>關於 Surface Go 2 的硬體支援程度，參閱 Github 的這個表格：&lt;a href="https://github.com/linux-surface/linux-surface/wiki/Supported-Devices-and-Features#feature-matrix" target="_blank" rel="noopener">Supported Devices and Features&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="製作-linux-開機碟">製作 Linux 開機碟&lt;/h3>
+&lt;ul>
+&lt;li>到 &lt;a href="https://www.fedoraproject.org/kde/" target="_blank" rel="noopener">Fedora KDE&lt;/a> 官網下載 ISO&lt;/li>
+&lt;li>然後用 &lt;a href="https://ivonblog.com/posts/ventoy-linux-installation/" target="_blank" rel="noopener">Ventoy&lt;/a> 製作開機碟。&lt;/li>
+&lt;li>因為 Surface Go 2 的連接埠只有 Type-C，你可能要準備擴充基座。它不能夠從 SD 卡開機。&lt;/li>
+&lt;/ul>
+&lt;h3 id="安裝-linux">安裝 Linux&lt;/h3>
+&lt;ul>
+&lt;li>將 Surface Go 2 關機。&lt;/li>
+&lt;li>長按開機鍵與音量上鍵，進入 UEFI。這個界面是可以觸控的，不用接上鍵盤，但之後安裝 Linux 可能還是需要使用實體鍵盤操作。&lt;/li>
+&lt;li>雖然 Fedora 支援 Secure Boot，還是建議關閉 Secure Boot，免得安裝驅動需要手動簽名。&lt;/li>
+&lt;li>將開機順序設定為隨身碟&lt;/li>
+&lt;li>開機，依照畫面指示安裝。選擇清除整個磁碟，安裝 Fedora。&lt;/li>
+&lt;li>關於中文輸入法，請安裝 Fcitx5
+&lt;ul>
+&lt;li>&lt;code>sudo dnf install fcitx5 fcitx5-chewing fcitx5-gtk3 fcitx5-gtk4 fcitx5-qt fcitx5-qt6 fcitx5-configtool&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>小技巧：Fedora 預設啟用 zRAM，如果 Surface Go 的 RAM 太小，編輯 &lt;code>/etc/systemd/zram-generator.conf&lt;/code> 提高 SWAP 數值，增加可用的 RAM，單位為 MB。
+&lt;ul>
+&lt;li>&lt;code>[zram0]&lt;/code>&lt;/li>
+&lt;li>&lt;code>zram-size = 8192&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="加裝-linux-surface-核心">加裝 linux-surface 核心&lt;/h3>
+&lt;ul>
+&lt;li>依照 &lt;a href="https://github.com/linux-surface/linux-surface/wiki/Installation-and-Setup" target="_blank" rel="noopener">Github&lt;/a> 指示安裝。Fedora 的作法是新增 linux-surface 團隊經營的套件庫到系統
+&lt;ul>
+&lt;li>&lt;code>sudo dnf config-manager addrepo --from-repofile=https://pkg.surfacelinux.com/fedora/linux-surface.repo&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>安裝 linux-surface 核心，重開機
+&lt;ul>
+&lt;li>&lt;code>sudo dnf install --allowerasing kernel-surface iptsd libwacom-surface&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>uname -a&lt;/code> 確認目前的核心是否切換成功，應該會顯示 &lt;code>linux-surface&lt;/code>&lt;/li>
+&lt;li>由於 Fedora 系統核心更新頻率比較高，新版核心可能會覆蓋 linux-surface 的核心。故安裝 linux-surface 套件之後會自動啟用 &lt;code>linux-surface-default-watchdog.path&lt;/code> 服務，確保開機啟動的都是 linux-surface 核心。&lt;/li>
+&lt;/ul>
+&lt;h3 id="kde-桌面的虛擬鍵盤使用方式">KDE 桌面的虛擬鍵盤使用方式&lt;/h3>
+&lt;p>在系統設定 → 鍵盤 → 虛擬鍵盤啟用。需要注意的是這個鍵盤無法跟 Fcitx5 一起使用。&lt;/p></description></item><item><title>Mosdns-X</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251109-mosdns-x/</link><pubDate>Sun, 09 Nov 2025 20:32:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251109-mosdns-x/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/pmkol/mosdns-x" target="_blank" rel="noopener">Mosdns-X&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://blog.ibytebox.com/archives/OxpX7FQ1" target="_blank" rel="noopener">让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X&lt;/a>&lt;/li>
 &lt;/ul>
