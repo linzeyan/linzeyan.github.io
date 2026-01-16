@@ -1,0 +1,18 @@
+dn: cn=config
+changetype: modify
+add: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/ldap/certs/ca.crt
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/ldap/certs/server.crt
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/ldap/certs/server.key
+-
+replace: olcTLSVerifyClient
+olcTLSVerifyClient: never
+#
+#dn: olcDatabase={1}bdb,cn=config
+#changetype: modify
+#add: olcSecurity
+#olcSecurity: tls=1

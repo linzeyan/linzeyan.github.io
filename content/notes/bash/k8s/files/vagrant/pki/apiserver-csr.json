@@ -1,0 +1,29 @@
+{
+  "CN": "kube-apiserver",
+  "hosts": [
+      "localhost",
+      "127.0.0.1",
+      "10.96.0.1",
+${perIP_json}
+      "${VIP}",
+      "*.kubernetes.master",
+      "kubernetes",
+      "kubernetes.default",
+      "kubernetes.default.svc",
+      "kubernetes.default.svc.cluster",
+      "kubernetes.default.svc.cluster.local"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "TW",
+      "ST": "Taipei",
+      "L": "Taipei",
+      "O": "Kubernetes",
+      "OU": "Kubernetes-manual"
+    }
+  ]
+}

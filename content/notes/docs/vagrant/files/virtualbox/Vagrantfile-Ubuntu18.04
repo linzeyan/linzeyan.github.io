@@ -1,0 +1,56 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.hostname = "ubuntu"
+  config.vm.define vm_name = "ubuntu"
+  config.vm.box_check_update = false
+  config.vm.network "private_network", ip: "10.0.0.13"
+  config.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+#config.vm.synced_folder "~/Github/scripts", "/vagrant", type: "rsync"
+#config.vm.synced_folder "data", "/vagrant", type: "nfs", mount_options: ["dmode=775,fmode=664"]
+  config.vm.provider "virtualbox" do |vb|
+# # Display the VirtualBox GUI when booting the machine
+# vb.gui = true
+# # # Customize the amount of memory on the VM:
+    vb.cpus = "2"
+    vb.memory = "2048"
+    vb.name = "ubuntu"
+  end
+  $script = <<-SCRIPT
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+	  setenforce 0
+    timedatectl set-timezone Asia/Taipei
+    sudo yum install -y -q epel-release
+    sudo yum install -y -q https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+    sudo yum install -y -q \
+      bind-utils \
+      chrony \
+      curl \
+      deltarpm \
+      git \
+      httping \
+      htop \
+      iftop \
+      iotop \
+      jq \
+      lsof \
+      net-tools \
+      nmap-ncat \
+      openssl \
+      psmisc \
+      sysstat \
+      tcping \
+      telnet \
+      tmux \
+      vim \
+      wget \
+      yum-utils
+    sudo yum update -y -q
+    yum install -y -q https://www.sudo.ws/sudo/dist/packages/1.9.2/sudo-1.9.2-1.el7.x86_64.rpm
+    curl https://github.com/linzeyan.keys >> /home/vagrant/.ssh/authorized_keys
+    cp -r /home/vagrant/.ssh /root/
+    reboot
+  SCRIPT
+  #config.vm.provision "shell", inline: $script
+end

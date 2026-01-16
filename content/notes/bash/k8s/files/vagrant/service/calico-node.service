@@ -1,0 +1,43 @@
+[Unit]
+Description=calico node
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+Environment=ETCD_ENDPOINTS=${etcd_cluster79}
+PermissionsStartOnly=true
+ExecStart=/usr/bin/docker run   --net=host --privileged --name=calico-node \
+                                -e ETCD_ENDPOINTS=${etcd_cluster79} \
+                                -e ETCD_CA_CERT_FILE=/etc/etcd/ssl/etcd-ca.pem \
+                                -e ETCD_CERT_FILE=/etc/etcd/ssl/client.pem \
+                                -e ETCD_KEY_FILE=/etc/etcd/ssl/client-key.pem \
+                                -e NODENAME=${hostname} \
+                                -e IP=${ip} \
+                                -e IP_AUTODETECTION_METHOD=can-reach=${VIP} \
+                                -e AS=64512 \
+                                -e CLUSTER_TYPE=k8s,bgp \
+                                -e CALICO_IPV4POOL_CIDR=10.244.0.0/16 \
+                                -e CALICO_IPV4POOL_IPIP=always \
+                                -e CALICO_LIBNETWORK_ENABLED=true \
+                                -e CALICO_NETWORKING_BACKEND=bird \
+                                -e CALICO_DISABLE_FILE_LOGGING=true \
+                                -e FELIX_IPV6SUPPORT=false \
+                                -e FELIX_DEFAULTENDPOINTTOHOSTACTION=ACCEPT \
+                                -e FELIX_LOGSEVERITYSCREEN=info \
+                                -e FELIX_IPINIPMTU=1440 \
+                                -e FELIX_HEALTHENABLED=true \
+                                -e CALICO_K8S_NODE_REF=${hostname} \
+                                -v /etc/calico/etcd-ca.pem:/etc/etcd/ssl/etcd-ca.pem \
+                                -v /etc/calico/client.pem:/etc/etcd/ssl/client.pem \
+                                -v /etc/calico/client-key.pem:/etc/etcd/ssl/client-key.pem \
+                                -v /lib/modules:/lib/modules \
+                                -v /var/lib/calico:/var/lib/calico \
+                                -v /var/run/calico:/var/run/calico \
+                                quay.io/calico/node:v3.1.0
+ExecStop=/usr/bin/docker rm -f calico-node
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/6"
+  config.vm.hostname = "69"
+  config.vm.define vm_name = "69"
+  config.vm.box_check_update = false
+  config.vm.network "public_network", bridge: "Intel(R) Ethernet Controller (2) I225-V"
+# config.vm.synced_folder "../data", "/vagrant_data"
+  #config.vm.synced_folder "./", "/vagrant", type: "nfs", mount_options: ["dmode=775,fmode=664"]
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "1"
+    vb.memory = "1024"
+    vb.name = "69"
+  end
+  $script = <<-SCRIPT
+     sudo yum install -y epel-release
+     sudo yum install -y \
+       bind-utils \
+       curl \
+       deltarpm \
+       GeoIP \
+       git \
+       httping \
+       iftop \
+       iotop \
+       jq \
+       lsof \
+       net-tools \
+       nmap-ncat \
+       chrony \
+       openssl \
+       psmisc \
+       sysstat \
+       tcping \
+       telnet \
+       tmux \
+       vim \
+       wget \
+       yum-utils
+     sudo yum update -y
+  SCRIPT
+  config.vm.provision "shell", inline: $script
+end

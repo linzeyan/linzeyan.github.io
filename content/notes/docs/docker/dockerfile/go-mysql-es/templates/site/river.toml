@@ -1,0 +1,64 @@
+my_addr = "{{ rds_host | first}}:{{ rds_port | default(3306) }}"
+my_user = "{{ rds_user | default('dscp') }}"
+my_pass = "{{ rds_pass | default('!QAZ@WSX') }}"
+my_charset = "utf8"
+
+es_addr = "{{ es_addr }}"
+es_user = "{{ es_user | default('') }}"
+es_pass = "{{ es_pass | default('') }}"
+
+data_dir = "./var"
+stat_addr = "127.0.0.1:12800"
+stat_path = "/metrics"
+server_id = {{ 8888 | random(88,1,seed=inventory_hostname) }}
+flavor = "mysql"
+mysqldump = "{{ my_version | default('mysqldump') }}"
+skip_master_data = false
+bulk_size = 128
+flush_bulk_time = "200ms"
+skip_no_pk_table = true
+
+[[source]]
+schema = "dscp"
+tables = ["ds_lottery_issue", "ds_lottery_order", "ds_sports_orders", "ds_synthesize_report_statistics", "ds_user", "ds_user_account_record", "ds_user_day_account_record", "ds_user_login_log", "ds_user_recharge_record", "ds_user_withdraw_record"]
+
+[[rule]]
+schema = "dscp"
+table = "ds_lottery_issue"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_lottery_issue"
+[[rule]]
+schema = "dscp"
+table = "ds_lottery_order"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_lottery_order"
+[[rule]]
+schema = "dscp"
+table = "ds_sports_orders"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_sports_orders"
+[[rule]]
+schema = "dscp"
+table = "ds_synthesize_report_statistics"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_synthesize_report_statistics"
+[[rule]]
+schema = "dscp"
+table = "ds_user"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user"
+[[rule]]
+schema = "dscp"
+table = "ds_user_account_record"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user_account_record"
+[[rule]]
+schema = "dscp"
+table = "ds_user_day_account_record"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user_day_account_record"
+[[rule]]
+schema = "dscp"
+table = "ds_user_login_log"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user_login_log"
+[[rule]]
+schema = "dscp"
+table = "ds_user_recharge_record"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user_recharge_record"
+[[rule]]
+schema = "dscp"
+table = "ds_user_withdraw_record"
+index = "{{ inventory_hostname | regex_replace('-web[0-9]+.*$', '') }}_user_withdraw_record"

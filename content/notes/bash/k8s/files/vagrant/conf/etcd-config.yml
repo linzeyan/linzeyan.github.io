@@ -1,0 +1,17 @@
+apiVersion: kubeadm.k8s.io/v1alpha1
+kind: MasterConfiguration
+api:
+  advertiseAddress: "${ip}"
+etcd:
+  caFile: /etc/etcd/ssl/etcd-ca.pem
+  certFile: /etc/etcd/ssl/client.pem
+  keyFile: /etc/etcd/ssl/client-key.pem
+  endpoints:
+${etcd_per79}
+networking:
+  podSubnet: 10.244.0.0/16
+apiServerCertSANs:
+  - "${VIP}"
+${perIP}
+apiServerExtraArgs:
+  endpoint-reconciler-type: lease
