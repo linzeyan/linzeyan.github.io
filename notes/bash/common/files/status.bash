@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# 0 : Normal
+# 1 L: Light, Bold
+# 2 B: Bold
+# 3 I: Italic, Bold
+# 4 U: Underline, Light, Bold
+# 7 BG: Background
+# 9 S: Strikethrough, Light, Bold
+readonly RESET='\033[0m'
+readonly BLACK='\033[0;30m'
+readonly BLACK1='\033[1;30m'
+readonly BLACK2='\033[2;30m'
+readonly BLACK3='\033[3;30m'
+readonly BLACK4='\033[4;30m'
+readonly BLACK7='\033[7;30m'
+readonly BLACK9='\033[9;30m'
+readonly RED='\033[0;31m'
+readonly RED1='\033[1;31m'
+readonly RED2='\033[2;31m'
+readonly RED3='\033[3;31m'
+readonly RED4='\033[4;31m'
+readonly RED7='\033[7;31m'
+readonly RED9='\033[9;31m'
+readonly GREEN='\033[0;32m'
+readonly GREEN1='\033[1;32m'
+readonly GREEN2='\033[2;32m'
+readonly GREEN3='\033[3;32m'
+readonly GREEN4='\033[4;32m'
+readonly GREEN7='\033[7;32m'
+readonly GREEN9='\033[9;32m'
+readonly YELLOW='\033[0;33m'
+readonly YELLOW1='\033[1;33m'
+readonly YELLOW2='\033[2;33m'
+readonly YELLOW3='\033[3;33m'
+readonly YELLOW4='\033[4;33m'
+readonly YELLOW7='\033[7;33m'
+readonly YELLOW9='\033[9;33m'
+readonly BLUE='\033[0;34m'
+readonly BLUE1='\033[1;34m'
+readonly BLUE2='\033[2;34m'
+readonly BLUE3='\033[3;34m'
+readonly BLUE4='\033[4;34m'
+readonly BLUE7='\033[7;34m'
+readonly BLUE9='\033[9;34m'
+readonly PURPLE='\033[0;35m'
+readonly PURPLE1='\033[1;35m'
+readonly PURPLE2='\033[2;35m'
+readonly PURPLE3='\033[3;35m'
+readonly PURPLE4='\033[4;35m'
+readonly PURPLE7='\033[7;35m'
+readonly PURPLE9='\033[9;35m'
+readonly CYAN='\033[0;36m'
+readonly CYAN1='\033[1;36m'
+readonly CYAN2='\033[2;36m'
+readonly CYAN3='\033[3;36m'
+readonly CYAN4='\033[4;36m'
+readonly CYAN7='\033[7;36m'
+readonly CYAN9='\033[9;36m'
+readonly GRAY='\033[0;37m'
+readonly GRAY1='\033[1;37m'
+readonly GRAY2='\033[2;37m'
+readonly GRAY3='\033[3;37m'
+readonly GRAY4='\033[4;37m'
+readonly GRAY7='\033[7;37m'
+readonly GRAY9='\033[9;37m'
+
+msg() {
+    echo -e "$@"
+}

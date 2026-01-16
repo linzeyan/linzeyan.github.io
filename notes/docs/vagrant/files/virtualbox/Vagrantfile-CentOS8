@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/8"
+  config.vm.hostname = "888"
+  config.vm.define vm_name = "888"
+  config.vm.box_check_update = false
+  config.disksize.size = '100GB'
+  config.vm.network "private_network", ip: "10.0.0.108"
+  config.vm.network "public_network", bridge: "Intel(R) Ethernet Controller (2) I225-V"
+  #config.vm.synced_folder "./", "/vagrant", type: "nfs", mount_options: ["dmode=775,fmode=664"]
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "1"
+    vb.memory = "1024"
+    vb.name = "888"
+  end
+
+  $script = <<-SCRIPT
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+    setenforce 0
+    timedatectl set-timezone Asia/Taipei
+    sudo yum install -y -q epel-release
+    reboot
+    SCRIPT
+  config.vm.provision "shell", inline: $script
+end

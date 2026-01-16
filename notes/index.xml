@@ -3718,7 +3718,102 @@ cannot use i (variable of type int) as MyInt1 value in variable declaration
 &lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;/div></description></item><item><title>Elasticsearch Notes</title><link>https://linzeyan.github.io/notes/elasticsearch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/elasticsearch/</guid><description>&lt;div class="note-card ">
+&lt;/div></description></item><item><title/><link>https://linzeyan.github.io/notes/pytorch/cnn/pytorch-captcha-recognition/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/pytorch/cnn/pytorch-captcha-recognition/readme/</guid><description>&lt;h1 id="深度学习识别验证码">深度学习识别验证码&lt;/h1>
+&lt;p>本项目致力于使用神经网络来识别各种验证码。&lt;/p>
+&lt;h1 id="特性">特性&lt;/h1>
+&lt;ul>
+&lt;li>&lt;strong>端到端，不需要做更多的图片预处理（比如图片字符切割、图片尺寸归一化、图片字符标记、字符图片特征提取）&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>验证码包括数字、大写字母、小写&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>采用自己生成的验证码来作为神经网络的训练集合、测试集合、预测集合&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>纯四位数字，验证码识别率高达 99.9999 %&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>四位数字 + 大写字符，验证码识别率约 96 %&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>深度学习框架pytorch + 验证码生成器ImageCaptcha&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h1 id="原理">原理&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>训练集合生成&lt;/strong>&lt;/p>
+&lt;p>使用常用的 Python 验证码生成库 ImageCaptcha，生成 10w 个验证码，并且都自动标记好;
+如果需要识别其他的验证码也同样的道理，寻找对应的验证码生成算法自动生成已经标记好的训练集合或者手动对标记，需要上万级别的数量，纯手工需要一定的时间，再或者可以借助一些网络的打码平台进行标记&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>训练卷积神经网络&lt;/strong>
+构建一个多层的卷积网络，进行多标签分类模型的训练
+标记的每个字符都做 one-hot 编码
+批量输入图片集合和标记数据，大概15个Epoch后，准确率已经达到 96% 以上&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="验证码识别率展示">验证码识别率展示&lt;/h1>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number.png" alt="">
+&lt;img src="https://raw.githubusercontent.com/dee1024/pytorch-captcha-recognition/master/docs/number2.png" alt="">&lt;/p>
+&lt;h1 id="快速开始">快速开始&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>步骤一：10分钟环境安装&lt;/strong>&lt;/p>
+&lt;p>Python2.7+ 、ImageCaptcha库(pip install captcha)、 Pytorch(参考官网http://pytorch.org)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>步骤二：生成验证码&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python captcha_gen.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行以上命令，会在目录 dataset/train/ 下生成多张验证码图片，图片已经标注好，数量可以是 1w、5w、10w，通过 captcha-gen.py 内的 count 参数设定&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>步骤三：训练模型&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python captcha_train.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用步骤一生成的验证码图集合用CNN模型（在 catcha_cnn_model 中定义）进行训练，训练完成会生成文件 model.pkl&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>步骤四：测试模型&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python captcha_test.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以在控制台，看到模型的准确率（如 95%） ，如果准确率较低，回到步骤一，生成更多的图片集合再次训练&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>步骤五：使用模型做预测&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python captcha_predict.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以在控制台，看到预测输出的结果&lt;/p></description></item><item><title/><link>https://linzeyan.github.io/notes/pytorch/cnn/pytorch-captcha/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/pytorch/cnn/pytorch-captcha/readme/</guid><description>&lt;h1 id="pytorch-captcha">pytorch-captcha&lt;/h1>
+&lt;p>使用pytorch搭建cnn识别验证码&lt;/p>
+&lt;p>数据集：
+链接: &lt;a href="https://pan.baidu.com/s/1pHSl-5nHJWazXVqda-2IcA" target="_blank" rel="noopener">https://pan.baidu.com/s/1pHSl-5nHJWazXVqda-2IcA&lt;/a> 提取码: mv3u 复制这段内容后打开百度网盘手机App，操作更方便哦&lt;/p>
+&lt;p>下载数据集后在根目录解压，运行train.py开始训练&lt;/p>
+&lt;hr>
+&lt;h1 id="pytorch入门实战之验证码识别">pytorch入门实战之验证码识别&lt;/h1>
+&lt;p>本文将使用pytorch框架训练一个四层卷积神经网络，用以识别四位数字字母区分大小的验证码。&lt;/p>
+&lt;h2 id="1-引言">1. 引言&lt;/h2>
+&lt;p>去年四六级查分时候我把准考证号忘了，准考证一时也找不到，最后是靠试准考证号试出来的，因为和我同一个考场的同学准考证号只有最后两位座位号不一样，一个考场不超过30人，遍历座位号就能试出来。&lt;/p>
+&lt;p>四六级查分系统有一个四位数字字母验证码，如果能够自动识别验证码，就能不断遍历准考证号查分了，不用手段输入验证码查分，效率大大提高，不知道淘宝上“忘记准考证号帮查四六级分”服务是不是这样做的。&lt;/p>
+&lt;h2 id="2-数据收集">2. 数据收集&lt;/h2>
+&lt;p>四六级查分网页链接为&lt;a href="http://cet.neea.edu.cn/cet" target="_blank" rel="noopener">http://cet.neea.edu.cn/cet&lt;/a>&lt;br>
+&lt;img src="./pics/cet.png" alt="四六级查分系统">&lt;/p>
+&lt;p>首先按Fn+F12使用网页开发者工具抓包看一下验证码是如何请求，以及如何提交查询信息并返回结果。最好不要一次性把三条信息都输对，那样会直接跳到查询结果页，不方便查看提交查询的请求。&lt;/p>
+&lt;p>&lt;img src="./pics/query.png" alt="查询的请求">&lt;/p>
+&lt;p>可以很容易的找到提交请求的是一个post请求，请求地址为&lt;code>http://cache.neea.edu.cn/cet/query&lt;/code>，请求参数有两个，分别是&lt;code>data&lt;/code>和&lt;code>v&lt;/code>，&lt;code>data&lt;/code>是由一串固定字符和准考证号以及姓名组成，&lt;code>v&lt;/code>则是验证码。通过构建查询请求，我们可以知道验证码是否输入正确。点击获取验证码按钮，可以抓包获取到验证码的请求，将验证码请求以及提交查询写成python代码如下：&lt;/p>
+&lt;pre>&lt;code>def get_captcha_img():
+ik = '123456789123456'
+rand = random.random()
+img_path = '{}/{}.png'.format(false_dir, rand)
+imgs_url = 'http://cache.neea.edu.cn/Imgs.do?c=CET&amp;amp;ik={}&amp;amp;t={}'.format(ik,
+rand)
+headers = {'Referer': 'http://cet.neea.edu.cn/cet'}
+resp = sess.get(imgs_url, headers=headers)
+img_url = re.findall(r'&amp;quot;([^&amp;quot;]*)?&amp;quot;', resp.text)[0]
+img_resp = sess.get(img_url, headers=headers)
+with open(img_path, 'wb') as f:
+f.write(img_resp.content)
+return img_path
+def check_captcha(v):
+query_url = 'http://cache.neea.edu.cn/cet/query'
+data = {'data': 'CET4_181_DANGCI,123456789123456,萧炎',
+'v': v}
+headers = {'Referer': 'http://cet.neea.edu.cn/cet'}
+resp = sess.post(query_url, headers=headers, data=data)
+# print(resp.text)
+if '抱歉，验证码错误！' in resp.text:
+return False
+else:
+return True
+&lt;/code>&lt;/pre>
+&lt;p>结合以上请求验证码以及提交查询信息判断验证码是否正确的方法，再通过打码平台，可以获得带有正确标记的验证码图片。
+使用上述方法，我获得了1181张带有标注的验证码，宽和高为（180，100），将其分为训练集与测试集，训练集为800张，测试及381张。我看过的其他使用卷积神经网络识别验证码的文章，使用的训练集数量多达几千上万张，大多都是自己用程序生成的，本文使用打码平台标记的验证码，就不要求那么大的数据集了，但也能达到满意的效果。&lt;/p></description></item><item><title>Elasticsearch Notes</title><link>https://linzeyan.github.io/notes/elasticsearch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/elasticsearch/</guid><description>&lt;div class="note-card ">
 &lt;div class="item">
 &lt;h5 class="note-title">&lt;span>Data too large&lt;/span>&lt;/h5>
 &lt;div class="card">

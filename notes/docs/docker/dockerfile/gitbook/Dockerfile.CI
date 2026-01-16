@@ -1,0 +1,32 @@
+FROM ubuntu:18.04
+ARG GITBOOK_VER=3.2.3
+ARG NODE_VER=v12.13.0
+ARG NVM_VER=v0.35.2
+ENV DEBIAN_FRONTEND=noninteractive \
+  PATH=${PATH}:/root/.nvm/versions/node/${NODE_VER}/bin \
+  TZ=Asia/Taipei
+## Install dependence packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      git \
+      tzdata \
+  && apt-get clean all \
+  && rm -rf /tmp/* \
+       /var/lib/apt/lists/*
+## Install NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VER}/install.sh | bash \
+  && . ~/.bashrc \
+  && nvm install ${NODE_VER} \
+  && npm install -g \
+       gitbook-cli \
+       npm@latest \
+  && rm -rf /tmp/* \
+       .nvm/.cache \
+       .nvm/.git \
+       .nvm/.github \
+       .npm/_cacache
+## Install GitBook
+RUN gitbook fetch ${GITBOOK_VER}
+
+CMD ["/bin/bash"]

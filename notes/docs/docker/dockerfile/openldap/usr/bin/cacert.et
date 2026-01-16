@@ -1,0 +1,18 @@
+#!/usr/bin/expect
+set timeout 1
+spawn openssl req -new -x509 -days 3650 -key ca.key -out ca.crt
+expect "\[AU\]:"
+send "US\r"
+expect "\[Some-State\]:"
+send "CA\r"
+expect "\[\]:"
+send "SanFrancisco\r"
+expect "\[Internet Widgits Pty Ltd\]:"
+send "CA-Company\r"
+expect "\[\]:"
+send "RootCA\r"
+expect "\[\]:"
+send "RootCA\r"
+expect "\[\]:"
+send "mail@rootca.com\r"
+expect eof

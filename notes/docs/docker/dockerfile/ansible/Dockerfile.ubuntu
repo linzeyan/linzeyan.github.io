@@ -1,0 +1,27 @@
+FROM ubuntu:20.04 AS base
+ENV DEBIAN_FRONTEND=noninteractive
+
+## Install dependence packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      git \
+      openssh-client \
+      openssl \
+      python3 \
+      python3-pip \
+#      python-pip-whl \
+      python3-setuptools \
+      rsync \
+      tzdata \
+  && apt-get clean all \
+  && rm -rf /var/lib/apt/lists/* \
+  && . /root/.bashrc \
+  && pip3 install wheel \
+  && pip3 install ansible \
+  && rm -rf /tmp/* \
+  && rm -rf /root/.pip*
+
+FROM scratch
+ENV TZ=Asia/Taipei
+COPY --from=base / /

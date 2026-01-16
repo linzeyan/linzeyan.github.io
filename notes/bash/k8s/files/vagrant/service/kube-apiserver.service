@@ -1,0 +1,64 @@
+[Unit]
+Description=Kubernetes API Service
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=network.target
+After=etcd.service
+
+[Service]
+EnvironmentFile=-/etc/kubernetes/config
+Restart=on-failure
+Type=notify
+LimitNOFILE=65536
+
+ExecStart=/usr/local/bin/kube-apiserver \
+--advertise-address=${VIP} \
+--allow-privileged=true \
+--audit-log-maxage=30 \
+--audit-log-maxbackup=3 \
+--audit-log-maxsize=128 \
+--audit-log-path=/var/log/kubernetes/audit.log \
+--audit-policy-file=/etc/kubernetes/audit-policy.yml \
+--authorization-mode=Node,RBAC \
+--bind-address=0.0.0.0 \
+--client-ca-file=/etc/kubernetes/pki/ca.pem \
+--disable-admission-plugins=PersistentVolumeLabel \
+--enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,NodeRestriction,PodPreset \
+--enable-bootstrap-token-auth=true \
+--enable-garbage-collector \
+--enable-logs-handler \
+--enable-swagger-ui \
+--endpoint-reconciler-type=lease \
+--etcd-compaction-interval=5m0s \
+--etcd-count-metric-poll-period=1m0s \
+--etcd-cafile=/etc/etcd/ssl/etcd-ca.pem \
+--etcd-certfile=/etc/etcd/ssl/client.pem \
+--etcd-keyfile=/etc/etcd/ssl/client-key.pem \
+--etcd-servers=${etcd_cluster79} \
+--event-ttl=1h \
+--insecure-port=0 \
+--kubelet-certificate-authority=/etc/kubernetes/pki/ca.pem \
+--kubelet-client-certificate=/etc/kubernetes/pki/apiserver.pem \
+--kubelet-client-key=/etc/kubernetes/pki/apiserver-key.pem \
+--kubelet-https=true \
+--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname \
+--kubelet-timeout=3s \
+--log-dir=/var/log/kubernetes \
+--proxy-client-cert-file=/etc/kubernetes/pki/kube-proxy.pem \
+--proxy-client-key-file=/etc/kubernetes/pki/kube-proxy-key.pem \
+--requestheader-client-ca-file=/etc/kubernetes/pki/ca.pem \
+--requestheader-allowed-names=system:kube-proxy \
+--requestheader-group-headers=X-Remote-Group \
+--requestheader-extra-headers-prefix=X-Remote-Extra- \
+--requestheader-username-headers=X-Remote-User \
+--runtime-config=rbac.authorization.k8s.io/v1 \
+--secure-port=5443 \
+--service-account-key-file=/etc/kubernetes/pki/ca-key.pem \
+--service-cluster-ip-range=10.96.0.0/12 \
+--service-node-port-range=30000-32767 \
+--storage-backend=etcd3 \
+--tls-cert-file=/etc/kubernetes/pki/apiserver.pem \
+--tls-private-key-file=/etc/kubernetes/pki/apiserver-key.pem \
+--v=0
+
+[Install]
+WantedBy=multi-user.target

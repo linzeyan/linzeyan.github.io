@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx
+  labels:
+    kubernetes.io/os: linux
+spec:
+  selector:
+    matchLabels:
+      kubernetes.io/os: linux
+  template:
+    metadata:
+      labels:
+        kubernetes.io/os: linux
+    spec:
+      hostNetwork: true
+      volumes:
+        - name: nginx-config
+          hostPath:
+            path: /data/nginx/nginx.conf
+        - name: nginx-enabled
+          hostPath:
+            path: /data/nginx/sites-enabled
+        - name: nginx-ssl
+          hostPath:
+            path: /data/nginx/ssl
+        - name: nginx-stream
+          hostPath:
+            path: /data/nginx/stream
+      containers:
+        - name: nginx
+          image: registry.go2cloudten.com/it/docker/proxy
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: nginx-config
+              readOnly: true
+              mountPath: /etc/nginx/nginx.conf
+            - name: nginx-enabled
+              readOnly: true
+              mountPath: /etc/nginx/sites-enabled
+            - name: nginx-ssl
+              readOnly: true
+              mountPath: /etc/nginx/ssl
+            - name: nginx-stream
+              readOnly: true
+              mountPath: /etc/nginx/stream
+          ports:
+            - containerPort: 30022
+            # hostPort:
+            # hostIP
+            - containerPort: 30080
+            - containerPort: 30443
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx
+# spec:
+#   type: NodePort
+#   externalIPs:
+#     - 192.168.185.9
+#   selector:
+#     kubernetes.io/os: linux
+#   ports:
+#     - name: https
+#       nodePort: 30443
+#       port: 443
+#       targetPort: 443
+#     - name: http
+#       nodePort: 30080
+#       port: 80
+#       targetPort: 80
+#     - name: ssh
+#       nodePort: 30022
+#       port: 22
+#       targetPort: 22

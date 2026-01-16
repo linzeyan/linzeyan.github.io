@@ -1,0 +1,38 @@
+---
+version: '3'
+
+services:
+  svn:
+    image: zeyanlin/svn
+    environment:
+      - LDAP_HOSTS=${LDAP_HOSTS}
+      - LDAP_BASE_DN=${LDAP_BASE_DN}
+      - LDAP_BIND_DN=${LDAP_BIND_DN}
+      - LDAP_ADMIN_PASS=${LDAP_ADMIN_PASS}
+    ports:
+      - 8000:80
+      - 3690:3690
+    volumes:
+      - ${PWD}/svn:/var/svn
+    depends_on:
+      - ldap
+
+  ldap:
+    image: zeyanlin/openldap
+    environment:
+      - LDAP_DOMAIN=${LDAP_DOMAIN}
+      - LDAP_ADMIN_PASS=${LDAP_ADMIN_PASS}
+    ports:
+      - 389:389
+      - 636:636
+    volumes:
+      - ${PWD}/ldap:/var/lib/ldap
+
+  php:
+    image: zeyanlin/phpldapadmin
+    environment:
+      - LDAP_HOSTS=${LDAP_HOSTS}
+    ports:
+      - 80:80
+    depends_on:
+      - ldap

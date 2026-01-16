@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = "ubuntu"
+  config.vm.define vm_name = "ubuntu"
+  config.vm.box_check_update = false
+  config.vm.network "private_network", ip: "10.0.0.13"
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
+#config.vm.synced_folder "~/Github/scripts", "/vagrant", type: "rsync"
+#config.vm.synced_folder "data", "/vagrant", type: "nfs", mount_options: ["dmode=775,fmode=664"]
+  config.vm.provider "virtualbox" do |vb|
+# # Display the VirtualBox GUI when booting the machine
+# vb.gui = true
+# # # Customize the amount of memory on the VM:
+    vb.cpus = "2"
+    vb.memory = "2048"
+    vb.name = "ubuntu"
+  end
+  $script = <<-SCRIPT
+    sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+	  setenforce 0
+    timedatectl set-timezone Asia/Taipei
+    curl https://github.com/linzeyan.keys >> /home/vagrant/.ssh/authorized_keys
+    cp -r /home/vagrant/.ssh /root/
+    reboot
+  SCRIPT
+  #config.vm.provision "shell", inline: $script
+end

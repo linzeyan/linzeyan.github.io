@@ -1,0 +1,20 @@
+[Unit]
+Description=Kubernetes Kube Proxy Server
+After=network.target
+Requires=network.service
+
+[Service]
+Restart=on-failure
+LimitNOFILE=65536
+
+ExecStart=/usr/local/bin/kube-proxy \
+--bind-address=0.0.0.0 \
+--cluster-cidr=10.244.0.0/16 \
+--kubeconfig=/etc/kubernetes/proxy.conf \
+--log-dir=/var/log/kubernetes \
+--logtostderr=false \
+--master=https://${VIP}:5443 \
+--v=0
+
+[Install]
+WantedBy=multi-user.target

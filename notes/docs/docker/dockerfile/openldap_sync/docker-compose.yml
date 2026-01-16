@@ -1,0 +1,31 @@
+---
+version: '3'
+
+services:
+  ldap1:
+    image: zeyanlin/openldap_sync
+    environment:
+      - LDAP_DOMAIN=${LDAP_DOMAIN}
+      - LDAP_ADMIN_PASS=${LDAP_ADMIN_PASS}
+      - ID=1
+      - PROVIDER=ldap2
+    ports:
+      - 1080:80
+      - 1389:389
+      - 1636:636
+    volumes:
+      - ${PWD}/db1:/var/lib/ldap
+
+  ldap2:
+    image: zeyanlin/openldap_sync
+    environment:
+      - LDAP_DOMAIN=${LDAP_DOMAIN}
+      - LDAP_ADMIN_PASS=${LDAP_ADMIN_PASS}
+      - ID=2
+      - PROVIDER=ldap1
+    ports:
+      - 2080:80
+      - 2389:389
+      - 2636:636
+    volumes:
+      - ${PWD}/db2:/var/lib/ldap

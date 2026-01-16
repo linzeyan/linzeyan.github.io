@@ -1,0 +1,17 @@
+[Unit]
+Description={{ inventory_hostname | regex_replace("-web[0-9]+.*$", "") }} DTS node
+After=docker.service
+Requires=docker.service
+
+[Service]
+User={{ webuser | default('www') }}
+ExecStart=/usr/bin/docker run --name={{ inventory_hostname | regex_replace("-web[0-9]+.*$", "") }} \
+                              --restart=always \
+                              -v {{ datapath }}/{{ inventory_hostname | regex_replace("-web[0-9]+.*$", "") }}:/opt \
+                              {{ dts_image | default('go-mysql-elasticsearch:centos5.7') }}
+ExecStop=/usr/bin/docker rm -f {{ inventory_hostname | regex_replace("-web[0-9]+.*$", "") }}
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

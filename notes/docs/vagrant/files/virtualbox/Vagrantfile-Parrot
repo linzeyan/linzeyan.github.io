@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Desktop Login:
+# username: vagrant
+# password: vagrant
+Vagrant.configure("2") do |config|
+  config.vm.box = "stuxcd/parrot-security"
+  config.vm.hostname = "parrot"
+  config.vm.define vm_name = "parrot"
+  config.vm.box_check_update = false
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (Wireless)"
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "2"
+    vb.memory = "2048"
+    vb.name = "parrot"
+  end
+  $script = <<-SCRIPT
+    timedatectl set-timezone Asia/Taipei
+    curl https://github.com/linzeyan.keys >> /home/vagrant/.ssh/authorized_keys
+    cp -r /home/vagrant/.ssh /root/
+  SCRIPT
+  config.vm.provision "shell", inline: $script
+end

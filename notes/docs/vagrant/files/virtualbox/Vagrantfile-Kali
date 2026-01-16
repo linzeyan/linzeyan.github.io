@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Desktop Login:
+# username: vagrant
+# password: vagrant
+Vagrant.configure("2") do |config|
+  config.vm.box = "kalilinux/rolling"
+  config.vm.hostname = "kali"
+  config.vm.define vm_name = "kali"
+  config.vm.box_check_update = false
+  config.vm.network "private_network", ip: "10.0.0.9"
+  config.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = "2"
+    vb.memory = "2048"
+    vb.name = "kali"
+  end
+  $script = <<-SCRIPT
+    timedatectl set-timezone Asia/Taipei
+    curl https://github.com/linzeyan.keys >> /home/vagrant/.ssh/authorized_keys
+    cp -r /home/vagrant/.ssh /root/
+  SCRIPT
+  config.vm.provision "shell", inline: $script
+end

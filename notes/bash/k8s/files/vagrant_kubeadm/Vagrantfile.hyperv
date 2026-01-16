@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box_check_update = false
+  config.vm.provider 'hyperv'
+  $num_instances = 3
+  (1..$num_instances).each do |i|
+    config.vm.define "node#{i}" do |node|
+      node.vm.box = "centos/7"
+      node.vm.hostname = "node#{i}"
+      ip = "10.0.0.#{i+100}"
+      node.vm.network "private_network", ip: ip
+      node.vm.network "public_network", bridge: "External-VSwitch"
+      node.vm.synced_folder "./", "/vagrant", type: "smb",
+        smb_username: "rickylin", smb_password: "pcpassword",
+        create: true, group: "vagrant", owner: "vagrant", mount_options: ["dir_mode=0775","file_mode=0664"]
+      node.vm.provider "hyperv" do |hv|
+        hv.memory = "3072"
+        hv.cpus = 1
+        hv.vmname = "node#{i}"
+      end
+      node.vm.provision "shell", path: "install.sh"
+    end
+  end
+end

@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+set timeout 1
+spawn openssl req -new -key server.key -out server.csr
+expect "\[AU\]:"
+send "TW\r"
+expect "\[Some-State\]:"
+send "Taiwan\r"
+expect "\[\]:"
+send "Taipei\r"
+expect "\[Internet Widgits Pty Ltd\]:"
+send "GoodCompany\r"
+expect "\[\]:"
+send "Server\r"
+expect "\[\]:"
+send "${LDAP_DOMAIN}\r"
+expect "\[\]:"
+send "admin@${LDAP_DOMAIN}\r"
+expect "\[\]:"
+send "\r"
+expect "\[\]:"
+send "\r"
+expect eof

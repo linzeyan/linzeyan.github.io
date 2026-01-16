@@ -1,0 +1,14 @@
+FROM centos:7 AS builder
+RUN yum install -y epel-release \
+  && yum install -y curl-devel openssl-devel wget which \
+  && yum groupinstall -y "Development Tools" \
+  && yum install -y cmake \
+  && yum install -y cyrus-sasl cyrus-sasl-devel cyrus-sasl-lib \
+  && wget https://github.com/edenhill/kafkacat/archive/1.6.0.tar.gz \
+  && tar -zxf 1.6.0.tar.gz \
+  && cd /kafkacat-1.6.0 \
+  && ./bootstrap.sh \
+  && cp /kafkacat-1.6.0/kafkacat /usr/bin
+
+FROM centos:7 AS base
+COPY --from=builder /usr/bin/kafkacat /usr/bin

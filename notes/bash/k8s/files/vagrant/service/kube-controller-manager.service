@@ -1,0 +1,38 @@
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+[Service]
+EnvironmentFile=-/etc/kubernetes/config
+Restart=on-failure
+LimitNOFILE=65536
+
+ExecStart=/usr/local/bin/kube-controller-manager \
+--address=127.0.0.1 \
+--allocate-node-cidrs=true \
+--cluster-cidr=10.244.0.0/16 \
+--cluster-name=kubernetes \
+--cluster-signing-cert-file=/etc/kubernetes/pki/ca.pem \
+--cluster-signing-key-file=/etc/kubernetes/pki/ca-key.pem  \
+--controllers=*,bootstrapsigner,tokencleaner \
+--deployment-controller-sync-period=10s \
+--experimental-cluster-signing-duration=86700h0m0s \
+--feature-gates=RotateKubeletServerCertificate=true \
+--kubeconfig=/etc/kubernetes/controller-manager.conf \
+--leader-elect=true \
+--log-dir=/var/log/kubernetes \
+--logtostderr=false \
+--master=https://${VIP}:5443 \
+--node-monitor-grace-period=40s \
+--node-monitor-period=5s \
+--node-cidr-mask-size=24 \
+--pod-eviction-timeout=2m0s \
+--root-ca-file=/etc/kubernetes/pki/ca.pem \
+--service-account-private-key-file=/etc/kubernetes/pki/ca-key.pem \
+--service-cluster-ip-range=10.96.0.0/12 \
+--terminated-pod-gc-threshold=50 \
+--use-service-account-credentials=true \
+--v=0
+
+[Install]
+WantedBy=multi-user.target
