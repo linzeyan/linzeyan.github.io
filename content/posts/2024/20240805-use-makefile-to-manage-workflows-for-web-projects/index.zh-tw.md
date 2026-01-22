@@ -6,8 +6,8 @@ menu:
     name: "寫 Web 也可以用 Makefile：好好管理你的環境流程"
     identifier: shell-use-makefile-to-manage-workflows-for-web-projects
     weight: 10
-tags: ["URL", "BASH", "SHELL"]
-categories: ["URL", "BASH", "SHELL"]
+tags: ["Links", "BASH", "SHELL"]
+categories: ["Links", "BASH", "SHELL"]
 hero: images/hero/shell.png
 ---
 

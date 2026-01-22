@@ -1,17 +1,17 @@
 ---
-title: "Python install module issues"
+title: "Python 安裝模組問題"
 date: 2020-03-04T15:43:38+08:00
 menu:
   sidebar:
-    name: "Python install module issues"
+    name: "Python 安裝模組問題"
     identifier: python-pip-install-requirements-issues
     weight: 10
-tags: ["URL", "Python", "pip", "issue"]
-categories: ["URL", "Python", "pip", "issue"]
+tags: ["Links", "Python", "pip", "issue"]
+categories: ["Links", "Python", "pip", "issue"]
 hero: images/hero/python.png
 ---
 
-- [I can't install python-ldap](https://stackoverflow.com/questions/4768446/i-cant-install-python-ldap)
+- [無法安裝 python-ldap](https://stackoverflow.com/questions/4768446/i-cant-install-python-ldap)
 
 #### python-ldap
 

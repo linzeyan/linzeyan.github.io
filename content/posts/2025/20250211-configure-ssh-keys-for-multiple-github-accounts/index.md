@@ -6,8 +6,8 @@ menu:
     name: Configuring SSH Keys for Multiple GitHub Accounts
     identifier: configure-ssh-keys-for-multiple-github-accounts
     weight: 10
-tags: ["URL", "command line", "SSH", "Github"]
-categories: ["URL", "command line", "SSH", "Github"]
+tags: ["Links", "command line", "SSH", "Github"]
+categories: ["Links", "command line", "SSH", "Github"]
 hero: images/hero/github.png
 ---
 

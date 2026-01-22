@@ -6,8 +6,8 @@ menu:
     name: "What does `< <(command args)` mean in the shell?"
     identifier: shell-what-does-command-args-mean-in-the-shell
     weight: 10
-tags: ["URL", "SHELL"]
-categories: ["URL", "SHELL"]
+tags: ["Links", "SHELL"]
+categories: ["Links", "SHELL"]
 hero: images/hero/shell.png
 ---
 

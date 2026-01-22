@@ -6,8 +6,8 @@ menu:
     name: "【理解 Cilium 系列文章】(一) 初識 Cilium"
     identifier: k8s-network-cilium-introduce
     weight: 10
-tags: ["URL", "Kubernetes", "Cilium", "Network"]
-categories: ["URL", "Kubernetes", "Cilium", "Network"]
+tags: ["Links", "Kubernetes", "Cilium", "Network"]
+categories: ["Links", "Kubernetes", "Cilium", "Network"]
 hero: images/hero/kubernetes.png
 ---
 

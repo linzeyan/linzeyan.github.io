@@ -6,8 +6,8 @@ menu:
     name: "Regex for Markdown Syntax"
     identifier: regular-expression-for-markdown
     weight: 10
-tags: ["URL", "Markdown", "Regex"]
-categories: ["URL", "Markdown", "Regex"]
+tags: ["Links", "Markdown", "Regex"]
+categories: ["Links", "Markdown", "Regex"]
 ---
 
 - [Regex for Markdown Syntax](https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html)

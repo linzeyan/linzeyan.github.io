@@ -6,8 +6,8 @@ menu:
     name: "Systemd 入门教程：实战篇"
     identifier: linux-systemd-tutorial-part-two
     weight: 10
-tags: ["URL", "Linux"]
-categories: ["URL", "Linux"]
+tags: ["Links", "Linux"]
+categories: ["Links", "Linux"]
 hero: images/hero/linux.png
 ---
 

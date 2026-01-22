@@ -1,16 +1,16 @@
 ---
-title: "How to automatically resize virtual box disk with vagrant"
+title: "使用 Vagrant 自動調整 VirtualBox 磁碟大小"
 date: 2020-08-25T09:40:34+08:00
 menu:
   sidebar:
-    name: "How to automatically resize virtual box disk with vagrant"
+    name: "使用 Vagrant 自動調整 VirtualBox 磁碟大小"
     identifier: how-to-automatically-resize-virtual-box-disk-with-vagrant
     weight: 10
-tags: ["URL", "Vagrant"]
-categories: ["URL", "Vagrant"]
+tags: ["Links", "Vagrant"]
+categories: ["Links", "Vagrant"]
 ---
 
-- [How to automatically resize virtual box disk with vagrant](https://medium.com/@kanrangsan/how-to-automatically-resize-virtual-box-disk-with-vagrant-9f0f48aa46b3)
+- [使用 Vagrant 自動調整 VirtualBox 磁碟大小](https://medium.com/@kanrangsan/how-to-automatically-resize-virtual-box-disk-with-vagrant-9f0f48aa46b3)
 - [Increasing Disk Space of a Linux-based Vagrant Box on Provisioning](https://marcbrandner.com/blog/increasing-disk-space-of-a-linux-based-vagrant-box-on-provisioning/)
 
 ```ruby
@@ -28,7 +28,7 @@ $ sudo lvextend -l +100%FREE /dev/centos/root
 $ sudo xfs_growfs /dev/centos/root
 ```
 
-##### Automate Part
+##### 自動化部分
 
 ```ruby
 Vagrant.configure(2) do |config|
@@ -74,7 +74,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-##### Provisioning Script: disk-extend.sh
+##### 佈署腳本：disk-extend.sh
 
 ```bash
 #!/bin/bash

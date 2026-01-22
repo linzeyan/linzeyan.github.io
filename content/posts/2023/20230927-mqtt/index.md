@@ -6,8 +6,8 @@ menu:
     name: Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes
     identifier: tune-mqtt-emqx
     weight: 10
-tags: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
-categories: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
+tags: ["Kubernetes", "MQTT", "EMQX", "Linux", "Links"]
+categories: ["Kubernetes", "MQTT", "EMQX", "Linux", "Links"]
 hero: images/hero/linux.png
 ---
 

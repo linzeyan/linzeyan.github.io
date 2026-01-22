@@ -6,8 +6,8 @@ menu:
     name: "Python玩转各种多媒体，视频、音频到图片"
     identifier: python-handle-all-kinds-of-multimedia-from-video-and-audio-to-images
     weight: 10
-tags: ["URL", "Python"]
-categories: ["URL", "Python"]
+tags: ["Links", "Python"]
+categories: ["Links", "Python"]
 hero: images/hero/python.png
 ---
 

@@ -1,14 +1,14 @@
 ---
-title: "CS Visualized: Useful Git Commands"
+title: "CS 視覺化：實用的 Git 指令"
 date: 2020-04-16T20:20:16+08:00
 menu:
   sidebar:
-    name: "CS Visualized: Useful Git Commands"
+    name: "CS 視覺化：實用的 Git 指令"
     identifier: git-cs-visualized-useful-git-commands
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 
-- [CS Visualized: Useful Git Commands](https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1)
+- [CS 視覺化：實用的 Git 指令](https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1)

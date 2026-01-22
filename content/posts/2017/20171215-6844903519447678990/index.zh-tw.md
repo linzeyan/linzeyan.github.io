@@ -6,8 +6,8 @@ menu:
     name: "具有代表性的 HTTP 状态码"
     identifier: network-representative-http-status-codes
     weight: 10
-tags: ["URL", "Network", "HTTP"]
-categories: ["URL", "Network", "HTTP"]
+tags: ["Links", "Network", "HTTP"]
+categories: ["Links", "Network", "HTTP"]
 hero: images/hero/network.png
 ---
 

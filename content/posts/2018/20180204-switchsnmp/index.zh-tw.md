@@ -6,8 +6,8 @@ menu:
     name: "如何在 Switch 上啟用 snmp 設定"
     identifier: switch-cisco-how-to-enable-snmp-configuration
     weight: 10
-tags: ["URL", "Switch", "Cisco"]
-categories: ["URL", "Switch", "Cisco"]
+tags: ["Links", "Switch", "Cisco"]
+categories: ["Links", "Switch", "Cisco"]
 ---
 
 - [如何在 Switch 上啟用 snmp 設定](https://itlocation.blogspot.com/2013/10/switchsnmp.html)

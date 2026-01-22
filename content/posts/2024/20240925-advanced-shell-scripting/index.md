@@ -6,8 +6,8 @@ menu:
     name: "Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash"
     identifier: advanced-shell-scripting
     weight: 10
-tags: ["URL", "SHELL", "BASH"]
-categories: ["URL", "SHELL", "BASH"]
+tags: ["Links", "SHELL", "BASH"]
+categories: ["Links", "SHELL", "BASH"]
 hero: images/hero/shell.png
 ---
 

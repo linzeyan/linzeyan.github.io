@@ -1,22 +1,22 @@
 ---
-title: "GO Generic 入門筆記"
+title: "Go Generics Beginner Notes"
 date: 2024-02-07T19:52:22+08:00
 menu:
   sidebar:
-    name: "GO Generic 入門筆記"
+    name: "Go Generics Beginner Notes"
     identifier: go-generic-beginner-notes
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [GO Generic 入門筆記](https://ganhua.wang/go-generic)
+- [Go Generics Beginner Notes](https://ganhua.wang/go-generic)
 
-#### 自定義約束
+#### Custom Constraints
 
 ```go
-// Addable只允許int 或 float64類型
+// Addable allows only int or float64 types
 type Addable interface {
     int | float64
 }
@@ -26,8 +26,8 @@ func Add[T Addable](a, b T) T {
 }
 ```
 
-**_`~` 符號的作用_**
-`~` 符號用于表示與指定类型有相同底層類型的所有類型。當你在類型參數的约束中使用 `~` 符號時，你指定了一個類型集合，這個集合包含所有底層類型與约束中指定的類型相同的類型。
+**_What `~` Means_**
+`~` represents all types that share the same underlying type as the specified type. When you use `~` in a type parameter constraint, you define a type set that includes all types whose underlying type matches the specified type.
 
 ```go
 type MyInt int

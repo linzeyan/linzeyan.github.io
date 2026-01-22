@@ -6,8 +6,8 @@ menu:
     name: "MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量"
     identifier: macos-ssl-key-log-file-decrypt-https-traffic
     weight: 10
-tags: ["URL", "MacOS"]
-categories: ["URL", "MacOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
 - [MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量](http://www.luwenpeng.cn/2020/04/29/MacBook%E8%AE%BE%E7%BD%AESSLKEYLOGFILE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%A7%A3%E5%AF%86HTTPS%E6%B5%81%E9%87%8F/)

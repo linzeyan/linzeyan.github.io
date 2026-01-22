@@ -6,8 +6,8 @@ menu:
     name: "Best Practices for Writing Bash Scripts"
     identifier: shell-bash-best-practices
     weight: 10
-tags: ["URL", "SHELL", "BASH"]
-categories: ["URL", "SHELL", "BASH"]
+tags: ["Links", "SHELL", "BASH"]
+categories: ["Links", "SHELL", "BASH"]
 hero: images/hero/shell.png
 ---
 

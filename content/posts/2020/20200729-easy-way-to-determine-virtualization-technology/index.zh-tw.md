@@ -6,8 +6,8 @@ menu:
     name: "确定虚拟化技术的简便方法"
     identifier: linux-easy-way-to-determine-virtualization-technology
     weight: 10
-tags: ["URL", "Virtualization", "Linux"]
-categories: ["URL", "Virtualization", "Linux"]
+tags: ["Links", "Virtualization", "Linux"]
+categories: ["Links", "Virtualization", "Linux"]
 hero: images/hero/linux.png
 ---
 

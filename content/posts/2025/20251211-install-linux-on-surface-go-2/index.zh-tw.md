@@ -6,8 +6,8 @@ menu:
     name: "如何在Surface Go 2安裝Fedora Linux，提昇低階平板效能"
     identifier: install-linux-on-surface-go-2
     weight: 10
-tags: ["URL", "Linux"]
-categories: ["URL", "Linux"]
+tags: ["Links", "Linux"]
+categories: ["Links", "Linux"]
 hero: images/hero/linux.png
 ---
 

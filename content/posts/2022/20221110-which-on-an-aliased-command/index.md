@@ -6,8 +6,8 @@ menu:
     name: "How to Use which on an Aliased Command"
     identifier: linux-which-on-an-aliased-command
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "How I configure my Git identities"
     identifier: git-how-i-configure-my-git-identities
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

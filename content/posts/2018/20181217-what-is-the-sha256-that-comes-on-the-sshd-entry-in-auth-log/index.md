@@ -6,8 +6,8 @@ menu:
     name: "What is the SHA256 that comes on the sshd entry in auth.log?"
     identifier: linux-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log
     weight: 10
-tags: ["URL", "Linux"]
-categories: ["URL", "Linux"]
+tags: ["Links", "Linux"]
+categories: ["Links", "Linux"]
 hero: images/hero/linux.png
 ---
 

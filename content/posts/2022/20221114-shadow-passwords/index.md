@@ -6,8 +6,8 @@ menu:
     name: "/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes"
     identifier: linux-shadow-passwords-hashes
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 

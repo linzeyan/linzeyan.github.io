@@ -4,10 +4,10 @@ date: 2024-01-21T09:30:54+08:00
 menu:
   sidebar:
     name: "llamafile - Distribute and run LLMs with a single file."
-    identifier: github-llamafile
+    identifier: github-mozilla-Ocho-llamafile
     weight: 10
-tags: ["URL"]
-categories: ["URL"]
+tags: ["Links", "llamafile"]
+categories: ["Links", "llamafile"]
 ---
 
 - [llamafile - Distribute and run LLMs with a single file.](https://github.com/mozilla-Ocho/llamafile)

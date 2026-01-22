@@ -6,8 +6,8 @@ menu:
     name: "Go embed 简明教程"
     identifier: golang-go-embed-tutorial
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

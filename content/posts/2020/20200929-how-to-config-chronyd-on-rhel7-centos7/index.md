@@ -1,23 +1,23 @@
 ---
-title: "如何設定時區與NTP服務在RHEL7/CentOS7"
+title: "How to configure time zone and NTP on RHEL7/CentOS7"
 date: 2020-09-29T11:41:43+08:00
 menu:
   sidebar:
-    name: "如何設定時區與NTP服務在RHEL7/CentOS7"
+    name: "How to configure time zone and NTP on RHEL7/CentOS7"
     identifier: linux-how-to-config-chronyd-on-rhel7-centos7
     weight: 10
-tags: ["URL", "Linux", "chrony"]
-categories: ["URL", "Linux", "chrony"]
+tags: ["Links", "Linux", "chrony"]
+categories: ["Links", "Linux", "chrony"]
 hero: images/hero/linux.png
 ---
 
-- [如何設定時區與 NTP 服務在 RHEL7/CentOS7](https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/)
+- [How to configure time zone and NTP on RHEL7/CentOS7](https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/)
 
-chrony 包含兩個程序，chronyd 是一個可以在啟動時啟動的守護進程，chronyc 是一個命令行界面程序，可用於監控 chronyd 的性能並在運行時更改各種運行參數。
+chrony includes two programs: chronyd is a daemon that starts on boot, and chronyc is a command-line client that can monitor chronyd and change runtime parameters.
 
-注意 ntpd 和 chronyd 擇一就可，不要同時運作。
+Use either ntpd or chronyd, not both.
 
-##### 設定時區
+##### Configure time zone
 
 ```shell
 ~# timedatectl set-timezone Asia/Taipei
@@ -32,13 +32,13 @@ NTP synchronized: no
       DST active: n/a
 ```
 
-##### 設定 chronyd
+##### Configure chronyd
 
 ```shell
-# 安裝
+# Install
 ~# yum install -y chrony
 
-# 配置設定檔
+# Config file
 ~# cat /etc/chrony.conf
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
@@ -47,12 +47,12 @@ server 1.tw.pool.ntp.org iburst            --->改成本地的伺服器
 server 2.tw.pool.ntp.org iburst            --->改成本地的伺服器
 server 3.tw.pool.ntp.org iburst            --->改成本地的伺服器
 
-# 啟動服務和設為開機時啟動
+# Start service and enable on boot
 ~# systemctl enable chronyd
 ~# systemctl start chronyd
 ```
 
-##### racking 參數顯示有關系統時間效能
+##### tracking parameters show system time performance
 
 ```shell
 ~# chronyc tracking
@@ -91,7 +91,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^- 61-216-153-105.hinet-ip.>     3   6    37    23   -280us[ -280us] +/-   64ms
 ```
 
-##### 看同步源頭的資訊
+##### View sync source info
 
 ```shell
 ~# chronyc sourcestats -v
@@ -113,7 +113,7 @@ Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
 61-216-153-105.hinet-ip.>   6   4   136     +8.965     42.440  +1250us   495us
 ```
 
-##### 將系統時間寫到硬體(主機板上的時間)上
+##### Write system time to hardware clock
 
 ```shell
 ~# hwclock --systohc

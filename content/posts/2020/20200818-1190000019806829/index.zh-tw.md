@@ -6,8 +6,8 @@ menu:
     name: "gitbook常用的插件"
     identifier: gitbook-how-to-use-plugin
     weight: 10
-tags: ["URL", "GitBook"]
-categories: ["URL", "GitBook"]
+tags: ["Links", "GitBook"]
+categories: ["Links", "GitBook"]
 ---
 
 - [gitbook 常用的插件](https://segmentfault.com/a/1190000019806829)

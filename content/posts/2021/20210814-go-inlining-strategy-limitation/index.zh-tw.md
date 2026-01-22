@@ -6,8 +6,8 @@ menu:
     name: "[译] Go语言inline内联的策略与限制"
     identifier: go-inlining-strategy-limitation
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

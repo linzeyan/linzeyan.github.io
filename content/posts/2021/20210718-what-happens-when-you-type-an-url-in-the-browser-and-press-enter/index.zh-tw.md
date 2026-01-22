@@ -6,8 +6,8 @@ menu:
     name: "在瀏覽器輸入網址並送出後，到底發生了什麼事？"
     identifier: what-happens-when-you-type-an-url-in-the-browser-and-press-enter
     weight: 10
-tags: ["URL", "Browser", "Network", "HTTP", "DNS", "Cache"]
-categories: ["URL", "Browser", "Network", "HTTP", "DNS", "Cache"]
+tags: ["Links", "URL", "Browser", "Network", "HTTP", "DNS", "Cache"]
+categories: ["Links", "URL", "Browser", "Network", "HTTP", "DNS", "Cache"]
 hero: images/hero/network.png
 ---
 

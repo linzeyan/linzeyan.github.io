@@ -6,8 +6,8 @@ menu:
     name: LLM Visualization
     identifier: llm-visualization
     weight: 10
-tags: ["llm", "visualization", "machinelearning", "URL"]
-categories: ["llm", "visualization", "machinelearning", "URL"]
+tags: ["llm", "visualization", "machinelearning", "Links"]
+categories: ["llm", "visualization", "machinelearning", "Links"]
 ---
 
 - [LLM Visualization](https://bbycroft.net/llm)

@@ -6,67 +6,67 @@ menu:
     name: "LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite"
     identifier: localstorage-indexeddb-cookies-opfs-sqlite-wasm
     weight: 10
-tags: ["URL", "Browser"]
-categories: ["URL", "Browser"]
+tags: ["Links", "Browser"]
+categories: ["Links", "Browser"]
 ---
 
 - [LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite](https://rxdb.info/articles/localstorage-indexeddb-cookies-opfs-sqlite-wasm.html)
 
-#### The available Storage APIs in a modern Browser
+#### 現代瀏覽器可用的 Storage API
 
 **_Cookies_**
 
-Cookies store small pieces of key-value data that are mainly used for session management, personalization, and tracking. Cookies can have several security settings like a time-to-live or the domain attribute to share the cookies between several subdomains.
+Cookies 會儲存小型的鍵值資料，主要用於工作階段管理、個人化與追蹤。Cookies 可以設定多種安全選項，例如存活時間或網域屬性，以便在多個子網域之間共用。
 
 **_LocalStorage_**
 
-LocalStorage is only suitable for storing small amounts of data that need to persist across sessions and it is limited by a 5MB storage cap. Storing complex data is only possible by transforming it into a string for example with JSON.stringify(). The API is not asynchronous which means if fully blocks your JavaScript process while doing stuff. Therefore running heavy operations on it might block your UI from rendering.
+LocalStorage 只適合儲存少量且需要跨 session 保存的資料，並且受限於 5MB 的容量上限。要儲存複雜資料，通常需要轉成字串，例如使用 JSON.stringify()。這個 API 不是非同步的，代表在操作時會阻塞你的 JavaScript 程序，因此執行重型操作可能會讓 UI 無法渲染。
 
 **_IndexedDB_**
 
-IndexedDB is a low-level API for storing large amounts of structured JSON data. While the API is a bit hard to use, IndexedDB can utilize indexes and asynchronous operations. It lacks support for complex queries and only allows to iterate over the indexes which makes it more like a base layer for other libraries then a fully fledged database.
+IndexedDB 是一個用於儲存大量結構化 JSON 資料的低階 API。雖然使用起來有些困難，但 IndexedDB 可以利用索引並支援非同步操作。它缺乏複雜查詢能力，只能迭代索引，更像是其他函式庫的底層基礎，而非完整的資料庫。
 
-#### Storage Size Limits
+#### 儲存容量限制
 
-| Technology   | Limits                                |
-| ------------ | ------------------------------------- |
-| Cookie       | 4 KB                                  |
-| LocalStorage | 4 MB to 10 MB per origin              |
-| IndexedDB    | depends on the browser implementation |
-| OPFS         | depends on the available disc space   |
+| 技術        | 上限                                  |
+| ----------- | ------------------------------------- |
+| Cookie      | 4 KB                                  |
+| LocalStorage | 每個來源 4 MB 到 10 MB                 |
+| IndexedDB   | 取決於瀏覽器實作                       |
+| OPFS        | 取決於可用的磁碟空間                   |
 
-#### Performance Comparison
+#### 效能比較
 
-##### Initialization Time
+##### 初始化時間
 
-| Technology              | Time in Milliseconds |
-| ----------------------- | -------------------- |
-| IndexedDB               | 46                   |
-| OPFS Main Thread        | 23                   |
-| OPFS WebWorker          | 26.8                 |
-| WASM SQLite (memory)    | 504                  |
-| WASM SQLite (IndexedDB) | 535                  |
+| 技術                  | 時間（毫秒） |
+| --------------------- | ---------- |
+| IndexedDB             | 46         |
+| OPFS 主執行緒         | 23         |
+| OPFS WebWorker        | 26.8       |
+| WASM SQLite（記憶體） | 504        |
+| WASM SQLite（IndexedDB） | 535     |
 
-##### Latency of small Writes
+##### 小型寫入延遲
 
-| Technology              | Time in Milliseconds |
-| ----------------------- | -------------------- |
-| Cookies                 | 0.058                |
-| LocalStorage            | 0.017                |
-| IndexedDB               | 0.17                 |
-| OPFS Main Thread        | 1.46                 |
-| OPFS WebWorker          | 1.54                 |
-| WASM SQLite (memory)    | 0.17                 |
-| WASM SQLite (IndexedDB) | 3.17                 |
+| 技術                  | 時間（毫秒） |
+| --------------------- | ---------- |
+| Cookies               | 0.058      |
+| LocalStorage          | 0.017      |
+| IndexedDB             | 0.17       |
+| OPFS 主執行緒         | 1.46       |
+| OPFS WebWorker        | 1.54       |
+| WASM SQLite（記憶體） | 0.17       |
+| WASM SQLite（IndexedDB） | 3.17    |
 
-##### Latency of small Reads
+##### 小型讀取延遲
 
-| Technology              | Time in Milliseconds |
-| ----------------------- | -------------------- |
-| Cookies                 | 0.132                |
-| LocalStorage            | 0.0052               |
-| IndexedDB               | 0.1                  |
-| OPFS Main Thread        | 1.28                 |
-| OPFS WebWorker          | 1.41                 |
-| WASM SQLite (memory)    | 0.45                 |
-| WASM SQLite (IndexedDB) | 2.93                 |
+| 技術                  | 時間（毫秒） |
+| --------------------- | ---------- |
+| Cookies               | 0.132      |
+| LocalStorage          | 0.0052     |
+| IndexedDB             | 0.1        |
+| OPFS 主執行緒         | 1.28       |
+| OPFS WebWorker        | 1.41       |
+| WASM SQLite（記憶體） | 0.45       |
+| WASM SQLite（IndexedDB） | 2.93    |

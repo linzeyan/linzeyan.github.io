@@ -1,14 +1,14 @@
 ---
-title: "Expose your local web server to the internet with a public URL."
+title: "用公開 URL 將本機 Web 伺服器暴露到網際網路。"
 date: 2025-12-27T15:24:41+08:00
 menu:
   sidebar:
-    name: "Expose your local web server to the internet with a public URL."
+    name: "用公開 URL 將本機 Web 伺服器暴露到網際網路。"
     identifier: github-agrinman-tunnelto
     weight: 10
-tags: ["URL", "Github", "Rust"]
-categories: ["URL", "Github", "Rust"]
+tags: ["Links", "Github", "Rust"]
+categories: ["Links", "Github", "Rust"]
 hero: images/hero/github.png
 ---
 
-- [Expose your local web server to the internet with a public URL.](https://github.com/agrinman/tunnelto)
+- [用公開 URL 將本機 Web 伺服器暴露到網際網路。](https://github.com/agrinman/tunnelto)

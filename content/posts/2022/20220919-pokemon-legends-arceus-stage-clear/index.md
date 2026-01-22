@@ -1,13 +1,13 @@
 ---
-title: "《宝可梦：阿尔宙斯》双周目通关"
+title: "Pokemon Legends: Arceus - Two Playthroughs Completed"
 date: 2022-09-19T11:30:08+08:00
 menu:
   sidebar:
-    name: "《宝可梦：阿尔宙斯》双周目通关"
+    name: "Pokemon Legends: Arceus - Two Playthroughs Completed"
     identifier: game-pokemon-legends-arceus-stage-clear
     weight: 10
-tags: ["URL", "Pokemon", "Arceus", "Game"]
-categories: ["URL", "Pokemon", "Arceus", "Game"]
+tags: ["Links", "Pokemon", "Arceus", "Game"]
+categories: ["Links", "Pokemon", "Arceus", "Game"]
 ---
 
-- [《宝可梦：阿尔宙斯》双周目通关](https://soulteary.com/2022/09/05/pokemon-legends-arceus-stage-clear.html)
+- [Pokemon Legends: Arceus - Two Playthroughs Completed](https://soulteary.com/2022/09/05/pokemon-legends-arceus-stage-clear.html)

@@ -1,20 +1,20 @@
 ---
-title: "2020年，最新NGINX的ngx_http_geoip2模块以精准禁止特定国家或者地区IP访问"
+title: "In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region"
 date: 2020-10-27T15:44:48+08:00
 menu:
   sidebar:
-    name: "2020年，最新NGINX的ngx_http_geoip2模块以精准禁止特定国家或者地区IP访问"
+    name: "In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region"
     identifier: nginx-module-http_geoip2-deny-ip-access
     weight: 10
-tags: ["URL", "Nginx", "GeoIP"]
-categories: ["URL", "Nginx", "GeoIP"]
+tags: ["Links", "Nginx", "GeoIP"]
+categories: ["Links", "Nginx", "GeoIP"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [2020 年，最新 NGINX 的 ngx_http_geoip2 模块以精准禁止特定国家或者地区 IP 访问](https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html)
-- [centos7 下 安装 GeoIP2，在 nginx 中根据 ip 地址对应的国家转发请求](https://www.cnblogs.com/baxiqiuxing/p/12376879.html)
+- [In 2020, the latest NGINX ngx_http_geoip2 module can precisely block IP access by country or region](https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html)
+- [Install GeoIP2 on CentOS 7 and route requests by IP country in nginx](https://www.cnblogs.com/baxiqiuxing/p/12376879.html)
 
-##### 安装 geoip2 lib
+##### Install geoip2 lib
 
 ```bash
 cd /usr/local/src
@@ -32,7 +32,7 @@ echo '/usr/local/lib' > /etc/ld.so.conf.d/geoip.conf
 sudo ldconfig
 ```
 
-##### 下载 ngx_http_geoip2_module 模块
+##### Download ngx_http_geoip2_module
 
 ```bash
 cd /usr/local/src
@@ -62,16 +62,15 @@ make
 make install
 ```
 
-##### geoip2 IP 地址库下载
+##### Download geoip2 IP database
 
-2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号
+The latest GeoLite2-City.mmdb for 2020 cannot be downloaded directly. You must register a maxmind account.
 
-1. 需要在 maxmind 后台注册账号，并且生成 Account/User ID 和 License key
-2. 安装 geoipupdate, 下载地址https://github.com/maxmind/geoipupdate/releases
-3. 配置 geoipupdate 的 GeoIP.conf , 填写 maxmind 账号的 User ID 和 License key 和 EditionIDs
+1. Register an account in the maxmind console and generate Account/User ID and License key.
+2. Install geoipupdate. Download from https://github.com/maxmind/geoipupdate/releases
+3. Configure GeoIP.conf for geoipupdate with User ID, License key, and EditionIDs.
 
-博主使用的是 centos 7
-安装如下
+The author uses CentOS 7. Install as follows:
 
 ```bash
 cd /usr/local/src/
@@ -90,7 +89,7 @@ cp -rf /usr/share/GeoIP/GeoLite2-City.mmdb /usr/local/nginx/geoip/maxmind-city.m
 
 ```
 
-注意 GeoLite2 City 和 GeoLite2 Country 两个 IP 库，请下载 City 的 mmdb 数据文件，较于其他两者信息更丰富
+Note: GeoLite2 City and GeoLite2 Country are both available. Download the City mmdb file because it contains richer data.
 
 ```nginx
 http {
@@ -123,7 +122,6 @@ stream {
       $geoip2_data_province_name subdivisions 0 names en;
       $geoip2_data_province_isocode subdivisions 0 iso_code;
     }
-    ...
 }
 ```
 

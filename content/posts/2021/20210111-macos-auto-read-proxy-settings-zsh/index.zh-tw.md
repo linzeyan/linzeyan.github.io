@@ -6,8 +6,8 @@ menu:
     name: "ZSH 自动读取 macOS 系统代理配置并设置环境变量"
     identifier: macos-auto-read-proxy-settings-zsh
     weight: 10
-tags: ["URL", "MacOS", "Zsh"]
-categories: ["URL", "MacOS", "Zsh"]
+tags: ["Links", "macOS", "Zsh"]
+categories: ["Links", "macOS", "Zsh"]
 ---
 
 - [ZSH 自动读取 macOS 系统代理配置并设置环境变量](https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/)

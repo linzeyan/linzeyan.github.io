@@ -6,8 +6,8 @@ menu:
     name: macOS Tips & Tricks
     identifier: macos-tips
     weight: 10
-tags: ["URL", "macOS"]
-categories: ["URL", "macOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
 - [macOS Tips & Tricks](https://saurabhs.org/macos-tips)

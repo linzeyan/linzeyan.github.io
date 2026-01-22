@@ -1,19 +1,19 @@
 ---
-title: "How to Make Output Overwrite the Same Line in a Terminal"
+title: "如何讓終端輸出覆蓋同一行"
 date: 2022-10-21T17:29:10+08:00
 menu:
   sidebar:
-    name: "How to Make Output Overwrite the Same Line in a Terminal"
+    name: "如何讓終端輸出覆蓋同一行"
     identifier: linux-shell-echo-printf-overwrite-terminal-line
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 
-- [How to Make Output Overwrite the Same Line in a Terminal](https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line)
+- [如何讓終端輸出覆蓋同一行](https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line)
 
-##### Introduction to the Problem
+##### 問題簡介
 
 ```bash
 $ cat print_status.sh
@@ -35,14 +35,14 @@ $ ./print_status.sh
 DONE
 ```
 
-##### The "Magic Code": `\033[0K\r`
+##### 「魔法碼」: `\033[0K\r`
 
-- `-n` option asks the echo command to stop outputting the trailing newline character
-- `-e` option allows the echo command to interpret backslash escapes such as `\n` (newline) and `\r` (carriage return)
-- `\033` - It's the escape sequence. In other words, it's ESC.
-- `\033[` - Then this becomes "ESC [", which is the control sequence introducer (CSI).
-- `\033[0k` - So it's "CSI 0 K". Further, "CSI 0 K" erases the text from the cursor to the end of the line.
-- `\r` - This is the carriage return. It brings the cursor to the beginning of the line.
+- `-n` 讓 echo 不輸出結尾的換行字元
+- `-e` 讓 echo 解讀反斜線逸出字元，例如 `\n`（換行）與 `\r`（回車）
+- `\033` - 逸出序列，也就是 ESC
+- `\033[` - 變成 "ESC ["，也就是控制序列引導字元（CSI）
+- `\033[0k` - 即 "CSI 0 K"，會清除從游標到行尾的文字
+- `\r` - 回車，將游標移回行首
 
 ```bash
 $ cat print_status.sh

@@ -1,16 +1,16 @@
 ---
-title: "Inspecting Web Views in macOS"
+title: "在 macOS 中檢視 Web Views"
 date: 2022-12-02T13:51:24+08:00
 menu:
   sidebar:
-    name: "Inspecting Web Views in macOS"
+    name: "在 macOS 中檢視 Web Views"
     identifier: macOS-inspecting-web-views-in-macos
     weight: 10
-tags: ["URL", "macOS"]
-categories: ["URL", "macOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
-- [Inspecting Web Views in macOS](https://blog.jim-nielsen.com/2022/inspecting-web-views-in-macos/)
+- [在 macOS 中檢視 Web Views](https://blog.jim-nielsen.com/2022/inspecting-web-views-in-macos/)
 
 ```bash
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true

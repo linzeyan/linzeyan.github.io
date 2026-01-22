@@ -1,17 +1,17 @@
 ---
-title: "Go Modules 處理 Private GIT Repository 流程"
+title: "Go Modules workflow for private Git repositories"
 date: 2021-07-23T09:40:39+08:00
 menu:
   sidebar:
-    name: "Go Modules 處理 Private GIT Repository 流程"
+    name: "Go Modules workflow for private Git repositories"
     identifier: golang-read-private-module-in-golang
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [Go Modules 處理 Private GIT Repository 流程](https://blog.wu-boy.com/2020/03/read-private-module-in-golang/)
+- [Go Modules workflow for private Git repositories](https://blog.wu-boy.com/2020/03/read-private-module-in-golang/)
 
 1. `go env -w GOPRIVATE=github.com/appleboy`
    1. `go env -w GONOPROXY=github.com/appleboy`

@@ -6,8 +6,8 @@ menu:
     name: "Gin中文文档"
     identifier: golang-gin-kancloud-cn-shuangdeyu-gin-book
     weight: 10
-tags: ["URL", "Go", "Gin"]
-categories: ["URL", "Go", "Gin"]
+tags: ["Links", "Go", "Gin"]
+categories: ["Links", "Go", "Gin"]
 hero: images/hero/go.svg
 ---
 

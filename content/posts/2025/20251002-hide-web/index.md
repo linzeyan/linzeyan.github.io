@@ -1,19 +1,19 @@
 ---
-title: "降低家用 Web 服务被通报的概率"
+title: "Reduce the Chance of Home Web Services Being Reported"
 date: 2025-10-02T09:54:00+08:00
 menu:
   sidebar:
-    name: "降低家用 Web 服务被通报的概率"
+    name: "Reduce the Chance of Home Web Services Being Reported"
     identifier: nginx-hide-web
     weight: 10
-tags: ["URL", "NGINX"]
-categories: ["URL", "NGINX"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [降低家用 Web 服务被通报的概率](https://tao.zz.ac/homelab/hide-web.html)
+- [Reduce the Chance of Home Web Services Being Reported](https://tao.zz.ac/homelab/hide-web.html)
 
-- 通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：
+- When a plaintext request hits an HTTPS service, Nginx returns a special 497 status code. If that happens, we want Nginx to close the connection and return no response. This requires another non-standard status code 444. Combining the two, add the following config in the server:
 
 ```nginx
 error_page 497 @close;
@@ -23,9 +23,9 @@ location @close {
 }
 ```
 
-使用 error_page 指令为 497 状态码设置虚拟路径@close，Nginx 在处理的@close 时发现是返回 444 状态码，于是直接关闭连接。
+Use the error_page directive to map 497 to the virtual path @close. When Nginx handles @close, it returns 444 and closes the connection.
 
-这个时候你再用 curl 访问对应的端口就会收到如下报错：
+If you curl the port, you will see:
 
 curl http://example.zz.ac:5678
 curl: (52) Empty reply from server

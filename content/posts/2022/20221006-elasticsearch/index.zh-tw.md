@@ -6,8 +6,8 @@ menu:
     name: "ElasticSearch 学习笔记"
     identifier: docker-elasticsearch-kibana-analysis-ik
     weight: 10
-tags: ["URL", "Docker", "ELK", "ElasticSearch", "Kibana"]
-categories: ["URL", "Docker", "ELK", "ElasticSearch", "Kibana"]
+tags: ["Links", "Docker", "ELK", "ElasticSearch", "Kibana"]
+categories: ["Links", "Docker", "ELK", "ElasticSearch", "Kibana"]
 hero: images/hero/docker.jpeg
 ---
 

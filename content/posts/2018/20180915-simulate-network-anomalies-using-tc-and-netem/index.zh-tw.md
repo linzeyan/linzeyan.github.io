@@ -6,8 +6,8 @@ menu:
     name: "使用 TC 和 Netem 模拟网络异常"
     identifier: linux-simulate-network-anomalies-using-tc-and-netem
     weight: 10
-tags: ["URL", "Linux", "Network"]
-categories: ["URL", "Linux", "Network"]
+tags: ["Links", "Linux", "Network"]
+categories: ["Links", "Linux", "Network"]
 hero: images/hero/linux.png
 ---
 

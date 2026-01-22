@@ -6,8 +6,8 @@ menu:
     name: "善用 Go Fuzzing，幫助你寫出更完整的單元測試"
     identifier: go-utilize-go-fuzzing-to-write-better-unit-tests
     weight: 10
-tags: ["URL", "Go", "Testing"]
-categories: ["URL", "Go", "Testing"]
+tags: ["Links", "Go", "Testing"]
+categories: ["Links", "Go", "Testing"]
 hero: images/hero/go.svg
 ---
 
@@ -44,7 +44,7 @@ func FuzzPow(f *testing.F) {
 
 - 在做 Fuzzing Test 的時候如果跑一跑 FAIL 了，Go 會幫忙把那組 input 記在 testcase/ 裡面
 - 看了之後會發現在 x=6、y=30 時 assert 會失敗，也就是說 pow(6, 30)/6 不會等於 pow(6, 29)。但這也太奇怪了吧？仔細實驗之後才發現是因為在計算 pow(6, 30) 的時候會發生 overflow。
-- 因為 Go 定義的 max.MaxUint 大約是 18 \* 10¹⁸，但 6²⁹ 大概是 7 \* 10¹⁸。如果把 6²⁹ 再乘上 6，就會發生 overflow 得到 8 \* 10¹⁸，很像繞了操場兩圈結果在跟原本差不多的位置。
+- 因為 Go 定義的 max.MaxUint 大約是 `18 * 10¹⁸`，但 `6²⁹` 大概是 `7 * 10¹⁸`。如果把 `6²⁹` 再乘上 6，就會發生 overflow 得到 `8 * 10¹⁸`，很像繞了操場兩圈結果在跟原本差不多的位置。
 
 ```go
 var ErrOverflow = fmt.Errorf("overflow")

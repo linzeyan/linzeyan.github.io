@@ -1,29 +1,29 @@
 ---
-title: "隐藏于 Cloudflare 的全球网络之中"
+title: "Hide Within Cloudflare's Global Network"
 date: 2024-08-01T14:35:24+08:00
 menu:
   sidebar:
-    name: "隐藏于 Cloudflare 的全球网络之中"
+    name: "Hide Within Cloudflare's Global Network"
     identifier: cloudflare-hide-ip-in-cf
     weight: 10
-tags: ["URL", "Cloudflare"]
-categories: ["URL", "Cloudflare"]
+tags: ["Links", "Cloudflare"]
+categories: ["Links", "Cloudflare"]
 hero: images/hero/cloudflare.svg
 ---
 
-- [隐藏于 Cloudflare 的全球网络之中](https://dmesg.app/hide-in-cf.html)
+- [Hide Within Cloudflare's Global Network](https://dmesg.app/hide-in-cf.html)
 
-1. 一种方式是走 Cloudflare WARP，WARP 可以运行在 proxy mode 而不是接管全局流量
+1. One approach is to use Cloudflare WARP, running WARP in proxy mode instead of taking over global traffic.
 
 ```shell
 warp-cli register
-# warp 监听本地的11111端口
+# WARP listens on local port 11111
 warp-cli set-proxy-port 11111
 
-# warp proxy mode
+# WARP proxy mode
 warp-cli set-mode proxy
 
-# 永久开启
+# Always on
 warp-cli enable-always-on
 ```
 
@@ -31,7 +31,7 @@ warp-cli enable-always-on
 https_proxy=socks5://127.0.0.1:11111 http_proxy=socks5://127.0.0.1:11111 go run main.go
 ```
 
-2. 还有一种方式是使用 Cloudflare Workers，请求由 Workers 转发
+2. Another approach is to use Cloudflare Workers, with requests forwarded by Workers.
 
 ```javascript
 export default {

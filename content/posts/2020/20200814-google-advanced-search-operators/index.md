@@ -6,8 +6,8 @@ menu:
     name: "Google Search Operators: The Complete List (44 Advanced Operators)"
     identifier: google-advanced-search-operators
     weight: 10
-tags: ["URL", "Google"]
-categories: ["URL", "Google"]
+tags: ["Links", "Google"]
+categories: ["Links", "Google"]
 ---
 
 - [Google Search Operators: The Complete List (44 Advanced Operators)](https://ahrefs.com/blog/google-advanced-search-operators/)

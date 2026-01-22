@@ -1,19 +1,19 @@
 ---
-title: "Little Git Tricks: Use .mailmap to Merge Different Authors"
+title: "Git 小技巧：用 .mailmap 合併不同作者"
 date: 2021-08-05T13:42:14+08:00
 menu:
   sidebar:
-    name: "Little Git Tricks: Use .mailmap to Merge Different Authors"
+    name: "Git 小技巧：用 .mailmap 合併不同作者"
     identifier: git-little-git-tricks-use-mailmap-to-merge-different-authors
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 
-- [Little Git Tricks: Use .mailmap to Merge Different Authors](https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/)
+- [Git 小技巧：用 .mailmap 合併不同作者](https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/)
 
-`.mailmap` file ==> `Name you want to keep <email> Name you no longer want <email>`
+`.mailmap` 檔案 ==> `Name you want to keep <email> Name you no longer want <email>`
 
 ```
 John Doe  John Doe
@@ -22,7 +22,7 @@ John Doe  john doe
 Max Example  Max
 ```
 
-##### before
+##### 之前
 
 ```shell
 $ git shortlog -se
@@ -34,7 +34,7 @@ $ git shortlog -se
      1  john doe <john@doe.org>
 ```
 
-##### after
+##### 之後
 
 ```shell
 $ git shortlog -se

@@ -6,8 +6,8 @@ menu:
     name: "Cannot set command timeout per task with network_cli"
     identifier: ansible-cannot-set-command-timeout-per-task-with-network_cli
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

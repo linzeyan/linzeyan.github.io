@@ -1,30 +1,30 @@
 ---
-title: "Python's many command-line utilities"
+title: "Python 的多種命令列工具"
 date: 2024-07-06T20:39:01+08:00
 menu:
   sidebar:
-    name: "Python's many command-line utilities"
+    name: "Python 的多種命令列工具"
     identifier: python-pythons-many-command-line-utilities
     weight: 10
-tags: ["URL", "Python"]
-categories: ["URL", "Python"]
+tags: ["Links", "Python"]
+categories: ["Links", "Python"]
 hero: images/hero/python.png
 ---
 
-- [Python's many command-line utilities](https://www.pythonmorsels.com/cli-tools/)
+- [Python 的多種命令列工具](https://www.pythonmorsels.com/cli-tools/)
 
-These are Python's most helpful general-purpose command-line tools.
+這些是 Python 最實用的通用命令列工具。
 
 | Command                 | Purpose                      | More                                                                             |
 | ----------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
-| `python -m http.server` | Start a simple web server    | [Video](https://www.pythonmorsels.com/http-server/)                              |
-| `python -m webbrowser`  | Launch your web browser      | [Docs](https://docs.python.org/3/library/webbrowser.html#command-line-interface) |
-| `python -m json.tool`   | Nicely format JSON data      | [Docs](https://docs.python.org/3/library/json.html#module-json.tool)             |
-| `python -m calendar`    | Show a command-line calendar | [Docs](https://docs.python.org/3/library/calendar.html#command-line-usage)       |
+| `python -m http.server` | 啟動簡易網頁伺服器           | [Video](https://www.pythonmorsels.com/http-server/)                              |
+| `python -m webbrowser`  | 開啟預設瀏覽器               | [Docs](https://docs.python.org/3/library/webbrowser.html#command-line-interface) |
+| `python -m json.tool`   | 以更易讀的格式輸出 JSON 資料 | [Docs](https://docs.python.org/3/library/json.html#module-json.tool)             |
+| `python -m calendar`    | 顯示命令列月曆               | [Docs](https://docs.python.org/3/library/calendar.html#command-line-usage)       |
 
 ### `http.server`
 
-Running the `http.server` module as a script will start a web server on port 8000 that hosts files from the current directory. I use this _all the time_ to preview Sphinx documentation sites (especially when using Sphinx's `dirhtml` option which is _all about_ subdirectories of `index.html` files).
+將 `http.server` 模組以腳本執行後，會在 8000 埠啟動一個 web server，並提供目前目錄中的檔案。我常常用它來預覽 Sphinx 文件網站（尤其是使用 `dirhtml` 選項時，會以 `index.html` 的子目錄結構呈現）。
 
 ```text
 $ python -m http.server
@@ -33,7 +33,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 ### `webbrowser`
 
-Running the `webbrowser` module as a script will open a given URL in your default web browser. For example, this would open the page https://pseudorandom.name:
+將 `webbrowser` 模組以腳本執行時，會用預設瀏覽器開啟指定 URL。例如，這會開啟 https://pseudorandom.name：
 
 ```text
 $ python -m webbrowser pseudorandom.name
@@ -41,7 +41,7 @@ $ python -m webbrowser pseudorandom.name
 
 ### `json.tool`
 
-Python's `json.tool` module can be run as a script to parse a JSON document and print out a version that's formatted nicely for human readability.
+`json.tool` 模組可以當作腳本執行，會解析 JSON 文件並輸出更適合人閱讀的格式。
 
 ```shell
 $ python -m json.tool /home/trey/Downloads/download.json
@@ -61,7 +61,7 @@ $ python -m json.tool /home/trey/Downloads/download.json
 
 ### `calendar`
 
-Running the `calendar` module as a script will print a calendar of the current year by default. It also accepts various arguments to customize its output. Here's a calendar of just one month:
+將 `calendar` 模組以腳本執行時，預設會輸出當年的月曆，也可以透過參數自訂輸出。以下是只顯示某一個月份的範例：
 
 ```text
 $ python -m calendar 2024 04
@@ -74,49 +74,49 @@ Mo Tu We Th Fr Sa Su
 29 30
 ```
 
-Those 4 scripts are general-purpose tools that I find helpful on _any_ machine. Python also includes a number of tools that are commonly available (or easily installable) on Linux and Mac machines.
+以上 4 個腳本是我覺得在任何機器上都很有用的通用工具。Python 也包含許多在 Linux 與 Mac 上常見（或容易安裝）的工具。
 
-## Especially handy on Windows machines
+## 在 Windows 機器上特別實用
 
-Running Python on Windows? Or running Python on a Linux/Mac machine without the ability to easily install common command-line utilities like `uuid`, `sqlite3` and `gzip`?
+在 Windows 上使用 Python？或者在 Linux/Mac 上使用 Python，但無法輕易安裝 `uuid`、`sqlite3`、`gzip` 等常見命令列工具？
 
-These tools are all equivalent to command-line tools that are common on many Linux machines, though the equivalent Linux commands are usually more powerful and more user-friendly.
+以下工具都相當於 Linux 上常見的命令列工具，不過 Linux 原生工具通常更強大也更好用。
 
 | Command                 | Purpose                              | More                                                                          |
 | ----------------------- | ------------------------------------ | ----------------------------------------------------------------------------- |
-| `python3.12 -m uuid`    | Like `uuidgen` CLI utility           | [Docs](https://docs.python.org/3/library/uuid.html#command-line-usage)        |
-| `python3.12 -m sqlite3` | Like `sqlite3` CLI utility           | [Docs](https://docs.python.org/3/library/sqlite3.html#command-line-interface) |
-| `python -m zipfile`     | Like `zip` & `unzip` CLI utilities   | [Docs](https://docs.python.org/3/library/zipfile.html#command-line-interface) |
-| `python -m gzip`        | Like `gzip` & `gunzip` CLI utilities | [Docs](https://docs.python.org/3/library/gzip.html#command-line-interface)    |
-| `python -m tarfile`     | Like the `tar` CLI utility           | [Docs](https://docs.python.org/3/library/tarfile.html#command-line-interface) |
-| `python -m base64`      | Like the `base64` CLI utility        |                                                                               |
-| `python -m ftplib`      | Like the `ftp` utility               |                                                                               |
-| `python -m smtplib`     | Like the `sendmail` utility          |                                                                               |
-| `python -m poplib`      | Like using `curl` to read email      |                                                                               |
-| `python -m imaplib`     | Like using `curl` to read email      |                                                                               |
-| `python -m telnetlib`   | Like the `telnet`utility             |                                                                               |
+| `python3.12 -m uuid`    | 類似 `uuidgen` CLI 工具               | [Docs](https://docs.python.org/3/library/uuid.html#command-line-usage)        |
+| `python3.12 -m sqlite3` | 類似 `sqlite3` CLI 工具               | [Docs](https://docs.python.org/3/library/sqlite3.html#command-line-interface) |
+| `python -m zipfile`     | 類似 `zip` 與 `unzip` CLI 工具        | [Docs](https://docs.python.org/3/library/zipfile.html#command-line-interface) |
+| `python -m gzip`        | 類似 `gzip` 與 `gunzip` CLI 工具      | [Docs](https://docs.python.org/3/library/gzip.html#command-line-interface)    |
+| `python -m tarfile`     | 類似 `tar` CLI 工具                   | [Docs](https://docs.python.org/3/library/tarfile.html#command-line-interface) |
+| `python -m base64`      | 類似 `base64` CLI 工具                |                                                                               |
+| `python -m ftplib`      | 類似 `ftp` 工具                       |                                                                               |
+| `python -m smtplib`     | 類似 `sendmail` 工具                  |                                                                               |
+| `python -m poplib`      | 類似用 `curl` 讀取電子郵件            |                                                                               |
+| `python -m imaplib`     | 類似用 `curl` 讀取電子郵件            |                                                                               |
+| `python -m telnetlib`   | 類似 `telnet` 工具                    |                                                                               |
 
-## Analyzing Python code
+## 分析 Python 程式碼
 
-Python also includes a handful of other Python-related tools that are specifically for analyzing Python code.
+Python 也內建一些專門用於分析 Python 程式碼的工具。
 
-If you wanted to analyze some Python code to see how it ticks, these tools can be useful.
+如果你想分析 Python 程式碼的運作方式，這些工具會很有幫助。
 
 | Command              | Purpose                                | More                                                                          |
 | -------------------- | -------------------------------------- | ----------------------------------------------------------------------------- |
-| `python -m tokenize` | Break Python module into "tokens"      | [Docs](https://docs.python.org/3/library/tokenize.html#command-line-usage)    |
-| `python -m ast`      | Show abstract syntax tree for code     | [Docs](https://docs.python.org/3/library/ast.html#command-line-usage)         |
-| `python -m dis`      | Disassemble Python code to bytecode    | [Docs](https://docs.python.org/3/library/dis.html#command-line-interface)     |
-| `python -m inspect`  | inspect source code of a Python object | [Docs](https://docs.python.org/3/library/inspect.html#command-line-interface) |
-| `python -m pyclbr`   | See overview of a module's objects     |                                                                               |
+| `python -m tokenize` | 將 Python 模組分解為 "tokens"         | [Docs](https://docs.python.org/3/library/tokenize.html#command-line-usage)    |
+| `python -m ast`      | 顯示程式碼的抽象語法樹                  | [Docs](https://docs.python.org/3/library/ast.html#command-line-usage)         |
+| `python -m dis`      | 將 Python 程式碼反組譯成 bytecode       | [Docs](https://docs.python.org/3/library/dis.html#command-line-interface)     |
+| `python -m inspect`  | 檢視 Python 物件的原始碼               | [Docs](https://docs.python.org/3/library/inspect.html#command-line-interface) |
+| `python -m pyclbr`   | 查看模組中物件的概覽                   |                                                                               |
 
-## Just for fun
+## 只是好玩
 
-These are Python Easter Eggs that work as Python scripts.
+這些是 Python 的彩蛋腳本。
 
 | Command                 | Purpose                            |
 | ----------------------- | ---------------------------------- |
-| `python -m __hello__`   | Print `Hello world!`               |
-| `python -m this`        | Display the Zen of Python (PEP 20) |
-| `python -m antigravity` | Open XKCD 353 in a web browser     |
-| `python -m turtledemo`  | See `turtle` module demos          |
+| `python -m __hello__`   | 印出 `Hello world!`                |
+| `python -m this`        | 顯示 Zen of Python (PEP 20)         |
+| `python -m antigravity` | 在瀏覽器開啟 XKCD 353               |
+| `python -m turtledemo`  | 顯示 `turtle` 模組示範              |

@@ -6,8 +6,8 @@ menu:
     name: "Top 25 Nginx Tips and Tricks From Practical Experience"
     identifier: nginx-top-25-nginx-tips-and-tricks-from-practical-experience
     weight: 10
-tags: ["URL", "NGINX"]
-categories: ["URL", "NGINX"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

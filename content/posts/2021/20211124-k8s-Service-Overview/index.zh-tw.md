@@ -6,8 +6,8 @@ menu:
     name: "[Kubernetes] Service Overview"
     identifier: k8s-service-overview
     weight: 10
-tags: ["URL", "Kubernetes"]
-categories: ["URL", "Kubernetes"]
+tags: ["Links", "Kubernetes"]
+categories: ["Links", "Kubernetes"]
 hero: images/hero/kubernetes.png
 ---
 

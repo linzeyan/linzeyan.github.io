@@ -1,14 +1,14 @@
 ---
-title: "A fast and powerful log viewer and processor that converts JSON logs or logfmt logs into a clear human-readable format."
+title: "快速且強大的日誌檢視與處理器，能把 JSON logs 或 logfmt logs 轉成清楚易讀的格式。"
 date: 2025-12-14T21:06:20+08:00
 menu:
   sidebar:
-    name: "A fast and powerful log viewer and processor that converts JSON logs or logfmt logs into a clear human-readable format."
+    name: "快速且強大的日誌檢視與處理器，能把 JSON logs 或 logfmt logs 轉成清楚易讀的格式。"
     identifier: github-pamburus-hl-high-performance-log-viewer
     weight: 10
-tags: ["URL", "Github", "Rust", "Log"]
-categories: ["URL", "Github", "Rust", "Log"]
+tags: ["Links", "Github", "Rust", "Log"]
+categories: ["Links", "Github", "Rust", "Log"]
 hero: images/hero/github.png
 ---
 
-- [A fast and powerful log viewer and processor that converts JSON logs or logfmt logs into a clear human-readable format.](https://github.com/pamburus/hl)
+- [快速且強大的日誌檢視與處理器，能把 JSON logs 或 logfmt logs 轉成清楚易讀的格式。](https://github.com/pamburus/hl)

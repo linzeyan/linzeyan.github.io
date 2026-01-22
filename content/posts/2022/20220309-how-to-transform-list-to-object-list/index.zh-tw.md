@@ -6,8 +6,8 @@ menu:
     name: "將 List 轉置為 dict 的 list"
     identifier: ansible-how-to-transform-list-to-object-list
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

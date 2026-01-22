@@ -6,8 +6,8 @@ menu:
     name: "BIRD 与 BGP 的新手开场"
     identifier: network-bird-bgp-kickstart
     weight: 10
-tags: ["URL", "Network", "BIRD", "BGP"]
-categories: ["URL", "Network", "BIRD", "BGP"]
+tags: ["Links", "Network", "BIRD", "BGP"]
+categories: ["Links", "Network", "BIRD", "BGP"]
 hero: images/hero/network.png
 ---
 

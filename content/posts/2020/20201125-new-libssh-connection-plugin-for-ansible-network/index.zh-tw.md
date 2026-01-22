@@ -1,43 +1,43 @@
 ---
-title: "New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement"
+title: "Ansible Network 的新 LibSSH 連線外掛取代 Paramiko，並支援 FIPS 模式"
 date: 2020-11-25T21:09:50+08:00
 menu:
   sidebar:
-    name: "New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement"
+    name: "Ansible Network 的新 LibSSH 連線外掛取代 Paramiko，並支援 FIPS 模式"
     identifier: ansible-new-libssh-connection-plugin-for-ansible-network
     weight: 10
-tags: ["URL", "Ansible", "SSH"]
-categories: ["URL", "Ansible", "SSH"]
+tags: ["Links", "Ansible", "SSH"]
+categories: ["Links", "Ansible", "SSH"]
 hero: images/hero/ansible.png
 ---
 
-- [New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement](https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network)
+- [Ansible Network 的新 LibSSH 連線外掛取代 Paramiko，並支援 FIPS 模式](https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network)
 
-##### Switching Ansible Playbooks to use LibSSH
+##### 切換 Ansible Playbook 使用 LibSSH
 
 ```bash
-# Installing LibSSH
+# 安裝 LibSSH
 pip install ansible-pylibssh
 ```
 
-Using LibSSH in Ansible Playbooks
+在 Ansible Playbook 中使用 LibSSH
 
-Method 1. The `ssh_type` configuration parameter can be set to use libssh in the active `ansible.cfg` file of your project
+方法 1. 在專案的 `ansible.cfg` 檔案中設定 `ssh_type` 參數使用 libssh
 
 ```toml
 [persistent_connection]
 ssh_type = libssh
 ```
 
-Method 2: Set the `ANSIBLE_NETWORK_CLI_SSH_TYPE` environment variable
+方法 2: 設定 `ANSIBLE_NETWORK_CLI_SSH_TYPE` 環境變數
 
 ```bash
 $ export ANSIBLE_NETWORK_CLI_SSH_TYPE=libssh
 ```
 
-Method 3: Set the `ansible_network_cli_ssh_type` parameter to libssh within your playbook at the play level
+方法 3: 在 play 等級的 playbook 中設定 `ansible_network_cli_ssh_type` 為 libssh
 
-##### Playbook to test libssh configuration settings
+##### 用來測試 libssh 設定的 Playbook
 
 ```yaml
 - hosts: "changeme"

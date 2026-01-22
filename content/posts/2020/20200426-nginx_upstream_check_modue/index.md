@@ -6,8 +6,8 @@ menu:
     name: "nginx 添加第三方nginx_upstream_check_module 模块实现健康状态检测"
     identifier: nginx-add-third-party-module-nginx_upstream_check_module
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

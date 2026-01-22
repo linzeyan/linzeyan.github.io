@@ -1,17 +1,17 @@
 ---
-title: "Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學"
+title: "Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network"
 date: 2025-08-01T15:51:00+08:00
 menu:
   sidebar:
-    name: "Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學"
+    name: "Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network"
     identifier: docker-gluetun-vpn
     weight: 10
-tags: ["URL", "Docker", "Gluetun", "VPN"]
-categories: ["URL", "Docker", "Gluetun", "VPN"]
+tags: ["Links", "Docker", "Gluetun", "VPN"]
+categories: ["Links", "Docker", "Gluetun", "VPN"]
 hero: images/hero/docker.jpeg
 ---
 
-- [Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學](https://ivonblog.com/posts/gluetun-vpn-docker/)
+- [Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network](https://ivonblog.com/posts/gluetun-vpn-docker/)
 
 ## Gluetun
 
@@ -33,17 +33,17 @@ services:
       - 8388:8388/udp # Shadowsocks
     volumes:
       - /home/user/gluetun:/gluetun
-    environment: # 按照VPN供應商的OpenVPN設定檔填寫
+    environment: # Fill in based on your VPN provider's OpenVPN config
       - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=openvpn
-      - OPENVPN_USER= # OpenVPN帳號
-      - OPENVPN_PASSWORD= # OpenVPN密碼
-      - SERVER_COUNTRIES=United Kingdom # 指定伺服器所在國家，以逗號分隔
-     networks: # (選擇性) 固定Gluetun容器的IP
+      - OPENVPN_USER= # OpenVPN username
+      - OPENVPN_PASSWORD= # OpenVPN password
+      - SERVER_COUNTRIES=United Kingdom # Set server country, separated by commas
+     networks: # (Optional) fixed IP for the Gluetun container
        network:
         ipv4_address: 172.27.0.5
 
-networks: # (選擇性) 固定Gluetun容器的IP
+networks: # (Optional) fixed IP for the Gluetun container
   network:
     driver: bridge
     ipam:
@@ -71,17 +71,17 @@ services:
     volumes:
       - /home/user/gluetun:/gluetun
     environment:
-      - VPN_SERVICE_PROVIDER=protonvpn # 按照VPN供應商的WireGuard設定檔填寫
+      - VPN_SERVICE_PROVIDER=protonvpn # Fill in based on your VPN provider's WireGuard config
       - VPN_TYPE=wireguard
-      - WIREGUARD_PRESHARED_KEY= # 預共享密鑰
-      - WIREGUARD_PRIVATE_KEY= # 私鑰
-      - WIREGUARD_ADDRESSES= # 填IPV4與IPV6位址，以逗號分隔
-      - SERVER_COUNTRIES=United Kingdom # 指定伺服器所在國家，以逗號分隔
-     networks: # (選擇性) 固定Gluetun容器的IP
+      - WIREGUARD_PRESHARED_KEY= # Preshared key
+      - WIREGUARD_PRIVATE_KEY= # Private key
+      - WIREGUARD_ADDRESSES= # Set IPv4 and IPv6 addresses, separated by commas
+      - SERVER_COUNTRIES=United Kingdom # Set server country, separated by commas
+     networks: # (Optional) fixed IP for the Gluetun container
        network:
         ipv4_address: 172.27.0.5
 
-networks: # (選擇性) 固定Gluetun容器的IP
+networks: # (Optional) fixed IP for the Gluetun container
   network:
     driver: bridge
     ipam:
@@ -90,10 +90,10 @@ networks: # (選擇性) 固定Gluetun容器的IP
           gateway: 172.27.0.5
 ```
 
-## 讓容器走 Gluetun 的 VPN 連線
+## Let containers use Gluetun's VPN connection
 
-- 如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: "service:gluetun"
-- 如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: "container:gluetun"
-- 開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來
-- 依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務
-- 容器公共 IP 應當跟您選擇的 VPN 伺服器一致
+- If the service and Gluetun are in the same docker-compose, add network mode: network_mode: "service:gluetun"
+- If the service is in a different docker-compose from Gluetun, add network_mode: "container:gluetun"
+- Open Gluetun's docker-compose file and re-add the service ports you need (e.g. 8080)
+- Start Gluetun first, then start services that should use Gluetun's VPN connection
+- The container's public IP should match the VPN server you selected

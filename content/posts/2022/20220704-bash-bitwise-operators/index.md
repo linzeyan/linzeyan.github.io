@@ -6,8 +6,8 @@ menu:
     name: "Bash Bitwise Operators"
     identifier: bash-bitwise-operators
     weight: 10
-tags: ["URL", "BASH"]
-categories: ["URL", "BASH"]
+tags: ["Links", "BASH"]
+categories: ["Links", "BASH"]
 ---
 
 - [Bash Bitwise Operators](https://www.baeldung.com/linux/bash-bitwise-operators)

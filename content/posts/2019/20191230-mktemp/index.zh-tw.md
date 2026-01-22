@@ -1,23 +1,23 @@
 ---
-title: "Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程"
+title: "Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學"
 date: 2019-12-30T14:31:45+08:00
 menu:
   sidebar:
-    name: "Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程"
+    name: "Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學"
     identifier: shell-script-mktemp-and-trap-command
     weight: 10
-tags: ["URL", "SHELL"]
-categories: ["URL", "SHELL"]
+tags: ["Links", "SHELL"]
+categories: ["Links", "SHELL"]
 hero: images/hero/shell.png
 ---
 
-- [Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程](http://www.ruanyifeng.com/blog/2019/12/mktemp.html)
+- [Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學](http://www.ruanyifeng.com/blog/2019/12/mktemp.html)
 
 #### `mktemp` 命令
 
-- 生成的临时文件名是随机的，而且权限是只有用户本人可读写
-- 为了确保临时文件创建成功，`mktemp` 命令后面最好使用 OR 运算符（`||`），指定创建失败时退出脚本
-- 为了保证脚本退出时临时文件被删除，可以使用`trap`命令指定退出时的清除操作
+- 產生的臨時檔案名稱是隨機的，而且權限只有使用者本人可讀寫。
+- 為了確保臨時檔案建立成功，`mktemp` 後面最好使用 OR 運算子（`||`），在建立失敗時退出腳本。
+- 為了確保腳本退出時刪除臨時檔案，可以使用 `trap` 指定退出時的清理動作。
 
 ```bash
 #!/bin/bash
@@ -28,17 +28,17 @@ TMPFILE=$(mktemp) || exit 1
 echo "Our temp file is $TMPFILE"
 ```
 
-##### mktemp 命令的参数
+##### mktemp 參數
 
-- `-d` 参数可以创建一个临时目录
-- `-p` 参数可以指定临时文件所在的目录。默认是使用 `$TMPDIR` 环境变量指定的目录，如果这个变量没设置，那么使用 `/tmp` 目录。
-- `-t` 参数可以指定临时文件的文件名模板，模板的末尾必须至少包含三个连续的 `X` 字符，表示随机字符，建议至少使用六个 `X`。默认的文件名模板是 `tmp.后接十个随机字符`
+- `-d` 參數可以建立臨時目錄。
+- `-p` 參數可以指定臨時檔案所在的目錄。預設使用 `$TMPDIR` 環境變數指定的目錄；若未設定，使用 `/tmp`。
+- `-t` 參數可以指定臨時檔案的檔名模板，模板末尾必須至少包含三個連續的 `X` 字元作為隨機字元，建議至少六個 `X`。預設的檔名模板為 `tmp.` 加上十個隨機字元。
 
 #### `trap` 命令的用法
 
-trap 命令用来在 Bash 脚本中响应系统信号。
+trap 命令用來在 Bash 腳本中響應系統訊號。
 
-最常见的系统信号就是 SIGINT（中断），即按 Ctrl + C 所产生的信号。trap 命令的-l 参数，可以列出所有的系统信号。
+最常見的系統訊號是 SIGINT（中斷），也就是按下 Ctrl + C 產生的訊號。`-l` 參數可以列出所有系統訊號。
 
 ```shell
 $ trap -l
@@ -47,21 +47,21 @@ $ trap -l
  ... ...
 ```
 
-trap 的命令格式如下。
+trap 的命令格式如下：
 
 ```shell
-$ trap [动作] [信号]
+$ trap [動作] [訊號]
 ```
 
-动作是一个 Bash 命令
+動作是一個 Bash 命令。
 
-信号:
+訊號：
 
-- HUP：编号 1，脚本与所在的终端脱离联系。
-- INT：编号 2，用户按下 Ctrl + C，意图让脚本中止运行。
-- QUIT：编号 3，用户按下 Ctrl + 斜杠，意图退出脚本。
-- KILL：编号 9，该信号用于杀死进程。
-- TERM：编号 15，这是 kill 命令发出的默认信号。
-- EXIT：编号 0，这不是系统信号，而是 Bash 脚本特有的信号，不管什么情况，只要退出脚本就会产生。
+- HUP：編號 1，腳本與終端機脫離連線。
+- INT：編號 2，使用者按下 Ctrl + C，想中止腳本。
+- QUIT：編號 3，使用者按下 Ctrl + 斜線，想退出腳本。
+- KILL：編號 9，用於殺死行程。
+- TERM：編號 15，kill 命令發出的預設訊號。
+- EXIT：編號 0，不是系統訊號，而是 Bash 腳本特有的訊號，腳本退出就會產生。
 
-注意，trap 命令必须放在脚本的开头。否则，它上方的任何命令导致脚本退出，都不会被它捕获。
+注意：trap 命令必須放在腳本開頭。否則它上方的任何命令導致腳本退出，都不會被它捕獲。

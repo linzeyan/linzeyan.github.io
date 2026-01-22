@@ -6,8 +6,8 @@ menu:
     name: "Running GitHub Actions for Certain Commit Messages"
     identifier: github-action-running-github-actions-for-certain-commit-messages
     weight: 10
-tags: ["URL", "Github"]
-categories: ["URL", "Github"]
+tags: ["Links", "Github"]
+categories: ["Links", "Github"]
 hero: images/hero/github.png
 ---
 

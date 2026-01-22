@@ -6,8 +6,8 @@ menu:
     name: "Inspecting Web Views in macOS"
     identifier: macOS-inspecting-web-views-in-macos
     weight: 10
-tags: ["URL", "macOS"]
-categories: ["URL", "macOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
 - [Inspecting Web Views in macOS](https://blog.jim-nielsen.com/2022/inspecting-web-views-in-macos/)

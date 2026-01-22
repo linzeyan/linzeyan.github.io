@@ -6,8 +6,8 @@ menu:
     name: "Quagga Routing - Install, Configure and setup BGP"
     identifier: linux-quagga-routing-install-configure-and-setup-bgp
     weight: 10
-tags: ["URL", "Linux", "Network"]
-categories: ["URL", "Linux", "Network"]
+tags: ["Links", "Linux", "Network"]
+categories: ["Links", "Linux", "Network"]
 hero: images/hero/linux.png
 ---
 

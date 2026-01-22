@@ -1,30 +1,30 @@
 ---
-title: "再战运营商缓存之 使用 iptables 对付死 X 缓存劫持"
+title: "Fighting ISP Cache Hijacking Again with iptables"
 date: 2019-10-07T10:41:08+08:00
 menu:
   sidebar:
-    name: "再战运营商缓存之 使用 iptables 对付死 X 缓存劫持"
+    name: "Fighting ISP Cache Hijacking Again with iptables"
     identifier: linux-network-iptables-cache-hijack-FUCK-CMCC
     weight: 10
-tags: ["URL", "Network", "Linux", "Iptables"]
-categories: ["URL", "Network", "Linux", "Iptables"]
+tags: ["Links", "Network", "Linux", "Iptables"]
+categories: ["Links", "Network", "Linux", "Iptables"]
 hero: images/hero/linux.png
 ---
 
-- [再战运营商缓存之 使用 iptables 对付死 X 缓存劫持](https://v2c.tech/Article/FUCK-CMCC)
+- [Fighting ISP Cache Hijacking Again with iptables](https://v2c.tech/Article/FUCK-CMCC)
 
-##### 起因
+##### Cause
 
-与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错
+The fight against the carrier cache problem started two years ago. The carrier even cached cnpm data. Worse, their cache servers were not only slow like a turtle in a marathon, they also crashed frequently, so I just wanted to write code but had to face a wall of red errors.
 
-##### 解决
+##### Fix
 
 `iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP`
 
-考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有
+Since real packets from other servers might have TTL values in the 20-30 range, we should add another check. Comparing the hijacked 302 packets with normal 302 packets, the hijacked packets include FIN, PSH, and ACK flags, while normal 302 packets typically do not include all three.
 
-那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：
+So add a TCP flag check in iptables:
 
 `iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP`
 
-这样应该就能在丢弃移动劫持包的同时尽可能减少误伤正常数据包的可能。
+This should drop hijacked packets while minimizing false positives.

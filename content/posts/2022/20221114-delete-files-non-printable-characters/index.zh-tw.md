@@ -1,17 +1,17 @@
 ---
-title: "How to Delete Files With Names That Contain Non-printable Characters"
+title: "如何刪除檔名含有不可列印字元的檔案"
 date: 2022-11-14T13:55:17+08:00
 menu:
   sidebar:
-    name: "How to Delete Files With Names That Contain Non-printable Characters"
+    name: "如何刪除檔名含有不可列印字元的檔案"
     identifier: linux-delete-files-non-printable-characters
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 
-- [How to Delete Files With Names That Contain Non-printable Characters](https://www.baeldung.com/linux/delete-files-non-printable-characters)
+- [如何刪除檔名含有不可列印字元的檔案](https://www.baeldung.com/linux/delete-files-non-printable-characters)
 
 ```bash
 ls -l
@@ -32,7 +32,7 @@ total 13
 
 ```
 
-##### Using ANSI-C Quoting
+##### 使用 ANSI-C Quoting
 
 ```bash
 # Using ANSI-C Quoting
@@ -45,7 +45,7 @@ rm '\026\033'
 rm: cannot remove '\026\033': No such file or directory
 ```
 
-##### Using Inode Numbers
+##### 使用 Inode 編號
 
 ```bash
 ls -li
@@ -56,14 +56,14 @@ total 11
 4685554 -rw-r--r-- 1 ZZ 197121   4 Nov  6 06:27
 ```
 
-we can delete the desired file by passing its inode number to the -inum switch of the find command
+可以透過 find 的 -inum 參數指定 inode 來刪除檔案。
 
 ```bash
 find . -inum 4685554 -exec rm -i {} \;
 rm: remove regular file './                '? y
 ```
 
-##### Using rm Interactive Option With Bash Globbing
+##### 搭配 Bash Globbing 使用 rm 互動模式
 
 ```bash
 rm -i *
@@ -72,7 +72,7 @@ rm: remove regular file '                            '?y
 ...
 ```
 
-##### Using the Vim Text Editor
+##### 使用 Vim 編輯器
 
 `vim .`
-After choosing the target file, we simply use `Shift+D`, type y or yes, and hit the Return key to delete it.
+選好目標檔案後，使用 `Shift+D`，輸入 y 或 yes，再按 Return 便可刪除。

@@ -6,8 +6,8 @@ menu:
     name: "I use Zip Bombs to Protect my Server"
     identifier: zipbomb-protection
     weight: 10
-tags: ["URL", "HTTP", "Security"]
-categories: ["URL", "HTTP", "Security"]
+tags: ["Links", "HTTP", "Security"]
+categories: ["Links", "HTTP", "Security"]
 ---
 
 - [I use Zip Bombs to Protect my Server](https://idiallo.com/blog/zipbomb-protection)

@@ -6,8 +6,8 @@ menu:
     name: "GitLab 啟用 Project integration - Mattermost slash commands"
     identifier: gitlab-mattermost-slash-commands
     weight: 10
-tags: ["URL", "Gitlab", "Mattermost"]
-categories: ["URL", "Gitlab", "Mattermost"]
+tags: ["Links", "Gitlab", "Mattermost"]
+categories: ["Links", "Gitlab", "Mattermost"]
 hero: images/hero/gitlab.png
 ---
 

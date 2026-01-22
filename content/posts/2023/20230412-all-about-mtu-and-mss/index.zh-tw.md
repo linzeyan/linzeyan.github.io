@@ -6,8 +6,8 @@ menu:
     name: "有关 MTU 和 MSS 的一切"
     identifier: network-mtu-and-mss
     weight: 10
-tags: ["URL", "Network", "MTU", "MSS", "Linux"]
-categories: ["URL", "Network", "MTU", "MSS", "Linux"]
+tags: ["Links", "Network", "MTU", "MSS", "Linux"]
+categories: ["Links", "Network", "MTU", "MSS", "Linux"]
 hero: images/hero/linux.png
 ---
 

@@ -1,17 +1,17 @@
 ---
-title: "將指令輸出轉為圖片"
+title: "Convert Command Output to an Image"
 date: 2022-11-10T16:13:04+08:00
 menu:
   sidebar:
-    name: "將指令輸出轉為圖片"
+    name: "Convert Command Output to an Image"
     identifier: ansible-tip-command-output-to-image
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 
-- [將指令輸出轉為圖片](https://ansible.cloudns.pro/post/tips/tip-command-output-to-image/)
+- [Convert Command Output to an Image](https://ansible.cloudns.pro/post/tips/tip-command-output-to-image/)
 
 ```yaml
 ---
@@ -27,7 +27,7 @@ hero: images/hero/ansible.png
       shell: hostname
       register: hostname_result
 
-    # 可以使用 ImageMagick 來轉換文字為圖片
+    # You can use ImageMagick to convert text to an image
     - name: Convert command output as image
       shell: echo -e "{{ hostname_result.stdout }}\n{{ redhat_release_result.stdout }}" | convert label:@- {{ hostname_result.stdout }}.png
       delegate_to: localhost

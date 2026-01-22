@@ -6,8 +6,8 @@ menu:
     name: "SQL queries don't start with SELECT"
     identifier: sql-queries-don-t-start-with-select
     weight: 10
-tags: ["URL", "SQL"]
-categories: ["URL", "SQL"]
+tags: ["Links", "SQL"]
+categories: ["Links", "SQL"]
 ---
 
 - [SQL queries don't start with SELECT](https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/)

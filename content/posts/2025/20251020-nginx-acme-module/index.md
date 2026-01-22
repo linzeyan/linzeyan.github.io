@@ -1,47 +1,47 @@
 ---
-title: "NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署"
+title: "NGINX Native ACME Support: Rethinking TLS Automation from the Ground Up"
 date: 2025-10-20T16:31:00+08:00
 menu:
   sidebar:
-    name: "NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署"
+    name: "NGINX Native ACME Support: Rethinking TLS Automation from the Ground Up"
     identifier: nginx-acme-module
     weight: 10
-tags: ["URL", "NGINX", "ACME", "module"]
-categories: ["URL", "NGINX", "ACME", "module"]
+tags: ["Links", "Nginx", "ACME", "module"]
+categories: ["Links", "Nginx", "ACME", "module"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署](https://sconts.com/post/nginx-native-acme-support/)
+- [NGINX Native ACME Support: Rethinking TLS Automation from the Ground Up](https://sconts.com/post/nginx-native-acme-support/)
 
 ## `ngx_http_acme_module`
 
 - NGINX 1.25.1
 
-## pre-install
+## Pre-install
 
 ```bash
-# 在 Debian/Ubuntu 系统上安装基础编译工具和 NGINX 依赖
+# Install build tools and NGINX dependencies on Debian/Ubuntu
 sudo apt update
 sudo apt install build-essential libpcre3-dev zlib1g-dev libssl-dev pkg-config libclang-dev git -y
 
-# 安装 Rust 工具链 (cargo 和 rustc)
+# Install the Rust toolchain (cargo and rustc)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
 mkdir -pv /app/nginx/{logs,conf,cache, acme} /app/nginx-build
 cd /app/nginx-build
 
-# 克隆 ACME 模块的源码
+# Clone the ACME module source
 git clone https://github.com/nginx/nginx-acme.git /app/nginx-build/nginx-acme
-# 或者
+# Or
 # git clone git@github.com:nginx/nginx-acme.git /app/nginx-build/nginx-acme
 
-# 下载 NGINX 源码（请替换为您需要的版本）
+# Download the NGINX source (replace with the version you need)
 wget https://nginx.org/download/nginx-1.28.0.tar.gz
 tar -zxf nginx-1.28.0.tar.gz
 ```
 
-## compile
+## Compile
 
 ```bash
 cd nginx-1.28.0
@@ -91,12 +91,12 @@ make && \
     make modules && \
     make install
 
-# 运行配置脚本，这里的关键是 --add-dynamic-module
-# 注意：您需要在这里包含您当前 NGINX 已有的所有编译参数，可以通过 nginx -V 查看
-# 编译模块，注意是 make modules 而不是 make install
+# Run the configure script; the key is --add-dynamic-module
+# Note: include all existing NGINX build flags; see nginx -V
+# Build the module; note it is make modules, not make install
 ```
 
-## config
+## Config
 
 ```nginx
 # /app/nginx/conf/nginx.conf
@@ -126,27 +126,28 @@ http {
     gzip  on;
 
     resolver 8.8.8.8 1.1.1.1;
-    # 定义一个名为 letsencrypt 的 ACME 颁发机构实例
+    # Define an ACME issuer instance named letsencrypt
     acme_issuer letsencrypt {
-        # 指定 ACME 服务提供商的目录 URL，这里是 Let's Encrypt 的生产环境
+        # Set the ACME directory URL; this is Let's Encrypt production
         uri         https://acme-v02.api.letsencrypt.org/directory;
-        # 提供一个联系邮箱，用于接收 CA 的重要通知（如证书即将过期）
+        # Provide a contact email for CA notices (e.g., expiration)
         contact     mailto:security-alerts@aidig.co;
-        # 指定状态文件的存储路径，用于保存 ACME 账户密钥，非常重要
+        # State file path for ACME account key material
         state_path  acme/letsencrypt;
-        # 同意服务条款，对于 Let's Encrypt 等 CA 这是必需的步骤
+        # Accept the terms of service; required for Let's Encrypt
         accept_terms_of_service;
     }
-    # 可选指令 acme_shared_zone，用于存储所有配置的证书颁发者的证书、私钥和挑战数据。该区域默认大小为 256K，可根据需要增加
+    # Optional acme_shared_zone stores certs, keys, and challenges for issuers.
+    # Default size is 256K; increase as needed.
     acme_shared_zone zone=acme_shared:1M;
 
     server {
         listen 443 ssl;
         server_name ssl.aidig.co;
 
-        # 步骤一：声明此 server 块启用 ACME，并指定使用上面定义的 letsencrypt 颁发机构
+        # Step 1: enable ACME for this server and select the letsencrypt issuer
         acme_certificate    letsencrypt;
-        # 步骤二：使用动态变量加载由 ACME 模块在内存中管理的证书和私钥
+        # Step 2: use dynamic variables managed in memory by the ACME module
         ssl_certificate     $acme_certificate;
         ssl_certificate_key   $acme_certificate_key;
         ssl_certificate_cache   max=2;  # required ngx 1.27.4+
@@ -161,7 +162,7 @@ http {
         listen 80 default_server;
         server_name _;
 
-        # ACME 模块会自动处理 /.well-known/acme-challenge/ 的请求，此 location 用于处理所有其他请求
+        # ACME handles /.well-known/acme-challenge/ automatically; this is for all other requests
         location / {
             return 301 https://$host$request_uri;
         }

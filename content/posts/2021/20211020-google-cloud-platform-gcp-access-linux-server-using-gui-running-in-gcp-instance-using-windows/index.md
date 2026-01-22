@@ -6,8 +6,8 @@ menu:
     name: "Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection."
     identifier: linux-using-windows-remote-desktop-connection
     weight: 10
-tags: ["URL", "Linux", "RDP"]
-categories: ["URL", "Linux", "RDP"]
+tags: ["Links", "Linux", "RDP"]
+categories: ["Links", "Linux", "RDP"]
 hero: images/hero/linux.png
 ---
 

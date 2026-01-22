@@ -6,8 +6,8 @@ menu:
     name: "Tracking SQLite Database Changes in Git"
     identifier: git-tracking_sqlite_database_changes_git
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

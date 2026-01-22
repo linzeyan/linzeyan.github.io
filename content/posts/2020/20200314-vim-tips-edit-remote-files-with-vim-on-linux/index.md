@@ -6,8 +6,8 @@ menu:
     name: "Vim Tips - Edit Remote Files With Vim On Linux"
     identifier: linux-vim-tips-edit-remote-files-with-vim-on-linux
     weight: 10
-tags: ["URL", "Vim"]
-categories: ["URL", "Vim"]
+tags: ["Links", "Vim"]
+categories: ["Links", "Vim"]
 ---
 
 - [Vim Tips - Edit Remote Files With Vim On Linux](https://www.ostechnix.com/vim-tips-edit-remote-files-with-vim-on-linux/)

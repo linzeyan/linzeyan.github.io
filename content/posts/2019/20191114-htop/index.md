@@ -6,8 +6,8 @@ menu:
     name: "htop explained"
     identifier: command-line-htop-explained
     weight: 10
-tags: ["URL", "htop"]
-categories: ["URL", "htop"]
+tags: ["Links", "htop"]
+categories: ["Links", "htop"]
 ---
 
 - [htop explained](https://peteris.rocks/blog/htop/)

@@ -6,8 +6,8 @@ menu:
     name: "以 Go 為例，圖解 Data Alignment 如何影響記憶體使用量"
     identifier: go-illustrate-how-data-alignment-affects-memory-usage
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

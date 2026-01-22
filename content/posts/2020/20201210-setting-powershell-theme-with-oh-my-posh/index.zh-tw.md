@@ -6,8 +6,8 @@ menu:
     name: "使用 oh-my-posh 美化 PowerShell 樣式"
     identifier: windows-terminal-powershell-oh-my-post
     weight: 10
-tags: ["URL", "Windows", "Terminal", "PowerShell"]
-categories: ["URL", "Windows", "Terminal", "PowerShell"]
+tags: ["Links", "Windows", "Terminal", "PowerShell"]
+categories: ["Links", "Windows", "Terminal", "PowerShell"]
 hero: images/hero/microsoft_windows.png
 ---
 

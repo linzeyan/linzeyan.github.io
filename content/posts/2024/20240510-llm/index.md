@@ -6,13 +6,13 @@ menu:
     name: LLMs Hackmd Docs
     identifier: llm-hackmd-docs
     weight: 10
-tags: ["llm", "machinelearning", "URL"]
-categories: ["llm", "machinelearning", "URL"]
+tags: ["llm", "machinelearning", "Links"]
+categories: ["llm", "machinelearning", "Links"]
 ---
 
-- [大型語言模型 LLMs 課程教學 課程大綱 (四)](https://hackmd.io/@whYPD8MBSHWRZV6y-ymFwQ/ryqUCfu6T)
-- [大型語言模型 LLMs 課程教學 課程大綱 (五)](https://hackmd.io/cZPGG0gQRCuG7pZGV-SlEg)
-- [大型語言模型 LLMs 課程教學 課程大綱 (六)](https://hackmd.io/@whYPD8MBSHWRZV6y-ymFwQ/Bk3TbayAp)
+- [Large Language Model (LLMs) Course Outline (4)](https://hackmd.io/@whYPD8MBSHWRZV6y-ymFwQ/ryqUCfu6T)
+- [Large Language Model (LLMs) Course Outline (5)](https://hackmd.io/cZPGG0gQRCuG7pZGV-SlEg)
+- [Large Language Model (LLMs) Course Outline (6)](https://hackmd.io/@whYPD8MBSHWRZV6y-ymFwQ/Bk3TbayAp)
 
 1. LM STUDIO
 2. chromadb/chroma

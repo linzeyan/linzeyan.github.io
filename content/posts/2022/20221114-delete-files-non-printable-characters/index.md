@@ -6,8 +6,8 @@ menu:
     name: "How to Delete Files With Names That Contain Non-printable Characters"
     identifier: linux-delete-files-non-printable-characters
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 

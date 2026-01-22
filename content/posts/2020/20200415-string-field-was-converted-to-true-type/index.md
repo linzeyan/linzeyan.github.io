@@ -6,8 +6,8 @@ menu:
     name: "string field was converted to True (type string)"
     identifier: ansible-string-field-was-converted-to-true-type
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

@@ -1,19 +1,19 @@
 ---
-title: "用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案"
+title: "Replace Watchtower with WUD: Build a Controlled Docker Auto-Update Plan"
 date: 2026-01-11T15:22:11+08:00
 menu:
   sidebar:
-    name: "用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案"
+    name: "Replace Watchtower with WUD: Build a Controlled Docker Auto-Update Plan"
     identifier: docker-replace-watchtower-with-wud
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 
-- [用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案](https://blog.ibytebox.com/archives/TKFPS2tq)
+- [Replace Watchtower with WUD: Build a Controlled Docker Auto-Update Plan](https://blog.ibytebox.com/archives/TKFPS2tq)
 
-WUD（What's Up Docker）
+WUD (What's Up Docker)
 
 ```yaml
 services:
@@ -29,31 +29,31 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-      # 本机 Docker watcher
+      # Local Docker watcher
       - WUD_WATCHER_LOCAL_SOCKET=/var/run/docker.sock
 
-      # 关键：默认不监控任何容器
+      # Key: do not watch any containers by default
       - WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false
 
-      # 每 12 小时扫描一次
+      # Scan every 12 hours
       - WUD_WATCHER_LOCAL_CRON=0 */12 * * *
 
-      # 自动更新 + 更新后清理旧镜像
-      - WUD_TRIGGER_DOCKER_AUTO_PRUNE=true # 效果等同于 `watchtower --cleanup`
+      # Auto update + prune old images after update
+      - WUD_TRIGGER_DOCKER_AUTO_PRUNE=true # Equivalent to `watchtower --cleanup`
 ```
 
-#### 只监控（不自动更新）
+#### Monitor only (no auto update)
 
 ```yaml
 labels:
   - "wud.watch=true"
 ```
 
-- 出现在 WUD UI
-- 有更新提示
-- 不会自动重启
+- Appears in the WUD UI
+- Shows update hints
+- Does not auto-restart
 
-#### 监控 + 自动更新（Watchtower 的等价替代）
+#### Monitor + auto update (Watchtower equivalent)
 
 ```yaml
 labels:

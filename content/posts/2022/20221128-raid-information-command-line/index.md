@@ -6,8 +6,8 @@ menu:
     name: "How to Detect RAID Information in Linux"
     identifier: linux-raid-information-command-line
     weight: 10
-tags: ["URL", "Linux", "RAID", "command line"]
-categories: ["URL", "Linux", "RAID", "command line"]
+tags: ["Links", "Linux", "RAID", "command line"]
+categories: ["Links", "Linux", "RAID", "command line"]
 hero: images/hero/linux.png
 ---
 

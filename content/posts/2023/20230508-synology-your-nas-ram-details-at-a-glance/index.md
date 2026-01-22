@@ -6,8 +6,8 @@ menu:
     name: "Synology: Your NAS RAM Details at a Glance"
     identifier: synology-nas-ram-details
     weight: 10
-tags: ["URL", "Synology", "NAS"]
-categories: ["URL", "Synology", "NAS"]
+tags: ["Links", "Synology", "NAS"]
+categories: ["Links", "Synology", "NAS"]
 ---
 
 - [Synology: Your NAS RAM Details at a Glance](https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/)

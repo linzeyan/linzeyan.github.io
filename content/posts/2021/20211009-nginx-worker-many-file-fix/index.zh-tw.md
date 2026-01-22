@@ -6,8 +6,8 @@ menu:
     name: "Nginx 出現 500 Error 修復 (too many open file, connection)"
     identifier: nginx-worker-many-file-fix
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

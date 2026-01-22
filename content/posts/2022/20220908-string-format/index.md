@@ -6,8 +6,8 @@ menu:
     name: "Go string format"
     identifier: golang-string-format
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

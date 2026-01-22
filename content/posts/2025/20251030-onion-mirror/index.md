@@ -6,8 +6,8 @@ menu:
     name: "onion-mirror"
     identifier: tor-onion-mirror
     weight: 10
-tags: ["URL", "Tor"]
-categories: ["URL", "Tor"]
+tags: ["Links", "Tor"]
+categories: ["Links", "Tor"]
 ---
 
 - [onion-mirror](https://flower.codes/2025/10/23/onion-mirror.html)

@@ -6,8 +6,8 @@ menu:
     name: "Expose your local web server to the internet with a public URL."
     identifier: github-agrinman-tunnelto
     weight: 10
-tags: ["URL", "Github", "Rust"]
-categories: ["URL", "Github", "Rust"]
+tags: ["Links", "Github", "Rust"]
+categories: ["Links", "Github", "Rust"]
 hero: images/hero/github.png
 ---
 

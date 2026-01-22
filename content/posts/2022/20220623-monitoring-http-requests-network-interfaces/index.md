@@ -6,8 +6,8 @@ menu:
     name: "Monitoring HTTP Requests on a Network Interface in Real Time"
     identifier: linux-monitoring-http-requests-network-interfaces
     weight: 10
-tags: ["URL", "Linux", "command line", "HTTP", "Network"]
-categories: ["URL", "Linux", "command line", "HTTP", "Network"]
+tags: ["Links", "Linux", "command line", "HTTP", "Network"]
+categories: ["Links", "Linux", "command line", "HTTP", "Network"]
 hero: images/hero/linux.png
 ---
 

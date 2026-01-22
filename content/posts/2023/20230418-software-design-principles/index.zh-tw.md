@@ -6,8 +6,8 @@ menu:
     name: "一些软件设计的原则"
     identifier: software-design-principles
     weight: 10
-tags: ["URL", "software", "design", "principle"]
-categories: ["URL", "software", "design", "principle"]
+tags: ["Links", "software", "design", "principle"]
+categories: ["Links", "software", "design", "principle"]
 ---
 
 - [一些软件设计的原则](https://coolshell.cn/articles/4535.html)

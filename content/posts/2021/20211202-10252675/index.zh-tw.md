@@ -6,8 +6,8 @@ menu:
     name: "Day 28 - Kubernetes 第三方好用工具介紹"
     identifier: k8s-introduction-to-useful-third-party-tools
     weight: 10
-tags: ["URL", "Kubernetes", "Plugin"]
-categories: ["URL", "Kubernetes", "Plugin"]
+tags: ["Links", "Kubernetes", "Plugin"]
+categories: ["Links", "Kubernetes", "Plugin"]
 hero: images/hero/kubernetes.png
 ---
 

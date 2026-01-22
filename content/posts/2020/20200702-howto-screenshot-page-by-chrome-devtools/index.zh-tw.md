@@ -6,8 +6,8 @@ menu:
     name: "如何使用 Chrome 開發人員工具擷取網頁畫面與製作長截圖？"
     identifier: chrome-howto-screenshot-page-by-chrome-devtools
     weight: 10
-tags: ["URL", "Chrome", "ScreenShot"]
-categories: ["URL", "Chrome", "ScreenShot"]
+tags: ["Links", "Chrome", "ScreenShot"]
+categories: ["Links", "Chrome", "ScreenShot"]
 ---
 
 - [如何使用 Chrome 開發人員工具擷取網頁畫面與製作長截圖？](https://tedliou.com/archives/howto-screenshot-page-by-chrome-devtools/)

@@ -1,27 +1,27 @@
 ---
-title: "25秒读取16GB文件，Go怎么做到的？"
+title: "How Go Reads a 16GB File in 25 Seconds"
 date: 2021-11-22T11:07:17+08:00
 menu:
   sidebar:
-    name: "25秒读取16GB文件，Go怎么做到的？"
+    name: "How Go Reads a 16GB File in 25 Seconds"
     identifier: go-processing-16gb-file-in-seconds-go-lang
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [25 秒读取 16GB 文件，Go 怎么做到的？](https://mp.weixin.qq.com/s/k6k9bwpKPdfShEEiTLSJ7w)
+- [How Go Reads a 16GB File in 25 Seconds](https://mp.weixin.qq.com/s/k6k9bwpKPdfShEEiTLSJ7w)
 - [Reading 16GB File in Seconds, Golang](https://medium.com/swlh/processing-16gb-file-in-seconds-go-lang-3982c235dfa2)
 
-> 打开文件后，我们有以下两个选项可以选择：
+> After opening the file, we have two options:
 >
-> - 逐行读取文件，这有助于减少内存紧张，但需要更多的时间。
-> - 一次将整个文件读入内存并处理该文件，这将消耗更多内存，但会显著减少时间。
+> - Read the file line by line, which reduces memory pressure but takes more time.
+> - Read the entire file into memory and process it, which uses more memory but significantly reduces time.
 >
-> 由于文件太大，即 16 GB，因此无法将整个文件加载到内存中。但是第一种选择对我们来说也是不可行的，因为我们希望在几秒钟内处理文件。
+> Because the file is too large (16 GB), we cannot load the entire file into memory. But the first option is also not feasible for us because we want to process the file within seconds.
 >
-> 但你猜怎么着，还有第三种选择。瞧……相比于将整个文件加载到内存中，在 Go 语言中，我们还可以使用 bufio.NewReader()将文件分块加载。
+> But guess what, there is a third option. Look... In Go, instead of loading the entire file into memory, we can use bufio.NewReader() to read the file in chunks.
 
 ```go
 

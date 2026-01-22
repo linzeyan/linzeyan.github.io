@@ -1,17 +1,17 @@
 ---
-title: "Systemd 入门教程：实战篇"
+title: "Systemd Tutorial: Practical Part"
 date: 2018-08-09T13:53:32+08:00
 menu:
   sidebar:
-    name: "Systemd 入门教程：实战篇"
+    name: "Systemd Tutorial: Practical Part"
     identifier: linux-systemd-tutorial-part-two
     weight: 10
-tags: ["URL", "Linux"]
-categories: ["URL", "Linux"]
+tags: ["Links", "Linux"]
+categories: ["Links", "Linux"]
 hero: images/hero/linux.png
 ---
 
-- [Systemd 入门教程：实战篇](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html)
+- [Systemd Tutorial: Practical Part](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html)
 
 ```shell
 $ systemctl cat sshd.service
@@ -35,37 +35,37 @@ RestartSec=42s
 WantedBy=multi-user.target
 ```
 
-#### [Unit] 区块：启动顺序与依赖关系
+#### [Unit] Section: Startup Order and Dependencies
 
-`After` 字段：表示如果 `network.target` 或 `sshd-keygen.service` 需要启动，那么 `sshd.service` 应该在它们之后启动。
+`After` field: if `network.target` or `sshd-keygen.service` needs to start, then `sshd.service` should start after them.
 
-相应地，还有一个 `Before` 字段，定义 `sshd.service` 应该在哪些服务之前启动。
+Correspondingly, the `Before` field defines which services `sshd.service` should start before.
 
-注意，After 和 Before 字段只涉及启动顺序，不涉及依赖关系。
+Note that After and Before only involve startup order, not dependency relationships.
 
-设置依赖关系，需要使用 Wants 字段和 Requires 字段
+To define dependencies, use the Wants and Requires fields.
 
-`Wants` 字段：表示 `sshd.service` 与 `sshd-keygen.service` 之间存在"弱依赖"关系，即如果"sshd-keygen.service"启动失败或停止运行，不影响 `sshd.service` 继续执行。
+`Wants` field: indicates a "weak dependency" between `sshd.service` and `sshd-keygen.service`. If `sshd-keygen.service` fails to start or stops running, it does not affect `sshd.service`.
 
-`Requires` 字段则表示"强依赖"关系，即如果该服务启动失败或异常退出，那么 `sshd.service` 也必须退出。
+`Requires` field indicates a "strong dependency". If the service fails to start or exits abnormally, then `sshd.service` must exit.
 
-注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。
+Note that Wants and Requires only involve dependencies, not startup order. By default they start at the same time.
 
-#### [Service] 区块：启动行为
+#### [Service] Section: Start Behavior
 
-`EnvironmentFile` 字段：指定当前服务的环境参数文件。该文件内部的 `key=value` 键值对，可以用 `$key` 的形式，在当前配置文件中获取。
+`EnvironmentFile` field: specifies the environment parameter file for the current service. The `key=value` pairs in that file can be referenced as `$key` in the config.
 
-`ExecStart` 字段：定义启动进程时执行的命令
+`ExecStart` field: command executed when starting the process.
 
-`ExecReload` 字段：重启服务时执行的命令
+`ExecReload` field: command executed when reloading the service.
 
-`ExecStop` 字段：停止服务时执行的命令
+`ExecStop` field: command executed when stopping the service.
 
-`ExecStartPre` 字段：启动服务之前执行的命令
+`ExecStartPre` field: command executed before starting the service.
 
-`ExecStartPost` 字段：启动服务之后执行的命令
+`ExecStartPost` field: command executed after starting the service.
 
-`ExecStopPost` 字段：停止服务之后执行的命令
+`ExecStopPost` field: command executed after stopping the service.
 
 **example**
 
@@ -78,7 +78,7 @@ ExecStartPost=/bin/echo post1
 ExecStartPost=/bin/echo post2
 ```
 
-上面这个配置文件，第二行 ExecStart 设为空值，等于取消了第一行的设置，运行结果如下。
+In the config above, the second line sets ExecStart to empty, which cancels the first line. The result is:
 
 ```shell
 execstart2
@@ -86,21 +86,21 @@ post1
 post2
 ```
 
-所有的启动设置之前，都可以加上一个连词号（`-`），表示"抑制错误"，即发生错误的时候，不影响其他命令的执行。比如，`EnvironmentFile=-/etc/sysconfig/sshd`（注意等号后面的那个连词号），就表示即使 `/etc/sysconfig/sshd` 文件不存在，也不会抛出错误。
+All start settings can be prefixed with a dash (`-`), meaning "suppress errors". For example, `EnvironmentFile=-/etc/sysconfig/sshd` means that even if `/etc/sysconfig/sshd` does not exist, it will not raise an error.
 
 ---
 
-`Type` 字段定义启动类型。它可以设置的值如下。
+`Type` field defines the startup type. Possible values:
 
-- simple（默认值）：ExecStart 字段启动的进程为主进程
-- forking： ExecStart 字段将以 fork()方式启动，此时父进程将会退出，子进程将成为主进程
-- oneshot： 类似于 simple，但只执行一次，Systemd 会等它执行完，才启动其他服务
-- dbus： 类似于 simple，但会等待 D-Bus 信号后启动
-- notify： 类似于 simple，启动结束后会发出通知信号，然后 Systemd 再启动其他服务
-- idle： 类似于 simple，但是要等到其他任务都执行完，才会启动该服务。一种使用场合是为让该服务的输出，不与其他服务的输出相混合
+- simple (default): the process started by ExecStart is the main process
+- forking: ExecStart will start with fork(); the parent exits and the child becomes the main process
+- oneshot: similar to simple, but runs only once; Systemd waits for it to finish before starting other services
+- dbus: similar to simple, but waits for a D-Bus signal before starting
+- notify: similar to simple, but sends a notification after startup and Systemd continues
+- idle: similar to simple, but waits until other tasks finish so its output does not mix with others
 
 **example**
-下面是一个 oneshot 的例子，笔记本电脑启动时，要把触摸板关掉，配置文件可以这样写。
+The following is a oneshot example. At laptop startup, disable the touchpad. The config file can be:
 
 ```
 [Unit]
@@ -114,9 +114,9 @@ ExecStart=/usr/bin/touchpad-off
 WantedBy=multi-user.target
 ```
 
-上面的配置文件，启动类型设为 oneshot，就表明这个服务只要运行一次就够了，不需要长期运行。
+In the config above, type oneshot means the service only needs to run once, and does not need to run long-term.
 
-如果关闭以后，将来某个时候还想打开，配置文件修改如下。
+If you want to enable it again later, update the config as follows:
 
 ```
 
@@ -133,62 +133,62 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 ```
 
-上面配置文件中，RemainAfterExit 字段设为 yes，表示进程退出以后，服务仍然保持执行。这样的话，一旦使用 systemctl stop 命令停止服务，ExecStop 指定的命令就会执行，从而重新开启触摸板。
+In the config above, RemainAfterExit is set to yes, meaning the service remains active after the process exits. In this case, when you stop the service with `systemctl stop`, the ExecStop command runs, which turns the touchpad back on.
 
 ---
 
-`KillMode` 字段：定义 Systemd 如何停止 sshd 服务。
+`KillMode` field: defines how Systemd stops the sshd service.
 
-上面这个例子中，将 KillMode 设为 process，表示只停止主进程，不停止任何 sshd 子进程，即子进程打开的 SSH session 仍然保持连接。这个设置不太常见，但对 sshd 很重要，否则你停止服务的时候，会连自己打开的 SSH session 一起杀掉。
+In the example above, KillMode is set to process, meaning only the main process is stopped. It does not stop any sshd child processes, so existing SSH sessions stay connected. This setting is uncommon but important for sshd; otherwise stopping the service would kill your own SSH session.
 
-`KillMode` 字段可以设置的值如下。
+Possible values for `KillMode`:
 
-- control-group（默认值）：当前控制组里面的所有子进程，都会被杀掉
-- process：只杀主进程
-- mixed：主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号
-- none：没有进程会被杀掉，只是执行服务的 stop 命令。
+- control-group (default): all child processes in the control group are killed
+- process: only kill the main process
+- mixed: main process receives SIGTERM, child processes receive SIGKILL
+- none: no processes are killed; only the service stop command runs
 
-`Restart` 字段：定义了 sshd 退出后，Systemd 的重启方式。
+`Restart` field: defines how Systemd restarts sshd after it exits.
 
-上面的例子中，Restart 设为 on-failure，表示任何意外的失败，就将重启 sshd。如果 sshd 正常停止（比如执行 systemctl stop 命令），它就不会重启。
+In the example above, Restart is set to on-failure, meaning any unexpected failure will restart sshd. If sshd stops normally (for example, via `systemctl stop`), it will not restart.
 
-`Restart` 字段可以设置的值如下。
+Possible values for `Restart`:
 
-- no（默认值）：退出后不会重启
-- on-success：只有正常退出时（退出状态码为 0），才会重启
-- on-failure：非正常退出时（退出状态码非 0），包括被信号终止和超时，才会重启
-- on-abnormal：只有被信号终止和超时，才会重启
-- on-abort：只有在收到没有捕捉到的信号终止时，才会重启
-- on-watchdog：超时退出，才会重启
-- always：不管是什么退出原因，总是重启
+- no (default): do not restart after exit
+- on-success: restart only after normal exit (status code 0)
+- on-failure: restart after non-zero exit, signal termination, or timeout
+- on-abnormal: restart only after signal termination or timeout
+- on-abort: restart only after an uncaught signal termination
+- on-watchdog: restart after watchdog timeout
+- always: always restart regardless of exit reason
 
-`RestartSec` 字段：表示 Systemd 重启服务之前，需要等待的秒数。上面的例子设为等待 42 秒。
+`RestartSec` field: number of seconds Systemd waits before restarting the service. In the example above, it waits 42 seconds.
 
-#### [Install] 区块
+#### [Install] Section
 
-Install 区块，定义如何安装这个配置文件，即怎样做到开机启动
+The Install section defines how to install this config file, i.e., how to enable it at boot.
 
-`WantedBy` 字段：表示该服务所在的 Target。
+`WantedBy` field: indicates the target for this service.
 
-Target 的含义是服务组，表示一组服务。WantedBy=multi-user.target 指的是，sshd 所在的 Target 是 multi-user.target。
+A target is a service group. WantedBy=multi-user.target means sshd is in the multi-user.target group.
 
-这个设置非常重要，因为执行 systemctl enable sshd.service 命令时，sshd.service 的一个符号链接，就会放在/etc/systemd/system 目录下面的 multi-user.target.wants 子目录之中。
+This is important because when you run `systemctl enable sshd.service`, a symlink for sshd.service is created under `/etc/systemd/system` in the `multi-user.target.wants` subdirectory.
 
-Systemd 有默认的启动 Target。
+Systemd has a default target.
 
 ```shell
 $ systemctl get-default
 multi-user.target
 
-# 查看 multi-user.target 包含的所有服务
+# List all services in multi-user.target
 $ systemctl list-dependencies multi-user.target
 
-# 切换到另一个 target
-# shutdown.target 就是关机状态
+# Switch to another target
+# shutdown.target is the shutdown state
 $ sudo systemctl isolate shutdown.target
 ```
 
-#### Target 的配置文件
+#### Target Config File
 
 ```shell
 $ systemctl cat multi-user.target

@@ -6,8 +6,8 @@ menu:
     name: "Some Jenkinsfile examples"
     identifier: jenkins-jenkinsfile-examples
     weight: 10
-tags: ["URL", "Jenkins"]
-categories: ["URL", "Jenkins"]
+tags: ["Links", "Jenkins"]
+categories: ["Links", "Jenkins"]
 ---
 
 - [Some Jenkinsfile examples](https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c)

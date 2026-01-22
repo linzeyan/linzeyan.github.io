@@ -1,21 +1,21 @@
 ---
-title: "Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04"
+title: "在 Ubuntu 22.04|20.04|18.04 安裝 PowerDNS 與 PowerDNS-Admin"
 date: 2020-09-25T09:38:17+08:00
 menu:
   sidebar:
-    name: "Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04"
+    name: "在 Ubuntu 22.04|20.04|18.04 安裝 PowerDNS 與 PowerDNS-Admin"
     identifier: linux-install-powerdns-and-powerdns-admin-on-ubuntu
     weight: 10
-tags: ["URL", "DNS", "Linux", "PowerDNS"]
-categories: ["URL", "DNS", "Linux", "PowerDNS"]
+tags: ["Links", "DNS", "Linux", "PowerDNS"]
+categories: ["Links", "DNS", "Linux", "PowerDNS"]
 hero: images/hero/linux.png
 ---
 
-- [Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04](https://computingforgeeks.com/install-powerdns-and-powerdns-admin-on-ubuntu/)
-- [Master-Master PowerDNS with Galera Replication](https://blog.zswap.net/master-master-powerdns-with-galera-replication/)
+- [在 Ubuntu 22.04|20.04|18.04 安裝 PowerDNS 與 PowerDNS-Admin](https://computingforgeeks.com/install-powerdns-and-powerdns-admin-on-ubuntu/)
+- [使用 Galera 複寫的 PowerDNS 主主架構](https://blog.zswap.net/master-master-powerdns-with-galera-replication/)
 - [https://www.scaleway.com/en/docs/installing-powerdns-server-on-ubuntu-bionic/](https://www.scaleway.com/en/docs/installing-powerdns-server-on-ubuntu-bionic/)
 
-#### Install PowerDNS
+#### 安裝 PowerDNS
 
 ```shell
 $ sudo apt update
@@ -130,7 +130,7 @@ $ sudo unlink /etc/resolv.conf
 $ echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 ```
 
-Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.
+新增 Ubuntu 22.04|20.04|18.04 的 PowerDNS 官方套件庫。
 
 ```shell
 # Ubuntu 22.04
@@ -149,7 +149,7 @@ $ sudo apt update
 $ sudo apt install pdns-server pdns-backend-mysql
 ```
 
-When asked whether to configure the PowerDNS database with **dbconfig-common**, answer **No**
+當被詢問是否要用 **dbconfig-common** 設定 PowerDNS 資料庫時，選擇 **No**
 
 ```shell
 $ sudo vim /etc/powerdns/pdns.d/pdns.local.gmysql.conf
@@ -169,7 +169,7 @@ $ sudo systemctl restart pdns
 $ sudo systemctl enable pdns
 ```
 
-#### Install PowerDNS-Admin
+#### 安裝 PowerDNS-Admin
 
 ```shell
 sudo apt install python3-dev
@@ -225,7 +225,7 @@ INFO  [alembic.runtime.migration] Running upgrade b0fea72a3f20 -> 3f76448bb6de, 
 INFO  [alembic.runtime.migration] Running upgrade 3f76448bb6de -> 0d3d93f1c2e0, Add domain_id to history table
 ```
 
-##### Fixing error "ImportError: cannot import name 'json' from 'itsdangerous'"
+##### 修正錯誤 "ImportError: cannot import name 'json' from 'itsdangerous'"
 
 ```shell
 # Only if you have error ImportError: cannot import name 'json' from 'itsdangerous'
@@ -282,7 +282,7 @@ Building bundle: generated/main.css
 [INFO] * Debugger PIN: 466-405-858
 ```
 
-##### Configure systemd service and Nginx
+##### 設定 systemd 服務與 Nginx
 
 ```shell
 $ sudo vim /etc/systemd/system/powerdns-admin.service
@@ -308,7 +308,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Create override file
+建立 override 檔案
 
 ```shell
 sudo tee /etc/systemd/system/powerdns-admin.service.d/override.conf<<EOF
@@ -317,7 +317,7 @@ Environment="FLASK_CONF=../configs/production.py"
 EOF
 ```
 
-Create socket file
+建立 socket 檔案
 
 ```shell
 $ sudo vim /etc/systemd/system/powerdns-admin.socket
@@ -332,7 +332,7 @@ WantedBy=sockets.target
 
 ```
 
-Create environment file
+建立 environment 檔案
 
 ```shell
 $ sudo vim /etc/tmpfiles.d/powerdns-admin.conf
@@ -399,7 +399,7 @@ server {
 
 ```
 
-##### Configure PowerDNS API
+##### 設定 PowerDNS API
 
 ```shell
 $ sudo vim /etc/powerdns/pdns.conf

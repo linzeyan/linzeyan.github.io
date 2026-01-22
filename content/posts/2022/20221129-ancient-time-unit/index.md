@@ -1,20 +1,20 @@
 ---
-title: "古代計時單位"
+title: "Ancient Time Units"
 date: 2022-11-29T11:21:02+08:00
 menu:
   sidebar:
-    name: "古代計時單位"
+    name: "Ancient Time Units"
     identifier: pixnet-ancient-time-unit
     weight: 10
-tags: ["URL", "Time"]
-categories: ["URL", "Time"]
+tags: ["Links", "Time"]
+categories: ["Links", "Time"]
 ---
 
-- [古代計時單位](https://wywu.pixnet.net/blog/posts/1022354528)
+- [Ancient Time Units](https://wywu.pixnet.net/blog/posts/1022354528)
 
-##### 十二時辰時間對照表
+##### Twelve Double-Hour Time Reference
 
-| 時辰 | 古名 | 對應現代時間 | 初 / 正時間              | 別名（完整）                                                                 |
+| Time Period | Ancient Name | Modern Time | Initial / Exact Time | Other Names (full) |
 | ---- | ---- | ------------ | ------------------------ | ---------------------------------------------------------------------------- |
 | 子時 | 夜半 | 23:00-01:00  | 子初 23:00<br>子正 00:00 | 子夜、中夜、午夜、夜分、夜半、未旦、宵分、未央                               |
 | 丑時 | 雞鳴 | 01:00-03:00  | 丑初 01:00<br>丑正 02:00 | 荒雞                                                                         |
@@ -29,12 +29,11 @@ categories: ["URL", "Time"]
 | 戌時 | 黃昏 | 19:00-21:00  | 戌初 19:00<br>戌正 20:00 | 日夕、日末、日暮、日晚、日闇、日墮、日暗、日曛、曛黃                         |
 | 亥時 | 人定 | 21:00-23:00  | 亥初 21:00<br>亥正 22:00 | 定昏、夤夜                                                                   |
 
-##### 更
+##### Night Watches
 
-漢代皇宮中值班人員分五個班次，按時更換，叫「五更」，由此古人把便把一夜分為五更，每更為一個時辰。
-戌時為一更，亥時為二更，子時為三更，丑時為四更，寅時為五更
+In the Han dynasty, palace guards rotated in five shifts called "five watches". Thus, a night was divided into five watches, each equal to one time period (double-hour). Xu time is the first watch, Hai time is the second, Zi time the third, Chou time the fourth, and Yin time the fifth.
 
-| 更名   | 時辰 | 時間           |
+| Watch Name | Time Period | Time           |
 | ------ | ---- | -------------- |
 | 一更天 | 戌時 | 19：00－21：00 |
 | 二更天 | 亥時 | 21：00－23：00 |
@@ -42,6 +41,6 @@ categories: ["URL", "Time"]
 | 四更天 | 丑時 | 01：00－03：00 |
 | 五更天 | 寅時 | 03：00－05：00 |
 
-##### 點
+##### Dian
 
-古代使用銅壺滴漏計時，以下漏擊點為名。每更分為五點，故每點合為現在的 24 分鐘。
+Ancient timekeeping used water clocks. Each watch was divided into five dian, so each dian equals 24 minutes.

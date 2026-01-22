@@ -6,8 +6,8 @@ menu:
     name: "Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes"
     identifier: scale-emqx-one-million-connections-kubernetes
     weight: 10
-tags: ["URL", "MQTT", "EMQX"]
-categories: ["URL", "MQTT", "EMQX"]
+tags: ["Links", "MQTT", "EMQX"]
+categories: ["Links", "MQTT", "EMQX"]
 ---
 
 - [Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes](https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/)

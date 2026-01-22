@@ -1,13 +1,13 @@
 ---
-title: "Database Fundamentals"
+title: "資料庫基礎"
 date: 2024-01-01T18:46:17+08:00
 menu:
   sidebar:
-    name: "Database Fundamentals"
+    name: "資料庫基礎"
     identifier: database-fundementals
     weight: 10
-tags: ["URL", "Database"]
-categories: ["URL", "Database"]
+tags: ["Links", "Database"]
+categories: ["Links", "Database"]
 ---
 
-- [Database Fundamentals](https://tontinton.com/posts/database-fundementals/)
+- [資料庫基礎](https://tontinton.com/posts/database-fundementals/)

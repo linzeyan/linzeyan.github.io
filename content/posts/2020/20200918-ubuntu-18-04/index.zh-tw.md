@@ -6,8 +6,8 @@ menu:
     name: "Ubuntu 18.04 透過 netplan 設定網路卡 IP"
     identifier: linux-ubuntu-configure-interface-ip-by-netplan
     weight: 10
-tags: ["URL", "Linux", "Ubuntu", "Network"]
-categories: ["URL", "Linux", "Ubuntu", "Network"]
+tags: ["Links", "Linux", "Ubuntu", "Network"]
+categories: ["Links", "Linux", "Ubuntu", "Network"]
 hero: images/hero/linux.png
 ---
 

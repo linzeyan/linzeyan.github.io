@@ -6,8 +6,8 @@ menu:
     name: "Nginx 使用 split_clients 进行简易 A/B 测试"
     identifier: nginx-ab-testing-split-clients
     weight: 10
-tags: ["URL", "NGINX", "Testing"]
-categories: ["URL", "NGINX", "Testing"]
+tags: ["Links", "Nginx", "Testing"]
+categories: ["Links", "Nginx", "Testing"]
 hero: images/hero/nginx.jpeg
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "channel 的 15 条规则和底层实现"
     identifier: go-channel-rules
     weight: 10
-tags: ["URL", "Go", "channel"]
-categories: ["URL", "Go", "channel"]
+tags: ["Links", "Go", "channel"]
+categories: ["Links", "Go", "channel"]
 hero: images/hero/go.svg
 ---
 

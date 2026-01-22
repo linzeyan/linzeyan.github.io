@@ -6,8 +6,8 @@ menu:
     name: Emoji 正则匹配
     identifier: emoji-regexp
     weight: 10
-tags: ["regex", "URL", "emoji"]
-categories: ["regex", "URL", "emoji"]
+tags: ["regex", "Links", "emoji"]
+categories: ["regex", "Links", "emoji"]
 ---
 
 - [Emoji 正则匹配](https://taxodium.ink/post/emoji-regexp/)

@@ -6,8 +6,8 @@ menu:
     name: "关于高可用的系统"
     identifier: high-availability-system
     weight: 10
-tags: ["URL", "design", "system", "HA"]
-categories: ["URL", "design", "system", "HA"]
+tags: ["Links", "design", "system", "HA"]
+categories: ["Links", "design", "system", "HA"]
 ---
 
 - [关于高可用的系统](https://coolshell.cn/articles/17459.html)

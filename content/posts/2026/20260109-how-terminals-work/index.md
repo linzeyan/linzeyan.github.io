@@ -6,8 +6,8 @@ menu:
     name: "How Terminals Work"
     identifier: terminal-how-terminals-work
     weight: 10
-tags: ["URL", "Terminal"]
-categories: ["URL", "Terminal"]
+tags: ["Links", "Terminal"]
+categories: ["Links", "Terminal"]
 ---
 
 - [How Terminals Work](https://how-terminals-work.vercel.app/)

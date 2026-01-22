@@ -6,8 +6,8 @@ menu:
     name: "golang pprof 实战"
     identifier: golang-go-ppof-practice
     weight: 10
-tags: ["URL", "Go", "pprof"]
-categories: ["URL", "Go", "pprof"]
+tags: ["Links", "Go", "pprof"]
+categories: ["Links", "Go", "pprof"]
 hero: images/hero/go.svg
 ---
 

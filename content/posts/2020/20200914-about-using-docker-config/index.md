@@ -6,8 +6,8 @@ menu:
     name: "Docker Tips: Using Docker Config"
     identifier: docker-about-using-docker-config
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 

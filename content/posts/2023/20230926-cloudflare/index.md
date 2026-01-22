@@ -7,8 +7,8 @@ menu:
     name: Cloudflare Zero Trust
     identifier: cloudflare-zero-trust
     weight: 10
-tags: ["Cloudflare", "zero trust"]
-categories: ["Cloudflare", "zero trust"]
+tags: ["Links", "Cloudflare", "zero trust"]
+categories: ["Links", "Cloudflare", "zero trust"]
 hero: images/hero/cloudflare.svg
 ---
 

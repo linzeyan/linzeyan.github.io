@@ -1,26 +1,26 @@
 ---
-title: "YAML 裡的字串很長該怎麼做？"
+title: "What to Do With Long Strings in YAML?"
 date: 2022-08-29T15:01:40+08:00
 menu:
   sidebar:
-    name: "YAML 裡的字串很長該怎麼做？"
+    name: "What to Do With Long Strings in YAML?"
     identifier: ansible-long-string-in-yaml
     weight: 10
-tags: ["URL", "Ansible", "YAML"]
-categories: ["URL", "Ansible", "YAML"]
+tags: ["Links", "Ansible", "YAML"]
+categories: ["Links", "Ansible", "YAML"]
 hero: images/hero/ansible.png
 ---
 
-- [YAML 裡的字串很長該怎麼做？](https://ansible.cloudns.pro/post/long-string-in-yaml/)
+- [What to Do With Long Strings in YAML?](https://ansible.cloudns.pro/post/long-string-in-yaml/)
 
-在 YAML 裡已經有規範此部份，在這種情況有四種方法可以幫助我們：
+YAML already defines this. In this case, there are four methods:
 
-- `|`: 其下內容的換行，就是換行，最後一行會有換行。
-- `>`: 其下內容的換行，不會是換行，會變為一個很長的字串，最後會有換行。
-- `|-`: 其下內容的換行，就是換行，但最後一行不會有換行。
-- `>-`: 其下內容的換常，不會是換行，最後一行也不會有換行。
+- `|`: Newlines under it are preserved as newlines, and the last line ends with a newline.
+- `>`: Newlines under it are folded into spaces, forming a long string, and the last line ends with a newline.
+- `|-`: Newlines under it are preserved, but the last line does not end with a newline.
+- `>-`: Newlines under it are folded into spaces, and the last line does not end with a newline.
 
-簡單的說，`>` 跟 `>-` 可以增加 YAML 的可讀性，又不會有多餘的換行符號。而 `|` 跟 `|-` 則可以讓字串跟定義的一致，在 YAML 裡看到換行，那字串裡就會有換行符號。
+In short, `>` and `>-` improve YAML readability without adding extra newline characters. `|` and `|-` keep the string exactly as defined: if you see a newline in YAML, the string contains a newline.
 
 ```yaml
 ---

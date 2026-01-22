@@ -6,8 +6,8 @@ menu:
     name: "Golang基准测试"
     identifier: golang-testing-ji-zhun-ce-shi
     weight: 10
-tags: ["URL", "Go", "Benchmark", "Testing"]
-categories: ["URL", "Go", "Benchmark", "Testing"]
+tags: ["Links", "Go", "Benchmark", "Testing"]
+categories: ["Links", "Go", "Benchmark", "Testing"]
 hero: images/hero/go.svg
 ---
 

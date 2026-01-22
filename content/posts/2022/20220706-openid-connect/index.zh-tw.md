@@ -6,8 +6,8 @@ menu:
     name: "OIDC(OpenID Connect) 简介"
     identifier: oidc-openid-connect
     weight: 10
-tags: ["URL", "OIDC", "Authentication", "Authorization", "OAuth"]
-categories: ["URL", "OIDC", "Authentication", "Authorization", "OAuth"]
+tags: ["Links", "OIDC", "Authentication", "Authorization", "OAuth"]
+categories: ["Links", "OIDC", "Authentication", "Authorization", "OAuth"]
 ---
 
 - [OIDC(OpenID Connect) 简介](https://jiajunhuang.com/articles/2022_07_06-openid_connect.md.html)

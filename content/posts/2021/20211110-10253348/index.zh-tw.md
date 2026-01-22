@@ -6,8 +6,8 @@ menu:
     name: "喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理"
     identifier: elk-elasticsearch-optimization-techniques-shard-optimization-management
     weight: 10
-tags: ["URL", "ELK", "Elasticsearch"]
-categories: ["URL", "ELK", "Elasticsearch"]
+tags: ["Links", "ELK", "Elasticsearch"]
+categories: ["Links", "ELK", "Elasticsearch"]
 ---
 
 - [喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理](https://ithelp.ithome.com.tw/articles/10253348)

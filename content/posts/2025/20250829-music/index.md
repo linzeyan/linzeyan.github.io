@@ -6,8 +6,8 @@ menu:
     name: "6首國際最強公認催眠曲"
     identifier: music-lullaby
     weight: 10
-tags: ["URL", "Music", "lullaby"]
-categories: ["URL", "Music", "lullaby"]
+tags: ["Links", "Music", "lullaby"]
+categories: ["Links", "Music", "lullaby"]
 ---
 
 - [6 首國際最強公認催眠曲](https://www.instagram.com/p/DNakVD4P_t9)

@@ -1,19 +1,19 @@
 ---
-title: Configuring SSH Keys for Multiple GitHub Accounts
+title: 設定多個 GitHub 帳號的 SSH 金鑰
 date: 2025-02-11T15:06:00+08:00
 menu:
   sidebar:
-    name: Configuring SSH Keys for Multiple GitHub Accounts
+    name: 設定多個 GitHub 帳號的 SSH 金鑰
     identifier: configure-ssh-keys-for-multiple-github-accounts
     weight: 10
-tags: ["URL", "command line", "SSH", "Github"]
-categories: ["URL", "command line", "SSH", "Github"]
+tags: ["Links", "command line", "SSH", "Github"]
+categories: ["Links", "command line", "SSH", "Github"]
 hero: images/hero/github.png
 ---
 
-- [Configuring SSH Keys for Multiple GitHub Accounts](https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts)
+- [設定多個 GitHub 帳號的 SSH 金鑰](https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts)
 
-### Use Different Host values
+### 使用不同的 Host 值
 
 ```bash
 Host github.com
@@ -35,7 +35,7 @@ $ git clone git@github.com:planet-express/delivery_service.git
 $ git clone git@github-plnx:planet-express/delivery_service.git
 ```
 
-### Automate Substituting the Host
+### 自動替換 Host
 
 ```bash
 [include]

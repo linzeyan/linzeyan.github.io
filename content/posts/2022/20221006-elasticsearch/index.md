@@ -1,19 +1,19 @@
 ---
-title: "ElasticSearch 学习笔记"
+title: "Elasticsearch Study Notes"
 date: 2022-10-06T11:30:59+08:00
 menu:
   sidebar:
-    name: "ElasticSearch 学习笔记"
+    name: "Elasticsearch Study Notes"
     identifier: docker-elasticsearch-kibana-analysis-ik
     weight: 10
-tags: ["URL", "Docker", "ELK", "ElasticSearch", "Kibana"]
-categories: ["URL", "Docker", "ELK", "ElasticSearch", "Kibana"]
+tags: ["Links", "Docker", "ELK", "ElasticSearch", "Kibana"]
+categories: ["Links", "Docker", "ELK", "ElasticSearch", "Kibana"]
 hero: images/hero/docker.jpeg
 ---
 
-- [ElasticSearch 学习笔记](https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html)
+- [Elasticsearch Study Notes](https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html)
 
-### 安装中文分词插件
+### Install the Chinese analyzer plugin
 
 ```bash
 docker exec -it elasticsearch bash
@@ -21,7 +21,7 @@ $ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-i
 ```
 
 - Dev Tools
-  - `content` 类型为 `text`，写入时使用 `ik_max_word` 做分词，搜索时使用 `ik_smart` 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。
+  - The `content` field is `text`. Use `ik_max_word` for indexing and `ik_smart` for searching. The former generates as many tokens as possible, while the latter generates coarser-grained tokens.
 
 ```json
 PUT /words

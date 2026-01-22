@@ -1,35 +1,35 @@
 ---
-title: "使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出"
+title: "Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly"
 date: 2019-10-07T10:35:22+08:00
 menu:
   sidebar:
-    name: "使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出"
+    name: "Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly"
     identifier: nginx-serve-webp-on-the-fly-with-nginx-and-mod-pagespeed
     weight: 10
-tags: ["URL", "Nginx", "Webp"]
-categories: ["URL", "Nginx", "Webp"]
+tags: ["Links", "Nginx", "Webp"]
+categories: ["Links", "Nginx", "Webp"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出](https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/)
+- [Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly](https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/)
 
-#### 编译 ngx_pagespeed
+#### Compile ngx_pagespeed
 
-> 首先确保 Nginx 有 `--with-compat` 编译参数，这样我们就不需要按照一些奇怪的教程让大家从头开始编译 Nginx
+> First make sure Nginx is built with `--with-compat`, so we do not need to rebuild Nginx from scratch.
 >
 > incubator: https://github.com/apache/incubator-pagespeed-ngx.git
 
 ```shell
-# 切换到 nginx 源代码目录下开始配置编译环境
+# Switch to the nginx source directory and configure the build
 ./configure --with-compat --add-dynamic-module=../incubator-pagespeed-ngx
 
-# 编译 modules
+# Build modules
 make modules
 
-# 将对应编译好的 module 放到 nginx 目录下：
+# Copy the built module into the nginx modules directory
 sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
 
-# 创建好缓存文件夹以便存放自动转换的图片
+# Create the cache directory for converted images
 sudo mkdir -p /var/ngx_pagespeed_cache
 sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
 ```
@@ -55,7 +55,7 @@ location ~ "^/ngx_pagespeed_beacon$" { }
 pagespeed RewriteLevel CoreFilters;
 ```
 
-其中最后一个部分（`pagespeed RewriteLevel CoreFilters;`）表示启用的优化方式，其中包括了一些基础的优化，比如
+The last line (`pagespeed RewriteLevel CoreFilters;`) specifies the enabled optimizations. It includes basic filters such as:
 
 ```
 add_head
@@ -74,21 +74,21 @@ rewrite_javascript
 rewrite_style_attributes_with_url
 ```
 
-如果需要加入别的 Filter ，可以类似这样写：
+To enable additional filters, do something like this:
 
 `pagespeed EnableFilters combine_css,extend_cache,rewrite_images;`
 
-所有的 Filters 列表可以参考：[Configuring PageSpeed Filters](https://www.modpagespeed.com/doc/config_filters)，对于我们图片的转换的话，由于 PageSpeed 会自动判断是否需要转换，对于我们需要彻底转换 WebP 的需求，还需要加上几个 filter：
+A full list is in [Configuring PageSpeed Filters](https://www.modpagespeed.com/doc/config_filters). For image conversion, PageSpeed decides whether to convert. If you need full WebP conversion, add these filters:
 
 `pagespeed EnableFilters convert_png_to_jpeg,convert_jpeg_to_webp;`
 
-#### 一些小问题
+#### Common issues
 
-如果发现你的图片并没有自动被转换成 WebP 格式的话，可以在你的 URL 后面加上 `?PageSpeedFilters=+debug`，然后查看源代码，并注意源代码中图片后面的部分，在我配置的过程中遇到过以下问题：
+If images are not converted to WebP, append `?PageSpeedFilters=+debug` to your URL, check the page source, and look for the text after the image. I ran into the following issues:
 
 ##### 1
 
-`<!--4xx status code, preventing rewriting of xxx` 由于手上 Wordpress 的机器都是放在 Docker 中，前置了 Cloudflare，所以默认的回源方式会出错，这个时候需要这样配置一下，其中 `localhost:2404` 是本地 Docker 监听地址：
+`<!--4xx status code, preventing rewriting of xxx` Because the Wordpress machines are running in Docker behind Cloudflare, the default origin mapping fails. Configure it like this, where `localhost:2404` is the local Docker endpoint:
 
 ```nginx
 pagespeed MapOriginDomain "http://localhost:2404/" "https://nova.moe/";
@@ -98,19 +98,19 @@ pagespeed MapOriginDomain "http://localhost:2404/" "https://nova.moe/";
 
 `<!--deadline_exceeded for filter CacheExtender--><!--deadline_exceeded for filter ImageRewrite-->`
 
-这个表示 PageSpeed 正在生成对应的缓存图片
+This means PageSpeed is generating cache images.
 
 ##### 3
 
 `<!--The preceding resource was not rewritten because its domain (nova.moe) is not authorized-->`
 
-由于有反向代理，SSL 在 Nginx 上就已经结束，需要配置一下代理中的：
+Because SSL terminates at Nginx with a reverse proxy, set this in the proxy config:
 
 ```nginx
 proxy_set_header X-Forwarded-Proto $scheme;
 ```
 
-并加上：
+And add:
 
 ```nginx
 pagespeed RespectXForwardedProto on;

@@ -1,28 +1,28 @@
 ---
-title: "Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash"
+title: "進階 Shell 腳本技巧：用 Bash 自動化複雜任務"
 date: 2024-09-25T09:23:00+08:00
 menu:
   sidebar:
-    name: "Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash"
+    name: "進階 Shell 腳本技巧：用 Bash 自動化複雜任務"
     identifier: advanced-shell-scripting
     weight: 10
-tags: ["URL", "SHELL", "BASH"]
-categories: ["URL", "SHELL", "BASH"]
+tags: ["Links", "SHELL", "BASH"]
+categories: ["Links", "SHELL", "BASH"]
 hero: images/hero/shell.png
 ---
 
-- [Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash](https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/)
+- [進階 Shell 腳本技巧：用 Bash 自動化複雜任務](https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/)
 
-#### Use Built-in Commands
+#### 使用內建指令
 
 {{< alert type="info" >}}
-Built-in commands execute faster because they don't require loading an external process.
+內建指令執行更快，因為不需要載入外部程序。
 {{< /alert >}}
 
-#### Minimize Subshells
+#### 減少子殼層
 
 {{< alert type="info" >}}
-Subshells can be expensive in terms of performance.
+子殼層會帶來效能成本。
 {{< /alert >}}
 
 ```bash
@@ -33,10 +33,10 @@ output=$(cat file.txt)
 output=$(<file.txt)
 ```
 
-#### Use Arrays for Bulk Data
+#### 使用陣列處理大量資料
 
 {{< alert type="info" >}}
-When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.
+處理大量資料時，陣列比多個變數更有效率，也更好管理。
 {{< /alert >}}
 
 ```bash
@@ -52,26 +52,26 @@ for item in "${items[@]}"; do
 done
 ```
 
-#### Enable Noclobber
+#### 啟用 Noclobber
 
 {{< alert type="info" >}}
-To prevent accidental overwriting of files.
+避免檔案被意外覆寫。
 {{< /alert >}}
 
 ```bash
 set -o noclobber
 ```
 
-#### Use Functions
+#### 使用函式
 
 {{< alert type="info" >}}
-Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.
+函式可以封裝並重用程式碼，讓腳本更乾淨、重複更少。
 {{< /alert >}}
 
-#### Efficient File Operations
+#### 高效的檔案操作
 
 {{< alert type="info" >}}
-When performing file operations, use efficient techniques to minimize resource usage.
+進行檔案操作時，使用更有效率的技巧以降低資源消耗。
 {{< /alert >}}
 
 ```bash
@@ -86,16 +86,16 @@ while IFS= read -r line; do
 done < file.txt
 ```
 
-#### Parallel Processing
+#### 平行處理
 
 {{< alert type="info" >}}
-Tools like `xargs` and GNU `parallel` can be incredibly useful.
+像 `xargs` 和 GNU `parallel` 這類工具非常實用。
 {{< /alert >}}
 
-#### Error Handling
+#### 錯誤處理
 
 {{< alert type="info" >}}
-Robust error handling is critical for creating reliable and maintainable scripts.
+健全的錯誤處理對建立可靠、易維護的腳本至關重要。
 {{< /alert >}}
 
 ```bash
@@ -126,10 +126,10 @@ exec 2>&1
 echo "Script started"
 ```
 
-#### Automating Complex System Administration Tasks:
+#### 自動化複雜的系統管理工作
 
-1.  Automated Backups
-2.  System Monitoring
-3.  User Management
-4.  Automated Updates
-5.  Network Configuration
+1.  自動化備份
+2.  系統監控
+3.  使用者管理
+4.  自動更新
+5.  網路設定

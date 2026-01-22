@@ -1,13 +1,13 @@
 ---
-title: "Taide - training data"
+title: "Taide - 訓練資料"
 date: 2024-04-27T17:10:00+08:00
 menu:
   sidebar:
-    name: Taide - training data
+    name: Taide - 訓練資料
     identifier: taide-training-data
     weight: 10
-tags: ["data", "URL"]
-categories: ["data", "URL"]
+tags: ["data", "Links"]
+categories: ["data", "Links"]
 ---
 
-- [Taide - training data](https://taide.tw/index/training-data)
+- [Taide - 訓練資料](https://taide.tw/index/training-data)

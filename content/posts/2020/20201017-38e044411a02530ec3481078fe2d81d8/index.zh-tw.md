@@ -1,17 +1,17 @@
 ---
-title: "Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen"
+title: "使用 Nginx HTTPS 與 Basic Auth 反向代理 VMware ESXi 6.5 修復 VMRC /screen"
 date: 2020-10-17T12:31:02+08:00
 menu:
   sidebar:
-    name: "Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen"
+    name: "使用 Nginx HTTPS 與 Basic Auth 反向代理 VMware ESXi 6.5 修復 VMRC /screen"
     identifier: nginx-reverse-proxy-with-basic-auth-for-esxi
     weight: 10
-tags: ["URL", "Nginx", "ESXi"]
-categories: ["URL", "Nginx", "ESXi"]
+tags: ["Links", "Nginx", "ESXi"]
+categories: ["Links", "Nginx", "ESXi"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen](https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8)
+- [使用 Nginx HTTPS 與 Basic Auth 反向代理 VMware ESXi 6.5 修復 VMRC /screen](https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8)
 
 ```nginx
 server {

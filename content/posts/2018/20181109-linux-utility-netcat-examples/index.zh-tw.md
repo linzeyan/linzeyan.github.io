@@ -6,8 +6,8 @@ menu:
     name: "Netcat（Linux nc 指令）網路管理者工具實用範例"
     identifier: linux-utility-netcat-examples
     weight: 10
-tags: ["URL", "Linux", "netcat"]
-categories: ["URL", "Linux", "netcat"]
+tags: ["Links", "Linux", "netcat"]
+categories: ["Links", "Linux", "netcat"]
 hero: images/hero/linux.png
 ---
 

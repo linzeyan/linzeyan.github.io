@@ -6,8 +6,8 @@ menu:
     name: "golang的AES加密和解密的三种模式实现（CBC/ECB/CFB)"
     identifier: golang-encrypt-aes
     weight: 10
-tags: ["URL", "Go", "Encrypt", "AES"]
-categories: ["URL", "Go", "Encrypt", "AES"]
+tags: ["Links", "Go", "Encrypt", "AES"]
+categories: ["Links", "Go", "Encrypt", "AES"]
 hero: images/hero/go.svg
 ---
 

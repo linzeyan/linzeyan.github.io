@@ -1,61 +1,61 @@
 ---
-title: "【理解 Cilium 系列文章】(一) 初識 Cilium"
+title: "Understanding Cilium Series (1): Introduction to Cilium"
 date: 2021-12-21T13:04:38+08:00
 menu:
   sidebar:
-    name: "【理解 Cilium 系列文章】(一) 初識 Cilium"
+    name: "Understanding Cilium Series (1): Introduction to Cilium"
     identifier: k8s-network-cilium-introduce
     weight: 10
-tags: ["URL", "Kubernetes", "Cilium", "Network"]
-categories: ["URL", "Kubernetes", "Cilium", "Network"]
+tags: ["Links", "Kubernetes", "Cilium", "Network"]
+categories: ["Links", "Kubernetes", "Cilium", "Network"]
 hero: images/hero/kubernetes.png
 ---
 
-- [【理解 Cilium 系列文章】(一) 初識 Cilium](https://www.gushiciku.cn/pl/geTr/zh-hk)
+- [Understanding Cilium Series (1): Introduction to Cilium](https://www.gushiciku.cn/pl/geTr/zh-hk)
 
-#### 當前 k8s Service 負載均衡的實現現狀
+#### Current status of k8s Service load balancing implementations
 
-在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。
+Before Cilium, Services were implemented by kube-proxy in three modes: userspace, iptables, and ipvs.
 
 ##### Userspace
 
-當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。
+In this mode, kube-proxy acts as a reverse proxy and listens on random ports. It redirects traffic to the proxy port via iptables rules, and kube-proxy forwards the traffic to backend pods. Service requests go from user space into kernel iptables and then back to user space, which is costly and has poor performance.
 
 ##### Iptables
 
-存在的問題：
+Problems:
 
-1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)
+1. Poor scalability. As the number of services grows into the thousands, control plane and data plane performance drop sharply. In the iptables control plane interface design, adding a rule requires traversing and modifying all rules, so control plane performance is O(n^2). In the data plane, rules are organized as a linked list, so performance is O(n).
 
-2.LB 調度算法僅支持隨機轉發
+2. The LB scheduling algorithm only supports random forwarding.
 
-##### Ipvs 模式
+##### Ipvs mode
 
-IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。
+IPVS is designed specifically for LB. It uses a hash table to manage services, so service add/delete/lookup are O(1). However, the IPVS kernel module does not provide SNAT, so it borrows SNAT from iptables.
 
-IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】
+After IPVS performs DNAT on packets, it stores connection information in nf_conntrack, and iptables then performs SNAT. This mode is currently the best choice for Kubernetes network performance. However, nf_conntrack complexity introduces significant overhead. Tencent has optimized this issue ("Bypass conntrack, use eBPF to enhance IPVS and optimize K8s network performance").
 
 ##### Cilium
 
-Cilium 是基於 eBpf 的一種開源網絡實現，通過在 Linux 內核動態插入強大的安全性、可見性和網絡控制邏輯，提供網絡互通，服務負載均衡，安全和可觀測性等解決方案。簡單來説可以理解為 Kube-proxy + CNI 網絡實現。
+Cilium is an open-source networking implementation based on eBPF. It dynamically inserts powerful security, visibility, and network control logic into the Linux kernel to provide network connectivity, service load balancing, security, and observability. In simple terms, it can be viewed as a Kube-proxy + CNI networking implementation.
 
-Cilium 位於容器編排系統和 Linux Kernel 之間，向上可以通過編排平台為容器進行網絡以及相應的安全配置，向下可以通過在 Linux 內核掛載 eBPF 程序，來控制容器網絡的轉發行為以及安全策略執行
+Cilium sits between the container orchestration system and the Linux kernel. Upward, it configures networking and security for containers via the orchestration platform. Downward, it mounts eBPF programs in the Linux kernel to control container network forwarding behavior and policy enforcement.
 
-- linux 內核要求 `4.19` 及以上
-- 可以採用 helm 或者 cilium cli ，此處筆者使用的是 cilium cli （版本為 1.10.3 ）
+- Linux kernel version must be `4.19` or later
+- You can use helm or the cilium cli; here I use the cilium cli (version 1.10.3)
 
 ```bash
-# 下載 cilium cli
+# Download the cilium cli
 wget https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz
 tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
 
-# 安裝 cilium
-cilium install --kube-proxy-replacement=strict # 此處選擇的是完全替換，默認情況下是 probe，(該選項下 pod hostport 特性不支持)
+# Install cilium
+cilium install --kube-proxy-replacement=strict # Fully replace kube-proxy; default is probe (hostport is not supported in this mode)
 
-# 可視化組件 hubble(選裝)
+# Optional visualization component: hubble
 cilium hubble enable --ui
 
-# pod ready 後，查看 狀態如下
+# After pods are ready, the status looks like this
 ~# cilium status
     /¯¯
  /¯¯__/¯¯    Cilium:         OK

@@ -1,17 +1,17 @@
 ---
-title: "Regex for Markdown Syntax"
+title: "Markdown 語法的正則表達式"
 date: 2021-10-29T10:19:41+08:00
 menu:
   sidebar:
-    name: "Regex for Markdown Syntax"
+    name: "Markdown 語法的正則表達式"
     identifier: regular-expression-for-markdown
     weight: 10
-tags: ["URL", "Markdown", "Regex"]
-categories: ["URL", "Markdown", "Regex"]
+tags: ["Links", "Markdown", "Regex"]
+categories: ["Links", "Markdown", "Regex"]
 ---
 
-- [Regex for Markdown Syntax](https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html)
-- [basic-syntax](https://www.markdownguide.org/basic-syntax/)
+- [Markdown 語法的正則表達式](https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html)
+- [基本語法](https://www.markdownguide.org/basic-syntax/)
 
 ```
 # Headings

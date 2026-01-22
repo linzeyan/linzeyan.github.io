@@ -6,8 +6,8 @@ menu:
     name: LLMs Hackmd Docs
     identifier: llm-hackmd-docs
     weight: 10
-tags: ["llm", "machinelearning", "URL"]
-categories: ["llm", "machinelearning", "URL"]
+tags: ["llm", "machinelearning", "Links"]
+categories: ["llm", "machinelearning", "Links"]
 ---
 
 - [大型語言模型 LLMs 課程教學 課程大綱 (四)](https://hackmd.io/@whYPD8MBSHWRZV6y-ymFwQ/ryqUCfu6T)

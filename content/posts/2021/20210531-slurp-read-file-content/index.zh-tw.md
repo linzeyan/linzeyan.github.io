@@ -6,8 +6,8 @@ menu:
     name: "ansible.builtin.slurp - 讀取檔案內容"
     identifier: ansible-module-slurp-read-file-content
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

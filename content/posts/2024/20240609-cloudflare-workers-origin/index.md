@@ -6,8 +6,8 @@ menu:
     name: "WebP Cloud uses Cloudflare Workers to fetch content from the origin server in order to protect the origin server and start providing origin fetch time information."
     identifier: uses-cloudflare-workers-for-origin-pull-to-protect-origin-pull-servers-and-begin-providing-origin-pull-time-information
     weight: 10
-tags: ["URL", "Cloudflare"]
-categories: ["URL", "Cloudflare"]
+tags: ["Links", "Cloudflare"]
+categories: ["Links", "Cloudflare"]
 hero: images/hero/cloudflare.svg
 ---
 

@@ -1,18 +1,18 @@
 ---
-title: "Best Practices for Writing Bash Scripts"
+title: "撰寫 Bash 腳本的最佳實務"
 date: 2021-12-06T11:11:54+08:00
 menu:
   sidebar:
-    name: "Best Practices for Writing Bash Scripts"
+    name: "撰寫 Bash 腳本的最佳實務"
     identifier: shell-bash-best-practices
     weight: 10
-tags: ["URL", "SHELL", "BASH"]
-categories: ["URL", "SHELL", "BASH"]
+tags: ["Links", "SHELL", "BASH"]
+categories: ["Links", "SHELL", "BASH"]
 hero: images/hero/shell.png
 ---
 
-- [Best Practices for Writing Bash Scripts](https://kvz.io/bash-best-practices.html)
-- [Shell Scripting - Best Practices](https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html)
+- [撰寫 Bash 腳本的最佳實務](https://kvz.io/bash-best-practices.html)
+- [Shell 腳本撰寫最佳實務](https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html)
 
 ```bash
 #!/usr/bin/env bash
@@ -31,9 +31,9 @@ __root="$(cd "$(dirname "${__dir}")" && pwd)" # <-- change this as it depends on
 arg1="${1:-}"
 ```
 
-##### Use shift to read function arguments
+##### 使用 shift 讀取函式參數
 
-> This makes it easier to reorder arguments, if you change your mind later.
+> 這樣在日後需要調整參數順序時會更容易。
 
 ```bash
 # Processes a file.
@@ -45,9 +45,9 @@ process_file(){
 }
 ```
 
-##### Declare your variables
+##### 宣告你的變數
 
-> If portability is a concern, use `typeset` instead of `declare`.
+> 若可攜性是重點，請用 `typeset` 取代 `declare`。
 
 ```bash
 declare -r -i port_number=8080
@@ -58,9 +58,9 @@ my_function() {
 }
 ```
 
-##### Quote all parameter expansions
+##### 為所有參數展開加上引號
 
-##### Use arrays where appropriate
+##### 適當使用陣列
 
 ```bash
 # using a string to hold a collection
@@ -78,9 +78,9 @@ do
 done
 ```
 
-##### Use "$@" to refer to all arguments
+##### 使用 "$@" 代表所有參數
 
-> Don't use `$*`.
+> 不要使用 `$*`。
 
 ```bash
 main() {
@@ -94,9 +94,9 @@ main() {
 main "$@"
 ```
 
-##### Use uppercase variable names for environment variables only
+##### 環境變數才使用大寫變數名稱
 
-##### Prefer shell builtins over external programs
+##### 優先使用 shell 內建而非外部程式
 
 ```bash
 declare -r my_file="/var/tmp/blah"
@@ -120,9 +120,9 @@ echo $(( 2+2 ))
 IFS=: read -a arr <<< "one:two:three"
 ```
 
-##### Avoid unnecessary pipelines
+##### 避免不必要的管線
 
-**Avoid unnecessary `cat`**
+**避免不必要的 `cat`**
 
 ```bash
 # instead of
@@ -131,7 +131,7 @@ cat file | command
 command < file
 ```
 
-**Avoid unnecessary `echo`**
+**避免不必要的 `echo`**
 
 ```bash
 # instead of
@@ -145,7 +145,7 @@ text
 END
 ```
 
-**Avoid unnecessary `grep`**
+**避免不必要的 `grep`**
 
 ```bash
 # instead of
@@ -159,15 +159,15 @@ grep pattern file | sed 's/foo/bar/g'
 sed -n '/pattern/{s/foo/bar/p}' file
 ```
 
-##### Avoid parsing ls
+##### 避免解析 ls
 
-> Instead of `ls`, use file globbing or an alternative command which outputs null terminated filenames, such as `find -print0`.
+> 請不要使用 `ls`，改用檔名展開或能輸出以 NUL 分隔的替代命令，例如 `find -print0`。
 
-##### Use globbing
+##### 使用檔名展開
 
-> In bash, you can make globbing more powerful by enabling extended pattern matching operators using the `extglob` shell option.
+> 在 bash 中，你可以透過 `extglob` shell 選項啟用延伸的樣式比對運算子，讓檔名展開更強大。
 >
-> Also, enable `nullglob` so that you get an empty list if no matches are found.
+> 另外，啟用 `nullglob`，讓找不到匹配時回傳空清單。
 
 ```bash
 shopt -s nullglob
@@ -180,9 +180,9 @@ declare -a dated_files=( *.[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].txt )
 declare -a non_zip_files=( !(*.zip) )
 ```
 
-##### Use null delimited output where possible
+##### 儘量使用 NUL 分隔輸出
 
-> In order to correctly handle filenames containing whitespace and newline characters, you should use null delimited output, which results in each line being terminated by a `NUL` (`00`) character instead of a newline. Most programs support this. For example, `find -print0` outputs filenames followed by a null character and `xargs -0` reads arguments separated by null characters.
+> 為了正確處理包含空白與換行的檔名，應使用以 NUL 分隔的輸出，也就是每行以 `NUL` (`00`) 字元結尾，而不是換行。多數程式都支援這種方式。例如，`find -print0` 會輸出以 NUL 分隔的檔名，`xargs -0` 則會以 NUL 作為分隔符號來讀取參數。
 
 ```bash
 # instead of
@@ -196,9 +196,9 @@ find . -type f -print0 | while IFS= read -r -d $'' filename; do
 done
 ```
 
-##### Don't use backticks
+##### 不要使用反引號
 
-##### Use process substitution instead of creating temporary files
+##### 使用行程替換代替建立暫存檔
 
 ```bash
 # using temp files
@@ -211,11 +211,11 @@ rm file1 file2
 diff <(command1) <(command2)
 ```
 
-##### Use mktemp if you have to create temporary files
+##### 若必須建立暫存檔，請使用 mktemp
 
-##### Use [[ and (( for test conditions
+##### 在判斷式中使用 [[ 與 ((
 
-##### Use commands in test conditions instead of exit status
+##### 在判斷式中直接使用指令，而非用退出狀態
 
 ```bash
 # don't use exit status
@@ -232,9 +232,9 @@ then
 fi
 ```
 
-##### Use set -e
+##### 使用 set -e
 
-##### Write error messages to stderr
+##### 將錯誤訊息輸出到 stderr
 
 ```bash
 echo "An error message" >&2

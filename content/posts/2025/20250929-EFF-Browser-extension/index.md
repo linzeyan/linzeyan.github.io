@@ -1,13 +1,13 @@
 ---
-title: "Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤"
+title: "Privacy Badger: A Free EFF Browser Extension to Block Online Tracking"
 date: 2025-09-29T16:41:00+08:00
 menu:
   sidebar:
-    name: "Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤"
+    name: "Privacy Badger: A Free EFF Browser Extension to Block Online Tracking"
     identifier: eff-privacy-badger
     weight: 10
-tags: ["URL", "EFF", "Browser", "Extension"]
-categories: ["URL", "EFF", "Browser", "Extension"]
+tags: ["Links", "EFF", "Browser", "Extension"]
+categories: ["Links", "EFF", "Browser", "Extension"]
 ---
 
-- [Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤](https://privacybadger.org/)
+- [Privacy Badger: A Free EFF Browser Extension to Block Online Tracking](https://privacybadger.org/)

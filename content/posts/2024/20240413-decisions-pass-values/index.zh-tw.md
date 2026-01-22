@@ -6,8 +6,8 @@ menu:
     name: Go Style Decisions - Pass values
     identifier: golang-go-style-decisions-pass-values
     weight: 10
-tags: ["Go", "URL"]
-categories: ["Go", "URL"]
+tags: ["Go", "Links"]
+categories: ["Go", "Links"]
 hero: images/hero/go.svg
 ---
 

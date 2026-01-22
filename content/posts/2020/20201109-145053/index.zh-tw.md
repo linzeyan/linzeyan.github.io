@@ -6,8 +6,8 @@ menu:
     name: "CentOS 7 掛載 Synology NAS 資料夾"
     identifier: linux-mount-nas-synology-directory
     weight: 10
-tags: ["URL", "Synology", "Linux", "NAS"]
-categories: ["URL", "Synology", "Linux", "NAS"]
+tags: ["Links", "Synology", "Linux", "NAS"]
+categories: ["Links", "Synology", "Linux", "NAS"]
 hero: images/hero/linux.png
 ---
 

@@ -1,203 +1,200 @@
 ---
-title: macOS Tips & Tricks
+title: macOS 使用技巧與小訣竅
 date: 2025-03-07T16:05:00+08:00
 menu:
   sidebar:
-    name: macOS Tips & Tricks
+    name: macOS 使用技巧與小訣竅
     identifier: macos-tips
     weight: 10
-tags: ["URL", "macOS"]
-categories: ["URL", "macOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
-- [macOS Tips & Tricks](https://saurabhs.org/macos-tips)
+- [macOS 使用技巧與小訣竅](https://saurabhs.org/macos-tips)
 
-### General
+### 一般
 
-#### Native UI Conventions
+#### 原生 UI 習慣
 
-- Press ⇧⌘/ to search all of the current app's menu items. Then use the Up/Down arrow keys to navigate the results and press `Return` to execute that menu bar action.
-- Press ⌃F2 to move keyboard focus to the application's menu bar. Start typing the first few letters of a menu title to jump to that menu.
-- Hold the `Option` key while expanding an outline view to recursively expand all children. (The easiest place to test this is in Finder's List view.)
-- On modal dialogs/sheets, press `Command` + the first letter of the button to press that button. ⌘. is the shortcut equivalent of the `Escape` key.
-- Hold `Control` and `Option` while clicking on a window to switch focus to that window without raising it.
-- Hold `Command` while dragging a toolbar icon to move it to a new position.
-- By default, clicking inside a scroll bar will scroll partially towards the clicked location. Hold `Option` while clicking in the scroll bar to jump directly to the clicked location.
-- Hold `Option` while dragging the scroller to slowly scroll.
-- In a scroll view, use the Up/Down keys to scroll in small increments. Hold `Option` to scroll in larger increments, and hold `Command` to scroll to the beginning or end.
-- Hold `Option` while pressing the Page Up/Page Down keys to also move the cursor while scrolling.
-- In a text field that treats the Tab key as an input, press `Control-Tab` and `Control-Shift-Tab` to move focus to the previous or next control.
-- Press ⌃⌘D while holding the pointer over a word to view an inline dictionary definition of the word.
-- Press ⌃F6 to move focus to a floating window.
-- To quickly find text, select some text and press ⌘E followed by ⌘G.
-- Press ⌃⌫ to delete only the accent mark from the previous character (e.g. é will become e).
-- In Fonts windows, enter `*X` to scale the current font size, e.g. `*1.5`.
-- When entering text, press ⌥⇧K (on U.S. keyboards) to insert an Apple logo.
-- Hold `Command` while dragging a Picture-in-Picture (PiP) video player to move it anywhere without having it snap to one of the screen corners.
+- 按 ⇧⌘/ 可搜尋目前應用程式的所有選單項目，接著用上下箭頭瀏覽結果，按 `Return` 執行該選單動作。
+- 按 ⌃F2 將鍵盤焦點移到應用程式的選單列，輸入選單標題的前幾個字母即可跳到該選單。
+- 展開樹狀清單時按住 `Option` 可遞迴展開所有子項（最容易測試的地方是 Finder 的列表檢視）。
+- 在對話框/工作表上，按 `Command` 加按鈕的首字母可直接按下該按鈕。⌘. 等同於 `Escape`。
+- 按住 `Control` 與 `Option` 點擊視窗，可切換焦點但不把視窗置頂。
+- 拖曳工具列圖示時按住 `Command` 可改變位置。
+- 預設在捲軸上點擊會部分捲動到該位置；按住 `Option` 點擊捲軸可直接跳到點擊處。
+- 拖曳捲軸滑塊時按住 `Option` 可慢速捲動。
+- 在可捲動區域，用上下鍵小幅捲動；按住 `Option` 可大幅捲動，按住 `Command` 則捲到開頭或結尾。
+- 按 Page Up/Page Down 時按住 `Option`，捲動同時移動游標。
+- 在 Tab 鍵被視為輸入的欄位中，按 `Control-Tab` 和 `Control-Shift-Tab` 可移動到前一或下一個控制項。
+- 游標停在單字上時按 ⌃⌘D 可顯示行內字典解釋。
+- 按 ⌃F6 可把焦點移到浮動視窗。
+- 快速尋找文字：選取文字後按 ⌘E，再按 ⌘G。
+- 按 ⌃⌫ 可只刪除上一個字元的重音符號（例如 é 變成 e）。
+- 在字體視窗輸入 `*X` 可縮放目前字體大小，例如 `*1.5`。
+- 輸入文字時，按 ⌥⇧K（美式鍵盤）可插入蘋果標誌。
+- 拖曳子母畫面（PiP）視窗時按住 `Command`，可自由移動而不會吸附到螢幕角落。
 
-#### Screenshots
+#### 截圖
 
-- After pressing ⇧⌘4 and while drawing the screen capture area, hold `Option` while resizing to resize from the center, and hold `Shift` while resizing to adjust only one axis. After drawing the area, hold the Space bar and drag to move the selected area.
-- After pressing ⇧⌘4, hold `Control` while taking the screenshot to copy to the clipboard instead of saving to file.
-- After pressing ⇧⌘4, press the Space bar to select a window to screenshot. Hold down `Option` while taking the screenshot to remove the window's shadow.
-- Right click on the floating screenshot preview to access additional actions.
+- 按下 ⇧⌘4 並拖曳選取截圖區域時，按住 `Option` 可從中心縮放，按住 `Shift` 可只調整單一軸向。畫好區域後，按住空白鍵並拖曳可移動選取區域。
+- 按下 ⇧⌘4 後截圖時按住 `Control`，可複製到剪貼簿而非儲存檔案。
+- 按下 ⇧⌘4 後按空白鍵可選擇視窗截圖，截圖時按住 `Option` 可移除視窗陰影。
+- 在浮動截圖預覽上按右鍵可使用更多動作。
 
-#### Open/Save Dialogs
+#### 開啟/儲存對話框
 
-- Drag a file or folder from Finder into an open/save dialog to jump directly to that file.
-- In save dialogs, press ⌘= to switch between the compact and expanded layout.
-- In save dialogs, press ⌘⌫ to activate the Delete button, ⌘D to activate the Don't Save button, and ⌘. (or `Esc`) to activate the Cancel button.
-- Press `~` to open a Go To File dialog prefilled with the home directory. Press `/` to open it prefilled with the root directory.
-- Press ⌘R to reveal the selected item in Finder.
+- 將 Finder 中的檔案或資料夾拖到開啟/儲存對話框，可直接跳到該位置。
+- 在儲存對話框按 ⌘= 可切換精簡與展開版面。
+- 在儲存對話框，按 ⌘⌫ 啟用 Delete，⌘D 啟用 Don't Save，⌘.（或 `Esc`）啟用 Cancel。
+- 按 `~` 會開啟 Go To File 對話框並預填家目錄；按 `/` 則預填根目錄。
+- 按 ⌘R 可在 Finder 顯示選取項目。
 
-#### Mission Control / Window Management
+#### Mission Control / 視窗管理
 
-- When a window is inactive, use the `Command` key to interact with it without making it active.
-- Hold `Control` when pressing the Mission Control function key to only show the current app's windows.
-  Hold `Command` when pressing the Mission Control function key to show the desktop.
-- Hold `Option` while double-clicking a window's corner to expand the window to fill the screen.
-- `Option`\-Click to switch windows while hiding the previous app. `Command-Option`\-Click to switch windows and hide all other apps.
-- In the Command-Tab app switcher, press the Up or Down arrow keys (or the 1 key) on an app to view that app's windows.
-- In the Command-Tab app switcher, hold `Option` while switching to an app to un-minimize all its windows.
-- Press ⌘\` to cycle between windows of the foreground application.
-- Press ⌃F4 to cycle between windows across all applications in the current desktop space.
-- Drag a window to the top of the screen and push it against the top of the screen to enter Mission Control with that window selected.
-- Press ⌥⌘W or hold `Option` while clicking the red close button, to close _all_ of the foreground application's open windows.
-- Press ⌥⌘M, or hold `Option` while clicking the yellow minimize button, to minimize _all_ of the foreground application's open windows.
-- Hold `Option` while clicking the green zoom button to fill the window to the screen instead of entering full-screen mode.
-- When configuring Hot Corners in System Settings, hold any or all of `Control`, `Option`, `Command`, or `Shift` to only activate the corner while the selected keys are also held down.
-- On a trackpad, use two fingers to double-tap (_tap_, not click) on an app's Dock icon to show all of the app's windows. Alternatively, perform the App Exposé trackpad gesture over an app's Dock icon.
-- Hold `Option` while resizing a window to resize from the center of the window.
-  Hold `Shift` while resizing a window to lock the aspect ratio.
-- Double-click a window's border to resize that edge to fill the screen. Hold `Option` while double-clicking to expand both edges.
-- In Mission Control, perform a scroll up over a group of app windows to reveal the individual windows. Press the Space bar while holding the pointer over any window to magnify it.
-- In Mission Control, Option-click another desktop space to switch to that space while staying in Mission Control.
-- In Mission Control, drag the application icon underneath the windows to move all of an app's windows to another space.
-- In Mission Control app window mode, press `Tab` and `Shift-Tab` to switch applications.
-- If a window was minimized in a different space, hold `Command` while un-minimizing to restore it to the current space.
-- Hold `Option` while un-minimizing a window to un-minimize all windows from that app.
-- If an app has windows in multiple spaces, click the app's Dock icon repeatedly to cycle through the spaces with that app's windows.
-- If keyboard shortcuts are enabled for switching desktop spaces, pressing a shortcut while clicking and holding a window will move the window to that space.
-- In Stage Manager, hold `Shift` while clicking on a window to add that window to the current stage instead of replacing it.
+- 視窗未啟用時，按住 `Command` 可操作它而不會讓它變成前景視窗。
+- 按 Mission Control 功能鍵時按住 `Control`，只顯示目前應用程式的視窗；按住 `Command` 則顯示桌面。
+- 按住 `Option` 雙擊視窗角落可把視窗擴展填滿螢幕。
+- `Option` 點擊可切換視窗並隱藏前一個應用程式；`Command-Option` 點擊可切換視窗並隱藏其他應用程式。
+- 在 Command-Tab 切換器中，按上下箭頭（或數字鍵 1）可查看該應用程式的視窗。
+- 在 Command-Tab 切換器中，按住 `Option` 切換到應用程式，可解除最小化該應用程式的所有視窗。
+- 按 ⌘` 可在前景應用程式的視窗間循環切換。
+- 按 ⌃F4 可在目前桌面空間的所有應用程式視窗間循環切換。
+- 把視窗拖到螢幕頂部並向上推，可在 Mission Control 中選取該視窗。
+- 按 ⌥⌘W，或按住 `Option` 點擊紅色關閉鍵，可關閉前景應用程式的所有視窗。
+- 按 ⌥⌘M，或按住 `Option` 點擊黃色最小化鍵，可最小化前景應用程式的所有視窗。
+- 按住 `Option` 點擊綠色縮放鍵可填滿螢幕，而不是進入全螢幕。
+- 在系統設定中配置熱角時，按住 `Control`、`Option`、`Command` 或 `Shift` 可讓角落只在按住這些按鍵時才會觸發。
+- 在觸控板上，用兩指輕點（不是點擊）Dock 上的應用程式圖示，可顯示該應用程式的所有視窗；也可在該圖示上使用 App Exposé 手勢。
+- 調整視窗大小時按住 `Option` 可從中心縮放；按住 `Shift` 可鎖定長寬比。
+- 雙擊視窗邊框可把該邊延伸填滿螢幕；按住 `Option` 雙擊則可同時延伸兩側。
+- 在 Mission Control 中，對一組應用程式視窗向上捲動可展開到單一視窗；游標停在視窗上按空白鍵可放大。
+- 在 Mission Control 中，Option 點擊另一個桌面空間可切換到該空間並保持 Mission Control 開啟。
+- 在 Mission Control 中，拖曳視窗下方的應用程式圖示可將該應用程式的所有視窗移到另一個空間。
+- 在 Mission Control 的應用程式視窗模式下，按 `Tab` 與 `Shift-Tab` 可切換應用程式。
+- 視窗若在其他空間被最小化，按住 `Command` 再解除最小化可讓它回到目前空間。
+- 按住 `Option` 解除最小化視窗，可同時解除最小化該應用程式的所有視窗。
+- 若某應用在多個空間有視窗，重複點 Dock 圖示可在這些空間間切換。
+- 若啟用切換桌面空間的快捷鍵，按住快捷鍵並拖曳視窗可把視窗移到該空間。
+- 在幕前調度中，按住 `Shift` 點擊視窗可將其加入目前舞台，而不是取代。
 
-#### Function Keys
+#### 功能鍵
 
-- Hold down `Shift` and `Option` when changing the volume or brightness to make smaller adjustments.
-- Hold down `Option` while changing the brightness to quickly open Display settings, or while changing the volume to open Sound settings.
-- Hold down `Shift` while changing the volume to audibly preview the volume level.
-- When connected to an external display, hold down `Control` while changing the brightness to adjust the brightness of the non-active display.
-- Press and hold down on the Mission Control function key to automatically exit Mission Control after letting go of the key.
+- 調整音量或亮度時按住 `Shift` 與 `Option` 可做更細微的調整。
+- 調整亮度時按住 `Option` 可快速開啟顯示器設定；調整音量時按住 `Option` 可快速開啟聲音設定。
+- 調整音量時按住 `Shift` 可預覽音量。
+- 連接外接螢幕時，調整亮度時按住 `Control` 可調整非目前顯示器的亮度。
+- 按住 Mission Control 功能鍵不放，鬆開時會自動退出 Mission Control。
 
-#### Menu Bar / Notification Center
+#### 選單列 / 通知中心
 
-- Hold `Option` while opening the Wi-Fi and Bluetooth menus to access extra options.
-- Hold `Command` while dragging a menu bar icon to move it to a new position.
-- Add new menu bar items by dragging icons from Control Center to the menu bar.
-- Option-click the date/time in the menu bar to toggle Do Not Disturb.
-- Right-click a widget to change its size.
-- On a trackpad, swipe horizontally with two fingers over a notification to dismiss that notification.
+- 按住 `Option` 開啟 Wi-Fi 與藍牙選單可顯示更多選項。
+- 拖曳選單列圖示時按住 `Command` 可改變位置。
+- 從控制中心拖曳圖示到選單列可新增選單列項目。
+- Option 點擊選單列的日期時間可切換請勿打擾。
+- 右鍵點擊小工具可變更大小。
+- 在觸控板上，用兩指橫向滑過通知可將其移除。
 
 ### Finder
 
-- After copying a file, press ⌥⌘V to move the file instead of pasting a copy of it.
-- Press ⌃⌘N with multiple files selected to create a new folder with those items.
-- Press `Tab` and `Shift-Tab` to navigate through files alphabetically, regardless of the current sort ordering (only in Icons and List view).
-- Hold `Option` while activating Quick Look to immediately launch into full-screen view.
-- After opening Quick Look with multiple files selected, press ⌘⏎ to display a grid view of all items. Use the arrow keys to navigate and press Return to select an item to focus on.
-- In Quick Look, right-click on the "Open with" button to select a different app to use to open the file.
-- In Columns view, hold `Option` while resizing a column to simultaneously resize all columns.
-- In Columns view, double-click a column separator to auto-resize that column. Hold `Option` while double-clicking on any separator to auto-resize all columns.
-- In Columns view, click the empty space at the bottom of a folder to go to the parent folder.
-- In Columns view, and when in a deeply nested file, press `Shift-Tab` and `Tab` to navigate through the parent directories without losing the path to the file.
-- Hold `Option` while dragging a file to make a new copy instead of moving the original. Hold `Command` and `Option` to create an alias to the file.
-- In List view, press ⌘+ and ⌘- to increase and decrease the row size.
-- In List view, press ⌥↑ and ⌥↓ to select the top-most and bottom-most item.
-- In List view, use the Left and Right arrow keys to collapse and expand directories. When a file is selected, press the Left arrow key to jump to the parent folder.
-- Press ⌘I to show the inspector for the current file.
-  Press ⌥⌘I to show a floating inspector that updates with the selected file.
-- Press ⌥⌘C to copy the full pathname of the currently selected file.
-- Press ⇧⌘. to toggle showing hidden files.
-- Press ⌥⌘⌫ to immediately delete a file without sending it to the Trash.
-- Merge folders by holding `Option` while dragging one folder on top of another folder.
-- Set a custom icon for a folder by copying the new icon, inspecting the folder (⌘I), and pasting the icon by selecting the folder icon in the upper-left of the inspector window and pressing ⌘V.
-- Drag selected text into a Finder window to quickly create and save a text clipping. (Text clippings are text files that can't be edited and don't require a filename to be saved.)
-- Press ⌥⌘O to open the selected file _and_ automatically close the Finder window.
-- Press ⌥⇧⌘V to paste an item while preserving the file permission flags.
-- Hold `Command` while dragging an icon in Icon view to align it to a grid.
-- Restart Finder by holding `Option` while right-clicking the Finder dock icon and selecting Relaunch.
-- Drag a folder to the new tab button (only visible if multiple tabs are already open) to open the folder in a new tab.
-- Press ⌃⌘↑ to open the parent folder in a new window.
-- If the toolbar is hidden (⌥⌘T), Finder will open folders in a new window.
-- Press ⌘R with an image selected to rotate it clockwise, and ⌘L to rotate it counter-clockwise.
+- 複製檔案後按 ⌥⌘V 可移動檔案而非貼上副本。
+- 選取多個檔案時按 ⌃⌘N 可建立包含這些項目的新資料夾。
+- 按 `Tab` 與 `Shift-Tab` 可依字母順序瀏覽檔案，無視目前排序方式（僅限圖示與列表檢視）。
+- 按住 `Option` 啟動 Quick Look 可直接進入全螢幕。
+- 以多個檔案開啟 Quick Look 後，按 ⌘⏎ 可顯示所有項目的格狀檢視，用方向鍵選取並按 Return 聚焦。
+- 在 Quick Look 中，右鍵點擊「Open with」可選擇不同的開啟應用程式。
+- 在欄位檢視中，按住 `Option` 拖曳欄位寬度可同時調整所有欄位。
+- 在欄位檢視中，雙擊欄位分隔線可自動調整該欄寬度；按住 `Option` 雙擊可自動調整所有欄位。
+- 在欄位檢視中，點擊資料夾底部的空白區可回到上一層資料夾。
+- 在欄位檢視中，當你位於深層目錄時，按 `Shift-Tab` 與 `Tab` 可在不丟失路徑的情況下切換父層目錄。
+- 拖曳檔案時按住 `Option` 可建立副本，按住 `Command` 與 `Option` 則會建立捷徑。
+- 在列表檢視中，按 ⌘+ 與 ⌘- 可放大或縮小列高。
+- 在列表檢視中，按 ⌥↑ 與 ⌥↓ 可選取最上或最下的項目。
+- 在列表檢視中，按左右箭頭可折疊或展開目錄；選取檔案時按左鍵可回到父層目錄。
+- 按 ⌘I 可開啟目前檔案的檢查器；按 ⌥⌘I 則開啟會隨選取變化的浮動檢查器。
+- 按 ⌥⌘C 可複製目前選取檔案的完整路徑。
+- 按 ⇧⌘. 可切換顯示隱藏檔案。
+- 按 ⌥⌘⌫ 可立即刪除檔案而不送進垃圾桶。
+- 拖曳資料夾到另一個資料夾上時按住 `Option` 可合併資料夾。
+- 複製新圖示後，開啟檢查器（⌘I），選取左上角資料夾圖示並按 ⌘V 可設定自訂圖示。
+- 將選取文字拖到 Finder 視窗，可快速建立文字剪貼並儲存（文字剪貼是無法編輯、且不需命名的文字檔）。
+- 按 ⌥⌘O 可開啟所選檔案並自動關閉 Finder 視窗。
+- 按 ⌥⇧⌘V 可貼上項目並保留檔案權限標記。
+- 在圖示檢視中拖曳圖示時按住 `Command` 可對齊格線。
+- 在 Finder Dock 圖示上按住 `Option` 右鍵並選擇 Relaunch 可重新啟動 Finder。
+- 拖曳資料夾到新分頁按鈕（需已有多個分頁）可在新分頁開啟該資料夾。
+- 按 ⌃⌘↑ 可在新視窗開啟父層資料夾。
+- 若工具列被隱藏（⌥⌘T），Finder 會在新視窗開啟資料夾。
+- 選取圖片後按 ⌘R 可順時針旋轉，按 ⌘L 可逆時針旋轉。
 
 ### Dock
 
-- Press ⌥⌘D to hide and show the dock.
-- Press ⌃F3 to move keyboard focus to the Dock. Then use the Left and Right arrow keys to select an app, or type the first few letters of an app. Press `Enter` to open the selected app, or press the Up arrow key to open the app's menu.
-- Hold `Control` and `Shift` while mousing over the Dock to temporarily turn on magnification.
-- Quickly move the Dock to a different side of the screen by holding `Shift` while dragging the resize handle.
-- Hold `Option` while resizing the Dock to resize in multiples of 16 points.
-- Hold `Option` and `Command` while clicking a running app's Dock icon to hide all other applications.
-- Open a file in a specific application by dragging the file to the application's Dock icon. If the application doesn't accept the file type by default, force open the file by holding `Option` and `Command` while dragging the file.
-- If a dock icon is bouncing repeatedly, stop the bouncing by mousing over the icon.
-- Hold `Control` and `Command` when right-clicking a Dock icon to only see the default system menu options.
-- Hold `Option` and `Command` when clicking on a folder in the Dock to open the folder in a new Finder window.
-- To open multiple items from a stack, hold `Option` while selecting an item to open it in the background while keeping the stack open.
-- After opening a stack, hover the cursor over an item and press the Space bar to preview the item with quick look.
-- Right-click the Launchpad dock icon to open an app from an inline menu.
-- In Launchpad, hold `Option` to enter "jiggle mode" to re-arrange and delete apps.
-- To add AirDrop to the Dock, navigate to `/System/Library/CoreServices/Finder.app/Contents/Applications` in Finder and drag the AirDrop icon to the Dock.
+- 按 ⌥⌘D 可顯示或隱藏 Dock。
+- 按 ⌃F3 將鍵盤焦點移到 Dock，再用左右箭頭選取應用程式，或輸入應用程式前幾個字母，按 `Enter` 開啟；按上箭頭可打開該應用程式的選單。
+- 按住 `Control` 與 `Shift` 在 Dock 上移動滑鼠可暫時開啟放大效果。
+- 拖曳 Dock 的縮放把手時按住 `Shift` 可快速把 Dock 移到不同螢幕邊緣。
+- 調整 Dock 大小時按住 `Option` 可用 16 點的倍數縮放。
+- 按住 `Option` 與 `Command` 點擊正在執行的 Dock 圖示，可隱藏其他應用程式。
+- 將檔案拖到 Dock 上的應用程式圖示可用指定應用程式開啟；若預設不支援該檔案類型，拖曳時按住 `Option` 與 `Command` 可強制開啟。
+- Dock 圖示持續彈跳時，把游標移到圖示上可停止彈跳。
+- 右鍵點擊 Dock 圖示時按住 `Control` 與 `Command` 可只顯示預設系統選單項目。
+- 按住 `Option` 與 `Command` 點擊 Dock 中的資料夾可在新的 Finder 視窗開啟。
+- 在堆疊中開啟多個項目時，按住 `Option` 點選可在背景開啟，堆疊不會關閉。
+- 開啟堆疊後，把游標移到項目上並按空白鍵可用 Quick Look 預覽。
+- 右鍵點擊 Launchpad 圖示可從行內選單開啟應用程式。
+- 在 Launchpad 中按住 `Option` 可進入抖動模式，重新排列或刪除應用程式。
+- 要把 AirDrop 加到 Dock，請在 Finder 前往 `/System/Library/CoreServices/Finder.app/Contents/Applications`，並把 AirDrop 圖示拖到 Dock。
 
 ### Spotlight
 
-- Press ⌘B to search the web for the current query.
-- Press ⌘C to copy the full path to the selected file, or to copy the result of the current calculation.
-- Press ⌘D to open the Dictionary app with the current query.
-- Press ⌘L to jump to the dictionary section in the results (if present).
-- Press ⌘⏎ or ⌘R to reveal the selected file in Finder.
-- Use the `name:` filter to only search in the filename.
-- Add `kind:folder` to only search for folder names.
-- Hold `Command` to show the path to the currently selected file.
+- 按 ⌘B 可用目前的查詢搜尋網頁。
+- 按 ⌘C 可複製所選檔案的完整路徑，或複製目前計算結果。
+- 按 ⌘D 可用目前查詢開啟字典。
+- 按 ⌘L 可跳到結果中的字典區塊（若存在）。
+- 按 ⌘⏎ 或 ⌘R 可在 Finder 顯示所選檔案。
+- 使用 `name:` 篩選只搜尋檔名。
+- 使用 `kind:folder` 只搜尋資料夾名稱。
+- 按住 `Command` 可顯示目前選取檔案的路徑。
 
 ### Safari
 
-- Tab groups organize tabs spatially. Use ⌥⌘{↑,↓,←,→} to navigate tabs in 2D space.
-- When a video is playing, right click the speaker icon in the address bar or tab to enter Picture-in-Picture (PiP) mode.
-- Hold `Option` while closing a tab to close all other tabs _except_ the current tab.
-- Click and hold the back button to see recent browsing history. Hold `Option` to see page URLs instead of page titles.
-- Drag selected text onto the Safari dock icon to quickly search the web for that text.
-- Press ⇧⌘T to re-open the most recently closed tab or window.
-- Click and hold on the new tab icon in the toolbar to view recently closed tabs.
-- Press the Space bar at the beginning of the address bar to change the search engine and to see recent web searches.
-- Add `kind:bookmark` to Spotlight searches to search Safari bookmarks and browsing history.
-- `Shift`\-click a link to add it to Reading List.
-- Click and hold a bookmark in the bookmarks bar to edit its display title.
-- Option-click the reload icon or press ⌥⌘R to force a fresh reload of the current webpage.
-- Right-click the reader icon in the address bar to automatically turn on Reader Mode for all pages on the current website.
-- After performing a web search and opening a result in the same tab, press ⌥⌘S to go back to the search results page.
-- Press ⇧⌘I to create a new email message with the contents of the current page.
-- Hold `Option` over the History \> Clear History menu item to only clear browsing history while preserving website data.
-- Press ⌃⌘D while hovering over a link to open an inline preview of the link.
+- 分頁群組會以空間方式整理分頁；使用 ⌥⌘{↑,↓,←,→} 可在 2D 空間中瀏覽分頁。
+- 播放影片時，右鍵點擊網址列或分頁上的喇叭圖示可進入子母畫面（PiP）。
+- 關閉分頁時按住 `Option` 可關閉其他分頁，僅保留目前分頁。
+- 點擊並按住返回鍵可查看近期瀏覽記錄；按住 `Option` 可顯示 URL 而非標題。
+- 把選取文字拖到 Safari 的 Dock 圖示可快速搜尋網頁。
+- 按 ⇧⌘T 可重新開啟最近關閉的分頁或視窗。
+- 按住工具列的新分頁圖示可查看最近關閉的分頁。
+- 在網址列開頭按空白鍵可變更搜尋引擎並查看近期網頁搜尋。
+- 在 Spotlight 搜尋中加入 `kind:bookmark` 可搜尋 Safari 書籤與瀏覽記錄。
+- `Shift` 點擊連結可加入閱讀列表。
+- 點擊並按住書籤列的書籤可編輯顯示標題。
+- Option 點擊重新整理圖示或按 ⌥⌘R 可強制重新載入目前網頁。
+- 右鍵點擊網址列的閱讀器圖示，可讓目前網站的所有頁面自動開啟閱讀模式。
+- 執行網頁搜尋並在同一分頁開啟結果後，按 ⌥⌘S 可回到搜尋結果頁。
+- 按 ⇧⌘I 可建立包含目前頁面內容的新郵件。
+- 在 History > Clear History 上按住 `Option` 可只清除瀏覽記錄並保留網站資料。
+- 游標停在連結上按 ⌃⌘D 可顯示連結的行內預覽。
 
 ### Mail
 
-- `Command`\-click multiple mailboxes in the left sidebar to simultaneously view all messages from the selected mailboxes.
-- Select part of a message's text before replying or forwarding to only include the selected text in the new message.
-- Drag a file to the Mail dock icon to compose a new message with the file already attached.
-- Press ⌥⇧⌘N to create a new tab.
-- Press the Space bar at the end of a message to go to the next message. Hold `Shift` while pressing the Space bar at the top of a message to go to the previous message.
-- Start typing the first few characters of the sender, subject, or body to jump to that message in the messages list.
-- Press ⌥⌘↑ and ⌥⌘↓ to jump to the top-most or bottom-most message in the messages list.
-- Save an extra copy of an important message by dragging it to the Finder.
-- If a message bounces, use `Message > Send Again` on the bounced message to re-send it to a different address.
-- To add a message to multiple folders, hold Command while dragging the message to each folder.
-- Press ⇧⌘C to assign a color to a message.
-- Drag a message into the Notes or Reminders app to add a link to the message.
-- Press ⌘R and ⇧⌘R while replying to a message to switch between reply and reply-all.
-- Press ⌥⌫ to delete a message without automatically opening the next message.
-- `Command`\-click on the currently selected message to unselect it.
-- If a message has already been replied to, click on the reply icon in the message list to open the reply in a new window.
-- When creating a new mailbox, add a forward slash to create a nested mailbox.
+- 在左側欄以 `Command` 點擊多個信箱可同時檢視其郵件。
+- 回覆或轉寄前先選取訊息中的部分文字，可只在新訊息中包含該段落。
+- 將檔案拖到 Mail 的 Dock 圖示可建立新郵件並附上該檔案。
+- 按 ⌥⇧⌘N 可建立新分頁。
+- 在訊息結尾按空白鍵可前往下一封訊息；在訊息開頭按住 `Shift` 再按空白鍵可回到上一封訊息。
+- 開始輸入寄件者、主旨或內文的前幾個字元可快速跳到該訊息。
+- 按 ⌥⌘↑ 與 ⌥⌘↓ 可跳到最上或最下的訊息。
+- 將重要郵件拖到 Finder 可保留額外備份。
+- 若郵件退信，可在退信上使用 `Message > Send Again` 改寄到其他地址。
+- 拖曳郵件到資料夾時按住 Command 可同時加入多個資料夾。
+- 按 ⇧⌘C 可替郵件標記顏色。
+- 把郵件拖到 Notes 或 Reminders 可新增連結。
+- 回覆郵件時按 ⌘R 與 ⇧⌘R 可在回覆與回覆全部之間切換。
+- 按 ⌥⌫ 可刪除郵件且不會自動開啟下一封。
+- `Command` 點擊目前選取的郵件可取消選取。
+- 若郵件已被回覆，可點訊息列表中的回覆圖示在新視窗開啟回覆。
+- 建立新信箱時，在名稱中加入斜線可建立巢狀信箱。
 - After performing a search, select a mailbox from the left sidebar to filter the search to that mailbox.
 - Hold `Shift` while launching Mail to reset the index.
 

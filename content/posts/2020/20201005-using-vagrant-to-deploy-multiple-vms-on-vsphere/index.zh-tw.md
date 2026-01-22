@@ -1,16 +1,16 @@
 ---
-title: "Using Vagrant to Deploy Multiple VMs on vSphere"
+title: "使用 Vagrant 在 vSphere 部署多台 VM"
 date: 2020-10-05T09:53:03+08:00
 menu:
   sidebar:
-    name: "Using Vagrant to Deploy Multiple VMs on vSphere"
+    name: "使用 Vagrant 在 vSphere 部署多台 VM"
     identifier: using-vagrant-to-deploy-multiple-vms-on-vsphere
     weight: 10
-tags: ["URL", "vagrant"]
-categories: ["URL", "vagrant"]
+tags: ["Links", "vagrant"]
+categories: ["Links", "vagrant"]
 ---
 
-- [Using Vagrant to Deploy Multiple VMs on vSphere](https://buildvirtual.net/using-vagrant-to-deploy-multiple-vms-on-vsphere/)
+- [使用 Vagrant 在 vSphere 部署多台 VM](https://buildvirtual.net/using-vagrant-to-deploy-multiple-vms-on-vsphere/)
 
 ```ruby
 vm1 = { 'name' => "PhotonVM1", 'ip' => "192.168.5.224" }

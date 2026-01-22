@@ -6,8 +6,8 @@ menu:
     name: "Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore"
     identifier: ansible-galaxy-fortios-collection-fortios_system_config_backup_restore
     weight: 10
-tags: ["URL", "Ansible", "Fortinet"]
-categories: ["URL", "Ansible", "Fortinet"]
+tags: ["Links", "Ansible", "Fortinet"]
+categories: ["Links", "Ansible", "Fortinet"]
 hero: images/hero/ansible.png
 ---
 

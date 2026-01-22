@@ -6,8 +6,8 @@ menu:
     name: "How to automatically resize virtual box disk with vagrant"
     identifier: how-to-automatically-resize-virtual-box-disk-with-vagrant
     weight: 10
-tags: ["URL", "Vagrant"]
-categories: ["URL", "Vagrant"]
+tags: ["Links", "Vagrant"]
+categories: ["Links", "Vagrant"]
 ---
 
 - [How to automatically resize virtual box disk with vagrant](https://medium.com/@kanrangsan/how-to-automatically-resize-virtual-box-disk-with-vagrant-9f0f48aa46b3)

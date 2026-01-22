@@ -6,8 +6,8 @@ menu:
     name: "Linkerd 2.8 - 實現超級簡單又安全的多叢集(multicluster) Kubernetes 架構"
     identifier: k8s-multi-cluster-feature-overview-linkerd
     weight: 10
-tags: ["URL", "Kubernetes", "Cluster", "Linkerd", "Service Mesh"]
-categories: ["URL", "Kubernetes", "Cluster", "Linkerd", "Service Mesh"]
+tags: ["Links", "Kubernetes", "Cluster", "Linkerd", "Service Mesh"]
+categories: ["Links", "Kubernetes", "Cluster", "Linkerd", "Service Mesh"]
 hero: images/hero/kubernetes.png
 ---
 

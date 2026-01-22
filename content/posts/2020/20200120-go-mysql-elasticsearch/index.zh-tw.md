@@ -1,9 +1,9 @@
 ---
-title: "go-mysql-elasticsearch-benchmarking"
+title: "go-mysql-elasticsearch 基準測試"
 date: 2020-01-20T09:18:00+08:00
 menu:
   sidebar:
-    name: "go-mysql-elasticsearch-benchmarking"
+    name: "go-mysql-elasticsearch 基準測試"
     identifier: go-mysql-elasticsearch-benchmarking
     weight: 10
 tags: ["MySQL", "Elasticsearch", "go-mysql-elasticsearch"]

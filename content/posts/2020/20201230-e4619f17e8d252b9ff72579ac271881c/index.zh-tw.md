@@ -6,8 +6,8 @@ menu:
     name: "WSL 2 的 .wslconfig 設定檔說明"
     identifier: windows-wsl2-configuration-explain-e4619f17e8d252b9ff72579ac271881c
     weight: 10
-tags: ["URL", "Windows", "WSL"]
-categories: ["URL", "Windows", "WSL"]
+tags: ["Links", "Windows", "WSL"]
+categories: ["Links", "Windows", "WSL"]
 hero: images/hero/microsoft_windows.png
 ---
 

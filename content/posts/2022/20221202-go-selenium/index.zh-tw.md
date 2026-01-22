@@ -6,8 +6,8 @@ menu:
     name: "Go 使用 selenium 截图"
     identifier: go-benny-selenium
     weight: 10
-tags: ["URL", "Go", "Selenium"]
-categories: ["URL", "Go", "Selenium"]
+tags: ["Links", "Go", "Selenium"]
+categories: ["Links", "Go", "Selenium"]
 hero: images/hero/go.svg
 ---
 

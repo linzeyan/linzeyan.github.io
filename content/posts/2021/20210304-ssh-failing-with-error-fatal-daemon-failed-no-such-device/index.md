@@ -6,8 +6,8 @@ menu:
     name: "SSH failing with Error : fatal: daemon() failed: No such device"
     identifier: linux-ssh-failing-with-error-fatal-daemon-failed-no-such-device
     weight: 10
-tags: ["URL", "Linux", "SSH"]
-categories: ["URL", "Linux", "SSH"]
+tags: ["Links", "Linux", "SSH"]
+categories: ["Links", "Linux", "SSH"]
 hero: images/hero/linux.png
 ---
 

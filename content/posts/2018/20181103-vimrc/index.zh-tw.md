@@ -6,8 +6,8 @@ menu:
     name: "vimrc設定教學"
     identifier: vim-vimrc-configuration
     weight: 10
-tags: ["URL", "Vim"]
-categories: ["URL", "Vim"]
+tags: ["Links", "Vim"]
+categories: ["Links", "Vim"]
 ---
 
 - [vimrc 設定教學](https://wiki.csie.ncku.edu.tw/vim/vimrc)

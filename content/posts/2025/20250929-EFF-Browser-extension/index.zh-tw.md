@@ -6,8 +6,8 @@ menu:
     name: "Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤"
     identifier: eff-privacy-badger
     weight: 10
-tags: ["URL", "EFF", "Browser", "Extension"]
-categories: ["URL", "EFF", "Browser", "Extension"]
+tags: ["Links", "EFF", "Browser", "Extension"]
+categories: ["Links", "EFF", "Browser", "Extension"]
 ---
 
 - [Privacy Badger：EFF 推出的免費瀏覽器擴充套件，用來阻止網路監控追蹤](https://privacybadger.org/)

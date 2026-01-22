@@ -1,17 +1,17 @@
 ---
-title: "ansible.builtin.slurp - 讀取檔案內容"
+title: "ansible.builtin.slurp - read file content"
 date: 2021-05-31T17:15:04+08:00
 menu:
   sidebar:
-    name: "ansible.builtin.slurp - 讀取檔案內容"
+    name: "ansible.builtin.slurp - read file content"
     identifier: ansible-module-slurp-read-file-content
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 
-- [ansible.builtin.slurp - 讀取檔案內容](https://ansible.cloudns.pro/post/slurp-read-file-content/)
+- [ansible.builtin.slurp - read file content](https://ansible.cloudns.pro/post/slurp-read-file-content/)
 
 ```yaml
 ---
@@ -43,7 +43,7 @@ hero: images/hero/ansible.png
         var: upload_result
 ```
 
-使用 slurp，就可以避掉 lookup('file') 的限制。
+Using slurp avoids the limitations of lookup('file').
 
-- 可以讀取受控端主機上的檔案，也可以利用 delegate_to: localhost 來讀取主控端主機上的檔案。
-- 可以讀取二進位檔案來做進一步處理，例如做 base64 編碼
+- You can read files on managed hosts, or use delegate_to: localhost to read files on the controller.
+- You can read binary files for further processing, such as base64 encoding.

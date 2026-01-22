@@ -1,17 +1,17 @@
 ---
-title: "Force file download with Nginx"
+title: "用 Nginx 強制檔案下載"
 date: 2019-08-19T12:12:32+08:00
 menu:
   sidebar:
-    name: "Force file download with Nginx"
+    name: "用 Nginx 強制檔案下載"
     identifier: nginx-force-file-download-with-nginx
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Force file download with Nginx](https://coderwall.com/p/3yb8vg/force-file-download-with-nginx)
+- [用 Nginx 強制檔案下載](https://coderwall.com/p/3yb8vg/force-file-download-with-nginx)
 
 `add_header Content-Disposition 'attachment;';`
 

@@ -1,9 +1,9 @@
 ---
-title: GraphQL Introspection Query
+title: GraphQL 內省查詢
 date: 2025-01-02T15:32:00+08:00
 menu:
   sidebar:
-    name: GraphQL Introspection Query
+    name: GraphQL 內省查詢
     identifier: gql-introspection-query
     weight: 10
 tags: ["GraphQL"]

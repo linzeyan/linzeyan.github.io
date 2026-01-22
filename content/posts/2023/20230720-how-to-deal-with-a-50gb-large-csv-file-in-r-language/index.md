@@ -6,8 +6,8 @@ menu:
     name: "How to deal with a 50GB large csv file in r language?"
     identifier: r-large-csv-file
     weight: 10
-tags: ["URL", "R"]
-categories: ["URL", "R"]
+tags: ["Links", "R"]
+categories: ["Links", "R"]
 ---
 
 - [How to deal with a 50GB large csv file in r language?](https://stackoverflow.com/questions/39678940/how-to-deal-with-a-50gb-large-csv-file-in-r-language)

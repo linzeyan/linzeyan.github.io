@@ -6,8 +6,8 @@ menu:
     name: "將指令輸出轉為圖片"
     identifier: ansible-tip-command-output-to-image
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: "機房 notes"
+title: "Data Center Notes"
 date: 2017-10-24T23:17:33+08:00
 menu:
   sidebar:
-    name: "機房 notes"
+    name: "Data Center Notes"
     identifier: network-idc-network-center-notes
     weight: 10
 tags: ["Network"]
@@ -11,58 +11,58 @@ categories: ["Network"]
 hero: images/hero/network.png
 ---
 
-第一張網卡-藍色線
+First NIC - blue cable
 
-第二張網卡-綠色線
+Second NIC - green cable
 
-交換機互連-白色線
+Switch interconnect - white cable
 
-黃、紅
+Yellow, red
 
-Storage 有磁碟陣列，數據交換量大，用光纖連接，使用光纖專用的交換機。
+Storage has disk arrays and heavy data transfer, so it uses fiber connections and fiber switches.
 
-光纖顏色：
+Fiber colors:
 
-多模 (Multi-mode)或單模 (Single-mode)的光纖線
+Multi-mode or single-mode fiber
 
-單模光纖是黃色，多模光纖 50μm 或是 62.5μm 通常都是橘色。10GB 多模光纖通常是水藍色(Aqua)。
+Single-mode fiber is yellow. Multi-mode fiber (50μm or 62.5μm) is usually orange. 10GB multi-mode fiber is usually aqua.
 
-以下是一些常見的規格區分方式。
+Common spec distinctions:
 
-- OS1, OS2, 9µm, 9/125 = 單模光纖
-- OM1, 62.5µm, 62.5/125 = 多模光纖 62.5
-- OM2, 50µ, 50/125 = 多模光纖 50
-- OM3, 10GB, 50µm, 50/125 = 多模光纖 10GB
-- OM4, 100GB, 50µm, 50/125 = 多模光纖 100GB
+- OS1, OS2, 9µm, 9/125 = single-mode fiber
+- OM1, 62.5µm, 62.5/125 = 62.5 multi-mode fiber
+- OM2, 50µ, 50/125 = 50 multi-mode fiber
+- OM3, 10GB, 50µm, 50/125 = 10GB multi-mode fiber
+- OM4, 100GB, 50µm, 50/125 = 100GB multi-mode fiber
 
-光纖結構
+Fiber structure
 
-光纖裸纖的構成主要分為三層：
+Bare fiber consists of three layers:
 
-- 中心：高折射率玻璃芯(芯徑一般為單模 9μm，多模 50 或 62.5μm) 。
-- 夾層：低折射率硅玻璃包層(直徑為 125μm) 。
-- 外層：加強用樹脂塗層(直徑為 250μm)。
+- Core: high-refractive-index glass core (typically 9μm for single-mode, 50 or 62.5μm for multi-mode).
+- Cladding: low-refractive-index silica (diameter 125μm).
+- Coating: reinforcing resin coating (diameter 250μm).
 
-光纖的種類
+Fiber types
 
-1. 一般依光波長在光纖中的傳輸模式可分為：單模態光纖和多模態光纖。
-   1. 多模態光纖：中心玻璃芯(纖核)較粗(50 或 62.5μm)，外層纖殼為 125μm 可傳輸多種模代的光波長。但其模間色散較大，因而限制了傳輸信號的頻率，而隨著距離的增加會更加嚴重。例如：600MB/KM 的光纖再 2KM 時則只有 300MB 的頻寬了。因此，多模光纖傳輸的距離就比較近，一般只有幾公里的距離。
-   2. 單模態光纖：中心玻璃芯較細(纖核一般為 9 或 10μm)，只能傳一種模式的光。因此，其模間色散很小，適用於遠距離通訊，但其色度色散起了主要作用，這樣單模光纖對光源的譜寬和穩定性有較高的要求，即譜寬要窄，穩定性要好。
-2. 按最佳傳輸頻率窗口分： 常規型單模光纖和色散位移型單模光纖。
-   1. 常規型：光纖生產廠將光纖傳輸頻率最佳化在單一波長的光上，如 1300μm。
-   2. 色散位移型：光纖生產廠將 光纖傳輸頻率最佳兩個波長的光上，如 1300μm 和 1550μm。
-3. 按折射率分佈情況分：突變型和漸變型光纖。
+1. Based on transmission modes by wavelength: single-mode fiber and multi-mode fiber.
+   1. Multi-mode fiber: the center glass core is thicker (50 or 62.5μm), the cladding is 125μm, and it can transmit multiple modes. But modal dispersion is larger, limiting the signal frequency, and becomes worse with distance. For example, a 600MB/KM fiber at 2KM only has 300MB bandwidth. Therefore, multi-mode fiber is used over shorter distances, usually only a few kilometers.
+   2. Single-mode fiber: the center glass core is thinner (typically 9 or 10μm) and carries only one mode. Modal dispersion is very small, suitable for long-distance communication, but chromatic dispersion dominates, so it requires a narrow spectrum and a stable light source.
+2. By optimal transmission window: conventional single-mode fiber and dispersion-shifted single-mode fiber.
+   1. Conventional: optimized for a single wavelength, such as 1300μm.
+   2. Dispersion-shifted: optimized for two wavelengths, such as 1300μm and 1550μm.
+3. By refractive-index profile: step-index and graded-index fiber.
 
-常用光纖規格
+Common fiber specs
 
-- 單模態光纖：8/125μm、9/125μm 、10/125μm
-- 多模態光纖：50/125，歐洲標準 62.5/125μm，美國標準工業、醫療和低速網路：100/140μm、200/230μm
-- 塑料光纖：98/1000μm，用於汽車控制。
+- Single-mode fiber: 8/125μm, 9/125μm, 10/125μm
+- Multi-mode fiber: 50/125, European standard 62.5/125μm, US standard industrial/medical/low-speed networks: 100/140μm, 200/230μm
+- Plastic fiber: 98/1000μm, used for automotive control.
 
-第一櫃-網路櫃：防火牆、CoreSwitch，線多。
+First rack - network rack: firewall, core switch, lots of cables.
 
-Server 風扇多，可以緊接著放，散熱也會比較好，通常放下面。
+Servers have many fans, can be placed close together; cooling is better, usually placed lower.
 
-網路設備最少隔 1U，才不會過熱，通常放上面。
+Network devices should be spaced at least 1U to avoid overheating, usually placed on top.
 
-機房冷氣朝上吹，代表設備面朝這邊。
+The data center AC blows upward; devices face this side.

@@ -6,8 +6,8 @@ menu:
     name: "5 DevSecOps open source projects to know"
     identifier: cloud-native-5-devsecops-open-source-projects-know
     weight: 10
-tags: ["URL", "DevSecOps", "cloud-native"]
-categories: ["URL", "DevSecOps", "cloud-native"]
+tags: ["Links", "DevSecOps", "cloud-native"]
+categories: ["Links", "DevSecOps", "cloud-native"]
 ---
 
 - [5 DevSecOps open source projects to know](https://enterprisersproject.com/article/2021/8/5-devsecops-open-source-projects-know)

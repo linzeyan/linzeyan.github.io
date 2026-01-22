@@ -6,8 +6,8 @@ menu:
     name: Taide - training data
     identifier: taide-training-data
     weight: 10
-tags: ["data", "URL"]
-categories: ["data", "URL"]
+tags: ["data", "Links"]
+categories: ["data", "Links"]
 ---
 
 - [Taide - training data](https://taide.tw/index/training-data)

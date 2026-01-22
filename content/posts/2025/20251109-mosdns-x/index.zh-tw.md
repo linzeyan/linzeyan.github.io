@@ -6,21 +6,21 @@ menu:
     name: "Mosdns-X"
     identifier: Mosdns-X
     weight: 10
-tags: ["URL", "Go", "DNS", "linux"]
-categories: ["URL", "Go", "DNS", "linux"]
+tags: ["Links", "Go", "DNS", "linux"]
+categories: ["Links", "Go", "DNS", "linux"]
 hero: images/hero/go.svg
 ---
 
 - [Mosdns-X](https://github.com/pmkol/mosdns-x)
-- [让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X](https://blog.ibytebox.com/archives/OxpX7FQ1)
+- [讓 Linux 系統的 DNS 更快更乾淨：部署 Mosdns-X](https://blog.ibytebox.com/archives/OxpX7FQ1)
 
-### install
+### 安裝
 
 ```bash
 bash <(curl -sL https://raw.githubusercontent.com/lidebyte/bashshell/refs/heads/main/mosdns-x-manager.sh)
 ```
 
-### config
+### 設定
 
 ```bash
 sudo tee /etc/mosdns-x/config.yaml > /dev/null <<'EOF'

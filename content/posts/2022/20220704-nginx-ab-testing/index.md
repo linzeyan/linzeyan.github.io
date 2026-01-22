@@ -1,23 +1,23 @@
 ---
-title: "Nginx 使用 split_clients 进行简易 A/B 测试"
+title: "Simple A/B Testing with Nginx split_clients"
 date: 2022-07-04T14:36:23+08:00
 menu:
   sidebar:
-    name: "Nginx 使用 split_clients 进行简易 A/B 测试"
+    name: "Simple A/B Testing with Nginx split_clients"
     identifier: nginx-ab-testing-split-clients
     weight: 10
-tags: ["URL", "NGINX", "Testing"]
-categories: ["URL", "NGINX", "Testing"]
+tags: ["Links", "Nginx", "Testing"]
+categories: ["Links", "Nginx", "Testing"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Nginx 使用 split_clients 进行简易 A/B 测试](https://u.sb/nginx-ab-testing/)
+- [Simple A/B Testing with Nginx split_clients](https://u.sb/nginx-ab-testing/)
 
 ##### [ngx_http_split_clients_module](https://nginx.org/en/docs/http/ngx_http_split_clients_module.html)
 
-##### configure
+##### Configure
 
-> 这里举例，我们想要 20% 的用户跳转到网址 https://example.com/，30% 的用户跳转到网址 https://example.org/，剩下的跳转到网址 https://examle.edu/
+> For example, suppose we want 20% of users to be redirected to https://example.com/, 30% to https://example.org/, and the rest to https://example.edu/.
 
 ```nginx
 split_clients "${remote_addr}AAA" $variant {
@@ -35,15 +35,15 @@ server {
 }
 ```
 
-上述例子中，按照访客请求的 IP 地址 加上 AAA 字符串 会使用 MurmurHash2 转换成数字，如果得出的数字在前 20%，那么 $variant 值为 https://example.com/，相应的在中间 30% 区间的值为 https://example.org/，其他的为 https://example.edu/。
+In the example above, the visitor's IP address plus the string AAA is hashed with MurmurHash2 into a number. If the number falls in the first 20%, $variant is https://example.com/. If it falls in the middle 30%, $variant is https://example.org/. Otherwise it is https://example.edu/.
 
-###### 指定不同的目录
+###### Specify different directories
 
 ```nginx
 root /var/www/${variant};
 ```
 
-###### 指定不同的首页
+###### Specify different index pages
 
 ```nginx
 index index-${variant}.html;

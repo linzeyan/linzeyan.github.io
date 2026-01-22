@@ -6,8 +6,8 @@ menu:
     name: "Golang os/exec 使用方法（筆記）"
     identifier: go-golang-cmd-ex-exec-usage-note
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

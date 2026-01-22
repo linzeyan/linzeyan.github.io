@@ -6,8 +6,8 @@ menu:
     name: "Advanced macOS Command-Line Tools"
     identifier: macos-advanced-macos-built-in-commands
     weight: 10
-tags: ["URL", "macOS", "command line"]
-categories: ["URL", "macOS", "command line"]
+tags: ["Links", "macOS", "command line"]
+categories: ["Links", "macOS", "command line"]
 ---
 
 - [Advanced macOS Command-Line Tools](https://saurabhs.org/advanced-macos-commands)

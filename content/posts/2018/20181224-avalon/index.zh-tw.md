@@ -6,8 +6,8 @@ menu:
     name: "阿瓦隆(The Resistance：Avalon)"
     identifier: board-game-the-resistance-avalon
     weight: 10
-tags: ["URL", "Board Game"]
-categories: ["URL", "Board Game"]
+tags: ["Links", "Board Game"]
+categories: ["Links", "Board Game"]
 ---
 
 - [阿瓦隆(The Resistance：Avalon)](https://mj9981168.pixnet.net/blog/posts/8196168065)

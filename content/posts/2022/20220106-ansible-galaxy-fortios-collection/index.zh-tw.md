@@ -1,27 +1,27 @@
 ---
-title: "Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore"
+title: "fortios_system_config_backup_restore 的拼寫錯誤、缺少 collection，或模組路徑不正確"
 date: 2022-01-06T13:40:40+08:00
 menu:
   sidebar:
-    name: "Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore"
+    name: "fortios_system_config_backup_restore 的拼寫錯誤、缺少 collection，或模組路徑不正確"
     identifier: ansible-galaxy-fortios-collection-fortios_system_config_backup_restore
     weight: 10
-tags: ["URL", "Ansible", "Fortinet"]
-categories: ["URL", "Ansible", "Fortinet"]
+tags: ["Links", "Ansible", "Fortinet"]
+categories: ["Links", "Ansible", "Fortinet"]
 hero: images/hero/ansible.png
 ---
 
-- [Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore](https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/95)
+- [fortios_system_config_backup_restore 的拼寫錯誤、缺少 collection，或模組路徑不正確](https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/95)
 
-#### issue
+#### 問題
 
 Hi,
 
-I'm trying to retrieve the configuration from a Fortigate using the module `fortios_system_config_backup_restore` and basing on your playbook example.
+我在嘗試使用 `fortios_system_config_backup_restore` 模組，並依照你的 playbook 範例從 Fortigate 取得設定。
 
-I have `ansible 2.10.6`.
+我使用的是 `ansible 2.10.6`。
 
-When I use the collection `fortinet.fortios:1.1.8`, I got the following error: `missing 1 required positional argument: 'mod'`
+當我使用 `fortinet.fortios:1.1.8` 這個 collection 時，出現以下錯誤：`missing 1 required positional argument: 'mod'`
 
 ```shell
 The full traceback is:
@@ -50,7 +50,7 @@ fatal: [fortigate-01]: FAILED! => {
 }
 ```
 
-Using the recent pre release `fortinet.fortios:2.0.0` , I got:
+使用最新的預發布版 `fortinet.fortios:2.0.0` 時，我得到：
 
 ```shell
 ERROR! couldn't resolve module/action 'fortinet.fortios.fortios_system_config_backup_restore'. This often indicates a misspelling, missing collection, or incorrect module path.
@@ -64,6 +64,6 @@ tasks:
   - name: backup global or a_specific_vdom settings
 ```
 
-No module found in `~/.ansible/collections/ansible_collections/fortinet/fortios/plugins/modules/`
+在 `~/.ansible/collections/ansible_collections/fortinet/fortios/plugins/modules/` 找不到模組。
 
-#### use 1.1.9
+#### 使用 1.1.9

@@ -1,9 +1,9 @@
 ---
-title: "docker-compose yaml problem"
+title: "docker-compose yaml 問題"
 date: 2021-07-19T15:40:36+08:00
 menu:
   sidebar:
-    name: "docker-compose yaml problem"
+    name: "docker-compose yaml 問題"
     identifier: docker-compose-yaml-problem-port-mapping
     weight: 10
 tags: ["Docker"]
@@ -11,7 +11,7 @@ categories: ["Docker"]
 hero: images/hero/docker.jpeg
 ---
 
-#### issue
+#### 問題
 
 ```shell
 # ./docker-compose up -d
@@ -32,13 +32,13 @@ services:
       - 2222:22
 ```
 
-YAML supports so-called "base-60 floating-point numbers," which is useful for time calculations.
+YAML 支援所謂的「六十進位浮點數」，這對時間計算很有用。
 
-Therefore, `2222:22` is interpreted as `2222 * 60 + 22`, which is 133342.
+因此，`2222:22` 會被解讀為 `2222 * 60 + 22`，也就是 133342。
 
-If the port contains numbers greater than 60, such as 3306:3306 or 8080:80, there is no problem, so this issue doesn't always occur, making it somewhat obscure.
+如果連接埠包含大於 60 的數字，例如 3306:3306 或 8080:80，就不會有問題，所以這個問題不一定會出現，因而比較不容易察覺。
 
-#### solve
+#### 解法
 
 ```yaml
 services:

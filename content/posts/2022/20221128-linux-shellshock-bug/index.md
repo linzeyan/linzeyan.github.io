@@ -6,8 +6,8 @@ menu:
     name: "Test Whether a Server Is Vulnerable to Shellshock Bug"
     identifier: linux-shell-shellshock-bug
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 

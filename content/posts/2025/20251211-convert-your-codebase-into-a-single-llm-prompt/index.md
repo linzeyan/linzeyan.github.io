@@ -6,8 +6,8 @@ menu:
     name: "Convert your codebase into a single LLM prompt."
     identifier: github-mufeedvh-code2prompt-convert-your-codebase-into-a-single-llm-prompt
     weight: 10
-tags: ["URL", "Github", "Rust", "LLM", "Markdown"]
-categories: ["URL", "Github", "Rust", "LLM", "Markdown"]
+tags: ["Links", "Github", "Rust", "LLM", "Markdown"]
+categories: ["Links", "Github", "Rust", "LLM", "Markdown"]
 hero: images/hero/github.png
 ---
 

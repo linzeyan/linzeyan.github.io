@@ -6,8 +6,8 @@ menu:
     name: "我的提升生產力 Mac 設定與軟體"
     identifier: macos-settings-and-software
     weight: 10
-tags: ["URL", "MacOS"]
-categories: ["URL", "MacOS"]
+tags: ["Links", "macOS"]
+categories: ["Links", "macOS"]
 ---
 
 - [我的提升生產力 Mac 設定與軟體](https://jason-memo.dev/posts/my-mac-setting/)

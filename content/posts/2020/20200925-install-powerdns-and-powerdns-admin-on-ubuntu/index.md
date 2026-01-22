@@ -6,8 +6,8 @@ menu:
     name: "Install PowerDNS and PowerDNS-Admin on Ubuntu 22.04|20.04|18.04"
     identifier: linux-install-powerdns-and-powerdns-admin-on-ubuntu
     weight: 10
-tags: ["URL", "DNS", "Linux", "PowerDNS"]
-categories: ["URL", "DNS", "Linux", "PowerDNS"]
+tags: ["Links", "DNS", "Linux", "PowerDNS"]
+categories: ["Links", "DNS", "Linux", "PowerDNS"]
 hero: images/hero/linux.png
 ---
 

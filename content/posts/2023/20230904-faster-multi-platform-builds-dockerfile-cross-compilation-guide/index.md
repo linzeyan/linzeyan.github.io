@@ -6,8 +6,8 @@ menu:
     name: "Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide"
     identifier: docker-multi-platform-builds
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 

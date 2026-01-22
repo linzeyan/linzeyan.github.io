@@ -1,19 +1,19 @@
 ---
-title: "/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes"
+title: "/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊"
 date: 2022-11-14T12:55:39+08:00
 menu:
   sidebar:
-    name: "/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes"
+    name: "/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊"
     identifier: linux-shadow-passwords-hashes
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 
-- [/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes](https://www.baeldung.com/linux/shadow-passwords)
+- [/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊](https://www.baeldung.com/linux/shadow-passwords)
 
-##### chage and Password Aging
+##### chage 與密碼期限
 
 ```bash
 chage --list root
@@ -26,39 +26,39 @@ Maximum number of days between password change          : 99999
 Number of days of warning before password expires       : 7
 ```
 
-Consequently, we can change any field via its associated flag:
+因此，我們可以用對應的旗標修改各欄位：
 
-- `-d` or `--lastday` for the last change date
-- `-m` or `--mindays` for the days between password changes
-- `-M` or `--maxdays` for the maximum password validity
-- `-W` or `--warndays` for the warning period
-- `-I` or `--inactive` for the inactivity period
-- `-E` or `--expiredate` for the expiration period
+- `-d` 或 `--lastday`：最後變更日期
+- `-m` 或 `--mindays`：變更密碼最少間隔天數
+- `-M` 或 `--maxdays`：密碼最大有效天數
+- `-W` 或 `--warndays`：到期前警告天數
+- `-I` 或 `--inactive`：密碼失效天數
+- `-E` 或 `--expiredate`：帳號過期日期
 
-##### chpasswd and Passwords
+##### chpasswd 與密碼
 
 `echo 'user1:PASSWORD' | chpasswd --crypt-method SHA512`
 
-##### crypt() and Encryption Algorithms
+##### crypt() 與加密演算法
 
-Essentially, the initial characters of the password field value in /etc/shadow identify the encryption algorithm:
+基本上，/etc/shadow 密碼欄位的開頭字元可以辨識加密演算法：
 
-- `$1$` is Message Digest 5 (MD5)
-- `$2a$` is blowfish
-- `$5$` is 256-bit Secure Hash Algorithm (SHA-256)
-- `$6$` is 512-bit Secure Hash Algorithm (SHA-512)
-- `$y$` (or `$7$`) is yescrypt
-- noneof the above means DES
+- `$1$` 是 Message Digest 5（MD5）
+- `$2a$` 是 blowfish
+- `$5$` 是 256-bit Secure Hash Algorithm（SHA-256）
+- `$6$` 是 512-bit Secure Hash Algorithm（SHA-512）
+- `$y$`（或 `$7$`）是 yescrypt
+- 以上皆非則表示 DES
 
-##### Generate /etc/shadow Passwords
+##### 產生 /etc/shadow 密碼
 
-OpenSSL support several types of hashing:
+OpenSSL 支援多種雜湊：
 
-- `-crypt` for the standard UNIX crypt, i.e., DES (default)
-- `-apr1` for the Apache-specific MD5 variant
-- `-1` for MD5
-- `-5` for SHA-256
-- `-6` for SHA-512
+- `-crypt`：標準 UNIX crypt，也就是 DES（預設）
+- `-apr1`：Apache 專用的 MD5 變體
+- `-1`：MD5
+- `-5`：SHA-256
+- `-6`：SHA-512
 
 ```bash
 # OpenSSL

@@ -6,8 +6,8 @@ menu:
     name: "go-synctest"
     identifier: go-synctest
     weight: 10
-tags: ["URL", "Go", "sync", "test"]
-categories: ["URL", "Go", "sync", "test"]
+tags: ["Links", "Go", "sync", "test"]
+categories: ["Links", "Go", "sync", "test"]
 hero: images/hero/go.svg
 ---
 

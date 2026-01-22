@@ -6,8 +6,8 @@ menu:
     name: "制作macOS系统dmg包及iso可引导镜像"
     identifier: macos-dmg-iso
     weight: 10
-tags: ["URL", "MacOS", "dmg", "iso"]
-categories: ["URL", "MacOS", "dmg", "iso"]
+tags: ["Links", "macOS", "dmg", "iso"]
+categories: ["Links", "macOS", "dmg", "iso"]
 ---
 
 - [制作 macOS 系统 dmg 包及 iso 可引导镜像](https://www.newlearner.site/2019/03/07/macos-dmg-iso.html)

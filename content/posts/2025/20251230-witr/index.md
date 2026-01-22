@@ -6,8 +6,8 @@ menu:
     name: "Why is this running?"
     identifier: github-pranshuparmar-witr-why-is-this-running
     weight: 10
-tags: ["URL", "Github", "Go"]
-categories: ["URL", "Github", "Go"]
+tags: ["Links", "Github", "Go"]
+categories: ["Links", "Github", "Go"]
 hero: images/hero/go.svg
 ---
 

@@ -1,19 +1,19 @@
 ---
-title: "How to use a here documents to write data to a file in bash script"
+title: "在 bash 腳本中使用 here-doc 將資料寫入檔案"
 date: 2021-05-07T11:37:35+08:00
 menu:
   sidebar:
-    name: "How to use a here documents to write data to a file in bash script"
+    name: "在 bash 腳本中使用 here-doc 將資料寫入檔案"
     identifier: shell-using-heredoc-rediection-in-bash-shell-script-to-write-to-file
     weight: 10
-tags: ["URL", "SHELL"]
-categories: ["URL", "SHELL"]
+tags: ["Links", "SHELL"]
+categories: ["Links", "SHELL"]
 hero: images/hero/shell.png
 ---
 
-- [How to use a here documents to write data to a file in bash script](https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/)
+- [在 bash 腳本中使用 here-doc 將資料寫入檔案](https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/)
 
-#### allow here-documents within shell scripts to be indented in a natural fashion using `EOF<<-`
+#### 使用 `EOF<<-` 讓 here-doc 在 shell 腳本中可自然縮排
 
 ```bash
 command <<-EOF
@@ -23,7 +23,7 @@ command <<-EOF
 EOF
 ```
 
-#### Disabling pathname/parameter/variable expansion, command substitution, arithmetic expansion with `'EOF'`
+#### 使用 `'EOF'` 停用路徑/參數/變數展開、命令替換與算術展開
 
 ```bash
 #!/bin/bash

@@ -6,8 +6,8 @@ menu:
     name: "Nginx怎样隐藏上游错误"
     identifier: nginx-hide-upstream-errors
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

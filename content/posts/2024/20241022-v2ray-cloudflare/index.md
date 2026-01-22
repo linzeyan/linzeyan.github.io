@@ -1,62 +1,62 @@
 ---
-title: "使用 Cloudflare 中转 V2Ray 流量"
+title: "Relay V2Ray Traffic via Cloudflare"
 date: 2024-10-22T09:24:08+08:00
 menu:
   sidebar:
-    name: "使用 Cloudflare 中转 V2Ray 流量"
+    name: "Relay V2Ray Traffic via Cloudflare"
     identifier: network-proxy-v2ray-forward-traffic-and-cloudflare-configuration
     weight: 10
-tags: ["URL", "V2Ray", "Network", "Proxy"]
-categories: ["URL", "V2Ray", "Network", "Proxy"]
+tags: ["Links", "V2Ray", "Network", "Proxy"]
+categories: ["Links", "V2Ray", "Network", "Proxy"]
 hero: images/hero/network.png
 ---
 
-- [使用 Cloudflare 中转 V2Ray 流量](https://233boy.com/v2ray/v2ray-cloudflare/)
-- [最好用的 V2Ray 一键安装脚本](https://233boy.com/v2ray/v2ray-script/)
-- [V2Ray 脚本 DNS 设置](https://233boy.com/v2ray/v2ray-dns/)
-- [V2Ray 脚本中转教程](https://233boy.com/v2ray/v2ray-dokodemo-door/)
+- [Relay V2Ray Traffic via Cloudflare](https://233boy.com/v2ray/v2ray-cloudflare/)
+- [The most convenient V2Ray one-click install script](https://233boy.com/v2ray/v2ray-script/)
+- [V2Ray script DNS settings](https://233boy.com/v2ray/v2ray-dns/)
+- [V2Ray script relay tutorial](https://233boy.com/v2ray/v2ray-dokodemo-door/)
 
-## 安装脚本
+## Install Script
 
 ```bash
 bash <(wget -qO- -o- https://git.io/v2ray.sh)
 ```
 
-## 准备
+## Preparation
 
-我们现在就添加一个 DNS 记录，名称：`ai`，IPv4 地址：`写你的 VPS IP`，代理状态必须关闭，云朵图标为灰色。
+Add a DNS record now. Name: `ai`, IPv4 address: `your VPS IP`. The proxy status must be off, so the cloud icon is gray.
 
-提示：你可以使用 `v2ray ip` 查看你的 VPS IP。
+Tip: You can use `v2ray ip` to view your VPS IP.
 
-## 添加中转配置
+## Add Relay Configuration
 
-使用 `v2ray add ws ai.233boy.com` 添加一个 vmess-ws-tls 配置；记得把 `ai.233boy.com` 改成你的域名
+Use `v2ray add ws ai.233boy.com` to add a vmess-ws-tls configuration; remember to replace `ai.233boy.com` with your domain.
 
-就是刚才添加记录的那个域名，假设你的域名是 233boy.com ，添加的名称是 ai，域名就是 ai.233boy.com
+This domain is the record you just added. For example, if your domain is 233boy.com and the name is ai, the domain is ai.233boy.com.
 
-## 开启中转
+## Enable Relay
 
-在 Cloudflare 后台主页，点击你的域名进去，在左侧选项菜单选择 `SSL/TLS`
+On the Cloudflare dashboard, click your domain, then choose `SSL/TLS` in the left sidebar.
 
-将 SSL/TLS 加密模式更改为 `完全`
+Change the SSL/TLS encryption mode to `Full`.
 
-然后在左侧选项菜单选择 `DNS`
+Then in the left sidebar choose `DNS`.
 
-编辑添加的那个记录，把代理状态打开，即是 `已代理`，云朵图标为点亮状态，然后保存
+Edit the record you added, enable the proxy (status is `Proxied`), the cloud icon is lit, and save.
 
-把云朵点亮之后，流量就是走的 Cloudflare 中转了。
+After the cloud is lit, traffic goes through Cloudflare.
 
-提醒，把云朵点亮就是流量通过 Cloudflare 中转，点灰云朵图标就是直连，不走 Cloudflare 中转。
+Reminder: Lit cloud means traffic is relayed by Cloudflare. Gray cloud means direct connection without Cloudflare.
 
-## 获取真实客户端 IP
+## Get the Real Client IP
 
-考虑到有些人会有某些特殊需求，因为套 CF 了默认情况在查看日志的时候会显示客户端 IP 是 CF 的。
+Some people have special needs, because with CF enabled the client IP in logs is CF's IP by default.
 
-如果你需要获取真实的客户端 IP，得更改一下 Caddy 的配置
+If you need the real client IP, update the Caddy config.
 
-在 `/etc/caddy/233boy/xxx.conf` 找到你的 caddy 配置文件，（xxx 指的是你的域名）
+Find your Caddy config at `/etc/caddy/233boy/xxx.conf` (xxx is your domain).
 
-默认配置类似如下：
+The default config looks like this:
 
 ```
 xxx:443 {
@@ -65,7 +65,7 @@ xxx:443 {
 }
 ```
 
-最终更改的配置如下：
+Update it to:
 
 ```
 xxx:443 {
@@ -77,19 +77,19 @@ xxx:443 {
 }
 ```
 
-原则上，你仅需要更改增加一下 header_up 选项指定 IP 为 CF 转发就好了，
+In principle, you only need to add the `header_up` options to use the CF forwarded IP.
 
-改好了要重启一下 Caddy：`v2ray restart caddy`
+After changes, restart Caddy: `v2ray restart caddy`
 
 ---
 
 ## DNS
 
-输入 `v2ray dns` 即可选择相关 DNS
+Run `v2ray dns` to choose a DNS option.
 
 ```shell
 
-请选择 DNS:
+Select DNS:
 
 1) 1.1.1.1
 2) 8.8.8.8
@@ -99,101 +99,101 @@ xxx:443 {
 6) set
 7) none
 
-请选择 [1-7]:
+Choose [1-7]:
 ```
 
-备注，https 开头的即是使用 DOH 方式，使用 DOH 方式默认开启本地查询，即是 DOH 本地模式 (DOHL)
+Note: options starting with https use DOH. DOH enables local query by default, which is DOH local mode (DOHL).
 
-set 选项是可以自定义 DNS，
+The `set` option lets you customize DNS.
 
-none 选项是不配置任何 DNS
+The `none` option means no DNS configuration.
 
 ### google
 
-快速设置 Google DNS: `v2ray dns 88`
+Quickly set Google DNS: `v2ray dns 88`
 
-快速设置 Google DNS DOH: `v2ray dns gg`
+Quickly set Google DNS DOH: `v2ray dns gg`
 
 ### cloudflare
 
-快速设置 Cloudflare DNS: `v2ray dns 11`
+Quickly set Cloudflare DNS: `v2ray dns 11`
 
-快速设置 Cloudflare DNS DOH: `v2ray dns cf`
+Quickly set Cloudflare DNS DOH: `v2ray dns cf`
 
 ### nosex
 
-快速设置 Cloudflare Family DNS DOH: `v2ray dns nosex`
+Quickly set Cloudflare Family DNS DOH: `v2ray dns nosex`
 
-备注，使用此方式，将无法打开小电影网站（提供给有特殊需求的时候使用
+Note: with this option, you won't be able to open certain adult sites (use it only if needed).
 
 ### set
 
-快速自定义 DNS 使用 9.9.9.9：`v2ray dns set 9.9.9.9`
+Quickly set custom DNS to 9.9.9.9: `v2ray dns set 9.9.9.9`
 
-快速自定义使用 ADGUARD DNS DOH：`v2ray dns set https://dns.adguard-dns.com/dns-query`
+Quickly set custom ADGUARD DNS DOH: `v2ray dns set https://dns.adguard-dns.com/dns-query`
 
-使用 `v2ray dns set` 可以手动输入 DNS 值，
+Use `v2ray dns set` to enter a DNS value manually.
 
-或者 `v2ray dns set 1.1.1.1` 直接指定使用 1.1.1.1 作为 DNS，后面的 1.1.1.1 可以自定义成任何你喜欢的 DNS
+Or use `v2ray dns set 1.1.1.1` to set 1.1.1.1; you can replace it with any DNS you like.
 
 ### none
 
-如果你出现任何问题，请使用 `v2ray dns none` 来重置 DNS 配置
+If you encounter any issues, use `v2ray dns none` to reset DNS settings.
 
-或者如果你想要 V2Ray 走系统 DNS，也使用此命令
+If you want V2Ray to use system DNS, use this command too.
 
 ---
 
-## 利用 Dokodemo-door 进行转发
+## Forwarding with Dokodemo-door
 
-假设你有 A-B 两台 VPS，打算使用 A 机器转发流量到 B 机器。
+Suppose you have two VPS machines, A and B, and want to use A to forward traffic to B.
 
-常见的用途是国内连接到 A 机器的网络比较好，然后希望通过 A 机器转发数据到 B 机器，再通过 B 机器干坏事（
+A common use case is that connections to A are better from within China, so you forward data from A to B, and then use B for other operations.
 
-又或者是 B 机器可以解锁一些在线服务之类，但是直连效果不好，甚至 IP 都被墙了，想要使用 A 机器做前置转发。
+Or B can unlock certain online services but direct connections are poor, or the IP is even blocked, so you use A as a front relay.
 
-缺点是，只能转发 TCP 或 UDP 流量，带 TLS 的不行
+The downside is that only TCP or UDP can be forwarded; TLS does not work.
 
-### 添加配置
+### Add Configuration
 
-先在 B 机器添加一个 V2Ray 配置，举例： `v2ray add tcp 233`
+First, add a V2Ray configuration on B, for example: `v2ray add tcp 233`
 
-这样来就是添加了一个 VMESS-TCP 的配置，并且端口是 233
+This adds a VMESS-TCP configuration with port 233.
 
-如果你已经有配置就不用再添加了，反正记下 B 机器的 `IP` 和配置的 `端口` 即可
+If you already have a configuration, just note B's `IP` and the configuration `port`.
 
-因为利用 A 机器转发的时候必须要填写上 B 机器的 IP，以及要转到到 B 机器的哪个端口
+When forwarding with A, you must provide B's IP and the target port on B.
 
 ### door
 
-使用方法： `v2ray add door [port] [remote-addr] [remote-port]`
+Usage: `v2ray add door [port] [remote-addr] [remote-port]`
 
-在 A 机器执行：`v2ray add door`，然后输入 B 机器的 IP 和端口
+On A, run `v2ray add door`, then enter B's IP and port.
 
-默认情况下 V2Ray 脚本会随机生成一个端口，如果你需要自定义端口请使用 `v2ray add door 需要自定义的端口`
+By default, the V2Ray script generates a random port. If you need a custom port, use `v2ray add door <custom-port>`.
 
-### 测试
+### Test
 
-把 B 机器给出的配置里面的地址和端口，改成 A 机器的 IP 和端口即可
+Replace the address and port in B's config with A's IP and port.
 
-就是 B 机器的配置，假设你用 v2rayN 通过 URL 导入了配置，把配置的地址和端口改成 A 机器的 IP 和 Dokodemo-door 端口。
+This is B's config. For example, if you use v2rayN to import the config via URL, change the config's address and port to A's IP and the Dokodemo-door port.
 
-看看是不是能使用了？
+See if it works.
 
-### 一键添加
+### One-Click Add
 
-快速添加一个中转配置：
+Quickly add a relay configuration:
 
 `v2ray add door 233 b.233boy.com 443`
 
-解释：添加一个 Dokodemo-door 配置，端口 233，目标地址 b.233boy.com，目标端口 443。
+Explanation: add a Dokodemo-door configuration. Port 233, target address b.233boy.com, target port 443.
 
-是的，目标地址你也可以使用域名。
+Yes, the target address can also be a domain.
 
-### 机智如我
+### A Clever Trick
 
-虽然说上面的例子是来中转 V2Ray 配置使用，但是你也可以做一下跳板机，用来搞一下骚操作
+Although the example above is for relaying V2Ray configs, you can also use it as a jump host for other tricks.
 
-比如说，转发数据到 1.1.1.1 DNS：`v2ray add door 53 1.1.1.1 53`，这样来就是你的 53 端口也可以做 DNS 啦
+For example, forward traffic to 1.1.1.1 DNS: `v2ray add door 53 1.1.1.1 53`. That way your port 53 can also serve DNS.
 
-至于其他的操作，自行发挥！
+Feel free to explore other uses.

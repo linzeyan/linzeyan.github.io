@@ -6,8 +6,8 @@ menu:
     name: Rules that terminal programs follow
     identifier: url-terminal-rules
     weight: 10
-tags: ["URL", "terminal", "command line"]
-categories: ["URL", "terminal", "command line"]
+tags: ["Links", "terminal", "command line"]
+categories: ["Links", "terminal", "command line"]
 ---
 
 - ["Rules" that terminal programs follow](https://jvns.ca/blog/2024/11/26/terminal-rules/)

@@ -6,8 +6,8 @@ menu:
     name: Go leetcode
     identifier: golang-leetcode
     weight: 10
-tags: ["golang", "URL", "leetcode"]
-categories: ["golang", "URL", "leetcode"]
+tags: ["Go", "Links", "leetcode"]
+categories: ["Go", "Links", "leetcode"]
 ---
 
 - https://books.halfrost.com/leetcode/

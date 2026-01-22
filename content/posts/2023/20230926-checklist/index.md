@@ -6,8 +6,8 @@ menu:
     name: 朋友旅行防止絕交檢查表
     identifier: checklist-travel
     weight: 10
-tags: ["travel", "checklist", "URL"]
-categories: ["travel", "checklist", "URL"]
+tags: ["travel", "checklist", "Links"]
+categories: ["travel", "checklist", "Links"]
 ---
 
 - https://travel-questions.gnehs.net/

@@ -6,8 +6,8 @@ menu:
     name: "Linux CentOS 7 安裝字體庫 & 中文本體"
     identifier: linux-centos7-install-fonts
     weight: 10
-tags: ["URL", "Linux"]
-categories: ["URL", "Linux"]
+tags: ["Links", "Linux"]
+categories: ["Links", "Linux"]
 hero: images/hero/linux.png
 ---
 

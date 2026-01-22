@@ -6,8 +6,8 @@ menu:
     name: iTerm2 features I find useful
     identifier: iterm2-features-i-find-useful
     weight: 10
-tags: ["URL", "terminal", "iTerm2"]
-categories: ["URL", "terminal", "iTerm2"]
+tags: ["Links", "terminal", "iTerm2"]
+categories: ["Links", "terminal", "iTerm2"]
 ---
 
 - [iTerm2 features I find useful](https://danielde.dev/blog/iterm2-features-i-find-useful)

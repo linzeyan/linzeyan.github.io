@@ -1,9 +1,9 @@
 ---
-title: "Cloudflare Traffic sequence"
+title: "Cloudflare 流量處理順序"
 date: 2021-11-03T13:11:29+08:00
 menu:
   sidebar:
-    name: "Cloudflare Traffic sequence"
+    name: "Cloudflare 流量處理順序"
     identifier: cloudflare-waf-traffic-filter-sequence
     weight: 10
 tags: ["Cloudflare", "WAF", "Network"]
@@ -11,18 +11,18 @@ categories: ["Cloudflare", "WAF", "Network"]
 hero: images/hero/cloudflare.svg
 ---
 
-### Traffic sequence
+### 流量處理順序
 
-Traffic to your application runs through the following sequence on Cloudflare's edge:
+應用程式流量在 Cloudflare 邊緣節點會依下列順序處理：
 
 1. DDoS
-2. URL Rewrites
-3. Page Rules
-4. IP Access Rules
-5. Bots
-6. Firewall Rules
-7. Rate Limiting
-8. Managed Rules
-9. Header Modification
-10. Access
+2. URL 重寫
+3. 頁面規則
+4. IP 存取規則
+5. Bot 管理
+6. 防火牆規則
+7. 速率限制
+8. 託管規則
+9. 標頭修改
+10. 存取控制
 11. Workers

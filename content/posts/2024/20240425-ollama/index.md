@@ -4,10 +4,10 @@ date: 2024-04-25T10:14:00+08:00
 menu:
   sidebar:
     name: Run llama3
-    identifier: ollama
+    identifier: github-ollama-ollama
     weight: 10
-tags: ["Go", "URL", "ollama"]
-categories: ["Go", "URL", "ollama"]
+tags: ["Go", "Links", "ollama"]
+categories: ["Go", "Links", "ollama"]
 hero: images/hero/go.svg
 ---
 

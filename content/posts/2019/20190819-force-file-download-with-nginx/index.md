@@ -6,8 +6,8 @@ menu:
     name: "Force file download with Nginx"
     identifier: nginx-force-file-download-with-nginx
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "Jinja docx template, avoiding new line in nested for"
     identifier: ansible-jinja-docx-template-avoiding-new-line-in-nested-for
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

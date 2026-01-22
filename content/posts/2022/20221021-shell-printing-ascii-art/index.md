@@ -6,8 +6,8 @@ menu:
     name: "Printing ASCII Art in the Shell"
     identifier: linux-shell-printing-ascii-art
     weight: 10
-tags: ["URL", "SHELL", "Linux", "ASCII"]
-categories: ["URL", "SHELL", "Linux", "ASCII"]
+tags: ["Links", "SHELL", "Linux", "ASCII"]
+categories: ["Links", "SHELL", "Linux", "ASCII"]
 hero: images/hero/linux.png
 ---
 

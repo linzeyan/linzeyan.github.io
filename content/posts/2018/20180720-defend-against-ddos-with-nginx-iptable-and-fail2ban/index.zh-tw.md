@@ -6,8 +6,8 @@ menu:
     name: "與 DDoS 奮戰：nginx, iptables 與 fail2ban"
     identifier: nginx-defend-against-ddos-with-nginx-iptable-and-fail2ban
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

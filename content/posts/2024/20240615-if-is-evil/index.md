@@ -6,8 +6,8 @@ menu:
     name: "Nginx if 避坑指南"
     identifier: nginx-taoshu-if-is-evil
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

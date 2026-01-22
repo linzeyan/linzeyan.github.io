@@ -1,14 +1,14 @@
 ---
-title: "GitHub Actions 入门教程"
+title: "Getting Started with GitHub Actions"
 date: 2019-12-23T10:16:01+08:00
 menu:
   sidebar:
-    name: "GitHub Actions 入门教程"
+    name: "Getting Started with GitHub Actions"
     identifier: github-getting-started-with-github-actions
     weight: 10
-tags: ["URL", "GitHub"]
-categories: ["URL", "GitHub"]
+tags: ["Links", "GitHub"]
+categories: ["Links", "GitHub"]
 hero: images/hero/github.png
 ---
 
-- [GitHub Actions 入门教程](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
+- [Getting Started with GitHub Actions](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)

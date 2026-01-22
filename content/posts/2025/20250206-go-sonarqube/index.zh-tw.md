@@ -6,8 +6,8 @@ menu:
     name: "GitLab CI 可以自動檢測程式碼品質！SonarQube 程式碼品質檢測怎麼做？"
     identifier: go-gitlab-ci-with-sonarqube
     weight: 10
-tags: ["URL", "Go", "SonarQube"]
-categories: ["URL", "Go", "SonarQube"]
+tags: ["Links", "Go", "SonarQube"]
+categories: ["Links", "Go", "SonarQube"]
 hero: images/hero/go.svg
 ---
 

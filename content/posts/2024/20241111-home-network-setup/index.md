@@ -1,13 +1,13 @@
 ---
-title: "工欲善其事，必先利其器 —— 我的家庭网络组网方案"
+title: "Sharpen the Axe Before Cutting Wood: My Home Network Setup"
 date: 2024-11-11T09:25:57+08:00
 menu:
   sidebar:
-    name: "工欲善其事，必先利其器 —— 我的家庭网络组网方案"
+    name: "Sharpen the Axe Before Cutting Wood: My Home Network Setup"
     identifier: homelab-home-network-setup
     weight: 10
-tags: ["URL", "HomeLab"]
-categories: ["URL", "HomeLab"]
+tags: ["Links", "HomeLab"]
+categories: ["Links", "HomeLab"]
 ---
 
-- [工欲善其事，必先利其器 —— 我的家庭网络组网方案](https://blog.skk.moe/post/home-network-setup/)
+- [Sharpen the Axe Before Cutting Wood: My Home Network Setup](https://blog.skk.moe/post/home-network-setup/)

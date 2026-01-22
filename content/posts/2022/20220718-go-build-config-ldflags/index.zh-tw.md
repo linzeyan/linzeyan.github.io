@@ -6,8 +6,8 @@ menu:
     name: "[Golang] 利用build tags達到不同的build config"
     identifier: golang-go-build-config-ldflags
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

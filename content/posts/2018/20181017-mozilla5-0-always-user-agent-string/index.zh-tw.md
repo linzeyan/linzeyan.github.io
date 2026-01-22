@@ -6,8 +6,8 @@ menu:
     name: "為什麼瀏覽器 user-agent string 總是包含 Mozilla/5.0 ?"
     identifier: browser-mozilla5-0-always-user-agent-string
     weight: 10
-tags: ["URL", "Browser", "UserAgent"]
-categories: ["URL", "Browser", "UserAgent"]
+tags: ["Links", "Browser", "UserAgent"]
+categories: ["Links", "Browser", "UserAgent"]
 ---
 
 - [為什麼瀏覽器 user-agent string 總是包含 Mozilla/5.0 ?](https://yulun.me/2013/mozilla5-0-always-user-agent-string/)

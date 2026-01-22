@@ -10,3 +10,9 @@ cf:
 	@tar xf hugo_extended_0.148.2_linux-amd64.tar.gz
 	@./hugo --minify -b "$(CF_PAGES_URL)"
 .PHONY: cf
+
+clean:
+	@rm -rf ./node_modules
+	@rm -rf ./public
+	@rm -rf ./resources
+.PHONY: clean

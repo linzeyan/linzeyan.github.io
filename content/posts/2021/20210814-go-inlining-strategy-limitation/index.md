@@ -1,17 +1,17 @@
 ---
-title: "[译] Go语言inline内联的策略与限制"
+title: "[Translated] Go inline strategy and limitations"
 date: 2021-08-14T20:33:41+08:00
 menu:
   sidebar:
-    name: "[译] Go语言inline内联的策略与限制"
+    name: "[Translated] Go inline strategy and limitations"
     identifier: go-inlining-strategy-limitation
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [[译] Go 语言 inline 内联的策略与限制](https://www.pengrl.com/p/20028/)
+- [[Translated] Go inline strategy and limitations](https://www.pengrl.com/p/20028/)
 - [Go: Inlining Strategy & Limitation](https://medium.com/a-journey-with-go/go-inlining-strategy-limitation-6b6d7fc3b1be)
 - [Visualizing memory management in Golang](https://deepu.tech/memory-management-in-golang/)
 - [Understanding Allocations in Go](https://medium.com/eureka-engineering/understanding-allocations-in-go-stack-heap-memory-9a2631b5035d)
@@ -42,7 +42,7 @@ func add(a, b float32) float32 { return a + b }
 func sub(a, b float32) float32 { return a - b }
 ```
 
-使用参数`-gflags="-m"`运行，可显示被内联的函数
+Run with `-gflags="-m"` to show which functions are inlined.
 
 ```shell
 ./op.go:3:6: can inline add
@@ -52,35 +52,35 @@ func sub(a, b float32) float32 { return a - b }
 ./main.go:7:12: inlining call to fmt.Printf
 ```
 
-可以看到 add 方法被内联了。但是，为什么 sum 方法没有被内联呢？使用运行参数`-gflags="-m -m"`可以看到原因：
+You can see that add is inlined. But why is sum not inlined? With `-gflags="-m -m"` you can see the reason:
 
 ```shell
 ./main.go:10:6: cannot inline sum: unhandled op RANGE
 ```
 
-Go 不会内联包含循环的方法。实际上，包含以下内容的方法都不会被内联：
+Go does not inline functions that contain loops. In fact, functions containing any of the following are not inlined:
 
-- 闭包调用
+- closure calls
 - select
 - for
 - defer
-- go 关键字创建的协程。
+- goroutines created with the go keyword
 
-并且除了这些，还有其它的限制。当解析 AST 时，Go 申请了 80 个节点作为内联的预算。每个节点都会消耗一个预算。
+There are additional limits. When parsing the AST, Go allocates a budget of 80 nodes for inlining. Each node consumes one unit of budget.
 
-比如，a = a + 1 这行代码包含了 5 个节点：AS, NAME, ADD, NAME, LITERAL。
+For example, `a = a + 1` contains 5 nodes: AS, NAME, ADD, NAME, LITERAL.
 
-当一个函数的开销超过了这个预算，就无法内联。以下是一个更复杂的 add 函数对应的输出：
+If a function exceeds the budget, it cannot be inlined. For a more complex add function, you might see:
 
 ```shell
 /op.go:3:6: cannot inline add: function too complex: cost 104 exceeds budget 80
 ```
 
-#### 内联带来的性能提升
+#### Performance gains from inlining
 
-内联是高性能编程的一种重要手段。每个函数调用都有开销：创建栈帧，读写寄存器，这些开销可以通过内联避免。
+Inlining is an important technique in high-performance programming. Every function call has overhead: stack frame setup and register reads/writes. Inlining removes that overhead.
 
-但话说回来，对函数体进行拷贝也会增大二进制文件的大小。以下是内联与非内联时的一个 benchmark 对比：
+That said, copying the function body increases binary size. Here is a benchmark comparison of inline vs non-inline:
 
 ```shell
 name                     old time/op    new time/op    delta
@@ -103,7 +103,7 @@ JSONDecode-8               33.9ms ± 3%    33.1ms ± 1%   -2.32%
 Mandelbrot200-8            3.74ms ± 0%    3.74ms ± 1%     ~
 ```
 
-内联的性能大概要好 5~6%左右。
+Inlining usually improves performance by about 5% to 6%.
 
 #### Memory Allocation
 

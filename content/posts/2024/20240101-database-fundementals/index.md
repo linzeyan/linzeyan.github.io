@@ -6,8 +6,8 @@ menu:
     name: "Database Fundamentals"
     identifier: database-fundementals
     weight: 10
-tags: ["URL", "Database"]
-categories: ["URL", "Database"]
+tags: ["Links", "Database"]
+categories: ["Links", "Database"]
 ---
 
 - [Database Fundamentals](https://tontinton.com/posts/database-fundementals/)

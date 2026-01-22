@@ -1,19 +1,19 @@
 ---
-title: "Containers from scratch"
+title: "從零開始的容器"
 date: 2022-11-24T13:10:14+08:00
 menu:
   sidebar:
-    name: "Containers from scratch"
+    name: "從零開始的容器"
     identifier: linux-containers-from-scratch
     weight: 10
-tags: ["URL", "Linux", "container"]
-categories: ["URL", "Linux", "container"]
+tags: ["Links", "Linux", "container"]
+categories: ["Links", "Linux", "container"]
 hero: images/hero/linux.png
 ---
 
-- [Containers from scratch](https://ericchiang.github.io/post/containers-from-scratch/)
+- [從零開始的容器](https://ericchiang.github.io/post/containers-from-scratch/)
 
-### Container file systems
+### 容器檔案系統
 
 ```bash
 $ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
@@ -30,7 +30,7 @@ $ ls -al rootfs/bin/ls
 
 ### chroot
 
-it allows us to restrict a process' view of the file system. In this case, we'll restrict our process to the "rootfs" directory then exec a shell.
+它可以限制某個程序對檔案系統的視野。這裡我們把程序限制在 "rootfs" 目錄，然後執行一個 shell。
 
 ```bash
 $ sudo chroot rootfs /bin/bash
@@ -44,9 +44,9 @@ Hello, container world!
 root@localhost:/#
 ```
 
-When we execute the Python interpreter, we're executing `rootfs/usr/bin/python`, not the host's Python.
+當我們執行 Python 直譯器時，實際上是執行 `rootfs/usr/bin/python`，而不是宿主機的 Python。
 
-### Creating namespaces with unshare
+### 使用 unshare 建立 namespaces
 
 ```bash
 $ sudo unshare -p -f --mount-proc=$PWD/rootfs/proc \
@@ -58,11 +58,11 @@ root         2  0.0  0.0  17504  2096 ?        R+   22:34   0:00 ps aux
 root@localhost:/#
 ```
 
-In this case, we'll create a PID namespace for the shell, then execute the chroot like the last example.
+在這個例子中，我們為 shell 建立 PID namespace，然後像上一個例子一樣執行 chroot。
 
-### Entering namespaces with nsenter
+### 使用 nsenter 進入 namespaces
 
-- Let's find the shell running in a chroot from our last example.
+- 先找出上一個例子中在 chroot 裡執行的 shell。
 
 ```bash
 $ # From the host, not the chroot.
@@ -71,9 +71,9 @@ $ ps aux | grep /bin/bash | grep root
 root     29840  0.0  0.0  20272  3064 pts/5    S+   17:25   0:00 /bin/bash
 ```
 
-The kernel exposes namespaces under /proc/(PID)/ns as files. In this case, /proc/29840/ns/pid is the process namespace we're hoping to join.
+Kernel 會在 /proc/(PID)/ns 底下以檔案的形式暴露 namespace。在這裡，/proc/29840/ns/pid 就是我們要加入的程序 namespace。
 
-- The nsenter command provides a wrapper around setns to enter a namespace. We'll provide the namespace file, then run the unshare to remount `/proc` and `chroot` to setup a `chroot`. This time, instead of creating a new namespace, our shell will join the existing one.
+- nsenter 指令提供 setns 的封裝以進入 namespace。我們會指定 namespace 檔案，然後執行 unshare 重新掛載 `/proc` 並 chroot。這次不是建立新 namespace，而是加入既有的 namespace。
 
 ```bash
 $ sudo nsenter --pid=/proc/29840/ns/pid \
@@ -86,16 +86,16 @@ root         5  0.0  0.0  20276  3248 ?        S    00:29   0:00 /bin/bash
 root         6  0.0  0.0  17504  1984 ?        R+   00:30   0:00 ps aux
 ```
 
-### Getting around chroot with mounts
+### 用 mounts 繞過 chroot
 
-- First, let's make a new directory to mount into the chroot and create a file there.
+- 先建立一個要掛載到 chroot 的新目錄，並在其中建立檔案。
 
 ```bash
 $ sudo mkdir readonlyfiles
 $ echo "hello" > readonlyfiles/hi.txt
 ```
 
-- Next, we'll create a target directory in our container and bind mount the directory providing the -o ro argument to make it read-only.
+- 接著在容器內建立目標目錄，並用 bind mount 掛載到該目錄，搭配 `-o ro` 讓它唯讀。
 
 ```bash
 $ sudo mkdir -p rootfs/var/readonlyfiles
@@ -104,7 +104,7 @@ $ sudo mount --bind -o ro $PWD/readonlyfiles $PWD/rootfs/var/readonlyfiles
 
 ### cgroups
 
-The kernel exposes cgroups through the /sys/fs/cgroup directory. If your machine doesn't have one you may have to mount the memory cgroup to follow along.
+Kernel 透過 /sys/fs/cgroup 目錄暴露 cgroups。如果你的機器沒有，你可能需要掛載 memory cgroup 才能跟著做。
 
 ```bash
 $ ls /sys/fs/cgroup/
@@ -112,7 +112,7 @@ blkio  cpuacct      cpuset   freezer  memory   net_cls,net_prio  perf_event  sys
 cpu    cpu,cpuacct  devices  hugetlb  net_cls  net_prio          pids
 ```
 
-Creating a cgroup is easy, just create a directory. In this case we'll create a memory group called "demo". Once created, the kernel fills the directory with files that can be used to configure the cgroup.
+建立 cgroup 很簡單，只要建立目錄即可。這裡我們建立一個名為 "demo" 的 memory group。建立後，Kernel 會在該目錄中放入用來配置 cgroup 的檔案。
 
 ```bash
 $ sudo su
@@ -136,20 +136,20 @@ memory.limit_in_bytes               tasks
 memory.max_usage_in_bytes
 ```
 
-To adjust a value we just have to write to the corresponding file. Let's limit the cgroup to 100MB of memory and turn off swap.
+要調整數值，只要寫入對應檔案即可。這裡把 cgroup 設為 100MB，並關閉 swap。
 
 ```bash
 # echo "100000000" > /sys/fs/cgroup/memory/demo/memory.limit_in_bytes
 # echo "0" > /sys/fs/cgroup/memory/demo/memory.swappiness
 ```
 
-The tasks file is special, it contains the list of processes which are assigned to the cgroup. To join the cgroup we can write our own PID.
+tasks 檔案很特別，裡面列出被指派到此 cgroup 的程序。要加入 cgroup，可以把自己的 PID 寫入。
 
 ```bash
 # echo $$ > /sys/fs/cgroup/memory/demo/tasks
 ```
 
-Finally we need a memory hungry application.
+最後我們需要一個吃記憶體的程式。
 
 ```python
 # hungry.py
@@ -176,7 +176,7 @@ while True:
 Killed
 ```
 
-cgroups can't be removed until every processes in the tasks file has exited or been reassigned to another group. Exit the shell and remove the directory with `rmdir` (don't use `rm -r`).
+在 tasks 檔案中的程序全部結束或被重新指派到其他群組前，cgroups 不能被刪除。離開 shell 後用 `rmdir` 刪除目錄（不要用 `rm -r`）。
 
 ```bash
 # exit
@@ -184,7 +184,7 @@ exit
 $ sudo rmdir /sys/fs/cgroup/memory/demo
 ```
 
-### Container security and capabilities
+### 容器安全與 capabilities
 
 ```go
 package main
@@ -217,7 +217,7 @@ $ ./listen
 success
 ```
 
-For things already running as root, like most containerized apps, we're more interested in taking capabilities away than granting them.
+對於已經以 root 執行的東西（例如多數容器化應用），我們更關心的是移除 capabilities，而非新增。
 
 ```bash
 $ sudo su
@@ -233,7 +233,7 @@ gid=0(root)
 groups=0(root)
 ```
 
-As an example, we'll use capsh to drop a few capabilities including CAP_CHOWN. If things work as expected, our shell shouldn't be able to modify file ownership despite being root.
+例如，我們用 capsh 移除幾個 capabilities（包含 CAP_CHOWN）。若一切正常，即使是 root，我們也無法變更檔案擁有者。
 
 ```bash
 $ sudo capsh --drop=cap_chown,cap_setpcap,cap_setfcap,cap_sys_admin --chroot=$PWD/rootfs --

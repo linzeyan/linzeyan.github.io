@@ -1,17 +1,17 @@
 ---
-title: "How to Detect RAID Information in Linux"
+title: "在 Linux 中偵測 RAID 資訊"
 date: 2022-11-28T15:36:27+08:00
 menu:
   sidebar:
-    name: "How to Detect RAID Information in Linux"
+    name: "在 Linux 中偵測 RAID 資訊"
     identifier: linux-raid-information-command-line
     weight: 10
-tags: ["URL", "Linux", "RAID", "command line"]
-categories: ["URL", "Linux", "RAID", "command line"]
+tags: ["Links", "Linux", "RAID", "command line"]
+categories: ["Links", "Linux", "RAID", "command line"]
 hero: images/hero/linux.png
 ---
 
-- [How to Detect RAID Information in Linux](https://www.baeldung.com/linux/raid-information-command-line)
+- [在 Linux 中偵測 RAID 資訊](https://www.baeldung.com/linux/raid-information-command-line)
 
 ##### lspci
 
@@ -93,7 +93,7 @@ lsscsi
 [0:0:0:0]    disk    ATA      ST320LT012-9WS14 YAM1  /dev/sda
 ```
 
-##### Vendor-Specific Tools
+##### 廠商專用工具
 
 ```bash
 omreport storage vdisk

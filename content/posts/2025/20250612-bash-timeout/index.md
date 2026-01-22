@@ -6,8 +6,8 @@ menu:
     name: "TIL: timeout in Bash scripts"
     identifier: bash-timeout
     weight: 10
-tags: ["URL", "BASH", "timeout", "HTTP"]
-categories: ["URL", "BASH", "timeout", "HTTP"]
+tags: ["Links", "BASH", "timeout", "HTTP"]
+categories: ["Links", "BASH", "timeout", "HTTP"]
 ---
 
 - [TIL: timeout in Bash scripts](https://heitorpb.github.io/bla/timeout/)

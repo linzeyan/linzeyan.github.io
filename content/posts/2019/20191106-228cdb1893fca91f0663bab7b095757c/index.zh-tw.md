@@ -1,18 +1,18 @@
 ---
-title: "Some Jenkinsfile examples"
+title: "Jenkinsfile 範例"
 date: 2019-11-06T17:29:46+08:00
 menu:
   sidebar:
-    name: "Some Jenkinsfile examples"
+    name: "Jenkinsfile 範例"
     identifier: jenkins-jenkinsfile-examples
     weight: 10
-tags: ["URL", "Jenkins"]
-categories: ["URL", "Jenkins"]
+tags: ["Links", "Jenkins"]
+categories: ["Links", "Jenkins"]
 ---
 
 - [Some Jenkinsfile examples](https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c)
 
-##### Parallel
+##### 並行
 
 ```
 #!/usr/bin/env groovy

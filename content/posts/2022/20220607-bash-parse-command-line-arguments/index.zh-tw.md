@@ -1,17 +1,17 @@
 ---
-title: "Parse Command Line Arguments in Bash"
+title: "在 Bash 中解析命令列參數"
 date: 2022-06-07T14:48:47+08:00
 menu:
   sidebar:
-    name: "Parse Command Line Arguments in Bash"
+    name: "在 Bash 中解析命令列參數"
     identifier: linux-bash-parse-command-line-arguments
     weight: 10
-tags: ["URL", "Linux", "BASH"]
-categories: ["URL", "Linux", "BASH"]
+tags: ["Links", "Linux", "BASH"]
+categories: ["Links", "Linux", "BASH"]
 hero: images/hero/linux.png
 ---
 
-- [Parse Command Line Arguments in Bash](https://www.baeldung.com/linux/bash-parse-command-line-arguments)
+- [在 Bash 中解析命令列參數](https://www.baeldung.com/linux/bash-parse-command-line-arguments)
 
 ### getopts
 
@@ -41,12 +41,12 @@ while getopts 'abc:h' opt; do
       ;;
   esac
 done
-shift "$(($OPTIND -1))"
+shift "$(( $OPTIND -1 ))"
 ```
 
-- optstring represents the supported options. The option expects an argument if there is a colon (:) after it. For instance, if option c expects an argument, then it would be represented as c: in the optstring
-- When an option has an associated argument, then getopts stores the argument as a string in the OPTARG shell variable. For instance, the argument passed to option c would be stored in the OPTARG variable.
-- opt contains the parsed option.
+- optstring 代表支援的選項。若某個選項需要參數，則在它後面加冒號 (:)。例如選項 c 需要參數，會寫成 c:
+- 當選項有關聯參數時，getopts 會將參數字串存到 OPTARG shell 變數中。例如 option c 的參數會存到 OPTARG。
+- opt 包含已解析的選項。
 
 ```bash
 #!/bin/bash
@@ -82,13 +82,13 @@ while getopts ':abc:h' opt; do
       ;;
   esac
 done
-shift "$(($OPTIND -1))"
+shift "$(( $OPTIND -1 ))"
 ```
 
-- Note that we've updated optstring as well. Now it starts with the colon(:) character, which suppresses the default error message.
-- The getopts function disables error reporting when the OPTERR variable is set to zero.
+- 注意我們也更新了 optstring，現在以冒號 (:) 開頭，會抑制預設的錯誤訊息。
+- 當 OPTERR 變數設為 0 時，getopts 會停用錯誤訊息輸出。
 
-### Parsing Long Command-Line Options With getopt
+### 使用 getopt 解析長選項
 
 ```bash
 #!/bin/bash
@@ -124,5 +124,5 @@ while [ : ]; do
 done
 ```
 
-- `-o` option represents the short command-line options
-- `--long` option represents the long command-line options
+- `-o` 選項代表短選項
+- `--long` 選項代表長選項

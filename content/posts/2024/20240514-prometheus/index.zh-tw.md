@@ -6,8 +6,8 @@ menu:
     name: Prometheus relabeling and linux metrics
     identifier: prometheus-relabeling-linux-metrics
     weight: 10
-tags: ["Prometheus", "URL"]
-categories: ["Prometheus", "URL"]
+tags: ["Prometheus", "Links"]
+categories: ["Prometheus", "Links"]
 ---
 
 - [How to use relabeling in Prometheus and VictoriaMetrics](https://valyala.medium.com/how-to-use-relabeling-in-prometheus-and-victoriametrics-8b90fc22c4b2)

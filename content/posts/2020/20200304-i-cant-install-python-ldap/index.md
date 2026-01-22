@@ -6,8 +6,8 @@ menu:
     name: "Python install module issues"
     identifier: python-pip-install-requirements-issues
     weight: 10
-tags: ["URL", "Python", "pip", "issue"]
-categories: ["URL", "Python", "pip", "issue"]
+tags: ["Links", "Python", "pip", "issue"]
+categories: ["Links", "Python", "pip", "issue"]
 hero: images/hero/python.png
 ---
 

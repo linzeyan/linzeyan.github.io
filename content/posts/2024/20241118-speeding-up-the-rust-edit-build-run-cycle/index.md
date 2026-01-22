@@ -6,8 +6,8 @@ menu:
     name: "Speeding up the Rust edit-build-run cycle"
     identifier: rust-speeding-up-the-rust-edit-build-run-cycle
     weight: 10
-tags: ["URL", "Rust"]
-categories: ["URL", "Rust"]
+tags: ["Links", "Rust"]
+categories: ["Links", "Rust"]
 ---
 
 - [Speeding up the Rust edit-build-run cycle](https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html)

@@ -6,8 +6,8 @@ menu:
     name: "Using Vagrant to Deploy Multiple VMs on vSphere"
     identifier: using-vagrant-to-deploy-multiple-vms-on-vsphere
     weight: 10
-tags: ["URL", "vagrant"]
-categories: ["URL", "vagrant"]
+tags: ["Links", "vagrant"]
+categories: ["Links", "vagrant"]
 ---
 
 - [Using Vagrant to Deploy Multiple VMs on vSphere](https://buildvirtual.net/using-vagrant-to-deploy-multiple-vms-on-vsphere/)

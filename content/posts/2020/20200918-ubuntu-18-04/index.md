@@ -1,19 +1,19 @@
 ---
-title: "Ubuntu 18.04 透過 netplan 設定網路卡 IP"
+title: "Set interface IP with netplan on Ubuntu 18.04"
 date: 2020-09-18T13:00:05+08:00
 menu:
   sidebar:
-    name: "Ubuntu 18.04 透過 netplan 設定網路卡 IP"
+    name: "Set interface IP with netplan on Ubuntu 18.04"
     identifier: linux-ubuntu-configure-interface-ip-by-netplan
     weight: 10
-tags: ["URL", "Linux", "Ubuntu", "Network"]
-categories: ["URL", "Linux", "Ubuntu", "Network"]
+tags: ["Links", "Linux", "Ubuntu", "Network"]
+categories: ["Links", "Linux", "Ubuntu", "Network"]
 hero: images/hero/linux.png
 ---
 
-- [Ubuntu 18.04 透過 netplan 設定網路卡 IP](https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html)
+- [Set interface IP with netplan on Ubuntu 18.04](https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html)
 
-照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：
+Following the notes above, check `/etc/netplan` and open `/etc/netplan/50-cloud-init.yaml`:
 
 ```yaml
 # This file is generated from information provided by
@@ -30,11 +30,11 @@ network:
   version: 2
 ```
 
-看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：
+It looks like you can disable cloud network, but I do not use cloud-init, so remove it:
 
 > `sudo apt-get remove cloud-init`
 
-然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：
+Then change `/etc/netplan/50-cloud-init.yaml` to:
 
 ```yaml
 # This file is generated from information provided by
@@ -55,13 +55,13 @@ network:
   version: 2
 ```
 
-這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：
+YAML has become popular in recent years. Here is a quick explanation of the settings above:
 
-- dhcp4: 關閉 DHCP 自動取得 IP，原本是 true 所以改成 no (官方文件竟然不是 false 有點搞笑，但我實際測試 false 也是可以 work 的)
-- addresses: 靜態 IP 與 Mask
-- nameservers: DNS 服務器，可以設定多筆
-- gateway4: IPv4 所使用的 Gateway
+- dhcp4: disable DHCP. It was true so set to no (the docs say no, not false, but false also works in testing).
+- addresses: static IP and mask.
+- nameservers: DNS servers, can set multiple.
+- gateway4: IPv4 gateway.
 
-修改後存檔後輸入以下命令：
+After saving, run:
 
 > `sudo netplan try`

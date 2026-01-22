@@ -6,8 +6,8 @@ menu:
     name: "CS Visualized: Useful Git Commands"
     identifier: git-cs-visualized-useful-git-commands
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

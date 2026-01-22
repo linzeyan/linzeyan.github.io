@@ -6,8 +6,8 @@ menu:
     name: "設定 Haproxy 以防止 DDOS 攻擊"
     identifier: haproxy-defend-ddos-configuration
     weight: 10
-tags: ["URL", "HAProxy"]
-categories: ["URL", "HAProxy"]
+tags: ["Links", "HAProxy"]
+categories: ["Links", "HAProxy"]
 ---
 
 - [設定 Haproxy 以防止 DDOS 攻擊](https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html)

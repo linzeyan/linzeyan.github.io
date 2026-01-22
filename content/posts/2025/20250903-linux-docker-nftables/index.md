@@ -1,14 +1,14 @@
 ---
-title: "Docker 容器无法访问外网？nftables 下的 NAT 配置指南"
+title: "Docker Containers Can't Access the Internet? NAT Configuration Guide for nftables"
 date: 2025-09-03T09:03:00+08:00
 menu:
   sidebar:
-    name: "Docker 容器无法访问外网？nftables 下的 NAT 配置指南"
+    name: "Docker Containers Can't Access the Internet? NAT Configuration Guide for nftables"
     identifier: linux-docker-nftables
     weight: 10
-tags: ["URL", "Linux", "Docker", "nftables"]
-categories: ["URL", "Linux", "Docker", "nftables"]
+tags: ["Links", "Linux", "Docker", "nftables"]
+categories: ["Links", "Linux", "Docker", "nftables"]
 hero: images/hero/docker.jpeg
 ---
 
-- [Docker 容器无法访问外网？nftables 下的 NAT 配置指南](https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan)
+- [Docker Containers Can't Access the Internet? NAT Configuration Guide for nftables](https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan)

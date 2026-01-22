@@ -1,14 +1,14 @@
 ---
-title: "The Art of Command Line"
+title: "命令列的藝術"
 date: 2022-11-02T15:04:37+08:00
 menu:
   sidebar:
-    name: "The Art of Command Line"
+    name: "命令列的藝術"
     identifier: linux-shell-the-art-of-command-line
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 
-- [The Art of Command Line](https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh-Hant.md)
+- [命令列的藝術](https://github.com/jlevy/the-art-of-command-line)

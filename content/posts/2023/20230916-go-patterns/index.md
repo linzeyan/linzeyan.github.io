@@ -6,8 +6,8 @@ menu:
     name: Go Patterns
     identifier: github-tmrts-go-patterns-mohuishou-go-design-pattern
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

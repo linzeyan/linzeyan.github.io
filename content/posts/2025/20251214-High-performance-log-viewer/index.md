@@ -6,8 +6,8 @@ menu:
     name: "A fast and powerful log viewer and processor that converts JSON logs or logfmt logs into a clear human-readable format."
     identifier: github-pamburus-hl-high-performance-log-viewer
     weight: 10
-tags: ["URL", "Github", "Rust", "Log"]
-categories: ["URL", "Github", "Rust", "Log"]
+tags: ["Links", "Github", "Rust", "Log"]
+categories: ["Links", "Github", "Rust", "Log"]
 hero: images/hero/github.png
 ---
 

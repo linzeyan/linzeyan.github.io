@@ -6,8 +6,8 @@ menu:
     name: "Backup FortiOS config with Ansible - with RestAPI"
     identifier: ansible-backup-fortios-config-with-ansible-with-restapi
     weight: 10
-tags: ["URL", "Ansible", "FortiOS"]
-categories: ["URL", "Ansible", "FortiOS"]
+tags: ["Links", "Ansible", "FortiOS"]
+categories: ["Links", "Ansible", "FortiOS"]
 hero: images/hero/ansible.png
 ---
 

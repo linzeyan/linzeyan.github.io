@@ -6,8 +6,8 @@ menu:
     name: "The Art of Command Line"
     identifier: linux-shell-the-art-of-command-line
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 

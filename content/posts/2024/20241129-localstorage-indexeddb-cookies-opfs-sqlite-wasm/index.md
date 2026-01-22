@@ -6,8 +6,8 @@ menu:
     name: "LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite"
     identifier: localstorage-indexeddb-cookies-opfs-sqlite-wasm
     weight: 10
-tags: ["URL", "Browser"]
-categories: ["URL", "Browser"]
+tags: ["Links", "Browser"]
+categories: ["Links", "Browser"]
 ---
 
 - [LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite](https://rxdb.info/articles/localstorage-indexeddb-cookies-opfs-sqlite-wasm.html)

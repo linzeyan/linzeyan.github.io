@@ -6,8 +6,8 @@ menu:
     name: "Zsh tab-completion not working"
     identifier: shell-zsh-tab-completion-not-working
     weight: 10
-tags: ["URL", "SHELL", "ZSH", "Completion"]
-categories: ["URL", "SHELL", "ZSH", "Completion"]
+tags: ["Links", "SHELL", "ZSH", "Completion"]
+categories: ["Links", "SHELL", "ZSH", "Completion"]
 hero: images/hero/shell.png
 ---
 

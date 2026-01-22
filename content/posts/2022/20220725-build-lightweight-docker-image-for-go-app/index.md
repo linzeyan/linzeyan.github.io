@@ -1,17 +1,17 @@
 ---
-title: "為你的Go應用建立輕量級Docker映象？ | IT人"
+title: "Build a Lightweight Docker Image for Your Go App? | IT Man"
 date: 2022-07-25T17:33:47+08:00
 menu:
   sidebar:
-    name: "為你的Go應用建立輕量級Docker映象？ | IT人"
+    name: "Build a Lightweight Docker Image for Your Go App? | IT Man"
     identifier: golang-build-lightweight-docker-image-for-go-application
     weight: 10
-tags: ["URL", "Go", "Docker"]
-categories: ["URL", "Go", "Docker"]
+tags: ["Links", "Go", "Docker"]
+categories: ["Links", "Go", "Docker"]
 hero: images/hero/go.svg
 ---
 
-- [為你的 Go 應用建立輕量級 Docker 映象？ | IT 人](https://iter01.com/605065.html)
+- [Build a Lightweight Docker Image for Your Go App? | IT Man](https://iter01.com/605065.html)
 
 ##### go build
 
@@ -22,12 +22,12 @@ $ du -sh test1
 14M    test1
 
 
-# 在程式編譯的時候可以加上 `-ldflags "-s -w"` 引數來優化編譯，原理是通過去除部分連結和除錯等資訊來減小編譯生成的可執行程式體積，具體引數如下：
-# -a：強制編譯所有依賴包
-# -s：去掉符號表資訊，不過 panic 的時候 stack trace 就沒有任何檔名/行號資訊了
-# -w：去掉 DWARF 除錯資訊，不過得到的程式就不能使用 gdb 進行除錯了
-# 若對符號表無需求，-ldflags 直接新增 "-s" 即可
-# 注：不建議-w和-s同時使用
+# You can add `-ldflags "-s -w"` during compilation to reduce the binary size by stripping some link and debug info. Details:
+# -a: force rebuilding all dependencies
+# -s: drop symbol table info; stack traces in panic will lose file/line info
+# -w: drop DWARF debug info; you cannot debug with gdb
+# If you don't need the symbol table, you can just use "-s"
+# Note: it is not recommended to use -w and -s together
 $ go build -ldflags "-s -w" -o test2 main.go
 $ du -sh test2
 11M    test2
@@ -50,66 +50,66 @@ $ du -sh test2
 4.6M    test2
 ```
 
-upx 的壓縮選項
+UPX compression options
 
-- `-o`: 指定輸出的檔名
-- `-k`: 保留備份原檔案
-- `-1`: 最快壓縮，共 1-9 九個級別
-- `-9`: 最優壓縮，與上面對應
-- `-d`: 解壓縮 decompress，恢復原體積
-- `-l`: 顯示壓縮檔案的詳情，例如 upx -l main.exe
-- `-t`: 測試壓縮檔案，例如 upx -t main.exe
-- `-q`: 靜默壓縮 be quiet
-- `-v`: 顯示壓縮細節 be verbose
-- `-f`: 強制壓縮
-- `-V`: 顯示版本號
-- `-h`: 顯示幫助資訊
-- `--brute`: 嘗試所有可用的壓縮方法，slow
-- `--ultra-brute`: 比樓上更極端，very slow
+- `-o`: specify output filename
+- `-k`: keep a backup of the original file
+- `-1`: fastest compression, levels 1-9
+- `-9`: best compression, matches the above scale
+- `-d`: decompress and restore original size
+- `-l`: show details of the compressed file, e.g., upx -l main.exe
+- `-t`: test the compressed file, e.g., upx -t main.exe
+- `-q`: be quiet
+- `-v`: show compression details (verbose)
+- `-f`: force compression
+- `-V`: show version
+- `-h`: show help
+- `--brute`: try all available compression methods, slow
+- `--ultra-brute`: even more extreme, very slow
 
-upx 壓縮後的程式和壓縮前的程式一樣，無需解壓仍然能夠正常地執行，這種壓縮方法稱之為帶殼壓縮，壓縮包含兩個部分:
+After UPX compression, the program can still run without decompression. This is called packed compression. It includes two parts:
 
-- 在程式開頭或其他合適的地方插入解壓程式碼；
-- 將程式的其他部分壓縮;
+- Insert decompression code at the beginning or another suitable place in the program
+- Compress the rest of the program
 
-執行時，也包含兩個部分:
+At runtime, it also includes two parts:
 
-- 首先執行的是程式開頭的插入的解壓程式碼，將原來的程式在記憶體中解壓出來；
-- 再執行解壓後的程式;
+- First run the inserted decompression code, which decompresses the program in memory
+- Then run the decompressed program
 
-也就是說，upx 在程式執行時，會有額外的解壓動作，不過這個耗時幾乎可以忽略。
+In short, UPX adds an extra decompression step at runtime, but the overhead is usually negligible.
 
 ##### docker image
 
 ```dockerfile
 FROM golang:alpine AS build
 
-# 為我們的映象設定必要的環境變數
+# Set required environment variables for the image
 ENV GO111MODULE=on
     CGO_ENABLED=0
     GOOS=linux
     GOARCH=amd64
     GOPROXY="https://goproxy.io"
 
-# 移動到工作目錄：/build
+# Move to the working directory: /build
 WORKDIR $GOPATH/src/gin_docker
 
-# 將程式碼複製到容器中
+# Copy the code into the container
 ADD . ./
 
-# 將我們的程式碼編譯成二進位制可執行檔案 app
+# Build the binary executable app
 RUN go build -ldflags "-s -w" -o app
 
 
 FROM scratch AS prod
 
-# 從builder映象中把/go/src/gin_docker 拷貝到當前目錄
-# 設定應用程式以非 root 使用者身份運行
-# User ID 65534 通常是 'nobody' 使用者
-# 映像的執行者仍應在安裝過程中指定一個使用者。
+# Copy /go/src/gin_docker from the builder image to the current directory
+# Run the application as a non-root user
+# User ID 65534 is usually the 'nobody' user
+# The image user should still be specified during installation.
 COPY --chown=65534:0  --from=build  /go/src/gin_docker .
 USER 65534
 
-# 需要執行的命令
+# Command to run
 CMD ["./app"]
 ```

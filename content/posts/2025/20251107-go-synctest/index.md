@@ -6,8 +6,8 @@ menu:
     name: "go-synctest"
     identifier: go-synctest
     weight: 10
-tags: ["URL", "Go", "sync", "test"]
-categories: ["URL", "Go", "sync", "test"]
+tags: ["Links", "Go", "sync", "test"]
+categories: ["Links", "Go", "sync", "test"]
 hero: images/hero/go.svg
 ---
 
@@ -21,16 +21,16 @@ func TestAfterFunc(t *testing.T) {
         called := false
         context.AfterFunc(ctx, func() { called = true })
 
-        synctest.Wait() // 等到所有 goroutine 都卡住
+        synctest.Wait() // Wait until all goroutines are blocked
         if called {
-            t.Fatal("AfterFunc 在 cancel 前就被呼叫")
+            t.Fatal("AfterFunc was called before cancel")
         }
 
         cancel()
 
-        synctest.Wait() // 再等一次
+        synctest.Wait() // Wait again
         if !called {
-            t.Fatal("AfterFunc 沒有在 cancel 後被呼叫")
+            t.Fatal("AfterFunc was not called after cancel")
         }
     })
 }

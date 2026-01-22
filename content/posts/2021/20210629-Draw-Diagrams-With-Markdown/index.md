@@ -6,8 +6,8 @@ menu:
     name: "Draw Diagrams With Markdown"
     identifier: typora-draw-diagrams-with-markdown
     weight: 10
-tags: ["URL", "Typora", "Markdown", "Mermaid", "Diagrams"]
-categories: ["URL", "Typora", "Markdown", "Mermaid", "Diagrams"]
+tags: ["Links", "Typora", "Markdown", "Mermaid", "Diagrams"]
+categories: ["Links", "Typora", "Markdown", "Mermaid", "Diagrams"]
 ---
 
 - [Draw Diagrams With Markdown](https://support.typora.io/Draw-Diagrams-With-Markdown/#sequence-diagrams)

@@ -6,8 +6,8 @@ menu:
     name: "应大多数人要求写下kubeadm的基础使用"
     identifier: k8s-kubeadm-base-use
     weight: 10
-tags: ["URL", "Kubernetes"]
-categories: ["URL", "Kubernetes"]
+tags: ["Links", "Kubernetes"]
+categories: ["Links", "Kubernetes"]
 ---
 
 - [应大多数人要求写下 kubeadm 的基础使用](https://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/)

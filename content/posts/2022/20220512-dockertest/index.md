@@ -1,15 +1,15 @@
 ---
-title: "Dockertest 极速搭建集成测试环境神器"
+title: "Dockertest: A Fast Way to Set Up Integration Test Environments"
 date: 2022-05-12T16:43:31+08:00
 menu:
   sidebar:
-    name: "Dockertest 极速搭建集成测试环境神器"
+    name: "Dockertest: A Fast Way to Set Up Integration Test Environments"
     identifier: golang-testing-dockertest
     weight: 10
-tags: ["URL", "Go", "Testing"]
-categories: ["URL", "Go", "Testing"]
+tags: ["Links", "Go", "Testing"]
+categories: ["Links", "Go", "Testing"]
 hero: images/hero/go.svg
 ---
 
-- [Dockertest 极速搭建集成测试环境神器](https://cn-sec.com/archives/998286.html)
+- [Dockertest: A Fast Way to Set Up Integration Test Environments](https://cn-sec.com/archives/998286.html)
 - [dockertest](https://github.com/ory/dockertest)

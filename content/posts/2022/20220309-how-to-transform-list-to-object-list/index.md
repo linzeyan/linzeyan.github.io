@@ -1,17 +1,17 @@
 ---
-title: "將 List 轉置為 dict 的 list"
+title: "Convert a List to a List of Dicts"
 date: 2022-03-09T11:26:23+08:00
 menu:
   sidebar:
-    name: "將 List 轉置為 dict 的 list"
+    name: "Convert a List to a List of Dicts"
     identifier: ansible-how-to-transform-list-to-object-list
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 
-- [將 List 轉置為 dict 的 list](https://ansible.cloudns.pro/post/how-to-transform-list-to-object-list/)
+- [Convert a List to a List of Dicts](https://ansible.cloudns.pro/post/how-to-transform-list-to-object-list/)
 
 ##### list
 
@@ -46,8 +46,8 @@ my_users:
   loop: "{{ orig_users }}"
 ```
 
-說明如下：
+Explanation:
 
-1. 利用 combine 這個 filter 來組出 dict
-2. 利用 loop 去 iterate orig_users
-3. 用 my_users + [{} | combine({'Name': item})] 來做 List append```
+1. Use the combine filter to build a dict
+2. Use loop to iterate orig_users
+3. Use my_users + [{} | combine({'Name': item})] to append to the list```

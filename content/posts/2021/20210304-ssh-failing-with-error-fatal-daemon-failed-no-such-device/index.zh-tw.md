@@ -1,17 +1,17 @@
 ---
-title: "SSH failing with Error : fatal: daemon() failed: No such device"
+title: "SSH 失敗錯誤：fatal: daemon() failed: No such device"
 date: 2021-03-04T18:48:39+08:00
 menu:
   sidebar:
-    name: "SSH failing with Error : fatal: daemon() failed: No such device"
+    name: "SSH 失敗錯誤：fatal: daemon() failed: No such device"
     identifier: linux-ssh-failing-with-error-fatal-daemon-failed-no-such-device
     weight: 10
-tags: ["URL", "Linux", "SSH"]
-categories: ["URL", "Linux", "SSH"]
+tags: ["Links", "Linux", "SSH"]
+categories: ["Links", "Linux", "SSH"]
 hero: images/hero/linux.png
 ---
 
-- [SSH failing with Error : fatal: daemon() failed: No such device](<https://admin-ahead.com/forum/general-linux/ssh-failing-with-error-fatal-daemon()-failed-no-such-device/>)
+- [SSH 失敗錯誤：fatal: daemon() failed: No such device](<https://admin-ahead.com/forum/general-linux/ssh-failing-with-error-fatal-daemon()-failed-no-such-device/>)
 
 /var/log/secure
 

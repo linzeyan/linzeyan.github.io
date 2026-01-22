@@ -1,63 +1,63 @@
 ---
-title: "Mount AWS S3 Bucket On Amazon EC2"
+title: "在 Amazon EC2 上掛載 AWS S3 Bucket"
 date: 2024-06-09T15:37:30+08:00
 menu:
   sidebar:
-    name: "Mount AWS S3 Bucket On Amazon EC2"
+    name: "在 Amazon EC2 上掛載 AWS S3 Bucket"
     identifier: aws-mount-aws-s3-bucket-on-amazon-ec2
     weight: 10
-tags: ["URL", "AWS", "S3"]
-categories: ["URL", "AWS", "S3"]
+tags: ["Links", "AWS", "S3"]
+categories: ["Links", "AWS", "S3"]
 ---
 
-- [Mount AWS S3 Bucket On Amazon EC2](https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04)
+- [在 Amazon EC2 上掛載 AWS S3 Bucket](https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04)
 
-**_Use Cases_**
+**_使用情境_**
 
-- Data Backup and Archiving: Efficiently store and retrieve data from S3 to perform reliable backups and long-term archiving.
-- Big Data and Analytics: Directly access large datasets in S3 for seamless data processing and analytics.
-- Web Hosting and Content Distribution: Serve static content from S3 to host websites and media files efficiently.
-- Log Collection and Analysis: Centrally store logs in S3 for easy log analysis and monitoring.
-- File Sharing and Collaboration: Share and collaborate on files among multiple EC2 instances using S3 as a shared data repository.
+- 資料備份與封存：有效率地從 S3 儲存與取回資料，用於可靠備份與長期封存。
+- 大數據與分析：直接存取 S3 中的大型資料集，進行順暢的資料處理與分析。
+- 網站代管與內容分發：使用 S3 提供靜態內容，以高效率地託管網站與媒體檔案。
+- 日誌收集與分析：集中將日誌存放在 S3，方便分析與監控。
+- 檔案分享與協作：多台 EC2 透過 S3 作為共享資料庫來分享與協作。
 
-**_Prerequisites_**
+**_先決條件_**
 
-- An Amazon EC2 instance running Linux (Amazon Linux, Ubuntu, CentOS, etc.).
-- IAM role attached to the EC2 instance with appropriate permissions to access the S3 bucket.
+- 一台執行 Linux 的 Amazon EC2 執行個體（Amazon Linux、Ubuntu、CentOS 等）。
+- 已附加具備存取 S3 Bucket 權限的 IAM 角色。
 
 ```shell
 sudo apt-get update -y
 sudo apt-get install awscli -y
 sudo apt-get install s3fs -y
 
-# Create a mount point directory for the S3 bucke
+# 建立 S3 bucket 的掛載點目錄
 sudo mkdir /mnt/s3-bucket
 
-# sync the local directory with the S3 bucket to check the access
+# 同步本機目錄與 S3 bucket 以檢查存取
 cd /mnt/s3-bucket ;touch test1.txt test2.txt
 aws s3 sync /mnt/s3-bucket s3://<your-s3-bucket-name>
 
-# mount the S3 bucket as a filesystem
+# 將 S3 bucket 掛載成檔案系統
 sudo s3fs <your-s3-bucket-name> /mnt/s3-bucket -o iam_role=<iam-role-name> -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 -o use_path_request_style -o url=https://s3-{{aws_region}}.amazonaws.com
 
 ```
 
-##### Debug issue
+##### 除錯問題
 
-To debug at any point, add
+需要除錯時，可加上：
 
 ```shell
 $ sudo s3fs <your-s3-bucket-name> /mnt/s3-bucket -o iam_role=<iam-role-name> -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 -o use_path_request_style -o url=https://s3-{{aws_region}}.amazonaws.com -o dbglevel=info -f -o curldbg
 ```
 
-Verify the mount status
+確認掛載狀態
 
 ```shell
 df -h | grep s3fs
 
 ```
 
-To make the S3 bucket mount persistent across reboots
+讓 S3 bucket 在重新開機後仍可持續掛載
 
 `/etc/fstab`
 

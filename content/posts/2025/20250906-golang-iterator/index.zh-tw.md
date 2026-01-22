@@ -6,8 +6,8 @@ menu:
     name: "淺談 Go Iterator"
     identifier: golang-iterator
     weight: 10
-tags: ["URL", "Golang"]
-categories: ["URL", "Golang"]
+tags: ["Links", "Golang"]
+categories: ["Links", "Golang"]
 ---
 
 - [淺談 Go Iterator](https://ganhua.wang/go-iterator)

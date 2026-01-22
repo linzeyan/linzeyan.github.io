@@ -6,8 +6,8 @@ menu:
     name: "我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化"
     identifier: terminal-zsh-make-oh-my-zsh-fly
     weight: 10
-tags: ["URL", "Zsh"]
-categories: ["URL", "Zsh"]
+tags: ["Links", "Zsh"]
+categories: ["Links", "Zsh"]
 ---
 
 - [我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化](https://blog.skk.moe/post/make-oh-my-zsh-fly/)

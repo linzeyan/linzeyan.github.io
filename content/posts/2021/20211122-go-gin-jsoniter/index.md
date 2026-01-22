@@ -1,17 +1,17 @@
 ---
-title: "Gin 框架绑定 JSON 参数使用 jsoniter"
+title: "Bind JSON with jsoniter in Gin"
 date: 2021-11-22T10:27:39+08:00
 menu:
   sidebar:
-    name: "Gin 框架绑定 JSON 参数使用 jsoniter"
+    name: "Bind JSON with jsoniter in Gin"
     identifier: go-gin-jsoniter
     weight: 10
-tags: ["URL", "Go", "GIN", "jsoniter"]
-categories: ["URL", "Go", "GIN", "jsoniter"]
+tags: ["Links", "Go", "GIN", "jsoniter"]
+categories: ["Links", "Go", "GIN", "jsoniter"]
 hero: images/hero/go.svg
 ---
 
-- [Gin 框架绑定 JSON 参数使用 jsoniter](https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw)
+- [Bind JSON with jsoniter in Gin](https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw)
 
 ### simple
 
@@ -50,9 +50,9 @@ import (
     jsoniter "github.com/json-iterator/go"
     "github.com/gin-gonic/gin/binding"
 )
-// BindingJSON 替换Gin默认的binding，支持更丰富JSON功能
+// BindingJSON replaces Gin's default binding and supports richer JSON features
 var BindingJSON = jsonBinding{}
-// 可以自定义jsoniter配置或者添加插件
+// You can customize jsoniter config or add plugins
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 type jsonBinding struct{}
 func (jsonBinding) Name() string {
@@ -89,7 +89,7 @@ func validate(obj interface{}) error {
 ```
 
 ```go
-// binding.JSON 替换成自定义的
+// Replace binding.JSON with the custom one
 ctx.ShouldBindWith(ms, binding.JSON)
 ctx.ShouldBindBodyWith(ms, binding.JSON)
 ```

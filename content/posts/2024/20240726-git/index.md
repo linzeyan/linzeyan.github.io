@@ -6,8 +6,8 @@ menu:
     name: Git force push
     identifier: git-force-push
     weight: 10
-tags: ["Git", "URL", "push"]
-categories: ["Git", "URL", "push"]
+tags: ["Git", "Links", "push"]
+categories: ["Git", "Links", "push"]
 hero: images/hero/git.png
 ---
 

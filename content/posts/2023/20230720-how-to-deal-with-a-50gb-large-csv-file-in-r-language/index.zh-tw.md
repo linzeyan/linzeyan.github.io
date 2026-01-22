@@ -1,18 +1,18 @@
 ---
-title: "How to deal with a 50GB large csv file in r language?"
+title: "如何處理 50GB 的大型 CSV 檔案（R 語言）？"
 date: 2023-07-20T15:44:11+08:00
 menu:
   sidebar:
-    name: "How to deal with a 50GB large csv file in r language?"
+    name: "如何處理 50GB 的大型 CSV 檔案（R 語言）？"
     identifier: r-large-csv-file
     weight: 10
-tags: ["URL", "R"]
-categories: ["URL", "R"]
+tags: ["Links", "R"]
+categories: ["Links", "R"]
 ---
 
-- [How to deal with a 50GB large csv file in r language?](https://stackoverflow.com/questions/39678940/how-to-deal-with-a-50gb-large-csv-file-in-r-language)
+- [如何處理 50GB 的大型 CSV 檔案（R 語言）？](https://stackoverflow.com/questions/39678940/how-to-deal-with-a-50gb-large-csv-file-in-r-language)
 
-### question
+### 問題
 
 ```r
 all <- read.csv.ffdf(
@@ -25,7 +25,7 @@ all <- read.csv.ffdf(
   )
 ```
 
-### answer
+### 回答
 
 ```r
 library(sqldf)

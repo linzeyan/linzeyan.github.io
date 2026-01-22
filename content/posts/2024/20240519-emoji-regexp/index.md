@@ -6,8 +6,8 @@ menu:
     name: Emoji Regular expression
     identifier: emoji-regexp
     weight: 10
-tags: ["regex", "URL", "emoji"]
-categories: ["regex", "URL", "emoji"]
+tags: ["regex", "Links", "emoji"]
+categories: ["regex", "Links", "emoji"]
 ---
 
 - [Emoji Regular expression](https://taxodium.ink/post/emoji-regexp/)

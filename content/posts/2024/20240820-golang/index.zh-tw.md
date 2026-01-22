@@ -1,80 +1,80 @@
 ---
-title: "Go articles"
+title: "Go 文章"
 date: 2024-08-20T08:55:00+08:00
 menu:
   sidebar:
-    name: Go articles
+    name: Go 文章
     identifier: golang-articles-202408200855
     weight: 10
-tags: ["golang", "URL", "GIN", "byte", "string"]
-categories: ["golang", "URL", "GIN", "byte", "string"]
+tags: ["Go", "Links", "GIN", "byte", "string"]
+categories: ["Go", "Links", "GIN", "byte", "string"]
 ---
 
-- [学会 gin 参数校验之 validator 库，看这一篇就足够了](https://juejin.cn/post/6863765115456454664)
+- [學會 gin 參數校驗之 validator 函式庫，看這一篇就夠了](https://juejin.cn/post/6863765115456454664)
 
-### 字符串约束
+### 字串約束
 
-excludesall：不包含参数中任意的 UNICODE 字符，例如 excludesall=ab
+excludesall：不包含參數中任意的 UNICODE 字元，例如 excludesall=ab
 
-excludesrune：不包含参数表示的 rune 字符，excludesrune=asong
+excludesrune：不包含參數表示的 rune 字元，excludesrune=asong
 
-startswith：以参数子串为前缀，例如 startswith=hi
+startswith：以參數子字串為前綴，例如 startswith=hi
 
-endswith：以参数子串为后缀，例如 endswith=bye。
+endswith：以參數子字串為後綴，例如 endswith=bye。
 
-contains=：包含参数子串，例如 contains=email
+contains=：包含參數子字串，例如 contains=email
 
-containsany：包含参数中任意的 UNICODE 字符，例如 containsany=ab
+containsany：包含參數中任意的 UNICODE 字元，例如 containsany=ab
 
-containsrune：包含参数表示的 rune 字符，例如`containsrune=asong
+containsrune：包含參數表示的 rune 字元，例如 `containsrune=asong`
 
-excludes：不包含参数子串，例如 excludes=email
+excludes：不包含參數子字串，例如 excludes=email
 
-### 范围约束
+### 範圍約束
 
-范围约束的字段类型分为三种：
+範圍約束的欄位型別分為三種：
 
-对于数值，我们则可以约束其值
-对于切片、数组和 map，我们则可以约束其长度
-对于字符串，我们则可以约束其长度
+對於數值，我們可以約束其值
+對於切片、陣列和 map，我們可以約束其長度
+對於字串，我們可以約束其長度
 
-#### 常用 tag 介绍：
+#### 常用 tag 介紹：
 
-ne：不等于参数值，例如 ne=5
-gt：大于参数值，例如 gt=5
-gte：大于等于参数值，例如 gte=50
-lt：小于参数值，例如 lt=50
-lte：小于等于参数值，例如 lte=50
-oneof：只能是列举出的值其中一个，这些值必须是数值或字符串，以空格分隔，如果字符串中有空格，将字符串用单引号包围，例如 oneof=male female。
-eq：等于参数值，注意与 len 不同。对于字符串，eq 约束字符串本身的值，而 len 约束字符串长度。例如 eq=10
-len：等于参数值，例如 len=10
-max：小于等于参数值，例如 max=10
-min：大于等于参数值，例如 min=10
+ne：不等於參數值，例如 ne=5
+gt：大於參數值，例如 gt=5
+gte：大於等於參數值，例如 gte=50
+lt：小於參數值，例如 lt=50
+lte：小於等於參數值，例如 lte=50
+oneof：只能是列舉出的值其中之一，這些值必須是數值或字串，以空格分隔；如果字串中有空格，請用單引號包起來，例如 oneof=male female。
+eq：等於參數值，注意與 len 不同。對於字串，eq 約束字串本身的值，而 len 約束字串長度。例如 eq=10
+len：等於參數值，例如 len=10
+max：小於等於參數值，例如 max=10
+min：大於等於參數值，例如 min=10
 
-### Fields 约束
+### 欄位約束
 
-eqfield：定义字段间的相等约束，用于约束同一结构体中的字段。例如：eqfield=Password
-eqcsfield：约束统一结构体中字段等于另一个字段（相对），确认密码时可以使用，例如：eqfiel=ConfirmPassword
-nefield：用来约束两个字段是否相同，确认两种颜色是否一致时可以使用，例如：nefield=Color1
-necsfield：约束两个字段是否相同（相对）
+eqfield：定義欄位間相等約束，用於約束同一結構體中的欄位。例如：eqfield=Password
+eqcsfield：約束同一結構體中欄位等於另一個欄位（相對），確認密碼時可以使用，例如：eqcsfield=ConfirmPassword
+nefield：用來約束兩個欄位是否不同，確認兩種顏色是否一致時可以使用，例如：nefield=Color1
+necsfield：約束兩個欄位是否不同（相對）
 
-### 常用约束
+### 常用約束
 
-unique：指定唯一性约束，不同类型处理不同：
+unique：指定唯一性約束，不同型別處理不同：
 
-对于 map，unique 约束没有重复的值
-对于数组和切片，unique 没有重复的值
-对于元素类型为结构体的碎片，unique 约束结构体对象的某个字段不重复，使用 unique=field 指定字段名
+對於 map，unique 約束沒有重複的值
+對於陣列和切片，unique 沒有重複的值
+對於元素型別為結構體的切片，unique 約束結構體物件的某個欄位不重複，使用 unique=field 指定欄位名
 
-email：使用 email 来限制字段必须是邮件形式，直接写 eamil 即可，无需加任何指定。
+email：使用 email 來限制欄位必須是郵件形式，直接寫 email 即可，無需加任何指定。
 
-omitempty：字段未设置，则忽略
+omitempty：欄位未設定，則忽略
 
--：跳过该字段，不检验
+-：跳過該欄位，不檢驗
 
-|：使用多个约束，只需要满足其中一个，例如 rgb|rgba
+|：使用多個約束，只需要滿足其中一個，例如 rgb|rgba
 
-required：字段必须设置，不能为默认值
+required：欄位必須設定，不能為預設值
 
 ```go
 type Info struct {
@@ -83,9 +83,9 @@ type Info struct {
 }
 ```
 
-## [没有什么不可能：修改 Go 结构体的私有字段](https://colobu.com/2024/08/08/access-the-unexported-fields/)
+## [沒有什麼不可能：修改 Go 結構體的私有欄位](https://colobu.com/2024/08/08/access-the-unexported-fields/)
 
-### 在我们的 main 函数中，你不能访问 Person 的 age 字段：
+### 在我們的 main 函式中，你不能存取 Person 的 age 欄位：
 
 ```go
 package main;
@@ -104,7 +104,7 @@ func main() {
 }
 ```
 
-那么真的就无法访问了吗？也不一定，我们可以通过反射的方式访问私有字段：
+那麼真的就無法存取了嗎？也不一定，我們可以透過反射的方式存取私有欄位：
 
 ```go
 p := model.NewPerson("Alice", 30)
@@ -112,13 +112,13 @@ age := reflect.ValueOf(p).FieldByName("age")
 fmt.Printf("原始值: %d, CanSet: %v\n", age.Int(), age.CanSet()) // 30, false
 ```
 
-运行这个程序，可以看到我们获得了这个私有字段 age 的值：
+執行這個程式，可以看到我們獲得了私有欄位 age 的值：
 
 ```shell
 原始值: 30, CanSet: false
 ```
 
-### 这里我们以标准库的 sync.Mutex 结构体为例，sync.Mutex 包含两个字段，这两个字段都是私有的：
+### 這裡我們以標準函式庫的 sync.Mutex 結構體為例，sync.Mutex 包含兩個欄位，這兩個欄位都是私有的：
 
 ```go
 type Mutex struct {
@@ -127,9 +127,9 @@ type Mutex struct {
 }
 ```
 
-正常情况下你只能通过 Mutex.Lock 和 Mutex.Unlock 来间接的修改这两个字段。
+正常情況下你只能透過 Mutex.Lock 和 Mutex.Unlock 來間接修改這兩個欄位。
 
-现在我们演示通过 hack 的方式修改 Mutex 的 state 字段的值：
+現在我們示範透過 hack 的方式修改 Mutex 的 state 欄位值：
 
 ```go
 func setPrivateField() {
@@ -140,7 +140,7 @@ func setPrivateField() {
 	fmt.Println(*state) // ❶
 	flagField := reflect.ValueOf(&field).Elem().FieldByName("flag")
 	flagPtr := (*uintptr)(unsafe.Pointer(flagField.UnsafeAddr()))
-	// 修改 flag 字段的值
+	// 修改 flag 欄位的值
 	*flagPtr &= ^uintptr(flagRO) // ❷
 	field.Set(reflect.ValueOf(int32(0)))
 	mu.Lock() // ❸
@@ -160,15 +160,15 @@ const (
 )
 ```
 
-❶ 处我们已经介绍过了，访问私有字段的值，这里会打印出 1
-❶ 处我们清除了 flag 字段的 flagRO 标志位，这样就不会报 reflect: reflect.Value.SetInt using value obtained using unexported field 错误了
-❸ 处不会导致二次加锁带来的死锁，因为 state 字段的值已经被修改为 0 了，所以不会阻塞。最后打印结果还是 1
+❶ 處我們已經介紹過了，存取私有欄位的值，這裡會印出 1
+❷ 處我們清除了 flag 欄位的 flagRO 標誌位，這樣就不會報 reflect: reflect.Value.SetInt using value obtained using unexported field 錯誤了
+❸ 處不會導致二次加鎖帶來的死鎖，因為 state 欄位的值已經被修改為 0 了，所以不會阻塞。最後印出的結果還是 1
 
-这样我们就可以实现了修改私有字段的值了。
+這樣我們就可以實作修改私有欄位的值了。
 
-### 使用 unexported 字段的 Value 设置公开字段
+### 使用 unexported 欄位的 Value 設定公開欄位
 
-看 reflect.Value.Set 的源码，我们可以看到它会检查参数的值是否 unexported，如果是，就会报错，下面就是一个例子：
+看 reflect.Value.Set 的原始碼，我們可以看到它會檢查參數的值是否為 unexported，如果是就會報錯，下面是一個例子：
 
 ```go
 func setUnexportedField2() {
@@ -180,7 +180,7 @@ func setUnexportedField2() {
 }
 ```
 
-注意 ❹ 处，我们尝试把 alice 的私有字段 age 的值赋值给 bob 的公开字段 Age，这里会报错：
+注意 ❹ 處，我們嘗試把 alice 的私有欄位 age 的值賦值給 bob 的公開欄位 Age，這裡會報錯：
 
 ```shell
 panic: reflect: reflect.Value.Set using value obtained using unexported field
@@ -198,9 +198,9 @@ main.main()
 exit status 2
 ```
 
-原因 alice 的 age 值被识别为私有字段，它是不能用来赋值给公开字段的。
+原因是 alice 的 age 值被識別為私有欄位，不能用來賦值給公開欄位。
 
-有了上一节的经验，我们同样可以绕过这个检查，实现这个赋值：
+有了上一節的經驗，我們同樣可以繞過這個檢查，實現這個賦值：
 
 ```go
 func setUnexportedField2() {
@@ -208,7 +208,7 @@ func setUnexportedField2() {
 	bob := model.NewTeacher("Bob", 40)
 	bobAgent := reflect.ValueOf(&bob).Elem().FieldByName("Age")
 	aliceAge := reflect.ValueOf(&alice).Elem().FieldByName("age")
-	// 修改 flag 字段的值
+	// 修改 flag 欄位的值
 	flagField := reflect.ValueOf(&aliceAge).Elem().FieldByName("flag")
 	flagPtr := (*uintptr)(unsafe.Pointer(flagField.UnsafeAddr()))
 	*flagPtr &= ^uintptr(flagRO) // ❺
@@ -217,15 +217,15 @@ func setUnexportedField2() {
 }
 ```
 
-❺ 处我们修改了 aliceAge 的 flag 字段，去掉了 flagRO 标志位，这样就不会报错了，❻ 处我们成功的把 alice 的私有字段 age 的值赋值给 bob 的公开字段 Age。
+❺ 處我們修改了 aliceAge 的 flag 欄位，去掉了 flagRO 標誌位，這樣就不會報錯了，❻ 處我們成功把 alice 的私有欄位 age 值賦給 bob 的公開欄位 Age。
 
-这样我们就可以实现了使用私有字段的值给其他 Value 值进行赋值了。
+這樣我們就可以使用私有欄位的值給其他 Value 賦值。
 
-### 给 unaddressable 的值设置值
+### 給 unaddressable 的值設定值
 
-回到最初的问题，我们尝试给一个 unaddressable 的值设置值，会报错。
+回到最初的問題，若嘗試給一個 unaddressable 的值設定值，會報錯。
 
-结合上面的 hack 手段，我们也可以绕过限制，给 unaddressable 的值设置值：
+結合上面的 hack 手段，我們也可以繞過限制，給 unaddressable 的值設定值：
 
 ```go
 func setUnaddressableValue() {
@@ -235,15 +235,15 @@ func setUnaddressableValue() {
 	// v.Set(reflect.ValueOf(50))
 	flagField := reflect.ValueOf(&v).Elem().FieldByName("flag")
 	flagPtr := (*uintptr)(unsafe.Pointer(flagField.UnsafeAddr()))
-	// 修改 flag 字段的值
-	*flagPtr |= uintptr(flagAddr)          // 设置可寻址标志位
+	// 修改 flag 欄位的值
+	*flagPtr |= uintptr(flagAddr)          // 設定可尋址標誌位
 	fmt.Printf("CanSet: %v\n", v.CanSet()) // true
 	v.SetInt(50)
-	fmt.Printf("修改后的值：%d\n", v.Int()) // 50
+	fmt.Printf("修改後的值：%d\n", v.Int()) // 50
 }
 ```
 
-## [四种字符串和 bytes 互相转换方式的性能比较](https://colobu.com/2024/08/13/string-bytes-benchmark/)
+## [四種字串與 bytes 互相轉換方式的效能比較](https://colobu.com/2024/08/13/string-bytes-benchmark/)
 
 ### 三、新型 unsafe 方式
 
@@ -262,7 +262,7 @@ func toString(b []byte) string {
 }
 ```
 
-### 四、kubernetes 的实现
+### 四、kubernetes 的實作
 
 ```go
 func toK8sBytes(s string) []byte {
@@ -273,44 +273,44 @@ func toK8sString(b []byte) string {
 }
 ```
 
-#### 在 Mac mini M2 上运行，go1.22.6 darwin/arm64，结果如下：
+#### 在 Mac mini M2 上執行，go1.22.6 darwin/arm64，結果如下：
 
 ```shell
 goos: darwin
 goarch: arm64
 pkg: github.com/smallnest/study/str2bytes
-BenchmarkStringToBytes/强制转换-8              	78813638	        14.73 ns/op	      16 B/op	       1 allocs/op
-BenchmarkStringToBytes/传统转换-8              	599346962	         2.010 ns/op	       0 B/op	       0 allocs/op
-BenchmarkStringToBytes/新型转换-8              	624976126	         1.929 ns/op	       0 B/op	       0 allocs/op
-BenchmarkStringToBytes/k8s转换-8             	887370499	         1.211 ns/op	       0 B/op	       0 allocs/op
+BenchmarkStringToBytes/強制轉換-8               78813638        14.73 ns/op      16 B/op       1 allocs/op
+BenchmarkStringToBytes/傳統轉換-8               599346962        2.010 ns/op       0 B/op       0 allocs/op
+BenchmarkStringToBytes/新型轉換-8               624976126        1.929 ns/op       0 B/op       0 allocs/op
+BenchmarkStringToBytes/k8s轉換-8              887370499        1.211 ns/op       0 B/op       0 allocs/op
 
-BenchmarkBytesToString/强制转换-8              	92011309	        12.68 ns/op	      16 B/op	       1 allocs/op
-BenchmarkBytesToString/传统转换-8              	815922964	         1.471 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBytesToString/新型转换-8              	624965414	         1.922 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBytesToString/k8s转换-8             	1000000000	         1.194 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBytesToString/強制轉換-8               92011309        12.68 ns/op      16 B/op       1 allocs/op
+BenchmarkBytesToString/傳統轉換-8               815922964        1.471 ns/op       0 B/op       0 allocs/op
+BenchmarkBytesToString/新型轉換-8               624965414        1.922 ns/op       0 B/op       0 allocs/op
+BenchmarkBytesToString/k8s轉換-8              1000000000        1.194 ns/op       0 B/op       0 allocs/op
 
 ```
 
-string 转 bytes 性能最好的是 k8s 方案，新型转换和传统转换性能差不多，新型方案略好，强制转换性能最差。
+string 轉 bytes 效能最好的是 k8s 方案，新型轉換和傳統轉換效能差不多，新型方案略好，強制轉換效能最差。
 
-而对于 bytes 转 string，k8s 方案性能最好，传统转换次之，新型转换性能再次之，强制转换性能非常不好。
+而 bytes 轉 string，k8s 方案效能最好，傳統轉換次之，新型轉換再次之，強制轉換效能非常差。
 
-#### 在 Linux amd64 上运行，go1.22.0 linux/amd64，结果如下：
+#### 在 Linux amd64 上執行，go1.22.0 linux/amd64，結果如下：
 
 ```shell
 goos: linux
 goarch: amd64
 pkg: test
 cpu: Intel(R) Xeon(R) Platinum
-BenchmarkStringToBytes/强制转换-2                 	30606319	        42.02 ns/op	      16 B/op	       1 allocs/op
-BenchmarkStringToBytes/传统转换-2                 	315913948	         3.779 ns/op	       0 B/op	       0 allocs/op
-BenchmarkStringToBytes/新型转换-2                 	411972518	         2.753 ns/op	       0 B/op	       0 allocs/op
-BenchmarkStringToBytes/k8s转换-2                	449640819	         2.770 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBytesToString/强制转换-2                 	38716465	        29.18 ns/op	      16 B/op	       1 allocs/op
-BenchmarkBytesToString/传统转换-2                 	458832459	         2.593 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBytesToString/新型转换-2                 	439537762	         2.762 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBytesToString/k8s转换-2                	478885546	         2.375 ns/op	       0 B/op	       0 allocs/op
+BenchmarkStringToBytes/強制轉換-2                  30606319        42.02 ns/op      16 B/op       1 allocs/op
+BenchmarkStringToBytes/傳統轉換-2                  315913948        3.779 ns/op       0 B/op       0 allocs/op
+BenchmarkStringToBytes/新型轉換-2                  411972518        2.753 ns/op       0 B/op       0 allocs/op
+BenchmarkStringToBytes/k8s轉換-2                 449640819        2.770 ns/op       0 B/op       0 allocs/op
+BenchmarkBytesToString/強制轉換-2                  38716465        29.18 ns/op      16 B/op       1 allocs/op
+BenchmarkBytesToString/傳統轉換-2                  458832459        2.593 ns/op       0 B/op       0 allocs/op
+BenchmarkBytesToString/新型轉換-2                  439537762        2.762 ns/op       0 B/op       0 allocs/op
+BenchmarkBytesToString/k8s轉換-2                 478885546        2.375 ns/op       0 B/op       0 allocs/op
 
 ```
 
-整体上看，k8s 方案、传统转换、新型转换性能都挺好，强制转换性能最差。k8s 在 bytes 转 string 上性能最好。
+整體來看，k8s 方案、傳統轉換、新型轉換效能都不錯，強制轉換效能最差。bytes 轉 string 上，k8s 最快。

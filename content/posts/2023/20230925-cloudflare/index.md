@@ -1,18 +1,22 @@
 ---
-title: "Cloudflare tunnel on Synology"
+title: "Cloudflare Tunnel on Synology"
 date: 2023-09-25T22:01:00+08:00
-description: Create cloudflare tunnel on synology
+description: Create Cloudflare tunnel on Synology
 menu:
   sidebar:
     name: Cloudflare Tunnel
     identifier: cloudflare-tunnel
     weight: 10
-tags: ["URL", "Cloudflare", "tunnel", "Synology"]
-categories: ["URL", "Cloudflare", "Synology"]
+tags: ["Links", "Cloudflare", "tunnel", "Synology"]
+categories: ["Links", "Cloudflare", "Synology"]
 hero: images/hero/cloudflare.svg
 ---
 
 - [CLOUDFLARE tunnel on SYNOLOGY. (the raw way)](https://www.youtube.com/watch?v=5IrtNxfzH1o)
+
+{{< youtube 5IrtNxfzH1o >}}
+
+{{< vs >}}
 
 ## Setup Synology
 

@@ -6,8 +6,8 @@ menu:
     name: "Terraform Provider 開發紀錄"
     identifier: terraform-provider-development
     weight: 10
-tags: ["URL", "Terraform"]
-categories: ["URL", "Terraform"]
+tags: ["Links", "Terraform"]
+categories: ["Links", "Terraform"]
 ---
 
 - [Terraform Provider 開發紀錄](https://hazel.style/2022/12/06/Terraform-Provider-Development/)

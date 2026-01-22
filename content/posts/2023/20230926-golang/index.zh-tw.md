@@ -6,8 +6,8 @@ menu:
     name: Golang tips
     identifier: golang-tips
     weight: 10
-tags: ["Go", "URL"]
-categories: ["Go", "URL"]
+tags: ["Go", "Links"]
+categories: ["Go", "Links"]
 hero: images/hero/go.svg
 ---
 

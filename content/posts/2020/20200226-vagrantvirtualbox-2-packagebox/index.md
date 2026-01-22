@@ -6,8 +6,8 @@ menu:
     name: "vagrant筆記"
     identifier: vagrant-virtualbox-2-packagebox
     weight: 10
-tags: ["URL", "Vagrant"]
-categories: ["URL", "Vagrant"]
+tags: ["Links", "Vagrant"]
+categories: ["Links", "Vagrant"]
 ---
 
 - [vagrant 筆記](https://cwza.github.io/my_blog/2016/03/09/vagrant%E7%AD%86%E8%A8%98)

@@ -6,8 +6,8 @@ menu:
     name: "SHELL编程之常用技巧"
     identifier: linux-shellbian-cheng-zhi-chang-yong-ji-qiao
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 

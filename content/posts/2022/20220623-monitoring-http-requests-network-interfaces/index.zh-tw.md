@@ -1,17 +1,17 @@
 ---
-title: "Monitoring HTTP Requests on a Network Interface in Real Time"
+title: "即時監控網路介面上的 HTTP 請求"
 date: 2022-06-23T16:48:42+08:00
 menu:
   sidebar:
-    name: "Monitoring HTTP Requests on a Network Interface in Real Time"
+    name: "即時監控網路介面上的 HTTP 請求"
     identifier: linux-monitoring-http-requests-network-interfaces
     weight: 10
-tags: ["URL", "Linux", "command line", "HTTP", "Network"]
-categories: ["URL", "Linux", "command line", "HTTP", "Network"]
+tags: ["Links", "Linux", "command line", "HTTP", "Network"]
+categories: ["Links", "Linux", "command line", "HTTP", "Network"]
 hero: images/hero/linux.png
 ---
 
-- [Monitoring HTTP Requests on a Network Interface in Real Time](https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces)
+- [即時監控網路介面上的 HTTP 請求](https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces)
 
 ### tcpflow
 
@@ -26,12 +26,12 @@ GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
 GET /mirrors.txt HTTP/1.1
 ```
 
-- `-p` disables promiscuous mode
-- `-c` means only print the output to the console and don't create files
-- `-i` specifies the network interface
-  grep receives the output of tcpflow
-- `-o` means show only the matching parts of the lines that match the pattern
-- `-E` means the pattern is an extended regular expression (ERE)
+- `-p` 停用混雜模式
+- `-c` 只輸出到主控台，不建立檔案
+- `-i` 指定網路介面
+  grep 會接收 tcpflow 的輸出
+- `-o` 只顯示符合樣式的那一段
+- `-E` 表示樣式是延伸正則表示式（ERE）
 
 ### httpry
 

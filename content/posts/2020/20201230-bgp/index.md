@@ -6,8 +6,8 @@ menu:
     name: "Day 19 BGP Protocol (1)"
     identifier: network-route-bgp-introduction
     weight: 10
-tags: ["URL", "Network", "Route", "BGP"]
-categories: ["URL", "Network", "Route", "BGP"]
+tags: ["Links", "Network", "Route", "BGP"]
+categories: ["Links", "Network", "Route", "BGP"]
 hero: images/hero/network.png
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "怎么选择 Go 文件读取方案"
     identifier: go-file-reading-scheme
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

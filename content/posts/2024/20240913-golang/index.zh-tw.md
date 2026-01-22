@@ -1,16 +1,16 @@
 ---
-title: "Supply chain attack"
+title: "供應鏈攻擊"
 date: 2024-09-13T09:41:00+08:00
 menu:
   sidebar:
-    name: "Supply chain attack"
+    name: "供應鏈攻擊"
     identifier: golang-supply-chain-attack
     weight: 10
-tags: ["golang", "URL", "security"]
-categories: ["golang", "URL", "security"]
+tags: ["Go", "Links", "security"]
+categories: ["Go", "Links", "security"]
 ---
 
-- [提高警惕，供应链攻击就在你我身边](https://v2ex.com/t/1072079)
+- [提高警惕，供應鏈攻擊就在你我身邊](https://v2ex.com/t/1072079)
 
 * `github.com/siruspen/logrus` 假
 * `github.com/sirupsen/logrus` 真

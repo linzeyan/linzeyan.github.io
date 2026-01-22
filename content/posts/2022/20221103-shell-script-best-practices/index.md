@@ -6,8 +6,8 @@ menu:
     name: "Shell Script Best Practices"
     identifier: linux-shell-script-best-practices
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 

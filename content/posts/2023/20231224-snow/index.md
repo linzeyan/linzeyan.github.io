@@ -6,8 +6,8 @@ menu:
     name: A python script that allows your terminal to snow.
     identifier: python-script
     weight: 10
-tags: ["Python", "snow", "terminal", "URL"]
-categories: ["Python", "snow", "terminal", "URL"]
+tags: ["Python", "snow", "terminal", "Links"]
+categories: ["Python", "snow", "terminal", "Links"]
 hero: images/hero/python.png
 ---
 

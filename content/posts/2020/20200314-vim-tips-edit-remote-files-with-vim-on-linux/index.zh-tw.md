@@ -1,32 +1,32 @@
 ---
-title: "Vim Tips - Edit Remote Files With Vim On Linux"
+title: "Vim 小技巧 - 在 Linux 上用 Vim 編輯遠端檔案"
 date: 2020-03-14T15:43:38+08:00
 menu:
   sidebar:
-    name: "Vim Tips - Edit Remote Files With Vim On Linux"
+    name: "Vim 小技巧 - 在 Linux 上用 Vim 編輯遠端檔案"
     identifier: linux-vim-tips-edit-remote-files-with-vim-on-linux
     weight: 10
-tags: ["URL", "Vim"]
-categories: ["URL", "Vim"]
+tags: ["Links", "Vim"]
+categories: ["Links", "Vim"]
 hero: images/hero/kubernetes.png
 ---
 
-- [Vim Tips - Edit Remote Files With Vim On Linux](https://www.ostechnix.com/vim-tips-edit-remote-files-with-vim-on-linux/)
+- [Vim 小技巧 - 在 Linux 上用 Vim 編輯遠端檔案](https://www.ostechnix.com/vim-tips-edit-remote-files-with-vim-on-linux/)
 
-#### Edit remote files with Vim on Linux
+#### 在 Linux 上用 Vim 編輯遠端檔案
 
 ```shell
 $ vim scp://sk@192.168.225.22/info.txt
 ```
 
-1. `user@remotesystem:port` (E.g. `sk@192.168.225.22`)
+1. `user@remotesystem:port`（例如 `sk@192.168.225.22`）
 
-2. Single slash (`/`) - If you want to edit a file that is stored in the $HOME directory of a remote system, you must use a trailing slash to separate remote system's IP address or hostname from the file path.
+2. 單斜線 (`/`) - 若要編輯位於遠端系統 $HOME 目錄的檔案，需要在遠端系統的 IP 或主機名後加上一個斜線，用來分隔檔案路徑。
 
-3. Double slashes (`//`) - To specify full path of a file, you must use double slashes. For example, let us say you are editing a file named info.txt that is located in /home/sk/Documents/ directory of your remote system. In this case, the command would be: `vim scp://sk@192.168.225.22//home/sk/Documents/info.txt`
+3. 雙斜線 (`//`) - 若要指定檔案完整路徑，必須使用雙斜線。例如，你要編輯遠端系統 /home/sk/Documents/ 目錄下的 info.txt，命令會是：`vim scp://sk@192.168.225.22//home/sk/Documents/info.txt`
 
-4. If you don't have ssh/scp access, you can use other protocols, for example `ftp`. `vim ftp://user@remotesystem/path/to/file`
+4. 如果沒有 ssh/scp 權限，可以改用其他協定，例如 `ftp`：`vim ftp://user@remotesystem/path/to/file`
 
-#### Edit remote files within Vim session
+#### 在 Vim 工作階段內編輯遠端檔案
 
 `:e scp://sk@192.168.225.22/info.txt`

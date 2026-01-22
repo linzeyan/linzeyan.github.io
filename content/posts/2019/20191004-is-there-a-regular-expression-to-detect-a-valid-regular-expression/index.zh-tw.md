@@ -1,18 +1,18 @@
 ---
-title: "Is there a regular expression to detect a valid regular expression?"
+title: "是否有正規表示式可以檢測有效的正規表示式？"
 date: 2019-10-04T14:44:38+08:00
 menu:
   sidebar:
-    name: "Is there a regular expression to detect a valid regular expression?"
+    name: "是否有正規表示式可以檢測有效的正規表示式？"
     identifier: is-there-a-regular-expression-to-detect-a-valid-regular-expression
     weight: 10
-tags: ["URL", "Regex"]
-categories: ["URL", "Regex"]
+tags: ["Links", "Regex"]
+categories: ["Links", "Regex"]
 ---
 
-- [Is there a regular expression to detect a valid regular expression?](https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression)
+- [是否有正規表示式可以檢測有效的正規表示式？](https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression)
 
-This is a recursive regex, and is not supported by many regex engines. PCRE based ones should support it.
+這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。
 
 ```
 /
@@ -34,11 +34,11 @@ $                                             # end of string
 /
 ```
 
-Without whitespace and comments
+移除空白與註解後
 
 `/^((?:(?:[^?+*{}()[\]\\|]+|\\.|\[(?:\^?\\.|\^[^\\]|[^\\^])(?:[^\]\\]+|\\.)*\]|\((?:\?[:=!]|\?<[=!]|\?>)?(?1)??\)|\(\?(?:R|[+-]?\d+)\))(?:(?:[?+*]|\{\d+(?:,\d*)?\})[?+]?)?|\|)*)$/`
 
-.NET does not support recursion directly. (The (?1) and (?R) constructs.) The recursion would have to be converted to counting balanced groups
+.NET 不直接支援遞迴（(?1) 和 (?R) 結構）。必須將遞迴改寫成平衡群組計數。
 
 ```
 ^                                         # start of string
@@ -64,6 +64,6 @@ $                                         # end of string
 (?(N)(?!))                                # fail if counter is non-zero.
 ```
 
-Compacted
+精簡版
 
 `^(?:(?:[^?+*{}()[\]\\|]+|\\.|\[(?:\^?\\.|\^[^\\]|[^\\^])(?:[^\]\\]+|\\.)*\]|\((?:\?[:=!]|\?<[=!]|\?>|\?<[^\W\d]\w*>|\?'[^\W\d]\w*')?(?<N>)|\)(?<-N>))(?:(?:[?+*]|\{\d+(?:,\d*)?\})[?+]?)?|\|)*$(?(N)(?!))`

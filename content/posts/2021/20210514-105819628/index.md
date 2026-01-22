@@ -1,48 +1,48 @@
 ---
-title: "Nginx - request_time和upstream_response_time详解"
+title: "Nginx request_time and upstream_response_time explained"
 date: 2021-05-14T16:04:04+08:00
 menu:
   sidebar:
-    name: "Nginx - request_time和upstream_response_time详解"
+    name: "Nginx request_time and upstream_response_time explained"
     identifier: nginx-time-definition-and-detail
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Nginx - request_time 和 upstream_response_time 详解](https://blog.csdn.net/zzhongcy/article/details/105819628)
+- [Nginx request_time and upstream_response_time explained](https://blog.csdn.net/zzhongcy/article/details/105819628)
 
-### time definition
+### Time definitions
 
 **request_time**
 
-从接受用户请求的第一个字节到发送完响应数据的时间，即`$request_time` 包括接收客户端请求数据的时间、后端程序响应的时间、发送响应数据给客户端的时间(不包含写日志的时间)。
+Time from the first byte of the client request to the completion of response data being sent. `$request_time` includes time to receive the request, time for the upstream to respond, and time to send the response (excluding log write time).
 
 **upstream_response_time**
 
-从 Nginx 向后端建立连接开始到接受完数据然后关闭连接为止的时间
+Time from Nginx establishing a connection to the upstream until all data is received and the connection is closed.
 
 **upstream_connect_time**
 
-跟后端 server 建立连接的时间，如果是到后端使用了加密的协议，该时间将包括握手的时间。
+Time to connect to the upstream server. If using an encrypted protocol, this includes handshake time.
 
 **upstream_header_time**
 
-接收后端 server 响应头的时间
+Time to receive the upstream response headers.
 
-如果把整个过程补充起来的话 应该是：
+If we break the flow down:
 
-`［1用户请求］［2建立 Nginx 连接］［3发送响应］［4接收响应］［5关闭  Nginx 连接］`
+`[1 client request] [2 connect to Nginx] [3 send response] [4 receive response] [5 close Nginx connection]`
 
-- 那么 `upstream_response_time` 就是 `2+3+4+5`
-- 但是 一般这里面可以认为 `［5关闭 Nginx 连接］` 的耗时接近 0
-- 所以 `upstream_response_time` 实际上就是 `2+3+4`
-- 而 `request_time` 是 `1+2+3+4`
-- 二者之间相差的就是 `［1用户请求］`的时间。
+- `upstream_response_time` is `2+3+4+5`
+- In practice, `[5 close Nginx connection]` is close to 0
+- So `upstream_response_time` is effectively `2+3+4`
+- `request_time` is `1+2+3+4`
+- The difference is the `[1 client request]` time
 
-#### upstream_response_time 比 request_time 大
+#### upstream_response_time greater than request_time
 
 > https://forum.nginx.org/read.php?21,284448,284450#msg-284450
 
-`$upstream_response_time` 由 `clock_gettime(CLOCK_MONOTONIC_COARSE)`计算，默认情况下，它可以过去 4 毫秒，相反，`$request_time` 由 `gettimeofday()`计算。 所以最终 upstream_response_time 可能比 response_time 更大。
+`$upstream_response_time` is calculated with `clock_gettime(CLOCK_MONOTONIC_COARSE)` and can be 4 ms behind by default. In contrast, `$request_time` is calculated with `gettimeofday()`. So upstream_response_time can end up larger than response_time.

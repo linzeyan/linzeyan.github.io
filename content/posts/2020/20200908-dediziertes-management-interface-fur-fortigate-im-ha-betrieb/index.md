@@ -6,8 +6,8 @@ menu:
     name: "Fortigate Management Interface in HA Mode"
     identifier: dediziertes-management-interface-fur-fortigate-im-ha-betrieb
     weight: 10
-tags: ["URL", "Fortigate", "Firewall"]
-categories: ["URL", "Fortigate", "Firewall"]
+tags: ["Links", "Fortigate", "Firewall"]
+categories: ["Links", "Fortigate", "Firewall"]
 ---
 
 - [Fortigate Management Interface in HA Mode](https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/)

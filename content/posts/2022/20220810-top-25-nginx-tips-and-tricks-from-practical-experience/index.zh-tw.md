@@ -1,21 +1,21 @@
 ---
-title: "Top 25 Nginx Tips and Tricks From Practical Experience"
+title: "實戰經驗整理的 25 個 Nginx 技巧"
 date: 2022-08-10T12:27:28+08:00
 menu:
   sidebar:
-    name: "Top 25 Nginx Tips and Tricks From Practical Experience"
+    name: "實戰經驗整理的 25 個 Nginx 技巧"
     identifier: nginx-top-25-nginx-tips-and-tricks-from-practical-experience
     weight: 10
-tags: ["URL", "NGINX"]
-categories: ["URL", "NGINX"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Top 25 Nginx Tips and Tricks From Practical Experience](https://hackernoon.com/top-25-nginx-tips-and-tricks-from-practical-experience)
+- [實戰經驗整理的 25 個 Nginx 技巧](https://hackernoon.com/top-25-nginx-tips-and-tricks-from-practical-experience)
 
 - `server_tokens off;`
 - `ssl_protocols TLSv1.2 TLSv1.3;`
-- Disable any undesirable HTTP methods
+- 停用不需要的 HTTP 方法
 
 ```nginx
   location / {
@@ -23,14 +23,14 @@ hero: images/hero/nginx.jpeg
   }
 ```
 
-- Enable sysctl based protection
+- 啟用基於 sysctl 的保護
 
 ```shell
 net.ipv4.conf.all.rp_filter = 1
 net.ipv4.tcp_syncookies = 1
 ```
 
-- Stop image hotlinking
+- 防止圖片外連
 
 ```nginx
 location /images/ {

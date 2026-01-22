@@ -6,8 +6,8 @@ menu:
     name: "Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal"
     identifier: rust-terminal-tools-linux-mac-windows-fish-zsh
     weight: 10
-tags: ["URL", "Rust", "Terminal"]
-categories: ["URL", "Rust", "Terminal"]
+tags: ["Links", "Rust", "Terminal"]
+categories: ["Links", "Rust", "Terminal"]
 ---
 
 - [Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal](https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/)

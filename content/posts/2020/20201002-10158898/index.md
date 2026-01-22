@@ -6,8 +6,8 @@ menu:
     name: "Vagrantfile and Provider"
     identifier: vagrant-vagrantfile-and-provider-introduct
     weight: 10
-tags: ["URL", "vagrant"]
-categories: ["URL", "vagrant"]
+tags: ["Links", "vagrant"]
+categories: ["Links", "vagrant"]
 ---
 
 - [Day 8 - Vagrantfile and Provider](https://ithelp.ithome.com.tw/articles/10158898)

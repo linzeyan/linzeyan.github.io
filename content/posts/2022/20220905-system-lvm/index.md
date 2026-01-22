@@ -6,8 +6,8 @@ menu:
     name: "LVM - lvg and lvol"
     identifier: ansible-system-lvm
     weight: 10
-tags: ["URL", "Ansible", "LVM"]
-categories: ["URL", "Ansible", "LVM"]
+tags: ["Links", "Ansible", "LVM"]
+categories: ["Links", "Ansible", "LVM"]
 hero: images/hero/ansible.png
 ---
 

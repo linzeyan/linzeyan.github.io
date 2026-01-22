@@ -1,21 +1,21 @@
 ---
-title: "Golang基准测试"
+title: "Golang benchmarks"
 date: 2021-09-02T12:50:33+08:00
 menu:
   sidebar:
-    name: "Golang基准测试"
+    name: "Golang benchmarks"
     identifier: golang-testing-ji-zhun-ce-shi
     weight: 10
-tags: ["URL", "Go", "Benchmark", "Testing"]
-categories: ["URL", "Go", "Benchmark", "Testing"]
+tags: ["Links", "Go", "Benchmark", "Testing"]
+categories: ["Links", "Go", "Benchmark", "Testing"]
 hero: images/hero/go.svg
 ---
 
-- [Golang 基准测试](https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&mid=2247485595&idx=1&sn=9981e6103a6b33cc3a06be0781a2bf10&chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd)
+- [Golang benchmarks](https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&mid=2247485595&idx=1&sn=9981e6103a6b33cc3a06be0781a2bf10&chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd)
 
-#### 基本使用
+#### Basics
 
-> 基准测试常用于代码性能测试，函数需要导入 testing 包，并定义以 Benchmark 开头的函数， 参数为 testing.B 指针类型，在测试函数中循环调用函数多次
+> Benchmarks are used for performance testing. Functions should import the testing package and define functions that start with Benchmark. The parameter type is testing.B, and the target function is called repeatedly inside the benchmark loop.
 
 ```shell
 ➜  go test -bench=. -run=none
@@ -36,15 +36,15 @@ PASS
 ok      pkg06   1.854s
 ```
 
-#### bench 的工作原理
+#### How bench works
 
-- 基准测试函数会被一直调用直到 `b.N` 无效，它是基准测试循环的次数
-- `b.N` 从 `1` 开始，如果基准测试函数在 `1` 秒内就完成 (默认值)，则 `b.N` 增加，并再次运行基准测试函数
-- `b.N` 的值会按照序列 `1,2,5,10,20,50,...` 增加，同时再次运行基准测测试函数
-- 上述结果解读代表 `1` 秒内运行了 `250` 次，每次 `4682682 ns`
-- `-12` 后缀和用于运行次测试的 `GOMAXPROCS` 值有关。与 `GOMAXPROCS` 一样，此数字默认为启动时 Go 进程可见的 CPU 数。可以使用 `-cpu` 标识更改此值，可以传入多个值以列表形式来运行基准测试
+- The benchmark function keeps running until `b.N` is no longer valid; it is the number of iterations.
+- `b.N` starts at `1`. If the benchmark completes within `1` second (default), `b.N` increases and the benchmark runs again.
+- `b.N` increases in the sequence `1,2,5,10,20,50,...` and the benchmark reruns.
+- The result above means it ran `250` times in 1 second, with each run taking `4682682 ns`.
+- The `-12` suffix relates to `GOMAXPROCS`. The default value is the number of CPUs visible to the Go process at startup. You can change it with `-cpu`, and pass multiple values to run multiple benchmarks.
 
-#### 传入 cpu num 进行测试
+#### Run with multiple CPU counts
 
 ```shell
 ➜  go test -bench=. -cpu=1,2,4  -benchmem -run=none
@@ -59,9 +59,9 @@ PASS
 ok      pkg06   5.826s
 ```
 
-#### count 多次运行基准测试
+#### Run benchmarks multiple times with count
 
-> 因为热缩放、内存局部性、后台处理、gc 活动等等会导致单次的误差，所以一般会进行多次测试
+> Due to CPU throttling, memory locality, background work, GC activity, etc., a single run may be noisy. It is common to run benchmarks multiple times.
 
 ```shell
 ➜  go test -bench=. -count=10  -benchmem -run=none
@@ -83,9 +83,9 @@ PASS
 ok      pkg06   18.166s
 ```
 
-#### benchtime 指定运行秒数
+#### benchtime: specify duration
 
-> 有的函数比较慢，为了更精确的结果，可以通过-benchtime 标志指定运行时间，从而使它运行更多次
+> For slower functions, you can use -benchtime to run longer and collect more samples.
 
 ```shell
 ➜  go test -bench=. -benchtime=5s  -benchmem -run=none
@@ -98,9 +98,9 @@ PASS
 ok      pkg06   7.199s
 ```
 
-#### ResetTimer 重置定时器
+#### ResetTimer
 
-> 能在真正测试之前还需要做很多例如初始化等工作，这时可以在需要测试的函数执行之初添加一个重置定时器的功能，这样最终得到的时间就更为精确
+> If the benchmark includes setup work like initialization, reset the timer before the actual benchmark to get more accurate results.
 
 ```go
 package pkg06
@@ -130,9 +130,9 @@ PASS
 ok      pkg06   16.122s
 ```
 
-#### benchmem 展示内存消耗
+#### benchmem shows memory usage
 
-- 例如测试大 cap 的切片，直接用 cap 初始化和 cap 动态扩容进行对比
+- For example, compare a slice initialized with a large cap vs dynamic growth.
 
 ```go
 package pkg08

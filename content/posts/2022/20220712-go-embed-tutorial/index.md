@@ -1,26 +1,26 @@
 ---
-title: "Go embed 简明教程"
+title: "A Concise Go embed Tutorial"
 date: 2022-07-12T13:57:03+08:00
 menu:
   sidebar:
-    name: "Go embed 简明教程"
+    name: "A Concise Go embed Tutorial"
     identifier: golang-go-embed-tutorial
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [Go embed 简明教程](https://colobu.com/2021/01/17/go-embed-tutorial/)
+- [A Concise Go embed Tutorial](https://colobu.com/2021/01/17/go-embed-tutorial/)
 
-### 嵌入
+### Embedding
 
-- 对于单个的文件，支持嵌入为`string`和 `[]byre`
-- 对于多个文件和文件夹，支持嵌入为新的文件系统 FS
-- 比如导入 "embed" 包，即使无显式的使用
-- `go:embed` 指令用来嵌入，必须紧跟着嵌入后的变量名
-- 只支持嵌入为 `string`, `[]byte` 和 `embed.FS` 三种类型，这三种类型的别名(alias)和命名类型(如 type S string)都不可以
-- 使用的是相对路径
+- For a single file, you can embed it as `string` or `[]byte`
+- For multiple files and directories, you can embed them as a new filesystem (FS)
+- Import the "embed" package even if it is not explicitly used
+- The `go:embed` directive is used for embedding and must be followed by the target variable name
+- Only `string`, `[]byte`, and `embed.FS` are supported. Aliases and named types (e.g., type S string) are not allowed
+- Uses relative paths
 
 #### string/[]byte
 
@@ -71,13 +71,13 @@ func main() {
 }
 ```
 
-##### 匹配模式
+##### Matching patterns
 
-go:embed 指令中可以只写文件夹名，此文件夹中除了.和\_开头的文件和文件夹都会被嵌入，并且子文件夹也会被递归的嵌入，形成一个此文件夹的文件系统。
+go:embed can take just a directory name. All files and directories inside, except those starting with . and _, are embedded. Subdirectories are embedded recursively to form a filesystem for that directory.
 
-如果想嵌入.和\_开头的文件和文件夹， 比如 p 文件夹下的.hello.txt 文件，那么就需要使用*，比如 go:embed p/*。
+If you want to embed files and directories starting with . and _, such as p/.hello.txt, you need to use *, e.g., go:embed p/*.
 
-*不具有递归性，所以子文件夹下的.和\_不会被嵌入，除非你在专门使用子文件夹的*进行嵌入
+The * pattern is not recursive, so . and _ files in subdirectories are not embedded unless you use a * specifically for the subdirectory.
 
 ```go
 package main
@@ -95,7 +95,7 @@ var ff embed.FS
 func main() {
 	data, _ := f.ReadFile("p/.hello.txt")
 	fmt.Println(string(data))
-	data, _ = f.ReadFile("p/q/.hi.txt") // 没有嵌入 p/q/.hi.txt
+	data, _ = f.ReadFile("p/q/.hi.txt") // p/q/.hi.txt is not embedded
 	fmt.Println(string(data))
 
 	data, _ := ff.ReadFile("hello.txt")

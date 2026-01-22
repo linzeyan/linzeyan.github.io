@@ -6,8 +6,8 @@ menu:
     name: "Dockertest 极速搭建集成测试环境神器"
     identifier: golang-testing-dockertest
     weight: 10
-tags: ["URL", "Go", "Testing"]
-categories: ["URL", "Go", "Testing"]
+tags: ["Links", "Go", "Testing"]
+categories: ["Links", "Go", "Testing"]
 hero: images/hero/go.svg
 ---
 

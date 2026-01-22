@@ -1,24 +1,24 @@
 ---
-title: "Kubernetes Without kube-proxy"
+title: "不使用 kube-proxy 的 Kubernetes"
 date: 2021-12-20T17:57:13+08:00
 menu:
   sidebar:
-    name: "Kubernetes Without kube-proxy"
+    name: "不使用 kube-proxy 的 Kubernetes"
     identifier: k8s-network-cilium-kube-proxy-free
     weight: 10
-tags: ["URL", "Kubernetes", "Cilium", "Network"]
-categories: ["URL", "Kubernetes", "Cilium", "Network"]
+tags: ["Links", "Kubernetes", "Cilium", "Network"]
+categories: ["Links", "Kubernetes", "Cilium", "Network"]
 hero: images/hero/kubernetes.png
 ---
 
-- [Kubernetes Without kube-proxy](https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/)
+- [不使用 kube-proxy 的 Kubernetes](https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/)
 
-#### Quick-Start
+#### 快速開始
 
 ```bash
 kubeadm init --skip-phases=addon/kube-proxy
 
-# Setup Helm repository
+# 設定 Helm 倉庫
 helm repo add cilium https://helm.cilium.io/
 
 

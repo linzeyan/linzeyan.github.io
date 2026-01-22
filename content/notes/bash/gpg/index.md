@@ -83,7 +83,7 @@ gpg --import-options restore --import private.gpg
 
 ```bash
 echo 'export GPG_TTY=$(tty)' >> ~/.zshrc
-gpgconf –kill gpg-agent
+gpgconf -kill gpg-agent
 exec $SHELL
 ```
 

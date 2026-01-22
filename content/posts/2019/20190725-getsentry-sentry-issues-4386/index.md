@@ -6,8 +6,8 @@ menu:
     name: "Excessive Errors from `sentry.lang.javascript.processor: SoftTimeLimitExceeded()`"
     identifier: github-issue-getsentry-sentry-issues-4386
     weight: 10
-tags: ["URL", "Sentry"]
-categories: ["URL", "Sentry"]
+tags: ["Links", "Sentry"]
+categories: ["Links", "Sentry"]
 ---
 
 - [Excessive Errors from `sentry.lang.javascript.processor: SoftTimeLimitExceeded()`](https://github.com/getsentry/sentry/issues/4386)

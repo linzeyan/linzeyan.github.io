@@ -6,8 +6,8 @@ menu:
     name: "Nginx SSL/TLS configuration with TLSv1.2 and TLSv1.3 - ECDHE and strong ciphers suite (Openssl 1.1.1)"
     identifier: nginx-tls-configuration-ecdhe-7d432c3c3d134cc3cb7e98b30a76c287
     weight: 10
-tags: ["URL", "Nginx", "TLS"]
-categories: ["URL", "Nginx", "TLS"]
+tags: ["Links", "Nginx", "TLS"]
+categories: ["Links", "Nginx", "TLS"]
 hero: images/hero/nginx.jpeg
 ---
 

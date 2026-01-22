@@ -6,8 +6,8 @@ menu:
     name: "Tcpdump 使用总结"
     identifier: network-command-tcpdump
     weight: 10
-tags: ["URL", "Network", "tcpdump", "command line"]
-categories: ["URL", "Network", "tcpdump", "command line"]
+tags: ["Links", "Network", "tcpdump", "command line"]
+categories: ["Links", "Network", "tcpdump", "command line"]
 hero: images/hero/network.png
 ---
 

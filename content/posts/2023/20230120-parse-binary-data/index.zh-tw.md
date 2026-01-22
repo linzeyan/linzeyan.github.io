@@ -6,8 +6,8 @@ menu:
     name: "使用Go语言解析二进制数据踩坑总结"
     identifier: golang-parse-binary-data
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

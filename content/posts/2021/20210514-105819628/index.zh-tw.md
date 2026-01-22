@@ -6,8 +6,8 @@ menu:
     name: "Nginx - request_time和upstream_response_time详解"
     identifier: nginx-time-definition-and-detail
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

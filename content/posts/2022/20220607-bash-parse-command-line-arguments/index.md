@@ -6,8 +6,8 @@ menu:
     name: "Parse Command Line Arguments in Bash"
     identifier: linux-bash-parse-command-line-arguments
     weight: 10
-tags: ["URL", "Linux", "BASH"]
-categories: ["URL", "Linux", "BASH"]
+tags: ["Links", "Linux", "BASH"]
+categories: ["Links", "Linux", "BASH"]
 hero: images/hero/linux.png
 ---
 

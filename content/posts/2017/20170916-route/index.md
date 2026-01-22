@@ -11,18 +11,18 @@ categories: ["Network"]
 hero: images/hero/network.png
 ---
 
-Router - 善於運算路由表的機器，L3 的設備。
+Router - a device that is good at computing routing tables, an L3 device.
 
 Routing Table
 
-- 一張網卡綁了一個 IP，天生就有了 2 筆 route，不能被改變。192.168.1.1/24
-  - 自己本身。Local route / Host route：192.168.1.1/32
-  - 整個網段。Direct route / Connect route：192.168.1.0/24
-- Static route 想設幾個就設幾個。
+- A NIC with one IP naturally has two routes and they cannot be changed. 192.168.1.1/24
+  - Itself. Local route / Host route: 192.168.1.1/32
+  - The whole subnet. Direct route / Connect route: 192.168.1.0/24
+- You can add as many static routes as you want.
   - 172.10.10.10/24 -> 192.168.1.2
   - 2.2.2.2/26 -> 192.168.1.9
   - ...
-- Default route - gateway 只有一個。
+- Default route - only one gateway.
   - 0.0.0.0/0 -> 192.168.1.10
-- 小數優先 - 優先走範圍小的 route。
+- More specific routes take precedence.
 - BGPv4

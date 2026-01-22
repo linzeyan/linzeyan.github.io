@@ -1,45 +1,45 @@
 ---
-title: "openvpn部署之部署基於AD域認證"
+title: "Deploying OpenVPN with AD domain authentication"
 date: 2020-09-17T13:15:33+08:00
 menu:
   sidebar:
-    name: "openvpn部署之部署基於AD域認證"
+    name: "Deploying OpenVPN with AD domain authentication"
     identifier: linux-openvpn-pam-sssd-active-directory
     weight: 10
-tags: ["URL", "Linux", "Windows", "AD", "LDAP", "VPN"]
-categories: ["URL", "Linux", "Windows", "AD", "LDAP", "VPN"]
+tags: ["Links", "Linux", "Windows", "AD", "LDAP", "VPN"]
+categories: ["Links", "Linux", "Windows", "AD", "LDAP", "VPN"]
 hero: images/hero/linux.png
 ---
 
-- [openvpn 部署之部署基於 AD 域認證](https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff)
+- [Deploying OpenVPN with AD domain authentication](https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff)
 - [OpenVPN + PAM + SSSD + Active Directory](https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/)
 - https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/
 - https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8
 - https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5
 
 ```bash
-# 安裝openvpn
+# Install OpenVPN
 yum install openvpn -y
 yum -y install openssl openssl-devel -y
 yum -y install lzo lzo-devel  -y
 yum install -y libgcrypt libgpg-error libgcrypt-devel
 
-# 安裝openvpn認證插件
+# Install OpenVPN auth plugin
 yum install openvpn-auth-ldap -y
 
-# 安裝easy-rsa
-# 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝
+# Install easy-rsa
+# Since openvpn 2.3 removed easy-rsa from the package, install it separately.
 yum install easy-rsa
 cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
 
-# 生成openvpn的key及證書
-# 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數
-export KEY_COUNTRY="CN"                # 國家
-export KEY_PROVINCE="ZJ"               # 省份
-export KEY_CITY="NingBo"               # 城市
-export KEY_ORG="TEST-VPN"              # 組織
-exportKEY_EMAIL="81367070@qq.com"      # 郵件
-export KEY_OU="baidu"                  # 單位
+# Generate OpenVPN keys and certificates
+# Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters
+export KEY_COUNTRY="CN"                # Country
+export KEY_PROVINCE="ZJ"               # Province
+export KEY_CITY="NingBo"               # City
+export KEY_ORG="TEST-VPN"              # Organization
+exportKEY_EMAIL="81367070@qq.com"      # Email
+export KEY_OU="baidu"                  # Unit
 
 source vars
 ./clean-all
@@ -49,7 +49,7 @@ source vars
 ./build-key client1
 
 
-# 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`
+# Edit the OpenVPN server config: `/etc/openvpn/server.conf`
 port 1194
 proto udp
 dev tun
@@ -57,9 +57,9 @@ ca keys/ca.crt
 cert keys/server.crt
 key keys/server.key  # This file should be kept secret
 dh keys/dh2048.pem
-server 10.8.0.0 255.255.255.0    //客戶端分配的ip地址
-push "route 192.168.1.0 255.255.255.0"  //推送客戶端的路由
-push "redirect-gateway"   //修改客戶端的網關，使其直接走vpn流量
+server 10.8.0.0 255.255.255.0    // client IP pool
+push "route 192.168.1.0 255.255.255.0"  // push route to clients
+push "redirect-gateway"   // change client gateway to route VPN traffic
 ifconfig-pool-persist ipp.txt
 keepalive 10 120
 comp-lzo
@@ -73,24 +73,24 @@ username-as-common-name
 log /var/log/openvpn.log
 
 
-# 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`
+# Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`
 # /etc/openvpn/auth/ldap.conf
 
 <LDAP>
     # LDAP server URL
-    # 更改爲 AD 服務器的 IP
+    # Change to the AD server IP
     URL ldap://172.16.76.238:389
 
     # Bind DN (If your LDAP server doesn't support anonymous binds)
     # BindDN uid=Manager,ou=People,dc=example,dc=com
-    # 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢
-    # -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有
+    # Change to the domain admin DN; you can query it with ldapsearch
+    # Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all
     # ldapsearch -LLL -x -h 172.16.76.238 -D "administrator@xx.com" -W -b "dc=xx,dc=com" "*"
     BindDN "cn=administrator,cn=Users,dc=xx,dc=com"
 
     # Bind Password
     # Password SecretPassword
-    # 域管理員的密碼
+    # Domain admin password
     Password passwd
 
     # Network timeout (in seconds)
@@ -120,14 +120,14 @@ log /var/log/openvpn.log
 
 <Authorization>
     # Base DN
-    # 查詢認證的基礎 dn
+    # Base DN for auth search
     BaseDN "dc=boqii-inc,dc=com"
 
     # User Search Filter
     # SearchFilter "(&(uid=%u)(accountStatus=active))"
-    # 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，
-    # 後面 "memberof=CN=myvpn,DC=xx,DC=com" 指向要認證的 vpn 用戶組，
-    # 這樣任何用戶使用 vpn，只要加入這個組就好了
+    # sAMAccountName=%u uses the sAMAccountName value as the username,
+    # and "memberof=CN=myvpn,DC=xx,DC=com" points to the VPN user group to authenticate,
+    # so any user can use VPN once they are in this group.
     SearchFilter "(&(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))"
 
     # Require Group Membership
@@ -151,23 +151,23 @@ log /var/log/openvpn.log
 
 ```
 
-拷貝`/etc/openvpn/key`目錄下的`ca.crt`證書，以備客戶端使用。
+Copy the `ca.crt` certificate under `/etc/openvpn/key` for client use.
 
-注：客戶端使用 ca.crt 和客戶端配置文件即可正常使用 openvpn 了，客戶端使用方法，不在本文範圍之內
+Note: the client can use OpenVPN with ca.crt and the client configuration file. Client usage is out of scope here.
 
 client.ovpn
 
 ```
 client
 dev tun
-proto udp                  //注意協議，跟服務器保持一致
-remote xx.xx.com 1194     //xx.xx.com替換爲你的服務器ip
+proto udp                  // protocol must match the server
+remote xx.xx.com 1194     // replace with your server IP
 resolv-retry infinite
 nobind
 persist-key
 persist-tun
 ca ca.crt
-auth-user-pass            //客戶端使用賬戶密碼登陸的選項，用於客戶端彈出認證用戶的窗口
+auth-user-pass            // enable username/password auth prompt
 comp-lzo
 verb 3
 ```
@@ -176,10 +176,10 @@ verb 3
 
 https://github.com/Nyr/openvpn-install.git
 
-##### 修改 `/etc/openvpn/server/server.conf` 讓 OpenVPN 支援 PAM
+##### Edit `/etc/openvpn/server/server.conf` to enable PAM for OpenVPN
 
 ```
-local 10.0.0.10 #主機IP
+local 10.0.0.10 # host IP
 port 1194
 proto udp
 dev tun
@@ -204,17 +204,17 @@ status openvpn-status.log
 verb 3
 crl-verify crl.pem
 explicit-exit-notify
-plugin /usr/lib64/openvpn/plugins/openvpn-plugin-auth-pam.so login #啟用PAM驗證, 使用預設設定檔/etc/pam.d/login
+plugin /usr/lib64/openvpn/plugins/openvpn-plugin-auth-pam.so login # enable PAM auth using default profile /etc/pam.d/login
 ```
 
-##### 修改 Client 端的預設值, 由於用戶端要使用與主機不同網段 10.1.0.0/24 的資源故需要增加路由
+##### Update client defaults. Since clients need access to a different subnet (10.1.0.0/24), add a route.
 
 `/etc/openvpn/server/client-common.txt`
 
 ```
 client dev tun
 proto udp
-remote 1.2.3.4 1194 # 外部實體IP
+remote 1.2.3.4 1194 # public IP
 resolv-retry infinite
 nobind
 persist-key
@@ -224,37 +224,37 @@ auth SHA512
 cipher AES-256-CBC
 ignore-unknown-option block-outside-dns
 block-outside-dns
-auth-user-pass # 除了openvpn本身的金鑰驗證, 另外開啟AD使用者帳號密碼驗證
+auth-user-pass # enable AD username/password auth in addition to OpenVPN keys
 verb 3
-route 10.1.0.0 255.255.255.0 10.0.0.253 # 增加通往10.1.0.0/24網斷路由, 網關為10.0.0.253
+route 10.1.0.0 255.255.255.0 10.0.0.253 # add route to 10.1.0.0/24 via gateway 10.0.0.253
 ```
 
-##### 更改完成後重新執行安裝命令產生新的 client 端 .ovpn 設定檔
+##### After changes, rerun the install script to generate a new client .ovpn file
 
 `./openvpn-install.sh`
 
 ```bash
-# 過程中選 Add a new user, 至於第一次產生的user設定可以選擇 Revoke an existing user
-# 移除掉. 產生的 .ovpn 檔會在/root資料夾下
+# During the process choose Add a new user. You can choose Revoke an existing user
+# to remove the first one. The .ovpn file will be in /root.
 
-# 取得網域憑證伺服器的Public key ,通常會在以下位址且檔名類似
+# Get the domain CA public key. It is usually at the path below with a similar name
 \\caserver\CertEnroll\caserver_MYDOMAIN Root Certification Authority.crt
-使用cifs工具掛載目錄後 下載到centos8上並轉為PEM格式
+Mount the share with cifs, download to CentOS 8, and convert to PEM.
 
 
-# 掛載cifs, server2003使用smb1.0所以參數須加上vers=1.0
+# Mount CIFS; Server 2003 uses SMB 1.0 so add vers=1.0
 mount.cifs //ca_server/CertEnroll /mnt/cifs -o user=administrator,pass=password,dom=mydomain,vers=1.0
 cp /mnt/cifs/xxxx.crt xxxx.crt
-# 將der 轉換為 pem
+# Convert der to pem
 openssl x509 -inform der -in xxxx.crt -out xxxx.pem
-# 搬移到 trust資料夾
+# Move to the trust store directory
 mv xxxx.pem /etc/pki/ca-trust/source/anchors
-# 將憑證更新至主機信任憑證裡
+# Update the trusted certificates
 update-ca-trust
 
 
-# 設定sssd 連接 Active Directory
-# 修改 `/etc/sssd/sssd.conf`
+# Configure sssd to connect to Active Directory
+# Edit `/etc/sssd/sssd.conf`
 
 
 [sssd]
@@ -273,10 +273,10 @@ offline_credentials_expiration = 60
 cache_credentials = True
 ldap_search_base = dc=mydomain,dc=com
 id_provider = ldap
-ldap_uri = ldaps://dc.mydomain.com:636   #AD主機, 使用ssl協定連線
+ldap_uri = ldaps://dc.mydomain.com:636   # AD host, connect via SSL
 ldap_schema = AD
-ldap_default_bind_dn = cn=administrator,cn=users,dc= mydomain,dc=com  # 這裡為了方便使用管理員帳號, 為安全起見可以使用唯讀的網域帳號
-ldap_default_authtok = password_for_administrator  # 管理員密碼
+ldap_default_bind_dn = cn=administrator,cn=users,dc= mydomain,dc=com  # using admin for convenience; use a read-only domain account for safety
+ldap_default_authtok = password_for_administrator  # admin password
 ldap_tls_reqcert = demand
 ldap_tls_cacert = /etc/pki/tls/certs/ca-bundle.crt
 ldap_tls_cacertdir = /etc/pki/tls/certs
@@ -290,7 +290,7 @@ fallback_homedir = /home/%u
 default_shell = /bin/bash
 
 
-# 修改 `/etc/openlap/ldap.conf`
+# Edit `/etc/openlap/ldap.conf`
 
 URI ldaps://dc.mydomain.com:636
 base    dc=mydomain,dc=com
@@ -298,21 +298,21 @@ TLS_CACERT  /etc/pki/tls/certs/ca-bundle.crt
 SASL_NOCANON    on
 
 
-# 強制啟用sssd
+# Force enable sssd
 
 authselect select sssd -force
 systemctl enable --now sssd
 systemctl restart sssd
 
-# 由於Windows 2003 CA仍使用舊版SHA1, 因此需要改crypto政策
+# Since Windows 2003 CA still uses SHA1, change crypto policy
 update-crypto-policies --set LEGACY
 
 
-# 完成後重新開機
+# Reboot after completion
 
-# 防火牆上設定允許連向1.2.3.4 UDP1194的流量並引導至內部10.0.0.10
+# Configure firewall to allow UDP 1194 to 1.2.3.4 and forward to internal 10.0.0.10
 
-# 用戶端安裝OpenVPN Client軟體後匯入.ovpn檔
-Windows7/8/10 Client: OpenVPN-GUI (嘗試過OpenVPN Connect for Windows無法匯入.ovpn)
+# Install OpenVPN Client and import .ovpn
+Windows7/8/10 Client: OpenVPN-GUI (OpenVPN Connect for Windows could not import .ovpn)
 iOS/Android Client: OpenVPN Connect
 ```

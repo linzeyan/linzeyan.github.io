@@ -1,40 +1,40 @@
 ---
-title: "Shell Script Best Practices"
+title: "Shell Script 最佳實務"
 date: 2022-11-03T16:51:11+08:00
 menu:
   sidebar:
-    name: "Shell Script Best Practices"
+    name: "Shell Script 最佳實務"
     identifier: linux-shell-script-best-practices
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 
-- [Shell Script Best Practices](https://sharats.me/posts/shell-script-best-practices/)
+- [Shell Script 最佳實務](https://sharats.me/posts/shell-script-best-practices/)
 
-#### Things
+#### 重點
 
-1. Just make the first line be `#!/usr/bin/env bash`.
-2. Use the `.sh` (or `.bash`) extension for your file.
-3. Use `set -o errexit` at the start of your script.
-4. Prefer to use `set -o nounset`.
-   1. use `"${VARNAME-}"` instead of `"$VARNAME"`
-5. Use `set -o pipefail`.
-6. Use `set -o xtrace`, with a check on `$TRACE` env variable.
+1. 第一行就用 `#!/usr/bin/env bash`。
+2. 檔案使用 `.sh`（或 `.bash`）副檔名。
+3. 在腳本開頭使用 `set -o errexit`。
+4. 也建議使用 `set -o nounset`。
+   1. 用 `"${VARNAME-}"` 取代 `"$VARNAME"`
+5. 使用 `set -o pipefail`。
+6. 使用 `set -o xtrace`，並檢查 `$TRACE` 環境變數。
    1. `if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi`
-   2. People can now enable debug mode, by running your script as `TRACE=1 ./script.sh` instead of `./script.sh`.
-7. Use `[[ ]]` for conditions in `if` / `while` statements, instead of `[ ]` or `test`.
-8. Always quote variable accesses with double-quotes.
-9. Use `local` variables in functions.
-10. When printing error messages, please redirect to stderr.
-    1. Use `echo 'Something unexpected happened' >&2` for this.
-11. Use long options, where possible (like `--silent` instead of `-s`).
-12. If appropriate, change to the script's directory close to the start of the script.
-    1. Use cd "$(dirname "$0")", which works in most cases.
-13. Use `shellcheck`. Heed its warnings.
+   2. 使用者可以透過 `TRACE=1 ./script.sh` 啟用除錯模式，而不是 `./script.sh`。
+7. `if` / `while` 條件使用 `[[ ]]`，而不是 `[ ]` 或 `test`。
+8. 變數存取一律用雙引號包住。
+9. 在函式中使用 `local` 變數。
+10. 輸出錯誤訊息時請導向 stderr。
+    1. 例如 `echo 'Something unexpected happened' >&2`。
+11. 能用長選項就用長選項（例如 `--silent` 取代 `-s`）。
+12. 適合的話，腳本開頭就切換到腳本所在目錄。
+    1. 可用 `cd "$(dirname "$0")"`，多數情況可用。
+13. 使用 `shellcheck` 並留意其警告。
 
-#### Template
+#### 範本
 
 ```bash
 #!/usr/bin/env bash

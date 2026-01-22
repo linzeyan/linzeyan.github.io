@@ -6,8 +6,8 @@ menu:
     name: "[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子"
     identifier: bayonet-rope
     weight: 10
-tags: ["URL", "bayonet"]
-categories: ["URL", "bayonet"]
+tags: ["Links", "bayonet"]
+categories: ["Links", "bayonet"]
 ---
 
 - [[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子](https://www.mobile01.com/topicdetail.php?f=637&t=282596)

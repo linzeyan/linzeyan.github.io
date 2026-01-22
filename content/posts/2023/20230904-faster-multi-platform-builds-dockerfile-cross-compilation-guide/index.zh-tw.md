@@ -1,23 +1,23 @@
 ---
-title: "Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide"
+title: "更快的多平台建置：Dockerfile 交叉編譯指南"
 date: 2023-09-04T10:31:54+08:00
 menu:
   sidebar:
-    name: "Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide"
+    name: "更快的多平台建置：Dockerfile 交叉編譯指南"
     identifier: docker-multi-platform-builds
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 
-- [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
+- [更快的多平台建置：Dockerfile 交叉編譯指南](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
 
-### method
+### 方法
 
 - `docker buildx create --use`
 - `FROM --platform=linux/amd64 debian` / `FROM --platform=$BUILDPLATFORM debian`
-- variables
+- 變數
 
 ```
 BUILDPLATFORM — matches the current machine. (e.g. linux/amd64)
@@ -37,7 +37,7 @@ TARGETARCH - Architecture from --platform, e.g. arm64
 TARGETVARIANT
 ```
 
-### example
+### 範例
 
 - before
 

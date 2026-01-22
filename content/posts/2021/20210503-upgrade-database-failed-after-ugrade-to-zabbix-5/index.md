@@ -6,8 +6,8 @@ menu:
     name: "Upgrade database failed after ugrade to Zabbix 5..."
     identifier: upgrade-database-failed-after-ugrade-to-zabbix-5
     weight: 10
-tags: ["URL", "Zabbix"]
-categories: ["URL", "Zabbix"]
+tags: ["Links", "Zabbix"]
+categories: ["Links", "Zabbix"]
 ---
 
 - [Upgrade database failed after ugrade to Zabbix 5...](https://www.zabbix.com/forum/zabbix-troubleshooting-and-problems/403139-upgrade-database-failed-after-ugrade-to-zabbix-5)

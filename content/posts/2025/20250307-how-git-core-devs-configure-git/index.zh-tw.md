@@ -1,17 +1,17 @@
 ---
-title: How Core Git Developers Configure Git
+title: Git 核心開發者如何設定 Git
 date: 2025-03-07T15:46:00+08:00
 menu:
   sidebar:
-    name: How Core Git Developers Configure Git
+    name: Git 核心開發者如何設定 Git
     identifier: how-git-core-devs-configure-git
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 
-- [How Core Git Developers Configure Git](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
+- [Git 核心開發者如何設定 Git](https://blog.gitbutler.com/how-git-core-devs-configure-git/)
 
 ```bash
 # clearly makes git better

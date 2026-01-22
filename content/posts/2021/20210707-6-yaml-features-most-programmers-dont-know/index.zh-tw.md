@@ -1,23 +1,23 @@
 ---
-title: "6 YAML Features most programmers don't know"
+title: "多數程式設計師不知道的 6 個 YAML 特性"
 date: 2021-07-07T15:08:31+08:00
 menu:
   sidebar:
-    name: "6 YAML Features most programmers don't know"
+    name: "多數程式設計師不知道的 6 個 YAML 特性"
     identifier: 6-yaml-features-most-programmers-dont-know
     weight: 10
-tags: ["URL", "YAML"]
-categories: ["URL", "YAML"]
+tags: ["Links", "YAML"]
+categories: ["Links", "YAML"]
 ---
 
-- [6 YAML Features most programmers don't know](https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3)
+- [多數程式設計師不知道的 6 個 YAML 特性](https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3)
 
-#### There are more examples that are similarly dangerous as Tom Ritchford pointed out
+#### 還有更多類似的危險例子，正如 Tom Ritchford 所指出
 
-- `013` is mapped to 11 as the leading zero triggers the octal notation
-- `4:30` is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: `4*60 + 30 = 270` . Interestingly, this pattern still "works" with `1:1:1:1:1:1:1:1:4:30` .
+- `013` 會被對應為 11，因為前導 0 會觸發八進位表示法
+- `4:30` 會被對應為 270。Max Werner Kaul-Gothe 與 Niklas Baumstark 告訴我，這會被自動轉換為分鐘（或秒）並被視為一段持續時間：`4*60 + 30 = 270`。有趣的是，這個模式在 `1:1:1:1:1:1:1:1:4:30` 仍然「可運作」。
 
-#### Multi-Line String
+#### 多行字串
 
 ```yaml
 mail_signature: |
@@ -29,9 +29,9 @@ mail_signature: |
 { "mail_signature": "Martin Thoma\nTel. +49 123 4567" }
 ```
 
-#### Anchor
+#### 錨點
 
-> The `&` defined a variable `emailAddress` with the value `"info@example.de"`. The `*` then indicated that the name of a variable follows.
+> `&` 會定義一個名為 `emailAddress` 的變數，值為 `"info@example.de"`。`*` 則表示接著的是變數名稱。
 
 ```yaml
 email: &emailAddress "info@example.de"
@@ -42,7 +42,7 @@ id: *emailAddress
 { "email": "info@example.de", "id": "info@example.de" }
 ```
 
-##### You can do the same with mappings
+##### 也可以對映射這樣做
 
 ```yaml
 foo: &default_settings
@@ -77,9 +77,9 @@ dev: *default_settings
 }
 ```
 
-#### Type Casting
+#### 型別轉換
 
-> The double bang `!!` has a special meaning in YAML. It is called "secondary tag handle" and a shorthand for `!tag:yaml.org,2002`
+> 雙驚嘆號 `!!` 在 YAML 中有特殊意義。它稱為「secondary tag handle」，是 `!tag:yaml.org,2002` 的簡寫。
 
 ```yaml
 tuple_example: !!python/tuple

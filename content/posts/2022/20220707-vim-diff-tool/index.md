@@ -6,8 +6,8 @@ menu:
     name: "Using Vim as a Diff Tool"
     identifier: command-line-diff-vim
     weight: 10
-tags: ["URL", "command line", "Vim"]
-categories: ["URL", "command line", "Vim"]
+tags: ["Links", "command line", "Vim"]
+categories: ["Links", "command line", "Vim"]
 ---
 
 - [Using Vim as a Diff Tool](https://www.baeldung.com/linux/vim-diff-tool)

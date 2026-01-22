@@ -6,8 +6,8 @@ menu:
     name: "Containers from scratch"
     identifier: linux-containers-from-scratch
     weight: 10
-tags: ["URL", "Linux", "container"]
-categories: ["URL", "Linux", "container"]
+tags: ["Links", "Linux", "container"]
+categories: ["Links", "Linux", "container"]
 hero: images/hero/linux.png
 ---
 

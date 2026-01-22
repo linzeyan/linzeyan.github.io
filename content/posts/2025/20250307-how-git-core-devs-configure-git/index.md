@@ -6,8 +6,8 @@ menu:
     name: How Core Git Developers Configure Git
     identifier: how-git-core-devs-configure-git
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

@@ -1,18 +1,18 @@
 ---
-title: "Fortigate Management Interface in HA Mode"
+title: "Fortigate 在 HA 模式下的管理介面"
 date: 2020-09-08T09:47:47+08:00
 menu:
   sidebar:
-    name: "Fortigate Management Interface in HA Mode"
+    name: "Fortigate 在 HA 模式下的管理介面"
     identifier: dediziertes-management-interface-fur-fortigate-im-ha-betrieb
     weight: 10
-tags: ["URL", "Fortigate", "Firewall"]
-categories: ["URL", "Fortigate", "Firewall"]
+tags: ["Links", "Fortigate", "Firewall"]
+categories: ["Links", "Fortigate", "Firewall"]
 ---
 
-- [Fortigate Management Interface in HA Mode](https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/)
+- [Fortigate 在 HA 模式下的管理介面](https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/)
 
-##### First you activate the feature
+##### 先啟用此功能
 
 ```
 config system ha
@@ -26,9 +26,9 @@ config system ha
 end
 ```
 
-Do not forget to set a default gateway. This interface is isolated and requires its own routing.
+別忘了設定預設閘道。這個介面是隔離的，需要獨立的路由設定。
 
-##### Then you assign an individual IP address to every node in the cluster
+##### 接著為叢集中的每個節點設定獨立 IP
 
 System1
 
@@ -54,11 +54,11 @@ end
 
 ---
 
-#### New since FortiOS 5.6
+#### FortiOS 5.6 起新增
 
-Starting with FortiOS 5.6, there is a new way to access every machine directly. This method is In-Band and does not require a reserved interface.
+從 FortiOS 5.6 開始，有一種新的方式可以直接存取每台設備。這是 In-Band 的方法，不需要保留介面。
 
-##### Assign on any interface a management IP-address. This address will not be synchronised in the cluster.
+##### 在任意介面設定管理用 IP 位址。這個位址不會在叢集中同步。
 
 System1
 
@@ -84,4 +84,4 @@ config system interface
 end
 ```
 
-Every device can be accessed individually now. The regular routing table applies.
+現在每台設備都可以單獨存取，使用一般的路由表即可。

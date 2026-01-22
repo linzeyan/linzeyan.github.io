@@ -6,8 +6,8 @@ menu:
     name: "人人都需要一個 HTTP proxy 來 debug"
     identifier: http-proxy-tool
     weight: 10
-tags: ["URL", "Proxy", "Web", "HTTP", "Debug"]
-categories: ["URL", "Proxy", "Web", "HTTP", "Debug"]
+tags: ["Links", "Proxy", "Web", "HTTP", "Debug"]
+categories: ["Links", "Proxy", "Web", "HTTP", "Debug"]
 ---
 
 - [人人都需要一個 HTTP proxy 來 debug](https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/)

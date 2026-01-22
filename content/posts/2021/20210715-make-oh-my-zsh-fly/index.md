@@ -1,16 +1,16 @@
 ---
-title: "我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化"
+title: "I can feel the speed — optimize zsh and oh my zsh cold start"
 date: 2021-07-15T18:19:06+08:00
 menu:
   sidebar:
-    name: "我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化"
+    name: "I can feel the speed — optimize zsh and oh my zsh cold start"
     identifier: terminal-zsh-make-oh-my-zsh-fly
     weight: 10
-tags: ["URL", "Zsh"]
-categories: ["URL", "Zsh"]
+tags: ["Links", "Zsh"]
+categories: ["Links", "Zsh"]
 ---
 
-- [我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化](https://blog.skk.moe/post/make-oh-my-zsh-fly/)
+- [I can feel the speed — optimize zsh and oh my zsh cold start](https://blog.skk.moe/post/make-oh-my-zsh-fly/)
 
 #### Profiling
 
@@ -39,7 +39,7 @@ num  calls                time                       self            name
 [Redacted]
 ```
 
-`zprof` 模块只能获取每个 zsh 函数的用时，因此适合找出拖累 zsh 冷启动的 oh my zsh 的插件。如果要获取完整的 `.zshrc` 性能分析，应该使用 `xtrace`。在 `.zshrc` 开头添加如下命令
+The `zprof` module only reports the time for each zsh function, so it is useful for finding oh-my-zsh plugins that slow down cold start. To profile the entire `.zshrc`, use `xtrace`. Add the following at the top of `.zshrc`:
 
 ```bash
 # .zshrc
@@ -59,7 +59,7 @@ unsetopt XTRACE
 exec 2>&3 3>&-
 ```
 
-这会在 $HOME 目录下生成一个文件名包含随机字符串的文件（`zsh_profile.123456` ）。一些介绍 zsh profiling 的文章会推荐使用 [kcachegrind](http://kcachegrind.sourceforge.net/html/Home.html) 这个工具可视化这个文件，但是我们只需要知道是什么拖累了 zsh 冷启动，将这个文件格式化一下即可。这里提供一个简单的脚本
+This creates a file in $HOME with a random suffix in the name (e.g. `zsh_profile.123456`). Some profiling articles recommend using [kcachegrind](http://kcachegrind.sourceforge.net/html/Home.html) to visualize it, but we only need to know what slows down zsh cold start, so formatting the file is enough. Here is a simple script:
 
 ```bash
 # $HOME/format_profile.zsh
@@ -117,7 +117,7 @@ $ ./format_profile.zsh zsh_profile.123456 | head -n 30
 [Redacted]
 ```
 
-这样就一目了然了。可以看到，除了 `nvm` 以外、`hexo` 的自动补全、`thefuck` 的初始化、`pyenv` 都大幅拖慢了 zsh 的启动速度。
+This makes it obvious. Besides `nvm`, `hexo` completion, `thefuck` init, and `pyenv` all significantly slow down zsh startup.
 
 #### Lazyload
 
@@ -150,9 +150,9 @@ __lazyload_completion_pyenv() {
 compdef __lazyload_completion_pyenv pyenv
 ```
 
-这样，当首次输入 pyenv 并按下 Tab 时会加载 pyenv 的命令补全，第二次按下 Tab 时就可以正常显示命令补全了。
+This way, the first time you type `pyenv` and press Tab, it loads the completion; the second time, completions show normally.
 
-将上述 lazyload 封装成函数便于调用：
+Wrap the lazyload logic into functions for easier use:
 
 ```bash
 sukka_lazyload_add_command() {

@@ -1,7 +1,7 @@
 ---
 title: "Nginx 筆記"
 date: 2021-11-19T14:35:58+08:00
-description: Notes about Nginx configs
+description: Nginx 設定檔筆記
 menu:
   sidebar:
     name: Nginx 筆記

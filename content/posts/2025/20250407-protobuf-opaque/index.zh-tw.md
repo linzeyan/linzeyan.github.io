@@ -6,8 +6,8 @@ menu:
     name: "Go Protobuf：新的 Opaque API"
     identifier: golang-protobuf-opaque-api
     weight: 10
-tags: ["URL", "Go", "Protobuf"]
-categories: ["URL", "Go", "Protobuf"]
+tags: ["Links", "Go", "Protobuf"]
+categories: ["Links", "Go", "Protobuf"]
 hero: images/hero/go.svg
 ---
 

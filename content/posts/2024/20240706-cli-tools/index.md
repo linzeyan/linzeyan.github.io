@@ -6,8 +6,8 @@ menu:
     name: "Python's many command-line utilities"
     identifier: python-pythons-many-command-line-utilities
     weight: 10
-tags: ["URL", "Python"]
-categories: ["URL", "Python"]
+tags: ["Links", "Python"]
+categories: ["Links", "Python"]
 hero: images/hero/python.png
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen"
     identifier: nginx-reverse-proxy-with-basic-auth-for-esxi
     weight: 10
-tags: ["URL", "Nginx", "ESXi"]
-categories: ["URL", "Nginx", "ESXi"]
+tags: ["Links", "Nginx", "ESXi"]
+categories: ["Links", "Nginx", "ESXi"]
 hero: images/hero/nginx.jpeg
 ---
 

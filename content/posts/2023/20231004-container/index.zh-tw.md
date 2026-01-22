@@ -6,8 +6,8 @@ menu:
     name: Container security fundamentals
     identifier: container-security-fundamentals
     weight: 10
-tags: ["Kubernetes", "Docker", "Container", "Linux", "Security", "URL"]
-categories: ["Kubernetes", "Docker", "Container", "Linux", "Security", "URL"]
+tags: ["Kubernetes", "Docker", "Container", "Linux", "Security", "Links"]
+categories: ["Kubernetes", "Docker", "Container", "Linux", "Security", "Links"]
 hero: images/hero/docker.jpeg
 ---
 

@@ -1,15 +1,15 @@
 ---
-title: "BIRD 与 BGP 的新手开场"
+title: "BIRD and BGP: a beginner's kickoff"
 date: 2020-06-22T09:38:55+08:00
 menu:
   sidebar:
-    name: "BIRD 与 BGP 的新手开场"
+    name: "BIRD and BGP: a beginner's kickoff"
     identifier: network-bird-bgp-kickstart
     weight: 10
-tags: ["URL", "Network", "BIRD", "BGP"]
-categories: ["URL", "Network", "BIRD", "BGP"]
+tags: ["Links", "Network", "BIRD", "BGP"]
+categories: ["Links", "Network", "BIRD", "BGP"]
 hero: images/hero/network.png
 ---
 
-- [BIRD 与 BGP 的新手开场](https://soha.moe/post/bird-bgp-kickstart.html)
+- [BIRD and BGP: a beginner's kickoff](https://soha.moe/post/bird-bgp-kickstart.html)
 - [BIRD Internet Routing Daemon](https://gitlab.nic.cz/labs/bird)

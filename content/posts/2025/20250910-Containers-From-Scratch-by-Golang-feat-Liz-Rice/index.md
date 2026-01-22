@@ -6,8 +6,8 @@ menu:
     name: "Containers From Scratch by Golang (feat. Liz Rice)"
     identifier: golang-containers
     weight: 10
-tags: ["URL", "Golang", "Container"]
-categories: ["URL", "Golang", "Container"]
+tags: ["Links", "Golang", "Container"]
+categories: ["Links", "Golang", "Container"]
 ---
 
 - [Containers From Scratch by Golang (feat. Liz Rice)](https://baconyao.notion.site/Containers-From-Scratch-by-Golang-feat-Liz-Rice-2638a3a7d9d48053ae1dce0763fb52e8)

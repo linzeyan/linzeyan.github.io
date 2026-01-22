@@ -6,8 +6,8 @@ menu:
     name: "Git内部原理介绍"
     identifier: git-introduce-internal-principles
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

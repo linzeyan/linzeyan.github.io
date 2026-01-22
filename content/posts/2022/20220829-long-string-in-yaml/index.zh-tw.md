@@ -6,8 +6,8 @@ menu:
     name: "YAML 裡的字串很長該怎麼做？"
     identifier: ansible-long-string-in-yaml
     weight: 10
-tags: ["URL", "Ansible", "YAML"]
-categories: ["URL", "Ansible", "YAML"]
+tags: ["Links", "Ansible", "YAML"]
+categories: ["Links", "Ansible", "YAML"]
 hero: images/hero/ansible.png
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署"
     identifier: nginx-acme-module
     weight: 10
-tags: ["URL", "NGINX", "ACME", "module"]
-categories: ["URL", "NGINX", "ACME", "module"]
+tags: ["Links", "Nginx", "ACME", "module"]
+categories: ["Links", "Nginx", "ACME", "module"]
 hero: images/hero/nginx.jpeg
 ---
 

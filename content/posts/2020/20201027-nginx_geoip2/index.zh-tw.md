@@ -6,8 +6,8 @@ menu:
     name: "2020年，最新NGINX的ngx_http_geoip2模块以精准禁止特定国家或者地区IP访问"
     identifier: nginx-module-http_geoip2-deny-ip-access
     weight: 10
-tags: ["URL", "Nginx", "GeoIP"]
-categories: ["URL", "Nginx", "GeoIP"]
+tags: ["Links", "Nginx", "GeoIP"]
+categories: ["Links", "Nginx", "GeoIP"]
 hero: images/hero/nginx.jpeg
 ---
 

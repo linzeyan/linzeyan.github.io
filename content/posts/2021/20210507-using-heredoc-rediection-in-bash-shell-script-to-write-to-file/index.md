@@ -6,8 +6,8 @@ menu:
     name: "How to use a here documents to write data to a file in bash script"
     identifier: shell-using-heredoc-rediection-in-bash-shell-script-to-write-to-file
     weight: 10
-tags: ["URL", "SHELL"]
-categories: ["URL", "SHELL"]
+tags: ["Links", "SHELL"]
+categories: ["Links", "SHELL"]
 hero: images/hero/shell.png
 ---
 

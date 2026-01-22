@@ -6,8 +6,8 @@ menu:
     name: "Kubernetes Without kube-proxy"
     identifier: k8s-network-cilium-kube-proxy-free
     weight: 10
-tags: ["URL", "Kubernetes", "Cilium", "Network"]
-categories: ["URL", "Kubernetes", "Cilium", "Network"]
+tags: ["Links", "Kubernetes", "Cilium", "Network"]
+categories: ["Links", "Kubernetes", "Cilium", "Network"]
 hero: images/hero/kubernetes.png
 ---
 

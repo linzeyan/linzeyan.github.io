@@ -6,8 +6,8 @@ menu:
     name: "SSH 证书登录教程"
     identifier: linux-ssh-login-certificate-introduce
     weight: 10
-tags: ["URL", "SSH", "Linux"]
-categories: ["URL", "SSH", "Linux"]
+tags: ["Links", "SSH", "Linux"]
+categories: ["Links", "SSH", "Linux"]
 hero: images/hero/linux.png
 ---
 

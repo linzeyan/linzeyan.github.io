@@ -6,8 +6,8 @@ menu:
     name: "Go code refactoring : the 23x performance hunt"
     identifier: go-code-refactoring-the-23x-performance-hunt-156746b522f7
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

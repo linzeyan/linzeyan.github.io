@@ -6,8 +6,8 @@ menu:
     name: "Mount AWS S3 Bucket On Amazon EC2"
     identifier: aws-mount-aws-s3-bucket-on-amazon-ec2
     weight: 10
-tags: ["URL", "AWS", "S3"]
-categories: ["URL", "AWS", "S3"]
+tags: ["Links", "AWS", "S3"]
+categories: ["Links", "AWS", "S3"]
 ---
 
 - [Mount AWS S3 Bucket On Amazon EC2](https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04)

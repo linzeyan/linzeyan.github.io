@@ -6,8 +6,8 @@ menu:
     name: "New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement"
     identifier: ansible-new-libssh-connection-plugin-for-ansible-network
     weight: 10
-tags: ["URL", "Ansible", "SSH"]
-categories: ["URL", "Ansible", "SSH"]
+tags: ["Links", "Ansible", "SSH"]
+categories: ["Links", "Ansible", "SSH"]
 hero: images/hero/ansible.png
 ---
 

@@ -10,90 +10,90 @@ tags: ["Firewall", "Juniper"]
 categories: ["Firewall", "Juniper"]
 ---
 
-下列操作命令在操作模式下使用，或在配置模式下 run show…
+The following commands are run in operational mode, or use `run show` in configuration mode.
 
-查看當前防火牆 session 數
+Show current firewall session count
 
 ```
 show security flow session | match 10.22.12.104
 show security flow session source-prefix 10.22.12.104
 ```
 
-清除當前 session
+Clear current sessions
 
 ```
 clear security flow session all
 ```
 
-查 OID
+Query OID
 
 ```
 show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
 ```
 
-查看當前軟體版本號
+Check current software version
 
 ```
 show system software
 ```
 
-查看系統啟動時間
+Check system uptime
 
 ```
 show system uptime
 ```
 
-查看硬體板卡及序列號
+Check hardware cards and serial numbers
 
 ```
 show chassis haredware
 ```
 
-查看硬體板卡當前狀態
+Check current hardware status
 
 ```
 show chassis environment
 ```
 
-查看路由表
+Show routing table
 
 ```
 show route
 ```
 
-設備商的 Administrative distance / Route preference 預設值比較
+Vendor default values for administrative distance / route preference
 
-查看 ARP 表
+Show ARP table
 
 ```
 show arp
 ```
 
-查看系統 log
+Show system log
 
 ```
 show log messages
 ```
 
-查看所有介面運行狀態
+Show all interface statuses
 
 ```
 show interface terse
 ```
 
-查看介面運行細節資訊
+Show interface detail
 
 ```
 show interface ge-x/y/z detail
 ```
 
-動態統計介面資料包轉發資訊
+Monitor interface packet forwarding stats
 
 ```
 monitor interface ge-x/y/z
 ```
 
-檢查 ALG 開啟情況
+Check ALG status
 
 ```
 show security alg status
@@ -105,10 +105,10 @@ LOG
 file list /cf/var/log | match cpu_date_0
 ```
 
-BGP Black hole set up
+BGP black hole setup
 
-基本設定
-恢復原廠設定
+Basic setup
+Factory reset
 
 ```
 root@srx#start shell
@@ -121,7 +121,7 @@ root@srx# set system root-authentication plain-text-password
 root@srx#commit
 ```
 
-遠端管理帳密配置
+Remote management credentials
 
 ```
 root@srx#set system login user username class super-user authentication plain-text-password
@@ -129,63 +129,63 @@ root@srx#set system login user username class super-user authentication plain-te
 set system login user support029 uid 2029
 set system login user support029 class ADMIN
 set system login user support029 encrypted-password "$5$JQoeH.gs$f6/3srHsGRvvEXZ5Ok/Hpj/uc1CG.sPQZfXMoCXaWk8"
-# 帳號為 username，擁有 super-user 權限
-# 設定連線者 5 分鐘 timeout
+# Account is username with super-user privileges
+# Set session timeout to 5 minutes
 
 set system login idle-timeout 5
 ```
 
-設定連線者以特定 IP 登入
+Allow login from specific IP
 
 ```
 set policy-options prefix-list manager-ip 8.8.8.8/32
 ```
 
-設置系統時間
+Set system time
 
 ```
 root@srx#run set date 201711011329.14
 root@srx#set system ntp server 168.95.1.1
 ```
 
-設定設備名稱
+Set hostname
 
 ```
 root@srx#set system host-name QQ
 root@QQ#
 ```
 
-設定 Domain Name
+Set domain name
 
 ```
 root@srx#set system domain-name abc.cde
 ```
 
-設定 DNS
+Set DNS
 
 ```
 root@srx#set system name-server 8.8.8.8
 ```
 
-開啟 ssh 遠端管理
+Enable SSH remote management
 
 ```
 root@srx#set system service ssh
 ```
 
-開啟 https 遠端管理
+Enable HTTPS remote management
 
 ```
 root@srx#set system service web-management https
 ```
 
-加註解
+Add annotation
 
 ```
 root@srx#annotate
 ```
 
-######加入這兩條 Policy 的 log session ### 可以查看 log debug 問題
+######Add these two policy log session lines ### to view log debug issues
 
 ```
 set security policies from-zone DB to-zone INTERNET policy For_Postgres then log session-init

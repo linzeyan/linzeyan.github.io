@@ -6,8 +6,8 @@ menu:
     name: "iPhone 鈴聲製作教學，將 MP3 音樂換成電話鈴聲或鬧鐘鈴聲"
     identifier: iphone-ringtone-mp3
     weight: 10
-tags: ["URL", "iPhone", "ringtone"]
-categories: ["URL", "iPhone", "ringtone"]
+tags: ["Links", "iPhone", "ringtone"]
+categories: ["Links", "iPhone", "ringtone"]
 ---
 
 - [iPhone 鈴聲製作教學，將 MP3 音樂換成電話鈴聲或鬧鐘鈴聲](https://www.tech-girlz.com/2020/08/iphone-ringtone-mp3.html/amp)

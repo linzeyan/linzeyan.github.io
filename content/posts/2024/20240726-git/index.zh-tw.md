@@ -1,13 +1,13 @@
 ---
-title: "Git force push"
+title: "Git 強制推送"
 date: 2024-07-26T12:24:00+08:00
 menu:
   sidebar:
-    name: Git force push
+    name: Git 強制推送
     identifier: git-force-push
     weight: 10
-tags: ["Git", "URL", "push"]
-categories: ["Git", "URL", "push"]
+tags: ["Git", "Links", "push"]
+categories: ["Git", "Links", "push"]
 hero: images/hero/git.png
 ---
 

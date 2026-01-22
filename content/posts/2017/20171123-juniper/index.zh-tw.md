@@ -1,9 +1,9 @@
 ---
-title: "Juniper notes"
+title: "Juniper 筆記"
 date: 2017-11-23T16:00:00+08:00
 menu:
   sidebar:
-    name: "Juniper notes"
+    name: "Juniper 筆記"
     identifier: network-firewall-juniper-my-notes
     weight: 10
 tags: ["Network", "Firewall", "Juniper"]
@@ -11,7 +11,7 @@ categories: ["Network", "Firewall", "Juniper"]
 hero: images/hero/network.png
 ---
 
-#### [Juniper Firewall] tunnel
+#### [Juniper Firewall] 隧道
 
 **_ACG_**
 `icare@TWCHIJF01# show | compare rollback 4`
@@ -176,9 +176,9 @@ set security policies from-zone MNL to-zone GPO policy For_ACG_DB_Backup then pe
 set security zones security-zone MNL address-book address TCT_DBA_10.22.12.103 10.22.12.103/32
 ```
 
-#### [Juniper] packet capture
+#### [Juniper] 封包擷取
 
-**_Configure forwarding options_**
+**_設定轉送選項_**
 
 ```
 [edit]
@@ -376,7 +376,7 @@ set security zones security-zone DMZ interfaces reth2.0
 **_設定有修改設定檔 commit 就自動備份_**
 
 ```
-root@888# show  system archival | display set
+root@888# show system archival | display set
 set system archival configuration transfer-on-commit
 set system archival configuration archive-sites "ftp://帳號@192.168.88.1/路徑";; password "ftp密碼"
 ```

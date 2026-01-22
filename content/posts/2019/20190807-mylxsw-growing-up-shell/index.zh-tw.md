@@ -1,132 +1,132 @@
 ---
-title: "Shell脚本学习笔记"
+title: "Shell 腳本學習筆記"
 date: 2019-08-07T15:14:08+08:00
 menu:
   sidebar:
-    name: "Shell脚本学习笔记"
+    name: "Shell 腳本學習筆記"
     identifier: shell-scripting-notes-mylxsw-growing-up
     weight: 10
-tags: ["URL", "SHELL"]
-categories: ["URL", "SHELL"]
+tags: ["Links", "SHELL"]
+categories: ["Links", "SHELL"]
 hero: images/hero/shell.png
 ---
 
-- [Shell 脚本学习笔记](https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
+- [Shell 腳本學習筆記](https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
-### 执行算术运算
+### 執行算術運算
 
     val=`expr $a + $b`
 
-### 运算符
+### 運算符
 
-| 符号 | 说明                                 | 示例                       |
+| 符號 | 說明                                 | 示例                       |
 | ---- | ------------------------------------ | -------------------------- |
-| !    | 非运算                               | [ ! false ]                |
-| -o   | 或运算                               | [ $a -lt 20 -o $b -gt 20 ] |
-| -a   | 与运算                               | [ $a -lt 20 -a $b -gt 20 ] |
-| =    | 相等检测                             | [ $a = $b ]                |
-| !=   | 不相等检测                           | [ $a != $b ]               |
-| -z   | 字符串长度是否为 0，为 0 则返回 true | [ -z $a ]                  |
-| -n   | 字符串长度不为 0， 不为 0 返回 true  | [ -n $a ]                  |
-| str  | 检测字符串是否为空，不为空返回 true  | [ $a ]                     |
-| -b   | 检测文件是否是块设备文件             | [ -b $file ]               |
-| -c   | 检测文件是否是字符设备               | ..                         |
-| -d   | 检测文件是否为目录                   | [ -d $file ]               |
-| -f   | 检测文件是否为普通文件               | [ -f $file ]               |
-| -r   | 检测文件是否可读                     | ..                         |
-| -w   | 检测文件是否可写                     | ..                         |
-| -x   | 检测文件是否可执行                   | ..                         |
-| -s   | 检测文件是否为空                     | ..                         |
-| -e   | 检测文件是否存在                     | ..                         |
+| !    | 非運算                               | [ ! false ]                |
+| -o   | 或運算                               | [ $a -lt 20 -o $b -gt 20 ] |
+| -a   | 與運算                               | [ $a -lt 20 -a $b -gt 20 ] |
+| =    | 相等檢測                             | [ $a = $b ]                |
+| !=   | 不相等檢測                           | [ $a != $b ]               |
+| -z   | 字串長度是否為 0，為 0 則回傳 true   | [ -z $a ]                  |
+| -n   | 字串長度不為 0，不為 0 回傳 true     | [ -n $a ]                  |
+| str  | 檢測字串是否為空，不為空回傳 true    | [ $a ]                     |
+| -b   | 檢測檔案是否是區塊裝置檔             | [ -b $file ]               |
+| -c   | 檢測檔案是否是字元裝置               | ..                         |
+| -d   | 檢測檔案是否為目錄                   | [ -d $file ]               |
+| -f   | 檢測檔案是否為一般檔案               | [ -f $file ]               |
+| -r   | 檢測檔案是否可讀                     | ..                         |
+| -w   | 檢測檔案是否可寫                     | ..                         |
+| -x   | 檢測檔案是否可執行                   | ..                         |
+| -s   | 檢測檔案是否為空                     | ..                         |
+| -e   | 檢測檔案是否存在                     | ..                         |
 
-### 特殊变量
+### 特殊變數
 
-| 变量 | 含义                                                                          |
+| 變數 | 含義                                                                          |
 | ---- | ----------------------------------------------------------------------------- |
-| $0   | 当前脚本的文件名                                                              |
-| $n   | 传递给脚本或函数的参数。n 是一个数字，表示第几个参数                          |
-| $#   | 传递给脚本或函数的参数个数                                                    |
-| $\*  | 传递给脚本或函数的所有参数，所有参数被当做一个词，例如 "1 2 3"                |
-| $@   | 传递给脚本或函数的所有参数，每个参数当做一个词，用双引号包含，例如"1" "2" "3" |
-| $?   | 上个命令的退出状态，或函数的返回值                                            |
-| $$   | 当前 Shell 进程 ID。对于 Shell 脚本，就是这些脚本所在的进程 ID                |
+| $0   | 目前腳本的檔名                                                                |
+| $n   | 傳遞給腳本或函式的參數，n 表示第幾個參數                                      |
+| $#   | 傳遞給腳本或函式的參數個數                                                    |
+| $\*  | 傳遞給腳本或函式的所有參數，所有參數視為一個詞，例如 "1 2 3"                |
+| $@   | 傳遞給腳本或函式的所有參數，每個參數視為一個詞，用雙引號包含，例如 "1" "2" "3" |
+| $?   | 上個命令的退出狀態，或函式的回傳值                                            |
+| $$   | 目前 Shell 行程 ID；對 Shell 腳本而言，就是該腳本所在的行程 ID                |
 
-### POSIX 程序退出状态
+### POSIX 程式退出狀態
 
-| 状态码  | 含义                                                              |
+| 狀態碼  | 含義                                                              |
 | ------- | ----------------------------------------------------------------- |
 | 0       | 命令成功退出                                                      |
-| > 0     | 在重定向或者单词展开期间(~、变量、命令、算术展开以及单词切割)失败 |
-| 1 - 125 | 命令不成功退出。特定的退出值的含义，有各个命令自行定义            |
-| 126     | 命令找到了，但是文件无法执行                                      |
-| 127     | 命令没有找到                                                      |
-| > 128   | 命令因收到信号而死亡                                              |
+| > 0     | 在重導向或單詞展開期間（~、變數、命令、算術展開以及單詞切割）失敗 |
+| 1 - 125 | 命令不成功退出，各命令自行定義特定退出值含義                      |
+| 126     | 命令找到但檔案無法執行                                            |
+| 127     | 命令未找到                                                        |
+| > 128   | 命令因收到信號而終止                                              |
 
-### 输入输出重定向
+### 輸入輸出重導向
 
-| 命令           | 说明                                               |
+| 命令           | 說明                                               |
 | -------------- | -------------------------------------------------- |
-| command > file | 将输出重定向到 file。                              |
-| command > file | 将输出以追加的方式重定向到 file。                  |
-| n > file       | 将文件描述符为 n 的文件重定向到 file。             |
-| n >> file      | 将文件描述符为 n 的文件以追加的方式重定向到 file。 |
-| n >& m         | 将输出文件 m 和 n 合并。                           |
-| n <& m         | 将输入文件 m 和 n 合并。                           |
-| << tag         | 将开始标记 tag 和结束标记 tag 之间的内容作为输入。 |
+| command > file | 將輸出重導向到 file                                |
+| command > file | 將輸出以追加的方式重導向到 file                    |
+| n > file       | 將檔案描述符為 n 的檔案重導向到 file               |
+| n >> file      | 將檔案描述符為 n 的檔案以追加的方式重導向到 file   |
+| n >& m         | 將輸出檔案 m 和 n 合併                             |
+| n <& m         | 將輸入檔案 m 和 n 合併                             |
+| << tag         | 將開始標記 tag 和結束標記 tag 之間的內容作為輸入   |
 
-### 文件包含
+### 檔案包含
 
-使用`.`或者`source`包含文件
+使用 `.` 或 `source` 包含檔案
 
     . filename
     source filename
 
-> 被包含文件不需要有执行权限
+> 被包含的檔案不需要有執行權限
 
-### 使用函数
+### 使用函式
 
-下面是函数基本结构
+下面是函式基本結構
 
-    # 直接使用函数名称即可，前面可选的添加function function_name
+    # 直接使用函式名稱即可，前面可選擇加上 function
     function_name(){
 
-        # 使用$#,$*,$@以及$0-$n获取函数名以及其它参数
+        # 使用 $#, $*, $@ 以及 $0-$n 取得函式名稱與其他參數
         val="$1"
 
-        # 带返回值，可选，返回值只能是整数（状态码）
-        # 如果要返回结果的话，使用全局变量
+        # 帶回傳值，可選，回傳值只能是整數（狀態碼）
+        # 若要回傳結果，使用全域變數
         return $val
     }
 
-函数调用
+函式呼叫
 
-    # 调用函数直接使用函数名称即可，后面可以空格隔开使用多个参数
+    # 呼叫函式直接使用函式名稱即可，後面可用空格傳入多個參數
     function_name 1 2 3 4
-    # 使用$?变量获取返回值
+    # 使用 $? 取得回傳值
     ret=$?
 
-## 常用代码片段
+## 常用程式片段
 
-### 列出目录下的所有文件
+### 列出目錄下的所有檔案
 
-下面的代码列出了 downloads 目录下所有的 xlsx 文件，这里要注意的是，如果要列出所有文件，使用`"$watch_dir"/*`这种形式。
+下面的程式列出 downloads 目錄下所有的 xlsx 檔案。注意，要列出所有檔案需使用 `"$watch_dir"/*` 形式。
 
     watch_dir="/Users/mylxsw/Downloads"
-    # 避免目录下没有匹配文件时返回带有*的结果
+    # 避免目錄下沒有匹配檔案時回傳帶有 * 的結果
     shopt -s nullglob
     for file in "$watch_dir"/*.xlsx
     do
         echo $file
     done
 
-    for file in "$watch_dir"/*/    # 列出所有目录
+    for file in "$watch_dir"/*/    # 列出所有目錄
     do
         echo $file
     done
 
-> 参考 [How to get the list of files in a directory in a shell script?](http://stackoverflow.com/questions/2437452/how-to-get-the-list-of-files-in-a-directory-in-a-shell-script) 和 [Bash Shell Loop Over Set of Files](http://www.cyberciti.biz/faq/bash-loop-over-file/)
+> 參考 [How to get the list of files in a directory in a shell script?](http://stackoverflow.com/questions/2437452/how-to-get-the-list-of-files-in-a-directory-in-a-shell-script) 和 [Bash Shell Loop Over Set of Files](http://www.cyberciti.biz/faq/bash-loop-over-file/)
 
-### 从标准输入循环读取
+### 從標準輸入循環讀取
 
     while read line
     do
@@ -136,16 +136,16 @@ hero: images/hero/shell.png
         fi
     done
 
-### 日期时间处理
+### 日期時間處理
 
-#### 获取当前日期
+#### 取得目前日期
 
-    # 输出: 20161023
+    # 輸出: 20161023
     echo $(date +%Y%m%d)
 
-#### 时间比较
+#### 時間比較
 
-时间比较可以先转换为 UNIX 时间戳，然后直接比较时间戳大小即可。
+時間比較可先轉換為 UNIX 時間戳，然後直接比較時間戳大小即可。
 
     time1=`date +%s`
     time2=`date -d '2016-10-25 17:20:13' +%s`

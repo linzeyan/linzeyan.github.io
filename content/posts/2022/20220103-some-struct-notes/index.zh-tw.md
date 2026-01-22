@@ -6,8 +6,8 @@ menu:
     name: "Gopher 需要知道的几个结构体骚操作"
     identifier: golang-some-struct-notes
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

@@ -1,17 +1,17 @@
 ---
-title: "How I configure my Git identities"
+title: "我如何設定 Git 身分"
 date: 2024-11-25T17:35:35+08:00
 menu:
   sidebar:
-    name: "How I configure my Git identities"
+    name: "我如何設定 Git 身分"
     identifier: git-how-i-configure-my-git-identities
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 
-- [How I configure my Git identities](https://www.benji.dog/articles/git-config/)
+- [我如何設定 Git 身分](https://www.benji.dog/articles/git-config/)
 
 **_includeIf_**
 

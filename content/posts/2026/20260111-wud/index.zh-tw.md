@@ -1,17 +1,17 @@
 ---
-title: "用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案"
+title: "用 WUD 取代 Watchtower：打造可控的 Docker 自動更新方案"
 date: 2026-01-11T15:22:11+08:00
 menu:
   sidebar:
-    name: "用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案"
+    name: "用 WUD 取代 Watchtower：打造可控的 Docker 自動更新方案"
     identifier: docker-replace-watchtower-with-wud
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 
-- [用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案](https://blog.ibytebox.com/archives/TKFPS2tq)
+- [用 WUD 取代 Watchtower：打造可控的 Docker 自動更新方案](https://blog.ibytebox.com/archives/TKFPS2tq)
 
 WUD（What's Up Docker）
 
@@ -42,18 +42,18 @@ services:
       - WUD_TRIGGER_DOCKER_AUTO_PRUNE=true # 效果等同于 `watchtower --cleanup`
 ```
 
-#### 只监控（不自动更新）
+#### 只監控（不自動更新）
 
 ```yaml
 labels:
   - "wud.watch=true"
 ```
 
-- 出现在 WUD UI
-- 有更新提示
-- 不会自动重启
+- 會出現在 WUD UI
+- 會提示有更新
+- 不會自動重啟
 
-#### 监控 + 自动更新（Watchtower 的等价替代）
+#### 監控 + 自動更新（等同 Watchtower）
 
 ```yaml
 labels:

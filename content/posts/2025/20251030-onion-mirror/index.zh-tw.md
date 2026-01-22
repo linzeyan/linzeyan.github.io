@@ -6,20 +6,20 @@ menu:
     name: "onion-mirror"
     identifier: tor-onion-mirror
     weight: 10
-tags: ["URL", "Tor"]
-categories: ["URL", "Tor"]
+tags: ["Links", "Tor"]
+categories: ["Links", "Tor"]
 ---
 
 - [onion-mirror](https://flower.codes/2025/10/23/onion-mirror.html)
 
-### Install Tor
+### 安裝 Tor
 
 ```bash
 sudo apt update
 sudo apt install tor
 ```
 
-### Configure Tor
+### 設定 Tor
 
 ```
 # Disable SOCKS proxy since we aren't making outbound connections
@@ -47,13 +47,13 @@ DirPort 0
 sudo systemctl restart tor
 ```
 
-### Get Your .onion Address
+### 取得你的 .onion 位址
 
 ```bash
 sudo cat /var/lib/tor/hidden_service/hostname
 ```
 
-### Configure Caddy
+### 設定 Caddy
 
 ```
 http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
@@ -61,7 +61,7 @@ http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
 }
 ```
 
-### Advertise Your .onion Address
+### 公告你的 .onion 位址
 
 ```
 header {

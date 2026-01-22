@@ -6,8 +6,8 @@ menu:
     name: "Windows SSH setup"
     identifier: ansible-windows-ssh-setup
     weight: 10
-tags: ["URL", "Ansible", "Windows", "SSH"]
-categories: ["URL", "Ansible", "Windows", "SSH"]
+tags: ["Links", "Ansible", "Windows", "SSH"]
+categories: ["Links", "Ansible", "Windows", "SSH"]
 hero: images/hero/ansible.png
 ---
 

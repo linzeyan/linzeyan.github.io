@@ -6,8 +6,8 @@ menu:
     name: "Avoiding the Top 10 NGINX Configuration Mistakes - NGINX"
     identifier: nginx-avoiding-top-10-nginx-configuration-mistakes
     weight: 10
-tags: ["URL", "NGINX"]
-categories: ["URL", "NGINX"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

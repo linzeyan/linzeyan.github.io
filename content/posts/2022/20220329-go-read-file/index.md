@@ -1,25 +1,25 @@
 ---
-title: "怎么选择 Go 文件读取方案"
+title: "How to Choose a Go File Reading Approach"
 date: 2022-03-29T16:15:34+08:00
 menu:
   sidebar:
-    name: "怎么选择 Go 文件读取方案"
+    name: "How to Choose a Go File Reading Approach"
     identifier: go-file-reading-scheme
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [怎么选择 Go 文件读取方案](https://mp.weixin.qq.com/s/Z-19Yj8Je7Wb9bqvMR35Cg)
+- [How to Choose a Go File Reading Approach](https://mp.weixin.qq.com/s/Z-19Yj8Je7Wb9bqvMR35Cg)
 
-> Go 提供了可一次性读取文件内容的方法：`os.ReadFile` 与 `ioutil.ReadFile`。在 Go 1.16 开始，`ioutil.ReadFile` 就等价于 `os.ReadFile`。
+> Go provides one-shot methods for reading file content: `os.ReadFile` and `ioutil.ReadFile`. Starting from Go 1.16, `ioutil.ReadFile` is equivalent to `os.ReadFile`.
 >
-> 一次性加载文件的优缺点非常明显，它能减少 IO 次数，但它会将文件内容都加载至内存中，对于大文件，存在内存撑爆的风险。
+> The pros and cons of loading a file in one shot are obvious: it reduces IO operations, but it loads the entire file into memory. For large files, this risks running out of memory.
 
-#### 逐行读取
+#### Read line by line
 
-Go 中 bufio.Reader 对象提供了一个 ReadLine() 方法，但其实我们更多地是使用 ReadBytes('\n') 或者 ReadString('\n') 代替。
+In Go, the bufio.Reader type provides ReadLine(), but in practice we more often use ReadBytes('\n') or ReadString('\n').
 
 ```go
 func ReadLines(filename string) {
@@ -41,9 +41,9 @@ func ReadLines(filename string) {
 }
 ```
 
-#### 块读取
+#### Chunked reading
 
-块读取也称为分片读取，这也很好理解，我们可以将内容分成一块块的，每次读取指定大小的块内容。这里，我们将块大小设置为 4KB。
+Chunked reading is also called segmented reading. It is easy to understand: we split the content into chunks and read a fixed-size block each time. Here, we set the chunk size to 4KB.
 
 ```go
 func ReadChunk(filename string) {
@@ -85,6 +85,6 @@ BenchmarkReadChunk4GB-8                1        2095515009 ns/op
 BenchmarkReadChunk16GB-8               1        8547054349 ns/op
 ```
 
-在本文的测试条件下（每行数据 1KB），对于小对象 4KB 的读取，三种方式差距并不大；在 MB 级别的读取中，直接加载最快，但块读取也慢不了多少；上了 GB 后，块读取方式会最快。
+Under the test conditions in this article (1KB per line), for small 4KB reads, the differences among the three methods are not large. For MB-level reads, full read is the fastest, but chunked reading is not far behind. For GB-level reads, chunked reading becomes the fastest.
 
-且有一点可以注意到的是，在整个文件加载的方式中，对于 16 GB 的文件数据（测试机器运行内存为 8GB），会内存耗尽出错，没法执行。
+One more thing to note: with full-file loading, a 16 GB file (on a machine with 8GB RAM) runs out of memory and cannot complete.

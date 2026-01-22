@@ -1,13 +1,13 @@
 ---
-title: "How Terminals Work"
+title: "終端機如何運作"
 date: 2026-01-09T16:11:33+08:00
 menu:
   sidebar:
-    name: "How Terminals Work"
+    name: "終端機如何運作"
     identifier: terminal-how-terminals-work
     weight: 10
-tags: ["URL", "Terminal"]
-categories: ["URL", "Terminal"]
+tags: ["Links", "Terminal"]
+categories: ["Links", "Terminal"]
 ---
 
-- [How Terminals Work](https://how-terminals-work.vercel.app/)
+- [終端機如何運作](https://how-terminals-work.vercel.app/)

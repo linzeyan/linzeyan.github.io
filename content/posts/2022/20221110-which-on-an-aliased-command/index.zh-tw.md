@@ -1,17 +1,17 @@
 ---
-title: "How to Use which on an Aliased Command"
+title: "如何在別名指令上使用 which"
 date: 2022-11-10T16:24:30+08:00
 menu:
   sidebar:
-    name: "How to Use which on an Aliased Command"
+    name: "如何在別名指令上使用 which"
     identifier: linux-which-on-an-aliased-command
     weight: 10
-tags: ["URL", "Linux", "SHELL", "command line"]
-categories: ["URL", "Linux", "SHELL", "command line"]
+tags: ["Links", "Linux", "SHELL", "command line"]
+categories: ["Links", "Linux", "SHELL", "command line"]
 hero: images/hero/linux.png
 ---
 
-- [How to Use which on an Aliased Command](https://www.baeldung.com/linux/which-on-an-aliased-command)
+- [如何在別名指令上使用 which](https://www.baeldung.com/linux/which-on-an-aliased-command)
 
 ##### type
 

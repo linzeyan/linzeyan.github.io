@@ -6,8 +6,8 @@ menu:
     name: "一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash"
     identifier: what-are-encoding-encrypt-and-hashing
     weight: 10
-tags: ["URL", "Encode", "Encrypt", "Hash"]
-categories: ["URL", "Encode", "Encrypt", "Hash"]
+tags: ["Links", "Encode", "Encrypt", "Hash"]
+categories: ["Links", "Encode", "Encrypt", "Hash"]
 ---
 
 - [一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash](https://medium.com/starbugs/what-are-encoding-encrypt-and-hashing-4b03d40e7b0c)

@@ -6,8 +6,8 @@ menu:
     name: "Argo CD ApplicationSet Controller: 世界為我而轉動！"
     identifier: k8s-argo-cd-applicationset-controller
     weight: 10
-tags: ["URL", "Kubernetes", "Argo CD", "GitOps"]
-categories: ["URL", "Kubernetes", "Argo CD", "GitOps"]
+tags: ["Links", "Kubernetes", "Argo CD", "GitOps"]
+categories: ["Links", "Kubernetes", "Argo CD", "GitOps"]
 hero: images/hero/kubernetes.png
 ---
 

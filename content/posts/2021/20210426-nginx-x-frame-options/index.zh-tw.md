@@ -6,8 +6,8 @@ menu:
     name: "通过 Nginx 绕过 X-Frame-Options 限制"
     identifier: nginx-x-frame-options
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 

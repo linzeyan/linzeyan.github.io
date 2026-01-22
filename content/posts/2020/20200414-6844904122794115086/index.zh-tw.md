@@ -6,8 +6,8 @@ menu:
     name: "活久见！Linux命令行居然也可以用来查看图像？"
     identifier: linux-use-command-line-to-view-picture-in-terminal
     weight: 10
-tags: ["URL", "Linux", "command line"]
-categories: ["URL", "Linux", "command line"]
+tags: ["Links", "Linux", "command line"]
+categories: ["Links", "Linux", "command line"]
 hero: images/hero/linux.png
 ---
 

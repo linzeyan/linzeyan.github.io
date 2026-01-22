@@ -1,19 +1,19 @@
 ---
-title: "Running GitHub Actions for Certain Commit Messages"
+title: "針對特定 Commit Message 觸發 GitHub Actions"
 date: 2020-10-11T23:13:22+08:00
 menu:
   sidebar:
-    name: "Running GitHub Actions for Certain Commit Messages"
+    name: "針對特定 Commit Message 觸發 GitHub Actions"
     identifier: github-action-running-github-actions-for-certain-commit-messages
     weight: 10
-tags: ["URL", "Github"]
-categories: ["URL", "Github"]
+tags: ["Links", "Github"]
+categories: ["Links", "Github"]
 hero: images/hero/github.png
 ---
 
-- [Running GitHub Actions for Certain Commit Messages](https://ryangjchandler.co.uk/articles/running-github-actions-for-certain-commit-messages)
+- [針對特定 Commit Message 觸發 GitHub Actions](https://ryangjchandler.co.uk/articles/running-github-actions-for-certain-commit-messages)
 
-Now, whenever I push a `wip` commit or any commit that contains the word `wip`, it will be marked as skipped inside of GitHub actions.
+現在，只要我推送 `wip` commit 或任何包含 `wip` 的 commit，就會在 GitHub Actions 中被標記為跳過。
 
 ```yaml
 jobs:
@@ -22,7 +22,7 @@ jobs:
     if: "! contains(github.event.head_commit.message, 'wip')"
 ```
 
-Any commit that contains `[build]` will now trigger these jobs, everything else will be skipped.
+任何包含 `[build]` 的 commit 會觸發這些工作，其他則會被跳過。
 
 ```yaml
 jobs:

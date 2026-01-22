@@ -1,77 +1,77 @@
 ---
-title: "Nginx请求处理流程你了解吗？"
+title: "Do you understand the Nginx request processing flow?"
 date: 2019-03-07T14:05:55+08:00
 menu:
   sidebar:
-    name: "Nginx请求处理流程你了解吗？"
+    name: "Do you understand the Nginx request processing flow?"
     identifier: nginx-request-processing-flow
     weight: 10
-tags: ["URL", "Nginx"]
-categories: ["URL", "Nginx"]
+tags: ["Links", "Nginx"]
+categories: ["Links", "Nginx"]
 hero: images/hero/nginx.jpeg
 ---
 
-- [Nginx 请求处理流程你了解吗？](https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ)
+- [Do you understand the Nginx request processing flow?](https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ)
 
-### 11 个处理阶段
+### 11 processing phases
 
-1）NGX_HTTP_POST_READ_PHASE：
+1) NGX_HTTP_POST_READ_PHASE:
 
-接收到完整的 HTTP 头部后处理的阶段，它位于 uri 重写之前，实际上很少有模块会注册在该阶段，默认的情况下，该阶段被跳过。
+A phase after receiving the full HTTP headers. It is before URI rewrite. Very few modules register in this phase, and it is skipped by default.
 
-2）NGX_HTTP_SERVER_REWRITE_PHASE：
+2) NGX_HTTP_SERVER_REWRITE_PHASE:
 
-URI 与 location 匹配前，修改 URI 的阶段，用于重定向，也就是该阶段执行处于 server 块内，location 块外的重写指令，在读取请求头的过程中 nginx 会根据 host 及端口找到对应的虚拟主机配置。
+The phase that modifies the URI before matching the location, used for redirects. This is where rewrite directives in the server block but outside location are executed. While reading request headers, nginx selects the virtual host by host and port.
 
-3）NGX_HTTP_FIND_CONFIG_PHASE：
+3) NGX_HTTP_FIND_CONFIG_PHASE:
 
-根据 URI 寻找匹配的 location 块配置项阶段，该阶段使用重写之后的 uri 来查找对应的 location，值得注意的是该阶段可能会被执行多次，因为也可能有 location 级别的重写指令。
+Find the matching location configuration based on the URI. This phase uses the rewritten URI to find the location. Note that it can run multiple times because there may be location-level rewrite directives.
 
-4）NGX_HTTP_REWRITE_PHASE：
+4) NGX_HTTP_REWRITE_PHASE:
 
-上一阶段找到 location 块后再修改 URI，location 级别的 uri 重写阶段，该阶段执行 location 基本的重写指令，也可能会被执行多次。
+Rewrite the URI after the location is found. This is the location-level rewrite phase, and it can run multiple times.
 
-5）NGX_HTTP_POST_REWRITE_PHASE：
+5) NGX_HTTP_POST_REWRITE_PHASE:
 
-防止重写 URL 后导致的死循环，location 级别重写的后一阶段，用来检查上阶段是否有 uri 重写，并根据结果跳转到合适的阶段。
+Prevents rewrite loops after URL rewriting. It checks whether the URI was rewritten in the previous phase and jumps to the right phase.
 
-6）NGX_HTTP_PREACCESS_PHASE：
+6) NGX_HTTP_PREACCESS_PHASE:
 
-下一阶段之前的准备，访问权限控制的前一阶段，该阶段在权限控制阶段之前，一般也用于访问控制，比如限制访问频率，链接数等。
+Preparation before the next phase, the pre-access control phase. It is often used for access control such as rate limiting or connection limits.
 
-7）NGX_HTTP_ACCESS_PHASE：
+7) NGX_HTTP_ACCESS_PHASE:
 
-让 HTTP 模块判断是否允许这个请求进入 Nginx 服务器，访问权限控制阶段，比如基于 ip 黑白名单的权限控制，基于用户名密码的权限控制等。
+Access control phase. HTTP modules decide whether the request is allowed, such as IP allow/deny lists or username/password authentication.
 
-8）NGX_HTTP_POST_ACCESS_PHASE：
+8) NGX_HTTP_POST_ACCESS_PHASE:
 
-访问权限控制的后一阶段，该阶段根据权限控制阶段的执行结果进行相应处理，向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝。
+Post-access control phase. It handles the result of access control and sends rejection error codes when access is denied.
 
-9）NGX_HTTP_TRY_FILES_PHASE：
+9) NGX_HTTP_TRY_FILES_PHASE:
 
-为访问静态文件资源而设置，try_files 指令的处理阶段，如果没有配置 try_files 指令，则该阶段被跳过。
+Phase for serving static resources. It handles try_files directives. If try_files is not configured, this phase is skipped.
 
-10）NGX_HTTP_CONTENT_PHASE：
+10) NGX_HTTP_CONTENT_PHASE:
 
-处理 HTTP 请求内容的阶段，大部分 HTTP 模块介入这个阶段，内容生成阶段，该阶段产生响应，并发送到客户端。
+Content phase. Most HTTP modules run here, generating content and sending responses to clients.
 
-11）NGX_HTTP_LOG_PHASE：
+11) NGX_HTTP_LOG_PHASE:
 
-处理完请求后的日志记录阶段，该阶段记录访问日志。
+Logging phase after the request is processed. This phase records access logs.
 
-以上 11 个阶段中，HTTP 无法介入的阶段有 4 个：
+Among these 11 phases, HTTP modules cannot hook into 4 phases:
 
-3）NGX_HTTP_FIND_CONFIG_PHASE
+3) NGX_HTTP_FIND_CONFIG_PHASE
 
-5）NGX_HTTP_POST_REWRITE_PHASE
+5) NGX_HTTP_POST_REWRITE_PHASE
 
-8）NGX_HTTP_POST_ACCESS_PHASE
+8) NGX_HTTP_POST_ACCESS_PHASE
 
-9）NGX_HTTP_TRY_FILES_PHASE
+9) NGX_HTTP_TRY_FILES_PHASE
 
-剩余的 7 个阶段，HTTP 模块均能介入，每个阶段可介入模块的个数也是没有限制的，多个 HTTP 模块可同时介入同一阶段并作用于同一请求。
+The remaining 7 phases can be hooked by HTTP modules, with no limit on the number of modules per phase. Multiple HTTP modules can hook into the same phase and act on the same request.
 
-### lua 8 个阶段
+### Lua 8 phases
 
 init_by_lua http
 set_by_lua server, server if, location, location if
@@ -82,60 +82,60 @@ header_filter_by_lua http, server, location, location if
 body_filter_by_lua http, server, location, location if
 log_by_lua http, server, location, location if
 
-1）init_by_lua：
+1) init_by_lua:
 
-在 nginx 重新加载配置文件时，运行里面 lua 脚本，常用于全局变量的申请。（例如：lua_shared_dict 共享内存的申请，只有当 nginx 重起后，共享内存数据才清空，这常用于统计。）
+Runs Lua scripts when nginx reloads configuration. It is commonly used to allocate global variables (for example, lua_shared_dict shared memory). Shared memory data is cleared only after nginx restarts, which is useful for statistics.
 
-2）set_by_lua：
+2) set_by_lua:
 
-流程分支处理判断变量初始化（设置一个变量，常用与计算一个逻辑，然后返回结果，该阶段不能运行 Output API、Control API、Subrequest API、Cosocket API）
+Used for control flow and variable initialization (set a variable, compute a value, and return). This phase cannot run Output API, Control API, Subrequest API, or Cosocket API.
 
-3）rewrite_by_lua：
+3) rewrite_by_lua:
 
-转发、重定向、缓存等功能 (例如特定请求代理到外网，在 access 阶段前运行，主要用于 rewrite)
+Forwarding, redirects, caching, etc. (for example, proxying specific requests to external networks). It runs before the access phase and is mainly for rewrite.
 
-4）access_by_lua：
+4) access_by_lua:
 
-IP 准入、接口权限等情况集中处理(例如配合 iptable 完成简单防火墙，主要用于访问控制，能收集到大部分变量，类似 status 需要在 log 阶段才有。这条指令运行于 nginx access 阶段的末尾，因此总是在 allow 和 deny 这样的指令之后运行，虽然它们同属 access 阶段。）
+Central handling for IP admission and API authorization (for example, simple firewall with iptables). It is mainly for access control and can collect most variables; some fields like status are only available in the log phase. This directive runs at the end of the nginx access phase, so it always runs after allow/deny directives.
 
-5）content_by_lua：
+5) content_by_lua:
 
-内容生成，阶段是所有请求处理阶段中最为重要的一个，运行在这个阶段的配置指令一般都肩负着生成内容（content）并输出 HTTP 响应。
+Content generation. This is the most important phase among all request phases. Directives in this phase are responsible for generating content and sending HTTP responses.
 
-6）header_filter_by_lua：
+6) header_filter_by_lua:
 
-应答 HTTP 过滤处理，一般只用于设置 Cookie 和 Headers 等，该阶段不能运行 Output API、Control API、Subrequest API、Cosocket API(例如添加头部信息)。
+Response header filtering, usually used for setting cookies and headers. This phase cannot run Output API, Control API, Subrequest API, or Cosocket API (for example, adding header info).
 
-7）body_filter_by_lua：
+7) body_filter_by_lua:
 
-应答 BODY 过滤处理(例如完成应答内容统一成大写)（一般会在一次请求中被调用多次, 因为这是实现基于 HTTP 1.1 chunked 编码的所谓"流式输出"的，该阶段不能运行 Output API、Control API、Subrequest API、Cosocket API）
+Response body filtering (for example, converting response content to uppercase). It is often called multiple times in a single request due to HTTP/1.1 chunked streaming output. This phase cannot run Output API, Control API, Subrequest API, or Cosocket API.
 
-8）log_by_lua：
+8) log_by_lua:
 
-会话完成后本地异步完成日志记录(日志可以记录在本地，还可以同步到其他机器)（该阶段总是运行在请求结束的时候，用于请求的后续操作，如在共享内存中进行统计数据,如果要高精确的数据统计，应该使用 body_filter_by_lua，该阶段不能运行 Output API、Control API、Subrequest API、Cosocket API）
+Asynchronous logging after the session completes (logs can be written locally or synced to other machines). It runs at request end and is used for post-request actions such as collecting stats in shared memory. For high-precision stats, body_filter_by_lua is preferred. This phase cannot run Output API, Control API, Subrequest API, or Cosocket API.
 
-### nginx 和 lua 运行阶段的对应关系
+### Mapping between nginx and Lua phases
 
-1）init_by_lua，运行在 initialization Phase；
+1) init_by_lua runs in the initialization phase.
 
-2）set_by_lua，运行在 rewrite 阶段；
+2) set_by_lua runs in the rewrite phase.
 
-     set 指令来自 ngx_rewrite 模块，运行于 rewrite 阶段；
+     The set directive comes from ngx_rewrite and runs in the rewrite phase.
 
-3）rewrite_by_lua 指令来自 ngx_lua 模块，运行于 rewrite 阶段的末尾
+3) rewrite_by_lua comes from ngx_lua and runs at the end of the rewrite phase.
 
-4）access_by_lua 指令同样来自 ngx_lua 模块，运行于 access 阶段的末尾；
+4) access_by_lua also comes from ngx_lua and runs at the end of the access phase.
 
-     deny 指令来自 ngx_access 模块，运行于 access 阶段；
+     The deny directive comes from ngx_access and runs in the access phase.
 
-5）content_by_lua 指令来自 ngx_lua 模块，运行于 content 阶段；不要将它和其它的内容处理指令在同一个 location 内使用如 proxy_pass；
+5) content_by_lua comes from ngx_lua and runs in the content phase. Do not use it with other content handlers in the same location, such as proxy_pass.
 
-      echo 指令则来自 ngx_echo 模块，运行在 content 阶段；
+      The echo directive comes from ngx_echo and runs in the content phase.
 
-6）header_filter_by_lua 运行于 content 阶段，output-header-filter 一般用来设置 cookie 和 headers；
+6) header_filter_by_lua runs in the content phase. output-header-filter is usually used to set cookies and headers.
 
-7）body_filter_by_lua，运行于 content 阶段；
+7) body_filter_by_lua runs in the content phase.
 
-8）log_by_lua，运行在 Log Phase 阶段；
+8) log_by_lua runs in the log phase.
 
 ![](./nginx_phase.webp)

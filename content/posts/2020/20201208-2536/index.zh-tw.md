@@ -6,8 +6,8 @@ menu:
     name: "冰山一角的駭客工具介紹"
     identifier: ironman-hacker-tools-introduction
     weight: 10
-tags: ["URL", "Security"]
-categories: ["URL", "Security"]
+tags: ["Links", "Security"]
+categories: ["Links", "Security"]
 ---
 
 - [冰山一角的駭客工具介紹](https://ithelp.ithome.com.tw/users/20114110/ironman/2536)

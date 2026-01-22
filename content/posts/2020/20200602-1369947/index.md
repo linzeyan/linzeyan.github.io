@@ -1,14 +1,14 @@
 ---
-title: "Git内部原理介绍"
+title: "Introduction to Git internals"
 date: 2020-06-02T08:39:08+08:00
 menu:
   sidebar:
-    name: "Git内部原理介绍"
+    name: "Introduction to Git internals"
     identifier: git-introduce-internal-principles
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 
-- [Git 内部原理介绍](https://cloud.tencent.com/developer/article/1369947)
+- [Introduction to Git internals](https://cloud.tencent.com/developer/article/1369947)

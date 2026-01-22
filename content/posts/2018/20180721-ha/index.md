@@ -13,33 +13,33 @@ categories: ["Firewall", "Juniper"]
 ```
 load merge relative terminal
 
-# 全新設備上面沒啟用過HA  必須先定義Cluster ID
-# ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
+# On a brand-new device without HA enabled, you must define the cluster ID.
+# Cluster ID must be unique and cannot duplicate other SRX, because HA creates a virtual MAC address and this ID affects it. Duplicates may cause MAC duplication and unexpected errors.
 #
 
 request system zeroize
 
-# 以下command 必須在  > 模式使用
-set chassis cluster cluster-id <ID範圍 0~ 255> node 0 # 這個是在 node  0 的設備下的
-set chassis cluster cluster-id <ID範圍 0~ 255> node 1 # 這個是在 node 1  的設備下的
+# The following commands must be run in `>` mode.
+set chassis cluster cluster-id <ID range 0~255> node 0 # This is on node 0
+set chassis cluster cluster-id <ID range 0~255> node 1 # This is on node 1
 
-在secondary node 下 這個command
+# On the secondary node, run this command.
 request chassis cluster configuration-synchronize
 
 
-# 等待機器重開機後，會出現Hold 或stanby 字樣 ，看到Cluster 是否有起來
+# After reboot, you will see Hold or standby; check whether the cluster is up.
 
 show chassis cluster status
 
-# 這個是RETH interface 建立好才會出現，必須先做config才會有
+# This appears only after RETH interfaces are created; you must configure first.
 show chassis cluster interfaces
 
-# 以下command 則是在 Config mode 下使用 ，先把設定檔建起來
+# The following commands are run in config mode; build the config first.
 
 
 ---
 
-# 這邊需要 backup-router 是給 HA裡面的Standby Device 的管理介面 (fxp) 一筆routing 可以回應，預設Standby 不會啟用routing engine，所以需要這筆設定
+# The backup-router is for the HA standby device management interface (fxp) so it can respond to routing; by default the standby does not enable the routing engine, so this is required.
 
 set groups node0 system host-name SRX-node0
 set groups node0 system backup-router 10.10.0.254
@@ -57,12 +57,12 @@ set chassis cluster control-link-recovery
 set chassis cluster reth-count 10
 set chassis cluster heartbeat-interval 2000
 
-# 另外建議在建置期間先將IPv6 打開，可以使用以下指令，因為日後開啟IPv6功能則必須要將設備重開機
+# It is recommended to enable IPv6 during setup using the following command, because enabling IPv6 later requires a reboot.
 set security forwarding-options family inet6 mode flow-based
 
 
-# 這邊的interface 號碼要看每一台Chassis 的型號不同而會有所不同
-# 最簡單的識別方式是看那台設備的Slot 有幾個，像SRX550HM 是 0~ 8都有擴充可以使用，所以預設HA會在 9開始 ，所以會是 ge-9/x/x
+# Interface numbers vary by chassis model.
+# The easiest way is to check how many slots the device has. For example, SRX550HM has expansion 0-8, so HA starts at 9, hence ge-9/x/x.
 set chassis cluster redundancy-group 0 node 0 priority 150
 set chassis cluster redundancy-group 0 node 1 priority 100
 set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
@@ -78,11 +78,11 @@ set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
 set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
 
 
-# 這裡是作為Redundancy group: 1 的 Data sync 設定 ，請務必設定上去才會啟用ge-0/0/2 的 heartbeat link
+# This is the data sync setting for redundancy group 1; you must set it to enable the ge-0/0/2 heartbeat link.
 set interfaces fab0 fabric-options member-interfaces ge-0/0/2
 set interfaces fab1 fabric-options member-interfaces ge-9/0/2
 
-# 設定interface 加入reth Group
+# Add interfaces to the reth group.
 set interfaces ge-0/0/3 gigether-options redundant-parent reth0
 set interfaces ge-0/0/4 gigether-options redundant-parent reth0
 set interfaces ge-9/0/3 gigether-options redundant-parent reth0
@@ -92,10 +92,10 @@ set interfaces ge-0/0/5 gigether-options redundant-parent reth1
 set interfaces ge-9/0/5 gigether-options redundant-parent reth1
 
 set interfaces reth0 vlan-tagging
-# 務必要將RETH 加入 data sync Group 裡面，不然不會動
+# You must add RETH to the data sync group, otherwise it will not work.
 set interfaces reth0 redundant-ether-options redundancy-group 1
 
-# 特別注意，在SRX雖然是LACP Passive mode ，在Switch 請務必使用LACP Activate mode
+# Note: SRX uses LACP passive mode, but the switch must use LACP active mode.
 set interfaces reth0 redundant-ether-options lacp passive
 set interfaces reth0 redundant-ether-options lacp periodic slow
 

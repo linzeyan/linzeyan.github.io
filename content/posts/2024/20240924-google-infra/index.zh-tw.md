@@ -1,14 +1,14 @@
 ---
-title: "Google Infra"
+title: "Google 基礎設施"
 date: 2024-09-24T09:04:00+08:00
 menu:
   sidebar:
-    name: "Google Infra"
+    name: "Google 基礎設施"
     identifier: google-infra
     weight: 10
-tags: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
-categories: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
+tags: ["Google", "Links", "infra", "infrastructure", "network", "switch"]
+categories: ["Google", "Links", "infra", "infrastructure", "network", "switch"]
 hero: images/hero/network.png
 ---
 
-- [Google 的十年五代网络架构](https://www.kawabangga.com/posts/6624)
+- [Google 十年五代網路架構](https://www.kawabangga.com/posts/6624)

@@ -6,10 +6,12 @@ menu:
     name: 永齡基金會AI大師論壇:人工智慧如何形塑人類未來
     identifier: ai-revolution
     weight: 10
-tags: ["AI", "URL", "Video"]
-categories: ["AI", "URL", "Video"]
+tags: ["AI", "Links", "Video"]
+categories: ["AI", "Links", "Video"]
 ---
 
 - https://www.youtube.com/watch?v=M3z6gI1AEns
 
-<!-- {{< video src="https://www.youtube.com/watch?v=M3z6gI1AEns" >}} -->
+{{< youtube M3z6gI1AEns >}}
+
+{{< vs >}}

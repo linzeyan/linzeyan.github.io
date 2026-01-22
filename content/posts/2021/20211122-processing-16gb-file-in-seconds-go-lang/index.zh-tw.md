@@ -6,8 +6,8 @@ menu:
     name: "25秒读取16GB文件，Go怎么做到的？"
     identifier: go-processing-16gb-file-in-seconds-go-lang
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

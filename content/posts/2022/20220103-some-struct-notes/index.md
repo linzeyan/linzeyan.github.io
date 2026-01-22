@@ -1,17 +1,17 @@
 ---
-title: "Gopher 需要知道的几个结构体骚操作"
+title: "Struct Tricks Every Gopher Should Know"
 date: 2022-01-03T15:08:31+08:00
 menu:
   sidebar:
-    name: "Gopher 需要知道的几个结构体骚操作"
+    name: "Struct Tricks Every Gopher Should Know"
     identifier: golang-some-struct-notes
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [Gopher 需要知道的几个结构体骚操作](https://mp.weixin.qq.com/s/A4m1xlFwh9pD0qy3p7ItSA)
+- [Struct Tricks Every Gopher Should Know](https://mp.weixin.qq.com/s/A4m1xlFwh9pD0qy3p7ItSA)
 
 #### NoCopy
 
@@ -39,11 +39,11 @@ type WaitGroup struct {
 }
 ```
 
-noCopy 定义非常简单，空结构体，zero size 不占用空间(前提是非结构体的最后一个字段，否则还要是有 8 byte 空间开销)
+noCopy is very simple: an empty struct. It has zero size and takes no space (as long as it is not the last field of a struct; otherwise there is still an 8-byte space overhead).
 
-sync.WaitGroup 内嵌 noCopy 字段，防止 Cond 变量被复制
+sync.WaitGroup embeds noCopy to prevent the Cond variable from being copied.
 
-上面是 sync.WaitGroup 结构体的定义，同时注意 noCopy 是源码中不可导出的定义。如果用户代码也想实现 NoCopy 呢？可以参考 grpc DoNotCopy
+The above is the definition of sync.WaitGroup. Note that noCopy is an unexported definition in the source code. If user code wants to implement NoCopy, you can refer to grpc DoNotCopy.
 
 ```go
 // DoNotCopy can be embedded in a struct to help prevent shallow copies.
@@ -52,13 +52,13 @@ sync.WaitGroup 内嵌 noCopy 字段，防止 Cond 变量被复制
 type DoNotCopy [0]sync.Mutex
 ```
 
-非常简单，Mutex 零长数组，不占用空间。由于 vet checker 会检测 Mutex，相当于替我们实现了 noCopy 功能
+It is very simple: a zero-length array of Mutex, which takes no space. Because vet checker inspects Mutex, it effectively implements noCopy for us.
 
 #### DoNotCompare
 
-对于 struct 来讲，<mark>只有所有字段全部 comparable 的(不限大小写是否导出)，那么结构体才可以比较。同时只比较 non-blank 的字段</mark>
+For structs, <mark>only if all fields are comparable (regardless of whether they are exported) can the struct be compared. Also, only non-blank fields are compared.</mark>
 
-Slice, Map, Function 均是不可比较的，只与判断是否为 nil. 所以我们可以利用这两个特性，内嵌函数来实现不可比较，参考 protobuf DoNotCompare
+Slice, Map, and Function are not comparable, and can only be checked for nil. So we can take advantage of this by embedding a function to make a struct non-comparable, as in protobuf DoNotCompare.
 
 ```go
 // DoNotCompare can be embedded in a struct to prevent comparability.

@@ -6,8 +6,8 @@ menu:
     name: "Setting up JWT Authentication"
     identifier: nginx-security-controls-configuring-jwt-authentication
     weight: 10
-tags: ["URL", "Nginx", "JWT"]
-categories: ["URL", "Nginx", "JWT"]
+tags: ["Links", "Nginx", "JWT"]
+categories: ["Links", "Nginx", "JWT"]
 hero: images/hero/nginx.jpeg
 ---
 

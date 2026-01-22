@@ -1,17 +1,17 @@
 ---
-title: "[Golang] 利用build tags達到不同的build config"
+title: "[Golang] Use build tags for different build configs"
 date: 2022-07-18T14:21:34+08:00
 menu:
   sidebar:
-    name: "[Golang] 利用build tags達到不同的build config"
+    name: "[Golang] Use build tags for different build configs"
     identifier: golang-go-build-config-ldflags
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [[Golang] 利用 build tags 達到不同的 build config](https://www.evanlin.com/go-build-config-ldflags/)
+- [[Golang] Use build tags for different build configs](https://www.evanlin.com/go-build-config-ldflags/)
 
 ##### Go build -ldflags
 
@@ -54,7 +54,7 @@ func GetConfigString() string {
 ```
 
 {{< alert type="warning" >}}
-`//+build debug` 前後需要一個空行(除非你在第一行)
+`//+build debug` needs a blank line before and after it (unless it is on the first line).
 {{< /alert >}}
 
 ###### release_config.go

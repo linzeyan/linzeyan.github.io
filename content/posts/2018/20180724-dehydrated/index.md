@@ -1,9 +1,9 @@
 ---
-title: "CDN 相关 https 证书的申请"
+title: "Applying HTTPS Certificates for CDN"
 date: 2018-07-24T18:35:39+08:00
 menu:
   sidebar:
-    name: "CDN 相关 https 证书的申请"
+    name: "Applying HTTPS Certificates for CDN"
     identifier: cdn-related-https-certificate-application
     weight: 10
 tags: ["DNS-01", "dehydrated", "SSL"]
@@ -13,39 +13,41 @@ categories: ["DNS-01", "dehydrated", "SSL"]
 - [dehydrated](https://github.com/lukas2511/dehydrated)
 - [letsencrypt-cloudflare-hook](https://github.com/kappataumu/letsencrypt-cloudflare-hook)
 
-由于我们不能上传文件到 CDN 服务器，所以我们不能采用文件验证方式来申请 https 证书。所幸 Let's Encrypt 支持 dns-01 challenge 通过 DNS 验证方式来申请 https 证书。我们使用 Dehydrated 配合 CloudFlare hook 来申请 https 证书。
+Since we cannot upload files to the CDN server, we cannot use file validation to apply for HTTPS certificates. Fortunately, Let's Encrypt supports the dns-01 challenge via DNS validation. We use Dehydrated with the CloudFlare hook to apply for HTTPS certificates.
 
 ```shell
-# 首先 clone dehydrated 这个仓库
+# First clone the dehydrated repository
 
 git clone https://github.com/lukas2511/dehydrated
 
-# 在 clone 出来的 dehydrated 目录下创建 config 文件，内容参考 config 文件(https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config)
-# 在 config 文件的末尾加上 Cloudflare 相关的信息
+# In the cloned dehydrated directory, create a config file. See the example config file:
+# https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config
+# Append Cloudflare info to the end of the config file
+
 echo "export CF_EMAIL=user@example.com" >> config
 echo "export CF_KEY=K9uX2HyUjeWg5AhAb" >> config
 
-# clone Cloudflare hook
+# Clone the Cloudflare hook
 mkdir hooks
 git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare
 
 
-# 安装依赖
+# Install dependencies
 
 pip install -r hooks/cloudflare/requirements-python-2.txt
 
-# 创建 domains.txt 文件，每行一个域名
+# Create domains.txt, one domain per line
 
 [root@db-slave01 dehydrated]# cat domains.txt
 apk.kosungames.com
 sp-res.kosungames.com
 cpweb.kosungames.com
 
-# 申请 https 证书
+# Request HTTPS certificates
 
 ./dehydrated -c -k hooks/cloudflare/hook.py
 
-# 使用 Python 脚本上传证书。脚本需在 dehydrated 目录下
+# Use a Python script to upload the certificates. The script must be in the dehydrated directory.
 ```
 
 ```python

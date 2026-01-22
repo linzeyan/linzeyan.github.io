@@ -6,8 +6,8 @@ menu:
     name: "Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學"
     identifier: docker-gluetun-vpn
     weight: 10
-tags: ["URL", "Docker", "Gluetun", "VPN"]
-categories: ["URL", "Docker", "Gluetun", "VPN"]
+tags: ["Links", "Docker", "Gluetun", "VPN"]
+categories: ["Links", "Docker", "Gluetun", "VPN"]
 hero: images/hero/docker.jpeg
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "Google Infra"
     identifier: google-infra
     weight: 10
-tags: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
-categories: ["Google", "URL", "infra", "infrastructure", "network", "switch"]
+tags: ["Google", "Links", "infra", "infrastructure", "network", "switch"]
+categories: ["Google", "Links", "infra", "infrastructure", "network", "switch"]
 hero: images/hero/network.png
 ---
 

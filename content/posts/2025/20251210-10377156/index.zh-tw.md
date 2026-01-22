@@ -6,8 +6,8 @@ menu:
     name: "VsCode 整合 DevSpace 進行 debug !"
     identifier: ide-vscode-debug-with-devspace
     weight: 10
-tags: ["URL", "VSCode"]
-categories: ["URL", "VSCode"]
+tags: ["Links", "VSCode"]
+categories: ["Links", "VSCode"]
 ---
 
 - [VsCode 整合 DevSpace 進行 debug !](https://ithelp.ithome.com.tw/articles/10377156)

@@ -6,8 +6,8 @@ menu:
     name: "A10"
     identifier: adc-application-delivery-controller-a10-command-introduce
     weight: 10
-tags: ["URL", "Application Delivery Controller", "A10"]
-categories: ["URL", "Application Delivery Controller", "A10"]
+tags: ["Links", "Application Delivery Controller", "A10"]
+categories: ["Links", "Application Delivery Controller", "A10"]
 ---
 
 - [A10 Link Aggregation](https://jal.tw/a10:l2:link-aggregation)

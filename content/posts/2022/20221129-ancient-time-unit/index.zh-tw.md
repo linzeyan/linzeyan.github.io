@@ -6,8 +6,8 @@ menu:
     name: "古代計時單位"
     identifier: pixnet-ancient-time-unit
     weight: 10
-tags: ["URL", "Time"]
-categories: ["URL", "Time"]
+tags: ["Links", "Time"]
+categories: ["Links", "Time"]
 ---
 
 - [古代計時單位](https://wywu.pixnet.net/blog/posts/1022354528)

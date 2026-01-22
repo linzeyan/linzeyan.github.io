@@ -6,8 +6,8 @@ menu:
     name: "Gin 框架绑定 JSON 参数使用 jsoniter"
     identifier: go-gin-jsoniter
     weight: 10
-tags: ["URL", "Go", "GIN", "jsoniter"]
-categories: ["URL", "Go", "GIN", "jsoniter"]
+tags: ["Links", "Go", "GIN", "jsoniter"]
+categories: ["Links", "Go", "GIN", "jsoniter"]
 hero: images/hero/go.svg
 ---
 

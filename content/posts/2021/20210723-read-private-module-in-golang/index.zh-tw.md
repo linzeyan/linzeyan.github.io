@@ -6,8 +6,8 @@ menu:
     name: "Go Modules 處理 Private GIT Repository 流程"
     identifier: golang-read-private-module-in-golang
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

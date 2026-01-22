@@ -6,8 +6,8 @@ menu:
     name: "利用 GPG 簽署 git commit"
     identifier: sign-git-commit-with-gpg
     weight: 10
-tags: ["URL", "Git", "GPG"]
-categories: ["URL", "Git", "GPG"]
+tags: ["Links", "Git", "GPG"]
+categories: ["Links", "Git", "GPG"]
 hero: images/hero/git.png
 ---
 

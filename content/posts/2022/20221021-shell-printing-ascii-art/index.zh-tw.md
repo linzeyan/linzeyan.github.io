@@ -1,17 +1,17 @@
 ---
-title: "Printing ASCII Art in the Shell"
+title: "在 Shell 中輸出 ASCII 藝術字"
 date: 2022-10-21T17:30:41+08:00
 menu:
   sidebar:
-    name: "Printing ASCII Art in the Shell"
+    name: "在 Shell 中輸出 ASCII 藝術字"
     identifier: linux-shell-printing-ascii-art
     weight: 10
-tags: ["URL", "SHELL", "Linux", "ASCII"]
-categories: ["URL", "SHELL", "Linux", "ASCII"]
+tags: ["Links", "SHELL", "Linux", "ASCII"]
+categories: ["Links", "SHELL", "Linux", "ASCII"]
 hero: images/hero/linux.png
 ---
 
-- [Printing ASCII Art in the Shell](https://www.baeldung.com/linux/shell-printing-ascii-art)
+- [在 Shell 中輸出 ASCII 藝術字](https://www.baeldung.com/linux/shell-printing-ascii-art)
 
 ##### banner
 
@@ -41,8 +41,8 @@ $ figlet hello
 |_| |_|\___|_|_|\___/
 ```
 
-- `-f` option and specify a font name for the output
-- `-l`, `-c`, and `-r` options to align the text to the left, center, or right,
+- `-f` 選項可指定輸出的字型
+- `-l`、`-c`、`-r` 可將文字對齊到左、中、右
 
 ##### TOIlet: FIGlet With More Options
 
@@ -85,7 +85,7 @@ $ toilet -F border hello
 └───────────────────────────────────┘
 ```
 
-##### Making Cows Say Things With cowsay
+##### 用 cowsay 讓牛說話
 
 > `sudo apt install cowsay`
 
@@ -147,7 +147,7 @@ cowsay -f duck hello
       (__)__ _
 ```
 
-###### Using cowsay With fortune/lolcat
+###### 使用 cowsay 搭配 fortune/lolcat
 
 ```bash
 fortune | cowsay
@@ -163,7 +163,7 @@ fortune | cowsay
                 ||     ||
 ```
 
-##### Printing Images With jp2a
+##### 使用 jp2a 輸出圖片
 
 > `sudo apt install jp2a`
 
@@ -188,4 +188,4 @@ jp2a baeldung.png
                    .kWMMM0;
 ```
 
-We can also use the -colors flag to obtain colored output
+也可以使用 -colors 旗標來取得彩色輸出

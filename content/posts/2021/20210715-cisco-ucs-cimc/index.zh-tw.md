@@ -6,8 +6,8 @@ menu:
     name: "[網友好文]Cisco UCS CIMC系列文章"
     identifier: ansible-shell-module-cisco-ucs-cimc
     weight: 10
-tags: ["URL", "Ansible", "Cisco"]
-categories: ["URL", "Ansible", "Cisco"]
+tags: ["Links", "Ansible", "Cisco"]
+categories: ["Links", "Ansible", "Cisco"]
 hero: images/hero/ansible.png
 ---
 

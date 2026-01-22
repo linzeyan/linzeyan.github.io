@@ -6,8 +6,8 @@ menu:
     name: "zsh 配置文件解析及优先级"
     identifier: zsh-environment-files-priority
     weight: 10
-tags: ["URL", "ZSH"]
-categories: ["URL", "ZSH"]
+tags: ["Links", "ZSH"]
+categories: ["Links", "ZSH"]
 ---
 
 - [zsh 配置文件解析及优先级](https://einverne.github.io/post/2023/01/zprofile-zshrc.html)

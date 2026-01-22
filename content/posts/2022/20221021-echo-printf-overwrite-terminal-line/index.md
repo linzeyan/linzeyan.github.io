@@ -6,8 +6,8 @@ menu:
     name: "How to Make Output Overwrite the Same Line in a Terminal"
     identifier: linux-shell-echo-printf-overwrite-terminal-line
     weight: 10
-tags: ["URL", "SHELL", "Linux"]
-categories: ["URL", "SHELL", "Linux"]
+tags: ["Links", "SHELL", "Linux"]
+categories: ["Links", "SHELL", "Linux"]
 hero: images/hero/linux.png
 ---
 

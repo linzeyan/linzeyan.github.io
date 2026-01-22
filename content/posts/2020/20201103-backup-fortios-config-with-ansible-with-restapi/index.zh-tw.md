@@ -1,20 +1,20 @@
 ---
-title: "Backup FortiOS config with Ansible - with RestAPI"
+title: "使用 Ansible 透過 RestAPI 備份 FortiOS 設定"
 date: 2020-11-03T17:59:24+08:00
 menu:
   sidebar:
-    name: "Backup FortiOS config with Ansible - with RestAPI"
+    name: "使用 Ansible 透過 RestAPI 備份 FortiOS 設定"
     identifier: ansible-backup-fortios-config-with-ansible-with-restapi
     weight: 10
-tags: ["URL", "Ansible", "FortiOS"]
-categories: ["URL", "Ansible", "FortiOS"]
+tags: ["Links", "Ansible", "FortiOS"]
+categories: ["Links", "Ansible", "FortiOS"]
 hero: images/hero/ansible.png
 ---
 
-- [Fortigate RestAPI Config Backup - FortiOS 6.0.4](http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/)
-- [Backup FortiOS config with Ansible - with RestAPI](http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/)
+- [Fortigate RestAPI 設定備份 - FortiOS 6.0.4](http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/)
+- [使用 Ansible 透過 RestAPI 備份 FortiOS 設定](http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/)
 
-##### Create access profile
+##### 建立存取設定檔
 
 ```
 FGTAWS0004BE1ADE # config system accprofile
@@ -24,7 +24,7 @@ FGTAWS0004BE1ADE (readOnly) # set sysgrp read
 FGTAWS0004BE1ADE (readOnly) # end
 ```
 
-##### Create API user in Fortigate
+##### 在 Fortigate 建立 API 使用者
 
 ```
 FGTAWS0004BE1ADE # config system api-user
@@ -40,7 +40,7 @@ FGTAWS0004BE1ADE (1) # end
 FGTAWS0004BE1ADE (api-admin) # end
 ```
 
-##### Generate API token
+##### 產生 API token
 
 ```
 FGTAWS0004BE1ADE # execute api-user generate-key api-admin
@@ -48,7 +48,7 @@ New API key: 'your_api_token'
 NOTE: The bearer of this API key will be granted all access privileges assigned to the api-user api-admin.
 ```
 
-##### Test
+##### 測試
 
 ```python
 # fortigate.py
@@ -104,7 +104,7 @@ Done!
 
 ---
 
-##### Configure Ansible inventory and playbook
+##### 設定 Ansible inventory 與 playbook
 
 ```bash
 $ cat hosts

@@ -6,8 +6,8 @@ menu:
     name: "Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy"
     identifier: provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy
     weight: 10
-tags: ["URL", "Windows", "Vagrant"]
-categories: ["URL", "Windows", "Vagrant"]
+tags: ["Links", "Windows", "Vagrant"]
+categories: ["Links", "Windows", "Vagrant"]
 hero: images/hero/microsoft_windows.png
 ---
 

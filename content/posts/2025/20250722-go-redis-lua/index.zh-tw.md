@@ -6,8 +6,8 @@ menu:
     name: "Go实战指南：使用 go-redis 执行 Lua 脚本"
     identifier: golang-redis-lua-script
     weight: 10
-tags: ["URL", "Go", "Redis", "Lua"]
-categories: ["URL", "Go", "Redis", "Lua"]
+tags: ["Links", "Go", "Redis", "Lua"]
+categories: ["Links", "Go", "Redis", "Lua"]
 hero: images/hero/go.svg
 ---
 

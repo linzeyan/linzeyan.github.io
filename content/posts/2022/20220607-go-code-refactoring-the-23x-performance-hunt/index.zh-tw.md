@@ -1,17 +1,17 @@
 ---
-title: "Go code refactoring : the 23x performance hunt"
+title: "Go 程式碼重構：23 倍效能追擊"
 date: 2022-06-07T13:42:07+08:00
 menu:
   sidebar:
-    name: "Go code refactoring : the 23x performance hunt"
+    name: "Go 程式碼重構：23 倍效能追擊"
     identifier: go-code-refactoring-the-23x-performance-hunt-156746b522f7
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [Go code refactoring : the 23x performance hunt](https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7)
+- [Go 程式碼重構：23 倍效能追擊](https://medium.com/@val_deleplace/go-code-refactoring-the-23x-performance-hunt-156746b522f7)
 
 ```bash
 $ go test -bench=. -cpuprofile cpu.prof

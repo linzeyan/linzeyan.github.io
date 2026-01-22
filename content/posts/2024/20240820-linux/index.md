@@ -6,8 +6,8 @@ menu:
     name: Lightweight Linux Distributions For Older PCs
     identifier: linux-lightweight
     weight: 10
-tags: ["Linux", "URL", "lightweight"]
-categories: ["Linux", "URL", "lightweight"]
+tags: ["Linux", "Links", "lightweight"]
+categories: ["Linux", "Links", "lightweight"]
 hero: images/hero/linux.png
 ---
 

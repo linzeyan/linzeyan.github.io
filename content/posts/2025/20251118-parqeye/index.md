@@ -6,8 +6,8 @@ menu:
     name: "parqeye"
     identifier: rust-parquet-parqeye
     weight: 10
-tags: ["URL", "Rust", "Parquet"]
-categories: ["URL", "Rust", "Parquet"]
+tags: ["Links", "Rust", "Parquet"]
+categories: ["Links", "Rust", "Parquet"]
 ---
 
 - [parqeye](https://github.com/kaushiksrini/parqeye)

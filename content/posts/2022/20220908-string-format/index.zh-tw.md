@@ -1,45 +1,45 @@
 ---
-title: "Go string format"
+title: "Go 字串格式化"
 date: 2022-09-08T11:32:00+08:00
 menu:
   sidebar:
-    name: "Go string format"
+    name: "Go 字串格式化"
     identifier: golang-string-format
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [Go string format](https://zetcode.com/golang/string-format/)
-- [Go 语言 fmt.Printf 使用指南](https://www.liwenzhou.com/posts/Go/fmt/)
+- [Go 字串格式化](https://zetcode.com/golang/string-format/)
+- [Go 語言 fmt.Printf 使用指南](https://www.liwenzhou.com/posts/Go/fmt/)
 
-The verb at the end defines the type and the interpretation of its corresponding argument.
+結尾的動詞（verb）決定對應參數的型別與解讀方式。
 
-- `d` - decimal integer
-- `o` - octal integer
-- `O` - octal integer with `0o` prefix
-- `b` - binary integer
-- `x` - hexadecimal integer lowercase
-- `X` - hexadecimal integer uppercase
-- `f` - decimal floating point, lowercase
-- `F` - decimal floating point, uppercase
-- `e` - scientific notation (mantissa/exponent), lowercase
-- `E` - scientific notation (mantissa/exponent), uppercase
-- `g` - the shortest representation of `%e` or `%f`
-- `G` - the shortest representation of `%E` or `%F`
-- `c` - a character represented by the corresponding Unicode code point
-- `q` - a quoted character
-- `U` - Unicode escape sequence
-- `t` - the word true or false
-- `s` - a string
-- `v` - default format
-- `#v` - Go-syntax representation of the value
-- `T` - a Go-syntax representation of the type of the value
-- `p` - pointer address
-- `%` - a double `%%` prints a single `%`
+- `d` - 十進位整數
+- `o` - 八進位整數
+- `O` - 帶有 `0o` 前綴的八進位整數
+- `b` - 二進位整數
+- `x` - 十六進位整數（小寫）
+- `X` - 十六進位整數（大寫）
+- `f` - 十進位浮點數（小寫）
+- `F` - 十進位浮點數（大寫）
+- `e` - 科學記號（尾數/指數，小寫）
+- `E` - 科學記號（尾數/指數，大寫）
+- `g` - `%e` 或 `%f` 的最短表示
+- `G` - `%E` 或 `%F` 的最短表示
+- `c` - 以 Unicode 碼點表示的字元
+- `q` - 帶引號的字元
+- `U` - Unicode 逸出序列
+- `t` - true 或 false 字串
+- `s` - 字串
+- `v` - 預設格式
+- `#v` - 值的 Go 語法表示
+- `T` - 值型別的 Go 語法表示
+- `p` - 指標位址
+- `%` - 雙 `%%` 會輸出單一 `%`
 
-### Go string format indexing
+### Go 字串格式化索引
 
 ```go
 package main
@@ -62,7 +62,7 @@ func main() {
 }
 ```
 
-### Go string format precision
+### Go 字串格式化精度
 
 ```go
 package main
@@ -81,7 +81,7 @@ func main() {
 
 ```
 
-### Go string format flags
+### Go 字串格式化旗標
 
 ```go
 package main
@@ -104,7 +104,7 @@ func main() {
 }
 ```
 
-### Go string format width
+### Go 字串格式化寬度
 
 ```go
 package main

@@ -6,8 +6,8 @@ menu:
     name: "Go语言高性能编程手册（万字长文）"
     identifier: go-high-performance-programming-manual
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

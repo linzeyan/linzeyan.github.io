@@ -6,8 +6,8 @@ menu:
     name: "Little Git Tricks: Use .mailmap to Merge Different Authors"
     identifier: git-little-git-tricks-use-mailmap-to-merge-different-authors
     weight: 10
-tags: ["URL", "Git"]
-categories: ["URL", "Git"]
+tags: ["Links", "Git"]
+categories: ["Links", "Git"]
 hero: images/hero/git.png
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "為你的Go應用建立輕量級Docker映象？ | IT人"
     identifier: golang-build-lightweight-docker-image-for-go-application
     weight: 10
-tags: ["URL", "Go", "Docker"]
-categories: ["URL", "Go", "Docker"]
+tags: ["Links", "Go", "Docker"]
+categories: ["Links", "Go", "Docker"]
 hero: images/hero/go.svg
 ---
 

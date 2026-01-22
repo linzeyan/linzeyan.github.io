@@ -6,8 +6,8 @@ menu:
     name: "6 YAML Features most programmers don't know"
     identifier: 6-yaml-features-most-programmers-dont-know
     weight: 10
-tags: ["URL", "YAML"]
-categories: ["URL", "YAML"]
+tags: ["Links", "YAML"]
+categories: ["Links", "YAML"]
 ---
 
 - [6 YAML Features most programmers don't know](https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3)

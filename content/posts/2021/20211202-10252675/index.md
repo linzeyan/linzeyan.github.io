@@ -1,17 +1,17 @@
 ---
-title: "Day 28 - Kubernetes 第三方好用工具介紹"
+title: "Day 28 - Introduction to Useful Third-Party Kubernetes Tools"
 date: 2021-12-02T13:28:09+08:00
 menu:
   sidebar:
-    name: "Day 28 - Kubernetes 第三方好用工具介紹"
+    name: "Day 28 - Introduction to Useful Third-Party Kubernetes Tools"
     identifier: k8s-introduction-to-useful-third-party-tools
     weight: 10
-tags: ["URL", "Kubernetes", "Plugin"]
-categories: ["URL", "Kubernetes", "Plugin"]
+tags: ["Links", "Kubernetes", "Plugin"]
+categories: ["Links", "Kubernetes", "Plugin"]
 hero: images/hero/kubernetes.png
 ---
 
-- [Day 28 - Kubernetes 第三方好用工具介紹](https://ithelp.ithome.com.tw/articles/10252675)
+- [Day 28 - Introduction to Useful Third-Party Kubernetes Tools](https://ithelp.ithome.com.tw/articles/10252675)
 
 ```shell
 $ kubectl get pods
@@ -25,13 +25,13 @@ ithome-6564f65698-zhwlj   1/1     Running   0          84s
 
 #### [Stern](https://github.com/wercker/stern)/Kail
 
-> 創建出來的 Pod 名稱上面都會有一些不好閱讀的亂數
+> The names of created pods often contain some unreadable random strings.
 >
-> 如果使用 kubectl 來觀察個別 Pod 的 log 就必須要於不同的 pod 之間來回切換
+> If you use kubectl to observe logs for individual pods, you need to switch between different pods.
 >
-> 這方面的工具滿多的，譬如 Stern, Kube-tail, Kail 等都可以
+> There are many tools for this, such as Stern, Kube-tail, and Kail.
 
-上述範例會有五個 pod，而且這五個 pod 的名稱都是 ithome 開頭，因此我可以直接用 `stern ithom` 的方式來抓取這些 pod 的資訊，結果如下圖
+In the example above, there are five pods and their names all start with ithome, so I can use `stern ithome` to capture their logs. The result is shown below.
 
 ```bash
 $ stern ithome
@@ -59,11 +59,11 @@ ithome-6564f65698-fglr9 netutils Hello! 372 secs elapsed...
 
 #### K9S
 
-> 過往總是透過 kubectl 指令於各個資源，各 namespace 間切來切去，特別是要使用 `exec`, `get`, `describe`, `logs`, `delete` 等指令時，常常打的手忙腳亂或是覺得心累，有這種困擾的人可以考慮使用看看 k9s 這個工具
+> In the past, I used kubectl commands to jump between resources and namespaces, especially when running `exec`, `get`, `describe`, `logs`, `delete`, and so on. It is easy to get overwhelmed or feel tired. If you have the same pain, you can consider using k9s.
 
 #### Ksniff
 
-> 抓取網路封包的工具
+> A tool for capturing network packets.
 
 ```bash
 $ sudo apt install tshark

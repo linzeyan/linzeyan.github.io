@@ -1,19 +1,19 @@
 ---
-title: "LVM - lvg and lvol"
+title: "LVM - lvg 與 lvol"
 date: 2022-09-05T15:32:05+08:00
 menu:
   sidebar:
-    name: "LVM - lvg and lvol"
+    name: "LVM - lvg 與 lvol"
     identifier: ansible-system-lvm
     weight: 10
-tags: ["URL", "Ansible", "LVM"]
-categories: ["URL", "Ansible", "LVM"]
+tags: ["Links", "Ansible", "LVM"]
+categories: ["Links", "Ansible", "LVM"]
 hero: images/hero/ansible.png
 ---
 
-- [LVM - lvg and lvol](https://ansible.cloudns.pro/post/system/lvm/)
+- [LVM - lvg 與 lvol](https://ansible.cloudns.pro/post/system/lvm/)
 
-##### volume group
+##### 卷群組
 
 ```yaml
 - name: 在 /dev/sda1 跟 /dev/sdb1 之上建立 volume group，其 extend size 設置為 32MB
@@ -23,7 +23,7 @@ hero: images/hero/ansible.png
     pesize: 32
 ```
 
-##### local volume
+##### 本地卷
 
 ```yaml
 - name: 建立一個大小為 512m 的 local volume
@@ -33,7 +33,7 @@ hero: images/hero/ansible.png
     size: 512
 ```
 
-##### Example
+##### 範例
 
 ```yaml
 ---

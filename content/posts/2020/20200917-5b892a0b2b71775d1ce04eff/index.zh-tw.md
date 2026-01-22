@@ -6,8 +6,8 @@ menu:
     name: "openvpn部署之部署基於AD域認證"
     identifier: linux-openvpn-pam-sssd-active-directory
     weight: 10
-tags: ["URL", "Linux", "Windows", "AD", "LDAP", "VPN"]
-categories: ["URL", "Linux", "Windows", "AD", "LDAP", "VPN"]
+tags: ["Links", "Linux", "Windows", "AD", "LDAP", "VPN"]
+categories: ["Links", "Linux", "Windows", "AD", "LDAP", "VPN"]
 hero: images/hero/linux.png
 ---
 

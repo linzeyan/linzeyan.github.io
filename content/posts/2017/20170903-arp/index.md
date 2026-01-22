@@ -11,12 +11,12 @@ categories: ["Network"]
 hero: images/hero/network.png
 ---
 
-封包出去前
+Before a packet is sent
 
-- 對 Arp Table 找 IP 對應的 MAC
-  - 有 MAC - 封裝
-  - 無 MAC - 廣播
-    - 同網段 - OK
-    - 不同網段 - 對 Arp Table 找 Router 的 MAC
-      - 有 - OK
-      - 無 - 廣播
+- Look up the MAC for the IP in the ARP table
+  - MAC found - encapsulate
+  - No MAC - broadcast
+    - Same subnet - OK
+    - Different subnet - look up the router MAC in the ARP table
+      - Found - OK
+      - Not found - broadcast

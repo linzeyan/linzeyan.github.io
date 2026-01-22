@@ -6,8 +6,8 @@ menu:
     name: "一張圖學會【拼音輸入法】"
     identifier: input-method-zhuyin-pinyin
     weight: 10
-tags: ["URL", "pinyin"]
-categories: ["URL", "pinyin"]
+tags: ["Links", "pinyin"]
+categories: ["Links", "pinyin"]
 ---
 
 - [一張圖學會【拼音輸入法】](https://briian.com/zhuyin-pinyin)

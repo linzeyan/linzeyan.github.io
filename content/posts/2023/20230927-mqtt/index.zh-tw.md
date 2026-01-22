@@ -6,8 +6,8 @@ menu:
     name: 調整系統使得 EMQX 可以支援 1M 連線
     identifier: tune-mqtt-emqx
     weight: 10
-tags: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
-categories: ["Kubernetes", "MQTT", "EMQX", "Linux", "URL"]
+tags: ["Kubernetes", "MQTT", "EMQX", "Linux", "Links"]
+categories: ["Kubernetes", "MQTT", "EMQX", "Linux", "Links"]
 hero: images/hero/linux.png
 ---
 

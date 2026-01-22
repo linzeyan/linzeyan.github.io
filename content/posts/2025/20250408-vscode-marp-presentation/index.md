@@ -6,8 +6,8 @@ menu:
     name: "Marp教學：Markdown搭配VS Code做簡報，快速輸出為PPTX或PDF，提昇做簡報效率"
     identifier: vscode-marp-presentation
     weight: 10
-tags: ["URL", "markdown", "VScode"]
-categories: ["URL", "markdown", "VScode"]
+tags: ["Links", "markdown", "VScode"]
+categories: ["Links", "markdown", "VScode"]
 ---
 
 - [Marp 教學：Markdown 搭配 VS Code 做簡報，快速輸出為 PPTX 或 PDF，提昇做簡報效率](https://ivonblog.com/posts/vscode-marp-presentation/)

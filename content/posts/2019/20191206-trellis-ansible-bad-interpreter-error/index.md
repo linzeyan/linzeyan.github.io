@@ -6,8 +6,8 @@ menu:
     name: "Trellis Ansible Bad Interpreter Error"
     identifier: ansible-trellis-ansible-bad-interpreter-error
     weight: 10
-tags: ["URL", "Ansible"]
-categories: ["URL", "Ansible"]
+tags: ["Links", "Ansible"]
+categories: ["Links", "Ansible"]
 hero: images/hero/ansible.png
 ---
 

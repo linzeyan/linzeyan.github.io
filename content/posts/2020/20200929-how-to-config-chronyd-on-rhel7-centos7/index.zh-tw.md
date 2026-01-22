@@ -6,8 +6,8 @@ menu:
     name: "如何設定時區與NTP服務在RHEL7/CentOS7"
     identifier: linux-how-to-config-chronyd-on-rhel7-centos7
     weight: 10
-tags: ["URL", "Linux", "chrony"]
-categories: ["URL", "Linux", "chrony"]
+tags: ["Links", "Linux", "chrony"]
+categories: ["Links", "Linux", "chrony"]
 hero: images/hero/linux.png
 ---
 

@@ -1,22 +1,22 @@
 ---
-title: "GO Generic 入門筆記"
+title: "Go Generics 入門筆記"
 date: 2024-02-07T19:52:22+08:00
 menu:
   sidebar:
-    name: "GO Generic 入門筆記"
+    name: "Go Generics 入門筆記"
     identifier: go-generic-beginner-notes
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 
-- [GO Generic 入門筆記](https://ganhua.wang/go-generic)
+- [Go Generics 入門筆記](https://ganhua.wang/go-generic)
 
-#### 自定義約束
+#### 自訂約束
 
 ```go
-// Addable只允許int 或 float64類型
+// Addable 只允許 int 或 float64 類型
 type Addable interface {
     int | float64
 }
@@ -27,7 +27,7 @@ func Add[T Addable](a, b T) T {
 ```
 
 **_`~` 符號的作用_**
-`~` 符號用于表示與指定类型有相同底層類型的所有類型。當你在類型參數的约束中使用 `~` 符號時，你指定了一個類型集合，這個集合包含所有底層類型與约束中指定的類型相同的類型。
+`~` 符號用於表示與指定類型有相同底層類型的所有類型。當你在類型參數的約束中使用 `~` 符號時，你指定了一個類型集合，這個集合包含所有底層類型與約束中指定的類型相同的類型。
 
 ```go
 type MyInt int

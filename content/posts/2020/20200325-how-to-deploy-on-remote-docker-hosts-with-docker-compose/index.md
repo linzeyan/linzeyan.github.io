@@ -6,8 +6,8 @@ menu:
     name: "How to deploy on remote Docker hosts with docker-compose"
     identifier: docker-how-to-deploy-on-remote-docker-hosts-with-docker-compose
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 

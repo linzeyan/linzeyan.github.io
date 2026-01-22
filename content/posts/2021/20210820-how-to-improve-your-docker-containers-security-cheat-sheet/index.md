@@ -6,8 +6,8 @@ menu:
     name: "Docker Security Best Practices: Cheat Sheet"
     identifier: docker-how-to-improve-your-docker-containers-security-cheat-sheet
     weight: 10
-tags: ["URL", "Docker"]
-categories: ["URL", "Docker"]
+tags: ["Links", "Docker"]
+categories: ["Links", "Docker"]
 hero: images/hero/docker.jpeg
 ---
 

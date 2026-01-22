@@ -6,8 +6,8 @@ menu:
     name: "【筆記】在GCP上建立可Remote dekstop的Ubuntu環境"
     identifier: linux-using-vnc-connection
     weight: 10
-tags: ["URL", "Linux", "VNC"]
-categories: ["URL", "Linux", "VNC"]
+tags: ["Links", "Linux", "VNC"]
+categories: ["Links", "Linux", "VNC"]
 hero: images/hero/linux.png
 ---
 

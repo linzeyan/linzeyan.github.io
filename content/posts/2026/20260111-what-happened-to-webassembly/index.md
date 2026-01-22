@@ -6,8 +6,8 @@ menu:
     name: "What Happened To WebAssembly"
     identifier: webassembly-what-happened-to-webassembly
     weight: 10
-tags: ["URL", "WebAssembly"]
-categories: ["URL", "WebAssembly"]
+tags: ["Links", "WebAssembly"]
+categories: ["Links", "WebAssembly"]
 ---
 
 - [What Happened To WebAssembly](https://emnudge.dev/blog/what-happened-to-webassembly/)

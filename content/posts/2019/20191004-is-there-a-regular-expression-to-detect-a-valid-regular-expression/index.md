@@ -6,8 +6,8 @@ menu:
     name: "Is there a regular expression to detect a valid regular expression?"
     identifier: is-there-a-regular-expression-to-detect-a-valid-regular-expression
     weight: 10
-tags: ["URL", "Regex"]
-categories: ["URL", "Regex"]
+tags: ["Links", "Regex"]
+categories: ["Links", "Regex"]
 ---
 
 - [Is there a regular expression to detect a valid regular expression?](https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression)

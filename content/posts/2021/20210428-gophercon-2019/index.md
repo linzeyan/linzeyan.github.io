@@ -6,8 +6,8 @@ menu:
     name: "High Performance Go Workshop"
     identifier: golang-high-performance-go-workshop-gophercon-2019
     weight: 10
-tags: ["URL", "Go"]
-categories: ["URL", "Go"]
+tags: ["Links", "Go"]
+categories: ["Links", "Go"]
 hero: images/hero/go.svg
 ---
 

@@ -6,8 +6,8 @@ menu:
     name: "Python Numbers Every Programmer Should Know"
     identifier: python-numbers-every-programmer-should-know
     weight: 10
-tags: ["URL", "Python"]
-categories: ["URL", "Python"]
+tags: ["Links", "Python"]
+categories: ["Links", "Python"]
 hero: images/hero/python.png
 ---
 
