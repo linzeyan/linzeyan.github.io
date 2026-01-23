@@ -4,44 +4,44 @@
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener">Configure Split Tunnels&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/" target="_blank" rel="noopener">Traffic routing with WARP&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="1-set-up-the-client">1. Set up the client&lt;/h3>
-&lt;h4 id="create-device-enrollment-rules">Create device enrollment rules&lt;/h4>
+&lt;h3 id="1-設定-client">1. 設定 Client&lt;/h3>
+&lt;h4 id="建立裝置註冊規則">建立裝置註冊規則&lt;/h4>
 &lt;blockquote>
-&lt;p>Create device enrollment rules to determine which devices can enroll to Zero Trust organization.&lt;/p>&lt;/blockquote>
-&lt;h5 id="set-device-enrollment-permissions">Set device enrollment permissions&lt;/h5>
+&lt;p>建立裝置註冊規則，用來決定哪些裝置可以加入 Zero Trust 組織。&lt;/p>&lt;/blockquote>
+&lt;h5 id="設定裝置註冊權限">設定裝置註冊權限&lt;/h5>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage.&lt;/li>
-&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com.&lt;/li>
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage。&lt;/li>
+&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com。&lt;/li>
 &lt;/ol>
-&lt;h3 id="2-route-private-network-ips-through-warp">2. Route private network IPs through WARP&lt;/h3>
+&lt;h3 id="2-透過-warp-路由私有網路-ip">2. 透過 WARP 路由私有網路 IP&lt;/h3>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure.&lt;/li>
-&lt;li>Configure settings:
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure。&lt;/li>
+&lt;li>設定：
 &lt;ol>
-&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates.&lt;/li>
-&lt;li>Service mode: Gateway with WARP.&lt;/li>
-&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com.&lt;/li>
-&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage.
+&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates。&lt;/li>
+&lt;li>Service mode: Gateway with WARP。&lt;/li>
+&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com。&lt;/li>
+&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage。
 &lt;ul>
-&lt;li>Delete the IP range of nas.ruru910.com.&lt;/li>
+&lt;li>刪除 nas.ruru910.com 的 IP range。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ol>
-&lt;h3 id="3-filter-network-traffic-with-gateway">3. Filter network traffic with Gateway&lt;/h3>
-&lt;h4 id="1-enable-the-gateway-proxy">1. Enable the Gateway proxy&lt;/h4>
+&lt;h3 id="3-用-gateway-過濾網路流量">3. 用 Gateway 過濾網路流量&lt;/h3>
+&lt;h4 id="1-啟用-gateway-代理">1. 啟用 Gateway 代理&lt;/h4>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; Network.
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; Network。
 &lt;ol>
-&lt;li>Gateway Logging: Capture all.&lt;/li>
-&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection.&lt;/li>
+&lt;li>Gateway Logging: Capture all。&lt;/li>
+&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ol>
-&lt;h4 id="2-create-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">Create Zero Trust policies&lt;/a>&lt;/h4>
+&lt;h4 id="2-建立-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">建立 Zero Trust Policies&lt;/a>&lt;/h4>
 &lt;ol>
-&lt;li>Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li>
-&lt;li>For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li>
-&lt;li>Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li>
+&lt;li>前往 Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP。&lt;/li>
+&lt;li>Value 輸入應用程式的 IP（例如 10.128.0.7）。&lt;/li>
+&lt;li>修改 policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com。&lt;/li>
 &lt;/ol></description></item></channel></rss>

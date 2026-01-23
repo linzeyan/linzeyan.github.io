@@ -1,29 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/network/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Cloudflare 中转 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">使用 Cloudflare 中转 V2Ray 流量&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray 脚本 DNS 设置&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray 脚本中转教程&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/network/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Cloudflare 中轉 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">使用 Cloudflare 中轉 V2Ray 流量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">最好用的 V2Ray 一鍵安裝腳本&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray 腳本 DNS 設定&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray 腳本中轉教學&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h2 id="安装脚本">安装脚本&lt;/h2>
+&lt;h2 id="安裝腳本">安裝腳本&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="准备">准备&lt;/h2>
-&lt;p>我们现在就添加一个 DNS 记录，名称：&lt;code>ai&lt;/code>，IPv4 地址：&lt;code>写你的 VPS IP&lt;/code>，代理状态必须关闭，云朵图标为灰色。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="準備">準備&lt;/h2>
+&lt;p>我們現在就新增一筆 DNS 記錄，名稱：&lt;code>ai&lt;/code>，IPv4 位址：&lt;code>寫你的 VPS IP&lt;/code>，代理狀態必須關閉，雲朵圖示為灰色。&lt;/p>
 &lt;p>提示：你可以使用 &lt;code>v2ray ip&lt;/code> 查看你的 VPS IP。&lt;/p>
-&lt;h2 id="添加中转配置">添加中转配置&lt;/h2>
-&lt;p>使用 &lt;code>v2ray add ws ai.233boy.com&lt;/code> 添加一个 vmess-ws-tls 配置；记得把 &lt;code>ai.233boy.com&lt;/code> 改成你的域名&lt;/p>
-&lt;p>就是刚才添加记录的那个域名，假设你的域名是 233boy.com ，添加的名称是 ai，域名就是 ai.233boy.com&lt;/p>
-&lt;h2 id="开启中转">开启中转&lt;/h2>
-&lt;p>在 Cloudflare 后台主页，点击你的域名进去，在左侧选项菜单选择 &lt;code>SSL/TLS&lt;/code>&lt;/p>
-&lt;p>将 SSL/TLS 加密模式更改为 &lt;code>完全&lt;/code>&lt;/p>
-&lt;p>然后在左侧选项菜单选择 &lt;code>DNS&lt;/code>&lt;/p>
-&lt;p>编辑添加的那个记录，把代理状态打开，即是 &lt;code>已代理&lt;/code>，云朵图标为点亮状态，然后保存&lt;/p>
-&lt;p>把云朵点亮之后，流量就是走的 Cloudflare 中转了。&lt;/p>
-&lt;p>提醒，把云朵点亮就是流量通过 Cloudflare 中转，点灰云朵图标就是直连，不走 Cloudflare 中转。&lt;/p></description></item><item><title>Google Infra</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener">Google 的十年五代网络架构&lt;/a>&lt;/li>
+&lt;h2 id="新增中轉配置">新增中轉配置&lt;/h2>
+&lt;p>使用 &lt;code>v2ray add ws ai.233boy.com&lt;/code> 新增一個 vmess-ws-tls 配置；記得把 &lt;code>ai.233boy.com&lt;/code> 改成你的網域。&lt;/p>
+&lt;p>就是剛才新增記錄的那個網域，假設你的網域是 233boy.com，新增的名稱是 ai，網域就是 ai.233boy.com。&lt;/p>
+&lt;h2 id="開啟中轉">開啟中轉&lt;/h2>
+&lt;p>在 Cloudflare 後台首頁，點你的網域進去，在左側選項選單選擇 &lt;code>SSL/TLS&lt;/code>。&lt;/p>
+&lt;p>把 SSL/TLS 加密模式改成 &lt;code>完全&lt;/code>。&lt;/p>
+&lt;p>接著在左側選項選單選擇 &lt;code>DNS&lt;/code>。&lt;/p>
+&lt;p>編輯剛新增的記錄，把代理狀態打開，也就是 &lt;code>已代理&lt;/code>，雲朵圖示為點亮狀態，然後儲存。&lt;/p>
+&lt;p>雲朵點亮後，流量就會走 Cloudflare 中轉。&lt;/p>
+&lt;p>提醒：雲朵點亮代表流量經由 Cloudflare 中轉；雲朵灰色代表直連，不走 Cloudflare 中轉。&lt;/p>
+&lt;h2 id="取得真實客戶端-ip">取得真實客戶端 IP&lt;/h2>
+&lt;p>有些人可能有特殊需求，因為套上 CF 後，預設在查看日誌時會顯示客戶端 IP 為 CF 的 IP。&lt;/p></description></item><item><title>Google 基礎設施</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener">Google 十年五代網路架構&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>有关 MTU 和 MSS 的一切</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">有关 MTU 和 MSS 的一切&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>即時監控網路介面上的 HTTP 請求</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">即時監控網路介面上的 HTTP 請求&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="tcpflow">tcpflow&lt;/h3>
 &lt;blockquote>
@@ -35,16 +37,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-p&lt;/code> disables promiscuous mode&lt;/li>
-&lt;li>&lt;code>-c&lt;/code> means only print the output to the console and don&amp;rsquo;t create files&lt;/li>
-&lt;li>&lt;code>-i&lt;/code> specifies the network interface
-grep receives the output of tcpflow&lt;/li>
-&lt;li>&lt;code>-o&lt;/code> means show only the matching parts of the lines that match the pattern&lt;/li>
-&lt;li>&lt;code>-E&lt;/code> means the pattern is an extended regular expression (ERE)&lt;/li>
+&lt;li>&lt;code>-p&lt;/code> 停用混雜模式&lt;/li>
+&lt;li>&lt;code>-c&lt;/code> 只輸出到主控台，不建立檔案&lt;/li>
+&lt;li>&lt;code>-i&lt;/code> 指定網路介面
+grep 會接收 tcpflow 的輸出&lt;/li>
+&lt;li>&lt;code>-o&lt;/code> 只顯示符合樣式的那一段&lt;/li>
+&lt;li>&lt;code>-E&lt;/code> 表示樣式是延伸正則表示式（ERE）&lt;/li>
 &lt;/ul>
 &lt;h3 id="httpry">httpry&lt;/h3>
 &lt;blockquote>
-&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
+&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo httpry -i wlp0s20f3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>httpry version 0.1.8 -- HTTP logging and information retrieval tool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting capture on wlp0s20f3 interface
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump 使用总结&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="命令使用">命令使用&lt;/h2>
@@ -88,13 +99,13 @@ grep receives the output of tcpflow&lt;/li>
 &lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
 &lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
 &lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
-&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
+&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>不使用 kube-proxy 的 Kubernetes</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">不使用 kube-proxy 的 Kubernetes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="quick-start">Quick-Start&lt;/h4>
+&lt;h4 id="快速開始">快速開始&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 Helm 倉庫&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -103,25 +114,25 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence">Traffic sequence&lt;/h3>
-&lt;p>Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Cloudflare 流量處理順序</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="流量處理順序">流量處理順序&lt;/h3>
+&lt;p>應用程式流量在 Cloudflare 邊緣節點會依下列順序處理：&lt;/p>
 &lt;ol>
 &lt;li>DDoS&lt;/li>
-&lt;li>URL Rewrites&lt;/li>
-&lt;li>Page Rules&lt;/li>
-&lt;li>IP Access Rules&lt;/li>
-&lt;li>Bots&lt;/li>
-&lt;li>Firewall Rules&lt;/li>
-&lt;li>Rate Limiting&lt;/li>
-&lt;li>Managed Rules&lt;/li>
-&lt;li>Header Modification&lt;/li>
-&lt;li>Access&lt;/li>
+&lt;li>URL 重寫&lt;/li>
+&lt;li>頁面規則&lt;/li>
+&lt;li>IP 存取規則&lt;/li>
+&lt;li>Bot 管理&lt;/li>
+&lt;li>防火牆規則&lt;/li>
+&lt;li>速率限制&lt;/li>
+&lt;li>託管規則&lt;/li>
+&lt;li>標頭修改&lt;/li>
+&lt;li>存取控制&lt;/li>
 &lt;li>Workers&lt;/li>
 &lt;/ol></description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener">在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Day 19 BGP Protocol (1)</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener">Day 19 BGP Protocol (1)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener">Day 20 BGP Protocol (2)&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>第 19 天 BGP 協定（1）</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener">第 19 天 BGP 協定（1）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener">第 20 天 BGP 協定（2）&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a>&lt;/li>
 &lt;/ul>
@@ -161,16 +172,17 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item><item><title>BIRD 与 BGP 的新手开场</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD 与 BGP 的新手开场&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener">BIRD Internet Routing Daemon&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再戰營運商快取：使用 iptables 對付快取劫持&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="起因">起因&lt;/h5>
-&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
-&lt;h5 id="解决">解决&lt;/h5>
+&lt;p>與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p>
+&lt;h5 id="解決">解決&lt;/h5>
 &lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
-&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
+&lt;p>考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p>
+&lt;p>因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p>
+&lt;p>這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p></description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">使用 TC 和 Netem 模拟网络异常&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
@@ -185,10 +197,10 @@ grep receives the output of tcpflow&lt;/li>
 &lt;li>模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code>tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
-&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - 安裝、設定與建置 BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - 安裝、設定與建置 BGP&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>最好用的 V2Ray 一鍵安裝腳本 &amp; 管理腳本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一鍵安裝腳本 &amp;amp; 管理腳本&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>
@@ -230,7 +242,7 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/li>
 &lt;/ol>
 &lt;h5 id="vlan">Vlan&lt;/h5>
-&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
+&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item><item><title>Juniper 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-隧道">[Juniper Firewall] 隧道&lt;/h4>
 &lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
 &lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]

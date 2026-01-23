@@ -27,22 +27,22 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Convert command output as image&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">echo -e &amp;#34;{{ hostname_result.stdout }}\n{{ redhat_release_result.stdout }}&amp;#34; | convert label:@- {{ hostname_result.stdout }}.png&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">delegate_to&lt;/span>: &lt;span style="color:#ae81ff">localhost&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>LVM - lvg and lvol</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220905-system-lvm/</link><pubDate>Mon, 05 Sep 2022 15:32:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220905-system-lvm/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ansible.cloudns.pro/post/system/lvm/" target="_blank" rel="noopener">LVM - lvg and lvol&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>LVM - lvg 與 lvol</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220905-system-lvm/</link><pubDate>Mon, 05 Sep 2022 15:32:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220905-system-lvm/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/system/lvm/" target="_blank" rel="noopener">LVM - lvg 與 lvol&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="volume-group">volume group&lt;/h5>
+&lt;h5 id="卷群組">卷群組&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">在 /dev/sda1 跟 /dev/sdb1 之上建立 volume group，其 extend size 設置為 32MB&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">community.general.lvg&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vg&lt;/span>: &lt;span style="color:#ae81ff">vg.services&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pvs&lt;/span>: &lt;span style="color:#ae81ff">/dev/sda1,/dev/sdb1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pesize&lt;/span>: &lt;span style="color:#ae81ff">32&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="local-volume">local volume&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="本地卷">本地卷&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">建立一個大小為 512m 的 local volume&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">community.general.lvol&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vg&lt;/span>: &lt;span style="color:#ae81ff">firefly&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">lv&lt;/span>: &lt;span style="color:#ae81ff">test&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">size&lt;/span>: &lt;span style="color:#ae81ff">512&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="example">Example&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="範例">範例&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>---
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Create LVM for DRBD&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#ae81ff">all&lt;/span>
@@ -186,14 +186,14 @@
 &lt;li>利用 combine 這個 filter 來組出 dict&lt;/li>
 &lt;li>利用 loop 去 iterate orig_users&lt;/li>
 &lt;li>用 my_users + [{} | combine({&amp;lsquo;Name&amp;rsquo;: item})] 來做 List append```&lt;/li>
-&lt;/ol></description></item><item><title>Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220106-ansible-galaxy-fortios-collection/</link><pubDate>Thu, 06 Jan 2022 13:40:40 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220106-ansible-galaxy-fortios-collection/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/95" target="_blank" rel="noopener">Misspelling, missing collection, or incorrect module path for fortios_system_config_backup_restore&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>fortios_system_config_backup_restore 的拼寫錯誤、缺少 collection，或模組路徑不正確</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220106-ansible-galaxy-fortios-collection/</link><pubDate>Thu, 06 Jan 2022 13:40:40 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220106-ansible-galaxy-fortios-collection/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/95" target="_blank" rel="noopener">fortios_system_config_backup_restore 的拼寫錯誤、缺少 collection，或模組路徑不正確&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="issue">issue&lt;/h4>
+&lt;h4 id="問題">問題&lt;/h4>
 &lt;p>Hi,&lt;/p>
-&lt;p>I&amp;rsquo;m trying to retrieve the configuration from a Fortigate using the module &lt;code>fortios_system_config_backup_restore&lt;/code> and basing on your playbook example.&lt;/p>
-&lt;p>I have &lt;code>ansible 2.10.6&lt;/code>.&lt;/p>
-&lt;p>When I use the collection &lt;code>fortinet.fortios:1.1.8&lt;/code>, I got the following error: &lt;code>missing 1 required positional argument: 'mod'&lt;/code>&lt;/p>
+&lt;p>我在嘗試使用 &lt;code>fortios_system_config_backup_restore&lt;/code> 模組，並依照你的 playbook 範例從 Fortigate 取得設定。&lt;/p>
+&lt;p>我使用的是 &lt;code>ansible 2.10.6&lt;/code>。&lt;/p>
+&lt;p>當我使用 &lt;code>fortinet.fortios:1.1.8&lt;/code> 這個 collection 時，出現以下錯誤：&lt;code>missing 1 required positional argument: 'mod'&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>The full traceback is:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Traceback &lt;span style="color:#f92672">(&lt;/span>most recent call last&lt;span style="color:#f92672">)&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File &lt;span style="color:#e6db74">&amp;#34;/home/ansible/.ansible/tmp/ansible-local-8668osvgufxk/ansible-tmp-1615481963.0092971-8768-3877705280026/AnsiballZ_fortios_system_config_backup_restore.py&amp;#34;&lt;/span>, line 102, in &amp;lt;module&amp;gt;
@@ -218,7 +218,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;msg&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;MODULE FAILURE\nSee stdout/stderr for the exact error&amp;#34;&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;rc&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Using the recent pre release &lt;code>fortinet.fortios:2.0.0&lt;/code> , I got:&lt;/p></description></item><item><title>[網友好文]Cisco UCS CIMC系列文章</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210715-cisco-ucs-cimc/</link><pubDate>Thu, 15 Jul 2021 17:16:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210715-cisco-ucs-cimc/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用最新的預發布版 &lt;code>fortinet.fortios:2.0.0&lt;/code> 時，我得到：&lt;/p></description></item><item><title>[網友好文]Cisco UCS CIMC系列文章</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210715-cisco-ucs-cimc/</link><pubDate>Thu, 15 Jul 2021 17:16:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210715-cisco-ucs-cimc/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ansible.cloudns.pro/post/cisco-ucs-cimc/" target="_blank" rel="noopener">[網友好文]Cisco UCS CIMC 系列文章&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-for-cisco-ucs-cimc.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC 時區&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2021/06/ansible-for-cisco-ucs-cimc-dns-ipv6.html" target="_blank" rel="noopener">Ansible - 設定 Cisco UCS CIMC DNS 和停用 IPv6&lt;/a>&lt;/li>
@@ -260,29 +260,47 @@
 &lt;ul>
 &lt;li>可以讀取受控端主機上的檔案，也可以利用 delegate_to: localhost 來讀取主控端主機上的檔案。&lt;/li>
 &lt;li>可以讀取二進位檔案來做進一步處理，例如做 base64 編碼&lt;/li>
-&lt;/ul></description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network" target="_blank" rel="noopener">New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Ansible Network 的新 LibSSH 連線外掛取代 Paramiko，並支援 FIPS 模式</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network" target="_blank" rel="noopener">Ansible Network 的新 LibSSH 連線外掛取代 Paramiko，並支援 FIPS 模式&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="switching-ansible-playbooks-to-use-libssh">Switching Ansible Playbooks to use LibSSH&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Installing LibSSH&lt;/span>
+&lt;h5 id="切換-ansible-playbook-使用-libssh">切換 Ansible Playbook 使用 LibSSH&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 LibSSH&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pip install ansible-pylibssh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Using LibSSH in Ansible Playbooks&lt;/p>
-&lt;p>Method 1. The &lt;code>ssh_type&lt;/code> configuration parameter can be set to use libssh in the active &lt;code>ansible.cfg&lt;/code> file of your project&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 Ansible Playbook 中使用 LibSSH&lt;/p>
+&lt;p>方法 1. 在專案的 &lt;code>ansible.cfg&lt;/code> 檔案中設定 &lt;code>ssh_type&lt;/code> 參數使用 libssh&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#a6e22e">persistent_connection&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ssh_type&lt;/span> = &lt;span style="color:#a6e22e">libssh&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 2: Set the &lt;code>ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code> environment variable&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>方法 2: 設定 &lt;code>ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code> 環境變數&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ export ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;span style="color:#f92672">=&lt;/span>libssh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item><item><title>Backup FortiOS config with Ansible - with RestAPI</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI Config Backup - FortiOS 6.0.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">Backup FortiOS config with Ansible - with RestAPI&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>方法 3: 在 play 等級的 playbook 中設定 &lt;code>ansible_network_cli_ssh_type&lt;/code> 為 libssh&lt;/p>
+&lt;h5 id="用來測試-libssh-設定的-playbook">用來測試 libssh 設定的 Playbook&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">hosts&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;changeme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gather_facts&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">connection&lt;/span>: &lt;span style="color:#ae81ff">ansible.netcommon.network_cli&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vars&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_network_os&lt;/span>: &lt;span style="color:#ae81ff">cisco.ios.ios&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_user&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;changeme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_password&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;changeme&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_network_cli_ssh_type&lt;/span>: &lt;span style="color:#ae81ff">libssh&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tasks&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">run show version command&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible.netcommon.cli_command&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>: &lt;span style="color:#ae81ff">show version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">run show version command&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible.netcommon.cli_command&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>: &lt;span style="color:#ae81ff">show interfaces&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>使用 Ansible 透過 RestAPI 備份 FortiOS 設定</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI 設定備份 - FortiOS 6.0.4&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">使用 Ansible 透過 RestAPI 備份 FortiOS 設定&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="create-access-profile">Create access profile&lt;/h5>
+&lt;h5 id="建立存取設定檔">建立存取設定檔&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system accprofile
 FGTAWS0004BE1ADE (accprofile) # edit readOnly
 new entry &amp;#39;readOnly&amp;#39; added
 FGTAWS0004BE1ADE (readOnly) # set sysgrp read
 FGTAWS0004BE1ADE (readOnly) # end
-&lt;/code>&lt;/pre>&lt;h5 id="create-api-user-in-fortigate">Create API user in Fortigate&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="在-fortigate-建立-api-使用者">在 Fortigate 建立 API 使用者&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system api-user
 FGTAWS0004BE1ADE (api-user) # edit api-admin
 new entry &amp;#39;api-admin&amp;#39; added
@@ -294,11 +312,11 @@ new entry &amp;#39;1&amp;#39; added
 FGTAWS0004BE1ADE (1) # set ipv4-trusthost &amp;#39;ip_address_of_your_machine&amp;#39; 255.255.255.255
 FGTAWS0004BE1ADE (1) # end
 FGTAWS0004BE1ADE (api-admin) # end
-&lt;/code>&lt;/pre>&lt;h5 id="generate-api-token">Generate API token&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="產生-api-token">產生 API token&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # execute api-user generate-key api-admin
 New API key: &amp;#39;your_api_token&amp;#39;
 NOTE: The bearer of this API key will be granted all access privileges assigned to the api-user api-admin.
-&lt;/code>&lt;/pre>&lt;h5 id="test">Test&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="測試">測試&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fortigate.py&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> requests
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> urllib3 &lt;span style="color:#75715e"># disable security warning for SSL certificate&lt;/span>
@@ -346,7 +364,7 @@ Done!
 &amp;#39;#config-version=FGTAWS-6.0.4-FW-build0231-190107:opmode=0:vdom=0:user=api-admin\n&amp;#39;
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/code>&lt;/pre>&lt;hr>
-&lt;h5 id="configure-ansible-inventory-and-playbook">Configure Ansible inventory and playbook&lt;/h5>
+&lt;h5 id="設定-ansible-inventory-與-playbook">設定 Ansible inventory 與 playbook&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat hosts
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>fortigate&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x.x.x.x access_token&lt;span style="color:#f92672">=&lt;/span>w4q9qtfbGry3Nbc40kHjsk9mxG****
@@ -486,10 +504,10 @@ Done!
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> else &amp;#39;ap.qat.cht&amp;#39; if ansible_default_ipv4[&amp;#39;network&amp;#39;] == &amp;#39;192.168.50.0&amp;#39;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> else &amp;#39;db.qat.cht&amp;#39; if ansible_default_ipv4[&amp;#39;network&amp;#39;] == &amp;#39;192.168.60.0&amp;#39;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> else &amp;#39;qat.cht&amp;#39; }}&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>string field was converted to True (type string)</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200415-string-field-was-converted-to-true-type/</link><pubDate>Wed, 15 Apr 2020 21:34:09 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200415-string-field-was-converted-to-true-type/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.weithenn.org/2020/04/string-field-was-converted-to-true-type.html" target="_blank" rel="noopener">string field was converted to True (type string)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://www.weithenn.org/2020/04/unauthorized-name-in-rakp2.html" target="_blank" rel="noopener">Unauthorized name in RAKP2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.weithenn.org/2020/04/failed-to-start-poweroff-connection.html" target="_blank" rel="noopener">Failed to start poweroff connection timed out&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>字串欄位被轉成 True（型別 string）</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200415-string-field-was-converted-to-true-type/</link><pubDate>Wed, 15 Apr 2020 21:34:09 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200415-string-field-was-converted-to-true-type/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.weithenn.org/2020/04/string-field-was-converted-to-true-type.html" target="_blank" rel="noopener">字串欄位被轉成 True（型別 string）&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.weithenn.org/2020/04/unauthorized-name-in-rakp2.html" target="_blank" rel="noopener">RAKP2 中的未授權名稱&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.weithenn.org/2020/04/failed-to-start-poweroff-connection.html" target="_blank" rel="noopener">啟動 poweroff 失敗，連線逾時&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Cannot set command timeout per task with network_cli</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200114-42200/</link><pubDate>Tue, 14 Jan 2020 16:34:03 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200114-42200/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/ansible/ansible/issues/42200" target="_blank" rel="noopener">Cannot set command timeout per task with network_cli&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.cnblogs.com/v394435982/p/5180933.html" target="_blank" rel="noopener">Ansible 的委托 并发和任务超时&lt;/a>&lt;/li>
@@ -500,19 +518,39 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">show version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vars&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ansible_command_timeout&lt;/span>: &lt;span style="color:#ae81ff">40&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Trellis Ansible Bad Interpreter Error</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Trellis Ansible 錯誤的解譯器</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://wpvilla.in/trellis-ansible-bad-interpreter-error/" target="_blank" rel="noopener">Trellis Ansible Bad Interpreter Error&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="bad-interpreter-error">Bad Interpreter Error&lt;/h4>
-&lt;p>Error we got using Ansible was a bad interpreter error. Python 2.7 is not to be found:&lt;/p>
+&lt;p>使用 Ansible 時遇到錯誤的解譯器問題。找不到 Python 2.7：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And that was correct because when we checked /usr/local/opt we only had Python 3.&lt;/p>
-&lt;h4 id="installation-python-2">Installation Python 2&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p>
+&lt;h4 id="安裝-python-2">安裝 Python 2&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install python@2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-crashing-hard">Python Crashing Hard&lt;/h5>
-&lt;p>Next, on Ansible version check I got another error&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-嚴重崩潰">Python 嚴重崩潰&lt;/h5>
+&lt;p>接著在檢查 Ansible 版本時又出現錯誤：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ trellis git:&lt;span style="color:#f92672">(&lt;/span>master&lt;span style="color:#f92672">)&lt;/span> ansible --version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>1&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#ae81ff">19153&lt;/span> abort ansible --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It was somehow crashing Python 2.7 though it should just work with it. I decided to upgrade Ansible as well&lt;/p></description></item><item><title>Jinja docx template, avoiding new line in nested for</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx template, avoiding new line in nested for&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo pip install ansible --upgrade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Requirement already satisfied, skipping upgrade: six&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.4.1 in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>1.11.0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cffi&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.7; platform_python_implementation !&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;PyPy&amp;#34;&lt;/span>-&amp;gt;cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>2.18&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Installing collected packages: ansible
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Found existing installation: ansible 2.7.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Uninstalling ansible-2.7.5:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully uninstalled ansible-2.7.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully installed ansible-2.9.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Still I had the Python error and iTerm was showing a MacOS popup that Python was crashing unexpectedly:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Python quit unexpectedly.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Click Reopen to open the application again. Click Report to see more detailed information and send a report to Apple.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Application Specific Information:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/lib/libcrypto.dylib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> abort&lt;span style="color:#f92672">()&lt;/span> called
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Invalid dylib load. Clients should not load the unversioned libcrypto dylib as it does not have a stable ABI.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="invalid-dylib">Invalid DyLib&lt;/h5>
+&lt;p>找到 &lt;a href="https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib" target="_blank" rel="noopener">https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib&lt;/a> 這篇，知道是動態函式庫載入錯誤，於是決定安裝 openssl。&lt;/p></description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx 樣板：在巢狀 for 中避免換行&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Ricky</title><link>https://linzeyan.github.io/categories/docker/</link><description>Recent content in Docker on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 11 Jan 2026 15:22:11 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案</title><link>https://linzeyan.github.io/posts/2026/20260111-wud/</link><pubDate>Sun, 11 Jan 2026 15:22:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260111-wud/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/TKFPS2tq" target="_blank" rel="noopener">用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Ricky</title><link>https://linzeyan.github.io/categories/docker/</link><description>Recent content in Docker on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 11 Jan 2026 15:22:11 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Replace Watchtower with WUD: Build a Controlled Docker Auto-Update Plan</title><link>https://linzeyan.github.io/posts/2026/20260111-wud/</link><pubDate>Sun, 11 Jan 2026 15:22:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260111-wud/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/TKFPS2tq" target="_blank" rel="noopener">Replace Watchtower with WUD: Build a Controlled Docker Auto-Update Plan&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>WUD（What&amp;rsquo;s Up Docker）&lt;/p>
+&lt;p>WUD (What&amp;rsquo;s Up Docker)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">wud&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">getwud/wud:latest&lt;/span>
@@ -15,36 +15,36 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">TZ=Asia/Shanghai&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 本机 Docker watcher&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Local Docker watcher&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_WATCHER_LOCAL_SOCKET=/var/run/docker.sock&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 关键：默认不监控任何容器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Key: do not watch any containers by default&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_WATCHER_LOCAL_WATCHBYDEFAULT=false&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 每 12 小时扫描一次&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Scan every 12 hours&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_WATCHER_LOCAL_CRON=0 */12 * * *&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 自动更新 + 更新后清理旧镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_TRIGGER_DOCKER_AUTO_PRUNE=true&lt;/span> &lt;span style="color:#75715e"># 效果等同于 `watchtower --cleanup`&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="只监控不自动更新">只监控（不自动更新）&lt;/h4>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Auto update + prune old images after update&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_TRIGGER_DOCKER_AUTO_PRUNE=true&lt;/span> &lt;span style="color:#75715e"># Equivalent to `watchtower --cleanup`&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="monitor-only-no-auto-update">Monitor only (no auto update)&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">labels&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.watch=true&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>出现在 WUD UI&lt;/li>
-&lt;li>有更新提示&lt;/li>
-&lt;li>不会自动重启&lt;/li>
+&lt;li>Appears in the WUD UI&lt;/li>
+&lt;li>Shows update hints&lt;/li>
+&lt;li>Does not auto-restart&lt;/li>
 &lt;/ul>
-&lt;h4 id="监控--自动更新watchtower-的等价替代">监控 + 自动更新（Watchtower 的等价替代）&lt;/h4>
+&lt;h4 id="monitor--auto-update-watchtower-equivalent">Monitor + auto update (Watchtower equivalent)&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">labels&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.watch=true&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.trigger.include=docker.auto&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 容器无法访问外网？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器无法访问外网？nftables 下的 NAT 配置指南&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用</title><link>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">透過 LinuxServer.io 打包的 Docker 映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io 官網&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學</title><link>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Containers Can't Access the Internet? NAT Configuration Guide for nftables</title><link>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker Containers Can&amp;rsquo;t Access the Internet? NAT Configuration Guide for nftables&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Use LinuxServer.io Docker Images to Turn Desktop Apps into Web Apps</title><link>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">Use LinuxServer.io Docker Images to Turn Desktop Apps into Web Apps&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io Official Site&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network</title><link>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="gluetun">Gluetun&lt;/h2>
 &lt;ul>
@@ -65,17 +65,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># 按照VPN供應商的OpenVPN設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># Fill in based on your VPN provider&amp;#39;s OpenVPN config&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=openvpn&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN帳號&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN密碼&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN username&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># Set server country, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
@@ -101,34 +101,34 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># 按照VPN供應商的WireGuard設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># Fill in based on your VPN provider&amp;#39;s WireGuard config&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=wireguard&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># 預共享密鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># 私鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># 填IPV4與IPV6位址，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># Preshared key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># Private key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># Set IPv4 and IPv6 addresses, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># Set server country, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="讓容器走-gluetun-的-vpn-連線">讓容器走 Gluetun 的 VPN 連線&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="let-containers-use-gluetuns-vpn-connection">Let containers use Gluetun&amp;rsquo;s VPN connection&lt;/h2>
 &lt;ul>
-&lt;li>如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
-&lt;li>如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
-&lt;li>開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
-&lt;li>依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li>
-&lt;li>容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li>
-&lt;/ul></description></item><item><title>Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务</title><link>https://linzeyan.github.io/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</link><pubDate>Tue, 06 Aug 2024 12:26:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://soulteary.com/2024/08/05/best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly.html" target="_blank" rel="noopener">Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务&lt;/a>&lt;/li>
+&lt;li>If the service and Gluetun are in the same docker-compose, add network mode: network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
+&lt;li>If the service is in a different docker-compose from Gluetun, add network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
+&lt;li>Open Gluetun&amp;rsquo;s docker-compose file and re-add the service ports you need (e.g. 8080)&lt;/li>
+&lt;li>Start Gluetun first, then start services that should use Gluetun&amp;rsquo;s VPN connection&lt;/li>
+&lt;li>The container&amp;rsquo;s public IP should match the VPN server you selected&lt;/li>
+&lt;/ul></description></item><item><title>Build a Private Object Storage with Traefik v3 and MinIO in Docker</title><link>https://linzeyan.github.io/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</link><pubDate>Tue, 06 Aug 2024 12:26:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/05/best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly.html" target="_blank" rel="noopener">Build a Private Object Storage with Traefik v3 and MinIO in Docker&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/soulteary/traefik-minio-example.git" target="_blank" rel="noopener">https://github.com/soulteary/traefik-minio-example.git&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://soulteary.com/2024/08/04/best-practices-for-traefik-3-in-docker-getting-started-quickly.html#docker-%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener">Docker 环境下使用 Traefik 3 的最佳实践：快速上手&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/04/best-practices-for-traefik-3-in-docker-getting-started-quickly.html#docker-%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener">Best Practices for Traefik 3 in Docker: Quick Start&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231004-container/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener">Container security fundamentals: Exploring containers as processes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener">Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a>&lt;/li>
@@ -178,16 +178,16 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>build /out/myapp /bin&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>ElasticSearch 学习笔记</title><link>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">ElasticSearch 学习笔记&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Elasticsearch Study Notes</title><link>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">Elasticsearch Study Notes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="安装中文分词插件">安装中文分词插件&lt;/h3>
+&lt;h3 id="install-the-chinese-analyzer-plugin">Install the Chinese analyzer plugin&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it elasticsearch bash
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Dev Tools
 &lt;ul>
-&lt;li>&lt;code>content&lt;/code> 类型为 &lt;code>text&lt;/code>，写入时使用 &lt;code>ik_max_word&lt;/code> 做分词，搜索时使用 &lt;code>ik_smart&lt;/code> 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。&lt;/li>
+&lt;li>The &lt;code>content&lt;/code> field is &lt;code>text&lt;/code>. Use &lt;code>ik_max_word&lt;/code> for indexing and &lt;code>ik_smart&lt;/code> for searching. The former generates as many tokens as possible, while the latter generates coarser-grained tokens.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -212,8 +212,8 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>為你的Go應用建立輕量級Docker映象？ | IT人</title><link>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://iter01.com/605065.html" target="_blank" rel="noopener">為你的 Go 應用建立輕量級 Docker 映象？ | IT 人&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Build a Lightweight Docker Image for Your Go App? | IT Man</title><link>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</link><pubDate>Mon, 25 Jul 2022 17:33:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220725-build-lightweight-docker-image-for-go-app/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://iter01.com/605065.html" target="_blank" rel="noopener">Build a Lightweight Docker Image for Your Go App? | IT Man&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="go-build">go build&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># default&lt;/span>
@@ -222,12 +222,12 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>14M test1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在程式編譯的時候可以加上 `-ldflags &amp;#34;-s -w&amp;#34;` 引數來優化編譯，原理是通過去除部分連結和除錯等資訊來減小編譯生成的可執行程式體積，具體引數如下：&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -a：強制編譯所有依賴包&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -s：去掉符號表資訊，不過 panic 的時候 stack trace 就沒有任何檔名/行號資訊了&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -w：去掉 DWARF 除錯資訊，不過得到的程式就不能使用 gdb 進行除錯了&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若對符號表無需求，-ldflags 直接新增 &amp;#34;-s&amp;#34; 即可&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 注：不建議-w和-s同時使用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># You can add `-ldflags &amp;#34;-s -w&amp;#34;` during compilation to reduce the binary size by stripping some link and debug info. Details:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -a: force rebuilding all dependencies&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -s: drop symbol table info; stack traces in panic will lose file/line info&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -w: drop DWARF debug info; you cannot debug with gdb&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If you don&amp;#39;t need the symbol table, you can just use &amp;#34;-s&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Note: it is not recommended to use -w and -s together&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ go build -ldflags &lt;span style="color:#e6db74">&amp;#34;-s -w&amp;#34;&lt;/span> -o test2 main.go
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>11M test2
@@ -244,7 +244,7 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ upx --brute test2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ du -sh test2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.6M test2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>upx 的壓縮選項&lt;/p></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/2021/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>UPX compression options&lt;/p></description></item><item><title>Docker Introduction</title><link>https://linzeyan.github.io/posts/2021/20210917-docker/</link><pubDate>Fri, 17 Sep 2021 14:11:03 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210917-docker/</guid><description>&lt;h1 id="docker">Docker&lt;/h1>
 &lt;h2 id="concept">Concept&lt;/h2>
 &lt;h3 id="vm-vs-container">VM vs Container&lt;/h3>
 &lt;ul>

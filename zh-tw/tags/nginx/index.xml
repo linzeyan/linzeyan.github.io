@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/nginx/</link><description>Recent content in Nginx on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 08 Dec 2025 16:45:51 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>利用 Fail2Ban + nftables 加固服务器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251208-fail2ban/</link><pubDate>Mon, 08 Dec 2025 16:45:51 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251208-fail2ban/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://tao.zz.ac/homelab/fail2ban.html" target="_blank" rel="noopener">利用 Fail2Ban + nftables 加固服务器&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/nginx/</link><description>Recent content in Nginx on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 08 Dec 2025 16:45:51 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Fail2Ban + nftables 強化伺服器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251208-fail2ban/</link><pubDate>Mon, 08 Dec 2025 16:45:51 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251208-fail2ban/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://tao.zz.ac/homelab/fail2ban.html" target="_blank" rel="noopener">使用 Fail2Ban + nftables 強化伺服器&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251020-nginx-acme-module/</link><pubDate>Mon, 20 Oct 2025 16:31:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251020-nginx-acme-module/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://sconts.com/post/nginx-native-acme-support/" target="_blank" rel="noopener">NGINX 原生 ACME 支持：从根本上重塑 TLS 自动化部署&lt;/a>&lt;/li>
 &lt;/ul>
@@ -147,12 +147,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服务被通报的概率</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251002-hide-web/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>降低家用 Web 服務被通報的機率</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20251002-hide-web/</link><pubDate>Thu, 02 Oct 2025 09:54:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20251002-hide-web/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服务被通报的概率&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://tao.zz.ac/homelab/hide-web.html" target="_blank" rel="noopener">降低家用 Web 服務被通報的機率&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>通过明文协议尝试请求 HTTPS 服务在 Nginx 中有分配特殊的 497 状态码。如果发生该报错，我们希望 Nginx 直接关闭连接，不返回任何响应。这需要用到另外一个非标状态码 444，综合两种状态码，我们需要在 server 中增加如下配置：&lt;/p>
+&lt;p>透過明文協議嘗試請求 HTTPS 服務時，Nginx 會回傳特殊的 497 狀態碼。若發生此錯誤，我們希望 Nginx 直接關閉連線，不回傳任何回應。這需要另一個非標準狀態碼 444。綜合兩種狀態碼，我們需要在 server 中加入如下設定：&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">error_page&lt;/span> &lt;span style="color:#ae81ff">497&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span>;
@@ -160,8 +160,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">@close&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">return&lt;/span> &lt;span style="color:#ae81ff">444&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 error_page 指令为 497 状态码设置虚拟路径@close，Nginx 在处理的@close 时发现是返回 444 状态码，于是直接关闭连接。&lt;/p>
-&lt;p>这个时候你再用 curl 访问对应的端口就会收到如下报错：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 error_page 指令為 497 狀態碼設定虛擬路徑 @close，Nginx 在處理 @close 時發現要回傳 444，於是直接關閉連線。&lt;/p>
+&lt;p>此時你再用 curl 造訪對應埠口會看到如下錯誤：&lt;/p>
 &lt;p>curl &lt;a href="http://example.zz.ac:5678" target="_blank" rel="noopener">http://example.zz.ac:5678&lt;/a>
 curl: (52) Empty reply from server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
@@ -262,9 +262,9 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;li>高流量時會放大 OS 資源消耗；且連線關閉後會進入 &lt;code>TIME-WAIT&lt;/code>，可能導致 &lt;strong>來源埠（ephemeral ports）耗盡&lt;/strong>，進而無法建立新連線。&lt;/li>
 &lt;/ul>
 &lt;h3 id="修正方式-1">修正方式&lt;/h3>
-&lt;p>&lt;strong>(A) 在每個 &lt;code>upstream {}&lt;/code> 內加 &lt;code>keepalive&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>Top 25 Nginx Tips and Tricks From Practical Experience</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</link><pubDate>Wed, 10 Aug 2022 12:27:28 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</guid><description>&lt;ul>
+&lt;p>&lt;strong>(A) 在每個 &lt;code>upstream {}&lt;/code> 內加 &lt;code>keepalive&lt;/code>&lt;/strong>&lt;/p></description></item><item><title>實戰經驗整理的 25 個 Nginx 技巧</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</link><pubDate>Wed, 10 Aug 2022 12:27:28 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220810-top-25-nginx-tips-and-tricks-from-practical-experience/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://hackernoon.com/top-25-nginx-tips-and-tricks-from-practical-experience" target="_blank" rel="noopener">Top 25 Nginx Tips and Tricks From Practical Experience&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://hackernoon.com/top-25-nginx-tips-and-tricks-from-practical-experience" target="_blank" rel="noopener">實戰經驗整理的 25 個 Nginx 技巧&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>&lt;code>server_tokens off;&lt;/code>&lt;/p>
@@ -273,19 +273,19 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;p>&lt;code>ssl_protocols TLSv1.2 TLSv1.3;&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Disable any undesirable HTTP methods&lt;/p>
+&lt;p>停用不需要的 HTTP 方法&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">limit_except&lt;/span> &lt;span style="color:#e6db74">GET&lt;/span> &lt;span style="color:#e6db74">HEAD&lt;/span> &lt;span style="color:#e6db74">POST&lt;/span> { &lt;span style="color:#f92672">deny&lt;/span> &lt;span style="color:#e6db74">all&lt;/span>; }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Enable sysctl based protection&lt;/li>
+&lt;li>啟用基於 sysctl 的保護&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>net.ipv4.conf.all.rp_filter &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_syncookies &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Stop image hotlinking&lt;/li>
+&lt;li>防止圖片外連&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/images/&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">valid_referers&lt;/span> &lt;span style="color:#e6db74">none&lt;/span> &lt;span style="color:#e6db74">blocked&lt;/span> &lt;span style="color:#e6db74">www.domain.com&lt;/span> &lt;span style="color:#e6db74">domain.com&lt;/span>;
@@ -801,8 +801,8 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make install
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="geoip2-ip-地址库下载">geoip2 IP 地址库下载&lt;/h5>
-&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item><item><title>Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</link><pubDate>Sat, 17 Oct 2020 12:31:02 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8" target="_blank" rel="noopener">Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen&lt;/a>&lt;/li>
+&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item><item><title>使用 Nginx HTTPS 與 Basic Auth 反向代理 VMware ESXi 6.5 修復 VMRC /screen</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</link><pubDate>Sat, 17 Oct 2020 12:31:02 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8" target="_blank" rel="noopener">使用 Nginx HTTPS 與 Basic Auth 反向代理 VMware ESXi 6.5 修復 VMRC /screen&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
@@ -934,28 +934,28 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/ol>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>example&lt;/strong>&lt;/p></description></item><item><title>Nginx如何防禦DDoS攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
+&lt;p>&lt;strong>example&lt;/strong>&lt;/p></description></item><item><title>Nginx 如何防禦 DDoS 攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener">Nginx 如何防禦 DDoS 攻擊？&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit (防止 DDOS 攻擊)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit（防止 DDoS 攻擊）&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="ngx_http_limit_req_module">ngx_http_limit_req_module&lt;/h4>
-&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出&lt;/a>&lt;/li>
+&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="编译-ngx_pagespeed">编译 ngx_pagespeed&lt;/h4>
+&lt;h4 id="編譯-ngx_pagespeed">編譯 ngx_pagespeed&lt;/h4>
 &lt;blockquote>
-&lt;p>首先确保 Nginx 有 &lt;code>--with-compat&lt;/code> 编译参数，这样我们就不需要按照一些奇怪的教程让大家从头开始编译 Nginx&lt;/p>
+&lt;p>首先確保 Nginx 有 &lt;code>--with-compat&lt;/code> 編譯參數，這樣就不需要按照一些奇怪的教學讓大家從頭開始編譯 Nginx&lt;/p>
 &lt;p>incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener">https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切换到 nginx 源代码目录下开始配置编译环境&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-compat --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>../incubator-pagespeed-ngx
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译 modules&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編譯 modules&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make modules
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 将对应编译好的 module 放到 nginx 目录下：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 將編譯好的 module 放到 nginx 目錄下&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建好缓存文件夹以便存放自动转换的图片&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 建立快取資料夾以存放自動轉換的圖片&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /var/ngx_pagespeed_cache
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_pagespeed.so&lt;/span>;
@@ -976,8 +976,8 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span> { }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagespeed&lt;/span> &lt;span style="color:#e6db74">RewriteLevel&lt;/span> &lt;span style="color:#e6db74">CoreFilters&lt;/span>;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最后一个部分（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示启用的优化方式，其中包括了一些基础的优化，比如&lt;/p></description></item><item><title>Force file download with Nginx</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">Force file download with Nginx&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最後一段（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p></description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">用 Nginx 強制檔案下載&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>add_header Content-Disposition 'attachment;';&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
@@ -1000,28 +1000,28 @@ curl: (52) Empty reply from server&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_localtime&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx请求处理流程你了解吗？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 请求处理流程你了解吗？&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Nginx 請求處理流程你了解嗎？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 請求處理流程你了解嗎？&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="11-个处理阶段">11 个处理阶段&lt;/h3>
+&lt;h3 id="11-個處理階段">11 個處理階段&lt;/h3>
 &lt;p>1）NGX_HTTP_POST_READ_PHASE：&lt;/p>
-&lt;p>接收到完整的 HTTP 头部后处理的阶段，它位于 uri 重写之前，实际上很少有模块会注册在该阶段，默认的情况下，该阶段被跳过。&lt;/p>
+&lt;p>接收到完整的 HTTP 標頭後處理的階段，位於 URI 重寫之前。實際上很少有模組會註冊在該階段，預設情況下會被跳過。&lt;/p>
 &lt;p>2）NGX_HTTP_SERVER_REWRITE_PHASE：&lt;/p>
-&lt;p>URI 与 location 匹配前，修改 URI 的阶段，用于重定向，也就是该阶段执行处于 server 块内，location 块外的重写指令，在读取请求头的过程中 nginx 会根据 host 及端口找到对应的虚拟主机配置。&lt;/p>
+&lt;p>在 URI 與 location 匹配前修改 URI 的階段，用於重新導向。該階段執行 server 區塊內、location 區塊外的重寫指令。在讀取請求標頭的過程中，nginx 會根據 host 及埠號找到對應的虛擬主機設定。&lt;/p>
 &lt;p>3）NGX_HTTP_FIND_CONFIG_PHASE：&lt;/p>
-&lt;p>根据 URI 寻找匹配的 location 块配置项阶段，该阶段使用重写之后的 uri 来查找对应的 location，值得注意的是该阶段可能会被执行多次，因为也可能有 location 级别的重写指令。&lt;/p>
+&lt;p>根據 URI 尋找匹配的 location 設定項階段，使用重寫後的 URI 來查找對應的 location。需要注意的是該階段可能會被執行多次，因為也可能有 location 級別的重寫指令。&lt;/p>
 &lt;p>4）NGX_HTTP_REWRITE_PHASE：&lt;/p>
-&lt;p>上一阶段找到 location 块后再修改 URI，location 级别的 uri 重写阶段，该阶段执行 location 基本的重写指令，也可能会被执行多次。&lt;/p>
+&lt;p>上一階段找到 location 後再次修改 URI，屬於 location 級別的 URI 重寫階段，也可能會被執行多次。&lt;/p>
 &lt;p>5）NGX_HTTP_POST_REWRITE_PHASE：&lt;/p>
-&lt;p>防止重写 URL 后导致的死循环，location 级别重写的后一阶段，用来检查上阶段是否有 uri 重写，并根据结果跳转到合适的阶段。&lt;/p>
+&lt;p>防止重寫 URL 後導致的死循環，屬於 location 重寫的下一階段，用來檢查上階段是否有 URI 重寫，並根據結果跳轉到合適的階段。&lt;/p>
 &lt;p>6）NGX_HTTP_PREACCESS_PHASE：&lt;/p>
-&lt;p>下一阶段之前的准备，访问权限控制的前一阶段，该阶段在权限控制阶段之前，一般也用于访问控制，比如限制访问频率，链接数等。&lt;/p>
+&lt;p>下一階段之前的準備，屬於存取權限控制的前一階段。一般也用於存取控制，例如限制存取頻率、連線數等。&lt;/p>
 &lt;p>7）NGX_HTTP_ACCESS_PHASE：&lt;/p>
-&lt;p>让 HTTP 模块判断是否允许这个请求进入 Nginx 服务器，访问权限控制阶段，比如基于 ip 黑白名单的权限控制，基于用户名密码的权限控制等。&lt;/p>
+&lt;p>讓 HTTP 模組判斷是否允許請求進入 Nginx 伺服器的存取控制階段，例如基於 IP 白名單/黑名單、使用者名稱密碼等的權限控制。&lt;/p>
 &lt;p>8）NGX_HTTP_POST_ACCESS_PHASE：&lt;/p>
-&lt;p>访问权限控制的后一阶段，该阶段根据权限控制阶段的执行结果进行相应处理，向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝。&lt;/p>
+&lt;p>存取控制的後一階段，根據上一階段的執行結果進行處理，向使用者送出拒絕服務的錯誤碼，用來回應上一階段的拒絕。&lt;/p>
 &lt;p>9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p>
-&lt;p>为访问静态文件资源而设置，try_files 指令的处理阶段，如果没有配置 try_files 指令，则该阶段被跳过。&lt;/p>
+&lt;p>為存取靜態檔案資源而設置，try_files 指令的處理階段。如果沒有設定 try_files 指令，該階段會被跳過。&lt;/p>
 &lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item><item><title>Nginx 访问日志中记录毫秒级别的时间精度</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180724-milliseconds-server-time/</link><pubDate>Tue, 24 Jul 2018 18:31:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180724-milliseconds-server-time/</guid><description>&lt;p>Nginx 的 access log 可以记录毫秒级的时间戳，但是是以 &lt;code>EPOCH&lt;/code> 开始的毫秒数，比如 &lt;code>1503544071.865&lt;/code>, 另一个变量 &lt;code>$time_local&lt;/code> 记录的是秒级别的时间格式，比如 &lt;code>24/Aug/2017:11:07:51 +0800&lt;/code>，在业务量大的时候，我们需要记录毫秒精度的时间格式，比如 &lt;code>24/Aug/2017:11:07:51.865 +0800&lt;/code>, 这个可以通过 Lua 实现。&lt;/p>
 &lt;p>首先需要在 nginx.conf 中定义一个变量，叫做 &lt;code>time_millis&lt;/code>，并初始化为空。类似于使用 &lt;code>auto-ssl&lt;/code> 获取证书的时候需要指定一个 fallback 的自签证书。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">map&lt;/span> $host $time_millis {

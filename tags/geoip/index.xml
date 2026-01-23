@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GeoIP on Ricky</title><link>https://linzeyan.github.io/tags/geoip/</link><description>Recent content in GeoIP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Oct 2020 15:44:48 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/geoip/index.xml" rel="self" type="application/rss+xml"/><item><title>2020年，最新NGINX的ngx_http_geoip2模块以精准禁止特定国家或者地区IP访问</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener">2020 年，最新 NGINX 的 ngx_http_geoip2 模块以精准禁止特定国家或者地区 IP 访问&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener">centos7 下 安装 GeoIP2，在 nginx 中根据 ip 地址对应的国家转发请求&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GeoIP on Ricky</title><link>https://linzeyan.github.io/tags/geoip/</link><description>Recent content in GeoIP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Oct 2020 15:44:48 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/geoip/index.xml" rel="self" type="application/rss+xml"/><item><title>In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener">In 2020, the latest NGINX ngx_http_geoip2 module can precisely block IP access by country or region&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener">Install GeoIP2 on CentOS 7 and route requests by IP country in nginx&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="安装-geoip2-lib">安装 geoip2 lib&lt;/h5>
+&lt;h5 id="install-geoip2-lib">Install geoip2 lib&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -f libmaxminddb-1.4.2.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
@@ -16,7 +16,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;/usr/local/lib&amp;#39;&lt;/span> &amp;gt; /etc/ld.so.conf.d/geoip.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ldconfig
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="下载-ngx_http_geoip2_module-模块">下载 ngx_http_geoip2_module 模块&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-ngx_http_geoip2_module">Download ngx_http_geoip2_module&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/leev/ngx_http_geoip2_module/archive/3.3.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xzf 3.3.tar.gz
@@ -42,5 +42,5 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make install
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="geoip2-ip-地址库下载">geoip2 IP 地址库下载&lt;/h5>
-&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-geoip2-ip-database">Download geoip2 IP database&lt;/h5>
+&lt;p>The latest GeoLite2-City.mmdb for 2020 cannot be downloaded directly. You must register a maxmind account.&lt;/p></description></item></channel></rss>

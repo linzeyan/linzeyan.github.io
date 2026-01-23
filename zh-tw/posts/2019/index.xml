@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2019 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2019/</link><description>Recent content in 2019 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 30 Dec 2019 14:31:45 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2019/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2019 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2019/</link><description>Recent content in 2019 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 30 Dec 2019 14:31:45 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2019/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="mktemp-命令">&lt;code>mktemp&lt;/code> 命令&lt;/h4>
 &lt;ul>
-&lt;li>生成的临时文件名是随机的，而且权限是只有用户本人可读写&lt;/li>
-&lt;li>为了确保临时文件创建成功，&lt;code>mktemp&lt;/code> 命令后面最好使用 OR 运算符（&lt;code>||&lt;/code>），指定创建失败时退出脚本&lt;/li>
-&lt;li>为了保证脚本退出时临时文件被删除，可以使用&lt;code>trap&lt;/code>命令指定退出时的清除操作&lt;/li>
+&lt;li>產生的臨時檔案名稱是隨機的，而且權限只有使用者本人可讀寫。&lt;/li>
+&lt;li>為了確保臨時檔案建立成功，&lt;code>mktemp&lt;/code> 後面最好使用 OR 運算子（&lt;code>||&lt;/code>），在建立失敗時退出腳本。&lt;/li>
+&lt;li>為了確保腳本退出時刪除臨時檔案，可以使用 &lt;code>trap&lt;/code> 指定退出時的清理動作。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
@@ -13,74 +13,94 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TMPFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>mktemp&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#f92672">||&lt;/span> exit &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Our temp file is &lt;/span>$TMPFILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-命令的参数">mktemp 命令的参数&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-參數">mktemp 參數&lt;/h5>
 &lt;ul>
-&lt;li>&lt;code>-d&lt;/code> 参数可以创建一个临时目录&lt;/li>
-&lt;li>&lt;code>-p&lt;/code> 参数可以指定临时文件所在的目录。默认是使用 &lt;code>$TMPDIR&lt;/code> 环境变量指定的目录，如果这个变量没设置，那么使用 &lt;code>/tmp&lt;/code> 目录。&lt;/li>
-&lt;li>&lt;code>-t&lt;/code> 参数可以指定临时文件的文件名模板，模板的末尾必须至少包含三个连续的 &lt;code>X&lt;/code> 字符，表示随机字符，建议至少使用六个 &lt;code>X&lt;/code>。默认的文件名模板是 &lt;code>tmp.后接十个随机字符&lt;/code>&lt;/li>
+&lt;li>&lt;code>-d&lt;/code> 參數可以建立臨時目錄。&lt;/li>
+&lt;li>&lt;code>-p&lt;/code> 參數可以指定臨時檔案所在的目錄。預設使用 &lt;code>$TMPDIR&lt;/code> 環境變數指定的目錄；若未設定，使用 &lt;code>/tmp&lt;/code>。&lt;/li>
+&lt;li>&lt;code>-t&lt;/code> 參數可以指定臨時檔案的檔名模板，模板末尾必須至少包含三個連續的 &lt;code>X&lt;/code> 字元作為隨機字元，建議至少六個 &lt;code>X&lt;/code>。預設的檔名模板為 &lt;code>tmp.&lt;/code> 加上十個隨機字元。&lt;/li>
 &lt;/ul>
 &lt;h4 id="trap-命令的用法">&lt;code>trap&lt;/code> 命令的用法&lt;/h4>
-&lt;p>trap 命令用来在 Bash 脚本中响应系统信号。&lt;/p>
-&lt;p>最常见的系统信号就是 SIGINT（中断），即按 Ctrl + C 所产生的信号。trap 命令的-l 参数，可以列出所有的系统信号。&lt;/p>
+&lt;p>trap 命令用來在 Bash 腳本中響應系統訊號。&lt;/p>
+&lt;p>最常見的系統訊號是 SIGINT（中斷），也就是按下 Ctrl + C 產生的訊號。&lt;code>-l&lt;/code> 參數可以列出所有系統訊號。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ trap -l
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> SIGHUP 2&lt;span style="color:#f92672">)&lt;/span> SIGINT 3&lt;span style="color:#f92672">)&lt;/span> SIGQUIT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> SIGILL 5&lt;span style="color:#f92672">)&lt;/span> SIGTRAP 6&lt;span style="color:#f92672">)&lt;/span> SIGABRT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ... ...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下。&lt;/p></description></item><item><title>GitHub Actions 入门教程</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener">GitHub Actions 入门教程&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Nginx如何防禦DDoS攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下：&lt;/p></description></item><item><title>GitHub Actions 入門教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener">GitHub Actions 入門教學&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Nginx 如何防禦 DDoS 攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener">Nginx 如何防禦 DDoS 攻擊？&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit (防止 DDOS 攻擊)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit（防止 DDoS 攻擊）&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="ngx_http_limit_req_module">ngx_http_limit_req_module&lt;/h4>
-&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>golang服务的文件句柄超出系统限制(too many open files)</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</link><pubDate>Mon, 16 Dec 2019 10:14:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://studygolang.com/articles/23828" target="_blank" rel="noopener">golang 服务的文件句柄超出系统限制(too many open files)&lt;/a>&lt;/li>
+&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>Golang 服務的檔案句柄超出系統限制（too many open files）</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</link><pubDate>Mon, 16 Dec 2019 10:14:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://studygolang.com/articles/23828" target="_blank" rel="noopener">Golang 服務的檔案句柄超出系統限制（too many open files）&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>
 &lt;li>
-&lt;p>查看系统的配置 &lt;code>ulimit -a | grep open&lt;/code>，发现系统的配置正常。&lt;/p>
+&lt;p>查看系統設定：&lt;code>ulimit -a | grep open&lt;/code>，系統設定正常。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>查看程序服务的打开文件限制，&lt;code>cat /proc/40636/limits&lt;/code>，发现服务的限制并没有继承系统设置的，还是系统默认的 1024 限制。&lt;/p>
+&lt;p>查看服務的開啟檔案限制：&lt;code>cat /proc/40636/limits&lt;/code>，服務沒有繼承系統設定，仍是預設的 1024 限制。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>查看程序服务打开文件数（连接数）情况，&lt;code>lsof -p 40636 | wc -l&lt;/code>，发现已经超出限制，所以报错。&lt;/p>
+&lt;p>查看服務開啟檔案數（連線數）：&lt;code>lsof -p 40636 | wc -l&lt;/code>，已超過限制，因此報錯。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>再看看程序服务打开了哪些连接，&lt;code>lsof -p 40636 &amp;gt; openfiles.log&lt;/code>，发现很多 http 连接打开没有关闭，看 ip 是报警服务的接口，于是顺着这条线索，终于找到了原因，因为程序中读取到的配置解析时报错给报警服务，大量的报警服务连接后未关闭，才导致的 too many open files，这是问题的关键，但是程序为什么没有继承系统设置的最大配置限制，还需要继续查看。&lt;/p>
+&lt;p>查看開啟了哪些連線：&lt;code>lsof -p 40636 &amp;gt; openfiles.log&lt;/code>，發現很多 HTTP 連線未關閉，IP 是告警服務的介面。沿著線索找到原因：程式解析設定時出錯，對告警服務大量連線後未關閉，導致 too many open files。至於為何服務未繼承系統最大限制，還需進一步查看。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>最终原因找到，因为程序服务是 supervisor 管理的，supervisor 启动服务默认的 minfds 配置是 1024，也就是打开文件限制是 1024，在 supervisor 的配置中加入 &lt;code>minfds=81920&lt;/code>; 重启 &lt;code>supervisorctl reload&lt;/code>。&lt;/p>
+&lt;p>最終原因：服務由 supervisor 管理，supervisor 預設 minfds 為 1024。於設定中加入 &lt;code>minfds=81920&lt;/code>，並重啟 &lt;code>supervisorctl reload&lt;/code>。&lt;/p>
 &lt;/li>
-&lt;/ol></description></item><item><title>Trellis Ansible Bad Interpreter Error</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
+&lt;/ol></description></item><item><title>Trellis Ansible 錯誤的解譯器</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://wpvilla.in/trellis-ansible-bad-interpreter-error/" target="_blank" rel="noopener">Trellis Ansible Bad Interpreter Error&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="bad-interpreter-error">Bad Interpreter Error&lt;/h4>
-&lt;p>Error we got using Ansible was a bad interpreter error. Python 2.7 is not to be found:&lt;/p>
+&lt;p>使用 Ansible 時遇到錯誤的解譯器問題。找不到 Python 2.7：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And that was correct because when we checked /usr/local/opt we only had Python 3.&lt;/p>
-&lt;h4 id="installation-python-2">Installation Python 2&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p>
+&lt;h4 id="安裝-python-2">安裝 Python 2&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install python@2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-crashing-hard">Python Crashing Hard&lt;/h5>
-&lt;p>Next, on Ansible version check I got another error&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-嚴重崩潰">Python 嚴重崩潰&lt;/h5>
+&lt;p>接著在檢查 Ansible 版本時又出現錯誤：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ trellis git:&lt;span style="color:#f92672">(&lt;/span>master&lt;span style="color:#f92672">)&lt;/span> ansible --version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>1&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#ae81ff">19153&lt;/span> abort ansible --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It was somehow crashing Python 2.7 though it should just work with it. I decided to upgrade Ansible as well&lt;/p></description></item><item><title>用 iptables 和 ip rule 做负载均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做负载均衡&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo pip install ansible --upgrade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Requirement already satisfied, skipping upgrade: six&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.4.1 in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>1.11.0&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cffi&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.7; platform_python_implementation !&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;PyPy&amp;#34;&lt;/span>-&amp;gt;cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>2.18&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Installing collected packages: ansible
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Found existing installation: ansible 2.7.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Uninstalling ansible-2.7.5:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully uninstalled ansible-2.7.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully installed ansible-2.9.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Still I had the Python error and iTerm was showing a MacOS popup that Python was crashing unexpectedly:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Python quit unexpectedly.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Click Reopen to open the application again. Click Report to see more detailed information and send a report to Apple.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Application Specific Information:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/lib/libcrypto.dylib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> abort&lt;span style="color:#f92672">()&lt;/span> called
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Invalid dylib load. Clients should not load the unversioned libcrypto dylib as it does not have a stable ABI.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="invalid-dylib">Invalid DyLib&lt;/h5>
+&lt;p>找到 &lt;a href="https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib" target="_blank" rel="noopener">https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib&lt;/a> 這篇，知道是動態函式庫載入錯誤，於是決定安裝 openssl。&lt;/p></description></item><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做負載均衡&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="操作">操作&lt;/h4>
-&lt;p>这里以一台通过有线 + 无线出口连接到互联网的 Arch Linux 设备为例。其中共有两个出口，分别使用网卡 eth0 和 eth1。大概的对应关系是：&lt;/p>
+&lt;p>這裡以一台透過有線 + 無線出口連線到網際網路的 Arch Linux 裝置為例。共有兩個出口，分別使用網卡 eth0 和 eth1。大致對應關係如下：&lt;/p>
 &lt;ul>
-&lt;li>标记 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
-&lt;li>标记 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
+&lt;li>標記 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
+&lt;li>標記 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
 &lt;/ul>
-&lt;p>我们会根据数据包上包含的标记值来判断它应该走什么出口。首先，使用 ip rule 为每个标记值指定一张使用的路由表。&lt;/p>
-&lt;p>通常默认路由表的权重是 32768。为了让我们的路由表用得上，我们需要把它们的权重调得高一些（例如 31000）。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 10 (0xa) 的数据包使用 110 号路由表，权重 31000&lt;/span>
+&lt;p>我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p>
+&lt;p>通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">10&lt;/span> table &lt;span style="color:#ae81ff">110&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 11 (0xb) 的数据包使用 111 号路由表，权重 31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">11&lt;/span> table &lt;span style="color:#ae81ff">111&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的连接更多，可以继续添加标记 &amp;lt;-&amp;gt; 路由表的对应关系&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #110 路由表的路由&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#ae81ff">110&lt;/span>
@@ -90,33 +110,33 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.25.0.254 table &lt;span style="color:#ae81ff">111&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果这条连接已经被标记，那么把标记设置到数据包上&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果這條連線已經被標記，將標記設定到封包上&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包已经有标记，直接放行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包已經有標記，直接放行&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#ae81ff">0&lt;/span> -j ACCEPT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包没被标记的话&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包包的标记设置为 11 (0xb)...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包沒有被標記&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包標記為 10 (0xa)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 并且每 2 个包就把一个包的标记设置为 10 (0xa)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#ae81ff">2&lt;/span> --packet &lt;span style="color:#ae81ff">0&lt;/span> -j MARK --set-mark &lt;span style="color:#ae81ff">11&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三条出口的话，这里可以类似于&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三條出口，這裡可以類似於&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包的标记存储到整条连接上，这样整个连接过程都会使用同一条出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 我们还需要让数据包上标示的出口是我们为其选择的出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓封包的出口與我們選擇的一致&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下自己所设置的规则是否正确。然后就可以用 Wiresharks 看一看自己的连接是不是真的分流啦。&lt;/p></description></item><item><title>htop explained</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之後可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p></description></item><item><title>htop 說明</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://peteris.rocks/blog/htop/" target="_blank" rel="noopener">htop explained&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Some Jenkinsfile examples</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul>
+&lt;/ul></description></item><item><title>Jenkinsfile 範例</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c" target="_blank" rel="noopener">Some Jenkinsfile examples&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="parallel">Parallel&lt;/h5>
+&lt;h5 id="並行">並行&lt;/h5>
 &lt;pre tabindex="0">&lt;code>#!/usr/bin/env groovy
 pipeline {
 agent any
@@ -232,36 +252,37 @@ echo &amp;#34;Not AnyOf - Works!&amp;#34;
 }
 }
 }
-&lt;/code>&lt;/pre></description></item><item><title>Jinja docx template, avoiding new line in nested for</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx template, avoiding new line in nested for&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>What the f*ck Python! 🐍</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</link><pubDate>Fri, 11 Oct 2019 14:32:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</guid><description>&lt;ul>
+&lt;/code>&lt;/pre></description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx 樣板：在巢狀 for 中避免換行&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>What the f*ck Python! 🐍 中文版</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</link><pubDate>Fri, 11 Oct 2019 14:32:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">What the f*ck Python! 🐍&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再戰營運商快取：使用 iptables 對付快取劫持&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="起因">起因&lt;/h5>
-&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
-&lt;h5 id="解决">解决&lt;/h5>
+&lt;p>與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p>
+&lt;h5 id="解決">解決&lt;/h5>
 &lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
-&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自动将图片转换为 WebP 并输出&lt;/a>&lt;/li>
+&lt;p>考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p>
+&lt;p>因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p>
+&lt;p>這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="编译-ngx_pagespeed">编译 ngx_pagespeed&lt;/h4>
+&lt;h4 id="編譯-ngx_pagespeed">編譯 ngx_pagespeed&lt;/h4>
 &lt;blockquote>
-&lt;p>首先确保 Nginx 有 &lt;code>--with-compat&lt;/code> 编译参数，这样我们就不需要按照一些奇怪的教程让大家从头开始编译 Nginx&lt;/p>
+&lt;p>首先確保 Nginx 有 &lt;code>--with-compat&lt;/code> 編譯參數，這樣就不需要按照一些奇怪的教學讓大家從頭開始編譯 Nginx&lt;/p>
 &lt;p>incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener">https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切换到 nginx 源代码目录下开始配置编译环境&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-compat --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>../incubator-pagespeed-ngx
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 编译 modules&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編譯 modules&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make modules
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 将对应编译好的 module 放到 nginx 目录下：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 將編譯好的 module 放到 nginx 目錄下&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建好缓存文件夹以便存放自动转换的图片&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 建立快取資料夾以存放自動轉換的圖片&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /var/ngx_pagespeed_cache
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_pagespeed.so&lt;/span>;
@@ -282,10 +303,10 @@ echo &amp;#34;Not AnyOf - Works!&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span> { }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagespeed&lt;/span> &lt;span style="color:#e6db74">RewriteLevel&lt;/span> &lt;span style="color:#e6db74">CoreFilters&lt;/span>;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最后一个部分（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示启用的优化方式，其中包括了一些基础的优化，比如&lt;/p></description></item><item><title>Is there a regular expression to detect a valid regular expression?</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">Is there a regular expression to detect a valid regular expression?&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最後一段（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p></description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">是否有正規表示式可以檢測有效的正規表示式？&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>This is a recursive regex, and is not supported by many regex engines. PCRE based ones should support it.&lt;/p>
+&lt;p>這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p>
 &lt;pre tabindex="0">&lt;code>/
 ^ # start of string
 ( # first group start
@@ -303,8 +324,8 @@ echo &amp;#34;Not AnyOf - Works!&amp;#34;
 ) # end first group
 $ # end of string
 /
-&lt;/code>&lt;/pre>&lt;p>Without whitespace and comments&lt;/p></description></item><item><title>Force file download with Nginx</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">Force file download with Nginx&lt;/a>&lt;/li>
+&lt;/code>&lt;/pre>&lt;p>移除空白與註解後&lt;/p></description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">用 Nginx 強制檔案下載&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>add_header Content-Disposition 'attachment;';&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
@@ -327,154 +348,154 @@ $ # end of string
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_localtime&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell脚本学习笔记</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell 脚本学习笔记&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell 腳本學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell 腳本學習筆記&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="执行算术运算">执行算术运算&lt;/h3>
+&lt;h3 id="執行算術運算">執行算術運算&lt;/h3>
 &lt;pre>&lt;code>val=`expr $a + $b`
 &lt;/code>&lt;/pre>
-&lt;h3 id="运算符">运算符&lt;/h3>
+&lt;h3 id="運算符">運算符&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>符号&lt;/th>
-&lt;th>说明&lt;/th>
+&lt;th>符號&lt;/th>
+&lt;th>說明&lt;/th>
 &lt;th>示例&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>!&lt;/td>
-&lt;td>非运算&lt;/td>
+&lt;td>非運算&lt;/td>
 &lt;td>[ ! false ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-o&lt;/td>
-&lt;td>或运算&lt;/td>
+&lt;td>或運算&lt;/td>
 &lt;td>[ $a -lt 20 -o $b -gt 20 ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-a&lt;/td>
-&lt;td>与运算&lt;/td>
+&lt;td>與運算&lt;/td>
 &lt;td>[ $a -lt 20 -a $b -gt 20 ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>=&lt;/td>
-&lt;td>相等检测&lt;/td>
+&lt;td>相等檢測&lt;/td>
 &lt;td>[ $a = $b ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>!=&lt;/td>
-&lt;td>不相等检测&lt;/td>
+&lt;td>不相等檢測&lt;/td>
 &lt;td>[ $a != $b ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-z&lt;/td>
-&lt;td>字符串长度是否为 0，为 0 则返回 true&lt;/td>
+&lt;td>字串長度是否為 0，為 0 則回傳 true&lt;/td>
 &lt;td>[ -z $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-n&lt;/td>
-&lt;td>字符串长度不为 0， 不为 0 返回 true&lt;/td>
+&lt;td>字串長度不為 0，不為 0 回傳 true&lt;/td>
 &lt;td>[ -n $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>str&lt;/td>
-&lt;td>检测字符串是否为空，不为空返回 true&lt;/td>
+&lt;td>檢測字串是否為空，不為空回傳 true&lt;/td>
 &lt;td>[ $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-b&lt;/td>
-&lt;td>检测文件是否是块设备文件&lt;/td>
+&lt;td>檢測檔案是否是區塊裝置檔&lt;/td>
 &lt;td>[ -b $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-c&lt;/td>
-&lt;td>检测文件是否是字符设备&lt;/td>
+&lt;td>檢測檔案是否是字元裝置&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-d&lt;/td>
-&lt;td>检测文件是否为目录&lt;/td>
+&lt;td>檢測檔案是否為目錄&lt;/td>
 &lt;td>[ -d $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-f&lt;/td>
-&lt;td>检测文件是否为普通文件&lt;/td>
+&lt;td>檢測檔案是否為一般檔案&lt;/td>
 &lt;td>[ -f $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-r&lt;/td>
-&lt;td>检测文件是否可读&lt;/td>
+&lt;td>檢測檔案是否可讀&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-w&lt;/td>
-&lt;td>检测文件是否可写&lt;/td>
+&lt;td>檢測檔案是否可寫&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-x&lt;/td>
-&lt;td>检测文件是否可执行&lt;/td>
+&lt;td>檢測檔案是否可執行&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-s&lt;/td>
-&lt;td>检测文件是否为空&lt;/td>
+&lt;td>檢測檔案是否為空&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-e&lt;/td>
-&lt;td>检测文件是否存在&lt;/td>
+&lt;td>檢測檔案是否存在&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="特殊变量">特殊变量&lt;/h3>
+&lt;h3 id="特殊變數">特殊變數&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>变量&lt;/th>
-&lt;th>含义&lt;/th>
+&lt;th>變數&lt;/th>
+&lt;th>含義&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>$0&lt;/td>
-&lt;td>当前脚本的文件名&lt;/td>
+&lt;td>目前腳本的檔名&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$n&lt;/td>
-&lt;td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数&lt;/td>
+&lt;td>傳遞給腳本或函式的參數，n 表示第幾個參數&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$#&lt;/td>
-&lt;td>传递给脚本或函数的参数个数&lt;/td>
+&lt;td>傳遞給腳本或函式的參數個數&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$*&lt;/td>
-&lt;td>传递给脚本或函数的所有参数，所有参数被当做一个词，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
+&lt;td>傳遞給腳本或函式的所有參數，所有參數視為一個詞，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$@&lt;/td>
-&lt;td>传递给脚本或函数的所有参数，每个参数当做一个词，用双引号包含，例如&amp;quot;1&amp;quot; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
+&lt;td>傳遞給腳本或函式的所有參數，每個參數視為一個詞，用雙引號包含，例如 &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$?&lt;/td>
-&lt;td>上个命令的退出状态，或函数的返回值&lt;/td>
+&lt;td>上個命令的退出狀態，或函式的回傳值&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$$&lt;/td>
-&lt;td>当前 Shell 进程 ID。对于 Shell 脚本，就是这些脚本所在的进程 ID&lt;/td>
+&lt;td>目前 Shell 行程 ID；對 Shell 腳本而言，就是該腳本所在的行程 ID&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="posix-程序退出状态">POSIX 程序退出状态&lt;/h3>
+&lt;h3 id="posix-程式退出狀態">POSIX 程式退出狀態&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>状态码&lt;/th>
-&lt;th>含义&lt;/th>
+&lt;th>狀態碼&lt;/th>
+&lt;th>含義&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -484,92 +505,97 @@ $ # end of string
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;gt; 0&lt;/td>
-&lt;td>在重定向或者单词展开期间(~、变量、命令、算术展开以及单词切割)失败&lt;/td>
+&lt;td>在重導向或單詞展開期間（~、變數、命令、算術展開以及單詞切割）失敗&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>1 - 125&lt;/td>
-&lt;td>命令不成功退出。特定的退出值的含义，有各个命令自行定义&lt;/td>
+&lt;td>命令不成功退出，各命令自行定義特定退出值含義&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>126&lt;/td>
-&lt;td>命令找到了，但是文件无法执行&lt;/td>
+&lt;td>命令找到但檔案無法執行&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>127&lt;/td>
-&lt;td>命令没有找到&lt;/td>
+&lt;td>命令未找到&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;gt; 128&lt;/td>
-&lt;td>命令因收到信号而死亡&lt;/td>
+&lt;td>命令因收到信號而終止&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="输入输出重定向">输入输出重定向&lt;/h3>
+&lt;h3 id="輸入輸出重導向">輸入輸出重導向&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>命令&lt;/th>
-&lt;th>说明&lt;/th>
+&lt;th>說明&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>command &amp;gt; file&lt;/td>
-&lt;td>将输出重定向到 file。&lt;/td>
+&lt;td>將輸出重導向到 file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>command &amp;gt; file&lt;/td>
-&lt;td>将输出以追加的方式重定向到 file。&lt;/td>
+&lt;td>將輸出以追加的方式重導向到 file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;gt; file&lt;/td>
-&lt;td>将文件描述符为 n 的文件重定向到 file。&lt;/td>
+&lt;td>將檔案描述符為 n 的檔案重導向到 file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;raquo; file&lt;/td>
-&lt;td>将文件描述符为 n 的文件以追加的方式重定向到 file。&lt;/td>
+&lt;td>將檔案描述符為 n 的檔案以追加的方式重導向到 file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;gt;&amp;amp; m&lt;/td>
-&lt;td>将输出文件 m 和 n 合并。&lt;/td>
+&lt;td>將輸出檔案 m 和 n 合併&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;lt;&amp;amp; m&lt;/td>
-&lt;td>将输入文件 m 和 n 合并。&lt;/td>
+&lt;td>將輸入檔案 m 和 n 合併&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;laquo; tag&lt;/td>
-&lt;td>将开始标记 tag 和结束标记 tag 之间的内容作为输入。&lt;/td>
+&lt;td>將開始標記 tag 和結束標記 tag 之間的內容作為輸入&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="文件包含">文件包含&lt;/h3>
-&lt;p>使用&lt;code>.&lt;/code>或者&lt;code>source&lt;/code>包含文件&lt;/p></description></item><item><title>Excessive Errors from `sentry.lang.javascript.processor: SoftTimeLimitExceeded()`</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</link><pubDate>Thu, 25 Jul 2019 14:25:56 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</guid><description>&lt;ul>
+&lt;h3 id="檔案包含">檔案包含&lt;/h3>
+&lt;p>使用 &lt;code>.&lt;/code> 或 &lt;code>source&lt;/code> 包含檔案&lt;/p></description></item><item><title>`sentry.lang.javascript.processor: SoftTimeLimitExceeded()` 大量錯誤</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</link><pubDate>Thu, 25 Jul 2019 14:25:56 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/getsentry/sentry/issues/4386" target="_blank" rel="noopener">Excessive Errors from &lt;code>sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code>&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://forum.sentry.io/t/counters-0-queue-is-rising-continuously/5655/6" target="_blank" rel="noopener">Counters-0 queue is rising continuously&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="excessive-errors-from-sentrylangjavascriptprocessor-softtimelimitexceeded">Excessive Errors from &lt;code>sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code>&lt;/h4>
+&lt;h4 id="sentrylangjavascriptprocessor-softtimelimitexceeded-大量錯誤">&lt;code>sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code> 大量錯誤&lt;/h4>
 &lt;p>mattrobenolt:&lt;/p>
-&lt;p>Was just going to propose this. :) Unfortunately, this is just how this feature works. If it&amp;rsquo;s not useful and is just wasting resources, it&amp;rsquo;s easy to disable globally by setting &lt;code>SENTRY_SCRAPE_JAVASCRIPT_CONTEXT = False&lt;/code> in your &lt;code>sentry.conf.py&lt;/code> or per project in the UI.&lt;/p>
-&lt;p>Other than that, there&amp;rsquo;s not much else we can do here since the feature is effectively working as intended.&lt;/p></description></item><item><title>Python Telegram Bot</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</link><pubDate>Thu, 11 Jul 2019 14:03:25 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</guid><description>&lt;ul>
+&lt;p>我正打算提出這個。:) 很不幸，這個功能就是如此運作。如果它沒有用且只是浪費資源，可以很容易地全域關閉：在 &lt;code>sentry.conf.py&lt;/code> 設定 &lt;code>SENTRY_SCRAPE_JAVASCRIPT_CONTEXT = False&lt;/code>，或在 UI 內針對專案關閉。&lt;/p>
+&lt;p>除此之外，沒有太多能做的，因為這個功能本質上是按設計運作。&lt;/p>
+&lt;hr>
+&lt;h4 id="counters-0-佇列持續上升">Counters-0 佇列持續上升&lt;/h4>
+&lt;p>matt:&lt;/p>
+&lt;p>你需要更多 worker 來處理這個佇列的負載。&lt;/p>
+&lt;p>你也可以讓 worker 專門處理特定佇列，例如使用 &lt;code>sentry run worker -Q counters-0&lt;/code>。&lt;/p></description></item><item><title>Python Telegram Bot</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</link><pubDate>Thu, 11 Jul 2019 14:03:25 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://zaoldyeck.medium.com/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E6%80%8E%E9%BA%BC%E6%89%93%E9%80%A0-telegram-bot-a7b539c3402a" target="_blank" rel="noopener">（一）一步步打造 Telegram Bot&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://zaoldyeck.medium.com/%E5%88%A9%E7%94%A8-olami-open-api-%E7%82%BA-chatbot-%E5%A2%9E%E5%8A%A0-nlp-%E5%8A%9F%E8%83%BD-e6b37940913d" target="_blank" rel="noopener">（二）為 Chatbot 增加 NLP 功能&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://zaoldyeck.medium.com/add-custom-skill-into-chatbot-cef9bfeeef52" target="_blank" rel="noopener">（三）為 Chatbot 添加新技能&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://hackmd.io/@truckski/HkgaMUc24" target="_blank" rel="noopener">Python Telegram Bot 教學&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://kaive.me/2018/07/15/Python-telegram-bot/" target="_blank" rel="noopener">用 Python 写一个简单的 Telegram Bot&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets" target="_blank" rel="noopener">https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>linux磁碟空間沒釋放的解決方法</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">linux 磁碟空間沒釋放的解決方法&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://kaive.me/2018/07/15/Python-telegram-bot/" target="_blank" rel="noopener">用 Python 寫一個簡單的 Telegram Bot&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets" target="_blank" rel="noopener">Code snippets&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Linux 磁碟空間未釋放的解決方法</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">Linux 磁碟空間未釋放的解決方法&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="用-df--ah-命令-du--h---max-depth1">用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
-&lt;p>&lt;code>du&lt;/code> 之和遠遠小於 &lt;code>df&lt;/code> 得到的總量&lt;/p>
-&lt;p>程序使用的檔案資源被刪除後，程序還活著，導致檔案未被真正刪除，無法釋放磁碟空間，卻並不能被統計到。&lt;/p>
-&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Sentry 源码开发笔记</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</link><pubDate>Wed, 03 Jul 2019 11:53:15 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://chroming.gitlab.io/2018/09/26/edit_sentry_source_code/" target="_blank" rel="noopener">Sentry 源码开发笔记&lt;/a>&lt;/li>
+&lt;h5 id="使用-df--ah-命令-du--h---max-depth1">使用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
+&lt;p>&lt;code>du&lt;/code> 的總和遠小於 &lt;code>df&lt;/code> 得到的總量。&lt;/p>
+&lt;p>程式使用的檔案資源被刪除後，程式仍在執行，導致檔案未真正刪除，無法釋放磁碟空間，也無法被統計到。&lt;/p>
+&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Sentry 原始碼開發筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</link><pubDate>Wed, 03 Jul 2019 11:53:15 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://chroming.gitlab.io/2018/09/26/edit_sentry_source_code/" target="_blank" rel="noopener">Sentry 原始碼開發筆記&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html" target="_blank" rel="noopener">Formatting uWSGI requests logs&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.postgresql.org/docs/9.3/libpq-pgpass.html" target="_blank" rel="noopener">PostgreSQL: Documentation: 9.3: The Password File&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>openresty+redis拦截高频访问IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener">openresty+redis 拦截高频访问 IP&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>openresty+redis 攔截高頻訪問 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener">openresty+redis 攔截高頻訪問 IP&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">init_by_lua_block&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">redis&lt;/span> = &lt;span style="color:#e6db74">require&lt;/span> &lt;span style="color:#e6db74">&amp;#34;redis&amp;#34;&lt;/span>
@@ -596,23 +622,23 @@ $ # end of string
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> redis.connect(&lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">6379&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 如果发生 redis 连接失败，将停止拦截（直接放行）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> pcall(isConnected) &lt;span style="color:#66d9ef">then&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- already connected (or ping succeeded)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">else&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- not connected; try reconnect&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> pcall(createRedisConnection) &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 断开重连：会导致每次访问都需要重连 redis&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 访问量大时建议：关闭重连逻辑（pcall 不执行），直接 ngx.exit 放行/终止&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client &lt;span style="color:#f92672">=&lt;/span> createRedisConnection()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ngx.exit(ngx.OK)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">-- 监测周期（秒）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> bktimes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e">-- 在监测周期内达到触发拦截的访问量&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> block_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">600&lt;/span> &lt;span style="color:#75715e">-- 触发拦截后拦截时间（秒）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">-- 監測週期（秒）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> bktimes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e">-- 在監測週期內達到觸發攔截的訪問量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> block_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">600&lt;/span> &lt;span style="color:#75715e">-- 觸發攔截後攔截時間（秒）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ip &lt;span style="color:#f92672">=&lt;/span> ngx.var.remote_addr
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ipvtimes &lt;span style="color:#f92672">=&lt;/span> client:get(ip)
@@ -717,28 +743,28 @@ balance roundrobin
 server srv1 192.168.1.2:80 check maxconn 1000
 server srv2 192.168.1.3:80 check maxconn 1000
 &lt;/code>&lt;/pre>&lt;h3 id="限制每個-user-產生新連線的速率-limiting-the-connection-rate-per-user">限制每個 user 產生新連線的速率 Limiting the connection rate per user&lt;/h3>
-&lt;p>惡意的使用者會在短時間內建立很多連線，但如果產生新連線的速度太高，就會消耗掉過多的資源服務一個使用者。&lt;/p></description></item><item><title>白话 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener">白话 Kubernetes Runtime&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Nginx请求处理流程你了解吗？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 请求处理流程你了解吗？&lt;/a>&lt;/li>
+&lt;p>惡意的使用者會在短時間內建立很多連線，但如果產生新連線的速度太高，就會消耗掉過多的資源服務一個使用者。&lt;/p></description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener">白話 Kubernetes Runtime&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Nginx 請求處理流程你了解嗎？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 請求處理流程你了解嗎？&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="11-个处理阶段">11 个处理阶段&lt;/h3>
+&lt;h3 id="11-個處理階段">11 個處理階段&lt;/h3>
 &lt;p>1）NGX_HTTP_POST_READ_PHASE：&lt;/p>
-&lt;p>接收到完整的 HTTP 头部后处理的阶段，它位于 uri 重写之前，实际上很少有模块会注册在该阶段，默认的情况下，该阶段被跳过。&lt;/p>
+&lt;p>接收到完整的 HTTP 標頭後處理的階段，位於 URI 重寫之前。實際上很少有模組會註冊在該階段，預設情況下會被跳過。&lt;/p>
 &lt;p>2）NGX_HTTP_SERVER_REWRITE_PHASE：&lt;/p>
-&lt;p>URI 与 location 匹配前，修改 URI 的阶段，用于重定向，也就是该阶段执行处于 server 块内，location 块外的重写指令，在读取请求头的过程中 nginx 会根据 host 及端口找到对应的虚拟主机配置。&lt;/p>
+&lt;p>在 URI 與 location 匹配前修改 URI 的階段，用於重新導向。該階段執行 server 區塊內、location 區塊外的重寫指令。在讀取請求標頭的過程中，nginx 會根據 host 及埠號找到對應的虛擬主機設定。&lt;/p>
 &lt;p>3）NGX_HTTP_FIND_CONFIG_PHASE：&lt;/p>
-&lt;p>根据 URI 寻找匹配的 location 块配置项阶段，该阶段使用重写之后的 uri 来查找对应的 location，值得注意的是该阶段可能会被执行多次，因为也可能有 location 级别的重写指令。&lt;/p>
+&lt;p>根據 URI 尋找匹配的 location 設定項階段，使用重寫後的 URI 來查找對應的 location。需要注意的是該階段可能會被執行多次，因為也可能有 location 級別的重寫指令。&lt;/p>
 &lt;p>4）NGX_HTTP_REWRITE_PHASE：&lt;/p>
-&lt;p>上一阶段找到 location 块后再修改 URI，location 级别的 uri 重写阶段，该阶段执行 location 基本的重写指令，也可能会被执行多次。&lt;/p>
+&lt;p>上一階段找到 location 後再次修改 URI，屬於 location 級別的 URI 重寫階段，也可能會被執行多次。&lt;/p>
 &lt;p>5）NGX_HTTP_POST_REWRITE_PHASE：&lt;/p>
-&lt;p>防止重写 URL 后导致的死循环，location 级别重写的后一阶段，用来检查上阶段是否有 uri 重写，并根据结果跳转到合适的阶段。&lt;/p>
+&lt;p>防止重寫 URL 後導致的死循環，屬於 location 重寫的下一階段，用來檢查上階段是否有 URI 重寫，並根據結果跳轉到合適的階段。&lt;/p>
 &lt;p>6）NGX_HTTP_PREACCESS_PHASE：&lt;/p>
-&lt;p>下一阶段之前的准备，访问权限控制的前一阶段，该阶段在权限控制阶段之前，一般也用于访问控制，比如限制访问频率，链接数等。&lt;/p>
+&lt;p>下一階段之前的準備，屬於存取權限控制的前一階段。一般也用於存取控制，例如限制存取頻率、連線數等。&lt;/p>
 &lt;p>7）NGX_HTTP_ACCESS_PHASE：&lt;/p>
-&lt;p>让 HTTP 模块判断是否允许这个请求进入 Nginx 服务器，访问权限控制阶段，比如基于 ip 黑白名单的权限控制，基于用户名密码的权限控制等。&lt;/p>
+&lt;p>讓 HTTP 模組判斷是否允許請求進入 Nginx 伺服器的存取控制階段，例如基於 IP 白名單/黑名單、使用者名稱密碼等的權限控制。&lt;/p>
 &lt;p>8）NGX_HTTP_POST_ACCESS_PHASE：&lt;/p>
-&lt;p>访问权限控制的后一阶段，该阶段根据权限控制阶段的执行结果进行相应处理，向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝。&lt;/p>
+&lt;p>存取控制的後一階段，根據上一階段的執行結果進行處理，向使用者送出拒絕服務的錯誤碼，用來回應上一階段的拒絕。&lt;/p>
 &lt;p>9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p>
-&lt;p>为访问静态文件资源而设置，try_files 指令的处理阶段，如果没有配置 try_files 指令，则该阶段被跳过。&lt;/p>
+&lt;p>為存取靜態檔案資源而設置，try_files 指令的處理階段。如果沒有設定 try_files 指令，該階段會被跳過。&lt;/p>
 &lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item></channel></rss>

@@ -84,19 +84,53 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">content&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;{{ s5 }}&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dest&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/tmp/s5.txt&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># s5 this is my very very very long string line1 line2 line3%&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>6 YAML Features most programmers don't know</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener">6 YAML Features most programmers don&amp;rsquo;t know&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>多數程式設計師不知道的 6 個 YAML 特性</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener">多數程式設計師不知道的 6 個 YAML 特性&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="there-are-more-examples-that-are-similarly-dangerous-as-tom-ritchford-pointed-out">There are more examples that are similarly dangerous as Tom Ritchford pointed out&lt;/h4>
+&lt;h4 id="還有更多類似的危險例子正如-tom-ritchford-所指出">還有更多類似的危險例子，正如 Tom Ritchford 所指出&lt;/h4>
 &lt;ul>
-&lt;li>&lt;code>013&lt;/code> is mapped to 11 as the leading zero triggers the octal notation&lt;/li>
-&lt;li>&lt;code>4:30&lt;/code> is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: &lt;code>4*60 + 30 = 270&lt;/code> . Interestingly, this pattern still &amp;ldquo;works&amp;rdquo; with &lt;code>1:1:1:1:1:1:1:1:4:30&lt;/code> .&lt;/li>
+&lt;li>&lt;code>013&lt;/code> 會被對應為 11，因為前導 0 會觸發八進位表示法&lt;/li>
+&lt;li>&lt;code>4:30&lt;/code> 會被對應為 270。Max Werner Kaul-Gothe 與 Niklas Baumstark 告訴我，這會被自動轉換為分鐘（或秒）並被視為一段持續時間：&lt;code>4*60 + 30 = 270&lt;/code>。有趣的是，這個模式在 &lt;code>1:1:1:1:1:1:1:1:4:30&lt;/code> 仍然「可運作」。&lt;/li>
 &lt;/ul>
-&lt;h4 id="multi-line-string">Multi-Line String&lt;/h4>
+&lt;h4 id="多行字串">多行字串&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">mail_signature&lt;/span>: |&lt;span style="color:#e6db74">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Martin Thoma
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Tel. +49 123 4567&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;mail_signature&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Martin Thoma\nTel. +49 123 4567&amp;#34;&lt;/span> }
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="anchor">Anchor&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="錨點">錨點&lt;/h4>
 &lt;blockquote>
-&lt;p>The &lt;code>&amp;amp;&lt;/code> defined a variable &lt;code>emailAddress&lt;/code> with the value &lt;code>&amp;quot;info@example.de&amp;quot;&lt;/code>. The &lt;code>*&lt;/code> then indicated that the name of a variable follows.&lt;/p></description></item></channel></rss>
+&lt;p>&lt;code>&amp;amp;&lt;/code> 會定義一個名為 &lt;code>emailAddress&lt;/code> 的變數，值為 &lt;code>&amp;quot;info@example.de&amp;quot;&lt;/code>。&lt;code>*&lt;/code> 則表示接著的是變數名稱。&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">email&lt;/span>: &lt;span style="color:#75715e">&amp;amp;emailAddress&lt;/span> &lt;span style="color:#e6db74">&amp;#34;info@example.de&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#75715e">*emailAddress&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;email&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;info@example.de&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;info@example.de&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="也可以對映射這樣做">也可以對映射這樣做&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">foo&lt;/span>: &lt;span style="color:#75715e">&amp;amp;default_settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">db&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">host&lt;/span>: &lt;span style="color:#ae81ff">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">main_db&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">1337&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">email&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin@example.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">prod&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;&amp;lt;&lt;/span>: &lt;span style="color:#75715e">*default_settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">app&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">dev&lt;/span>: &lt;span style="color:#75715e">*default_settings&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;db&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;host&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;localhost&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;main_db&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1337&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;email&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;admin&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;admin@example.com&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;prod&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;app&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;db&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;host&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;localhost&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;main_db&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1337&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;email&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;admin&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;admin@example.com&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dev&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;db&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;host&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;localhost&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;main_db&amp;#34;&lt;/span>, &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">1337&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;email&amp;#34;&lt;/span>: { &lt;span style="color:#f92672">&amp;#34;admin&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;admin@example.com&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="型別轉換">型別轉換&lt;/h4>
+&lt;blockquote>
+&lt;p>雙驚嘆號 &lt;code>!!&lt;/code> 在 YAML 中有特殊意義。它稱為「secondary tag handle」，是 &lt;code>!tag:yaml.org,2002&lt;/code> 的簡寫。&lt;/p></description></item></channel></rss>

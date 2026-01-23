@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/docker/</link><description>Recent content in Docker on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 11 Jan 2026 15:22:11 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260111-wud/</link><pubDate>Sun, 11 Jan 2026 15:22:11 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260111-wud/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/TKFPS2tq" target="_blank" rel="noopener">用 WUD 替代 Watchtower：构建可控的 Docker 自动更新方案&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/docker/</link><description>Recent content in Docker on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 11 Jan 2026 15:22:11 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>用 WUD 取代 Watchtower：打造可控的 Docker 自動更新方案</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260111-wud/</link><pubDate>Sun, 11 Jan 2026 15:22:11 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260111-wud/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/TKFPS2tq" target="_blank" rel="noopener">用 WUD 取代 Watchtower：打造可控的 Docker 自動更新方案&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>WUD（What&amp;rsquo;s Up Docker）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
@@ -26,20 +26,20 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 自动更新 + 更新后清理旧镜像&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WUD_TRIGGER_DOCKER_AUTO_PRUNE=true&lt;/span> &lt;span style="color:#75715e"># 效果等同于 `watchtower --cleanup`&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="只监控不自动更新">只监控（不自动更新）&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="只監控不自動更新">只監控（不自動更新）&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">labels&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.watch=true&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>出现在 WUD UI&lt;/li>
-&lt;li>有更新提示&lt;/li>
-&lt;li>不会自动重启&lt;/li>
+&lt;li>會出現在 WUD UI&lt;/li>
+&lt;li>會提示有更新&lt;/li>
+&lt;li>不會自動重啟&lt;/li>
 &lt;/ul>
-&lt;h4 id="监控--自动更新watchtower-的等价替代">监控 + 自动更新（Watchtower 的等价替代）&lt;/h4>
+&lt;h4 id="監控--自動更新等同-watchtower">監控 + 自動更新（等同 Watchtower）&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">labels&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.watch=true&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;wud.trigger.include=docker.auto&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 容器无法访问外网？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器无法访问外网？nftables 下的 NAT 配置指南&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 容器無法存取外網？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器無法存取外網？nftables 下的 NAT 配置指南&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">透過 LinuxServer.io 打包的 Docker 映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io 官網&lt;/a>&lt;/li>
@@ -125,10 +125,10 @@
 &lt;li>開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
 &lt;li>依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li>
 &lt;li>容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li>
-&lt;/ul></description></item><item><title>Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</link><pubDate>Tue, 06 Aug 2024 12:26:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://soulteary.com/2024/08/05/best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly.html" target="_blank" rel="noopener">Docker 环境下使用 Traefik v3 和 MinIO 快速搭建私有化对象存储服务&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>在 Docker 環境使用 Traefik v3 與 MinIO 快速搭建私有化物件儲存服務</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</link><pubDate>Tue, 06 Aug 2024 12:26:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240806-best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/05/best-practices-for-traefik-3-and-minio-in-docker-getting-started-quickly.html" target="_blank" rel="noopener">在 Docker 環境使用 Traefik v3 與 MinIO 快速搭建私有化物件儲存服務&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/soulteary/traefik-minio-example.git" target="_blank" rel="noopener">https://github.com/soulteary/traefik-minio-example.git&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://soulteary.com/2024/08/04/best-practices-for-traefik-3-in-docker-getting-started-quickly.html#docker-%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener">Docker 环境下使用 Traefik 3 的最佳实践：快速上手&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://soulteary.com/2024/08/04/best-practices-for-traefik-3-in-docker-getting-started-quickly.html#docker-%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener">在 Docker 環境使用 Traefik 3 的最佳實務：快速上手&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener">Container security fundamentals: Exploring containers as processes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener">Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a>&lt;/li>
@@ -137,14 +137,14 @@
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener">Container security fundamentals part 5: AppArmor and SELinux&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener">Container security fundamentals part 6: seccomp
 &lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>更快的多平台建置：Dockerfile 交叉編譯指南</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">更快的多平台建置：Dockerfile 交叉編譯指南&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="method">method&lt;/h3>
+&lt;h3 id="方法">方法&lt;/h3>
 &lt;ul>
 &lt;li>&lt;code>docker buildx create --use&lt;/code>&lt;/li>
 &lt;li>&lt;code>FROM --platform=linux/amd64 debian&lt;/code> / &lt;code>FROM --platform=$BUILDPLATFORM debian&lt;/code>&lt;/li>
-&lt;li>variables&lt;/li>
+&lt;li>變數&lt;/li>
 &lt;/ul>
 &lt;pre tabindex="0">&lt;code>BUILDPLATFORM — matches the current machine. (e.g. linux/amd64)
 BUILDOS — os component of BUILDPLATFORM, e.g. linux
@@ -154,7 +154,7 @@ TARGETPLATFORM — The value set with --platform flag on build
 TARGETOS - OS component from --platform, e.g. linux
 TARGETARCH - Architecture from --platform, e.g. arm64
 TARGETVARIANT
-&lt;/code>&lt;/pre>&lt;h3 id="example">example&lt;/h3>
+&lt;/code>&lt;/pre>&lt;h3 id="範例">範例&lt;/h3>
 &lt;ul>
 &lt;li>before&lt;/li>
 &lt;/ul>
@@ -413,22 +413,40 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BASE_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;dc=knowhow,dc=fun&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_BIND_DN&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cn=admin&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">LDAP_ADMIN_PASS&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;123qwe&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Security Best Practices: Cheat Sheet</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</link><pubDate>Fri, 20 Aug 2021 23:14:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.gitguardian.com/how-to-improve-your-docker-containers-security-cheat-sheet/" target="_blank" rel="noopener">Docker Security Best Practices: Cheat Sheet&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 安全最佳實務：速查表</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</link><pubDate>Fri, 20 Aug 2021 23:14:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210820-how-to-improve-your-docker-containers-security-cheat-sheet/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gitguardian.com/how-to-improve-your-docker-containers-security-cheat-sheet/" target="_blank" rel="noopener">Docker 安全最佳實務：速查表&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="image-security">Image Security&lt;/h3>
-&lt;h4 id="use-trusted-images">Use Trusted Images&lt;/h4>
-&lt;h4 id="unprivileged-user">Unprivileged User&lt;/h4>
+&lt;h3 id="映像安全">映像安全&lt;/h3>
+&lt;h4 id="使用可信任的映像">使用可信任的映像&lt;/h4>
+&lt;h4 id="非特權使用者">非特權使用者&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> base_image&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> addgroup -S appgroup &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> adduser -S appuser -G appgroup&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">USER&lt;/span>&lt;span style="color:#e6db74"> appuser&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="user-id-namespace">User ID Namespace&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="user-id-命名空間">User ID 命名空間&lt;/h4>
 &lt;blockquote>
-&lt;p>Segregate namespaces to prevent container privilege escalation from affecting the host.&lt;/p>&lt;/blockquote>
-&lt;p>To mitigate this risk, configure your host and the Docker daemon to use a separate namespace with the &lt;code>--userns-remap&lt;/code> option.&lt;/p>
-&lt;h3 id="container-runtime-security">Container Runtime Security&lt;/h3>
-&lt;h4 id="forbid-new-privileges">Forbid New Privileges&lt;/h4>
-&lt;p>For enhanced security, it is recommended to explicitly forbid the addition of new privileges after container creation using this option: &lt;code>--security-opt=no-new-privileges&lt;/code>.&lt;/p></description></item><item><title>docker-compose yaml problem</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210719-docker-compose-yaml-problem/</link><pubDate>Mon, 19 Jul 2021 15:40:36 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210719-docker-compose-yaml-problem/</guid><description>&lt;h4 id="issue">issue&lt;/h4>
+&lt;p>隔離命名空間，避免容器權限提升影響主機。&lt;/p>&lt;/blockquote>
+&lt;p>為了降低風險，請在主機與 Docker daemon 上使用 &lt;code>--userns-remap&lt;/code> 選項設定獨立的命名空間。&lt;/p>
+&lt;h3 id="容器執行期安全">容器執行期安全&lt;/h3>
+&lt;h4 id="禁止新增權限">禁止新增權限&lt;/h4>
+&lt;p>為了提升安全性，建議在建立容器後明確禁止新增權限：&lt;code>--security-opt=no-new-privileges&lt;/code>。&lt;/p>
+&lt;h4 id="定義細粒度能力">定義細粒度能力&lt;/h4>
+&lt;p>例如，Web 伺服器可能只需要 &lt;code>NET_BIND_SERVICE&lt;/code> 來綁定 80 連接埠。&lt;/p>
+&lt;h4 id="控制資源使用">控制資源使用&lt;/h4>
+&lt;p>&lt;code>docker run --memory=&amp;quot;400m&amp;quot; --cpus=&amp;quot;0.5&amp;quot; &lt;/code>&lt;/p>
+&lt;h3 id="主機系統安全">主機系統安全&lt;/h3>
+&lt;h4 id="敏感檔案系統區域">敏感檔案系統區域&lt;/h4>
+&lt;p>若需要存取主機設備，請謹慎以 &lt;code>[r|w|m]&lt;/code> 旗標（&lt;code>read&lt;/code>、&lt;code>write&lt;/code>、&lt;code>mknod&lt;/code>）開啟必要權限。&lt;/p>
+&lt;h4 id="容器檔案系統存取">容器檔案系統存取&lt;/h4>
+&lt;p>&lt;code>docker run --read-only --tmpfs /tmp:rw ,noexec,nosuid &lt;/code>&lt;/p>
+&lt;h4 id="持久化儲存">持久化儲存&lt;/h4>
+&lt;p>如果需要和主機檔案系統或其他容器共享資料，有兩種做法：&lt;/p>
+&lt;ul>
+&lt;li>使用可限制磁碟空間的 bind mount（&lt;code>--mount type=bind,o=size&lt;/code>）&lt;/li>
+&lt;li>為專用分割區建立 bind volume（&lt;code>--mount type=volume&lt;/code>）&lt;/li>
+&lt;/ul>
+&lt;h3 id="網路安全">網路安全&lt;/h3>
+&lt;h4 id="docker-daemon-socket">Docker daemon socket&lt;/h4>
+&lt;p>Docker 使用的 UNIX socket 不應暴露：&lt;code>/var/run/docker.sock&lt;/code>&lt;/p></description></item><item><title>docker-compose yaml 問題</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210719-docker-compose-yaml-problem/</link><pubDate>Mon, 19 Jul 2021 15:40:36 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210719-docker-compose-yaml-problem/</guid><description>&lt;h4 id="問題">問題&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># ./docker-compose up -d&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Creating network &lt;span style="color:#e6db74">&amp;#34;gogs_default&amp;#34;&lt;/span> with the default driver
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Creating gogs_mysql_1 ... &lt;span style="color:#66d9ef">done&lt;/span>
@@ -442,13 +460,20 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gogs&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">2222&lt;/span>:&lt;span style="color:#ae81ff">22&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>YAML supports so-called &amp;ldquo;base-60 floating-point numbers,&amp;rdquo; which is useful for time calculations.&lt;/p>
-&lt;p>Therefore, &lt;code>2222:22&lt;/code> is interpreted as &lt;code>2222 * 60 + 22&lt;/code>, which is 133342.&lt;/p></description></item><item><title>Docker Tips: Using Docker Config</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</link><pubDate>Mon, 14 Sep 2020 11:13:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83" target="_blank" rel="noopener">Docker Tips: Using Docker Config&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>YAML 支援所謂的「六十進位浮點數」，這對時間計算很有用。&lt;/p>
+&lt;p>因此，&lt;code>2222:22&lt;/code> 會被解讀為 &lt;code>2222 * 60 + 22&lt;/code>，也就是 133342。&lt;/p>
+&lt;p>如果連接埠包含大於 60 的數字，例如 3306:3306 或 8080:80，就不會有問題，所以這個問題不一定會出現，因而比較不容易察覺。&lt;/p>
+&lt;h4 id="解法">解法&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gogs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#e6db74">&amp;#34;2222:22&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 小技巧：使用 Docker Config</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</link><pubDate>Mon, 14 Sep 2020 11:13:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200914-about-using-docker-config/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83" target="_blank" rel="noopener">Docker 小技巧：使用 Docker Config&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> nginx:1.13.6&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> nginx.conf /etc/nginx/nginx.conf&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Using the Docker CLI, we can create a &lt;code>config&lt;/code> from this configuration file, we name this config &lt;code>proxy&lt;/code>.&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 Docker CLI，可以從這個設定檔建立一個 &lt;code>config&lt;/code>，並將它命名為 &lt;code>proxy&lt;/code>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker config create proxy nginx.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mdcfnxud53ve6jgcgjkhflg0s
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -468,7 +493,7 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-a-config">Use a Config&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="使用-config">使用 Config&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker network create --driver overlay front
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker service create --name api --network front lucj/api
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker service create --name proxy &lt;span style="color:#ae81ff">\
@@ -476,20 +501,20 @@ systemctl restart docker
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --config src&lt;span style="color:#f92672">=&lt;/span>proxy,target&lt;span style="color:#f92672">=&lt;/span>/etc/nginx/nginx.conf &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --port 8000:8000 &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> nginx:1.13.6
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="service-update">Service Update&lt;/h5>
-&lt;p>When the content of a configuration needs to be modified, it&amp;rsquo;s a common pattern to create a new config (using &lt;code>docker config create&lt;/code>), and then to update the service order to remove the access to the previous config, and to add the access to the new one. The service commands are&lt;code>--config-rm&lt;/code> and &lt;code>--config-add&lt;/code>.&lt;/p></description></item><item><title>How to deploy on remote Docker hosts with docker-compose</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</link><pubDate>Wed, 25 Mar 2020 19:30:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/" target="_blank" rel="noopener">How to deploy on remote Docker hosts with docker-compose&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="服務更新">服務更新&lt;/h5>
+&lt;p>當設定內容需要修改時，常見做法是建立新的 config（使用 &lt;code>docker config create&lt;/code>），然後更新服務以移除舊的 config 並加上新的 config。對應的服務指令是 &lt;code>--config-rm&lt;/code> 與 &lt;code>--config-add&lt;/code>。&lt;/p></description></item><item><title>使用 docker-compose 部署到遠端 Docker 主機</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</link><pubDate>Wed, 25 Mar 2020 19:30:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200325-how-to-deploy-on-remote-docker-hosts-with-docker-compose/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/" target="_blank" rel="noopener">使用 docker-compose 部署到遠端 Docker 主機&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="manual-deployment-by-copying-project-files-install-docker-compose-and-running-it">Manual deployment by copying project files, install docker-compose and running it&lt;/h5>
+&lt;h5 id="手動部署複製專案檔案安裝-docker-compose-並執行">手動部署：複製專案檔案、安裝 docker-compose 並執行&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ scp -r hello-docker user@remotehost:/path/to/src
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh user@remotehost
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ pip install docker-compose
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd /path/to/src/hello-docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker-compose up -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-docker_host-environment-variable-to-set-up-the-target-engine">Using DOCKER_HOST environment variable to set up the target engine&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="使用-docker_host-環境變數設定目標引擎">使用 DOCKER_HOST 環境變數設定目標引擎&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ cd hello-docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ DOCKER_HOST&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ssh://user@remotehost&amp;#34;&lt;/span> docker-compose up -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-docker-contexts">Using docker contexts&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="使用-docker-context">使用 docker context&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ docker context create remote ‐‐docker &lt;span style="color:#e6db74">&amp;#34;host=ssh://user@remotemachine&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>remote
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully created context &lt;span style="color:#e6db74">&amp;#34;remote&amp;#34;&lt;/span>

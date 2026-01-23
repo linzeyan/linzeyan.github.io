@@ -18,26 +18,30 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dir&amp;gt;/usr/shared/fonts/chinese&amp;lt;dir&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>刷新內存中的字體緩存&lt;/p>
-&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item><item><title>What is the SHA256 that comes on the sshd entry in auth.log?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</link><pubDate>Mon, 17 Dec 2018 16:11:43 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://serverfault.com/questions/888281/what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log" target="_blank" rel="noopener">What is the SHA256 that comes on the sshd entry in auth.log?&lt;/a>&lt;/li>
+&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item><item><title>auth.log 中 sshd 這行的 SHA256 是什麼？</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</link><pubDate>Mon, 17 Dec 2018 16:11:43 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://serverfault.com/questions/888281/what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log" target="_blank" rel="noopener">auth.log 中 sshd 這行的 SHA256 是什麼？&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>ssh-keygen -lf .ssh/id_rsa.pub&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>cat .ssh/id_rsa.pub |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $2 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># Only the actual key data without prefix or comments&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 -d | &lt;span style="color:#75715e"># decode as base64&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sha256sum | &lt;span style="color:#75715e"># SHA256 hash (returns hex)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $1 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># only the hex data&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xxd -r -p | &lt;span style="color:#75715e"># hex to bytes&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 &lt;span style="color:#75715e"># encode as base64&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">What does &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> mean in the shell?&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $2 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># 只取實際的 key 資料，不含前綴或註解&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 -d | &lt;span style="color:#75715e"># 以 base64 解碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sha256sum | &lt;span style="color:#75715e"># SHA256 雜湊（回傳十六進位）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $1 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># 只取十六進位資料&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xxd -r -p | &lt;span style="color:#75715e"># 十六進位轉位元組&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 &lt;span style="color:#75715e"># 以 base64 編碼&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell 中 `&lt; &lt;(command args)` 是什麼意思？</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">Shell 中 &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> 是什麼意思？&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r -d &lt;span style="color:#e6db74">$&amp;#39;\0&amp;#39;&lt;/span> file; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dosomethingwith &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># do something with each file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dosomethingwith &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 對每個檔案進行處理&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &amp;lt;&lt;span style="color:#f92672">(&lt;/span>find /bar -name *foo* -print0&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;()&lt;/code> is called &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener">&lt;strong>process substitution&lt;/strong>&lt;/a> in the manual, and is similar to a pipe but passes an argument of the form &lt;code>/dev/fd/63&lt;/code> instead of using stdin.&lt;/p>
-&lt;p>&lt;code>&amp;lt;&lt;/code> reads the input from a file named on command line.&lt;/p>
-&lt;p>Together, these two operators function exactly like a pipe, so it could be rewritten as&lt;/p></description></item><item><title>Netcat（Linux nc 指令）網路管理者工具實用範例</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;()&lt;/code> 在手冊中稱為 &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener">&lt;strong>process substitution&lt;/strong>&lt;/a>，它類似於管線，但會傳遞 &lt;code>/dev/fd/63&lt;/code> 這種形式的參數，而不是使用 stdin。&lt;/p>
+&lt;p>&lt;code>&amp;lt;&lt;/code> 會從命令列指定的檔案讀取輸入。&lt;/p>
+&lt;p>這兩個運算子合起來的作用與管線完全相同，因此可以改寫為：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>find /bar -name *foo* -print0 | &lt;span style="color:#66d9ef">while&lt;/span> read line; &lt;span style="color:#66d9ef">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Netcat（Linux nc 指令）網路管理者工具實用範例</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.gtwang.org/linux/linux-utility-netcat-examples/" target="_blank" rel="noopener">Netcat（Linux nc 指令）網路管理者工具實用範例&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="傳送測試用的-udp-封包到遠端伺服器">傳送測試用的 UDP 封包到遠端伺服器&lt;/h4>
@@ -156,8 +160,8 @@
 &lt;li>模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code>tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
-&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
+&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - 安裝、設定與建置 BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - 安裝、設定與建置 BGP&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Systemd 入门教程：实战篇</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180809-systemd-tutorial-part-two/</link><pubDate>Thu, 09 Aug 2018 13:53:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180809-systemd-tutorial-part-two/</guid><description>&lt;ul>
 &lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇&lt;/a>&lt;/li>
 &lt;/ul>
@@ -425,8 +429,8 @@ software clean
 &lt;/li>
 &lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
 &lt;li>&lt;code>show version&lt;/code>&lt;/li>
-&lt;/ol></description></item><item><title>最好用的 V2Ray 一键安装脚本 &amp; 管理脚本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一键安装脚本 &amp;amp; 管理脚本&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>最好用的 V2Ray 一鍵安裝腳本 &amp; 管理腳本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一鍵安裝腳本 &amp;amp; 管理腳本&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>如何在 Switch 上啟用 snmp 設定</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</link><pubDate>Sun, 04 Feb 2018 14:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180204-switchsnmp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://itlocation.blogspot.com/2013/10/switchsnmp.html" target="_blank" rel="noopener">如何在 Switch 上啟用 snmp 設定&lt;/a>&lt;/li>

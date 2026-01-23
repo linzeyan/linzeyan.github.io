@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VSCode on Ricky</title><link>https://linzeyan.github.io/categories/vscode/</link><description>Recent content in VSCode on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Dec 2025 15:16:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>VsCode 整合 DevSpace 進行 debug !</title><link>https://linzeyan.github.io/posts/2025/20251210-10377156/</link><pubDate>Wed, 10 Dec 2025 15:16:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251210-10377156/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10377156" target="_blank" rel="noopener">VsCode 整合 DevSpace 進行 debug !&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>VSCode on Ricky</title><link>https://linzeyan.github.io/categories/vscode/</link><description>Recent content in VSCode on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 10 Dec 2025 15:16:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>VSCode Integration with DevSpace for Debugging!</title><link>https://linzeyan.github.io/posts/2025/20251210-10377156/</link><pubDate>Wed, 10 Dec 2025 15:16:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251210-10377156/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10377156" target="_blank" rel="noopener">VSCode Integration with DevSpace for Debugging!&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/devspace-sh/devspace" target="_blank" rel="noopener">DevSpace&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="安裝必要工具-">安裝必要工具 📦&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 確認 Go 版本&lt;/span>
+&lt;h3 id="install-required-tools-">Install required tools 📦&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Check Go version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 Delve 除錯器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install the Delve debugger&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go install github.com/go-delve/delve/cmd/dlv@latest
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 確認 DevSpace 版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Check DevSpace version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>devspace version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝 VSCode Go 擴充功能&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install VSCode Go extensions&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>code --install-extension golang.go
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>code --install-extension devspace.devspace
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="專案結構設計-">專案結構設計 📁&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="project-structure-design-">Project structure design 📁&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── cmd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── main.go
@@ -34,8 +34,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│ └── service.yaml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── main
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── start-dev.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="準備-go-應用程式-">準備 Go 應用程式 🚀&lt;/h4>
-&lt;p>首先，讓我們建立一個簡單但實用的 Go 應用程式，包含幾個 API 端點方便我們測試 Break Points&lt;/p></description></item><item><title>Marp教學：Markdown搭配VS Code做簡報，快速輸出為PPTX或PDF，提昇做簡報效率</title><link>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</link><pubDate>Tue, 08 Apr 2025 09:12:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="prepare-the-go-application-">Prepare the Go application 🚀&lt;/h4>
+&lt;p>First, build a simple but practical Go application with a few API endpoints so you can test breakpoints.&lt;/p></description></item><item><title>Marp教學：Markdown搭配VS Code做簡報，快速輸出為PPTX或PDF，提昇做簡報效率</title><link>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</link><pubDate>Tue, 08 Apr 2025 09:12:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250408-vscode-marp-presentation/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ivonblog.com/posts/vscode-marp-presentation/" target="_blank" rel="noopener">Marp 教學：Markdown 搭配 VS Code 做簡報，快速輸出為 PPTX 或 PDF，提昇做簡報效率&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenResty on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/openresty/</link><description>Recent content in OpenResty on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 27 Jun 2019 11:18:46 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/openresty/index.xml" rel="self" type="application/rss+xml"/><item><title>openresty+redis拦截高频访问IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener">openresty+redis 拦截高频访问 IP&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenResty on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/openresty/</link><description>Recent content in OpenResty on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 27 Jun 2019 11:18:46 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/openresty/index.xml" rel="self" type="application/rss+xml"/><item><title>openresty+redis 攔截高頻訪問 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener">openresty+redis 攔截高頻訪問 IP&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">init_by_lua_block&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">redis&lt;/span> = &lt;span style="color:#e6db74">require&lt;/span> &lt;span style="color:#e6db74">&amp;#34;redis&amp;#34;&lt;/span>
@@ -26,23 +26,23 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> redis.connect(&lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">6379&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 如果发生 redis 连接失败，将停止拦截（直接放行）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> pcall(isConnected) &lt;span style="color:#66d9ef">then&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- already connected (or ping succeeded)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">else&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- not connected; try reconnect&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> pcall(createRedisConnection) &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 断开重连：会导致每次访问都需要重连 redis&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 访问量大时建议：关闭重连逻辑（pcall 不执行），直接 ngx.exit 放行/终止&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client &lt;span style="color:#f92672">=&lt;/span> createRedisConnection()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ngx.exit(ngx.OK)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">-- 监测周期（秒）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> bktimes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e">-- 在监测周期内达到触发拦截的访问量&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> block_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">600&lt;/span> &lt;span style="color:#75715e">-- 触发拦截后拦截时间（秒）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">-- 監測週期（秒）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> bktimes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e">-- 在監測週期內達到觸發攔截的訪問量&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> block_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">600&lt;/span> &lt;span style="color:#75715e">-- 觸發攔截後攔截時間（秒）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ip &lt;span style="color:#f92672">=&lt;/span> ngx.var.remote_addr
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ipvtimes &lt;span style="color:#f92672">=&lt;/span> client:get(ip)

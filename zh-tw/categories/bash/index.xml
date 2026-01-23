@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BASH on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/bash/</link><description>Recent content in BASH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 12 Jun 2025 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>TIL: timeout in Bash scripts</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BASH on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/bash/</link><description>Recent content in BASH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 12 Jun 2025 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>TIL：Bash 腳本的 timeout</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL: timeout in Bash scripts&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL：Bash 腳本的 timeout&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>&lt;code>timeout 1m ./until.sh&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>wrap&lt;/p>
+&lt;p>包一層&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>timeout 1m bash -c &lt;span style="color:#e6db74">&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 1
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">done&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener">Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>進階 Shell 腳本技巧：用 Bash 自動化複雜任務</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener">進階 Shell 腳本技巧：用 Bash 自動化複雜任務&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="use-built-in-commands">Use Built-in Commands&lt;/h4>
+&lt;h4 id="使用內建指令">使用內建指令&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>內建指令執行更快，因為不需要載入外部程序。&lt;/strong>&lt;/span>
 &lt;/div>
-&lt;h4 id="minimize-subshells">Minimize Subshells&lt;/h4>
+&lt;h4 id="減少子殼層">減少子殼層&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Subshells can be expensive in terms of performance.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>子殼層會帶來效能成本。&lt;/strong>&lt;/span>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cat file.txt&lt;span style="color:#66d9ef">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>&amp;lt;file.txt&lt;span style="color:#66d9ef">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-arrays-for-bulk-data">Use Arrays for Bulk Data&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用陣列處理大量資料">使用陣列處理大量資料&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>處理大量資料時，陣列比多個變數更有效率，也更好管理。&lt;/strong>&lt;/span>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;apple&amp;#34;&lt;/span>
@@ -45,21 +45,21 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> item in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>items[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$item&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="enable-noclobber">Enable Noclobber&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="啟用-noclobber">啟用 Noclobber&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>To prevent accidental overwriting of files.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>避免檔案被意外覆寫。&lt;/strong>&lt;/span>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set -o noclobber
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-functions">Use Functions&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用函式">使用函式&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>函式可以封裝並重用程式碼，讓腳本更乾淨、重複更少。&lt;/strong>&lt;/span>
 &lt;/div>
-&lt;h4 id="efficient-file-operations">Efficient File Operations&lt;/h4>
+&lt;h4 id="高效的檔案操作">高效的檔案操作&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>When performing file operations, use efficient techniques to minimize resource usage.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>進行檔案操作時，使用更有效率的技巧以降低資源消耗。&lt;/strong>&lt;/span>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
@@ -70,15 +70,15 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; file.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="parallel-processing">Parallel Processing&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="平行處理">平行處理&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Tools like &lt;code>xargs&lt;/code> and GNU &lt;code>parallel&lt;/code> can be incredibly useful.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>像 &lt;code>xargs&lt;/code> 和 GNU &lt;code>parallel&lt;/code> 這類工具非常實用。&lt;/strong>&lt;/span>
 &lt;/div>
-&lt;h4 id="error-handling">Error Handling&lt;/h4>
+&lt;h4 id="錯誤處理">錯誤處理&lt;/h4>
 &lt;div class="alert info">
 &lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Robust error handling is critical for creating reliable and maintainable scripts.&lt;/strong>&lt;/span>
+&lt;span>&lt;strong>健全的錯誤處理對建立可靠、易維護的腳本至關重要。&lt;/strong>&lt;/span>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -e
@@ -105,13 +105,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Script started&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="automating-complex-system-administration-tasks">Automating Complex System Administration Tasks:&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="自動化複雜的系統管理工作">自動化複雜的系統管理工作&lt;/h4>
 &lt;ol>
-&lt;li>Automated Backups&lt;/li>
-&lt;li>System Monitoring&lt;/li>
-&lt;li>User Management&lt;/li>
-&lt;li>Automated Updates&lt;/li>
-&lt;li>Network Configuration&lt;/li>
+&lt;li>自動化備份&lt;/li>
+&lt;li>系統監控&lt;/li>
+&lt;li>使用者管理&lt;/li>
+&lt;li>自動更新&lt;/li>
+&lt;li>網路設定&lt;/li>
 &lt;/ol></description></item><item><title>寫 Web 也可以用 Makefile：好好管理你的環境流程</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">寫 Web 也可以用 Makefile：好好管理你的環境流程&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener">How I stopped worrying and loved Makefiles&lt;/a>&lt;/li>
@@ -146,22 +146,22 @@
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> up stop zsh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="來點變數">來點變數&lt;/h2>
-&lt;p>Make 當然也支援變數（&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>），與常見的 Unix 環境變數慣例相同，我們習慣用 SCREAMING_SNAKE_CASE 表示法（全大寫和底線的表示法）。並且在使用時以 &lt;code>$()&lt;/code> 包裹變數名稱。&lt;/p></description></item><item><title>Bash Bitwise Operators</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220704-bash-bitwise-operators/</link><pubDate>Mon, 04 Jul 2022 15:20:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220704-bash-bitwise-operators/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/bash-bitwise-operators" target="_blank" rel="noopener">Bash Bitwise Operators&lt;/a>&lt;/li>
+&lt;p>Make 當然也支援變數（&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>），與常見的 Unix 環境變數慣例相同，我們習慣用 SCREAMING_SNAKE_CASE 表示法（全大寫和底線的表示法）。並且在使用時以 &lt;code>$()&lt;/code> 包裹變數名稱。&lt;/p></description></item><item><title>Bash 位元運算子</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220704-bash-bitwise-operators/</link><pubDate>Mon, 04 Jul 2022 15:20:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220704-bash-bitwise-operators/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/bash-bitwise-operators" target="_blank" rel="noopener">Bash 位元運算子&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="bashs-tools-for-base-conversion">Bash&amp;rsquo;s Tools for Base Conversion&lt;/h3>
+&lt;h3 id="bash-的進位轉換工具">Bash 的進位轉換工具&lt;/h3>
 &lt;ul>
-&lt;li>Bash&amp;rsquo;s arithmetic expansion allows us to write numbers in any base by prefixing the numeric digits of the base followed by the hash symbol.&lt;/li>
+&lt;li>Bash 的算術展開允許我們用「進位數字 + #」的方式表示任意進位的數字。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#66d9ef">$((&lt;/span>&lt;span style="color:#ae81ff">2#1001&lt;/span>&lt;span style="color:#66d9ef">))&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">9&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>bc allows us to convert effortlessly between bases, using the parameters ibase (for the input base) and obase (for the output base). So, let&amp;rsquo;s convert the decimal number 9 to base 2&lt;/li>
+&lt;li>bc 可以用 ibase（輸入進位）與 obase（輸出進位）輕鬆進行進位轉換。以下將十進位的 9 轉成二進位。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#e6db74">&amp;#34;ibase=10;obase=2;9&amp;#34;&lt;/span> | bc
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1001&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Parse Command Line Arguments in Bash</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220607-bash-parse-command-line-arguments/</link><pubDate>Tue, 07 Jun 2022 14:48:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220607-bash-parse-command-line-arguments/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/bash-parse-command-line-arguments" target="_blank" rel="noopener">Parse Command Line Arguments in Bash&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>在 Bash 中解析命令列參數</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220607-bash-parse-command-line-arguments/</link><pubDate>Tue, 07 Jun 2022 14:48:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220607-bash-parse-command-line-arguments/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/bash-parse-command-line-arguments" target="_blank" rel="noopener">在 Bash 中解析命令列參數&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="getopts">getopts&lt;/h3>
 &lt;blockquote>
@@ -189,11 +189,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ;;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">esac&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shift &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$((&lt;/span>$OPTIND &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#66d9ef">))&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shift &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$((&lt;/span> $OPTIND &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">))&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>optstring represents the supported options. The option expects an argument if there is a colon (:) after it. For instance, if option c expects an argument, then it would be represented as c: in the optstring&lt;/li>
-&lt;li>When an option has an associated argument, then getopts stores the argument as a string in the OPTARG shell variable. For instance, the argument passed to option c would be stored in the OPTARG variable.&lt;/li>
-&lt;li>opt contains the parsed option.&lt;/li>
+&lt;li>optstring 代表支援的選項。若某個選項需要參數，則在它後面加冒號 (:)。例如選項 c 需要參數，會寫成 c:&lt;/li>
+&lt;li>當選項有關聯參數時，getopts 會將參數字串存到 OPTARG shell 變數中。例如 option c 的參數會存到 OPTARG。&lt;/li>
+&lt;li>opt 包含已解析的選項。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
@@ -228,12 +228,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ;;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">esac&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shift &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$((&lt;/span>$OPTIND &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#66d9ef">))&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shift &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$((&lt;/span> $OPTIND &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">))&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Note that we&amp;rsquo;ve updated optstring as well. Now it starts with the colon(:) character, which suppresses the default error message.&lt;/li>
-&lt;li>The getopts function disables error reporting when the OPTERR variable is set to zero.&lt;/li>
+&lt;li>注意我們也更新了 optstring，現在以冒號 (:) 開頭，會抑制預設的錯誤訊息。&lt;/li>
+&lt;li>當 OPTERR 變數設為 0 時，getopts 會停用錯誤訊息輸出。&lt;/li>
 &lt;/ul>
-&lt;h3 id="parsing-long-command-line-options-with-getopt">Parsing Long Command-Line Options With getopt&lt;/h3>
+&lt;h3 id="使用-getopt-解析長選項">使用 getopt 解析長選項&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VALID_ARGS&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>getopt -o abg:d: --long alpha,beta,gamma:,delta: -- &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>
@@ -266,11 +266,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">esac&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-o&lt;/code> option represents the short command-line options&lt;/li>
-&lt;li>&lt;code>--long&lt;/code> option represents the long command-line options&lt;/li>
-&lt;/ul></description></item><item><title>Best Practices for Writing Bash Scripts</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211206-bash-best-practices/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener">Best Practices for Writing Bash Scripts&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener">Shell Scripting - Best Practices&lt;/a>&lt;/li>
+&lt;li>&lt;code>-o&lt;/code> 選項代表短選項&lt;/li>
+&lt;li>&lt;code>--long&lt;/code> 選項代表長選項&lt;/li>
+&lt;/ul></description></item><item><title>撰寫 Bash 腳本的最佳實務</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211206-bash-best-practices/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener">撰寫 Bash 腳本的最佳實務&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener">Shell 腳本撰寫最佳實務&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e"># Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span>
@@ -286,6 +286,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__root&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>__dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> pwd&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># &amp;lt;-- change this as it depends on your app&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arg1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#66d9ef">:-&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-shift-to-read-function-arguments">Use shift to read function arguments&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="使用-shift-讀取函式參數">使用 shift 讀取函式參數&lt;/h5>
 &lt;blockquote>
-&lt;p>This makes it easier to reorder arguments, if you change your mind later.&lt;/p></description></item></channel></rss>
+&lt;p>這樣在日後需要調整參數順序時會更容易。&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Processes a file.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># $1 - the name of the input file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># $2 - the name of the output file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>process_file&lt;span style="color:#f92672">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> local -r input_file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; shift
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> local -r output_file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; shift
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="宣告你的變數">宣告你的變數&lt;/h5>
+&lt;blockquote>
+&lt;p>若可攜性是重點，請用 &lt;code>typeset&lt;/code> 取代 &lt;code>declare&lt;/code>。&lt;/p></description></item></channel></rss>

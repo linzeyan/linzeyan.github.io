@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Firewall on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/firewall/</link><description>Recent content in Firewall on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 08 Sep 2020 09:47:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/firewall/index.xml" rel="self" type="application/rss+xml"/><item><title>Fortigate Management Interface in HA Mode</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</link><pubDate>Tue, 08 Sep 2020 09:47:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/" target="_blank" rel="noopener">Fortigate Management Interface in HA Mode&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Firewall on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/firewall/</link><description>Recent content in Firewall on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 08 Sep 2020 09:47:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/firewall/index.xml" rel="self" type="application/rss+xml"/><item><title>Fortigate 在 HA 模式下的管理介面</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</link><pubDate>Tue, 08 Sep 2020 09:47:47 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200908-dediziertes-management-interface-fur-fortigate-im-ha-betrieb/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.unixfu.ch/dediziertes-management-interface-fur-fortigate-im-ha-betrieb/" target="_blank" rel="noopener">Fortigate 在 HA 模式下的管理介面&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="first-you-activate-the-feature">First you activate the feature&lt;/h5>
+&lt;h5 id="先啟用此功能">先啟用此功能&lt;/h5>
 &lt;pre tabindex="0">&lt;code>config system ha
 set ha-mgmt-status enable
 config ha-mgmt-interfaces
@@ -11,8 +11,8 @@ set gateway 192.168.147.254
 next
 end
 end
-&lt;/code>&lt;/pre>&lt;p>Do not forget to set a default gateway. This interface is isolated and requires its own routing.&lt;/p>
-&lt;h5 id="then-you-assign-an-individual-ip-address-to-every-node-in-the-cluster">Then you assign an individual IP address to every node in the cluster&lt;/h5>
+&lt;/code>&lt;/pre>&lt;p>別忘了設定預設閘道。這個介面是隔離的，需要獨立的路由設定。&lt;/p>
+&lt;h5 id="接著為叢集中的每個節點設定獨立-ip">接著為叢集中的每個節點設定獨立 IP&lt;/h5>
 &lt;p>System1&lt;/p>
 &lt;pre tabindex="0">&lt;code>config system interface
 edit wan2
@@ -20,7 +20,18 @@ set ip 10.11.101.101/24
 set allowaccess https ping ssh snmp
 next
 end
-&lt;/code>&lt;/pre>&lt;p>System2&lt;/p></description></item><item><title>HA command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
+&lt;/code>&lt;/pre>&lt;p>System2&lt;/p>
+&lt;pre tabindex="0">&lt;code>config system interface
+edit wan2
+set ip 10.11.101.102/24
+set allowaccess https ping ssh snmp
+next
+end
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h4 id="fortios-56-起新增">FortiOS 5.6 起新增&lt;/h4>
+&lt;p>從 FortiOS 5.6 開始，有一種新的方式可以直接存取每台設備。這是 In-Band 的方法，不需要保留介面。&lt;/p>
+&lt;h5 id="在任意介面設定管理用-ip-位址這個位址不會在叢集中同步">在任意介面設定管理用 IP 位址。這個位址不會在叢集中同步。&lt;/h5>
+&lt;p>System1&lt;/p></description></item><item><title>HA command</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
 # 全新設備上面沒啟用過HA 必須先定義Cluster ID
 # ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
 #
@@ -136,7 +147,7 @@ show security flow session source-prefix 10.22.12.104
 &lt;/li>
 &lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
 &lt;li>&lt;code>show version&lt;/code>&lt;/li>
-&lt;/ol></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
+&lt;/ol></description></item><item><title>Juniper 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-隧道">[Juniper Firewall] 隧道&lt;/h4>
 &lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
 &lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]

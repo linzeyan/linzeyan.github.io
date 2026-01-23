@@ -1,31 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/security/</link><description>Recent content in Security on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sat, 03 May 2025 11:24:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>I use Zip Bombs to Protect my Server</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/security/</link><description>Recent content in Security on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sat, 03 May 2025 11:24:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>我用 Zip Bomb 來保護我的伺服器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener">I use Zip Bombs to Protect my Server&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener">我用 Zip Bomb 來保護我的伺服器&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>What happens is, they receive the file, read the header that instructs them that it is a compressed file. So they try to decompress the 1MB file to find whatever content they are looking for. But the file expands, and expands, and expands, until they run out of memory and their server crashes. The 1MB file decompresses into a 1GB. This is more than enough to break most bots. However, for those pesky scripts that won&amp;rsquo;t stop, I serve them the 10MB file. This one decompresses into 10GB and instantly kills the script.&lt;/p></description></item><item><title>Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</link><pubDate>Wed, 13 Nov 2024 09:44:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://t.me/misakatech/1349" target="_blank" rel="noopener">Objective-See: 一个关于 Apple 设备隐私与安全的开源项目组织&lt;/a>&lt;/li>
+&lt;p>發生的情況是：對方收到檔案後，讀取標頭得知這是壓縮檔，因此嘗試解壓那個 1MB 的檔案來找他們要的內容。但檔案會不斷膨脹，直到耗盡記憶體、伺服器崩潰。1MB 的檔案會解壓成 1GB，這已足以讓多數機器人失敗。不過對於那些死纏爛打的腳本，我就給它 10MB 的檔案，解壓後會變成 10GB，立刻把腳本搞掛。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>dd if=/dev/zero bs=1G count=10 | gzip -c &amp;gt; 10GB.gz&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>dd&lt;/code>：用於複製或轉換資料的指令。&lt;/li>
+&lt;li>&lt;code>if&lt;/code>：輸入檔案，這裡指定 &lt;code>/dev/zero&lt;/code>，它會產生無限的零位元組串流。&lt;/li>
+&lt;li>&lt;code>bs&lt;/code>：區塊大小，設為 1GB（1G），代表 dd 會以 1GB 為單位讀寫。&lt;/li>
+&lt;li>&lt;code>count=10&lt;/code>：代表處理 10 個區塊、每個 1GB，因此會產生 10GB 的零資料。&lt;/li>
 &lt;/ul>
-&lt;p>今天搜小工具的时候发现他们做了一堆 macOS 上的开源软件，基本都是和隐私与安全相关的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>middleware&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>if (ipIsBlackListed() || isMalicious()) {
+header(&amp;#34;Content-Encoding: gzip&amp;#34;);
+header(&amp;#34;Content-Length: &amp;#34;. filesize(ZIP_BOMB_FILE_10G)); // 10 MB
+readfile(ZIP_BOMB_FILE_10G);
+exit;
+}
+&lt;/code>&lt;/pre></description></item><item><title>Objective-See：一個關於 Apple 裝置隱私與安全的開源專案組織</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</link><pubDate>Wed, 13 Nov 2024 09:44:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241113-objective-see/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://t.me/misakatech/1349" target="_blank" rel="noopener">Objective-See：一個關於 Apple 裝置隱私與安全的開源專案組織&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>今天在找小工具時發現他們做了一堆 macOS 上的開源軟體，基本都是和隱私與安全相關。&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://objective-see.org/products/knockknock.html" target="_blank" rel="noopener">KnockKnock&lt;/a>: 查看你的 Mac 上有哪些后台进程、守护进程、启动项、内核扩展、登录项、浏览器插件等等。能看到的比那个「Login Items」详细的多（有的软件通过其他方式自启动）&lt;/p>
+&lt;p>&lt;a href="https://objective-see.org/products/knockknock.html" target="_blank" rel="noopener">KnockKnock&lt;/a>：查看你的 Mac 上有哪些背景行程、守護行程、啟動項、核心擴充、登入項、瀏覽器外掛等等。能看到的比「Login Items」詳細得多（有的軟體會用其他方式自啟）。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="https://objective-see.org/products/lulu.html" target="_blank" rel="noopener">LuLu&lt;/a>: 一个开源的 macOS 上的网络防火墙，可以让你详细的控制每个软件的网络连接。（类似 Hands Off!）&lt;/p>
+&lt;p>&lt;a href="https://objective-see.org/products/lulu.html" target="_blank" rel="noopener">LuLu&lt;/a>：一個開源的 macOS 網路防火牆，可以讓你詳細控制每個軟體的網路連線（類似 Hands Off!）。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="https://objective-see.org/products/taskexplorer.html" target="_blank" rel="noopener">TaskExplorer&lt;/a>: 一个增强版的任务管理器，可以看到应用的签名、打开的文件、网络连接等等，还可以根据 sha256 自动帮你搜索 VirusTotal 结果。&lt;/p>
+&lt;p>&lt;a href="https://objective-see.org/products/taskexplorer.html" target="_blank" rel="noopener">TaskExplorer&lt;/a>：增強版的工作管理員，可以看到應用的簽名、開啟的檔案、網路連線等等，還可以根據 sha256 自動幫你搜尋 VirusTotal 的結果。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="https://objective-see.org/products/dnd.html" target="_blank" rel="noopener">Do Not Disturb&lt;/a>: 可以阻止你的 Mac 被打扰（没错），当你的 Mac 被别人打开盖子时可以发送警告、执行脚本、检测设备变化之类的。&lt;/p>
+&lt;p>&lt;a href="https://objective-see.org/products/dnd.html" target="_blank" rel="noopener">Do Not Disturb&lt;/a>：可以阻止你的 Mac 被打擾（沒錯），當你的 Mac 被別人打開上蓋時可以發送警告、執行腳本、偵測裝置變化之類的。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="https://objective-see.org/products/blockblock.html" target="_blank" rel="noopener">BlockBlock&lt;/a>: 可以阻止后台的持久化安装，RansomWhere 可以检测文件被加密的行为，还有一些杂七杂八的独立工具。&lt;/p>
+&lt;p>&lt;a href="https://objective-see.org/products/blockblock.html" target="_blank" rel="noopener">BlockBlock&lt;/a>：可以阻止背景的持久化安裝，RansomWhere 可以偵測檔案被加密的行為，還有一些雜七雜八的獨立工具。&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item><item><title>Supply chain attack</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240913-golang/</link><pubDate>Fri, 13 Sep 2024 09:41:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240913-golang/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2ex.com/t/1072079" target="_blank" rel="noopener">提高警惕，供应链攻击就在你我身边&lt;/a>&lt;/li>
+&lt;p>&lt;a href="https://objective-see.org" target="_blank" rel="noopener">https://objective-see.org&lt;/a>&lt;/p></description></item><item><title>供應鏈攻擊</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240913-golang/</link><pubDate>Fri, 13 Sep 2024 09:41:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240913-golang/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2ex.com/t/1072079" target="_blank" rel="noopener">提高警惕，供應鏈攻擊就在你我身邊&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ul>
 &lt;li>&lt;code>github.com/siruspen/logrus&lt;/code> 假&lt;/li>

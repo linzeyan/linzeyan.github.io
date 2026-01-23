@@ -1,79 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Ricky</title><link>https://linzeyan.github.io/categories/linux/</link><description>Recent content in Linux on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 11 Dec 2025 10:18:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>如何在Surface Go 2安裝Fedora Linux，提昇低階平板效能</title><link>https://linzeyan.github.io/posts/2025/20251211-install-linux-on-surface-go-2/</link><pubDate>Thu, 11 Dec 2025 10:18:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251211-install-linux-on-surface-go-2/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/install-linux-on-surface-go-2/" target="_blank" rel="noopener">如何在 Surface Go 2 安裝 Fedora Linux，提昇低階平板效能&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Ricky</title><link>https://linzeyan.github.io/categories/linux/</link><description>Recent content in Linux on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 11 Dec 2025 10:18:47 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>How to Install Fedora Linux on Surface Go 2 to Boost Entry-Level Tablet Performance</title><link>https://linzeyan.github.io/posts/2025/20251211-install-linux-on-surface-go-2/</link><pubDate>Thu, 11 Dec 2025 10:18:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251211-install-linux-on-surface-go-2/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/install-linux-on-surface-go-2/" target="_blank" rel="noopener">How to Install Fedora Linux on Surface Go 2 to Boost Entry-Level Tablet Performance&lt;/a>
 &lt;blockquote>
-&lt;p>Surface Go 2 (Intel Pentium 4425Y，4G/64G) Wifi 版&lt;/p>
-&lt;p>關於 Surface Go 2 的硬體支援程度，參閱 Github 的這個表格：&lt;a href="https://github.com/linux-surface/linux-surface/wiki/Supported-Devices-and-Features#feature-matrix" target="_blank" rel="noopener">Supported Devices and Features&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;p>Surface Go 2 (Intel Pentium 4425Y, 4G/64G) WiFi edition&lt;/p>
+&lt;p>For Surface Go 2 hardware support, see this GitHub table: &lt;a href="https://github.com/linux-surface/linux-surface/wiki/Supported-Devices-and-Features#feature-matrix" target="_blank" rel="noopener">Supported Devices and Features&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul>
-&lt;h3 id="製作-linux-開機碟">製作 Linux 開機碟&lt;/h3>
+&lt;h3 id="create-a-linux-boot-drive">Create a Linux boot drive&lt;/h3>
 &lt;ul>
-&lt;li>到 &lt;a href="https://www.fedoraproject.org/kde/" target="_blank" rel="noopener">Fedora KDE&lt;/a> 官網下載 ISO&lt;/li>
-&lt;li>然後用 &lt;a href="https://ivonblog.com/posts/ventoy-linux-installation/" target="_blank" rel="noopener">Ventoy&lt;/a> 製作開機碟。&lt;/li>
-&lt;li>因為 Surface Go 2 的連接埠只有 Type-C，你可能要準備擴充基座。它不能夠從 SD 卡開機。&lt;/li>
+&lt;li>Download the ISO from the &lt;a href="https://www.fedoraproject.org/kde/" target="_blank" rel="noopener">Fedora KDE&lt;/a> official site.&lt;/li>
+&lt;li>Use &lt;a href="https://ivonblog.com/posts/ventoy-linux-installation/" target="_blank" rel="noopener">Ventoy&lt;/a> to create a boot drive.&lt;/li>
+&lt;li>Surface Go 2 only has Type-C ports, so you may need a hub. It cannot boot from an SD card.&lt;/li>
 &lt;/ul>
-&lt;h3 id="安裝-linux">安裝 Linux&lt;/h3>
+&lt;h3 id="install-linux">Install Linux&lt;/h3>
 &lt;ul>
-&lt;li>將 Surface Go 2 關機。&lt;/li>
-&lt;li>長按開機鍵與音量上鍵，進入 UEFI。這個界面是可以觸控的，不用接上鍵盤，但之後安裝 Linux 可能還是需要使用實體鍵盤操作。&lt;/li>
-&lt;li>雖然 Fedora 支援 Secure Boot，還是建議關閉 Secure Boot，免得安裝驅動需要手動簽名。&lt;/li>
-&lt;li>將開機順序設定為隨身碟&lt;/li>
-&lt;li>開機，依照畫面指示安裝。選擇清除整個磁碟，安裝 Fedora。&lt;/li>
-&lt;li>關於中文輸入法，請安裝 Fcitx5
+&lt;li>Shut down the Surface Go 2.&lt;/li>
+&lt;li>Hold the power button and volume up to enter UEFI. The interface is touch-capable, but you may still need a physical keyboard for installation.&lt;/li>
+&lt;li>Fedora supports Secure Boot, but it is recommended to disable it to avoid manual signing when installing drivers.&lt;/li>
+&lt;li>Set the boot order to the USB drive.&lt;/li>
+&lt;li>Boot and follow the installer. Choose to wipe the disk and install Fedora.&lt;/li>
+&lt;li>For Chinese input, install Fcitx5:
 &lt;ul>
 &lt;li>&lt;code>sudo dnf install fcitx5 fcitx5-chewing fcitx5-gtk3 fcitx5-gtk4 fcitx5-qt fcitx5-qt6 fcitx5-configtool&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>小技巧：Fedora 預設啟用 zRAM，如果 Surface Go 的 RAM 太小，編輯 &lt;code>/etc/systemd/zram-generator.conf&lt;/code> 提高 SWAP 數值，增加可用的 RAM，單位為 MB。
+&lt;li>Tip: Fedora enables zRAM by default. If the Surface Go has limited RAM, edit &lt;code>/etc/systemd/zram-generator.conf&lt;/code> to increase SWAP size (MB).
 &lt;ul>
 &lt;li>&lt;code>[zram0]&lt;/code>&lt;/li>
 &lt;li>&lt;code>zram-size = 8192&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h3 id="加裝-linux-surface-核心">加裝 linux-surface 核心&lt;/h3>
+&lt;h3 id="install-the-linux-surface-kernel">Install the linux-surface kernel&lt;/h3>
 &lt;ul>
-&lt;li>依照 &lt;a href="https://github.com/linux-surface/linux-surface/wiki/Installation-and-Setup" target="_blank" rel="noopener">Github&lt;/a> 指示安裝。Fedora 的作法是新增 linux-surface 團隊經營的套件庫到系統
+&lt;li>Follow the &lt;a href="https://github.com/linux-surface/linux-surface/wiki/Installation-and-Setup" target="_blank" rel="noopener">GitHub&lt;/a> instructions. On Fedora, add the linux-surface repo to the system:
 &lt;ul>
 &lt;li>&lt;code>sudo dnf config-manager addrepo --from-repofile=https://pkg.surfacelinux.com/fedora/linux-surface.repo&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>安裝 linux-surface 核心，重開機
+&lt;li>Install the linux-surface kernel and reboot:
 &lt;ul>
 &lt;li>&lt;code>sudo dnf install --allowerasing kernel-surface iptsd libwacom-surface&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;code>uname -a&lt;/code> 確認目前的核心是否切換成功，應該會顯示 &lt;code>linux-surface&lt;/code>&lt;/li>
-&lt;li>由於 Fedora 系統核心更新頻率比較高，新版核心可能會覆蓋 linux-surface 的核心。故安裝 linux-surface 套件之後會自動啟用 &lt;code>linux-surface-default-watchdog.path&lt;/code> 服務，確保開機啟動的都是 linux-surface 核心。&lt;/li>
+&lt;li>Use &lt;code>uname -a&lt;/code> to verify the kernel is switched; it should show &lt;code>linux-surface&lt;/code>.&lt;/li>
+&lt;li>Fedora updates kernels frequently, so new kernels may override the linux-surface kernel. After installing the linux-surface packages, the &lt;code>linux-surface-default-watchdog.path&lt;/code> service is enabled automatically to ensure linux-surface is used on boot.&lt;/li>
 &lt;/ul>
-&lt;h3 id="kde-桌面的虛擬鍵盤使用方式">KDE 桌面的虛擬鍵盤使用方式&lt;/h3>
-&lt;p>在系統設定 → 鍵盤 → 虛擬鍵盤啟用。需要注意的是這個鍵盤無法跟 Fcitx5 一起使用。&lt;/p></description></item><item><title>Mosdns-X</title><link>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</link><pubDate>Sun, 09 Nov 2025 20:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</guid><description>&lt;ul>
+&lt;h3 id="using-the-virtual-keyboard-on-kde">Using the virtual keyboard on KDE&lt;/h3>
+&lt;p>Enable it in System Settings → Keyboard → Virtual Keyboard. Note that this keyboard cannot be used with Fcitx5.&lt;/p></description></item><item><title>Mosdns-X</title><link>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</link><pubDate>Sun, 09 Nov 2025 20:32:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20251109-mosdns-x/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/pmkol/mosdns-x" target="_blank" rel="noopener">Mosdns-X&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/OxpX7FQ1" target="_blank" rel="noopener">让 Linux 系统的 DNS 更快更干净：部署 Mosdns-X&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/OxpX7FQ1" target="_blank" rel="noopener">Make DNS faster and cleaner on Linux: Deploy Mosdns-X&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="install">install&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>curl -sL https://raw.githubusercontent.com/lidebyte/bashshell/refs/heads/main/mosdns-x-manager.sh&lt;span style="color:#f92672">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="config">config&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo tee /etc/mosdns-x/config.yaml &amp;gt; /dev/null &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># mosdns-x 并发查询（无分流）配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># mosdns-x concurrent query (no split routing) config
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">log:
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> level: info
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> file: /var/log/mosdns-x/mosdns-x.log
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">plugins:
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 缓存插件
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # Cache plugin
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: cache
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: cache
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> size: 1024
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> lazy_cache_ttl: 1800
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 并发上游：取最先返回的可用答案
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # Concurrent upstreams: take the first usable answer
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: forward_all
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: fast_forward
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> upstream:
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 阿里
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # AliDNS
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://223.5.5.5&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://dns.alidns.com&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
@@ -89,7 +89,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;udp://8.8.8.8&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - addr: &amp;#34;tls://dns.google&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # 主流水线：小缓存 → 并发优选
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> # Main pipeline: small cache -&amp;gt; concurrent selection
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - tag: main
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> type: sequence
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> args:
@@ -97,7 +97,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - cache
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - forward_all
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># 监听（双栈 UDP/TCP 53）
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"># Listen on dual-stack UDP/TCP 53
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">servers:
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - exec: main
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> listeners:
@@ -130,75 +130,48 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl daemon-reload
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl enable --now mosdns
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 备份系统 DNS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Backup system DNS&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp -n /etc/resolv.conf /etc/resolv.conf.mosdns-backup
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 改为使用本地 Mosdns-X&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Switch to local Mosdns-X&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;nameserver 127.0.0.1\noptions edns0&amp;#34;&lt;/span> | sudo tee /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 若 53 端口被 systemd-resolved 占用，可禁用它&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If port 53 is occupied by systemd-resolved, disable it&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl disable --now systemd-resolved 2&amp;gt;/dev/null &lt;span style="color:#f92672">||&lt;/span> true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果想顺便加锁（防止被 DHCP 修改），加上 chattr 一起执行：&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If you also want to lock it (prevent DHCP changes), run chattr too:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;nameserver 127.0.0.1\n&amp;#34;&lt;/span> &amp;gt; /etc/resolv.conf &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> chattr +i /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看进程状态&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Check process status&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo systemctl status mosdns --no-pager
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 测试解析速度（第二次命中缓存更快）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Test resolution speed (second run should hit cache)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dig +stats www.google.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dig +stats www.baidu.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 查看实时日志&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># View logs in real time&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tail -f /var/log/mosdns-x/mosdns-x.log
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker 容器无法访问外网？nftables 下的 NAT 配置指南</title><link>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker 容器无法访问外网？nftables 下的 NAT 配置指南&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>独立服务器 CPU 频率最大化配置指南</title><link>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</link><pubDate>Tue, 02 Sep 2025 08:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306" target="_blank" rel="noopener">独立服务器 CPU 频率最大化配置指南&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Containers Can't Access the Internet? NAT Configuration Guide for nftables</title><link>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</link><pubDate>Wed, 03 Sep 2025 09:03:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250903-linux-docker-nftables/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/docker-rong-qi-wu-fa-fang-wen-wai-wang-nftables-xia-de-nat-pei-zhi-zhi-nan" target="_blank" rel="noopener">Docker Containers Can&amp;rsquo;t Access the Internet? NAT Configuration Guide for nftables&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Dedicated Server CPU Frequency Maximization Guide</title><link>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</link><pubDate>Tue, 02 Sep 2025 08:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250902-linux-cpu-performance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.ibytebox.com/archives/02cf4c4a-0af7-43f1-bb65-ccdb54a52306" target="_blank" rel="noopener">Dedicated Server CPU Frequency Maximization Guide&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h2 id="看看-cpu-现在混哪种模式">看看 CPU 现在混哪种模式&lt;/h2>
-&lt;p>前提条件
-系统：Linux（Debian、Ubuntu、Proxmox 等都行）&lt;/p>
-&lt;p>权限：root&lt;/p>
-&lt;p>CPU：支持动态调频（Intel Xeon、AMD EPYC / Ryzen 等）&lt;/p>
+&lt;h2 id="check-which-cpu-mode-is-in-use">Check which CPU mode is in use&lt;/h2>
+&lt;p>Prerequisites
+System: Linux (Debian, Ubuntu, Proxmox, etc.)&lt;/p>
+&lt;p>Privileges: root&lt;/p>
+&lt;p>CPU: supports dynamic frequency scaling (Intel Xeon, AMD EPYC / Ryzen, etc.)&lt;/p>
 &lt;h3 id="governor">governor&lt;/h3>
 &lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor&lt;/code>&lt;/p>
 &lt;ul>
-&lt;li>powersave：节能小绵羊（频率锁低，省电但废武功）&lt;/li>
-&lt;li>ondemand：按需加速（要用时才升频，可能反应慢半拍）&lt;/li>
-&lt;li>performance：全程高能（我们要的就是它！💪）&lt;/li>
+&lt;li>powersave: low-power mode (locked low frequency, power-saving but weak)&lt;/li>
+&lt;li>ondemand: on-demand boost (only boosts when needed, may respond a bit slowly)&lt;/li>
+&lt;li>performance: full performance (this is what we want)&lt;/li>
 &lt;/ul>
-&lt;h3 id="确认内核到底用的哪种驱动intel--amd">确认内核到底用的哪种驱动（Intel / AMD）&lt;/h3>
-&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver&lt;/code>&lt;/p>
-&lt;h2 id="临时拉满性能">临时拉满性能&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> cpu in /sys/devices/system/cpu/cpu&lt;span style="color:#f92672">[&lt;/span>0-9&lt;span style="color:#f92672">]&lt;/span>*; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo performance &amp;gt; $cpu/cpufreq/scaling_governor
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="重启后也保持高能">重启后也保持高能&lt;/h2>
-&lt;h3 id="方案-a最稳妥推荐">方案 A：最稳妥推荐&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install cpufrequtils -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;GOVERNOR=&amp;#34;performance&amp;#34;&amp;#39;&lt;/span> &amp;gt;/etc/default/cpufrequtils
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable cpufrequtils
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl start cpufrequtils
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方案-bsystemd-自定义服务">方案 B：systemd 自定义服务&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/systemd/system/cpu-performance.service&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Unit&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Description&lt;span style="color:#f92672">=&lt;/span>Set CPU governor to performance
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>After&lt;span style="color:#f92672">=&lt;/span>multi-user.target
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>oneshot
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/bin/bash -c &lt;span style="color:#e6db74">&amp;#39;for cpu in /sys/devices/system/cpu/cpu[0-9]*; do echo performance &amp;gt; $cpu/cpufreq/scaling_governor; done&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl daemon-reexec
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl daemon-reload
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable --now cpu-performance.service
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>透過LinuxServer.io打包的Docker映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用</title><link>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">透過 LinuxServer.io 打包的 Docker 映像檔，將桌面程式轉成網頁版，透過瀏覽器即可使用&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io 官網&lt;/a>&lt;/li>
+&lt;h3 id="check-which-driver-the-kernel-uses-intel--amd">Check which driver the kernel uses (Intel / AMD)&lt;/h3>
+&lt;p>&lt;code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver&lt;/code>&lt;/p></description></item><item><title>Use LinuxServer.io Docker Images to Turn Desktop Apps into Web Apps</title><link>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</link><pubDate>Fri, 01 Aug 2025 15:52:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-linuxserver.io/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/linuxserver-io-docker-applications/" target="_blank" rel="noopener">Use LinuxServer.io Docker Images to Turn Desktop Apps into Web Apps&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.linuxserver.io/our-images" target="_blank" rel="noopener">LinuxServer.io Official Site&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Lightweight Linux Distributions For Older PCs</title><link>https://linzeyan.github.io/posts/2024/20240820-linux/</link><pubDate>Tue, 20 Aug 2024 12:38:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240820-linux/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.freecodecamp.org/news/lightweight-linux-distributions-for-your-pc/" target="_blank" rel="noopener">lightweight-linux-distributions-for-your-pc&lt;/a>&lt;/li>
 &lt;/ul>
@@ -342,8 +315,8 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.0.0.0:1883&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__ACCEPTORS&lt;/span>: &lt;span style="color:#ae81ff">64&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span>: &lt;span style="color:#ae81ff">1024000&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>有关 MTU 和 MSS 的一切</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">有关 MTU 和 MSS 的一切&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">Everything About MTU and MSS&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>How to Detect RAID Information in Linux</title><link>https://linzeyan.github.io/posts/2022/20221128-raid-information-command-line/</link><pubDate>Mon, 28 Nov 2022 15:36:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221128-raid-information-command-line/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.baeldung.com/linux/raid-information-command-line" target="_blank" rel="noopener">How to Detect RAID Information in Linux&lt;/a>&lt;/li>
 &lt;/ul>
@@ -823,19 +796,19 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# netstat -antup | grep xrdp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcp &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>【筆記】在GCP上建立可Remote dekstop的Ubuntu環境</title><link>https://linzeyan.github.io/posts/2021/20211020-gcp-remote-desktop/</link><pubDate>Wed, 20 Oct 2021 16:14:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211020-gcp-remote-desktop/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://medium.com/@huiqinng/%E7%AD%86%E8%A8%98-%E5%9C%A8gcp%E4%B8%8A%E5%BB%BA%E7%AB%8B%E5%8F%AFremote-dekstop%E7%9A%84ubuntu%E7%92%B0%E5%A2%83-e56fdbd3a4f2" target="_blank" rel="noopener">【筆記】在 GCP 上建立可 Remote dekstop 的 Ubuntu 環境&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>[Notes] Build an Ubuntu remote desktop environment on GCP</title><link>https://linzeyan.github.io/posts/2021/20211020-gcp-remote-desktop/</link><pubDate>Wed, 20 Oct 2021 16:14:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211020-gcp-remote-desktop/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@huiqinng/%E7%AD%86%E8%A8%98-%E5%9C%A8gcp%E4%B8%8A%E5%BB%BA%E7%AB%8B%E5%8F%AFremote-dekstop%E7%9A%84ubuntu%E7%92%B0%E5%A2%83-e56fdbd3a4f2" target="_blank" rel="noopener">[Notes] Build an Ubuntu remote desktop environment on GCP&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="install">install&lt;/h4>
+&lt;h4 id="install">Install&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># dependency&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># VNC Server&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install vnc4server
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝完成後先執行vncserver，會先跳出password設定的選項&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># After install, run vncserver and set the password when prompted&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="modify-vncxstartup">modify &lt;code>~/.vnc/xstartup&lt;/code>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="modify-vncxstartup">Modify &lt;code>~/.vnc/xstartup&lt;/code>&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/sh
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Uncomment the following two lines for normal desktop:&lt;/span>
@@ -853,17 +826,17 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gnome-settings-daemon &amp;amp;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metacity &amp;amp;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nautilus &amp;amp;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="exec">exec&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 殺掉目前執行的vncserver 然後重新執行&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="execute">Execute&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Kill the current vncserver and restart&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver -kill :1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vncserver預設是執行在port 5900上，如果在後面加上：1 就是5901以此類推&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># vncserver defaults to port 5900; :1 is 5901, and so on&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vncserver :1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="設定-reboot-的時候自動執行-vncserver">設定 reboot 的時候自動執行 vncserver&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="start-vncserver-on-reboot">Start vncserver on reboot&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>@reboot /usr/bin/vncserver :1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SHELL编程之常用技巧</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">SHELL 编程之常用技巧&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">SHELL 编程之内建命令&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">SHELL 编程之特殊符号&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Common shell scripting tips</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">Common shell scripting tips&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">Shell scripting built-in commands&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">Shell scripting special symbols&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>SSH failing with Error : fatal: daemon() failed: No such device</title><link>https://linzeyan.github.io/posts/2021/20210304-ssh-failing-with-error-fatal-daemon-failed-no-such-device/</link><pubDate>Thu, 04 Mar 2021 18:48:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210304-ssh-failing-with-error-fatal-daemon-failed-no-such-device/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://admin-ahead.com/forum/general-linux/ssh-failing-with-error-fatal-daemon%28%29-failed-no-such-device/" target="_blank" rel="noopener">SSH failing with Error : fatal: daemon() failed: No such device&lt;/a>&lt;/li>
 &lt;/ul>
@@ -879,14 +852,14 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting sshd: &lt;span style="color:#f92672">[&lt;/span> OK &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-bash-3.2# service sshd status
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>openssh-daemon &lt;span style="color:#f92672">(&lt;/span>pid 30608&lt;span style="color:#f92672">)&lt;/span> is running…
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CentOS 7 掛載 Synology NAS 資料夾</title><link>https://linzeyan.github.io/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201109-145053/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener">CentOS 7 掛載 Synology NAS 資料夾&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>如何設定時區與NTP服務在RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">如何設定時區與 NTP 服務在 RHEL7/CentOS7&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Mount a Synology NAS folder on CentOS 7</title><link>https://linzeyan.github.io/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201109-145053/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener">Mount a Synology NAS folder on CentOS 7&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>How to configure time zone and NTP on RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">How to configure time zone and NTP on RHEL7/CentOS7&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>chrony 包含兩個程序，chronyd 是一個可以在啟動時啟動的守護進程，chronyc 是一個命令行界面程序，可用於監控 chronyd 的性能並在運行時更改各種運行參數。&lt;/p>
-&lt;p>注意 ntpd 和 chronyd 擇一就可，不要同時運作。&lt;/p>
-&lt;h5 id="設定時區">設定時區&lt;/h5>
+&lt;p>chrony includes two programs: chronyd is a daemon that starts on boot, and chronyc is a command-line client that can monitor chronyd and change runtime parameters.&lt;/p>
+&lt;p>Use either ntpd or chronyd, not both.&lt;/p>
+&lt;h5 id="configure-time-zone">Configure time zone&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# timedatectl set-timezone Asia/Taipei
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# timedatectl
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Local time: Tue 2018-03-27 14:13:38 CST
@@ -897,11 +870,11 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NTP synchronized: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RTC in local TZ: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DST active: n/a
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="設定-chronyd">設定 chronyd&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="configure-chronyd">Configure chronyd&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# yum install -y chrony
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 配置設定檔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Config file&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# cat /etc/chrony.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use public servers from the pool.ntp.org project.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Please consider joining the pool (http://www.pool.ntp.org/join.html).&lt;/span>
@@ -910,10 +883,10 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 2.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 3.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟動服務和設為開機時啟動&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Start service and enable on boot&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable chronyd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl start chronyd
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="racking-參數顯示有關系統時間效能">racking 參數顯示有關系統時間效能&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="tracking-parameters-show-system-time-performance">tracking parameters show system time performance&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc tracking
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Reference ID : 3DD8996B &lt;span style="color:#f92672">(&lt;/span>61-216-153-107.hinet-ip.hinet.net&lt;span style="color:#f92672">)&lt;/span> ---&amp;gt;表示現在同步的時間伺服器，如果沒有id表示沒有同步
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stratum : &lt;span style="color:#ae81ff">4&lt;/span> ---&amp;gt;表示計算機有多少&lt;span style="color:#e6db74">&amp;#34;跳hop&amp;#34;&lt;/span> 表示本地的是第四層
@@ -945,7 +918,7 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^+ 61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -556us&lt;span style="color:#f92672">[&lt;/span> -556us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^? 59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> - +0ns&lt;span style="color:#f92672">[&lt;/span> +0ns&lt;span style="color:#f92672">]&lt;/span> +/- 0ns
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^- 61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -280us&lt;span style="color:#f92672">[&lt;/span> -280us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="看同步源頭的資訊">看同步源頭的資訊&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="view-sync-source-info">View sync source info&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc sourcestats -v
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span> Number of sources &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .- Number of sample points in measurement set.
@@ -963,7 +936,7 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">135&lt;/span> +4.455 19.761 +622us 247us
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> +0.000 2000.000 +0ns 4000ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">136&lt;/span> +8.965 42.440 +1250us 495us
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="將系統時間寫到硬體主機板上的時間上">將系統時間寫到硬體(主機板上的時間)上&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="write-system-time-to-hardware-clock">Write system time to hardware clock&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# hwclock --systohc
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# date ; hwclock
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 14:07:57 CST &lt;span style="color:#ae81ff">2018&lt;/span>
@@ -1078,10 +1051,10 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo unlink /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#e6db74">&amp;#34;nameserver 8.8.8.8&amp;#34;&lt;/span> | sudo tee /etc/resolv.conf
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.&lt;/p></description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.&lt;/p></description></item><item><title>Set interface IP with netplan on Ubuntu 18.04</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Set interface IP with netplan on Ubuntu 18.04&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：&lt;/p>
+&lt;p>Following the notes above, check &lt;code>/etc/netplan&lt;/code> and open &lt;code>/etc/netplan/50-cloud-init.yaml&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
@@ -1094,55 +1067,35 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt-get remove cloud-init&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">192.168.32.231&lt;/span>&lt;span style="color:#ae81ff">/24]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway4&lt;/span>: &lt;span style="color:#ae81ff">192.168.32.1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item><item><title>openvpn部署之部署基於AD域認證</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">openvpn 部署之部署基於 AD 域認證&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p></description></item><item><title>Deploying OpenVPN with AD domain authentication</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">Deploying OpenVPN with AD domain authentication&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/" target="_blank" rel="noopener">OpenVPN + PAM + SSSD + Active Directory&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/" target="_blank" rel="noopener">https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener">https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener">https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install openssl openssl-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install lzo lzo-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install -y libgcrypt libgpg-error libgcrypt-devel
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn認證插件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN auth plugin&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn-auth-ldap -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝easy-rsa&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install easy-rsa&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Since openvpn 2.3 removed easy-rsa from the package, install it separately.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install easy-rsa
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成openvpn的key及證書&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 國家&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 省份&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 城市&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 組織&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 郵件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 單位&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate OpenVPN keys and certificates&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Country&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Province&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># City&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Organization&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Email&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Unit&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source vars
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./clean-all
@@ -1152,7 +1105,7 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-key client1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit the OpenVPN server config: `/etc/openvpn/server.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#ae81ff">1194&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>proto udp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev tun
@@ -1160,9 +1113,9 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cert keys/server.crt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>key keys/server.key &lt;span style="color:#75715e"># This file should be kept secret&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dh keys/dh2048.pem
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 //客戶端分配的ip地址
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> //推送客戶端的路由
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> //修改客戶端的網關，使其直接走vpn流量
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 // client IP pool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> // push route to clients
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> // change client gateway to route VPN traffic
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ifconfig-pool-persist ipp.txt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keepalive &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">120&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>comp-lzo
@@ -1176,24 +1129,24 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log /var/log/openvpn.log
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/openvpn/auth/ldap.conf&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;LDAP&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># LDAP server URL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲 AD 服務器的 IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the AD server IP&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL ldap://172.16.76.238:389
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the domain admin DN; you can query it with ldapsearch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BindDN &lt;span style="color:#e6db74">&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind Password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Password SecretPassword&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 域管理員的密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Domain admin password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Password passwd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Network timeout (in seconds)&lt;/span>
@@ -1223,14 +1176,14 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;Authorization&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 查詢認證的基礎 dn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN for auth search&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BaseDN &lt;span style="color:#e6db74">&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># User Search Filter&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 後面 &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; 指向要認證的 vpn 用戶組，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 這樣任何用戶使用 vpn，只要加入這個組就好了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># sAMAccountName=%u uses the sAMAccountName value as the username,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># and &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; points to the VPN user group to authenticate,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># so any user can use VPN once they are in this group.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SearchFilter &lt;span style="color:#e6db74">&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Require Group Membership&lt;/span>
@@ -1251,95 +1204,62 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MemberAttribute &lt;span style="color:#e6db74">&amp;#34;member&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/Group&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/Authorization&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>拷貝&lt;code>/etc/openvpn/key&lt;/code>目錄下的&lt;code>ca.crt&lt;/code>證書，以備客戶端使用。&lt;/p></description></item><item><title>确定虚拟化技术的简便方法</title><link>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</link><pubDate>Wed, 29 Jul 2020 21:11:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://qastack.cn/unix/89714/easy-way-to-determine-virtualization-technology" target="_blank" rel="noopener">确定虚拟化技术的简便方法&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copy the &lt;code>ca.crt&lt;/code> certificate under &lt;code>/etc/openvpn/key&lt;/code> for client use.&lt;/p></description></item><item><title>An easy way to identify virtualization technology</title><link>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</link><pubDate>Wed, 29 Jul 2020 21:11:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://qastack.cn/unix/89714/easy-way-to-determine-virtualization-technology" target="_blank" rel="noopener">An easy way to identify virtualization technology&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="dmidecode--s-system-product-name">&lt;code>dmidecode -s system-product-name&lt;/code>&lt;/h3>
-&lt;p>虚拟化技术&lt;/p>
-&lt;h4 id="vmware-工作站">VMware 工作站&lt;/h4>
+&lt;p>Virtualization technology&lt;/p>
+&lt;h4 id="vmware-workstation">VMware Workstation&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VMware Virtual Platform
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="虚拟盒子">虚拟盒子&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="virtualbox">VirtualBox&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VirtualBox
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="qemu-与-kvm">Qemu 与 KVM&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="qemu-and-kvm">QEMU and KVM&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KVM
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Qemu（模拟）&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>QEMU (emulation)&lt;/p>
 &lt;h4>&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bochs
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="microsoft-虚拟-pc">Microsoft 虚拟 PC&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="microsoft-virtual-pc">Microsoft Virtual PC&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | egrep -i &lt;span style="color:#e6db74">&amp;#39;manufacturer|product&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Manufacturer: Microsoft Corporation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: Virtual Machine
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="维尔图佐">维尔图佐&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="virtuozzo">Virtuozzo&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dev/mem: Permission denied
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="en">en&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | grep -i domU
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: HVM domU
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="devdiskby-id">&lt;code>/dev/disk/by-id&lt;/code>&lt;/h3>
-&lt;p>如果您没有 &lt;code>dmidecode&lt;/code> 运行权， 则可以使用： &lt;code>ls -1 /dev/disk/by-id/&lt;/code>&lt;/p></description></item><item><title>SSH 证书登录教程</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener">SSH 证书登录教程&lt;/a>&lt;/li>
+&lt;p>If you do not have permission to run &lt;code>dmidecode&lt;/code>, you can use: &lt;code>ls -1 /dev/disk/by-id/&lt;/code>&lt;/p></description></item><item><title>SSH certificate login guide</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener">SSH certificate login guide&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="证书登录的流程">证书登录的流程&lt;/h3>
-&lt;p>SSH 证书登录之前，如果还没有证书，需要生成证书。具体方法是：&lt;/p>
+&lt;h3 id="certificate-login-flow">Certificate login flow&lt;/h3>
+&lt;p>Before using SSH certificate login, you need to generate certificates. The steps are:&lt;/p>
 &lt;ol>
-&lt;li>用户和服务器都将自己的公钥，发给 CA&lt;/li>
-&lt;li>CA 使用服务器公钥，生成服务器证书，发给服务器&lt;/li>
-&lt;li>CA 使用用户的公钥，生成用户证书，发给用户。&lt;/li>
+&lt;li>The user and the server both send their public keys to the CA.&lt;/li>
+&lt;li>The CA uses the server public key to generate a server certificate and sends it to the server.&lt;/li>
+&lt;li>The CA uses the user public key to generate a user certificate and sends it to the user.&lt;/li>
 &lt;/ol>
-&lt;p>有了证书以后，用户就可以登录服务器了。整个过程都是 SSH 自动处理，用户无感知。&lt;/p>
-&lt;ol>
-&lt;li>用户登录服务器时，SSH 自动将用户证书发给服务器。&lt;/li>
-&lt;li>服务器检查用户证书是否有效，以及是否由可信的 CA 颁发。&lt;/li>
-&lt;li>SSH 自动将服务器证书发给用户。&lt;/li>
-&lt;li>用户检查服务器证书是否有效，以及是否由信任的 CA 颁发。&lt;/li>
-&lt;li>双方建立连接，服务器允许用户登录。&lt;/li>
-&lt;/ol>
-&lt;h3 id="生成-ca-的密钥">生成 CA 的密钥&lt;/h3>
-&lt;p>虽然 CA 可以用同一对密码签发用户证书和服务器证书，但是出于安全性和灵活性，最好用不同的密钥分别签发。所以，CA 至少需要两对密钥，一对是签发用户证书的密钥，假设叫做 &lt;code>user_ca&lt;/code>，另一对是签发服务器证书的密钥，假设叫做 &lt;code>host_ca&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发用户证书的密钥&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：user_ca（私钥）和user_ca.pub（公钥）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 各个参数含义如下&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -t rsa：指定密钥算法 RSA。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -C user_ca：指定密钥的识别字符串，相当于注释，可以随意设置。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f ~/.ssh/user_ca -C user_ca
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发服务器证书的密钥&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：host_ca（私钥）和host_ca.pub（公钥）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 现在，~/.ssh目录应该至少有四把密钥。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca.pub&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca.pub&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f host_ca -C host_ca
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="服务器安装-ca-公钥">服务器安装 CA 公钥&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 为了让服务器信任用户证书，必须将 CA 签发用户证书的公钥`user_ca.pub`，拷贝到服务器&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scp ~/.ssh/user_ca.pub root@host.example.com:/etc/ssh/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="然后将下面一行添加到服务器配置文件-etcsshsshd_config">然后，将下面一行添加到服务器配置文件 &lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/h5>
-&lt;pre tabindex="0">&lt;code>TrustedUserCAKeys /etc/ssh/user_ca.pub
-&lt;/code>&lt;/pre>&lt;p>上面的做法是将&lt;code>user_ca.pub&lt;/code>加到&lt;code>/etc/ssh/sshd_config&lt;/code>，这会产生全局效果，即服务器的所有账户都会信任&lt;code>user_ca&lt;/code>签发的所有用户证书。&lt;/p></description></item><item><title>活久见！Linux命令行居然也可以用来查看图像？</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">活久见！Linux 命令行居然也可以用来查看图像？&lt;/a>&lt;/li>
+&lt;p>Once certificates are in place, the user can log in. SSH handles the whole process automatically.&lt;/p></description></item><item><title>Surprisingly, you can view images in the Linux CLI?</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">Surprisingly, you can view images in the Linux CLI?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="fim">FIM&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>sudo apt-get install fim&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>控制 FIM 中图像的常用快捷键：&lt;/p>
+&lt;p>Common shortcuts for images in FIM:&lt;/p>
 &lt;ul>
-&lt;li>PageUp / Down：上一个图像/下一个图像&lt;/li>
-&lt;li>+/-：放大/缩小&lt;/li>
-&lt;li>a：自动缩放&lt;/li>
-&lt;li>w：合适宽度&lt;/li>
-&lt;li>h：合适身高&lt;/li>
-&lt;li>j / k：向下平移/向上平移&lt;/li>
-&lt;li>f / m：翻转/镜面反射&lt;/li>
-&lt;li>r / R：旋转（顺时针和逆时针）&lt;/li>
-&lt;li>ESC / q：退出&lt;/li>
+&lt;li>PageUp / Down: previous/next image&lt;/li>
+&lt;li>+/-: zoom in/out&lt;/li>
+&lt;li>a: auto scale&lt;/li>
+&lt;li>w: fit width&lt;/li>
+&lt;li>h: fit height&lt;/li>
+&lt;li>j / k: pan down/up&lt;/li>
+&lt;li>f / m: flip/mirror&lt;/li>
+&lt;li>r / R: rotate (clockwise/counterclockwise)&lt;/li>
+&lt;li>ESC / q: quit&lt;/li>
 &lt;/ul>
 &lt;h4 id="viu">Viu&lt;/h4>
 &lt;blockquote>
@@ -1347,86 +1267,36 @@ grep receives the output of tcpflow&lt;/li>
 &lt;h4 id="lsix">Lsix&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>sudo apt-get install imagemagick&lt;/code>&lt;/p>
-&lt;p>&lt;code>wget https://github.com/hackerb9/lsix/archive/master.zip&lt;/code>&lt;/p>&lt;/blockquote></description></item><item><title>用 iptables 和 ip rule 做负载均衡</title><link>https://linzeyan.github.io/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做负载均衡&lt;/a>&lt;/li>
+&lt;p>&lt;code>wget https://github.com/hackerb9/lsix/archive/master.zip&lt;/code>&lt;/p>&lt;/blockquote></description></item><item><title>Load Balancing with iptables and ip rule</title><link>https://linzeyan.github.io/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">Load Balancing with iptables and ip rule&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="操作">操作&lt;/h4>
-&lt;p>这里以一台通过有线 + 无线出口连接到互联网的 Arch Linux 设备为例。其中共有两个出口，分别使用网卡 eth0 和 eth1。大概的对应关系是：&lt;/p>
+&lt;h4 id="steps">Steps&lt;/h4>
+&lt;p>This example uses an Arch Linux device with two Internet uplinks: eth0 and eth1. The mapping is:&lt;/p>
 &lt;ul>
-&lt;li>标记 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
-&lt;li>标记 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
+&lt;li>Mark 10 (0xa) - Routing table #110 - use eth0&lt;/li>
+&lt;li>Mark 11 (0xb) - Routing table #111 - use eth1&lt;/li>
 &lt;/ul>
-&lt;p>我们会根据数据包上包含的标记值来判断它应该走什么出口。首先，使用 ip rule 为每个标记值指定一张使用的路由表。&lt;/p>
-&lt;p>通常默认路由表的权重是 32768。为了让我们的路由表用得上，我们需要把它们的权重调得高一些（例如 31000）。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 10 (0xa) 的数据包使用 110 号路由表，权重 31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">10&lt;/span> table &lt;span style="color:#ae81ff">110&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 11 (0xb) 的数据包使用 111 号路由表，权重 31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">11&lt;/span> table &lt;span style="color:#ae81ff">111&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的连接更多，可以继续添加标记 &amp;lt;-&amp;gt; 路由表的对应关系&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #110 路由表的路由&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#ae81ff">110&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.20.0.254 table &lt;span style="color:#ae81ff">110&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #111 路由表的路由&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#ae81ff">111&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.25.0.254 table &lt;span style="color:#ae81ff">111&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果这条连接已经被标记，那么把标记设置到数据包上&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包已经有标记，直接放行&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#ae81ff">0&lt;/span> -j ACCEPT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包没被标记的话&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包包的标记设置为 11 (0xb)...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 并且每 2 个包就把一个包的标记设置为 10 (0xa)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#ae81ff">2&lt;/span> --packet &lt;span style="color:#ae81ff">0&lt;/span> -j MARK --set-mark &lt;span style="color:#ae81ff">11&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三条出口的话，这里可以类似于&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包的标记存储到整条连接上，这样整个连接过程都会使用同一条出口&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 我们还需要让数据包上标示的出口是我们为其选择的出口&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下自己所设置的规则是否正确。然后就可以用 Wiresharks 看一看自己的连接是不是真的分流啦。&lt;/p></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;p>We decide which uplink to use based on the packet mark. First, use ip rule to map each mark to its routing table.&lt;/p>
+&lt;p>The default routing table priority is 32768. To ensure our tables are used, set a higher priority (for example 31000).&lt;/p></description></item><item><title>Fighting ISP Cache Hijacking Again with iptables</title><link>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">Fighting ISP Cache Hijacking Again with iptables&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="起因">起因&lt;/h5>
-&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
-&lt;h5 id="解决">解决&lt;/h5>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
-&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item><item><title>linux磁碟空間沒釋放的解決方法</title><link>https://linzeyan.github.io/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">linux 磁碟空間沒釋放的解決方法&lt;/a>&lt;/li>
+&lt;h5 id="cause">Cause&lt;/h5>
+&lt;p>The fight against the carrier cache problem started two years ago. The carrier even cached cnpm data. Worse, their cache servers were not only slow like a turtle in a marathon, they also crashed frequently, so I just wanted to write code but had to face a wall of red errors.&lt;/p>
+&lt;h5 id="fix">Fix&lt;/h5>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p></description></item><item><title>Fixing Disk Space Not Freed on Linux</title><link>https://linzeyan.github.io/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">Fixing Disk Space Not Freed on Linux&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="用-df--ah-命令-du--h---max-depth1">用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
-&lt;p>&lt;code>du&lt;/code> 之和遠遠小於 &lt;code>df&lt;/code> 得到的總量&lt;/p>
-&lt;p>程序使用的檔案資源被刪除後，程序還活著，導致檔案未被真正刪除，無法釋放磁碟空間，卻並不能被統計到。&lt;/p>
-&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Linux CentOS 7 安裝字體庫 &amp; 中文本體</title><link>https://linzeyan.github.io/posts/2018/20181218-fonts/</link><pubDate>Tue, 18 Dec 2018 22:13:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181218-fonts/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://hk.saowen.com/a/8e1349c5e25aaca06614d56d65fcd43156684d591da80b5a886806ceac06e199" target="_blank" rel="noopener">Linux CentOS 7 安裝字體庫 &amp;amp; 中文本體&lt;/a>&lt;/li>
+&lt;h5 id="use-df--ah-and-du--h---max-depth1">Use &lt;code>df -ah&lt;/code> and &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
+&lt;p>The total from &lt;code>du&lt;/code> is far smaller than the total reported by &lt;code>df&lt;/code>.&lt;/p>
+&lt;p>When a process deletes files but keeps running, the files are not actually removed, so disk space is not freed, and those files are not counted.&lt;/p>
+&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Install Font Libraries and Chinese Fonts on Linux CentOS 7</title><link>https://linzeyan.github.io/posts/2018/20181218-fonts/</link><pubDate>Tue, 18 Dec 2018 22:13:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181218-fonts/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://hk.saowen.com/a/8e1349c5e25aaca06614d56d65fcd43156684d591da80b5a886806ceac06e199" target="_blank" rel="noopener">Install Font Libraries and Chinese Fonts on Linux CentOS 7&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>yum -y install fontconfig
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這時在 /usr/shared 目錄就可以看到 fonts 和 fontconfig 目錄了（之前是沒有的）&lt;/p>
-&lt;p>在這之前我們還需要新建目錄，首先在 /usr/shared/fonts 目錄下新建一個目錄 chinese&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now you can see the fonts and fontconfig directories under /usr/shared (they did not exist before).&lt;/p>
+&lt;p>Before that we need to create a directory. First create /usr/shared/fonts/chinese.&lt;/p>
 &lt;p>&lt;code>mkdir /usr/shared/fonts/chinese&lt;/code>&lt;/p>
-&lt;p>只需要將我們需要的字體拷貝出來並上傳至 linux 服務器 /usr/shared/fonts/chinese 目錄下即可，在這裏我選擇宋體和黑體（報表中用到了這兩種字體），可以看到是兩個後綴名為 ttf 和 ttc 的文檔&lt;/p>
-&lt;p>&lt;code>chmod -R 755 /usr/share/fonts/chinese&lt;/code>&lt;/p>
-&lt;p>接下來需要安裝 ttmkfdir 來搜索目錄中所有的字體信息，並彙總生成 fonts.scale 文檔&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install ttmkfdir
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ttmkfdir -e /usr/share/X11/fonts/encodings/encodings.dir
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>vi /etc/fonts/fonts.conf
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dir&amp;gt;/usr/shared/fonts/chinese&amp;lt;dir&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>刷新內存中的字體緩存&lt;/p>
-&lt;p>&lt;code>fc-cache&lt;/code>&lt;/p></description></item><item><title>What is the SHA256 that comes on the sshd entry in auth.log?</title><link>https://linzeyan.github.io/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</link><pubDate>Mon, 17 Dec 2018 16:11:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</guid><description>&lt;ul>
+&lt;p>Copy the fonts you need and upload them to /usr/shared/fonts/chinese. Here I use SimSun and HeiTi (used in reports). You will see files with ttf and ttc extensions.&lt;/p></description></item><item><title>What is the SHA256 that comes on the sshd entry in auth.log?</title><link>https://linzeyan.github.io/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</link><pubDate>Mon, 17 Dec 2018 16:11:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181217-what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://serverfault.com/questions/888281/what-is-the-sha256-that-comes-on-the-sshd-entry-in-auth-log" target="_blank" rel="noopener">What is the SHA256 that comes on the sshd entry in auth.log?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>ssh-keygen -lf .ssh/id_rsa.pub&lt;/code>&lt;/p>
@@ -1437,40 +1307,25 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> awk &lt;span style="color:#e6db74">&amp;#39;{ print $1 }&amp;#39;&lt;/span> | &lt;span style="color:#75715e"># only the hex data&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xxd -r -p | &lt;span style="color:#75715e"># hex to bytes&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base64 &lt;span style="color:#75715e"># encode as base64&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Netcat（Linux nc 指令）網路管理者工具實用範例</title><link>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.gtwang.org/linux/linux-utility-netcat-examples/" target="_blank" rel="noopener">Netcat（Linux nc 指令）網路管理者工具實用範例&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Netcat (Linux nc) Practical Examples for Network Admins</title><link>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</link><pubDate>Fri, 09 Nov 2018 00:17:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181109-linux-utility-netcat-examples/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.gtwang.org/linux/linux-utility-netcat-examples/" target="_blank" rel="noopener">Netcat (Linux nc) Practical Examples for Network Admins&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="傳送測試用的-udp-封包到遠端伺服器">傳送測試用的 UDP 封包到遠端伺服器&lt;/h4>
-&lt;p>下面這行指令會傳送 UDP 的測試封包到指定的機器與連接埠，&lt;code>-w1&lt;/code> 參數是指定 timeout 的時間為 1 秒。&lt;/p>
+&lt;h4 id="send-a-test-udp-packet-to-a-remote-server">Send a test UDP packet to a remote server&lt;/h4>
+&lt;p>This command sends a UDP test packet to the specified host and port. The &lt;code>-w1&lt;/code> option sets the timeout to 1 second.&lt;/p>
 &lt;p>&lt;code>echo -n &amp;quot;foo&amp;quot; | nc -u -w1 192.168.1.8 5000&lt;/code>&lt;/p>
-&lt;h4 id="開啟-udp-連接埠接收資料">開啟 UDP 連接埠接收資料&lt;/h4>
+&lt;h4 id="open-a-udp-port-to-receive-data">Open a UDP port to receive data&lt;/h4>
 &lt;p>&lt;code>nc -lu localhost 5000&lt;/code>&lt;/p>
-&lt;h4 id="遠端機器的連接埠掃描port-scanning">遠端機器的連接埠掃描（Port Scanning）&lt;/h4>
-&lt;p>這行指令會掃描指定機器 1 ~ 1000 與 2000 ~ 3000 這兩個範圍的 TCP 連接埠，看看哪些埠號有開啟。&lt;/p>
-&lt;p>&lt;code>nc -vnz -w 1 192.168.233.208 1-1000 2000-3000&lt;/code>&lt;/p>
-&lt;p>這行則是掃描 UDP 的連接埠&lt;/p>
-&lt;p>&lt;code>nc -vnzu 192.168.1.8 1-65535&lt;/code>&lt;/p>
-&lt;h4 id="在兩台主機之間複製檔案">在兩台主機之間複製檔案&lt;/h4>
-&lt;p>假設現在有兩台主機，分別為 A 主機與 B 主機，若要將一個檔案從 A 主機複製到 B 主機，可以先在 B 主機（檔案接收者）上執行：&lt;/p>
-&lt;p>&lt;code>nc -l 5000 &amp;gt; my.jpg&lt;/code>&lt;/p></description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">使用 TC 和 Netem 模拟网络异常&lt;/a>&lt;/li>
+&lt;h4 id="port-scanning-on-a-remote-host">Port scanning on a remote host&lt;/h4>
+&lt;p>This command scans TCP ports in the ranges 1-1000 and 2000-3000 on the specified host to see which ports are open.&lt;/p></description></item><item><title>Simulate Network Anomalies with TC and Netem</title><link>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">Simulate Network Anomalies with TC and Netem&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>Netem 与 TC 简要说明&lt;/p>
-&lt;p>Netem 是 Linux 2.6 及以上内核版本提供的一个网络模拟功能模块。该功能模块可以用来在性能良好的局域网中，模拟出复杂的互联网传输性能。例如:低带宽、传输延迟、丢包等等情况。使用 Linux 2.6 (或以上) 版本内核的很多 Linux 发行版都默认开启了该内核模块，比如：Fedora、Ubuntu、Redhat、OpenSuse、CentOS、Debian 等等。&lt;/p>
-&lt;p>TC 是 Linux 系统中的一个用户态工具，全名为 Traffic Control (流量控制)。TC 可以用来控制 Netem 模块的工作模式，也就是说如果想使用 Netem 需要至少两个条件，一是内核中的 Netem 模块被启用，另一个是要有对应的用户态工具 TC 。&lt;/p>&lt;/blockquote>
-&lt;ol>
-&lt;li>所有的报文延迟 100ms 发送: &lt;code>$ tc qdisc add dev enp0s5 root netem delay 100ms&lt;/code>&lt;/li>
-&lt;li>模拟丢包率: &lt;code>$ tc qdisc change dev enp0s5 root netem loss 50%&lt;/code>&lt;/li>
-&lt;li>模拟包重复: &lt;code>$ tc qdisc change dev enp0s5 root netem duplicate 50%&lt;/code>&lt;/li>
-&lt;li>模拟包损坏: &lt;code>tc qdisc change dev enp0s5 root netem corrupt 2%&lt;/code>&lt;/li>
-&lt;li>模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code>tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
-&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
+&lt;p>Netem and TC brief overview&lt;/p>
+&lt;p>Netem is a network emulation module provided by Linux 2.6 and later kernels. It can be used on a good LAN to simulate complex Internet transmission performance, such as low bandwidth, latency, packet loss, and so on. Many Linux distributions with kernel 2.6+ enable this module by default, such as Fedora, Ubuntu, Redhat, OpenSuse, CentOS, Debian, etc.&lt;/p>
+&lt;p>TC is a user-space tool in Linux, short for Traffic Control. TC controls the operating mode of the Netem module. In other words, to use Netem you need at least two conditions: the Netem module must be enabled in the kernel, and the corresponding user-space tool TC must be available.&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Systemd 入门教程：实战篇</title><link>https://linzeyan.github.io/posts/2018/20180809-systemd-tutorial-part-two/</link><pubDate>Thu, 09 Aug 2018 13:53:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180809-systemd-tutorial-part-two/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Systemd Tutorial: Practical Part</title><link>https://linzeyan.github.io/posts/2018/20180809-systemd-tutorial-part-two/</link><pubDate>Thu, 09 Aug 2018 13:53:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180809-systemd-tutorial-part-two/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd Tutorial: Practical Part&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ systemctl cat sshd.service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1491,11 +1346,7 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Install&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WantedBy&lt;span style="color:#f92672">=&lt;/span>multi-user.target
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="unit-区块启动顺序与依赖关系">[Unit] 区块：启动顺序与依赖关系&lt;/h4>
-&lt;p>&lt;code>After&lt;/code> 字段：表示如果 &lt;code>network.target&lt;/code> 或 &lt;code>sshd-keygen.service&lt;/code> 需要启动，那么 &lt;code>sshd.service&lt;/code> 应该在它们之后启动。&lt;/p>
-&lt;p>相应地，还有一个 &lt;code>Before&lt;/code> 字段，定义 &lt;code>sshd.service&lt;/code> 应该在哪些服务之前启动。&lt;/p>
-&lt;p>注意，After 和 Before 字段只涉及启动顺序，不涉及依赖关系。&lt;/p>
-&lt;p>设置依赖关系，需要使用 Wants 字段和 Requires 字段&lt;/p>
-&lt;p>&lt;code>Wants&lt;/code> 字段：表示 &lt;code>sshd.service&lt;/code> 与 &lt;code>sshd-keygen.service&lt;/code> 之间存在&amp;quot;弱依赖&amp;quot;关系，即如果&amp;quot;sshd-keygen.service&amp;quot;启动失败或停止运行，不影响 &lt;code>sshd.service&lt;/code> 继续执行。&lt;/p>
-&lt;p>&lt;code>Requires&lt;/code> 字段则表示&amp;quot;强依赖&amp;quot;关系，即如果该服务启动失败或异常退出，那么 &lt;code>sshd.service&lt;/code> 也必须退出。&lt;/p>
-&lt;p>注意，Wants 字段与 Requires 字段只涉及依赖关系，与启动顺序无关，默认情况下是同时启动的。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="unit-section-startup-order-and-dependencies">[Unit] Section: Startup Order and Dependencies&lt;/h4>
+&lt;p>&lt;code>After&lt;/code> field: if &lt;code>network.target&lt;/code> or &lt;code>sshd-keygen.service&lt;/code> needs to start, then &lt;code>sshd.service&lt;/code> should start after them.&lt;/p>
+&lt;p>Correspondingly, the &lt;code>Before&lt;/code> field defines which services &lt;code>sshd.service&lt;/code> should start before.&lt;/p>
+&lt;p>Note that After and Before only involve startup order, not dependency relationships.&lt;/p></description></item></channel></rss>

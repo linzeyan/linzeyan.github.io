@@ -1,31 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HTTP on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/http/</link><description>Recent content in HTTP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 12 Jun 2025 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/http/index.xml" rel="self" type="application/rss+xml"/><item><title>TIL: timeout in Bash scripts</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HTTP on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/http/</link><description>Recent content in HTTP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 12 Jun 2025 09:04:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/http/index.xml" rel="self" type="application/rss+xml"/><item><title>TIL：Bash 腳本的 timeout</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</link><pubDate>Thu, 12 Jun 2025 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250612-bash-timeout/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL: timeout in Bash scripts&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://heitorpb.github.io/bla/timeout/" target="_blank" rel="noopener">TIL：Bash 腳本的 timeout&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>&lt;code>timeout 1m ./until.sh&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>wrap&lt;/p>
+&lt;p>包一層&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>timeout 1m bash -c &lt;span style="color:#e6db74">&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 1
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">done&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>I use Zip Bombs to Protect my Server</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>我用 Zip Bomb 來保護我的伺服器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul>
 &lt;li>
-&lt;p>&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener">I use Zip Bombs to Protect my Server&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener">我用 Zip Bomb 來保護我的伺服器&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>What happens is, they receive the file, read the header that instructs them that it is a compressed file. So they try to decompress the 1MB file to find whatever content they are looking for. But the file expands, and expands, and expands, until they run out of memory and their server crashes. The 1MB file decompresses into a 1GB. This is more than enough to break most bots. However, for those pesky scripts that won&amp;rsquo;t stop, I serve them the 10MB file. This one decompresses into 10GB and instantly kills the script.&lt;/p></description></item><item><title>人人都需要一個 HTTP proxy 來 debug</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</link><pubDate>Fri, 25 Apr 2025 16:58:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</guid><description>&lt;ul>
+&lt;p>發生的情況是：對方收到檔案後，讀取標頭得知這是壓縮檔，因此嘗試解壓那個 1MB 的檔案來找他們要的內容。但檔案會不斷膨脹，直到耗盡記憶體、伺服器崩潰。1MB 的檔案會解壓成 1GB，這已足以讓多數機器人失敗。不過對於那些死纏爛打的腳本，我就給它 10MB 的檔案，解壓後會變成 10GB，立刻把腳本搞掛。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>dd if=/dev/zero bs=1G count=10 | gzip -c &amp;gt; 10GB.gz&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>dd&lt;/code>：用於複製或轉換資料的指令。&lt;/li>
+&lt;li>&lt;code>if&lt;/code>：輸入檔案，這裡指定 &lt;code>/dev/zero&lt;/code>，它會產生無限的零位元組串流。&lt;/li>
+&lt;li>&lt;code>bs&lt;/code>：區塊大小，設為 1GB（1G），代表 dd 會以 1GB 為單位讀寫。&lt;/li>
+&lt;li>&lt;code>count=10&lt;/code>：代表處理 10 個區塊、每個 1GB，因此會產生 10GB 的零資料。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>middleware&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>if (ipIsBlackListed() || isMalicious()) {
+header(&amp;#34;Content-Encoding: gzip&amp;#34;);
+header(&amp;#34;Content-Length: &amp;#34;. filesize(ZIP_BOMB_FILE_10G)); // 10 MB
+readfile(ZIP_BOMB_FILE_10G);
+exit;
+}
+&lt;/code>&lt;/pre></description></item><item><title>人人都需要一個 HTTP proxy 來 debug</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</link><pubDate>Fri, 25 Apr 2025 16:58:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/" target="_blank" rel="noopener">人人都需要一個 HTTP proxy 來 debug&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>
 &lt;li>&lt;a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://portswigger.net/burp/communitydownload" target="_blank" rel="noopener">Burp Suite&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://mitmproxy.org/" target="_blank" rel="noopener">mitmproxy&lt;/a>&lt;/li>
-&lt;/ol></description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>即時監控網路介面上的 HTTP 請求</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">即時監控網路介面上的 HTTP 請求&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="tcpflow">tcpflow&lt;/h3>
 &lt;blockquote>
@@ -37,16 +58,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-p&lt;/code> disables promiscuous mode&lt;/li>
-&lt;li>&lt;code>-c&lt;/code> means only print the output to the console and don&amp;rsquo;t create files&lt;/li>
-&lt;li>&lt;code>-i&lt;/code> specifies the network interface
-grep receives the output of tcpflow&lt;/li>
-&lt;li>&lt;code>-o&lt;/code> means show only the matching parts of the lines that match the pattern&lt;/li>
-&lt;li>&lt;code>-E&lt;/code> means the pattern is an extended regular expression (ERE)&lt;/li>
+&lt;li>&lt;code>-p&lt;/code> 停用混雜模式&lt;/li>
+&lt;li>&lt;code>-c&lt;/code> 只輸出到主控台，不建立檔案&lt;/li>
+&lt;li>&lt;code>-i&lt;/code> 指定網路介面
+grep 會接收 tcpflow 的輸出&lt;/li>
+&lt;li>&lt;code>-o&lt;/code> 只顯示符合樣式的那一段&lt;/li>
+&lt;li>&lt;code>-E&lt;/code> 表示樣式是延伸正則表示式（ERE）&lt;/li>
 &lt;/ul>
 &lt;h3 id="httpry">httpry&lt;/h3>
 &lt;blockquote>
-&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul>
+&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo httpry -i wlp0s20f3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>httpry version 0.1.8 -- HTTP logging and information retrieval tool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting capture on wlp0s20f3 interface
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener">在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>

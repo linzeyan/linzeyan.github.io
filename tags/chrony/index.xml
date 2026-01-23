@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chrony on Ricky</title><link>https://linzeyan.github.io/tags/chrony/</link><description>Recent content in Chrony on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 29 Sep 2020 11:41:43 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/chrony/index.xml" rel="self" type="application/rss+xml"/><item><title>如何設定時區與NTP服務在RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">如何設定時區與 NTP 服務在 RHEL7/CentOS7&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chrony on Ricky</title><link>https://linzeyan.github.io/tags/chrony/</link><description>Recent content in Chrony on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 29 Sep 2020 11:41:43 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/chrony/index.xml" rel="self" type="application/rss+xml"/><item><title>How to configure time zone and NTP on RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">How to configure time zone and NTP on RHEL7/CentOS7&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>chrony 包含兩個程序，chronyd 是一個可以在啟動時啟動的守護進程，chronyc 是一個命令行界面程序，可用於監控 chronyd 的性能並在運行時更改各種運行參數。&lt;/p>
-&lt;p>注意 ntpd 和 chronyd 擇一就可，不要同時運作。&lt;/p>
-&lt;h5 id="設定時區">設定時區&lt;/h5>
+&lt;p>chrony includes two programs: chronyd is a daemon that starts on boot, and chronyc is a command-line client that can monitor chronyd and change runtime parameters.&lt;/p>
+&lt;p>Use either ntpd or chronyd, not both.&lt;/p>
+&lt;h5 id="configure-time-zone">Configure time zone&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# timedatectl set-timezone Asia/Taipei
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# timedatectl
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Local time: Tue 2018-03-27 14:13:38 CST
@@ -14,11 +14,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NTP synchronized: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RTC in local TZ: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DST active: n/a
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="設定-chronyd">設定 chronyd&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="configure-chronyd">Configure chronyd&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# yum install -y chrony
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 配置設定檔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Config file&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# cat /etc/chrony.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use public servers from the pool.ntp.org project.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Please consider joining the pool (http://www.pool.ntp.org/join.html).&lt;/span>
@@ -27,10 +27,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 2.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 3.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟動服務和設為開機時啟動&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Start service and enable on boot&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable chronyd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl start chronyd
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="racking-參數顯示有關系統時間效能">racking 參數顯示有關系統時間效能&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="tracking-parameters-show-system-time-performance">tracking parameters show system time performance&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc tracking
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Reference ID : 3DD8996B &lt;span style="color:#f92672">(&lt;/span>61-216-153-107.hinet-ip.hinet.net&lt;span style="color:#f92672">)&lt;/span> ---&amp;gt;表示現在同步的時間伺服器，如果沒有id表示沒有同步
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stratum : &lt;span style="color:#ae81ff">4&lt;/span> ---&amp;gt;表示計算機有多少&lt;span style="color:#e6db74">&amp;#34;跳hop&amp;#34;&lt;/span> 表示本地的是第四層
@@ -62,7 +62,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^+ 61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -556us&lt;span style="color:#f92672">[&lt;/span> -556us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^? 59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> - +0ns&lt;span style="color:#f92672">[&lt;/span> +0ns&lt;span style="color:#f92672">]&lt;/span> +/- 0ns
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^- 61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -280us&lt;span style="color:#f92672">[&lt;/span> -280us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="看同步源頭的資訊">看同步源頭的資訊&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="view-sync-source-info">View sync source info&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc sourcestats -v
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span> Number of sources &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .- Number of sample points in measurement set.
@@ -80,7 +80,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">135&lt;/span> +4.455 19.761 +622us 247us
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> +0.000 2000.000 +0ns 4000ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">136&lt;/span> +8.965 42.440 +1250us 495us
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="將系統時間寫到硬體主機板上的時間上">將系統時間寫到硬體(主機板上的時間)上&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="write-system-time-to-hardware-clock">Write system time to hardware clock&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# hwclock --systohc
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# date ; hwclock
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 14:07:57 CST &lt;span style="color:#ae81ff">2018&lt;/span>

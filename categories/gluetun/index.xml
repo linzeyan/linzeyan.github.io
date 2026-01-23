@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gluetun on Ricky</title><link>https://linzeyan.github.io/categories/gluetun/</link><description>Recent content in Gluetun on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Aug 2025 15:51:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/gluetun/index.xml" rel="self" type="application/rss+xml"/><item><title>Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學</title><link>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gluetun on Ricky</title><link>https://linzeyan.github.io/categories/gluetun/</link><description>Recent content in Gluetun on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Aug 2025 15:51:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/gluetun/index.xml" rel="self" type="application/rss+xml"/><item><title>Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network</title><link>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun: Route Docker Containers Through a VPN, Disconnect on No Network&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="gluetun">Gluetun&lt;/h2>
 &lt;ul>
@@ -20,17 +20,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># 按照VPN供應商的OpenVPN設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># Fill in based on your VPN provider&amp;#39;s OpenVPN config&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=openvpn&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN帳號&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN密碼&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN username&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># Set server country, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
@@ -56,28 +56,28 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># 按照VPN供應商的WireGuard設定檔填寫&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># Fill in based on your VPN provider&amp;#39;s WireGuard config&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=wireguard&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># 預共享密鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># 私鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># 填IPV4與IPV6位址，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># Preshared key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># Private key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># Set IPv4 and IPv6 addresses, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># Set server country, separated by commas&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (Optional) fixed IP for the Gluetun container&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="讓容器走-gluetun-的-vpn-連線">讓容器走 Gluetun 的 VPN 連線&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="let-containers-use-gluetuns-vpn-connection">Let containers use Gluetun&amp;rsquo;s VPN connection&lt;/h2>
 &lt;ul>
-&lt;li>如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
-&lt;li>如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
-&lt;li>開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
-&lt;li>依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li>
-&lt;li>容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li>
+&lt;li>If the service and Gluetun are in the same docker-compose, add network mode: network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
+&lt;li>If the service is in a different docker-compose from Gluetun, add network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
+&lt;li>Open Gluetun&amp;rsquo;s docker-compose file and re-add the service ports you need (e.g. 8080)&lt;/li>
+&lt;li>Start Gluetun first, then start services that should use Gluetun&amp;rsquo;s VPN connection&lt;/li>
+&lt;li>The container&amp;rsquo;s public IP should match the VPN server you selected&lt;/li>
 &lt;/ul></description></item></channel></rss>

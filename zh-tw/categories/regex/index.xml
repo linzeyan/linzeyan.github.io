@@ -4,9 +4,9 @@
 &lt;p>&lt;code>/\p{Emoji}/u&lt;/code>&lt;/p>
 &lt;p>既然是匹配 Emoji，那么 loneProperty (\p{loneProperty}) 就应该是 Emoji ? 实际测试并不符合需求，因为在 Emoji 官方文档中， 123456789*# 也是被看作是 Emoji， 如果用这个正则的话，就会把数字也认为是 Emoji，不符合只排除特殊表情的要求。&lt;/p>
 &lt;p>&lt;code>/\p{Extended_Pictographic}/u&lt;/code>&lt;/p>
-&lt;p>而 Extended_Pictographic 表示的 Emoji 才是我们认为的那些表情符号。&lt;/p></description></item><item><title>Regex for Markdown Syntax</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211029-regex-for-md/</link><pubDate>Fri, 29 Oct 2021 10:19:41 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211029-regex-for-md/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html" target="_blank" rel="noopener">Regex for Markdown Syntax&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">basic-syntax&lt;/a>&lt;/li>
+&lt;p>而 Extended_Pictographic 表示的 Emoji 才是我们认为的那些表情符号。&lt;/p></description></item><item><title>Markdown 語法的正則表達式</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211029-regex-for-md/</link><pubDate>Fri, 29 Oct 2021 10:19:41 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211029-regex-for-md/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html" target="_blank" rel="noopener">Markdown 語法的正則表達式&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">基本語法&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;pre tabindex="0">&lt;code># Headings
 headerOne = `(#{1}\s)(.*)`
@@ -37,10 +37,10 @@ horizontalLine = `(\=|\-|\*){3}`
 emailText = `(\&amp;lt;{1})(\S+@\S+)(\&amp;gt;{1})`
 # TABLES
 tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}&amp;gt;?(?!-))]+))+(\|))(?:\n)?((\|)(-+))+(\|)(\n)((\|)(\W+|\w+|\S+))+(\|$)`
-&lt;/code>&lt;/pre></description></item><item><title>Is there a regular expression to detect a valid regular expression?</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">Is there a regular expression to detect a valid regular expression?&lt;/a>&lt;/li>
+&lt;/code>&lt;/pre></description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">是否有正規表示式可以檢測有效的正規表示式？&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>This is a recursive regex, and is not supported by many regex engines. PCRE based ones should support it.&lt;/p>
+&lt;p>這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p>
 &lt;pre tabindex="0">&lt;code>/
 ^ # start of string
 ( # first group start
@@ -58,4 +58,4 @@ tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}
 ) # end first group
 $ # end of string
 /
-&lt;/code>&lt;/pre>&lt;p>Without whitespace and comments&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>移除空白與註解後&lt;/p></description></item></channel></rss>

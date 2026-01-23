@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FortiOS on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/fortios/</link><description>Recent content in FortiOS on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 03 Nov 2020 17:59:24 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/fortios/index.xml" rel="self" type="application/rss+xml"/><item><title>Backup FortiOS config with Ansible - with RestAPI</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI Config Backup - FortiOS 6.0.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">Backup FortiOS config with Ansible - with RestAPI&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FortiOS on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/fortios/</link><description>Recent content in FortiOS on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 03 Nov 2020 17:59:24 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/fortios/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Ansible 透過 RestAPI 備份 FortiOS 設定</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI 設定備份 - FortiOS 6.0.4&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">使用 Ansible 透過 RestAPI 備份 FortiOS 設定&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="create-access-profile">Create access profile&lt;/h5>
+&lt;h5 id="建立存取設定檔">建立存取設定檔&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system accprofile
 FGTAWS0004BE1ADE (accprofile) # edit readOnly
 new entry &amp;#39;readOnly&amp;#39; added
 FGTAWS0004BE1ADE (readOnly) # set sysgrp read
 FGTAWS0004BE1ADE (readOnly) # end
-&lt;/code>&lt;/pre>&lt;h5 id="create-api-user-in-fortigate">Create API user in Fortigate&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="在-fortigate-建立-api-使用者">在 Fortigate 建立 API 使用者&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # config system api-user
 FGTAWS0004BE1ADE (api-user) # edit api-admin
 new entry &amp;#39;api-admin&amp;#39; added
@@ -20,11 +20,11 @@ new entry &amp;#39;1&amp;#39; added
 FGTAWS0004BE1ADE (1) # set ipv4-trusthost &amp;#39;ip_address_of_your_machine&amp;#39; 255.255.255.255
 FGTAWS0004BE1ADE (1) # end
 FGTAWS0004BE1ADE (api-admin) # end
-&lt;/code>&lt;/pre>&lt;h5 id="generate-api-token">Generate API token&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="產生-api-token">產生 API token&lt;/h5>
 &lt;pre tabindex="0">&lt;code>FGTAWS0004BE1ADE # execute api-user generate-key api-admin
 New API key: &amp;#39;your_api_token&amp;#39;
 NOTE: The bearer of this API key will be granted all access privileges assigned to the api-user api-admin.
-&lt;/code>&lt;/pre>&lt;h5 id="test">Test&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="測試">測試&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># fortigate.py&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> requests
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> urllib3 &lt;span style="color:#75715e"># disable security warning for SSL certificate&lt;/span>
@@ -72,7 +72,7 @@ Done!
 &amp;#39;#config-version=FGTAWS-6.0.4-FW-build0231-190107:opmode=0:vdom=0:user=api-admin\n&amp;#39;
 &amp;gt;&amp;gt;&amp;gt;
 &lt;/code>&lt;/pre>&lt;hr>
-&lt;h5 id="configure-ansible-inventory-and-playbook">Configure Ansible inventory and playbook&lt;/h5>
+&lt;h5 id="設定-ansible-inventory-與-playbook">設定 Ansible inventory 與 playbook&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat hosts
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>fortigate&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>x.x.x.x access_token&lt;span style="color:#f92672">=&lt;/span>w4q9qtfbGry3Nbc40kHjsk9mxG****

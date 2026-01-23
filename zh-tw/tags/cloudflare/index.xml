@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudflare on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/cloudflare/</link><description>Recent content in Cloudflare on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 06 Nov 2024 17:47:06 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/cloudflare/index.xml" rel="self" type="application/rss+xml"/><item><title>把 Cloudflare WARP 转换为 http 代理</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</link><pubDate>Wed, 06 Nov 2024 17:47:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://dmesg.app/warp-http-proxy.html" target="_blank" rel="noopener">把 Cloudflare WARP 转换为 http 代理&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudflare on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/cloudflare/</link><description>Recent content in Cloudflare on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 06 Nov 2024 17:47:06 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/cloudflare/index.xml" rel="self" type="application/rss+xml"/><item><title>將 Cloudflare WARP 轉成 HTTP 代理</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</link><pubDate>Wed, 06 Nov 2024 17:47:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/warp-http-proxy.html" target="_blank" rel="noopener">將 Cloudflare WARP 轉成 HTTP 代理&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli proxy port &lt;span style="color:#ae81ff">60606&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli mode proxy
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然而，Go 的程序不支持 socks 代理，要手动加 transport 我可没那个功夫去加。&lt;/p>
-&lt;p>好消息是，Go 默认是尊重环境变量 http_proxy 的。那么就要想办法给 socks 代理转换为 http 代理&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然而，Go 程式不支援 socks 代理，要手動加 transport 我可沒那個功夫去加。&lt;/p>
+&lt;p>好消息是，Go 預設會尊重環境變數 &lt;code>http_proxy&lt;/code>。因此我們要想辦法把 socks 代理轉成 http 代理。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 http_proxy&lt;span style="color:#f92672">=&lt;/span>http://127.0.0.1:8118 curl ipv4.win
@@ -14,141 +14,145 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Serving on ipv? 127.0.0.1:8118 by http
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http 127.0.0.1:45012 -&amp;gt; socks5 127.0.0.1:60606 -&amp;gt; ipv4.win:80
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Unknown remote protocol from 127.0.0.1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可能是 pproxy 的问题，那么用 gost&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可能是 pproxy 的問題，那就用 gost。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>gost -L http://127.0.0.1:8118 -F socks5://127.0.0.1:60606
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:43 route.go:700: http://127.0.0.1:8118 on 127.0.0.1:8118
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:162: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; ipv4.win:80
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:257: &lt;span style="color:#f92672">[&lt;/span>route&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; 1@socks5://127.0.0.1:60606 -&amp;gt; ipv4.win:80
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2024/11/03 12:32:46 http.go:280: &lt;span style="color:#f92672">[&lt;/span>http&lt;span style="color:#f92672">]&lt;/span> 127.0.0.1:33284 -&amp;gt; 127.0.0.1:8118 : unexpected EOF
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>那……Privoxy&lt;/p></description></item><item><title>隐藏于 Cloudflare 的全球网络之中</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://dmesg.app/hide-in-cf.html" target="_blank" rel="noopener">隐藏于 Cloudflare 的全球网络之中&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>那就用 Privoxy。&lt;/p></description></item><item><title>隱藏於 Cloudflare 的全球網路之中</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dmesg.app/hide-in-cf.html" target="_blank" rel="noopener">隱藏於 Cloudflare 的全球網路之中&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>
-&lt;li>一种方式是走 Cloudflare WARP，WARP 可以运行在 proxy mode 而不是接管全局流量&lt;/li>
+&lt;li>一種方式是使用 Cloudflare WARP，讓 WARP 以 proxy mode 執行，而不是接管全域流量。&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>warp-cli register
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp 监听本地的11111端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># WARP 監聽本機的 11111 埠&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-proxy-port &lt;span style="color:#ae81ff">11111&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># warp proxy mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># WARP proxy mode&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli set-mode proxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 永久开启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 永久啟用&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>warp-cli enable-always-on
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>https_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 http_proxy&lt;span style="color:#f92672">=&lt;/span>socks5://127.0.0.1:11111 go run main.go
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>还有一种方式是使用 Cloudflare Workers，请求由 Workers 转发&lt;/li>
+&lt;li>另一種方式是使用 Cloudflare Workers，請求由 Workers 轉發。&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">export&lt;/span> &lt;span style="color:#66d9ef">default&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">request&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#a6e22e">Request&lt;/span>)&lt;span style="color:#f92672">:&lt;/span> Promise {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Replace `remote` with the host you wish to send requests to
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * 將 `remote` 替換為你想要轉發請求的主機
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">remote&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;https://example.com&amp;#34;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">fetch&lt;/span>(&lt;span style="color:#a6e22e">remote&lt;/span>, &lt;span style="color:#a6e22e">request&lt;/span>);
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>WebP Cloud 使用 Cloudflare Workers 回源以保护回源服务器并开始提供回源时间信息</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.webp.se/cloudflare-workers-origin-zh/" target="_blank" rel="noopener">WebP Cloud 使用 Cloudflare Workers 回源以保护回源服务器并开始提供回源时间信息&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>WebP Cloud 使用 Cloudflare Workers 回源以保護回源伺服器並開始提供回源時間資訊</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.webp.se/cloudflare-workers-origin-zh/" target="_blank" rel="noopener">WebP Cloud 使用 Cloudflare Workers 回源以保護回源伺服器並開始提供回源時間資訊&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-cloudflare/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener">Connect private networks&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/" target="_blank" rel="noopener">Configure Local Domain Fallback&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener">Configure Split Tunnels&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/" target="_blank" rel="noopener">Traffic routing with WARP&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="1-set-up-the-client">1. Set up the client&lt;/h3>
-&lt;h4 id="create-device-enrollment-rules">Create device enrollment rules&lt;/h4>
+&lt;h3 id="1-設定-client">1. 設定 Client&lt;/h3>
+&lt;h4 id="建立裝置註冊規則">建立裝置註冊規則&lt;/h4>
 &lt;blockquote>
-&lt;p>Create device enrollment rules to determine which devices can enroll to Zero Trust organization.&lt;/p>&lt;/blockquote>
-&lt;h5 id="set-device-enrollment-permissions">Set device enrollment permissions&lt;/h5>
+&lt;p>建立裝置註冊規則，用來決定哪些裝置可以加入 Zero Trust 組織。&lt;/p>&lt;/blockquote>
+&lt;h5 id="設定裝置註冊權限">設定裝置註冊權限&lt;/h5>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage.&lt;/li>
-&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com.&lt;/li>
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage。&lt;/li>
+&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com。&lt;/li>
 &lt;/ol>
-&lt;h3 id="2-route-private-network-ips-through-warp">2. Route private network IPs through WARP&lt;/h3>
+&lt;h3 id="2-透過-warp-路由私有網路-ip">2. 透過 WARP 路由私有網路 IP&lt;/h3>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure.&lt;/li>
-&lt;li>Configure settings:
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure。&lt;/li>
+&lt;li>設定：
 &lt;ol>
-&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates.&lt;/li>
-&lt;li>Service mode: Gateway with WARP.&lt;/li>
-&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com.&lt;/li>
-&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage.
+&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates。&lt;/li>
+&lt;li>Service mode: Gateway with WARP。&lt;/li>
+&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com。&lt;/li>
+&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage。
 &lt;ul>
-&lt;li>Delete the IP range of nas.ruru910.com.&lt;/li>
+&lt;li>刪除 nas.ruru910.com 的 IP range。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ol>
-&lt;h3 id="3-filter-network-traffic-with-gateway">3. Filter network traffic with Gateway&lt;/h3>
-&lt;h4 id="1-enable-the-gateway-proxy">1. Enable the Gateway proxy&lt;/h4>
+&lt;h3 id="3-用-gateway-過濾網路流量">3. 用 Gateway 過濾網路流量&lt;/h3>
+&lt;h4 id="1-啟用-gateway-代理">1. 啟用 Gateway 代理&lt;/h4>
 &lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; Network.
+&lt;li>在 Zero Trust 中，前往 Settings &amp;gt; Network。
 &lt;ol>
-&lt;li>Gateway Logging: Capture all.&lt;/li>
-&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection.&lt;/li>
+&lt;li>Gateway Logging: Capture all。&lt;/li>
+&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection。&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ol>
-&lt;h4 id="2-create-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">Create Zero Trust policies&lt;/a>&lt;/h4>
+&lt;h4 id="2-建立-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">建立 Zero Trust Policies&lt;/a>&lt;/h4>
 &lt;ol>
-&lt;li>Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li>
-&lt;li>For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li>
-&lt;li>Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li>
-&lt;/ol></description></item><item><title>Cloudflare tunnel on Synology</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
+&lt;li>前往 Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP。&lt;/li>
+&lt;li>Value 輸入應用程式的 IP（例如 10.128.0.7）。&lt;/li>
+&lt;li>修改 policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com。&lt;/li>
+&lt;/ol></description></item><item><title>在 Synology 上建立 Cloudflare Tunnel</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
 &lt;/ul>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
+&lt;/div>
+&lt;div style="margin-top: rem;">&lt;/div>
 &lt;h2 id="setup-synology">Setup Synology&lt;/h2>
 &lt;ol>
-&lt;li>Create a directory in docker directory, such as &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;li>Download cloudflared/cloudflared image to registry.&lt;/li>
-&lt;li>ssh to admin@synology&lt;/li>
-&lt;li>Change &lt;code>cloudflare-tunnel&lt;/code> owner, &lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>在 docker 目錄下建立資料夾，例如 &lt;code>cloudflare-tunnel&lt;/code>。&lt;/li>
+&lt;li>下載 cloudflared/cloudflared 映像到 registry。&lt;/li>
+&lt;li>SSH 到 admin@synology。&lt;/li>
+&lt;li>變更 &lt;code>cloudflare-tunnel&lt;/code> 擁有者，&lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>。&lt;/li>
 &lt;/ol>
 &lt;h3 id="run-containers">Run containers&lt;/h3>
 &lt;h4 id="--cloudflared-tunnel-login">- &lt;code>cloudflared tunnel login&lt;/code>&lt;/h4>
 &lt;ol>
-&lt;li>Run container and mount volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>.&lt;/li>
-&lt;li>Select &lt;code>Use the same network as Docker Host&lt;/code> in network tab.&lt;/li>
-&lt;li>Add command &lt;code>tunnel login&lt;/code> in envorinment tab.&lt;/li>
-&lt;li>Go to container log, and copy login url.&lt;/li>
-&lt;li>Paste url to browser and authorize the zone.&lt;/li>
-&lt;li>Export the container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>執行容器並掛載 volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>。&lt;/li>
+&lt;li>在 network 分頁選擇 &lt;code>Use the same network as Docker Host&lt;/code>。&lt;/li>
+&lt;li>在 environment 分頁加入指令 &lt;code>tunnel login&lt;/code>。&lt;/li>
+&lt;li>到容器 log 複製登入 URL。&lt;/li>
+&lt;li>貼上 URL 到瀏覽器並授權 zone。&lt;/li>
+&lt;li>將容器設定 json 匯出到 &lt;code>cloudflare-tunnel&lt;/code> 目錄。&lt;/li>
 &lt;/ol>
 &lt;h4 id="--cloudflared-tunnel-create-synology-tunnel">- &lt;code>cloudflared tunnel create synology-tunnel&lt;/code>&lt;/h4>
 &lt;ol>
-&lt;li>Edit the container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel create synology-tunnel&lt;/code>.&lt;/li>
-&lt;li>Import the container setting json and run a new container.&lt;/li>
-&lt;li>The container will stop and create tunnel config json in &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;li>Create config.yml and write ingress rules.&lt;/li>
-&lt;li>In config.yml, tunnel value is the same as the tunnel config json name, and credentials-file is &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>&lt;/li>
-&lt;li>Export the second container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
+&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的容器設定 json，修改 cmd 為 &lt;code>tunnel create synology-tunnel&lt;/code>。&lt;/li>
+&lt;li>匯入容器設定 json 並執行新容器。&lt;/li>
+&lt;li>容器會停止，並在 &lt;code>cloudflare-tunnel&lt;/code> 中建立 tunnel config json。&lt;/li>
+&lt;li>建立 config.yml 並撰寫 ingress 規則。&lt;/li>
+&lt;li>在 config.yml 中，tunnel 的值要與 tunnel config json 檔名一致，credentials-file 為 &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>。&lt;/li>
+&lt;li>將第二個容器設定 json 匯出到 &lt;code>cloudflare-tunnel&lt;/code> 目錄。&lt;/li>
 &lt;/ol>
 &lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com">- &lt;code>cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>&lt;/h4>
 &lt;ol>
-&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>.&lt;/li>
-&lt;li>Import the second container setting json and run a new container.&lt;/li>
-&lt;li>The container will stop and create a dns record mapping domain to the tunnel.&lt;/li>
+&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>。&lt;/li>
+&lt;li>匯入第二個容器設定 json 並執行新容器。&lt;/li>
+&lt;li>容器會停止並建立 DNS 紀錄，將網域指到 tunnel。&lt;/li>
 &lt;/ol>
 &lt;h4 id="--cloudflared-tunnel-run-synology-tunnel">- &lt;code>cloudflared tunnel run synology-tunnel&lt;/code>&lt;/h4>
 &lt;ol>
-&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel run synology-tunnel&lt;/code>.&lt;/li>
-&lt;li>Import the second container setting json and run a new container.&lt;/li>
-&lt;li>The tunnel now is connectable.&lt;/li>
-&lt;/ol></description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence">Traffic sequence&lt;/h3>
-&lt;p>Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p>
+&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code>tunnel run synology-tunnel&lt;/code>。&lt;/li>
+&lt;li>匯入第二個容器設定 json 並執行新容器。&lt;/li>
+&lt;li>Tunnel 現在可以連線使用。&lt;/li>
+&lt;/ol></description></item><item><title>Cloudflare 流量處理順序</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="流量處理順序">流量處理順序&lt;/h3>
+&lt;p>應用程式流量在 Cloudflare 邊緣節點會依下列順序處理：&lt;/p>
 &lt;ol>
 &lt;li>DDoS&lt;/li>
-&lt;li>URL Rewrites&lt;/li>
-&lt;li>Page Rules&lt;/li>
-&lt;li>IP Access Rules&lt;/li>
-&lt;li>Bots&lt;/li>
-&lt;li>Firewall Rules&lt;/li>
-&lt;li>Rate Limiting&lt;/li>
-&lt;li>Managed Rules&lt;/li>
-&lt;li>Header Modification&lt;/li>
-&lt;li>Access&lt;/li>
+&lt;li>URL 重寫&lt;/li>
+&lt;li>頁面規則&lt;/li>
+&lt;li>IP 存取規則&lt;/li>
+&lt;li>Bot 管理&lt;/li>
+&lt;li>防火牆規則&lt;/li>
+&lt;li>速率限制&lt;/li>
+&lt;li>託管規則&lt;/li>
+&lt;li>標頭修改&lt;/li>
+&lt;li>存取控制&lt;/li>
 &lt;li>Workers&lt;/li>
 &lt;/ol></description></item></channel></rss>

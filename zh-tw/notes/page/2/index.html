@@ -251,7 +251,7 @@ Chinese</a></div></li><li class="nav-item dropdown"><a class="nav-link dropdown-
 </span></span><span style=display:flex><span><span style=color:#75715e># Restore key and enter the private key’s passphrase</span>
 </span></span><span style=display:flex><span>gpg --import-options restore --import private.gpg
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>If GPG not work</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>echo <span style=color:#e6db74>&#39;export GPG_TTY=$(tty)&#39;</span> &gt;&gt; ~/.zshrc
-</span></span><span style=display:flex><span>gpgconf –kill gpg-agent
+</span></span><span style=display:flex><span>gpgconf -kill gpg-agent
 </span></span><span style=display:flex><span>exec $SHELL
 </span></span></code></pre></div></div></div></div></div><div class=note-card><div class=item><h5 class=note-title><span>Encrypt file</span></h5><div class=card><div class=card-body><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Encrypt file</span>
 </span></span><span style=display:flex><span>gpg --symmetric --cipher-algo aes256 archive_file.tar

@@ -98,12 +98,12 @@
 &lt;li>User Management&lt;/li>
 &lt;li>Automated Updates&lt;/li>
 &lt;li>Network Configuration&lt;/li>
-&lt;/ol></description></item><item><title>寫 Web 也可以用 Makefile：好好管理你的環境流程</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">寫 Web 也可以用 Makefile：好好管理你的環境流程&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Makefiles for Web Projects: Manage Your Environment Workflow</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">Makefiles for Web Projects: Manage Your Environment Workflow&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener">How I stopped worrying and loved Makefiles&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>注意：Makefile 的縮排應使用 Tab，否則會出現語法問題。&lt;/strong>&lt;/p>
-&lt;h2 id="makefile-的主要本體target">Makefile 的主要本體：Target&lt;/h2>
+&lt;p>&lt;strong>Note: Makefile indentation must use tabs, otherwise you&amp;rsquo;ll get syntax errors.&lt;/strong>&lt;/p>
+&lt;h2 id="the-core-of-a-makefile-targets">The Core of a Makefile: Targets&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
@@ -114,8 +114,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">zsh&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose exec workspace zsh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>本例有三個 Target：&lt;code>up&lt;/code>、&lt;code>stop&lt;/code>、&lt;code>zsh&lt;/code>。Makefile 預設將第一個 Target 視為 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener">Goal&lt;/a>(不能是點（dot）開頭的 Target)，是專案的最主要流程，可以直接用 &lt;code>make&lt;/code> 執行。以本例來說，執行 &lt;code>make&lt;/code> 和 &lt;code>make up&lt;/code> 是一樣的結果。&lt;/li>
-&lt;li>但其實剛剛複製檔案的例子不是常見的 Make 用法。Make 的強項是在自動判斷有沒有必要執行每個 Target 的流程。例如我們常常將機敏資料放在 .env 中，若 .env 已經存在，就不應該再複製 .env.example 覆寫過去了。這時候我們可以把 .env 做成一個 Target：&lt;/li>
+&lt;li>This example has three targets: &lt;code>up&lt;/code>, &lt;code>stop&lt;/code>, and &lt;code>zsh&lt;/code>. By default, Make treats the first target as the &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener">Goal&lt;/a> (it cannot start with a dot), which is the project&amp;rsquo;s primary workflow. In this case, &lt;code>make&lt;/code> and &lt;code>make up&lt;/code> do the same thing.&lt;/li>
+&lt;li>But the copy step above is not a typical Make use case. Make shines at deciding whether each target needs to run. For example, we often store secrets in &lt;code>.env&lt;/code>. If &lt;code>.env&lt;/code> already exists, we shouldn&amp;rsquo;t overwrite it by copying &lt;code>.env.example&lt;/code> again. In that case, we can make &lt;code>.env&lt;/code> a target:&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span> .env
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
@@ -123,16 +123,16 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.env&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Target 名稱預設是被視為檔名的。Make 之所以稱為 make，就是想要「製作」出指定的 Target，當符合指定條件時（如檔案不存在）才會執行 Target 的內容。
+&lt;li>By default, target names are treated as filenames. The name &amp;ldquo;make&amp;rdquo; implies building a target; it will only execute the target&amp;rsquo;s recipe when the conditions are met (like the file not existing).
 &lt;ul>
-&lt;li>以本例來說，我們執行 &lt;code>up&lt;/code> Target 時，如果 .env 不存在，就會先執行 &lt;code>.env&lt;/code> Target 以複製出 .env，接著才會啟動 workspace container。如果執行 &lt;code>up&lt;/code> Target 時 .env 已經存在，就會略過 &lt;code>.env&lt;/code> Target，直接啟動 workspace container。&lt;/li>
-&lt;li>同樣地，如果我們目錄中有「up」這個檔案， &lt;code>up&lt;/code> Target 就不會被執行了。這時我們可以設定 &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener">Phony Target&lt;/a>，告訴 Make 哪些 Target 不是檔案的名稱，而是單純流程的命名。寫法如下：&lt;/li>
+&lt;li>In this example, when you run the &lt;code>up&lt;/code> target, if &lt;code>.env&lt;/code> doesn&amp;rsquo;t exist it will run the &lt;code>.env&lt;/code> target first to create it, then start the workspace container. If &lt;code>.env&lt;/code> already exists, it skips the &lt;code>.env&lt;/code> target and starts the container directly.&lt;/li>
+&lt;li>Likewise, if there is a file named &lt;code>up&lt;/code> in the directory, the &lt;code>up&lt;/code> target won&amp;rsquo;t run. You can define &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener">Phony Targets&lt;/a> to tell Make that certain targets aren&amp;rsquo;t filenames, but named workflows instead:&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> up stop zsh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="來點變數">來點變數&lt;/h2>
-&lt;p>Make 當然也支援變數（&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>），與常見的 Unix 環境變數慣例相同，我們習慣用 SCREAMING_SNAKE_CASE 表示法（全大寫和底線的表示法）。並且在使用時以 &lt;code>$()&lt;/code> 包裹變數名稱。&lt;/p></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="add-some-variables">Add Some Variables&lt;/h2>
+&lt;p>Make supports variables (&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>). Following common Unix environment variable conventions, we usually write them in SCREAMING_SNAKE_CASE. When used, variables are wrapped in &lt;code>$()&lt;/code>.&lt;/p></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>
@@ -396,10 +396,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arg1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#66d9ef">:-&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-shift-to-read-function-arguments">Use shift to read function arguments&lt;/h5>
 &lt;blockquote>
-&lt;p>This makes it easier to reorder arguments, if you change your mind later.&lt;/p></description></item><item><title>SHELL编程之常用技巧</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">SHELL 编程之常用技巧&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">SHELL 编程之内建命令&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">SHELL 编程之特殊符号&lt;/a>&lt;/li>
+&lt;p>This makes it easier to reorder arguments, if you change your mind later.&lt;/p></description></item><item><title>Common shell scripting tips</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">Common shell scripting tips&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">Shell scripting built-in commands&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">Shell scripting special symbols&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>How to use a here documents to write data to a file in bash script</title><link>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</link><pubDate>Fri, 07 May 2021 11:37:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/" target="_blank" rel="noopener">How to use a here documents to write data to a file in bash script&lt;/a>&lt;/li>
 &lt;/ul>
@@ -424,14 +424,14 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程</title><link>https://linzeyan.github.io/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to Create Temporary Files in Bash: mktemp and trap</title><link>https://linzeyan.github.io/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">How to Create Temporary Files in Bash: mktemp and trap&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="mktemp-命令">&lt;code>mktemp&lt;/code> 命令&lt;/h4>
+&lt;h4 id="mktemp-command">&lt;code>mktemp&lt;/code> command&lt;/h4>
 &lt;ul>
-&lt;li>生成的临时文件名是随机的，而且权限是只有用户本人可读写&lt;/li>
-&lt;li>为了确保临时文件创建成功，&lt;code>mktemp&lt;/code> 命令后面最好使用 OR 运算符（&lt;code>||&lt;/code>），指定创建失败时退出脚本&lt;/li>
-&lt;li>为了保证脚本退出时临时文件被删除，可以使用&lt;code>trap&lt;/code>命令指定退出时的清除操作&lt;/li>
+&lt;li>The generated temp file name is random and readable/writable only by the user.&lt;/li>
+&lt;li>To ensure creation succeeds, append OR (&lt;code>||&lt;/code>) after &lt;code>mktemp&lt;/code> to exit on failure.&lt;/li>
+&lt;li>To delete temp files on script exit, use &lt;code>trap&lt;/code> to register cleanup.&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
@@ -439,237 +439,231 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TMPFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>mktemp&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#f92672">||&lt;/span> exit &lt;span style="color:#ae81ff">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Our temp file is &lt;/span>$TMPFILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-命令的参数">mktemp 命令的参数&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-options">mktemp options&lt;/h5>
 &lt;ul>
-&lt;li>&lt;code>-d&lt;/code> 参数可以创建一个临时目录&lt;/li>
-&lt;li>&lt;code>-p&lt;/code> 参数可以指定临时文件所在的目录。默认是使用 &lt;code>$TMPDIR&lt;/code> 环境变量指定的目录，如果这个变量没设置，那么使用 &lt;code>/tmp&lt;/code> 目录。&lt;/li>
-&lt;li>&lt;code>-t&lt;/code> 参数可以指定临时文件的文件名模板，模板的末尾必须至少包含三个连续的 &lt;code>X&lt;/code> 字符，表示随机字符，建议至少使用六个 &lt;code>X&lt;/code>。默认的文件名模板是 &lt;code>tmp.后接十个随机字符&lt;/code>&lt;/li>
+&lt;li>&lt;code>-d&lt;/code> creates a temporary directory.&lt;/li>
+&lt;li>&lt;code>-p&lt;/code> specifies the directory for temp files. Default is &lt;code>$TMPDIR&lt;/code>. If not set, &lt;code>/tmp&lt;/code> is used.&lt;/li>
+&lt;li>&lt;code>-t&lt;/code> specifies a filename template. The template must end with at least three consecutive &lt;code>X&lt;/code> characters for randomness; six &lt;code>X&lt;/code> are recommended. The default template is &lt;code>tmp.&lt;/code> followed by ten random characters.&lt;/li>
 &lt;/ul>
-&lt;h4 id="trap-命令的用法">&lt;code>trap&lt;/code> 命令的用法&lt;/h4>
-&lt;p>trap 命令用来在 Bash 脚本中响应系统信号。&lt;/p>
-&lt;p>最常见的系统信号就是 SIGINT（中断），即按 Ctrl + C 所产生的信号。trap 命令的-l 参数，可以列出所有的系统信号。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ trap -l
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> SIGHUP 2&lt;span style="color:#f92672">)&lt;/span> SIGINT 3&lt;span style="color:#f92672">)&lt;/span> SIGQUIT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> SIGILL 5&lt;span style="color:#f92672">)&lt;/span> SIGTRAP 6&lt;span style="color:#f92672">)&lt;/span> SIGABRT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ... ...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下。&lt;/p></description></item><item><title>Shell脚本学习笔记</title><link>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell 脚本学习笔记&lt;/a>&lt;/li>
+&lt;h4 id="trap-usage">&lt;code>trap&lt;/code> usage&lt;/h4>
+&lt;p>The trap command handles system signals in Bash scripts.&lt;/p></description></item><item><title>Shell Script Study Notes</title><link>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell Script Study Notes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="执行算术运算">执行算术运算&lt;/h3>
+&lt;h3 id="arithmetic-operations">Arithmetic operations&lt;/h3>
 &lt;pre>&lt;code>val=`expr $a + $b`
 &lt;/code>&lt;/pre>
-&lt;h3 id="运算符">运算符&lt;/h3>
+&lt;h3 id="operators">Operators&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>符号&lt;/th>
-&lt;th>说明&lt;/th>
-&lt;th>示例&lt;/th>
+&lt;th>Symbol&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Example&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>!&lt;/td>
-&lt;td>非运算&lt;/td>
+&lt;td>NOT&lt;/td>
 &lt;td>[ ! false ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-o&lt;/td>
-&lt;td>或运算&lt;/td>
+&lt;td>OR&lt;/td>
 &lt;td>[ $a -lt 20 -o $b -gt 20 ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-a&lt;/td>
-&lt;td>与运算&lt;/td>
+&lt;td>AND&lt;/td>
 &lt;td>[ $a -lt 20 -a $b -gt 20 ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>=&lt;/td>
-&lt;td>相等检测&lt;/td>
+&lt;td>equality check&lt;/td>
 &lt;td>[ $a = $b ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>!=&lt;/td>
-&lt;td>不相等检测&lt;/td>
+&lt;td>inequality check&lt;/td>
 &lt;td>[ $a != $b ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-z&lt;/td>
-&lt;td>字符串长度是否为 0，为 0 则返回 true&lt;/td>
+&lt;td>string length is 0, returns true if 0&lt;/td>
 &lt;td>[ -z $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-n&lt;/td>
-&lt;td>字符串长度不为 0， 不为 0 返回 true&lt;/td>
+&lt;td>string length is not 0, returns true if not 0&lt;/td>
 &lt;td>[ -n $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>str&lt;/td>
-&lt;td>检测字符串是否为空，不为空返回 true&lt;/td>
+&lt;td>check whether string is empty, true if not&lt;/td>
 &lt;td>[ $a ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-b&lt;/td>
-&lt;td>检测文件是否是块设备文件&lt;/td>
+&lt;td>check whether file is a block device&lt;/td>
 &lt;td>[ -b $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-c&lt;/td>
-&lt;td>检测文件是否是字符设备&lt;/td>
+&lt;td>check whether file is a character device&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-d&lt;/td>
-&lt;td>检测文件是否为目录&lt;/td>
+&lt;td>check whether file is a directory&lt;/td>
 &lt;td>[ -d $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-f&lt;/td>
-&lt;td>检测文件是否为普通文件&lt;/td>
+&lt;td>check whether file is a regular file&lt;/td>
 &lt;td>[ -f $file ]&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-r&lt;/td>
-&lt;td>检测文件是否可读&lt;/td>
+&lt;td>check whether file is readable&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-w&lt;/td>
-&lt;td>检测文件是否可写&lt;/td>
+&lt;td>check whether file is writable&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-x&lt;/td>
-&lt;td>检测文件是否可执行&lt;/td>
+&lt;td>check whether file is executable&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-s&lt;/td>
-&lt;td>检测文件是否为空&lt;/td>
+&lt;td>check whether file is empty&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-e&lt;/td>
-&lt;td>检测文件是否存在&lt;/td>
+&lt;td>check whether file exists&lt;/td>
 &lt;td>..&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="特殊变量">特殊变量&lt;/h3>
+&lt;h3 id="special-variables">Special variables&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>变量&lt;/th>
-&lt;th>含义&lt;/th>
+&lt;th>Variable&lt;/th>
+&lt;th>Meaning&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>$0&lt;/td>
-&lt;td>当前脚本的文件名&lt;/td>
+&lt;td>file name of the current script&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$n&lt;/td>
-&lt;td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数&lt;/td>
+&lt;td>arguments passed to a script or function; n is the position&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$#&lt;/td>
-&lt;td>传递给脚本或函数的参数个数&lt;/td>
+&lt;td>number of arguments passed to a script or function&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$*&lt;/td>
-&lt;td>传递给脚本或函数的所有参数，所有参数被当做一个词，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
+&lt;td>all arguments as a single word, e.g., &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$@&lt;/td>
-&lt;td>传递给脚本或函数的所有参数，每个参数当做一个词，用双引号包含，例如&amp;quot;1&amp;quot; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
+&lt;td>all arguments as separate words, e.g., &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$?&lt;/td>
-&lt;td>上个命令的退出状态，或函数的返回值&lt;/td>
+&lt;td>exit status of the last command or return value of a function&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>$$&lt;/td>
-&lt;td>当前 Shell 进程 ID。对于 Shell 脚本，就是这些脚本所在的进程 ID&lt;/td>
+&lt;td>current shell process ID; for scripts, the PID of the script process&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="posix-程序退出状态">POSIX 程序退出状态&lt;/h3>
+&lt;h3 id="posix-program-exit-statuses">POSIX program exit statuses&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>状态码&lt;/th>
-&lt;th>含义&lt;/th>
+&lt;th>Code&lt;/th>
+&lt;th>Meaning&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>0&lt;/td>
-&lt;td>命令成功退出&lt;/td>
+&lt;td>command exited successfully&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;gt; 0&lt;/td>
-&lt;td>在重定向或者单词展开期间(~、变量、命令、算术展开以及单词切割)失败&lt;/td>
+&lt;td>failure during redirection or word expansion (~, variables, commands, arithmetic, and word splitting)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>1 - 125&lt;/td>
-&lt;td>命令不成功退出。特定的退出值的含义，有各个命令自行定义&lt;/td>
+&lt;td>command exited unsuccessfully; specific meanings are command-defined&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>126&lt;/td>
-&lt;td>命令找到了，但是文件无法执行&lt;/td>
+&lt;td>command found but file is not executable&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>127&lt;/td>
-&lt;td>命令没有找到&lt;/td>
+&lt;td>command not found&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;gt; 128&lt;/td>
-&lt;td>命令因收到信号而死亡&lt;/td>
+&lt;td>command died from a signal&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="输入输出重定向">输入输出重定向&lt;/h3>
+&lt;h3 id="inputoutput-redirection">Input/output redirection&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>命令&lt;/th>
-&lt;th>说明&lt;/th>
+&lt;th>Command&lt;/th>
+&lt;th>Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>command &amp;gt; file&lt;/td>
-&lt;td>将输出重定向到 file。&lt;/td>
+&lt;td>redirect output to file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>command &amp;gt; file&lt;/td>
-&lt;td>将输出以追加的方式重定向到 file。&lt;/td>
+&lt;td>redirect output to file by appending&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;gt; file&lt;/td>
-&lt;td>将文件描述符为 n 的文件重定向到 file。&lt;/td>
+&lt;td>redirect file descriptor n to file&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;raquo; file&lt;/td>
-&lt;td>将文件描述符为 n 的文件以追加的方式重定向到 file。&lt;/td>
+&lt;td>redirect file descriptor n to file by appending&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;gt;&amp;amp; m&lt;/td>
-&lt;td>将输出文件 m 和 n 合并。&lt;/td>
+&lt;td>merge output file m and n&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>n &amp;lt;&amp;amp; m&lt;/td>
-&lt;td>将输入文件 m 和 n 合并。&lt;/td>
+&lt;td>merge input file m and n&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&amp;laquo; tag&lt;/td>
-&lt;td>将开始标记 tag 和结束标记 tag 之间的内容作为输入。&lt;/td>
+&lt;td>use content between start tag and end tag as input&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="文件包含">文件包含&lt;/h3>
-&lt;p>使用&lt;code>.&lt;/code>或者&lt;code>source&lt;/code>包含文件&lt;/p></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
+&lt;h3 id="file-include">File include&lt;/h3>
+&lt;p>Use &lt;code>.&lt;/code> or &lt;code>source&lt;/code> to include files.&lt;/p></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">What does &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> mean in the shell?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r -d &lt;span style="color:#e6db74">$&amp;#39;\0&amp;#39;&lt;/span> file; &lt;span style="color:#66d9ef">do&lt;/span>

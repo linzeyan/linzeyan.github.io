@@ -98,13 +98,13 @@
 &lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
 &lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
 &lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
-&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
+&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>不使用 kube-proxy 的 Kubernetes</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">不使用 kube-proxy 的 Kubernetes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="quick-start">Quick-Start&lt;/h4>
+&lt;h4 id="快速開始">快速開始&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 Helm 倉庫&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -182,6 +182,6 @@
 &lt;li>&lt;a href="https://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/" target="_blank" rel="noopener">应大多数人要求写下 kubeadm 的基础使用&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://blog.frognew.com/2018/10/kubernetes-kube-proxy-enable-ipvs.html" target="_blank" rel="noopener">Kubernetes 从 1.10 到 1.11 升级记录(续)：Kubernetes kube-proxy 开启 IPVS 模式&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://lingxiankong.github.io/2018-07-20-katacontainer-docker-k8s.html" target="_blank" rel="noopener">Katacontainers 与 Docker 和 Kubernetes 的集成&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>白话 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener">白话 Kubernetes Runtime&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener">白話 Kubernetes Runtime&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>

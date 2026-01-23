@@ -137,29 +137,32 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span>: &lt;span style="color:#ae81ff">1024000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Install Chrome OS</title><link>https://linzeyan.github.io/posts/2023/20230927-chromeos/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-chromeos/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=Nc3bTBA4meo" target="_blank" rel="noopener">老電腦別丟掉！安裝 Google 免費作業系統安裝教學（Chrome OS Flex /CloudReady）&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>永齡基金會AI大師論壇:人工智慧如何形塑人類未來</title><link>https://linzeyan.github.io/posts/2023/20230927-ai/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-ai/</guid><description>&lt;ul>
+&lt;/ul>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Nc3bTBA4meo?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
+&lt;/div>
+&lt;div style="margin-top: rem;">&lt;/div></description></item><item><title>Yongling Foundation AI Forum: How AI Shapes the Future of Humanity</title><link>https://linzeyan.github.io/posts/2023/20230927-ai/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-ai/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;!--
-&lt;video class="video-player" id="video-178" playsinline controls>
-&lt;source src="https://www.youtube.com/watch?v=M3z6gI1AEns" type="video/mp4" />
-&lt;/video>
---></description></item><item><title>Golang tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/21128.html" target="_blank" rel="noopener">GO 编程模式：切片，接口，时间和性能&lt;/a>&lt;/li>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/M3z6gI1AEns?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
+&lt;/div>
+&lt;div style="margin-top: rem;">&lt;/div></description></item><item><title>Golang Tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/21128.html" target="_blank" rel="noopener">Go Programming Patterns: Slices, Interfaces, Time, and Performance&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>Go 语言是一个高性能的语言，但并不是说这样我们就不用关心性能了，我们还是需要关心的。下面是一个在编程方面和性能相关的提示。&lt;/p>
+&lt;p>Go is a high-performance language, but that does not mean we can ignore performance. Here are some tips related to programming and performance.&lt;/p>
 &lt;ul>
-&lt;li>如果需要把数字转字符串，使用 &lt;code>strconv.Itoa()&lt;/code> 会比 &lt;code>fmt.Sprintf()&lt;/code> 要快一倍左右&lt;/li>
-&lt;li>尽可能地避免把 &lt;code>String&lt;/code> 转成&lt;code>[]Byte&lt;/code> 。这个转换会导致性能下降。&lt;/li>
-&lt;li>如果在 for-loop 里对某个 slice 使用 &lt;code>append()&lt;/code>请先把 slice 的容量很扩充到位，这样可以避免内存重新分享以及系统自动按 2 的 N 次方幂进行扩展但又用不到，从而浪费内存。&lt;/li>
-&lt;li>使用 &lt;code>StringBuffer&lt;/code> 或是 &lt;code>StringBuild&lt;/code> 来拼接字符串，会比使用 &lt;code>+&lt;/code> 或 &lt;code>+=&lt;/code> 性能高三到四个数量级。&lt;/li>
-&lt;li>尽可能的使用并发的 go routine，然后使用 &lt;code>sync.WaitGroup&lt;/code> 来同步分片操作&lt;/li>
-&lt;li>避免在热代码中进行内存分配，这样会导致 gc 很忙。尽可能的使用 &lt;code>sync.Pool&lt;/code> 来重用对象。&lt;/li>
-&lt;li>使用 lock-free 的操作，避免使用 mutex，尽可能使用 &lt;code>sync/Atomic&lt;/code> 包。 （关于无锁编程的相关话题，可参看《&lt;a href="https://coolshell.cn/articles/8239.html" target="_blank" rel="noopener">无锁队列实现&lt;/a>》或《&lt;a href="https://coolshell.cn/articles/9703.html" target="_blank" rel="noopener">无锁 Hashmap 实现&lt;/a>》）&lt;/li>
-&lt;li>使用 I/O 缓冲，I/O 是个非常非常慢的操作，使用 &lt;code>bufio.NewWrite()&lt;/code> 和 &lt;code>bufio.NewReader()&lt;/code> 可以带来更高的性能。&lt;/li>
-&lt;li>对于在 for-loop 里的固定的正则表达式，一定要使用 &lt;code>regexp.Compile()&lt;/code> 编译正则表达式。性能会得升两个数量级。&lt;/li>
-&lt;li>如果你需要更高性能的协议，你要考虑使用 &lt;a href="https://github.com/golang/protobuf" target="_blank" rel="noopener">protobuf&lt;/a> 或 &lt;a href="https://github.com/tinylib/msgp" target="_blank" rel="noopener">msgp&lt;/a> 而不是 JSON，因为 JSON 的序列化和反序列化里使用了反射。&lt;/li>
-&lt;li>你在使用 map 的时候，使用整型的 key 会比字符串的要快，因为整型比较比字符串比较要快。&lt;/li>
+&lt;li>If you need to convert numbers to strings, &lt;code>strconv.Itoa()&lt;/code> is about twice as fast as &lt;code>fmt.Sprintf()&lt;/code>.&lt;/li>
+&lt;li>Avoid converting &lt;code>String&lt;/code> to &lt;code>[]Byte&lt;/code> where possible. This conversion hurts performance.&lt;/li>
+&lt;li>If you use &lt;code>append()&lt;/code> on a slice inside a for-loop, expand the slice capacity ahead of time to avoid reallocations and automatic growth by powers of two, which can waste memory.&lt;/li>
+&lt;li>Use &lt;code>StringBuffer&lt;/code> or &lt;code>StringBuild&lt;/code> to concatenate strings; they are three to four orders of magnitude faster than &lt;code>+&lt;/code> or &lt;code>+=&lt;/code>.&lt;/li>
+&lt;li>Use concurrent goroutines where possible, and use &lt;code>sync.WaitGroup&lt;/code> to synchronize concurrent work.&lt;/li>
+&lt;li>Avoid allocating in hot paths; it makes the GC busy. Use &lt;code>sync.Pool&lt;/code> to reuse objects.&lt;/li>
+&lt;li>Use lock-free operations and avoid mutexes when possible; use &lt;code>sync/Atomic&lt;/code>. (See &lt;a href="https://coolshell.cn/articles/8239.html" target="_blank" rel="noopener">Lock-Free Queue Implementation&lt;/a> or &lt;a href="https://coolshell.cn/articles/9703.html" target="_blank" rel="noopener">Lock-Free Hashmap Implementation&lt;/a>.)&lt;/li>
+&lt;li>Use I/O buffering; I/O is very slow. &lt;code>bufio.NewWrite()&lt;/code> and &lt;code>bufio.NewReader()&lt;/code> improve performance.&lt;/li>
+&lt;li>For fixed regex patterns in a for-loop, use &lt;code>regexp.Compile()&lt;/code> to precompile; it improves performance by two orders of magnitude.&lt;/li>
+&lt;li>If you need higher-performance protocols, consider &lt;a href="https://github.com/golang/protobuf" target="_blank" rel="noopener">protobuf&lt;/a> or &lt;a href="https://github.com/tinylib/msgp" target="_blank" rel="noopener">msgp&lt;/a> instead of JSON, because JSON serialization/deserialization uses reflection.&lt;/li>
+&lt;li>When using maps, integer keys are faster than string keys because integer comparisons are faster.&lt;/li>
 &lt;/ul></description></item><item><title>datavizproject</title><link>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://datavizproject.com" target="_blank" rel="noopener">https://datavizproject.com&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>朋友旅行防止絕交檢查表</title><link>https://linzeyan.github.io/posts/2023/20230926-checklist/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-checklist/</guid><description>&lt;ul>
@@ -210,9 +213,13 @@ dev_user, qa_user 同權限&lt;/p>
 &lt;li>Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li>
 &lt;li>For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li>
 &lt;li>Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li>
-&lt;/ol></description></item><item><title>Cloudflare tunnel on Synology</title><link>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
+&lt;/ol></description></item><item><title>Cloudflare Tunnel on Synology</title><link>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
 &lt;/ul>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
+&lt;/div>
+&lt;div style="margin-top: rem;">&lt;/div>
 &lt;h2 id="setup-synology">Setup Synology&lt;/h2>
 &lt;ol>
 &lt;li>Create a directory in docker directory, such as &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
@@ -311,82 +318,82 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iris2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv.sql&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;iris.csv&amp;#34;&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sql &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;select * from file where Species = &amp;#39;setosa&amp;#39; &amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>channel 的 15 条规则和底层实现</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener">channel 的 15 条规则和底层实现&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>15 Rules of Channels and Their Implementation</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener">15 Rules of Channels and Their Implementation&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="操作规则">操作规则&lt;/h3>
+&lt;h3 id="operation-rules">Operation rules&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th style="text-align: center">操作&lt;/th>
+&lt;th style="text-align: center">Operation&lt;/th>
 &lt;th style="text-align: center">nil&lt;/th>
-&lt;th style="text-align: center">已关闭的 channel&lt;/th>
-&lt;th style="text-align: center">未关闭有缓冲区的 channel&lt;/th>
-&lt;th style="text-align: center">未关闭无缓冲区的 channel&lt;/th>
+&lt;th style="text-align: center">Closed channel&lt;/th>
+&lt;th style="text-align: center">Open buffered channel&lt;/th>
+&lt;th style="text-align: center">Open unbuffered channel&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align: center">关闭&lt;/td>
+&lt;td style="text-align: center">Close&lt;/td>
 &lt;td style="text-align: center">panic&lt;/td>
 &lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">成功关闭，然后可以读取缓冲区的值，读取完之后，继续读取到的是 channel 类型的默认值&lt;/td>
-&lt;td style="text-align: center">成功关闭，之后读取到的是 channel 类型的默认值&lt;/td>
+&lt;td style="text-align: center">Close succeeds; buffered values can be read. After buffer drains, further reads return the zero value of the channel type.&lt;/td>
+&lt;td style="text-align: center">Close succeeds; further reads return the zero value of the channel type.&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align: center">接收&lt;/td>
-&lt;td style="text-align: center">阻塞&lt;/td>
-&lt;td style="text-align: center">不阻塞，读取到的是 channel 类型的默认值&lt;/td>
-&lt;td style="text-align: center">不阻塞，正常读取值&lt;/td>
-&lt;td style="text-align: center">阻塞&lt;/td>
+&lt;td style="text-align: center">Receive&lt;/td>
+&lt;td style="text-align: center">Block&lt;/td>
+&lt;td style="text-align: center">Non-blocking; returns the zero value of the channel type&lt;/td>
+&lt;td style="text-align: center">Non-blocking; reads values normally&lt;/td>
+&lt;td style="text-align: center">Block&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align: center">发送&lt;/td>
-&lt;td style="text-align: center">阻塞&lt;/td>
+&lt;td style="text-align: center">Send&lt;/td>
+&lt;td style="text-align: center">Block&lt;/td>
 &lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">不阻塞，正常写入值&lt;/td>
-&lt;td style="text-align: center">阻塞&lt;/td>
+&lt;td style="text-align: center">Non-blocking; writes values normally&lt;/td>
+&lt;td style="text-align: center">Block&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="编译规则">编译规则&lt;/h3>
+&lt;h3 id="compile-time-rules">Compile-time rules&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th style="text-align: center">操作&lt;/th>
-&lt;th style="text-align: center">channel 類型&lt;/th>
-&lt;th style="text-align: center">結果&lt;/th>
+&lt;th style="text-align: center">Operation&lt;/th>
+&lt;th style="text-align: center">Channel type&lt;/th>
+&lt;th style="text-align: center">Result&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align: center">接收&lt;/td>
-&lt;td style="text-align: center">只写 channel&lt;/td>
-&lt;td style="text-align: center">编译错误&lt;/td>
+&lt;td style="text-align: center">Receive&lt;/td>
+&lt;td style="text-align: center">Send-only channel&lt;/td>
+&lt;td style="text-align: center">Compile error&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align: center">发送&lt;/td>
-&lt;td style="text-align: center">只读 channel&lt;/td>
-&lt;td style="text-align: center">编译错误&lt;/td>
+&lt;td style="text-align: center">Send&lt;/td>
+&lt;td style="text-align: center">Receive-only channel&lt;/td>
+&lt;td style="text-align: center">Compile error&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align: center">关闭&lt;/td>
-&lt;td style="text-align: center">只读 channel&lt;/td>
-&lt;td style="text-align: center">编译错误&lt;/td>
+&lt;td style="text-align: center">Close&lt;/td>
+&lt;td style="text-align: center">Receive-only channel&lt;/td>
+&lt;td style="text-align: center">Compile error&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>制作macOS系统dmg包及iso可引导镜像</title><link>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener">制作 macOS 系统 dmg 包及 iso 可引导镜像&lt;/a>&lt;/li>
+&lt;/table></description></item><item><title>Create macOS DMG and Bootable ISO</title><link>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener">Create macOS DMG and Bootable ISO&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="dmg">dmg&lt;/h3>
 &lt;ol>
 &lt;li>AppStore ==&amp;gt; search &amp;lsquo;install macos&amp;rsquo; ==&amp;gt; get installer ==&amp;gt; &lt;code>du -sh /Applications/Install\ macOS\ Mojave.app/&lt;/code>&lt;/li>
-&lt;li>磁碟工具程式 ==&amp;gt; 檔案 ==&amp;gt; 新增映像檔 ==&amp;gt; 空白映像檔
+&lt;li>Disk Utility ==&amp;gt; File ==&amp;gt; New Image ==&amp;gt; Blank Image
 &lt;ol>
-&lt;li>大小: installer size&lt;/li>
-&lt;li>格式: Mac OS 擴充格式(日誌式)&lt;/li>
-&lt;li>分割區: 單一分割區 - GUID 分割區配置表&lt;/li>
-&lt;li>映像檔格式: 可讀寫的磁碟映像檔&lt;/li>
+&lt;li>Size: installer size&lt;/li>
+&lt;li>Format: Mac OS Extended (Journaled)&lt;/li>
+&lt;li>Partition: Single partition - GUID Partition Map&lt;/li>
+&lt;li>Image Format: read/write disk image&lt;/li>
 &lt;li>same as &lt;code>hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;/li>
@@ -406,10 +413,10 @@ TARGETVARIANT
 &lt;li>General: In the Task field type in RAM Details. Uncheck the &amp;ldquo;Enabled&amp;rdquo; option. Select root User.&lt;/li>
 &lt;li>Schedule: Select Run on the following date then select &amp;ldquo;Do not repeat&amp;rdquo;.&lt;/li>
 &lt;li>Task Settings: Check &amp;ldquo;Send run details by email&amp;rdquo;, add your email then copy paste the code below in the Run command area. After that, click OK.&lt;/li>
-&lt;/ol></description></item><item><title>zsh 配置文件解析及优先级</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">zsh 配置文件解析及优先级&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Zsh Config Files and Priority</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">Zsh Config Files and Priority&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="zsh-的环境变量配置文件有">zsh 的环境变量配置文件有：&lt;/h3>
+&lt;h3 id="zsh-environment-variable-config-files">Zsh environment variable config files:&lt;/h3>
 &lt;ul>
 &lt;li>.zprofile&lt;/li>
 &lt;li>.zlogin&lt;/li>
@@ -417,83 +424,60 @@ TARGETVARIANT
 &lt;li>.zshenv&lt;/li>
 &lt;li>.zlogout&lt;/li>
 &lt;/ul>
-&lt;p>.zshrc 就是用来对 Shell 整体做个性化配置的&lt;/p>
+&lt;p>.zshrc is used for overall shell customization&lt;/p>
 &lt;ul>
-&lt;li>.zprofile 和 .zlogin 差不多是一样的，他们都会被 login shells 设置环境变量，只是加载时间可能有一些差别。.zprofile 是基于 Bash 的 .bash_profile ，而 .zlogin 则是仿照 CSH 的 .login 遗留下来的名字&lt;/li>
-&lt;li>.zshrc 会设置 interactive shells 的环境变量。它会在 .zprofile 之后加载。通常可以设置 $PATH, $PROMPT, aliases, functions 等等。&lt;/li>
-&lt;li>.zshenv 总是会被读取，所以也可以在这里设置环境变量，$PATH 或 $EDITOR 等，但一般不怎么使用&lt;/li>
-&lt;li>zlogout 是在一个会话登出的时候被加载，非常适合用来清理临时的配置，比如重置终端窗口的标题&lt;/li>
+&lt;li>.zprofile and .zlogin are similar. They both set environment variables for login shells, but their load timing differs. .zprofile is based on Bash&amp;rsquo;s .bash_profile, while .zlogin is the CSH-style .login legacy name.&lt;/li>
+&lt;li>.zshrc sets environment variables for interactive shells. It loads after .zprofile. Typically used for $PATH, $PROMPT, aliases, functions, etc.&lt;/li>
+&lt;li>.zshenv is always read, so you can set environment variables like $PATH or $EDITOR there, but it is generally not used.&lt;/li>
+&lt;li>.zlogout is loaded when a session logs out, which is good for cleanup, such as resetting terminal titles.&lt;/li>
 &lt;/ul>
-&lt;p>zsh 会在用户登录时(login shell)加载 ~/.zprofile&lt;/p>
-&lt;p>zsh 会在开启新的终端会话时加载 ~/.zshrc&lt;/p>
-&lt;h3 id="需要注意的是首先会加载-etczshenv-下的内容-然后再加载-home-目录下的配置文件">需要注意的是首先会加载 /etc/zshenv 下的内容， 然后再加载 HOME 目录下的配置文件：&lt;/h3>
-&lt;p>&lt;code>.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code>&lt;/p></description></item><item><title>我的提升生產力 Mac 設定與軟體</title><link>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</link><pubDate>Thu, 20 Apr 2023 14:52:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://jason-memo.dev/posts/my-mac-setting/" target="_blank" rel="noopener">我的提升生產力 Mac 設定與軟體&lt;/a>&lt;/li>
+&lt;p>Zsh loads ~/.zprofile at login (login shell).&lt;/p></description></item><item><title>My Productivity Mac Settings and Apps</title><link>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</link><pubDate>Thu, 20 Apr 2023 14:52:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://jason-memo.dev/posts/my-mac-setting/" target="_blank" rel="noopener">My Productivity Mac Settings and Apps&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="控制個別-app-是否進入-dark-mode">控制個別 App 是否進入 dark mode&lt;/h3>
+&lt;h3 id="control-dark-mode-per-app">Control dark mode per app&lt;/h3>
 &lt;blockquote>
 &lt;p>&lt;a href="https://nightowlapp.co/" target="_blank" rel="noopener">https://nightowlapp.co/&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>&lt;code>brew install --cask nightowl&lt;/code>&lt;/p>
-&lt;h3 id="用鍵盤控制外接螢幕亮度---monitorcontrol">用鍵盤控制外接螢幕亮度 - MonitorControl&lt;/h3>
+&lt;h3 id="control-external-monitor-brightness-with-the-keyboard---monitorcontrol">Control external monitor brightness with the keyboard - MonitorControl&lt;/h3>
 &lt;blockquote>
 &lt;p>&lt;a href="https://github.com/MonitorControl/MonitorControl" target="_blank" rel="noopener">https://github.com/MonitorControl/MonitorControl&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>&lt;code>brew install --cask monitorcontrol&lt;/code>&lt;/p>
 &lt;h3 id="raycast">Raycast&lt;/h3>
-&lt;p>Raycast 可以視為免費而且功能更強大的 Alfred，讓你不需要用滑鼠，靠鍵盤 Option + Space 快速啟用各種功能，內建許多付費 App 才有的功能&lt;/p>
+&lt;p>Raycast is a free and more powerful Alfred. You can do most things with the keyboard and quickly launch features with Option + Space. It includes many features that other apps charge for.&lt;/p>
 &lt;ul>
-&lt;li>快速啟動 App&lt;/li>
-&lt;li>快速查字典跟使用計算機&lt;/li>
-&lt;li>內建查找剪貼簿歷史紀錄&lt;/li>
-&lt;li>自帶像是 Magnet 得 window managment 功能，利用快捷鍵迅速調整視窗大小置左置右&lt;/li>
-&lt;li>與行事曆整合，會議時間快到可以用快捷鍵快速開啟 Google Meet 遠端會議，而且會帶入對的 email 帳戶&lt;/li>
-&lt;li>可以自行寫 shell nodejs applescript 綁定快捷鍵快速啟用。&lt;/li>
-&lt;li>豐富的 extenstion store 可以下載&lt;/li>
+&lt;li>Launch apps quickly&lt;/li>
+&lt;li>Quick dictionary lookup and calculator&lt;/li>
+&lt;li>Built-in clipboard history search&lt;/li>
+&lt;li>Window management like Magnet, with shortcuts to resize and move windows&lt;/li>
+&lt;li>Calendar integration: quickly open Google Meet with the correct account when a meeting starts&lt;/li>
+&lt;li>Write shell/nodejs/applescript to bind shortcuts for quick actions&lt;/li>
+&lt;li>Rich extension store&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>&lt;a href="https://www.raycast.com/" target="_blank" rel="noopener">https://www.raycast.com/&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>&lt;code>brew install --cask raycast&lt;/code>&lt;/p>
-&lt;h3 id="減少風扇起飛---讓-spotlight-排除你的專案資料夾">減少風扇起飛 - 讓 Spotlight 排除你的專案資料夾&lt;/h3>
-&lt;p>系統設定 &amp;gt; Spotlight &amp;gt; 搜尋隱私權&lt;/p></description></item><item><title>一些软件设计的原则</title><link>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</link><pubDate>Tue, 18 Apr 2023 13:58:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/4535.html" target="_blank" rel="noopener">一些软件设计的原则&lt;/a>&lt;/li>
+&lt;p>&lt;a href="https://www.raycast.com/" target="_blank" rel="noopener">https://www.raycast.com/&lt;/a>&lt;/p></description></item><item><title>Some Software Design Principles</title><link>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</link><pubDate>Tue, 18 Apr 2023 13:58:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/4535.html" target="_blank" rel="noopener">Some Software Design Principles&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="1-dont-repeat-yourself-dry">1. Don&amp;rsquo;t Repeat Yourself (DRY)&lt;/h3>
 &lt;h3 id="2-keep-it-simple-stupid-kiss">2. Keep It Simple, Stupid (KISS)&lt;/h3>
-&lt;p>把一个事情搞复杂是一件简单的事，但要把一个复杂的事变简单，这是一件复杂的事。&lt;/p>
+&lt;p>Making something complex is easy, but making something complex simple is difficult.&lt;/p>
 &lt;h3 id="3-program-to-an-interface-not-an-implementation">3. Program to an interface, not an implementation&lt;/h3>
 &lt;ol>
-&lt;li>喜欢组合而不是继承&lt;/li>
-&lt;li>依赖倒置原则&lt;/li>
+&lt;li>Prefer composition over inheritance&lt;/li>
+&lt;li>Dependency inversion principle&lt;/li>
 &lt;/ol>
-&lt;h3 id="4-command-query-separation-cqs---命令-查询分离原则">4. Command-Query Separation (CQS) - 命令-查询分离原则&lt;/h3>
+&lt;h3 id="4-command-query-separation-cqs">4. Command-Query Separation (CQS)&lt;/h3>
 &lt;ul>
-&lt;li>查询：当一个方法返回一个值来回应一个问题的时候，它就具有查询的性质；&lt;/li>
-&lt;li>命令：当一个方法要改变对象的状态的时候，它就具有命令的性质；&lt;/li>
+&lt;li>Query: when a method returns a value to answer a question&lt;/li>
+&lt;li>Command: when a method changes the state of an object&lt;/li>
 &lt;/ul>
 &lt;h3 id="5-you-aint-gonna-need-it-yagni">5. You Ain&amp;rsquo;t Gonna Need It (YAGNI)&lt;/h3>
-&lt;p>只考虑和设计必须的功能，避免过度设计。只实现目前需要的功能，在以后您需要更多功能时，可以再进行添加。&lt;/p>
-&lt;h3 id="6-law-of-demeter---迪米特法则">6. Law of Demeter - 迪米特法则&lt;/h3>
-&lt;blockquote>
-&lt;p>最少知识原则（Principle of Least Knowledge）
-不要和陌生人说话&lt;/p>&lt;/blockquote>
-&lt;blockquote>
-&lt;p>如果你想让你的狗跑的话，你会对狗狗说还是对四条狗腿说？
-如果你去店里买东西，你会把钱交给店员，还是会把钱包交给店员让他自己拿？&lt;/p>&lt;/blockquote>
-&lt;p>对于对象 O 中一个方法 M ，M 应该只能够访问以下对象中的方法：&lt;/p>
-&lt;ol>
-&lt;li>对象 O；&lt;/li>
-&lt;li>与 O 直接相关的 Component Object；&lt;/li>
-&lt;li>由方法 M 创建或者实例化的对象；&lt;/li>
-&lt;li>作为方法 M 的参数的对象。&lt;/li>
-&lt;/ol>
-&lt;h3 id="7-面向对象的-solid-原则">7. 面向对象的 S.O.L.I.D 原则&lt;/h3>
-&lt;h4 id="single-responsibility-principle-srp---职责单一原则">Single Responsibility Principle (SRP) - 职责单一原则&lt;/h4>
-&lt;p>一个类，只做一件事，并把这件事做好，其只有一个引起它变化的原因&lt;/p></description></item><item><title>关于高可用的系统</title><link>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">关于高可用的系统&lt;/a>&lt;/li>
+&lt;p>Only design and implement what is necessary. Avoid overengineering. Implement what you need now; add more when needed later.&lt;/p></description></item><item><title>On High Availability Systems</title><link>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">On High Availability Systems&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>項目 / 機制&lt;/th>
+&lt;th>Item / Mechanism&lt;/th>
 &lt;th>Backups&lt;/th>
 &lt;th>M/S&lt;/th>
 &lt;th>MM&lt;/th>
@@ -552,15 +536,10 @@ TARGETVARIANT
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>这个图基本上来说是目前高可用系统中能看得到的所有的解决方案的基础了。M/S、MM 实现起来不难，但是会有很多问题，2PC 的问题就是性能不行，而 Paxos 的问题就是太复杂，实现难度太大。&lt;/p>
-&lt;p>总结一下各个高可用方案的的问题：&lt;/p>
-&lt;ul>
-&lt;li>对于最终一致性来说，在宕机的情况下，会出现数据没有完全同步完成，会出现数据差异性。&lt;/li>
-&lt;li>对于强一致性来说，要么使用性能比较慢的 XA 系的两阶段提交的方案，要么使用性能比较好，但是实现比较复杂的 Paxos 协议。&lt;/li>
-&lt;/ul></description></item><item><title>有关 MTU 和 MSS 的一切</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">有关 MTU 和 MSS 的一切&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>使用Go语言解析二进制数据踩坑总结</title><link>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</link><pubDate>Fri, 20 Jan 2023 13:48:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://tao.zz.ac/go/parse-binary-data.html" target="_blank" rel="noopener">使用 Go 语言解析二进制数据踩坑总结&lt;/a>&lt;/li>
+&lt;p>This table essentially covers the foundational solutions for high-availability systems today. M/S and MM are not hard to implement, but have many issues. 2PC suffers from poor performance, while Paxos is too complex and difficult to implement.&lt;/p></description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">Everything About MTU and MSS&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Pitfalls When Parsing Binary Data in Go</title><link>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</link><pubDate>Fri, 20 Jan 2023 13:48:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://tao.zz.ac/go/parse-binary-data.html" target="_blank" rel="noopener">Pitfalls When Parsing Binary Data in Go&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#a6e22e">bufSize&lt;/span>)
@@ -574,10 +553,9 @@ TARGETVARIANT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">buf&lt;/span>[:&lt;span style="color:#a6e22e">n&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>当 err 的值为 io.EOF 时直接返回了。这是最可能出问题的地方。仔细阅读函数文档发现：&lt;/p>
+&lt;p>The code returns immediately when err is io.EOF, which is the most likely problem. The docs say:&lt;/p>
 &lt;blockquote>
-&lt;p>Callers should always process the n &amp;gt; 0 bytes returned before considering the error err. Doing so correctly handles I/O errors that happen after reading some bytes and also both of the allowed EOF behaviors.&lt;/p>&lt;/blockquote>
-&lt;p>所以程序必须先处理 n &amp;gt; 0 的情况，然后再处理 err != nil 的情况！这跟我之前的印象不相符。因为一般来说，当 err 非空时，前面的返回数据一般都是空值。但 io.Reader 并不是这样。&lt;/p></description></item><item><title>Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal</title><link>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</link><pubDate>Fri, 13 Jan 2023 16:51:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</guid><description>&lt;ul>
+&lt;p>Callers should always process the n &amp;gt; 0 bytes returned before considering the error err. Doing so correctly handles I/O errors that happen after reading some bytes and also both of the allowed EOF behaviors.&lt;/p></description></item><item><title>Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal</title><link>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</link><pubDate>Fri, 13 Jan 2023 16:51:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/" target="_blank" rel="noopener">Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="alacritty">&lt;a href="https://github.com/alacritty/alacritty" target="_blank" rel="noopener">Alacritty&lt;/a>&lt;/h4>
@@ -585,13 +563,13 @@ TARGETVARIANT
 &lt;h4 id="bat">&lt;a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat&lt;/a>&lt;/h4>
 &lt;p>bat is one of my favorite tools from this list. It&amp;rsquo;s a replacement for cat.&lt;/p>
 &lt;h4 id="dust">&lt;a href="https://github.com/bootandy/dust" target="_blank" rel="noopener">dust&lt;/a>&lt;/h4>
-&lt;p>Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p></description></item><item><title>Windows SSH setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH setup&lt;/a>&lt;/li>
+&lt;p>Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p></description></item><item><title>Windows SSH Setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH Setup&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Install OpenSSH for Windows&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>
-&lt;li>預設的 shell 是使用 cmd，照文件說，若需要修改，是要改 ansible_shell_type 變數，這應該是要在 inventory 主機裡加入主機變數：ansible_shell_type，變數內容可以是 cmd 或 powershell。&lt;/li>
-&lt;li>inventory 主機裡要加入 ansible_connection 主機變數，告知要使用 ssh 連線。(&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
-&lt;li>可能會需要在 ansible.cfg 裡加上 remote_tmp 設定，指定為 C:\TEMP&lt;/li>
-&lt;li>Playbook 裡可以使用 &lt;code>win_&lt;/code> 開頭的模組，或是使用 raw 模組&lt;/li>
+&lt;li>The default shell is cmd. The docs say to change the ansible_shell_type variable if needed. This should be set as a host variable in inventory: ansible_shell_type, with value cmd or powershell.&lt;/li>
+&lt;li>Add the ansible_connection host variable in inventory to indicate SSH connections. (&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
+&lt;li>You may need to add remote_tmp in ansible.cfg and set it to C:\TEMP.&lt;/li>
+&lt;li>In playbooks, use modules prefixed with &lt;code>win_&lt;/code>, or use the raw module.&lt;/li>
 &lt;/ol></description></item></channel></rss>

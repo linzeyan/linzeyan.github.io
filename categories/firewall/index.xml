@@ -21,22 +21,22 @@ set allowaccess https ping ssh snmp
 next
 end
 &lt;/code>&lt;/pre>&lt;p>System2&lt;/p></description></item><item><title>HA command</title><link>https://linzeyan.github.io/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
-# 全新設備上面沒啟用過HA 必須先定義Cluster ID
-# ClustartID 必須獨立，不可以與其他SRX重複，因為HA會建立一組Virtual MAC Address ，而這個ID數值會對其產生影響，重複有可能導致MAC address 重複而出現不可預期的錯誤
+# On a brand-new device without HA enabled, you must define the cluster ID.
+# Cluster ID must be unique and cannot duplicate other SRX, because HA creates a virtual MAC address and this ID affects it. Duplicates may cause MAC duplication and unexpected errors.
 #
 request system zeroize
-# 以下command 必須在 &amp;gt; 模式使用
-set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 0 # 這個是在 node 0 的設備下的
-set chassis cluster cluster-id &amp;lt;ID範圍 0~ 255&amp;gt; node 1 # 這個是在 node 1 的設備下的
-在secondary node 下 這個command
+# The following commands must be run in `&amp;gt;` mode.
+set chassis cluster cluster-id &amp;lt;ID range 0~255&amp;gt; node 0 # This is on node 0
+set chassis cluster cluster-id &amp;lt;ID range 0~255&amp;gt; node 1 # This is on node 1
+# On the secondary node, run this command.
 request chassis cluster configuration-synchronize
-# 等待機器重開機後，會出現Hold 或stanby 字樣 ，看到Cluster 是否有起來
+# After reboot, you will see Hold or standby; check whether the cluster is up.
 show chassis cluster status
-# 這個是RETH interface 建立好才會出現，必須先做config才會有
+# This appears only after RETH interfaces are created; you must configure first.
 show chassis cluster interfaces
-# 以下command 則是在 Config mode 下使用 ，先把設定檔建起來
+# The following commands are run in config mode; build the config first.
 ---
-# 這邊需要 backup-router 是給 HA裡面的Standby Device 的管理介面 (fxp) 一筆routing 可以回應，預設Standby 不會啟用routing engine，所以需要這筆設定
+# The backup-router is for the HA standby device management interface (fxp) so it can respond to routing; by default the standby does not enable the routing engine, so this is required.
 set groups node0 system host-name SRX-node0
 set groups node0 system backup-router 10.10.0.254
 set groups node0 system backup-router destination 0.0.0.0/0
@@ -50,10 +50,10 @@ set system time-zone Asia/Taipei
 set chassis cluster control-link-recovery
 set chassis cluster reth-count 10
 set chassis cluster heartbeat-interval 2000
-# 另外建議在建置期間先將IPv6 打開，可以使用以下指令，因為日後開啟IPv6功能則必須要將設備重開機
+# It is recommended to enable IPv6 during setup using the following command, because enabling IPv6 later requires a reboot.
 set security forwarding-options family inet6 mode flow-based
-# 這邊的interface 號碼要看每一台Chassis 的型號不同而會有所不同
-# 最簡單的識別方式是看那台設備的Slot 有幾個，像SRX550HM 是 0~ 8都有擴充可以使用，所以預設HA會在 9開始 ，所以會是 ge-9/x/x
+# Interface numbers vary by chassis model.
+# The easiest way is to check how many slots the device has. For example, SRX550HM has expansion 0-8, so HA starts at 9, hence ge-9/x/x.
 set chassis cluster redundancy-group 0 node 0 priority 150
 set chassis cluster redundancy-group 0 node 1 priority 100
 set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
@@ -66,10 +66,10 @@ set chassis cluster redundancy-group 1 interface-monitor ge-0/0/3 weight 150
 set chassis cluster redundancy-group 1 interface-monitor ge-0/0/5 weight 150
 set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
 set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
-# 這裡是作為Redundancy group: 1 的 Data sync 設定 ，請務必設定上去才會啟用ge-0/0/2 的 heartbeat link
+# This is the data sync setting for redundancy group 1; you must set it to enable the ge-0/0/2 heartbeat link.
 set interfaces fab0 fabric-options member-interfaces ge-0/0/2
 set interfaces fab1 fabric-options member-interfaces ge-9/0/2
-# 設定interface 加入reth Group
+# Add interfaces to the reth group.
 set interfaces ge-0/0/3 gigether-options redundant-parent reth0
 set interfaces ge-0/0/4 gigether-options redundant-parent reth0
 set interfaces ge-9/0/3 gigether-options redundant-parent reth0
@@ -77,59 +77,46 @@ set interfaces ge-9/0/4 gigether-options redundant-parent reth0
 set interfaces ge-0/0/5 gigether-options redundant-parent reth1
 set interfaces ge-9/0/5 gigether-options redundant-parent reth1
 set interfaces reth0 vlan-tagging
-# 務必要將RETH 加入 data sync Group 裡面，不然不會動
+# You must add RETH to the data sync group, otherwise it will not work.
 set interfaces reth0 redundant-ether-options redundancy-group 1
-# 特別注意，在SRX雖然是LACP Passive mode ，在Switch 請務必使用LACP Activate mode
+# Note: SRX uses LACP passive mode, but the switch must use LACP active mode.
 set interfaces reth0 redundant-ether-options lacp passive
 set interfaces reth0 redundant-ether-options lacp periodic slow
 set interfaces reth1 redundant-ether-options redundancy-group 1
 set interfaces reth1 unit 0 family inet address 202.99.240.100/26
-&lt;/code>&lt;/pre></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180627-juniper/</guid><description>&lt;p>下列操作命令在操作模式下使用，或在配置模式下 run show…&lt;/p>
-&lt;p>查看當前防火牆 session 數&lt;/p>
+&lt;/code>&lt;/pre></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180627-juniper/</guid><description>&lt;p>The following commands are run in operational mode, or use &lt;code>run show&lt;/code> in configuration mode.&lt;/p>
+&lt;p>Show current firewall session count&lt;/p>
 &lt;pre tabindex="0">&lt;code>show security flow session | match 10.22.12.104
 show security flow session source-prefix 10.22.12.104
-&lt;/code>&lt;/pre>&lt;p>清除當前 session&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Clear current sessions&lt;/p>
 &lt;pre tabindex="0">&lt;code>clear security flow session all
-&lt;/code>&lt;/pre>&lt;p>查 OID&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Query OID&lt;/p>
 &lt;pre tabindex="0">&lt;code>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
-&lt;/code>&lt;/pre>&lt;p>查看當前軟體版本號&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Check current software version&lt;/p>
 &lt;pre tabindex="0">&lt;code>show system software
-&lt;/code>&lt;/pre>&lt;p>查看系統啟動時間&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Check system uptime&lt;/p>
 &lt;pre tabindex="0">&lt;code>show system uptime
-&lt;/code>&lt;/pre>&lt;p>查看硬體板卡及序列號&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Check hardware cards and serial numbers&lt;/p>
 &lt;pre tabindex="0">&lt;code>show chassis haredware
-&lt;/code>&lt;/pre>&lt;p>查看硬體板卡當前狀態&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Check current hardware status&lt;/p>
 &lt;pre tabindex="0">&lt;code>show chassis environment
-&lt;/code>&lt;/pre>&lt;p>查看路由表&lt;/p>
-&lt;pre tabindex="0">&lt;code>show route
-&lt;/code>&lt;/pre>&lt;p>設備商的 Administrative distance / Route preference 預設值比較&lt;/p>
-&lt;p>查看 ARP 表&lt;/p>
-&lt;pre tabindex="0">&lt;code>show arp
-&lt;/code>&lt;/pre>&lt;p>查看系統 log&lt;/p>
-&lt;pre tabindex="0">&lt;code>show log messages
-&lt;/code>&lt;/pre>&lt;p>查看所有介面運行狀態&lt;/p>
-&lt;pre tabindex="0">&lt;code>show interface terse
-&lt;/code>&lt;/pre>&lt;p>查看介面運行細節資訊&lt;/p>
-&lt;pre tabindex="0">&lt;code>show interface ge-x/y/z detail
-&lt;/code>&lt;/pre>&lt;p>動態統計介面資料包轉發資訊&lt;/p>
-&lt;pre tabindex="0">&lt;code>monitor interface ge-x/y/z
-&lt;/code>&lt;/pre>&lt;p>檢查 ALG 開啟情況&lt;/p></description></item><item><title>防火牆更新</title><link>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="事前準備">事前準備:&lt;/h4>
-&lt;p>插 console&lt;/p>
-&lt;p>將更新檔丟到 usb 裡&lt;/p>
-&lt;p>&lt;strong>&lt;em>使用前可先使用 &lt;code>show version&lt;/code> 查看當前版本&lt;/em>&lt;/strong>&lt;/p>
-&lt;h4 id="更新-sop">更新 SOP:&lt;/h4>
+&lt;/code>&lt;/pre>&lt;p>Show routing table&lt;/p></description></item><item><title>Firewall Update</title><link>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="preparation">Preparation:&lt;/h4>
+&lt;p>Plug in the console.&lt;/p>
+&lt;p>Copy the update file to the USB drive.&lt;/p>
+&lt;p>&lt;strong>&lt;em>Before starting, use &lt;code>show version&lt;/code> to check the current version&lt;/em>&lt;/strong>&lt;/p>
+&lt;h4 id="update-sop">Update SOP:&lt;/h4>
 &lt;ol>
 &lt;li>&lt;code>start shell&lt;/code>&lt;/li>
-&lt;li>&lt;code>su成root身分&lt;/code>&lt;/li>
-&lt;li>&lt;code>建資料夾mkdir /var/tmp/usb(名字可自取)&lt;/code>&lt;/li>
-&lt;li>插入 USB，這邊要注意 da 後面的數字，目前是 da1&lt;/li>
-&lt;li>掛載 &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (如果是 da0，就要變成 da0s1，以此類推)&lt;/li>
-&lt;li>跑完後 &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
+&lt;li>&lt;code>su&lt;/code> to root&lt;/li>
+&lt;li>Create a directory: &lt;code>mkdir /var/tmp/usb&lt;/code> (name can be anything)&lt;/li>
+&lt;li>Insert the USB. Note the number after &lt;code>da&lt;/code>, currently &lt;code>da1&lt;/code>.&lt;/li>
+&lt;li>Mount it: &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (if &lt;code>da0&lt;/code>, then use &lt;code>da0s1&lt;/code>, etc.)&lt;/li>
+&lt;li>After it finishes, &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
 &lt;ol>
 &lt;li>&lt;code>ls&lt;/code> (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;li>cli 切換成 operational mode
+&lt;li>Switch the CLI to operational mode
 &lt;ol>
 &lt;li>&lt;code>request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code>&lt;/li>
 &lt;/ol>

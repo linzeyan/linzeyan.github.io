@@ -1,38 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSL on Ricky</title><link>https://linzeyan.github.io/categories/ssl/</link><description>Recent content in SSL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 24 Jul 2018 18:35:39 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/ssl/index.xml" rel="self" type="application/rss+xml"/><item><title>CDN 相关 https 证书的申请</title><link>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</link><pubDate>Tue, 24 Jul 2018 18:35:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSL on Ricky</title><link>https://linzeyan.github.io/categories/ssl/</link><description>Recent content in SSL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 24 Jul 2018 18:35:39 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/ssl/index.xml" rel="self" type="application/rss+xml"/><item><title>Applying HTTPS Certificates for CDN</title><link>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</link><pubDate>Tue, 24 Jul 2018 18:35:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180724-dehydrated/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/lukas2511/dehydrated" target="_blank" rel="noopener">dehydrated&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/kappataumu/letsencrypt-cloudflare-hook" target="_blank" rel="noopener">letsencrypt-cloudflare-hook&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>由于我们不能上传文件到 CDN 服务器，所以我们不能采用文件验证方式来申请 https 证书。所幸 Let&amp;rsquo;s Encrypt 支持 dns-01 challenge 通过 DNS 验证方式来申请 https 证书。我们使用 Dehydrated 配合 CloudFlare hook 来申请 https 证书。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 首先 clone dehydrated 这个仓库&lt;/span>
+&lt;p>Since we cannot upload files to the CDN server, we cannot use file validation to apply for HTTPS certificates. Fortunately, Let&amp;rsquo;s Encrypt supports the dns-01 challenge via DNS validation. We use Dehydrated with the CloudFlare hook to apply for HTTPS certificates.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># First clone the dehydrated repository&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/lukas2511/dehydrated
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 clone 出来的 dehydrated 目录下创建 config 文件，内容参考 config 文件(https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 在 config 文件的末尾加上 Cloudflare 相关的信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># In the cloned dehydrated directory, create a config file. See the example config file:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Append Cloudflare info to the end of the config file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_EMAIL=user@example.com&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;export CF_KEY=K9uX2HyUjeWg5AhAb&amp;#34;&lt;/span> &amp;gt;&amp;gt; config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># clone Cloudflare hook&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Clone the Cloudflare hook&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir hooks
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/kappataumu/letsencrypt-cloudflare-hook hooks/cloudflare
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安装依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install dependencies&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pip install -r hooks/cloudflare/requirements-python-2.txt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建 domains.txt 文件，每行一个域名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create domains.txt, one domain per line&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>root@db-slave01 dehydrated&lt;span style="color:#f92672">]&lt;/span>&lt;span style="color:#75715e"># cat domains.txt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>apk.kosungames.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sp-res.kosungames.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpweb.kosungames.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 申请 https 证书&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Request HTTPS certificates&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./dehydrated -c -k hooks/cloudflare/hook.py
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 使用 Python 脚本上传证书。脚本需在 dehydrated 目录下&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use a Python script to upload the certificates. The script must be in the dehydrated directory.&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env python&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> aliyunsdkcore &lt;span style="color:#f92672">import&lt;/span> client

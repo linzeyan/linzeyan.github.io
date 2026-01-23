@@ -25,7 +25,7 @@
 &lt;ul>
 &lt;li>在做 Fuzzing Test 的時候如果跑一跑 FAIL 了，Go 會幫忙把那組 input 記在 testcase/ 裡面&lt;/li>
 &lt;li>看了之後會發現在 x=6、y=30 時 assert 會失敗，也就是說 pow(6, 30)/6 不會等於 pow(6, 29)。但這也太奇怪了吧？仔細實驗之後才發現是因為在計算 pow(6, 30) 的時候會發生 overflow。&lt;/li>
-&lt;li>因為 Go 定義的 max.MaxUint 大約是 18 * 10¹⁸，但 6²⁹ 大概是 7 * 10¹⁸。如果把 6²⁹ 再乘上 6，就會發生 overflow 得到 8 * 10¹⁸，很像繞了操場兩圈結果在跟原本差不多的位置。&lt;/li>
+&lt;li>因為 Go 定義的 max.MaxUint 大約是 &lt;code>18 * 10¹⁸&lt;/code>，但 &lt;code>6²⁹&lt;/code> 大概是 &lt;code>7 * 10¹⁸&lt;/code>。如果把 &lt;code>6²⁹&lt;/code> 再乘上 6，就會發生 overflow 得到 &lt;code>8 * 10¹⁸&lt;/code>，很像繞了操場兩圈結果在跟原本差不多的位置。&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">ErrOverflow&lt;/span> = &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Errorf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;overflow&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>

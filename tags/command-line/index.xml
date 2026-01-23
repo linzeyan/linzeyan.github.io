@@ -281,11 +281,11 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/ul>
 &lt;h3 id="httpry">httpry&lt;/h3>
 &lt;blockquote>
-&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump 使用总结&lt;/a>&lt;/li>
+&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>Tcpdump Usage Summary</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump Usage Summary&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h2 id="命令使用">命令使用&lt;/h2>
-&lt;p>tcpdump 采用命令行方式，它的命令格式为：&lt;/p>
+&lt;h2 id="command-usage">Command usage&lt;/h2>
+&lt;p>tcpdump uses the command line. The command format is:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tcpdump &lt;span style="color:#f92672">[&lt;/span> -AdDeflLnNOpqRStuUvxX &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -c count &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -C file_size &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -F file &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -i interface &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -m module &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -M secret &lt;span style="color:#f92672">]&lt;/span>
@@ -294,41 +294,41 @@ grep receives the output of tcpflow&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -E spi@ipaddr algo:secret, ... &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -y datalinktype &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -Z user &lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> expression &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="tcpdump-的简单选项介绍">tcpdump 的简单选项介绍&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="simple-option-notes-for-tcpdump">Simple option notes for tcpdump&lt;/h3>
 &lt;ul>
-&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code>，可通过&lt;code>spi@ipaddr algo:secret&lt;/code> 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code>0x&lt;/code> 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code>spi@ipaddr algo:secret&lt;/code>)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li>
-&lt;li>&lt;code>-T type&lt;/code> 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:
+&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code> can decrypt IPsec ESP packets using &lt;code>spi@ipaddr algo:secret&lt;/code>. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code>0x&lt;/code>, the key is read as hex. In addition to the syntax above (&lt;code>spi@ipaddr algo:secret&lt;/code>), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code>spi@ipaddr algo:secret, ...&lt;/code> with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li>
+&lt;li>&lt;code>-T type&lt;/code> forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
 &lt;ul>
-&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol， 按需距离向量路由协议，在 Ad hoc(点对点模式)网络中使用)，&lt;/li>
+&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol, used in Ad hoc peer-to-peer networks)&lt;/li>
 &lt;li>&lt;code>cnfp&lt;/code> (Cisco NetFlow protocol)&lt;/li>
-&lt;li>&lt;code>rpc&lt;/code>(Remote Procedure Call)&lt;/li>
+&lt;li>&lt;code>rpc&lt;/code> (Remote Procedure Call)&lt;/li>
 &lt;li>&lt;code>rtp&lt;/code> (Real-Time Applications protocol)&lt;/li>
-&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications con-trol protocol)&lt;/li>
+&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications control protocol)&lt;/li>
 &lt;li>&lt;code>snmp&lt;/code> (Simple Network Management Protocol)&lt;/li>
-&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol， 碎文件协议)&lt;/li>
-&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool， 可用于在 internet 上进行电视电话会议的应用层协议)&lt;/li>
-&lt;li>&lt;code>wb&lt;/code> (distributed White Board， 可用于网络会议的应用层协议)&lt;/li>
+&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol)&lt;/li>
+&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool, an application-layer protocol used for video conferencing on the internet)&lt;/li>
+&lt;li>&lt;code>wb&lt;/code> (distributed White Board, an application-layer protocol for online meetings)&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h3 id="实用命令实例">实用命令实例&lt;/h3>
-&lt;p>&lt;strong>截获主机 210.27.48.1 和主机 210.27.48.2 或 210.27.48.3 的通信&lt;/strong>&lt;/p></description></item><item><title>活久见！Linux命令行居然也可以用来查看图像？</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">活久见！Linux 命令行居然也可以用来查看图像？&lt;/a>&lt;/li>
+&lt;h3 id="practical-command-examples">Practical command examples&lt;/h3>
+&lt;p>&lt;strong>Capture communication between host 210.27.48.1 and host 210.27.48.2 or 210.27.48.3&lt;/strong>&lt;/p></description></item><item><title>Surprisingly, you can view images in the Linux CLI?</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">Surprisingly, you can view images in the Linux CLI?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="fim">FIM&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>sudo apt-get install fim&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>控制 FIM 中图像的常用快捷键：&lt;/p>
+&lt;p>Common shortcuts for images in FIM:&lt;/p>
 &lt;ul>
-&lt;li>PageUp / Down：上一个图像/下一个图像&lt;/li>
-&lt;li>+/-：放大/缩小&lt;/li>
-&lt;li>a：自动缩放&lt;/li>
-&lt;li>w：合适宽度&lt;/li>
-&lt;li>h：合适身高&lt;/li>
-&lt;li>j / k：向下平移/向上平移&lt;/li>
-&lt;li>f / m：翻转/镜面反射&lt;/li>
-&lt;li>r / R：旋转（顺时针和逆时针）&lt;/li>
-&lt;li>ESC / q：退出&lt;/li>
+&lt;li>PageUp / Down: previous/next image&lt;/li>
+&lt;li>+/-: zoom in/out&lt;/li>
+&lt;li>a: auto scale&lt;/li>
+&lt;li>w: fit width&lt;/li>
+&lt;li>h: fit height&lt;/li>
+&lt;li>j / k: pan down/up&lt;/li>
+&lt;li>f / m: flip/mirror&lt;/li>
+&lt;li>r / R: rotate (clockwise/counterclockwise)&lt;/li>
+&lt;li>ESC / q: quit&lt;/li>
 &lt;/ul>
 &lt;h4 id="viu">Viu&lt;/h4>
 &lt;blockquote>

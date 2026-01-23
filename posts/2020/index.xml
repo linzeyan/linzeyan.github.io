@@ -1,59 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2020 on Ricky</title><link>https://linzeyan.github.io/posts/2020/</link><description>Recent content in 2020 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Dec 2020 21:24:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/2020/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL 2 的 .wslconfig 設定檔說明</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 的 .wslconfig 設定檔說明&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2020 on Ricky</title><link>https://linzeyan.github.io/posts/2020/</link><description>Recent content in 2020 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Dec 2020 21:24:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/2020/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL 2 .wslconfig configuration explained</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 .wslconfig configuration explained&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">在 Windows 10 環境上安裝 WSL 2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">使用 WSL 2 打造優質的多重 Linux 開發環境&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">Install WSL 2 on Windows 10&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">Build a multi-Linux development environment with WSL 2&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;p>安裝 WSL 2 的步驟：&lt;/p>
+&lt;p>Steps to install WSL 2:&lt;/p>
 &lt;ul>
-&lt;li>加入 Windows Insider Program（此步驟不可省略）&lt;/li>
-&lt;li>啟用 WSL 必要元件&lt;/li>
-&lt;li>安裝 Linux 發行版本&lt;/li>
-&lt;li>設定 WSL 2 支援的 Linux 發行版本&lt;/li>
-&lt;li>WSL 2 問題排除：啟用壓縮功能的虛擬磁碟檔案無法轉換成 WSL 2 架構&lt;/li>
-&lt;li>安裝及啟動 Docker&lt;/li>
-&lt;li>安裝 Docker Desktop v2.2.1.0&lt;/li>
+&lt;li>Join the Windows Insider Program (required)&lt;/li>
+&lt;li>Enable required WSL components&lt;/li>
+&lt;li>Install a Linux distribution&lt;/li>
+&lt;li>Set the Linux distribution to use WSL 2&lt;/li>
+&lt;li>WSL 2 troubleshooting: compressed virtual disk files cannot be converted to the WSL 2 architecture&lt;/li>
+&lt;li>Install and start Docker&lt;/li>
+&lt;li>Install Docker Desktop v2.2.1.0&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟用 WSL 必要元件&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable required WSL components&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>Microsoft-Windows-Subsystem-Linux /all /norestart
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>VirtualMachinePlatform /all /norestart
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 WSL 2 支援的 Linux 發行版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set the Linux distribution to WSL 2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-version ubuntu &lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-default-version &lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
 &lt;ul>
 &lt;li>
-&lt;p>編輯 &lt;code>%UserProfile%\.wslconfig&lt;/code> 檔案&lt;/p></description></item><item><title>Day 19 BGP Protocol (1)</title><link>https://linzeyan.github.io/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-bgp/</guid><description>&lt;ul>
+&lt;p>Edit &lt;code>%UserProfile%\.wslconfig&lt;/code>&lt;/p></description></item><item><title>Day 19 BGP Protocol (1)</title><link>https://linzeyan.github.io/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-bgp/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener">Day 19 BGP Protocol (1)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener">Day 20 BGP Protocol (2)&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>使用 oh-my-posh 美化 PowerShell 樣式</title><link>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener">使用 oh-my-posh 美化 PowerShell 樣式&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Style PowerShell with oh-my-posh</title><link>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener">Style PowerShell with oh-my-posh&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 這會從 PowerShell Gallery 下載並安裝 posh-git 和 oh-my-posh 這兩個模組，前者是在命令列中顯示 Git 專案的相關資訊，後者則是美美的樣式套件&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This downloads and installs the posh-git and oh-my-posh modules from PowerShell Gallery.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The former shows Git info in the prompt, and the latter provides the themes.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module posh-git -Scope CurrentUser
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module oh-my-posh -Scope CurrentUser
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 接著我們要修改 PowerShell 啟動時所載入的設定檔，在 PowerShell 中輸入 $PROFILE 可得到當前使用者啟動 PowerShell 時，會載入的個人設定檔位置。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 你的電腦可能沒有這個實體檔案，這時可以執行下面的指令，如果沒有該設定檔，則建立一個，然後使用 notepad 來開啟該設定檔。&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Next, edit the PowerShell profile loaded at startup. In PowerShell, $PROFILE shows the current&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># user&amp;#39;s profile path. The file may not exist; run the commands below to create it and open it.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>notepad $PROFILE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最後在該設定檔中加入下列指令&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Import-Module posh-git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Import-Module oh-my-posh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Set-Theme Paradox
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>oh-my-posh 內建了很多樣式，你也可以使用 Get-Theme 這個 Cmdlet 指令取得 oh-my-posh 有提供的所有樣式及相關檔案位置&lt;/p></description></item><item><title>冰山一角的駭客工具介紹</title><link>https://linzeyan.github.io/posts/2020/20201208-2536/</link><pubDate>Tue, 08 Dec 2020 21:50:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201208-2536/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/users/20114110/ironman/2536" target="_blank" rel="noopener">冰山一角的駭客工具介紹&lt;/a>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add the following commands to the profile file:&lt;/p></description></item><item><title>An introduction to hacker tools: the tip of the iceberg</title><link>https://linzeyan.github.io/posts/2020/20201208-2536/</link><pubDate>Tue, 08 Dec 2020 21:50:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201208-2536/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/users/20114110/ironman/2536" target="_blank" rel="noopener">An introduction to hacker tools: the tip of the iceberg&lt;/a>
 &lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10214839" target="_blank" rel="noopener">[駭客工具 Day10] web 安全測試 - Burp Suite&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215002" target="_blank" rel="noopener">[駭客工具 Day11] 網站路徑遍歷 - DirBuster&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215072" target="_blank" rel="noopener">[駭客工具 Day12] 密碼暴力破解 - Hydra&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215234" target="_blank" rel="noopener">[駭客工具 Day13] 密碼字典檔生成工具 - crunch&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10216722" target="_blank" rel="noopener">[駭客工具 Day16] 滲透神器 - Metasploit&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10217688" target="_blank" rel="noopener">[駭客工具 Day18] windows 密碼獲取神器 - mimikatz&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10221189" target="_blank" rel="noopener">[駭客工具 Day25] CTF Exploit 的 Python library - pwntools&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10214839" target="_blank" rel="noopener">[Hacker Tools Day10] Web security testing - Burp Suite&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215002" target="_blank" rel="noopener">[Hacker Tools Day11] Website path traversal - DirBuster&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215072" target="_blank" rel="noopener">[Hacker Tools Day12] Password brute force - Hydra&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10215234" target="_blank" rel="noopener">[Hacker Tools Day13] Password wordlist generator - crunch&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10216722" target="_blank" rel="noopener">[Hacker Tools Day16] Penetration tool - Metasploit&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10217688" target="_blank" rel="noopener">[Hacker Tools Day18] Windows password extraction tool - mimikatz&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10221189" target="_blank" rel="noopener">[Hacker Tools Day25] CTF exploit Python library - pwntools&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul></description></item><item><title>Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy</title><link>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul>
@@ -73,27 +70,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ssh_type&lt;/span> = &lt;span style="color:#a6e22e">libssh&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 2: Set the &lt;code>ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code> environment variable&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ export ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;span style="color:#f92672">=&lt;/span>libssh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item><item><title>CentOS 7 掛載 Synology NAS 資料夾</title><link>https://linzeyan.github.io/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201109-145053/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener">CentOS 7 掛載 Synology NAS 資料夾&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量</title><link>https://linzeyan.github.io/posts/2020/20201106-sslkeylog/</link><pubDate>Fri, 06 Nov 2020 20:02:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201106-sslkeylog/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.luwenpeng.cn/2020/04/29/MacBook%E8%AE%BE%E7%BD%AESSLKEYLOGFILE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%A7%A3%E5%AF%86HTTPS%E6%B5%81%E9%87%8F/" target="_blank" rel="noopener">MacBook 设置 SSLKEYLOGFILE 环境变量解密 HTTPS 流量&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Method 3: Set the &lt;code>ansible_network_cli_ssh_type&lt;/code> parameter to libssh within your playbook at the play level&lt;/p></description></item><item><title>Mount a Synology NAS folder on CentOS 7</title><link>https://linzeyan.github.io/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201109-145053/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener">Mount a Synology NAS folder on CentOS 7&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Set SSLKEYLOGFILE on MacBook to decrypt HTTPS traffic</title><link>https://linzeyan.github.io/posts/2020/20201106-sslkeylog/</link><pubDate>Fri, 06 Nov 2020 20:02:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201106-sslkeylog/</guid><description>&lt;ul>
+&lt;li>&lt;a href="http://www.luwenpeng.cn/2020/04/29/MacBook%E8%AE%BE%E7%BD%AESSLKEYLOGFILE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%A7%A3%E5%AF%86HTTPS%E6%B5%81%E9%87%8F/" target="_blank" rel="noopener">Set SSLKEYLOGFILE on MacBook to decrypt HTTPS traffic&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>创建 keylogfile&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir ~/sslkeylogfile &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> touch ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 创建 keylogfile.log 文件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chmod &lt;span style="color:#ae81ff">777&lt;/span> ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 更改权限，确保 chrome 启动时能写入数据&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置环境变量&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim ~/.zshrc &lt;span style="color:#75715e"># 打开配置文件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export SSLKEYLOGFILE&lt;span style="color:#f92672">=&lt;/span>~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># 配置环境变量&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source ~/.zshrc &lt;span style="color:#75715e"># 使配置文件生效&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 wireshark&lt;/p>
-&lt;p>perferences -&amp;gt; Protocols -&amp;gt; TLS&lt;/p>
+&lt;p>Create keylogfile&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir ~/sslkeylogfile &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> touch ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># create keylogfile.log&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chmod &lt;span style="color:#ae81ff">777&lt;/span> ~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># change permissions so Chrome can write on startup&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure environment variable&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vim ~/.zshrc &lt;span style="color:#75715e"># open config file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export SSLKEYLOGFILE&lt;span style="color:#f92672">=&lt;/span>~/sslkeylogfile/keylogfile.log &lt;span style="color:#75715e"># set environment variable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source ~/.zshrc &lt;span style="color:#75715e"># reload config&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure Wireshark&lt;/p>
+&lt;p>preferences -&amp;gt; Protocols -&amp;gt; TLS&lt;/p>
 &lt;ul>
-&lt;li>配置 TSL debug file 记录解密日志&lt;/li>
-&lt;li>配置 (Pre)-Master-Secret log filename 路径为 keylogfile.log 的绝对路径&lt;/li>
+&lt;li>Set TLS debug file to record decryption logs&lt;/li>
+&lt;li>Set (Pre)-Master-Secret log filename to the absolute path of keylogfile.log&lt;/li>
 &lt;/ul>
-&lt;p>使用 termial 启动 chrome&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>open -a &lt;span style="color:#e6db74">&amp;#39;Google Chrome&amp;#39;&lt;/span> https://www.baidu.com/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：从 termial 启动 chrome，为了确保 chrome 可以读取 SSLKEYLOGFILE 环境变量。&lt;/p></description></item><item><title>Backup FortiOS config with Ansible - with RestAPI</title><link>https://linzeyan.github.io/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
+&lt;p>Start Chrome from terminal&lt;/p></description></item><item><title>Backup FortiOS config with Ansible - with RestAPI</title><link>https://linzeyan.github.io/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</link><pubDate>Tue, 03 Nov 2020 17:59:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201103-backup-fortios-config-with-ansible-with-restapi/</guid><description>&lt;ul>
 &lt;li>&lt;a href="http://shogokobayashi.com/2019/02/15/fortigate-restapi-config-backup-fortios-6-0-4/" target="_blank" rel="noopener">Fortigate RestAPI Config Backup - FortiOS 6.0.4&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://shogokobayashi.com/2019/04/05/backup-fortios-config-with-ansible-with-restapi/" target="_blank" rel="noopener">Backup FortiOS config with Ansible - with RestAPI&lt;/a>&lt;/li>
 &lt;/ul>
@@ -187,11 +182,11 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">write config to local file&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">local_action&lt;/span>: &lt;span style="color:#ae81ff">copy content={{ current_config.content }} dest=./{{ inventory_hostname }}_{{ ansible_date_time.date }}.txt&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>2020年，最新NGINX的ngx_http_geoip2模块以精准禁止特定国家或者地区IP访问</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener">2020 年，最新 NGINX 的 ngx_http_geoip2 模块以精准禁止特定国家或者地区 IP 访问&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener">centos7 下 安装 GeoIP2，在 nginx 中根据 ip 地址对应的国家转发请求&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener">In 2020, the latest NGINX ngx_http_geoip2 module can precisely block IP access by country or region&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener">Install GeoIP2 on CentOS 7 and route requests by IP country in nginx&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="安装-geoip2-lib">安装 geoip2 lib&lt;/h5>
+&lt;h5 id="install-geoip2-lib">Install geoip2 lib&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -f libmaxminddb-1.4.2.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
@@ -205,7 +200,7 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;/usr/local/lib&amp;#39;&lt;/span> &amp;gt; /etc/ld.so.conf.d/geoip.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ldconfig
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="下载-ngx_http_geoip2_module-模块">下载 ngx_http_geoip2_module 模块&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-ngx_http_geoip2_module">Download ngx_http_geoip2_module&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/leev/ngx_http_geoip2_module/archive/3.3.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xzf 3.3.tar.gz
@@ -231,8 +226,8 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make install
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="geoip2-ip-地址库下载">geoip2 IP 地址库下载&lt;/h5>
-&lt;p>2020 年最新 GeoLite2-City.mmdb 无法直接下载，必须注册 maxmind 账号&lt;/p></description></item><item><title>Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen</title><link>https://linzeyan.github.io/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</link><pubDate>Sat, 17 Oct 2020 12:31:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-geoip2-ip-database">Download geoip2 IP database&lt;/h5>
+&lt;p>The latest GeoLite2-City.mmdb for 2020 cannot be downloaded directly. You must register a maxmind account.&lt;/p></description></item><item><title>Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen</title><link>https://linzeyan.github.io/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</link><pubDate>Sat, 17 Oct 2020 12:31:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201017-38e044411a02530ec3481078fe2d81d8/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://gist.github.com/dbrownidau/38e044411a02530ec3481078fe2d81d8" target="_blank" rel="noopener">Nginx HTTPS with Basic Auth reverse proxy for VMware ESXi 6.5 fixed VMRC /screen&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
@@ -544,12 +539,12 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>如何設定時區與NTP服務在RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">如何設定時區與 NTP 服務在 RHEL7/CentOS7&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to configure time zone and NTP on RHEL7/CentOS7</title><link>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</link><pubDate>Tue, 29 Sep 2020 11:41:43 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200929-how-to-config-chronyd-on-rhel7-centos7/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.skywebster.com/how-to-config-chronyd-on-rhel7-centos7/" target="_blank" rel="noopener">How to configure time zone and NTP on RHEL7/CentOS7&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>chrony 包含兩個程序，chronyd 是一個可以在啟動時啟動的守護進程，chronyc 是一個命令行界面程序，可用於監控 chronyd 的性能並在運行時更改各種運行參數。&lt;/p>
-&lt;p>注意 ntpd 和 chronyd 擇一就可，不要同時運作。&lt;/p>
-&lt;h5 id="設定時區">設定時區&lt;/h5>
+&lt;p>chrony includes two programs: chronyd is a daemon that starts on boot, and chronyc is a command-line client that can monitor chronyd and change runtime parameters.&lt;/p>
+&lt;p>Use either ntpd or chronyd, not both.&lt;/p>
+&lt;h5 id="configure-time-zone">Configure time zone&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# timedatectl set-timezone Asia/Taipei
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# timedatectl
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Local time: Tue 2018-03-27 14:13:38 CST
@@ -560,11 +555,11 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NTP synchronized: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RTC in local TZ: no
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DST active: n/a
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="設定-chronyd">設定 chronyd&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="configure-chronyd">Configure chronyd&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# yum install -y chrony
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 配置設定檔&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Config file&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# cat /etc/chrony.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Use public servers from the pool.ntp.org project.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Please consider joining the pool (http://www.pool.ntp.org/join.html).&lt;/span>
@@ -573,10 +568,10 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 2.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 3.tw.pool.ntp.org iburst ---&amp;gt;改成本地的伺服器
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 啟動服務和設為開機時啟動&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Start service and enable on boot&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl enable chronyd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# systemctl start chronyd
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="racking-參數顯示有關系統時間效能">racking 參數顯示有關系統時間效能&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="tracking-parameters-show-system-time-performance">tracking parameters show system time performance&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc tracking
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Reference ID : 3DD8996B &lt;span style="color:#f92672">(&lt;/span>61-216-153-107.hinet-ip.hinet.net&lt;span style="color:#f92672">)&lt;/span> ---&amp;gt;表示現在同步的時間伺服器，如果沒有id表示沒有同步
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Stratum : &lt;span style="color:#ae81ff">4&lt;/span> ---&amp;gt;表示計算機有多少&lt;span style="color:#e6db74">&amp;#34;跳hop&amp;#34;&lt;/span> 表示本地的是第四層
@@ -608,7 +603,7 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^+ 61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -556us&lt;span style="color:#f92672">[&lt;/span> -556us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^? 59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> - +0ns&lt;span style="color:#f92672">[&lt;/span> +0ns&lt;span style="color:#f92672">]&lt;/span> +/- 0ns
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>^- 61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">37&lt;/span> &lt;span style="color:#ae81ff">23&lt;/span> -280us&lt;span style="color:#f92672">[&lt;/span> -280us&lt;span style="color:#f92672">]&lt;/span> +/- 64ms
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="看同步源頭的資訊">看同步源頭的資訊&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="view-sync-source-info">View sync source info&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# chronyc sourcestats -v
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">210&lt;/span> Number of sources &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .- Number of sample points in measurement set.
@@ -626,7 +621,7 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-107.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">135&lt;/span> +4.455 19.761 +622us 247us
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>59-125-122-217.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> +0.000 2000.000 +0ns 4000ms
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>61-216-153-105.hinet-ip.&amp;gt; &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> &lt;span style="color:#ae81ff">136&lt;/span> +8.965 42.440 +1250us 495us
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="將系統時間寫到硬體主機板上的時間上">將系統時間寫到硬體(主機板上的時間)上&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="write-system-time-to-hardware-clock">Write system time to hardware clock&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~# hwclock --systohc
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~# date ; hwclock
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Tue Mar &lt;span style="color:#ae81ff">27&lt;/span> 14:07:57 CST &lt;span style="color:#ae81ff">2018&lt;/span>
@@ -808,10 +803,10 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo unlink /etc/resolv.conf
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ echo &lt;span style="color:#e6db74">&amp;#34;nameserver 8.8.8.8&amp;#34;&lt;/span> | sudo tee /etc/resolv.conf
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.&lt;/p></description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add official PowerDNS repository for Ubuntu 22.04|20.04|18.04.&lt;/p></description></item><item><title>Set interface IP with netplan on Ubuntu 18.04</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Set interface IP with netplan on Ubuntu 18.04&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：&lt;/p>
+&lt;p>Following the notes above, check &lt;code>/etc/netplan&lt;/code> and open &lt;code>/etc/netplan/50-cloud-init.yaml&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
@@ -824,55 +819,35 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt-get remove cloud-init&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">192.168.32.231&lt;/span>&lt;span style="color:#ae81ff">/24]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway4&lt;/span>: &lt;span style="color:#ae81ff">192.168.32.1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item><item><title>openvpn部署之部署基於AD域認證</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">openvpn 部署之部署基於 AD 域認證&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p></description></item><item><title>Deploying OpenVPN with AD domain authentication</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">Deploying OpenVPN with AD domain authentication&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/" target="_blank" rel="noopener">OpenVPN + PAM + SSSD + Active Directory&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/" target="_blank" rel="noopener">https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener">https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener">https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install openssl openssl-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install lzo lzo-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install -y libgcrypt libgpg-error libgcrypt-devel
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn認證插件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN auth plugin&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn-auth-ldap -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝easy-rsa&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install easy-rsa&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Since openvpn 2.3 removed easy-rsa from the package, install it separately.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install easy-rsa
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成openvpn的key及證書&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 國家&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 省份&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 城市&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 組織&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 郵件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 單位&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate OpenVPN keys and certificates&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Country&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Province&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># City&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Organization&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Email&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Unit&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source vars
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./clean-all
@@ -882,7 +857,7 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-key client1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit the OpenVPN server config: `/etc/openvpn/server.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#ae81ff">1194&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>proto udp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev tun
@@ -890,9 +865,9 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cert keys/server.crt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>key keys/server.key &lt;span style="color:#75715e"># This file should be kept secret&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dh keys/dh2048.pem
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 //客戶端分配的ip地址
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> //推送客戶端的路由
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> //修改客戶端的網關，使其直接走vpn流量
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 // client IP pool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> // push route to clients
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> // change client gateway to route VPN traffic
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ifconfig-pool-persist ipp.txt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keepalive &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">120&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>comp-lzo
@@ -906,24 +881,24 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log /var/log/openvpn.log
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/openvpn/auth/ldap.conf&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;LDAP&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># LDAP server URL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲 AD 服務器的 IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the AD server IP&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL ldap://172.16.76.238:389
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the domain admin DN; you can query it with ldapsearch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BindDN &lt;span style="color:#e6db74">&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind Password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Password SecretPassword&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 域管理員的密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Domain admin password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Password passwd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Network timeout (in seconds)&lt;/span>
@@ -953,14 +928,14 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;Authorization&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 查詢認證的基礎 dn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN for auth search&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BaseDN &lt;span style="color:#e6db74">&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># User Search Filter&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 後面 &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; 指向要認證的 vpn 用戶組，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 這樣任何用戶使用 vpn，只要加入這個組就好了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># sAMAccountName=%u uses the sAMAccountName value as the username,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># and &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; points to the VPN user group to authenticate,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># so any user can use VPN once they are in this group.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SearchFilter &lt;span style="color:#e6db74">&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Require Group Membership&lt;/span>
@@ -981,7 +956,7 @@ Done!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MemberAttribute &lt;span style="color:#e6db74">&amp;#34;member&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/Group&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/Authorization&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>拷貝&lt;code>/etc/openvpn/key&lt;/code>目錄下的&lt;code>ca.crt&lt;/code>證書，以備客戶端使用。&lt;/p></description></item><item><title>Docker Tips: Using Docker Config</title><link>https://linzeyan.github.io/posts/2020/20200914-about-using-docker-config/</link><pubDate>Mon, 14 Sep 2020 11:13:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200914-about-using-docker-config/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copy the &lt;code>ca.crt&lt;/code> certificate under &lt;code>/etc/openvpn/key&lt;/code> for client use.&lt;/p></description></item><item><title>Docker Tips: Using Docker Config</title><link>https://linzeyan.github.io/posts/2020/20200914-about-using-docker-config/</link><pubDate>Mon, 14 Sep 2020 11:13:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200914-about-using-docker-config/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83" target="_blank" rel="noopener">Docker Tips: Using Docker Config&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> nginx:1.13.6&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
@@ -1125,8 +1100,8 @@ end
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ROOT_FS_SIZE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>df -h / | sed -n 2p | awk &lt;span style="color:#e6db74">&amp;#39;{print $2;}&amp;#39;&lt;/span>&lt;span style="color:#e6db74">`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;The root file system (/) has a size of &lt;/span>$ROOT_FS_SIZE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>gitbook常用的插件</title><link>https://linzeyan.github.io/posts/2020/20200818-1190000019806829/</link><pubDate>Tue, 18 Aug 2020 09:48:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200818-1190000019806829/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://segmentfault.com/a/1190000019806829" target="_blank" rel="noopener">gitbook 常用的插件&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Common GitBook plugins</title><link>https://linzeyan.github.io/posts/2020/20200818-1190000019806829/</link><pubDate>Tue, 18 Aug 2020 09:48:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200818-1190000019806829/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://segmentfault.com/a/1190000019806829" target="_blank" rel="noopener">Common GitBook plugins&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Google Search Operators: The Complete List (44 Advanced Operators)</title><link>https://linzeyan.github.io/posts/2020/20200814-google-advanced-search-operators/</link><pubDate>Fri, 14 Aug 2020 14:21:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200814-google-advanced-search-operators/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ahrefs.com/blog/google-advanced-search-operators/" target="_blank" rel="noopener">Google Search Operators: The Complete List (44 Advanced Operators)&lt;/a>&lt;/li>
 &lt;/ul>
@@ -1385,102 +1360,69 @@ end
 &lt;td>&lt;code>#apple&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>确定虚拟化技术的简便方法</title><link>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</link><pubDate>Wed, 29 Jul 2020 21:11:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://qastack.cn/unix/89714/easy-way-to-determine-virtualization-technology" target="_blank" rel="noopener">确定虚拟化技术的简便方法&lt;/a>&lt;/li>
+&lt;/table></description></item><item><title>An easy way to identify virtualization technology</title><link>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</link><pubDate>Wed, 29 Jul 2020 21:11:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200729-easy-way-to-determine-virtualization-technology/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://qastack.cn/unix/89714/easy-way-to-determine-virtualization-technology" target="_blank" rel="noopener">An easy way to identify virtualization technology&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="dmidecode--s-system-product-name">&lt;code>dmidecode -s system-product-name&lt;/code>&lt;/h3>
-&lt;p>虚拟化技术&lt;/p>
-&lt;h4 id="vmware-工作站">VMware 工作站&lt;/h4>
+&lt;p>Virtualization technology&lt;/p>
+&lt;h4 id="vmware-workstation">VMware Workstation&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VMware Virtual Platform
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="虚拟盒子">虚拟盒子&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="virtualbox">VirtualBox&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VirtualBox
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="qemu-与-kvm">Qemu 与 KVM&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="qemu-and-kvm">QEMU and KVM&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>KVM
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Qemu（模拟）&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>QEMU (emulation)&lt;/p>
 &lt;h4>&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode -s system-product-name
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bochs
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="microsoft-虚拟-pc">Microsoft 虚拟 PC&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="microsoft-virtual-pc">Microsoft Virtual PC&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | egrep -i &lt;span style="color:#e6db74">&amp;#39;manufacturer|product&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Manufacturer: Microsoft Corporation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: Virtual Machine
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="维尔图佐">维尔图佐&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="virtuozzo">Virtuozzo&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/dev/mem: Permission denied
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="en">en&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>root@router:~# dmidecode | grep -i domU
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Product Name: HVM domU
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="devdiskby-id">&lt;code>/dev/disk/by-id&lt;/code>&lt;/h3>
-&lt;p>如果您没有 &lt;code>dmidecode&lt;/code> 运行权， 则可以使用： &lt;code>ls -1 /dev/disk/by-id/&lt;/code>&lt;/p></description></item><item><title>[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子</title><link>https://linzeyan.github.io/posts/2020/20200710-bayonet-rope/</link><pubDate>Fri, 10 Jul 2020 12:32:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200710-bayonet-rope/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.mobile01.com/topicdetail.php?f=637&amp;amp;t=282596" target="_blank" rel="noopener">[分享]鑰匙圈 - 五七步槍刺刀鞘的墬子&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>SSH 证书登录教程</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener">SSH 证书登录教程&lt;/a>&lt;/li>
+&lt;p>If you do not have permission to run &lt;code>dmidecode&lt;/code>, you can use: &lt;code>ls -1 /dev/disk/by-id/&lt;/code>&lt;/p></description></item><item><title>[Share] Keychain - Pendant from a Type 57 rifle bayonet scabbard</title><link>https://linzeyan.github.io/posts/2020/20200710-bayonet-rope/</link><pubDate>Fri, 10 Jul 2020 12:32:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200710-bayonet-rope/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.mobile01.com/topicdetail.php?f=637&amp;amp;t=282596" target="_blank" rel="noopener">[Share] Keychain - Pendant from a Type 57 rifle bayonet scabbard&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>SSH certificate login guide</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener">SSH certificate login guide&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="证书登录的流程">证书登录的流程&lt;/h3>
-&lt;p>SSH 证书登录之前，如果还没有证书，需要生成证书。具体方法是：&lt;/p>
+&lt;h3 id="certificate-login-flow">Certificate login flow&lt;/h3>
+&lt;p>Before using SSH certificate login, you need to generate certificates. The steps are:&lt;/p>
 &lt;ol>
-&lt;li>用户和服务器都将自己的公钥，发给 CA&lt;/li>
-&lt;li>CA 使用服务器公钥，生成服务器证书，发给服务器&lt;/li>
-&lt;li>CA 使用用户的公钥，生成用户证书，发给用户。&lt;/li>
+&lt;li>The user and the server both send their public keys to the CA.&lt;/li>
+&lt;li>The CA uses the server public key to generate a server certificate and sends it to the server.&lt;/li>
+&lt;li>The CA uses the user public key to generate a user certificate and sends it to the user.&lt;/li>
 &lt;/ol>
-&lt;p>有了证书以后，用户就可以登录服务器了。整个过程都是 SSH 自动处理，用户无感知。&lt;/p>
-&lt;ol>
-&lt;li>用户登录服务器时，SSH 自动将用户证书发给服务器。&lt;/li>
-&lt;li>服务器检查用户证书是否有效，以及是否由可信的 CA 颁发。&lt;/li>
-&lt;li>SSH 自动将服务器证书发给用户。&lt;/li>
-&lt;li>用户检查服务器证书是否有效，以及是否由信任的 CA 颁发。&lt;/li>
-&lt;li>双方建立连接，服务器允许用户登录。&lt;/li>
-&lt;/ol>
-&lt;h3 id="生成-ca-的密钥">生成 CA 的密钥&lt;/h3>
-&lt;p>虽然 CA 可以用同一对密码签发用户证书和服务器证书，但是出于安全性和灵活性，最好用不同的密钥分别签发。所以，CA 至少需要两对密钥，一对是签发用户证书的密钥，假设叫做 &lt;code>user_ca&lt;/code>，另一对是签发服务器证书的密钥，假设叫做 &lt;code>host_ca&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发用户证书的密钥&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：user_ca（私钥）和user_ca.pub（公钥）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 各个参数含义如下&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -t rsa：指定密钥算法 RSA。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -b 4096：指定密钥的位数是4096位。安全性要求不高的场合，这个值可以小一点，但是不应小于1024。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -f ~/.ssh/user_ca：指定生成密钥的位置和文件名。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># -C user_ca：指定密钥的识别字符串，相当于注释，可以随意设置。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f ~/.ssh/user_ca -C user_ca
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成 CA 签发服务器证书的密钥&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 会在~/.ssh目录生成一对密钥：host_ca（私钥）和host_ca.pub（公钥）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 现在，~/.ssh目录应该至少有四把密钥。&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/user_ca.pub&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># - ~/.ssh/host_ca.pub&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ssh-keygen -t rsa -b &lt;span style="color:#ae81ff">4096&lt;/span> -f host_ca -C host_ca
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="服务器安装-ca-公钥">服务器安装 CA 公钥&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 为了让服务器信任用户证书，必须将 CA 签发用户证书的公钥`user_ca.pub`，拷贝到服务器&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scp ~/.ssh/user_ca.pub root@host.example.com:/etc/ssh/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="然后将下面一行添加到服务器配置文件-etcsshsshd_config">然后，将下面一行添加到服务器配置文件 &lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/h5>
-&lt;pre tabindex="0">&lt;code>TrustedUserCAKeys /etc/ssh/user_ca.pub
-&lt;/code>&lt;/pre>&lt;p>上面的做法是将&lt;code>user_ca.pub&lt;/code>加到&lt;code>/etc/ssh/sshd_config&lt;/code>，这会产生全局效果，即服务器的所有账户都会信任&lt;code>user_ca&lt;/code>签发的所有用户证书。&lt;/p></description></item><item><title>如何使用 Chrome 開發人員工具擷取網頁畫面與製作長截圖？</title><link>https://linzeyan.github.io/posts/2020/20200702-howto-screenshot-page-by-chrome-devtools/</link><pubDate>Thu, 02 Jul 2020 09:07:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200702-howto-screenshot-page-by-chrome-devtools/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://tedliou.com/archives/howto-screenshot-page-by-chrome-devtools/" target="_blank" rel="noopener">如何使用 Chrome 開發人員工具擷取網頁畫面與製作長截圖？&lt;/a>&lt;/li>
+&lt;p>Once certificates are in place, the user can log in. SSH handles the whole process automatically.&lt;/p></description></item><item><title>How to capture web pages and long screenshots with Chrome DevTools?</title><link>https://linzeyan.github.io/posts/2020/20200702-howto-screenshot-page-by-chrome-devtools/</link><pubDate>Thu, 02 Jul 2020 09:07:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200702-howto-screenshot-page-by-chrome-devtools/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://tedliou.com/archives/howto-screenshot-page-by-chrome-devtools/" target="_blank" rel="noopener">How to capture web pages and long screenshots with Chrome DevTools?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;ol>
-&lt;li>開啟 Chrome 開發人員工具&lt;/li>
-&lt;li>按下右上角的 more_vert，並選擇 filter_none 將它改成獨立視窗&lt;/li>
+&lt;li>Open Chrome DevTools&lt;/li>
+&lt;li>Click more_vert in the top-right, then choose filter_none to make it a separate window&lt;/li>
 &lt;li>&lt;code>Ctrl + Shift + P&lt;/code>(&lt;code>Command + Shift + P&lt;/code>)&lt;/li>
-&lt;li>輸入 &lt;code>screenshot&lt;/code>
+&lt;li>Type &lt;code>screenshot&lt;/code>
 &lt;ol>
-&lt;li>Capture area screenshot：區域擷圖，選擇後你的滑鼠指標會變成 add，用它在網頁中框選出一個範圍即可擷圖。&lt;/li>
-&lt;li>Capture full size screenshot：長截圖，延遲一秒左右後將會自動完成擷圖，就是這麼簡單。&lt;/li>
-&lt;li>Capture node screenshot：節點擷圖，它類似長擷圖，但只有螢幕有顯示到的地方有影像，其餘都是空白。在文章後段我們會放預覽圖讓你比較一下差異。&lt;/li>
-&lt;li>Capture screenshot：普通擷圖，會自動擷取視窗看得到的網頁。如果剛剛沒有讓開發者工具變成獨立視窗的話，這邊的擷圖結果就會被影響。&lt;/li>
+&lt;li>Capture area screenshot: area screenshot. After selecting it, your cursor changes to add. Use it to select an area on the page.&lt;/li>
+&lt;li>Capture full size screenshot: long screenshot. It completes automatically after about one second.&lt;/li>
+&lt;li>Capture node screenshot: node screenshot. Similar to a long screenshot, but only visible parts are captured and the rest is blank.&lt;/li>
+&lt;li>Capture screenshot: normal screenshot. It captures the visible page. If DevTools is not in a separate window, the result is affected.&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;/ol></description></item><item><title>BIRD 与 BGP 的新手开场</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD 与 BGP 的新手开场&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>BIRD and BGP: a beginner's kickoff</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD and BGP: a beginner&amp;rsquo;s kickoff&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener">BIRD Internet Routing Daemon&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Git内部原理介绍</title><link>https://linzeyan.github.io/posts/2020/20200602-1369947/</link><pubDate>Tue, 02 Jun 2020 08:39:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200602-1369947/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://cloud.tencent.com/developer/article/1369947" target="_blank" rel="noopener">Git 内部原理介绍&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Python玩转各种多媒体，视频、音频到图片</title><link>https://linzeyan.github.io/posts/2020/20200531-105371827/</link><pubDate>Sun, 31 May 2020 17:48:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200531-105371827/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.csdn.net/ZackSock/article/details/105371827" target="_blank" rel="noopener">Python 玩转各种多媒体，视频、音频到图片&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Introduction to Git internals</title><link>https://linzeyan.github.io/posts/2020/20200602-1369947/</link><pubDate>Tue, 02 Jun 2020 08:39:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200602-1369947/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://cloud.tencent.com/developer/article/1369947" target="_blank" rel="noopener">Introduction to Git internals&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Using Python for multimedia: video, audio, and images</title><link>https://linzeyan.github.io/posts/2020/20200531-105371827/</link><pubDate>Sun, 31 May 2020 17:48:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200531-105371827/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.csdn.net/ZackSock/article/details/105371827" target="_blank" rel="noopener">Using Python for multimedia: video, audio, and images&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>Abount Ansible Hosts</title><link>https://linzeyan.github.io/posts/2020/20200512-ansible-ad-hoc/</link><pubDate>Tue, 12 May 2020 19:46:04 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200512-ansible-ad-hoc/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># hosts 可以這樣寫&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ansible &lt;span style="color:#e6db74">&amp;#39;max-compute[!3:9][0:3][0:3]&amp;#39;&lt;/span> -m setup --list-hosts
@@ -1579,23 +1521,23 @@ end
 &lt;li>&lt;a href="https://www.weithenn.org/2020/04/string-field-was-converted-to-true-type.html" target="_blank" rel="noopener">string field was converted to True (type string)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://www.weithenn.org/2020/04/unauthorized-name-in-rakp2.html" target="_blank" rel="noopener">Unauthorized name in RAKP2&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.weithenn.org/2020/04/failed-to-start-poweroff-connection.html" target="_blank" rel="noopener">Failed to start poweroff connection timed out&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>活久见！Linux命令行居然也可以用来查看图像？</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">活久见！Linux 命令行居然也可以用来查看图像？&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Surprisingly, you can view images in the Linux CLI?</title><link>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</link><pubDate>Tue, 14 Apr 2020 22:01:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200414-6844904122794115086/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://juejin.cn/post/6844904122794115086" target="_blank" rel="noopener">Surprisingly, you can view images in the Linux CLI?&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="fim">FIM&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>sudo apt-get install fim&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>控制 FIM 中图像的常用快捷键：&lt;/p>
+&lt;p>Common shortcuts for images in FIM:&lt;/p>
 &lt;ul>
-&lt;li>PageUp / Down：上一个图像/下一个图像&lt;/li>
-&lt;li>+/-：放大/缩小&lt;/li>
-&lt;li>a：自动缩放&lt;/li>
-&lt;li>w：合适宽度&lt;/li>
-&lt;li>h：合适身高&lt;/li>
-&lt;li>j / k：向下平移/向上平移&lt;/li>
-&lt;li>f / m：翻转/镜面反射&lt;/li>
-&lt;li>r / R：旋转（顺时针和逆时针）&lt;/li>
-&lt;li>ESC / q：退出&lt;/li>
+&lt;li>PageUp / Down: previous/next image&lt;/li>
+&lt;li>+/-: zoom in/out&lt;/li>
+&lt;li>a: auto scale&lt;/li>
+&lt;li>w: fit width&lt;/li>
+&lt;li>h: fit height&lt;/li>
+&lt;li>j / k: pan down/up&lt;/li>
+&lt;li>f / m: flip/mirror&lt;/li>
+&lt;li>r / R: rotate (clockwise/counterclockwise)&lt;/li>
+&lt;li>ESC / q: quit&lt;/li>
 &lt;/ul>
 &lt;h4 id="viu">Viu&lt;/h4>
 &lt;blockquote>
@@ -1627,10 +1569,10 @@ end
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cd hello-docker
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker-compose ‐‐context remote up -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>应大多数人要求写下kubeadm的基础使用</title><link>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</link><pubDate>Tue, 24 Mar 2020 16:00:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/" target="_blank" rel="noopener">应大多数人要求写下 kubeadm 的基础使用&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.frognew.com/2018/10/kubernetes-kube-proxy-enable-ipvs.html" target="_blank" rel="noopener">Kubernetes 从 1.10 到 1.11 升级记录(续)：Kubernetes kube-proxy 开启 IPVS 模式&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://lingxiankong.github.io/2018-07-20-katacontainer-docker-k8s.html" target="_blank" rel="noopener">Katacontainers 与 Docker 和 Kubernetes 的集成&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Basic kubeadm usage notes (by request)</title><link>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</link><pubDate>Tue, 24 Mar 2020 16:00:34 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200324-kubeadm-base-use/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/" target="_blank" rel="noopener">Basic kubeadm usage (by request)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://blog.frognew.com/2018/10/kubernetes-kube-proxy-enable-ipvs.html" target="_blank" rel="noopener">Kubernetes upgrade from 1.10 to 1.11 (cont.): enable IPVS mode for kube-proxy&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://lingxiankong.github.io/2018-07-20-katacontainer-docker-k8s.html" target="_blank" rel="noopener">Integrating Kata Containers with Docker and Kubernetes&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Vim Tips - Edit Remote Files With Vim On Linux</title><link>https://linzeyan.github.io/posts/2020/20200314-vim-tips-edit-remote-files-with-vim-on-linux/</link><pubDate>Sat, 14 Mar 2020 15:43:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200314-vim-tips-edit-remote-files-with-vim-on-linux/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.ostechnix.com/vim-tips-edit-remote-files-with-vim-on-linux/" target="_blank" rel="noopener">Vim Tips - Edit Remote Files With Vim On Linux&lt;/a>&lt;/li>
 &lt;/ul>

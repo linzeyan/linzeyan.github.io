@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LDAP on Ricky</title><link>https://linzeyan.github.io/tags/ldap/</link><description>Recent content in LDAP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 17 Sep 2020 13:15:33 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml"/><item><title>openvpn部署之部署基於AD域認證</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">openvpn 部署之部署基於 AD 域認證&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LDAP on Ricky</title><link>https://linzeyan.github.io/tags/ldap/</link><description>Recent content in LDAP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 17 Sep 2020 13:15:33 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/ldap/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying OpenVPN with AD domain authentication</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">Deploying OpenVPN with AD domain authentication&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/" target="_blank" rel="noopener">OpenVPN + PAM + SSSD + Active Directory&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/" target="_blank" rel="noopener">https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener">https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener">https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install openssl openssl-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install lzo lzo-devel -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install -y libgcrypt libgpg-error libgcrypt-devel
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝openvpn認證插件&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN auth plugin&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn-auth-ldap -y
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 安裝easy-rsa&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install easy-rsa&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Since openvpn 2.3 removed easy-rsa from the package, install it separately.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install easy-rsa
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 生成openvpn的key及證書&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 國家&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 省份&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 城市&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 組織&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 郵件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># 單位&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate OpenVPN keys and certificates&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Country&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Province&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># City&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Organization&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Email&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Unit&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source vars
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./clean-all
@@ -36,7 +36,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-key client1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit the OpenVPN server config: `/etc/openvpn/server.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#ae81ff">1194&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>proto udp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev tun
@@ -44,9 +44,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cert keys/server.crt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>key keys/server.key &lt;span style="color:#75715e"># This file should be kept secret&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dh keys/dh2048.pem
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 //客戶端分配的ip地址
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> //推送客戶端的路由
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> //修改客戶端的網關，使其直接走vpn流量
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 // client IP pool
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> // push route to clients
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> // change client gateway to route VPN traffic
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ifconfig-pool-persist ipp.txt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keepalive &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">120&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>comp-lzo
@@ -60,24 +60,24 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log /var/log/openvpn.log
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/openvpn/auth/ldap.conf&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;LDAP&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># LDAP server URL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲 AD 服務器的 IP&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the AD server IP&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL ldap://172.16.76.238:389
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the domain admin DN; you can query it with ldapsearch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BindDN &lt;span style="color:#e6db74">&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind Password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Password SecretPassword&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 域管理員的密碼&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Domain admin password&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Password passwd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Network timeout (in seconds)&lt;/span>
@@ -107,14 +107,14 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;Authorization&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 查詢認證的基礎 dn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN for auth search&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BaseDN &lt;span style="color:#e6db74">&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># User Search Filter&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 後面 &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; 指向要認證的 vpn 用戶組，&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># 這樣任何用戶使用 vpn，只要加入這個組就好了&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># sAMAccountName=%u uses the sAMAccountName value as the username,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># and &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; points to the VPN user group to authenticate,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># so any user can use VPN once they are in this group.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SearchFilter &lt;span style="color:#e6db74">&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Require Group Membership&lt;/span>
@@ -135,4 +135,4 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MemberAttribute &lt;span style="color:#e6db74">&amp;#34;member&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/Group&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/Authorization&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>拷貝&lt;code>/etc/openvpn/key&lt;/code>目錄下的&lt;code>ca.crt&lt;/code>證書，以備客戶端使用。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copy the &lt;code>ca.crt&lt;/code> certificate under &lt;code>/etc/openvpn/key&lt;/code> for client use.&lt;/p></description></item></channel></rss>

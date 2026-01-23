@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iptables on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/iptables/</link><description>Recent content in Iptables on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 04 Dec 2019 11:08:04 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>用 iptables 和 ip rule 做负载均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做负载均衡&lt;/a>&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iptables on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/iptables/</link><description>Recent content in Iptables on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 04 Dec 2019 11:08:04 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/iptables/index.xml" rel="self" type="application/rss+xml"/><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做負載均衡&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="操作">操作&lt;/h4>
-&lt;p>这里以一台通过有线 + 无线出口连接到互联网的 Arch Linux 设备为例。其中共有两个出口，分别使用网卡 eth0 和 eth1。大概的对应关系是：&lt;/p>
+&lt;p>這裡以一台透過有線 + 無線出口連線到網際網路的 Arch Linux 裝置為例。共有兩個出口，分別使用網卡 eth0 和 eth1。大致對應關係如下：&lt;/p>
 &lt;ul>
-&lt;li>标记 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
-&lt;li>标记 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
+&lt;li>標記 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
+&lt;li>標記 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
 &lt;/ul>
-&lt;p>我们会根据数据包上包含的标记值来判断它应该走什么出口。首先，使用 ip rule 为每个标记值指定一张使用的路由表。&lt;/p>
-&lt;p>通常默认路由表的权重是 32768。为了让我们的路由表用得上，我们需要把它们的权重调得高一些（例如 31000）。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 10 (0xa) 的数据包使用 110 号路由表，权重 31000&lt;/span>
+&lt;p>我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p>
+&lt;p>通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">10&lt;/span> table &lt;span style="color:#ae81ff">110&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 让带标记 11 (0xb) 的数据包使用 111 号路由表，权重 31000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">11&lt;/span> table &lt;span style="color:#ae81ff">111&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的连接更多，可以继续添加标记 &amp;lt;-&amp;gt; 路由表的对应关系&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #110 路由表的路由&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#ae81ff">110&lt;/span>
@@ -23,34 +23,35 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.25.0.254 table &lt;span style="color:#ae81ff">111&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果这条连接已经被标记，那么把标记设置到数据包上&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果這條連線已經被標記，將標記設定到封包上&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包已经有标记，直接放行&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包已經有標記，直接放行&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#ae81ff">0&lt;/span> -j ACCEPT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果数据包没被标记的话&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包包的标记设置为 11 (0xb)...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包沒有被標記&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包標記為 10 (0xa)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 并且每 2 个包就把一个包的标记设置为 10 (0xa)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#ae81ff">2&lt;/span> --packet &lt;span style="color:#ae81ff">0&lt;/span> -j MARK --set-mark &lt;span style="color:#ae81ff">11&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三条出口的话，这里可以类似于&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三條出口，這裡可以類似於&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把数据包的标记存储到整条连接上，这样整个连接过程都会使用同一条出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 我们还需要让数据包上标示的出口是我们为其选择的出口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓封包的出口與我們選擇的一致&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下自己所设置的规则是否正确。然后就可以用 Wiresharks 看一看自己的连接是不是真的分流啦。&lt;/p></description></item><item><title>再战运营商缓存之 使用 iptables 对付死 X 缓存劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再战运营商缓存之 使用 iptables 对付死 X 缓存劫持&lt;/a>&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之後可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p></description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再戰營運商快取：使用 iptables 對付快取劫持&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h5 id="起因">起因&lt;/h5>
-&lt;p>与移动的缓存问题进行斗争要追溯到两年前，那时候因为移动竟然连 cnpm 的数据都进行缓存。并且令人喷饭的是：移动的缓存服务器不但经常速度慢到堪比万年王八跑马拉松，甚至还经常宕机，导致我只想安安静静的写个代码却不得不面对一片鲜红的报错&lt;/p>
-&lt;h5 id="解决">解决&lt;/h5>
+&lt;p>與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p>
+&lt;h5 id="解決">解決&lt;/h5>
 &lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考虑到可能还真的有其他幺蛾子服务器发来的真实数据包的 TTL 也在 20-30 的区间范围内，应该再加一层判断。对比了移动的 302 劫持包和正常的 302 跳转包的报文后，发现移动的劫持包的状态位包含 FIN, PSH, ACK 而正常的 302 跳转包一般不会这三个都有&lt;/p>
-&lt;p>那么就在 iptables 规则里加上状态位是否包含 FIN, PSH, ACK 的判断：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p>
+&lt;p>因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p>
+&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p>
+&lt;p>這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p></description></item></channel></rss>
