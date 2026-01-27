@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 15 Jan 2026 21:10:20 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Taiwanese Minnan Input Method App Launched: Mobile Devices Can Now Type Taiwanese</title><link>https://linzeyan.github.io/posts/2026/20260115-input-method/</link><pubDate>Thu, 15 Jan 2026 21:10:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260115-input-method/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Jan 2026 09:54:42 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Tool Trace</title><link>https://linzeyan.github.io/posts/2026/20260127-go-tool-trace/</link><pubDate>Tue, 27 Jan 2026 09:54:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260127-go-tool-trace/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10350656" target="_blank" rel="noopener">淺談 Go Tool Trace - 1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10351336" target="_blank" rel="noopener">淺談 Go Tool Trace - 2 Go Trace 與使用者自訂追蹤分析&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352139" target="_blank" rel="noopener">淺談 Go Tool Trace - 3 實際分析 Goroutine Analysis&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352141" target="_blank" rel="noopener">Go Tool Trace - 4 從 分析到實戰：最佳化 Goroutine 數量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://pkg.go.dev/cmd/trace@go1.23.0" target="_blank" rel="noopener">trace&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>Trace is an &amp;ldquo;event timeline&amp;rdquo;, not &amp;ldquo;sampling statistics&amp;rdquo;&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>go tool trace&lt;/code>: used to inspect &lt;strong>runtime traces&lt;/strong>. Its essence is a &lt;strong>time-ordered event stream&lt;/strong>, including:
+&lt;ul>
+&lt;li>goroutine lifecycle/states: create / runnable / running / waiting / syscall&lt;/li>
+&lt;li>scheduler (G/M/P) related events, scheduling latency&lt;/li>
+&lt;li>blocking time distribution (net / sync / syscall)&lt;/li>
+&lt;li>GC events, STW, heap changes (visible in the trace viewer)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Use &lt;code>pprof&lt;/code> to find &lt;strong>hot spots&lt;/strong>: who burns CPU, who allocates a lot&lt;/li>
+&lt;li>Use &lt;code>trace&lt;/code> to find &lt;strong>latency causes&lt;/strong>: &lt;strong>why&lt;/strong> it&amp;rsquo;s stuck (scheduling? locks? network? syscalls? GC?)&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Quick intuition:&lt;/p></description></item><item><title>I Replaced Redis with PostgreSQL (And It's Faster)</title><link>https://linzeyan.github.io/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</link><pubDate>Mon, 19 Jan 2026 15:45:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dev.to/polliog/i-replaced-redis-with-postgresql-and-its-faster-4942" target="_blank" rel="noopener">I Replaced Redis with PostgreSQL (And It&amp;rsquo;s Faster)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="before-the-change-redis-handled-three-things">Before the change, Redis handled three things:&lt;/h3>
+&lt;ol>
+&lt;li>Caching (70% of usage)&lt;/li>
+&lt;li>Pub/Sub (20% of usage)&lt;/li>
+&lt;li>Background Job Queue (10% of usage)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>&lt;em>The pain points:&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Two databases to backup&lt;/li>
+&lt;li>Redis uses RAM (expensive at scale)&lt;/li>
+&lt;li>Redis persistence is&amp;hellip; complicated&lt;/li>
+&lt;li>Network hop between Postgres and Redis&lt;/li>
+&lt;/ul>
+&lt;h3 id="postgresql-feature">PostgreSQL Feature&lt;/h3>
+&lt;h5 id="1-caching-with-unlogged-tables">1: Caching with UNLOGGED Tables&lt;/h5>
+&lt;p>&lt;strong>&lt;em>Redis&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">redis&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;session:abc123&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">JSON&lt;/span>.&lt;span style="color:#a6e22e">stringify&lt;/span>(&lt;span style="color:#a6e22e">sessionData&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;EX&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">3600&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>&lt;em>PostgreSQL&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> UNLOGGED &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">key&lt;/span> TEXT &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value JSONB &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at TIMESTAMPTZ &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> idx_cache_expires &lt;span style="color:#66d9ef">ON&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>(expires_at);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Insert&lt;/strong>&lt;/p></description></item><item><title>Taiwanese Minnan Input Method App Launched: Mobile Devices Can Now Type Taiwanese</title><link>https://linzeyan.github.io/posts/2026/20260115-input-method/</link><pubDate>Thu, 15 Jan 2026 21:10:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260115-input-method/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&amp;amp;s=43F7E1DC99DDAE7B" target="_blank" rel="noopener">Taiwanese Minnan Input Method App Launched: Mobile Devices Can Now Type Taiwanese&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://apps.apple.com/tw/app/%E6%95%99%E8%82%B2%E9%83%A8%E8%87%BA%E7%81%A3%E5%8F%B0%E8%AA%9E%E8%BC%B8%E5%85%A5%E6%B3%95/id6743423554" target="_blank" rel="noopener">MOE Taiwanese Minnan Input Method - iOS&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://play.google.com/store/apps/details?id=tw.moe.taiwanese.taigi&amp;amp;hl=zh_TW&amp;amp;pli=1" target="_blank" rel="noopener">MOE Taiwanese Minnan Input Method - Android&lt;/a>&lt;/li>

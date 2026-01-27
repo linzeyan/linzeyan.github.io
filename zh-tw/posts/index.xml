@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 15 Jan 2026 21:10:20 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>臺灣台語輸入法 App 上架，即日起行動裝置也能輸入臺灣台語</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260115-input-method/</link><pubDate>Thu, 15 Jan 2026 21:10:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260115-input-method/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 27 Jan 2026 09:54:42 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Tool Trace</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</link><pubDate>Tue, 27 Jan 2026 09:54:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10350656" target="_blank" rel="noopener">淺談 Go Tool Trace - 1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10351336" target="_blank" rel="noopener">淺談 Go Tool Trace - 2 Go Trace 與使用者自訂追蹤分析&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352139" target="_blank" rel="noopener">淺談 Go Tool Trace - 3 實際分析 Goroutine Analysis&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352141" target="_blank" rel="noopener">Go Tool Trace - 4 從 分析到實戰：最佳化 Goroutine 數量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://pkg.go.dev/cmd/trace@go1.23.0" target="_blank" rel="noopener">trace&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>trace 是「事件時間軸」，不是「取樣統計」&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>go tool trace&lt;/code>：用來看 &lt;strong>runtime trace（執行追蹤）&lt;/strong>，本質是「時間序列事件」：
+&lt;ul>
+&lt;li>goroutine 的建立 / runnable / running / waiting / syscall&lt;/li>
+&lt;li>scheduler（G/M/P）相關事件、排程延遲&lt;/li>
+&lt;li>blocking（net / sync / syscall）時間分佈&lt;/li>
+&lt;li>GC 事件、STW、heap 變化（在 trace viewer 會看到）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>用 &lt;code>pprof&lt;/code> 是找「熱點」：誰吃 CPU / 誰 alloc 多&lt;/li>
+&lt;li>用 &lt;code>trace&lt;/code> 是找「延遲原因」：&lt;strong>為什麼卡&lt;/strong>（排程？鎖？網路？syscall？GC？）&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>直覺判斷：&lt;/p></description></item><item><title>I Replaced Redis with PostgreSQL (And It's Faster)</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</link><pubDate>Mon, 19 Jan 2026 15:45:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dev.to/polliog/i-replaced-redis-with-postgresql-and-its-faster-4942" target="_blank" rel="noopener">I Replaced Redis with PostgreSQL (And It&amp;rsquo;s Faster)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="在更改之前redis-主要處理三件事">在更改之前，Redis 主要處理三件事：&lt;/h3>
+&lt;ol>
+&lt;li>快取（佔使用量的 70%）&lt;/li>
+&lt;li>發布/訂閱（佔使用量的 20%）&lt;/li>
+&lt;li>後台作業佇列（使用率 10%）&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>&lt;em>痛點:&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>需要備份兩個資料庫&lt;/li>
+&lt;li>Redis 使用記憶體（規模化時成本很高）&lt;/li>
+&lt;li>Redis 持久化機制…很複雜。&lt;/li>
+&lt;li>Postgres 和 Redis 之間的網路跳躍&lt;/li>
+&lt;/ul>
+&lt;h3 id="postgresql-功能">PostgreSQL 功能&lt;/h3>
+&lt;h5 id="1-使用未記錄表進行快取">1: 使用未記錄表進行快取&lt;/h5>
+&lt;p>&lt;strong>&lt;em>Redis&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">redis&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;session:abc123&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">JSON&lt;/span>.&lt;span style="color:#a6e22e">stringify&lt;/span>(&lt;span style="color:#a6e22e">sessionData&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;EX&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">3600&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>&lt;em>PostgreSQL&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> UNLOGGED &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">key&lt;/span> TEXT &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value JSONB &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at TIMESTAMPTZ &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> idx_cache_expires &lt;span style="color:#66d9ef">ON&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>(expires_at);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Insert&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">INTO&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (&lt;span style="color:#66d9ef">key&lt;/span>, value, expires_at)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">VALUES&lt;/span> (&lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, NOW() &lt;span style="color:#f92672">+&lt;/span> INTERVAL &lt;span style="color:#e6db74">&amp;#39;1 hour&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ON&lt;/span> CONFLICT (&lt;span style="color:#66d9ef">key&lt;/span>) &lt;span style="color:#66d9ef">DO&lt;/span> &lt;span style="color:#66d9ef">UPDATE&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">SET&lt;/span> value &lt;span style="color:#f92672">=&lt;/span> EXCLUDED.value,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at &lt;span style="color:#f92672">=&lt;/span> EXCLUDED.expires_at;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Read&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> value &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">WHERE&lt;/span> &lt;span style="color:#66d9ef">key&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> expires_at &lt;span style="color:#f92672">&amp;gt;&lt;/span> NOW();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Cleanup (run periodically)&lt;/strong>&lt;/p></description></item><item><title>臺灣台語輸入法 App 上架，即日起行動裝置也能輸入臺灣台語</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260115-input-method/</link><pubDate>Thu, 15 Jan 2026 21:10:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260115-input-method/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&amp;amp;s=43F7E1DC99DDAE7B" target="_blank" rel="noopener">臺灣台語輸入法 App 上架，即日起行動裝置也能輸入臺灣台語&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://apps.apple.com/tw/app/%E6%95%99%E8%82%B2%E9%83%A8%E8%87%BA%E7%81%A3%E5%8F%B0%E8%AA%9E%E8%BC%B8%E5%85%A5%E6%B3%95/id6743423554" target="_blank" rel="noopener">教育部臺灣台語輸入法 - iOS&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://play.google.com/store/apps/details?id=tw.moe.taiwanese.taigi&amp;amp;hl=zh_TW&amp;amp;pli=1" target="_blank" rel="noopener">教育部臺灣台語輸入法 - Android&lt;/a>&lt;/li>

@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Trace on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/trace/</link><description>Recent content in Trace on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 07 May 2024 11:45:57 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/trace/index.xml" rel="self" type="application/rss+xml"/><item><title>更強大的 Go 執行追蹤能力</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240507-go-trace/</link><pubDate>Tue, 07 May 2024 11:45:57 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240507-go-trace/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Trace on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/trace/</link><description>Recent content in Trace on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 27 Jan 2026 09:54:42 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/trace/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Tool Trace</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</link><pubDate>Tue, 27 Jan 2026 09:54:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10350656" target="_blank" rel="noopener">淺談 Go Tool Trace - 1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10351336" target="_blank" rel="noopener">淺談 Go Tool Trace - 2 Go Trace 與使用者自訂追蹤分析&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352139" target="_blank" rel="noopener">淺談 Go Tool Trace - 3 實際分析 Goroutine Analysis&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352141" target="_blank" rel="noopener">Go Tool Trace - 4 從 分析到實戰：最佳化 Goroutine 數量&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://pkg.go.dev/cmd/trace@go1.23.0" target="_blank" rel="noopener">trace&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>&lt;em>trace 是「事件時間軸」，不是「取樣統計」&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>go tool trace&lt;/code>：用來看 &lt;strong>runtime trace（執行追蹤）&lt;/strong>，本質是「時間序列事件」：
+&lt;ul>
+&lt;li>goroutine 的建立 / runnable / running / waiting / syscall&lt;/li>
+&lt;li>scheduler（G/M/P）相關事件、排程延遲&lt;/li>
+&lt;li>blocking（net / sync / syscall）時間分佈&lt;/li>
+&lt;li>GC 事件、STW、heap 變化（在 trace viewer 會看到）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>用 &lt;code>pprof&lt;/code> 是找「熱點」：誰吃 CPU / 誰 alloc 多&lt;/li>
+&lt;li>用 &lt;code>trace&lt;/code> 是找「延遲原因」：&lt;strong>為什麼卡&lt;/strong>（排程？鎖？網路？syscall？GC？）&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>直覺判斷：&lt;/p></description></item><item><title>更強大的 Go 執行追蹤能力</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240507-go-trace/</link><pubDate>Tue, 07 May 2024 11:45:57 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240507-go-trace/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://colobu.com/2024/03/18/execution-traces-2024/" target="_blank" rel="noopener">更強大的 Go 執行追蹤能力&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="runtimetrace">runtime/trace&lt;/h3>

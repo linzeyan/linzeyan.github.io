@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PostgreSQL on Ricky</title><link>https://linzeyan.github.io/categories/postgresql/</link><description>Recent content in PostgreSQL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 19 Jan 2026 15:45:23 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>I Replaced Redis with PostgreSQL (And It's Faster)</title><link>https://linzeyan.github.io/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</link><pubDate>Mon, 19 Jan 2026 15:45:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://dev.to/polliog/i-replaced-redis-with-postgresql-and-its-faster-4942" target="_blank" rel="noopener">I Replaced Redis with PostgreSQL (And It&amp;rsquo;s Faster)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="before-the-change-redis-handled-three-things">Before the change, Redis handled three things:&lt;/h3>
+&lt;ol>
+&lt;li>Caching (70% of usage)&lt;/li>
+&lt;li>Pub/Sub (20% of usage)&lt;/li>
+&lt;li>Background Job Queue (10% of usage)&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>&lt;em>The pain points:&lt;/em>&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Two databases to backup&lt;/li>
+&lt;li>Redis uses RAM (expensive at scale)&lt;/li>
+&lt;li>Redis persistence is&amp;hellip; complicated&lt;/li>
+&lt;li>Network hop between Postgres and Redis&lt;/li>
+&lt;/ul>
+&lt;h3 id="postgresql-feature">PostgreSQL Feature&lt;/h3>
+&lt;h5 id="1-caching-with-unlogged-tables">1: Caching with UNLOGGED Tables&lt;/h5>
+&lt;p>&lt;strong>&lt;em>Redis&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">redis&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;session:abc123&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">JSON&lt;/span>.&lt;span style="color:#a6e22e">stringify&lt;/span>(&lt;span style="color:#a6e22e">sessionData&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;EX&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">3600&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>&lt;em>PostgreSQL&lt;/em>&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> UNLOGGED &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">key&lt;/span> TEXT &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value JSONB &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at TIMESTAMPTZ &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> idx_cache_expires &lt;span style="color:#66d9ef">ON&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>(expires_at);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Insert&lt;/strong>&lt;/p></description></item></channel></rss>
