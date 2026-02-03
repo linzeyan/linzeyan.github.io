@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2026 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2026/</link><description>Recent content in 2026 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 27 Jan 2026 09:54:42 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2026/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Tool Trace</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</link><pubDate>Tue, 27 Jan 2026 09:54:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</guid><description>&lt;ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2026 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2026/</link><description>Recent content in 2026 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 03 Feb 2026 09:41:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2026/index.xml" rel="self" type="application/rss+xml"/><item><title>Selectively Disabling HTTP/1.0 and HTTP/1.1</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260203-selectively_disabling_http_1/</link><pubDate>Tue, 03 Feb 2026 09:41:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260203-selectively_disabling_http_1/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://markmcb.com/web/selectively_disabling_http_1/" target="_blank" rel="noopener">Selectively Disabling HTTP/1.0 and HTTP/1.1&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">http&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Check for text-based browsers
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#e6db74">map&lt;/span> $http_user_agent $is_text_browser {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Text-Based Browsers (not exhaustive)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">&amp;#34;~*^w3m&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*^Links&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*^ELinks&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*^lynx&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bots (not exhaustive)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">&amp;#34;~*Googlebot&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*bingbot&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*Yahoo!&lt;/span> &lt;span style="color:#e6db74">Slurp&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*DuckDuckBot&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*YandexBot&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;~*Kagibot&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Check if request is HTTP/1.X
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">map&lt;/span> $server_protocol $is_http1 {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;HTTP/1.0&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;HTTP/1.1&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># If Request is not text-based browser,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e"># and is HTTP/1.X, set the http1_and_unknown variable
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#75715e"># to 1, which is equivalent to &amp;#34;true&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#f92672">map&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$is_http1:$is_text_browser&amp;#34; $http1_and_unknown {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">default&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;1:0&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Go Tool Trace</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</link><pubDate>Tue, 27 Jan 2026 09:54:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260127-go-tool-trace/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10350656" target="_blank" rel="noopener">淺談 Go Tool Trace - 1&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10351336" target="_blank" rel="noopener">淺談 Go Tool Trace - 2 Go Trace 與使用者自訂追蹤分析&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10352139" target="_blank" rel="noopener">淺談 Go Tool Trace - 3 實際分析 Goroutine Analysis&lt;/a>&lt;/li>
