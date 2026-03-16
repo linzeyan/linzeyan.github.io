@@ -13,7 +13,7 @@ menu:
 
 - A. p.name
 - B. (&p).name
-- C. (*p).name
+- C. (\*p).name
 - D. p->name
 
 <details>
@@ -23,9 +23,8 @@ menu:
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="variable1" >}}
+
 ```go
 package main
 
@@ -38,6 +37,7 @@ func main() {
 	fmt.Println(ans)
 }
 ```
+
 - A. 45
 - B. 45.0
 - C. 45.2
@@ -50,9 +50,8 @@ func main() {
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="variable2" >}}
+
 ```go
 package main
 
@@ -65,6 +64,7 @@ func main() {
 	fmt.Println(ans)
 }
 ```
+
 - A. 1.5
 - B. 1
 - C. 0
@@ -77,9 +77,8 @@ func main() {
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="variable3" >}}
+
 ```go
 package main
 
@@ -99,9 +98,8 @@ func main() {
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="variable4" >}}
+
 ```go
 package main
 
@@ -119,8 +117,6 @@ func main() {
 <code class="language-shell">-128
 </code></pre></details>
 {{< /note >}}
-
-
 
 {{< note title="variable5" >}}
 
@@ -148,8 +144,6 @@ cannot use i (variable of type int) as MyInt1 value in variable declaration
 </code></pre></details>
 {{< /note >}}
 
-
-
 {{< note title="variable6" >}}
 
 ```go
@@ -159,7 +153,7 @@ import "fmt"
 
 func main() {
 	const X = 7.0
-	var x interface{} = X
+	var x any = X
 	if y, ok := x.(int); ok {
 		fmt.Println(y)
 	} else {
@@ -167,6 +161,7 @@ func main() {
 	}
 }
 ```
+
 - A. 7
 - B. 7.0
 - C. 0

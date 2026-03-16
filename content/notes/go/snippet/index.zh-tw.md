@@ -50,10 +50,10 @@ func main() {
 ```go
 func unaryInterceptor(
   ctx context.Context,
-  req interface{},
+  req any,
   info *googleGrpc.UnaryServerInfo,
   handler googleGrpc.UnaryHandler,
-) (interface{}, error) {
+) (any, error) {
   // 打印被调用的方法名
   fmt.Println("Called method:", info.FullMethod)
 
