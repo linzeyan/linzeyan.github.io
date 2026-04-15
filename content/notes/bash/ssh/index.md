@@ -29,3 +29,13 @@ Host private.example.com
 ```
 
 {{< /note >}}
+
+{{< note title="tmux" >}}
+
+**iTerm2**
+
+```bash
+tmux -CC
+```
+
+{{< /note >}}
