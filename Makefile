@@ -15,4 +15,6 @@ clean:
 	@rm -rf ./node_modules
 	@rm -rf ./public
 	@rm -rf ./resources
+	@rm -rf ~/Library/Caches/hugo_cache
+	@hugo mod clean
 .PHONY: clean
