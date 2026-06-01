@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Agent-Code on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/agent-code/</link><description>Recent content in Agent-Code on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 01 Jun 2026 10:58:17 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/agent-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Local LLM on MacBookPro</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260601-local-llm/</link><pubDate>Mon, 01 Jun 2026 10:58:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260601-local-llm/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener">https://huggingface.co/mlx-community&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/ml-explore/mlx-lm" target="_blank" rel="noopener">https://github.com/ml-explore/mlx-lm&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install">Install&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install hf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv tool install &lt;span style="color:#e6db74">&amp;#34;huggingface_hub&amp;#34;&lt;/span> --with hf-xet --upgrade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hf auth login
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hf auth whoami
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install mlx_lm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv tool install --force &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --from &lt;span style="color:#e6db74">&amp;#39;git+https://github.com/ml-explore/mlx-lm.git@refs/pull/1192/head&amp;#39;&lt;/span> mlx-lm &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with &lt;span style="color:#e6db74">&amp;#39;transformers @ git+https://github.com/huggingface/transformers.git&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install [litellm](https://github.com/BerriAI/litellm)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv tool install &lt;span style="color:#e6db74">&amp;#39;litellm[proxy]&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install [claw-code](https://github.com/ultraworkers/claw-code)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cargo install agent-code
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="download-model">Download Model&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>HF_HUB_DISABLE_XET&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> hf download mlx-community/DeepSeek-V4-Flash-4bit &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --local-dir deepseekV4 --repo-type model
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-server">Run Server&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlx_lm.server --model /Users/ricky/git/mlx/deepseekV4 --port &lt;span style="color:#ae81ff">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-litellm">Run litellm&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>litellm --config config.yaml --port &lt;span style="color:#ae81ff">4000&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>config.yaml&lt;/strong>&lt;/p></description></item></channel></rss>
