@@ -91,3 +91,9 @@ model_list:
 ```shell
 ANTHROPIC_BASE_URL=http://127.0.0.1:4000 ANTHROPIC_AUTH_TOKEN=token ANTHROPIC_MODEL=deepseek CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 CLAUDE_CODE_ATTRIBUTION_HEADER=0 agent
 ```
+
+##### Run [oMLX](https://github.com/jundot/omlx/releases/download/v0.3.12/oMLX-0.3.12-macos26-tahoe.dmg) directly, skipping the execution server and execution litellm
+
+```shell
+ANTHROPIC_BASE_URL=http://127.0.0.1:8000/v1 ANTHROPIC_AUTH_TOKEN=token ANTHROPIC_MODEL=deepseek CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 CLAUDE_CODE_ATTRIBUTION_HEADER=0 agent
+```
