@@ -12,6 +12,7 @@ categories: ["macOS", "LLM", "litellm", "MLX", "agent-code"]
 
 - https://huggingface.co/mlx-community
 - https://github.com/ml-explore/mlx-lm
+- https://github.com/jundot/omlx
 
 #### Install
 
@@ -25,6 +26,9 @@ hf auth whoami
 uv tool install --force \
   --from 'git+https://github.com/ml-explore/mlx-lm.git@refs/pull/1192/head' mlx-lm \
   --with 'transformers @ git+https://github.com/huggingface/transformers.git'
+
+# install mlx-openai-server
+uv pip install git+https://github.com/cubist38/mlx-openai-server.git --system
 
 # install [litellm](https://github.com/BerriAI/litellm)
 uv tool install 'litellm[proxy]'
@@ -44,6 +48,25 @@ HF_HUB_DISABLE_XET=1 hf download mlx-community/DeepSeek-V4-Flash-4bit \
 
 ```shell
 mlx_lm.server --model /Users/ricky/git/mlx/deepseekV4 --port 8080
+```
+
+**or**
+
+```shell
+mlx-openai-server launch \
+	--model-type lm \
+	--model-path /Users/ricky/git/mlx/deepseekV4 \
+	--context-length 8192 \
+	--decode-concurrency 4 \
+	--prompt-concurrency 1 \
+	--prefill-step-size 256 \
+	--max-tokens 2048 \
+	--prompt-cache-size 1 \
+	--max-bytes 2147483648 \
+	--kv-bits 4 \
+	--kv-group-size 64 \
+	--quantized-kv-start 0 \
+	--port 8080
 ```
 
 #### Run litellm
