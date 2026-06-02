@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky</title><link>https://linzeyan.github.io/posts/</link><description>Recent content in Posts on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 01 Jun 2026 10:58:17 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Local LLM on MacBookPro</title><link>https://linzeyan.github.io/posts/2026/20260601-local-llm/</link><pubDate>Mon, 01 Jun 2026 10:58:17 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260601-local-llm/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener">https://huggingface.co/mlx-community&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/ml-explore/mlx-lm" target="_blank" rel="noopener">https://github.com/ml-explore/mlx-lm&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/jundot/omlx" target="_blank" rel="noopener">https://github.com/jundot/omlx&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="install">Install&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install hf&lt;/span>
@@ -13,6 +14,9 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --from &lt;span style="color:#e6db74">&amp;#39;git+https://github.com/ml-explore/mlx-lm.git@refs/pull/1192/head&amp;#39;&lt;/span> mlx-lm &lt;span style="color:#ae81ff">\
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --with &lt;span style="color:#e6db74">&amp;#39;transformers @ git+https://github.com/huggingface/transformers.git&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install mlx-openai-server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv pip install git+https://github.com/cubist38/mlx-openai-server.git --system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># install [litellm](https://github.com/BerriAI/litellm)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv tool install &lt;span style="color:#e6db74">&amp;#39;litellm[proxy]&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -23,9 +27,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --local-dir deepseekV4 --repo-type model
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-server">Run Server&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlx_lm.server --model /Users/ricky/git/mlx/deepseekV4 --port &lt;span style="color:#ae81ff">8080&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-litellm">Run litellm&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>litellm --config config.yaml --port &lt;span style="color:#ae81ff">4000&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>config.yaml&lt;/strong>&lt;/p></description></item><item><title>Articles</title><link>https://linzeyan.github.io/posts/2026/20260513-articles/</link><pubDate>Wed, 13 May 2026 11:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260513-articles/</guid><description>&lt;ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>or&lt;/strong>&lt;/p></description></item><item><title>Articles</title><link>https://linzeyan.github.io/posts/2026/20260513-articles/</link><pubDate>Wed, 13 May 2026 11:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260513-articles/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://github.com/itgoyo/TelegramChannels" target="_blank" rel="noopener">TelegramChannels&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/warp-tech/warpgate" target="_blank" rel="noopener">warpgate: is a smart &amp;amp; fully transparent SSH, HTTPS, Kubernetes, MySQL, PostgreSQL bastion host that doesn&amp;rsquo;t require a client app or an SSH wrapper.&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://jakub.kr/writing/details-that-make-interfaces-feel-better" target="_blank" rel="noopener">Details that make interfaces feel better: &lt;code>npx skills add jakubkrehel/make-interfaces-feel-better&lt;/code>&lt;/a>&lt;/li>
