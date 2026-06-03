@@ -6,9 +6,28 @@ menu:
     name: "Articles"
     identifier: articles-recent-20260415
     weight: 10
-tags: ["Links", "macOS", "Go", "Meilisearch", "Claude Code", "Linux", "Taiwan"]
+tags:
+  [
+    "Links",
+    "macOS",
+    "Go",
+    "Meilisearch",
+    "Claude Code",
+    "Linux",
+    "Taiwan",
+    "Bookmark",
+  ]
 categories:
-  ["Links", "macOS", "Go", "Meilisearch", "Claude Code", "Linux", "Taiwan"]
+  [
+    "Links",
+    "macOS",
+    "Go",
+    "Meilisearch",
+    "Claude Code",
+    "Linux",
+    "Taiwan",
+    "Bookmark",
+  ]
 ---
 
 - [SingleFlight](https://ganhua.wang/singleflight)

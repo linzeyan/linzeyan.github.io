@@ -6,8 +6,8 @@ menu:
     name: "Tools"
     identifier: tools-github-command-lines-tools-20260315
     weight: 10
-tags: ["Links", "Tools", "command line"]
-categories: ["Links", "Tools", "command line"]
+tags: ["Links", "Tools", "command line", "Bookmark"]
+categories: ["Links", "Tools", "command line", "Bookmark"]
 ---
 
 - [tirith](https://github.com/sheeki03/tirith): Tirith guards the gate and intercepts suspicious URLs, ANSI injection, and pipe-to-shell attacks before they execute.

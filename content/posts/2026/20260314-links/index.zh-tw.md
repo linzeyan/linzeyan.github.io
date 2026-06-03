@@ -6,8 +6,8 @@ menu:
     name: "Links"
     identifier: links-recent-20260314
     weight: 10
-tags: ["Links"]
-categories: ["Links"]
+tags: ["Links", "Bookmark"]
+categories: ["Links", "Bookmark"]
 ---
 
 - [AnyStorage](https://anystorage.dev): AnyStorage brings S3, R2, Backblaze B2, MinIO, and other compatible services into a single desktop workspace with a cleaner rhythm than cloud dashboards.

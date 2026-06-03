@@ -6,9 +6,28 @@ menu:
     name: "Articles"
     identifier: articles-recent-20260430
     weight: 10
-tags: ["Links", "LLM", "Skill", "Markdown", "Ada", "Virtual Machine", "Linux"]
+tags:
+  [
+    "Links",
+    "LLM",
+    "Skill",
+    "Markdown",
+    "Ada",
+    "Virtual Machine",
+    "Linux",
+    "Bookmark",
+  ]
 categories:
-  ["Links", "LLM", "Skill", "Markdown", "Ada", "Virtual Machine", "Linux"]
+  [
+    "Links",
+    "LLM",
+    "Skill",
+    "Markdown",
+    "Ada",
+    "Virtual Machine",
+    "Linux",
+    "Bookmark",
+  ]
 ---
 
 - [gstack: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA](https://github.com/garrytan/gstack)

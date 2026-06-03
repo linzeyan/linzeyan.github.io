@@ -20,6 +20,7 @@ tags:
     "Privacy",
     "Linux",
     "macOS",
+    "Bookmark",
   ]
 categories:
   [
@@ -35,6 +36,7 @@ categories:
     "Privacy",
     "Linux",
     "macOS",
+    "Bookmark",
   ]
 ---
 
