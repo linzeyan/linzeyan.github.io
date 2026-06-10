@@ -6,8 +6,8 @@ menu:
     name: "比 Ctrl+F 更聰明：直接連到網頁內容"
     identifier: url-web-browser-linking-directly-to-web-page-content
     weight: 10
-tags: ["Links", "URL", "web", "browser"]
-categories: ["Links", "URL", "web", "browser"]
+tags: ["Links", "URL", "web", "Browser"]
+categories: ["Links", "URL", "web", "Browser"]
 ---
 
 - [比 Ctrl+F 更聰明：直接連到網頁內容](https://alfy.blog/2024/10/19/linking-directly-to-web-page-content.html)
