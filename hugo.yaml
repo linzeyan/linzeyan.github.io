@@ -47,6 +47,17 @@ outputs:
     - HTML
     - RSS
     - JSON
+    - HEADERS
+
+mediaTypes:
+  "text/plain":
+    suffixes: [] # 讓副檔名變成空字串，產出的檔名就會剛好是 _headers
+
+outputFormats:
+  HEADERS:
+    mediaType: "text/plain"
+    baseName: "_headers"
+    isPlainText: true
 
 # Enable global emoji support
 enableEmoji: true
