@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Image on Ricky</title><link>https://linzeyan.github.io/tags/image/</link><description>Recent content in Image on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 20 Jun 2026 22:55:33 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/image/index.xml" rel="self" type="application/rss+xml"/><item><title>Local LLM on MacBookPro - Image</title><link>https://linzeyan.github.io/posts/2026/20260620-local-llm-image/</link><pubDate>Sat, 20 Jun 2026 22:55:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20260620-local-llm-image/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://huggingface.co/mlx-community" target="_blank" rel="noopener">https://huggingface.co/mlx-community&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/filipstrand/mflux" target="_blank" rel="noopener">https://github.com/filipstrand/mflux&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/lpalbou/mlx-gen" target="_blank" rel="noopener">https://github.com/lpalbou/mlx-gen&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://huggingface.co/AbstractFramework" target="_blank" rel="noopener">https://huggingface.co/AbstractFramework&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="install">Install&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>uv tool install --upgrade mflux
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv tool install --upgrade --force mlx-gen
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="download-model">Download Model&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># mlx-community/FLUX.2-klein-9B&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># AbstractFramework/z-image-turbo-8bit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># AbstractFramework/qwen-image-edit-2511-8bit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HF_HUB_DISABLE_XET&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> hf download mlx-community/FLUX.2-klein-9B --local-dir FLUX.2-klein-9B --max-workers &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run">Run&lt;/h4>
+&lt;h5 id="flux2-klein-9b">FLUX.2-klein-9B&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mflux-generate-flux2 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model &lt;span style="color:#e6db74">&amp;#34;/Users/ricky/git/mlx/FLUX.2-klein-9B&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;Charmander from Pokemon, a specific Nintendo character, iconic appearance, very clean large eyes, friendly wide smile, smooth round belly, long distinct tail with simple flame outlines&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">42&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1240&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">1754&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output pics/charmander.png
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="z-image-turbo-8bit">z-image-turbo-8bit&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlxgen generate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model /Users/ricky/git/mlx/z-image-turbo-8bit &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;哆啦Ａ夢使用竹蜻蜓飛在天空中&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">42&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1240&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">1754&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output pics/doramon.png
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="qwen-image-edit-2511-8bit">qwen-image-edit-2511-8bit&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlxgen generate &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model /Users/ricky/git/mlx/qwen-image-edit-2511-8bit &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;哆啦Ａ夢使用竹蜻蜓飛在天空中，旁邊有大雄&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">6&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">42&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1240&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">1754&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --image-path pics/doramon.png &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output pics/doramon1.png
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
