@@ -6,8 +6,8 @@ menu:
     name: "Local LLM on MacBookPro - Audio/Video"
     identifier: local-llm-on-macbookpro-audio-video
     weight: 10
-tags: ["macOS", "LLM", "Video", "MLX", "Audio"]
-categories: ["macOS", "LLM", "Video", "MLX", "Audio"]
+tags: ["macOS", "LLM", "Video", "MLX", "Audio", "STT", "TTS"]
+categories: ["macOS", "LLM", "Video", "MLX", "Audio", "STT", "TTS"]
 ---
 
 ### Video
@@ -15,6 +15,7 @@ categories: ["macOS", "LLM", "Video", "MLX", "Audio"]
 - https://huggingface.co/Wan-AI
 - https://github.com/Wan-Video/Wan2.2
 - https://github.com/Blaizzy/mlx-video
+- https://huggingface.co/fishaudio/s2-pro
 
 #### Install
 
@@ -141,6 +142,8 @@ ffmpeg \
 
 #### Run
 
+**STT**
+
 ##### Breeze-ASR-25
 
 ```shell
@@ -151,6 +154,31 @@ python -m mlx_audio.stt.generate \
 		--format json \
 		--language zh \
 		--verbose
+```
+
+**TTS**
+
+##### fish-audio-s2-pro
+
+```shell
+# [excited]
+# [sad]
+# [angry]
+# [whisper]
+# [laughing]
+python -m mlx_audio.tts.generate \
+		--model models/mlx-community/fish-audio-s2-pro-bf16 \
+		--text "[excited] Hello, this is a test." \
+		--output_path ~/Downloads/s2pro_out
+```
+
+```shell
+python -m mlx_audio.tts.generate \
+		--model models/mlx-community/fish-audio-s2-pro-bf16 \
+		--ref_audio ~/Downloads/talk.wav \
+		--file_prefix cloned \
+		--text "今天天氣真好，我們一起去散步吧！" \
+		--output_path ~/Downloads/s2pro_ref_out
 ```
 
 #### Upload
