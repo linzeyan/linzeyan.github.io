@@ -4,7 +4,7 @@ date: 2026-08-07T16:00:33+08:00
 menu:
   sidebar:
     name: "Articles"
-    identifier: articles-recent-202607807
+    identifier: articles-recent-20260807
     weight: 10
 tags:
   [
