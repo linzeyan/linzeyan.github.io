@@ -82,3 +82,130 @@ func isRunningTest() bool {
 ```
 
 {{< /note >}}
+
+{{< note title="GIN dto validator" >}}
+
+```go
+package validator
+
+import (
+	"encoding/json"
+	"errors"
+	"io"
+	"net/http"
+	"reflect"
+	"sync"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+)
+
+const (
+	MB      = 1 << 20
+	maxBody = 5 * MB
+)
+
+var srcCache sync.Map // reflect.Type -> srcInfo
+type srcInfo struct{ form, uri, validate bool }
+
+type Binder interface {
+	Validate(*gin.Context) error
+}
+
+func infoOf(t reflect.Type) srcInfo {
+	if v, ok := srcCache.Load(t); ok {
+		return v.(srcInfo)
+	}
+
+	var s srcInfo
+	seen := map[reflect.Type]bool{} // 在遞迴外層，所有層級共用
+
+	var scan func(reflect.Type)
+	scan = func(t reflect.Type) {
+		for isWrapper(t.Kind()) {
+			t = t.Elem()
+		}
+		if t.Kind() != reflect.Struct || seen[t] {
+			return
+		}
+		seen[t] = true
+		for f := range t.Fields() {
+			if _, ok := f.Tag.Lookup("form"); ok {
+				s.form = true
+			}
+			if _, ok := f.Tag.Lookup("uri"); ok {
+				s.uri = true
+			}
+			if _, ok := f.Tag.Lookup("binding"); ok {
+				s.validate = true
+			}
+			scan(f.Type)
+		}
+	}
+	scan(t)
+
+	srcCache.Store(t, s)
+	return s
+}
+
+func isWrapper(k reflect.Kind) bool {
+	switch k {
+	case reflect.Pointer, reflect.Slice, reflect.Array, reflect.Map:
+		return true
+	}
+	return false
+}
+
+func Bind[T any](c *gin.Context) (*T, error) {
+	req := new(T)
+	// 有 body 才解 JSON
+	if c.Request.ContentLength != 0 && c.ContentType() == binding.MIMEJSON {
+		body := http.MaxBytesReader(c.Writer, c.Request.Body, maxBody)
+		if err := json.NewDecoder(body).Decode(req); err != nil && !errors.Is(err, io.EOF) {
+			return nil, err
+		}
+	}
+	info := infoOf(reflect.TypeFor[T]())
+	// 有 query 才映射
+	if info.form && c.Request.URL.RawQuery != "" {
+		if err := binding.MapFormWithTag(req, c.Request.URL.Query(), "form"); err != nil {
+			return nil, err
+		}
+	}
+	// 有 path 參數才映射
+	if info.uri && len(c.Params) > 0 {
+		m := make(map[string][]string, len(c.Params))
+		for _, p := range c.Params {
+			m[p.Key] = []string{p.Value}
+		}
+		if err := binding.MapFormWithTag(req, m, "uri"); err != nil {
+			return nil, err
+		}
+	}
+	// 有 binding tag 才驗證
+	if info.validate {
+		if err := binding.Validator.ValidateStruct(req); err != nil {
+			return nil, err
+		}
+	}
+	// 有實作才呼叫
+	if v, ok := any(req).(Binder); ok {
+		if err := v.Validate(c); err != nil {
+			return nil, err
+		}
+	}
+	return req, nil
+}
+
+func MustBind[T any](c *gin.Context) (*T, bool) {
+	req, err := Bind[T](c)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return nil, false
+	}
+	return req, true
+}
+
+```
+
+{{< /note >}}
