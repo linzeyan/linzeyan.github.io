@@ -209,3 +209,19 @@ func MustBind[T any](c *gin.Context) (*T, bool) {
 ```
 
 {{< /note >}}
+
+{{< note title="gRPC debug" >}}
+
+```shell
+# connect state: TRANSIENT_FAILURE
+GRPC_GO_LOG_SEVERITY_LEVEL=info GRPC_GO_LOG_VERBOSITY_LEVEL=2 ./bin/grpc-service
+```
+{{< /note >}}
+
+{{< note title="go build 限制記憶體最大為 2GB，並限制最多使用 2 個 CPU 核心(Linux)" >}}
+
+```shell
+systemd-run --scope --user -p MemoryHigh=1800M -p MemoryMax=2G -p CPUQuota=200% \
+	env GOMAXPROCS=2 GOMEMLIMIT=600MiB go build -v -p 2 -o myapp main.go
+```
+{{< /note >}}

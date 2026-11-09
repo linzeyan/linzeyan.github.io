@@ -90,3 +90,20 @@ menu:
     - [Dockerfile](/notes/docs/docker/dockerfile/supervisord/service_with_supervisord/Dockerfile)
 
 {{< /note >}}
+
+{{< note title="docker build 的時候限制使用資源" >}}
+
+```shell
+docker buildx create --name limited \
+  --driver docker-container \
+  --driver-opt default-load=true \
+  --driver-opt memory=2g \
+  --driver-opt memory-swap=2g \
+  --driver-opt cpu-quota=200000 \
+  --driver-opt cpu-period=100000 \
+  --use
+
+docker buildx build -t myimage .
+```
+
+{{< /note >}}
