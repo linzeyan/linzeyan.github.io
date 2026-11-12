@@ -1,65 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Channel on Ricky</title><link>https://linzeyan.github.io/categories/channel/</link><description>Recent content in Channel on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 22 Jun 2023 21:25:05 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/channel/index.xml" rel="self" type="application/rss+xml"/><item><title>15 Rules of Channels and Their Implementation</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener">15 Rules of Channels and Their Implementation&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="operation-rules">Operation rules&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: center">Operation&lt;/th>
-&lt;th style="text-align: center">nil&lt;/th>
-&lt;th style="text-align: center">Closed channel&lt;/th>
-&lt;th style="text-align: center">Open buffered channel&lt;/th>
-&lt;th style="text-align: center">Open unbuffered channel&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: center">Close&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">Close succeeds; buffered values can be read. After buffer drains, further reads return the zero value of the channel type.&lt;/td>
-&lt;td style="text-align: center">Close succeeds; further reads return the zero value of the channel type.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Receive&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;td style="text-align: center">Non-blocking; returns the zero value of the channel type&lt;/td>
-&lt;td style="text-align: center">Non-blocking; reads values normally&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Send&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">Non-blocking; writes values normally&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="compile-time-rules">Compile-time rules&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: center">Operation&lt;/th>
-&lt;th style="text-align: center">Channel type&lt;/th>
-&lt;th style="text-align: center">Result&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: center">Receive&lt;/td>
-&lt;td style="text-align: center">Send-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Send&lt;/td>
-&lt;td style="text-align: center">Receive-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Close&lt;/td>
-&lt;td style="text-align: center">Receive-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Channel on Ricky</title><link>https://linzeyan.github.io/categories/channel/</link><description>Recent content in Channel on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 22 Jun 2023 21:25:05 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/channel/index.xml" rel="self" type="application/rss+xml"/><item><title>15 Rules of Channels and Their Implementation</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener"&gt;15 Rules of Channels and Their Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="operation-rules"&gt;Operation rules&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: center"&gt;Operation&lt;/th&gt;
+&lt;th style="text-align: center"&gt;nil&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Closed channel&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Open buffered channel&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Open unbuffered channel&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Close&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Close succeeds; buffered values can be read. After buffer drains, further reads return the zero value of the channel type.&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Close succeeds; further reads return the zero value of the channel type.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Receive&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; returns the zero value of the channel type&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; reads values normally&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Send&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; writes values normally&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="compile-time-rules"&gt;Compile-time rules&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: center"&gt;Operation&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Channel type&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Result&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Receive&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Send-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Send&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Receive-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Close&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Receive-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item></channel></rss>

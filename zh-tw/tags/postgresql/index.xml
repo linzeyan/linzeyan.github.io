@@ -1,38 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PostgreSQL on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/postgresql/</link><description>Recent content in PostgreSQL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 19 Jan 2026 15:45:23 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>I Replaced Redis with PostgreSQL (And It's Faster)</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</link><pubDate>Mon, 19 Jan 2026 15:45:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://dev.to/polliog/i-replaced-redis-with-postgresql-and-its-faster-4942" target="_blank" rel="noopener">I Replaced Redis with PostgreSQL (And It&amp;rsquo;s Faster)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="在更改之前redis-主要處理三件事">在更改之前，Redis 主要處理三件事：&lt;/h3>
-&lt;ol>
-&lt;li>快取（佔使用量的 70%）&lt;/li>
-&lt;li>發布/訂閱（佔使用量的 20%）&lt;/li>
-&lt;li>後台作業佇列（使用率 10%）&lt;/li>
-&lt;/ol>
-&lt;p>&lt;strong>&lt;em>痛點:&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>需要備份兩個資料庫&lt;/li>
-&lt;li>Redis 使用記憶體（規模化時成本很高）&lt;/li>
-&lt;li>Redis 持久化機制…很複雜。&lt;/li>
-&lt;li>Postgres 和 Redis 之間的網路跳躍&lt;/li>
-&lt;/ul>
-&lt;h3 id="postgresql-功能">PostgreSQL 功能&lt;/h3>
-&lt;h5 id="1-使用未記錄表進行快取">1: 使用未記錄表進行快取&lt;/h5>
-&lt;p>&lt;strong>&lt;em>Redis&lt;/em>&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">await&lt;/span> &lt;span style="color:#a6e22e">redis&lt;/span>.&lt;span style="color:#a6e22e">set&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;session:abc123&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">JSON&lt;/span>.&lt;span style="color:#a6e22e">stringify&lt;/span>(&lt;span style="color:#a6e22e">sessionData&lt;/span>), &lt;span style="color:#e6db74">&amp;#34;EX&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">3600&lt;/span>);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>&lt;em>PostgreSQL&lt;/em>&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> UNLOGGED &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">key&lt;/span> TEXT &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> value JSONB &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at TIMESTAMPTZ &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">INDEX&lt;/span> idx_cache_expires &lt;span style="color:#66d9ef">ON&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>(expires_at);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Insert&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">INSERT&lt;/span> &lt;span style="color:#66d9ef">INTO&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span> (&lt;span style="color:#66d9ef">key&lt;/span>, value, expires_at)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">VALUES&lt;/span> (&lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>, NOW() &lt;span style="color:#f92672">+&lt;/span> INTERVAL &lt;span style="color:#e6db74">&amp;#39;1 hour&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">ON&lt;/span> CONFLICT (&lt;span style="color:#66d9ef">key&lt;/span>) &lt;span style="color:#66d9ef">DO&lt;/span> &lt;span style="color:#66d9ef">UPDATE&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">SET&lt;/span> value &lt;span style="color:#f92672">=&lt;/span> EXCLUDED.value,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expires_at &lt;span style="color:#f92672">=&lt;/span> EXCLUDED.expires_at;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Read&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">SELECT&lt;/span> value &lt;span style="color:#66d9ef">FROM&lt;/span> &lt;span style="color:#66d9ef">cache&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">WHERE&lt;/span> &lt;span style="color:#66d9ef">key&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">AND&lt;/span> expires_at &lt;span style="color:#f92672">&amp;gt;&lt;/span> NOW();
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Cleanup (run periodically)&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PostgreSQL on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/postgresql/</link><description>Recent content in PostgreSQL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 19 Jan 2026 15:45:23 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>I Replaced Redis with PostgreSQL (And It's Faster)</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</link><pubDate>Mon, 19 Jan 2026 15:45:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260119-i-replaced-redis-with-postgresql-and-its-faster/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dev.to/polliog/i-replaced-redis-with-postgresql-and-its-faster-4942" target="_blank" rel="noopener"&gt;I Replaced Redis with PostgreSQL (And It&amp;rsquo;s Faster)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="在更改之前redis-主要處理三件事"&gt;在更改之前，Redis 主要處理三件事：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;快取（佔使用量的 70%）&lt;/li&gt;
+&lt;li&gt;發布/訂閱（佔使用量的 20%）&lt;/li&gt;
+&lt;li&gt;後台作業佇列（使用率 10%）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;痛點:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要備份兩個資料庫&lt;/li&gt;
+&lt;li&gt;Redis 使用記憶體（規模化時成本很高）&lt;/li&gt;
+&lt;li&gt;Redis 持久化機制…很複雜。&lt;/li&gt;
+&lt;li&gt;Postgres 和 Redis 之間的網路跳躍&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="postgresql-功能"&gt;PostgreSQL 功能&lt;/h3&gt;
+&lt;h5 id="1-使用未記錄表進行快取"&gt;1: 使用未記錄表進行快取&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Redis&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;await&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redis&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;session:abc123&amp;#34;&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;JSON&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;stringify&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;sessionData&lt;/span&gt;), &lt;span style="color:#98c379"&gt;&amp;#34;EX&amp;#34;&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;3600&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;PostgreSQL&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;CREATE&lt;/span&gt; &lt;span style="color:#e06c75"&gt;UNLOGGED&lt;/span&gt; &lt;span style="color:#c678dd"&gt;TABLE&lt;/span&gt; &lt;span style="color:#c678dd"&gt;cache&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;key&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;TEXT&lt;/span&gt; &lt;span style="color:#c678dd"&gt;PRIMARY&lt;/span&gt; &lt;span style="color:#c678dd"&gt;KEY&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;value&lt;/span&gt; &lt;span style="color:#e06c75"&gt;JSONB&lt;/span&gt; &lt;span style="color:#c678dd"&gt;NOT&lt;/span&gt; &lt;span style="color:#c678dd"&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt; &lt;span style="color:#e06c75"&gt;TIMESTAMPTZ&lt;/span&gt; &lt;span style="color:#c678dd"&gt;NOT&lt;/span&gt; &lt;span style="color:#c678dd"&gt;NULL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;CREATE&lt;/span&gt; &lt;span style="color:#c678dd"&gt;INDEX&lt;/span&gt; &lt;span style="color:#e06c75"&gt;idx_cache_expires&lt;/span&gt; &lt;span style="color:#c678dd"&gt;ON&lt;/span&gt; &lt;span style="color:#c678dd"&gt;cache&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Insert&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;INSERT&lt;/span&gt; &lt;span style="color:#c678dd"&gt;INTO&lt;/span&gt; &lt;span style="color:#c678dd"&gt;cache&lt;/span&gt; (&lt;span style="color:#c678dd"&gt;key&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;value&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;VALUES&lt;/span&gt; ($&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;, $&lt;span style="color:#d19a66"&gt;2&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;NOW&lt;/span&gt;() &lt;span style="color:#56b6c2"&gt;+&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;INTERVAL&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;1 hour&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ON&lt;/span&gt; &lt;span style="color:#e06c75"&gt;CONFLICT&lt;/span&gt; (&lt;span style="color:#c678dd"&gt;key&lt;/span&gt;) &lt;span style="color:#c678dd"&gt;DO&lt;/span&gt; &lt;span style="color:#c678dd"&gt;UPDATE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;SET&lt;/span&gt; &lt;span style="color:#e06c75"&gt;value&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;EXCLUDED&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;value&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;EXCLUDED&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Read&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;SELECT&lt;/span&gt; &lt;span style="color:#e06c75"&gt;value&lt;/span&gt; &lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#c678dd"&gt;cache&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;WHERE&lt;/span&gt; &lt;span style="color:#c678dd"&gt;key&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; $&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#c678dd"&gt;AND&lt;/span&gt; &lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;NOW&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Cleanup (run periodically)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;DELETE&lt;/span&gt; &lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#c678dd"&gt;cache&lt;/span&gt; &lt;span style="color:#c678dd"&gt;WHERE&lt;/span&gt; &lt;span style="color:#e06c75"&gt;expires_at&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;NOW&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="2-附有-listennotify-的發布訂閱"&gt;2: 附有 LISTEN/NOTIFY 的發布/訂閱&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Redis 發佈/訂閱&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// Publisher
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;redis&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;publish&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;notifications&amp;#34;&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;JSON&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;stringify&lt;/span&gt;({ &lt;span style="color:#e06c75"&gt;userId&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#d19a66"&gt;123&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;msg&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt; }));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// Subscriber
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;redis&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;subscribe&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;notifications&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;redis&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;on&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;message&amp;#34;&lt;/span&gt;, (&lt;span style="color:#e06c75"&gt;channel&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;message&lt;/span&gt;) =&amp;gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;console&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;log&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;message&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;PostgreSQL 發佈/訂閱&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -1,46 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GeoIP on Ricky</title><link>https://linzeyan.github.io/tags/geoip/</link><description>Recent content in GeoIP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Oct 2020 15:44:48 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/geoip/index.xml" rel="self" type="application/rss+xml"/><item><title>In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener">In 2020, the latest NGINX ngx_http_geoip2 module can precisely block IP access by country or region&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener">Install GeoIP2 on CentOS 7 and route requests by IP country in nginx&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="install-geoip2-lib">Install geoip2 lib&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -f libmaxminddb-1.4.2.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xzf libmaxminddb-1.4.2.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd libmaxminddb-1.4.2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install gcc gcc-c++ make -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make check
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo make install
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#39;/usr/local/lib&amp;#39;&lt;/span> &amp;gt; /etc/ld.so.conf.d/geoip.conf
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ldconfig
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-ngx_http_geoip2_module">Download ngx_http_geoip2_module&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /usr/local/src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://github.com/leev/ngx_http_geoip2_module/archive/3.3.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xzf 3.3.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mv ngx_http_geoip2_module-3.3 ngx_http_geoip2_module
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># nginx集成&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /usr/local/src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget http://nginx.org/download/nginx-1.16.1.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxf nginx-1.16.1.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd nginx-1.16.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>useradd -M -s /sbin/nologin www
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install gcc gcc-c++ make pcre-devel zlib-devel openssl-devel -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --user&lt;span style="color:#f92672">=&lt;/span>www --group&lt;span style="color:#f92672">=&lt;/span>www --prefix&lt;span style="color:#f92672">=&lt;/span>/usr/local/nginx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-ld-opt&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;-Wl,-rpath -Wl,/usr/local/lib&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-http_sub_module &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-http_realip_module &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-http_gzip_static_module &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-http_ssl_module &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--with-http_v2_module &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>--add-module&lt;span style="color:#f92672">=&lt;/span>/usr/local/src/ngx_http_geoip2_module
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make install
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="download-geoip2-ip-database">Download geoip2 IP database&lt;/h5>
-&lt;p>The latest GeoLite2-City.mmdb for 2020 cannot be downloaded directly. You must register a maxmind account.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GeoIP on Ricky</title><link>https://linzeyan.github.io/tags/geoip/</link><description>Recent content in GeoIP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 27 Oct 2020 15:44:48 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/geoip/index.xml" rel="self" type="application/rss+xml"/><item><title>In 2020, use the latest NGINX ngx_http_geoip2 module to block IPs by country or region</title><link>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</link><pubDate>Tue, 27 Oct 2020 15:44:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201027-nginx_geoip2/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/faberbeta/p/nginx_geoip2.html" target="_blank" rel="noopener"&gt;In 2020, the latest NGINX ngx_http_geoip2 module can precisely block IP access by country or region&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cnblogs.com/baxiqiuxing/p/12376879.html" target="_blank" rel="noopener"&gt;Install GeoIP2 on CentOS 7 and route requests by IP country in nginx&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="install-geoip2-lib"&gt;Install geoip2 lib&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /usr/local/src
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -f libmaxminddb-1.4.2.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://github.com/maxmind/libmaxminddb/releases/download/1.4.2/libmaxminddb-1.4.2.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar -xzf libmaxminddb-1.4.2.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; libmaxminddb-1.4.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install gcc gcc-c++ make -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make check
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo make install
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;/usr/local/lib&amp;#39;&lt;/span&gt; &amp;gt; /etc/ld.so.conf.d/geoip.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo ldconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="download-ngx_http_geoip2_module"&gt;Download ngx_http_geoip2_module&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /usr/local/src
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://github.com/leev/ngx_http_geoip2_module/archive/3.3.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar -xzf 3.3.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mv ngx_http_geoip2_module-3.3 ngx_http_geoip2_module
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# nginx集成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /usr/local/src
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget http://nginx.org/download/nginx-1.16.1.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tar -zxf nginx-1.16.1.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; nginx-1.16.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;useradd -M -s /sbin/nologin www
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install gcc gcc-c++ make pcre-devel zlib-devel openssl-devel -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --user&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;www --group&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;www --prefix&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/usr/local/nginx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-ld-opt&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;-Wl,-rpath -Wl,/usr/local/lib&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-http_sub_module &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-http_realip_module &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-http_gzip_static_module &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-http_ssl_module &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--with-http_v2_module &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--add-module&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/usr/local/src/ngx_http_geoip2_module
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="download-geoip2-ip-database"&gt;Download geoip2 IP database&lt;/h5&gt;
+&lt;p&gt;The latest GeoLite2-City.mmdb for 2020 cannot be downloaded directly. You must register a maxmind account.&lt;/p&gt;</description></item></channel></rss>

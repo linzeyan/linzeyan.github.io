@@ -1,88 +1,88 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Audio on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/audio/</link><description>Recent content in Audio on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Fri, 31 Jul 2026 10:46:55 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/audio/index.xml" rel="self" type="application/rss+xml"/><item><title>Local LLM on MacBookPro - Audio/Video</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260731-local-llm-audio-video/</link><pubDate>Fri, 31 Jul 2026 10:46:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260731-local-llm-audio-video/</guid><description>&lt;h3 id="video">Video&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://huggingface.co/Wan-AI" target="_blank" rel="noopener">https://huggingface.co/Wan-AI&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/Wan-Video/Wan2.2" target="_blank" rel="noopener">https://github.com/Wan-Video/Wan2.2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/Blaizzy/mlx-video" target="_blank" rel="noopener">https://github.com/Blaizzy/mlx-video&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://huggingface.co/fishaudio/s2-pro" target="_blank" rel="noopener">https://huggingface.co/fishaudio/s2-pro&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="install">Install&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>uv tool install git+https://github.com/Blaizzy/mlx-video.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="download-model">Download Model&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>HF_HUB_DISABLE_XET&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> hf download Wan-AI/Wan2.2-TI2V-5B --local-dir Wan2.2-TI2V-5B --max-workers &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HF_HUB_DISABLE_XET&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> hf download Wan-AI/Wan2.2-T2V-A14B --local-dir Wan2.2-T2V-A14B --max-workers &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="convert">Convert&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>~/.local/share/uv/tools/mlx-video/bin/python -m mlx_video.models.wan_2.convert &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --checkpoint-dir models/Wan-AI/Wan2.2-TI2V-5B &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~/.local/share/uv/tools/mlx-video/bin/python -m mlx_video.models.wan_2.convert &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --checkpoint-dir models/Wan-AI/Wan2.2-T2V-A14B &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output-dir models/Wan-AI/Wan2.2-T2V-A14B-mlx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --dtype bfloat16
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run">Run&lt;/h4>
-&lt;h5 id="wan22-ti2v-5b">Wan2.2-TI2V-5B&lt;/h5>
-&lt;h6 id="t2v">t2v&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlx_video.wan_2.generate &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;A cinematic aerial shot of the Great Wall of China at sunrise&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1280&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">704&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --num-frames &lt;span style="color:#ae81ff">81&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --guide-scale 5.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --shift 5.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --scheduler unipc &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">3478&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output-path video/great_wall1.mp4
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="i2v">i2v&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlx_video.wan_2.generate &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;A cat is boating on the river&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --image models/Wan-AI/Wan2.2-TI2V-5B/examples/i2v_input.JPG &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1280&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">704&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --num-frames &lt;span style="color:#ae81ff">81&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --guide-scale 5.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --shift 5.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --scheduler unipc &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">13633&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output-path video/cat.mp4
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="wan22-t2v-a14b">Wan2.2-T2V-A14B&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>mlx_video.wan_2.generate &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model-dir models/Wan-AI/Wan2.2-T2V-A14B-mlx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --prompt &lt;span style="color:#e6db74">&amp;#39;A cinematic aerial shot of the Great Wall of China at sunrise&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --width &lt;span style="color:#ae81ff">1280&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --height &lt;span style="color:#ae81ff">720&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --num-frames &lt;span style="color:#ae81ff">81&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --steps &lt;span style="color:#ae81ff">40&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --guide-scale 3.0,4.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --shift 12.0 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --scheduler unipc &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --seed &lt;span style="color:#ae81ff">11846&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --output-path video/great_wall2.mp4
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="upload">Upload&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>HF_HUB_DOWNLOAD_TIMEOUT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">120&lt;/span> HF_HUB_DISABLE_XET&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> hf upload-large-folder rickylin20260522/Wan2.2-TI2V-5B-mlx models/Wan-AI/Wan2.2-TI2V-5B-mlx --repo-type model --num-workers &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;h3 id="audio">Audio&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://huggingface.co/MediaTek-Research" target="_blank" rel="noopener">https://huggingface.co/MediaTek-Research&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="install-1">Install&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install ffmpeg
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv pip install mlx mlx-audio
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="convert-1">Convert&lt;/h4>
-&lt;h5 id="model">model&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>python -m mlx_audio.convert &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --hf-path models/MediaTek-Research/Breeze-ASR-25 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --mlx-path models/MediaTek-Research/Breeze-ASR-25-mlx &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --dtype bfloat16 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --model-domain stt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="audio-1">audio&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>ffmpeg &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -i ~/Downloads/talk.m4a &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -ar &lt;span style="color:#ae81ff">16000&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -ac &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -c:a pcm_s16le &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> ~/Downloads/talk.wav
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-1">Run&lt;/h4>
-&lt;p>&lt;strong>STT&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Audio on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/audio/</link><description>Recent content in Audio on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Fri, 31 Jul 2026 10:46:55 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/audio/index.xml" rel="self" type="application/rss+xml"/><item><title>Local LLM on MacBookPro - Audio/Video</title><link>https://linzeyan.github.io/zh-tw/posts/2026/20260731-local-llm-audio-video/</link><pubDate>Fri, 31 Jul 2026 10:46:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2026/20260731-local-llm-audio-video/</guid><description>&lt;h3 id="video"&gt;Video&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://huggingface.co/Wan-AI" target="_blank" rel="noopener"&gt;https://huggingface.co/Wan-AI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Wan-Video/Wan2.2" target="_blank" rel="noopener"&gt;https://github.com/Wan-Video/Wan2.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Blaizzy/mlx-video" target="_blank" rel="noopener"&gt;https://github.com/Blaizzy/mlx-video&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://huggingface.co/fishaudio/s2-pro" target="_blank" rel="noopener"&gt;https://huggingface.co/fishaudio/s2-pro&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="install"&gt;Install&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uv tool install git+https://github.com/Blaizzy/mlx-video.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="download-model"&gt;Download Model&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;HF_HUB_DISABLE_XET&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; hf download Wan-AI/Wan2.2-TI2V-5B --local-dir Wan2.2-TI2V-5B --max-workers &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;HF_HUB_DISABLE_XET&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; hf download Wan-AI/Wan2.2-T2V-A14B --local-dir Wan2.2-T2V-A14B --max-workers &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="convert"&gt;Convert&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/.local/share/uv/tools/mlx-video/bin/python -m mlx_video.models.wan_2.convert &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --checkpoint-dir models/Wan-AI/Wan2.2-TI2V-5B &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --output-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~/.local/share/uv/tools/mlx-video/bin/python -m mlx_video.models.wan_2.convert &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --checkpoint-dir models/Wan-AI/Wan2.2-T2V-A14B &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --output-dir models/Wan-AI/Wan2.2-T2V-A14B-mlx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dtype bfloat16
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="run"&gt;Run&lt;/h4&gt;
+&lt;h5 id="wan22-ti2v-5b"&gt;Wan2.2-TI2V-5B&lt;/h5&gt;
+&lt;h6 id="t2v"&gt;t2v&lt;/h6&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mlx_video.wan_2.generate &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --model-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --prompt &lt;span style="color:#98c379"&gt;&amp;#39;A cinematic aerial shot of the Great Wall of China at sunrise&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --width &lt;span style="color:#d19a66"&gt;1280&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --height &lt;span style="color:#d19a66"&gt;704&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --num-frames &lt;span style="color:#d19a66"&gt;81&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --steps &lt;span style="color:#d19a66"&gt;40&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --guide-scale 5.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --shift 5.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --scheduler unipc &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --seed &lt;span style="color:#d19a66"&gt;3478&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --output-path video/great_wall1.mp4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="i2v"&gt;i2v&lt;/h6&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mlx_video.wan_2.generate &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --model-dir models/Wan-AI/Wan2.2-TI2V-5B-mlx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --prompt &lt;span style="color:#98c379"&gt;&amp;#39;A cat is boating on the river&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --image models/Wan-AI/Wan2.2-TI2V-5B/examples/i2v_input.JPG &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --width &lt;span style="color:#d19a66"&gt;1280&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --height &lt;span style="color:#d19a66"&gt;704&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --num-frames &lt;span style="color:#d19a66"&gt;81&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --steps &lt;span style="color:#d19a66"&gt;40&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --guide-scale 5.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --shift 5.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --scheduler unipc &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --seed &lt;span style="color:#d19a66"&gt;13633&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --output-path video/cat.mp4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="wan22-t2v-a14b"&gt;Wan2.2-T2V-A14B&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mlx_video.wan_2.generate &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --model-dir models/Wan-AI/Wan2.2-T2V-A14B-mlx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --prompt &lt;span style="color:#98c379"&gt;&amp;#39;A cinematic aerial shot of the Great Wall of China at sunrise&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --width &lt;span style="color:#d19a66"&gt;1280&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --height &lt;span style="color:#d19a66"&gt;720&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --num-frames &lt;span style="color:#d19a66"&gt;81&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --steps &lt;span style="color:#d19a66"&gt;40&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --guide-scale 3.0,4.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --shift 12.0 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --scheduler unipc &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --seed &lt;span style="color:#d19a66"&gt;11846&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --output-path video/great_wall2.mp4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="upload"&gt;Upload&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;HF_HUB_DOWNLOAD_TIMEOUT&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;120&lt;/span&gt; &lt;span style="color:#e06c75"&gt;HF_HUB_DISABLE_XET&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; hf upload-large-folder rickylin20260522/Wan2.2-TI2V-5B-mlx models/Wan-AI/Wan2.2-TI2V-5B-mlx --repo-type model --num-workers &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="audio"&gt;Audio&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://huggingface.co/MediaTek-Research" target="_blank" rel="noopener"&gt;https://huggingface.co/MediaTek-Research&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="install-1"&gt;Install&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ffmpeg
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uv pip install mlx mlx-audio
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="convert-1"&gt;Convert&lt;/h4&gt;
+&lt;h5 id="model"&gt;model&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;python -m mlx_audio.convert &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --hf-path models/MediaTek-Research/Breeze-ASR-25 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --mlx-path models/MediaTek-Research/Breeze-ASR-25-mlx &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --dtype bfloat16 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --model-domain stt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="audio-1"&gt;audio&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ffmpeg &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -i ~/Downloads/talk.m4a &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -ar &lt;span style="color:#d19a66"&gt;16000&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -ac &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -c:a pcm_s16le &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ~/Downloads/talk.wav
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="run-1"&gt;Run&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;STT&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

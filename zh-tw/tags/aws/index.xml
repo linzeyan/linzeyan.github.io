@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AWS on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/aws/</link><description>Recent content in AWS on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 09 Jun 2024 15:37:30 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>在 Amazon EC2 上掛載 AWS S3 Bucket</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</link><pubDate>Sun, 09 Jun 2024 15:37:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04" target="_blank" rel="noopener">在 Amazon EC2 上掛載 AWS S3 Bucket&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>使用情境&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>資料備份與封存：有效率地從 S3 儲存與取回資料，用於可靠備份與長期封存。&lt;/li>
-&lt;li>大數據與分析：直接存取 S3 中的大型資料集，進行順暢的資料處理與分析。&lt;/li>
-&lt;li>網站代管與內容分發：使用 S3 提供靜態內容，以高效率地託管網站與媒體檔案。&lt;/li>
-&lt;li>日誌收集與分析：集中將日誌存放在 S3，方便分析與監控。&lt;/li>
-&lt;li>檔案分享與協作：多台 EC2 透過 S3 作為共享資料庫來分享與協作。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>先決條件&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>一台執行 Linux 的 Amazon EC2 執行個體（Amazon Linux、Ubuntu、CentOS 等）。&lt;/li>
-&lt;li>已附加具備存取 S3 Bucket 權限的 IAM 角色。&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo apt-get update -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install awscli -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install s3fs -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 建立 S3 bucket 的掛載點目錄&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir /mnt/s3-bucket
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 同步本機目錄與 S3 bucket 以檢查存取&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd /mnt/s3-bucket ;touch test1.txt test2.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aws s3 sync /mnt/s3-bucket s3://&amp;lt;your-s3-bucket-name&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 將 S3 bucket 掛載成檔案系統&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo s3fs &amp;lt;your-s3-bucket-name&amp;gt; /mnt/s3-bucket -o iam_role&lt;span style="color:#f92672">=&lt;/span>&amp;lt;iam-role-name&amp;gt; -o use_cache&lt;span style="color:#f92672">=&lt;/span>/tmp -o allow_other -o uid&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1001&lt;/span> -o mp_umask&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">002&lt;/span> -o multireq_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">5&lt;/span> -o use_path_request_style -o url&lt;span style="color:#f92672">=&lt;/span>https://s3-&lt;span style="color:#f92672">{{&lt;/span>aws_region&lt;span style="color:#f92672">}}&lt;/span>.amazonaws.com
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="除錯問題">除錯問題&lt;/h5>
-&lt;p>需要除錯時，可加上：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AWS on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/aws/</link><description>Recent content in AWS on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 09 Jun 2024 15:37:30 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>在 Amazon EC2 上掛載 AWS S3 Bucket</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</link><pubDate>Sun, 09 Jun 2024 15:37:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://surajblog.medium.com/mount-aws-s3-bucket-on-amazon-ec2-9f18b48d4f04" target="_blank" rel="noopener"&gt;在 Amazon EC2 上掛載 AWS S3 Bucket&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;使用情境&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;資料備份與封存：有效率地從 S3 儲存與取回資料，用於可靠備份與長期封存。&lt;/li&gt;
+&lt;li&gt;大數據與分析：直接存取 S3 中的大型資料集，進行順暢的資料處理與分析。&lt;/li&gt;
+&lt;li&gt;網站代管與內容分發：使用 S3 提供靜態內容，以高效率地託管網站與媒體檔案。&lt;/li&gt;
+&lt;li&gt;日誌收集與分析：集中將日誌存放在 S3，方便分析與監控。&lt;/li&gt;
+&lt;li&gt;檔案分享與協作：多台 EC2 透過 S3 作為共享資料庫來分享與協作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;先決條件&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一台執行 Linux 的 Amazon EC2 執行個體（Amazon Linux、Ubuntu、CentOS 等）。&lt;/li&gt;
+&lt;li&gt;已附加具備存取 S3 Bucket 權限的 IAM 角色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install awscli -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install s3fs -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 建立 S3 bucket 的掛載點目錄&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir /mnt/s3-bucket
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 同步本機目錄與 S3 bucket 以檢查存取&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /mnt/s3-bucket ;touch test1.txt test2.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws s3 sync /mnt/s3-bucket s3://&amp;lt;your-s3-bucket-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 將 S3 bucket 掛載成檔案系統&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo s3fs &amp;lt;your-s3-bucket-name&amp;gt; /mnt/s3-bucket -o &lt;span style="color:#e06c75"&gt;iam_role&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&amp;lt;iam-role-name&amp;gt; -o &lt;span style="color:#e06c75"&gt;use_cache&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/tmp -o allow_other -o &lt;span style="color:#e06c75"&gt;uid&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1001&lt;/span&gt; -o &lt;span style="color:#e06c75"&gt;mp_umask&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;002&lt;/span&gt; -o &lt;span style="color:#e06c75"&gt;multireq_max&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; -o use_path_request_style -o &lt;span style="color:#e06c75"&gt;url&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;https://s3-&lt;span style="color:#56b6c2"&gt;{{&lt;/span&gt;aws_region&lt;span style="color:#56b6c2"&gt;}}&lt;/span&gt;.amazonaws.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="除錯問題"&gt;除錯問題&lt;/h5&gt;
+&lt;p&gt;需要除錯時，可加上：&lt;/p&gt;</description></item></channel></rss>

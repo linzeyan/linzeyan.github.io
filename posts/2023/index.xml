@@ -1,575 +1,589 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2023 on Ricky</title><link>https://linzeyan.github.io/posts/2023/</link><description>Recent content in 2023 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 24 Dec 2023 15:40:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/2023/index.xml" rel="self" type="application/rss+xml"/><item><title>A python script that allows your terminal to snow.</title><link>https://linzeyan.github.io/posts/2023/20231224-snow/</link><pubDate>Sun, 24 Dec 2023 15:40:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231224-snow/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/sontek/snowmachine" target="_blank" rel="noopener">A python script that allows your terminal to snow.&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run --rm -ti sontek/snowmachine tree --color rainbow --particle &lt;span style="color:#e6db74">&amp;#34;*&amp;#34;&lt;/span> --snow true --lights-color rainbow
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/posts/2023/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory">Add SFTP user and share directory&lt;/h1>
-&lt;p>dev_test_user, qa_test_user 同權限
-dev_user, qa_user 同權限&lt;/p>
-&lt;h2 id="1-建立共享資料夾sftp-使用的資料夾">1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/&lt;span style="color:#f92672">{&lt;/span>exchange,upload&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/exchange/success
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /home/&lt;span style="color:#f92672">{&lt;/span>test,prod&lt;span style="color:#f92672">}&lt;/span>/upload/backup
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-建立使用者群組">2. 建立使用者群組&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo groupadd share01-test
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo groupadd share01-prod
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test">3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-test qa_test_user
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_test_user 使用者的群組為 share01-test&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-test dev_test_user
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_test_user
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod">4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo useradd -m -G share01-prod qa_user
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 dev_user 使用者的群組為 share01-prod&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo usermod -G share01-prod dev_user
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定密碼&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo passwd qa_user
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-設定權限">5. 設定權限&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_test_user:share01-test test/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R qa_user:share01-prod prod/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># SFTP 登入資料夾權限要給 root&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/test
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown root:root /home/prod
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-設定-etcsshsshd_config">6. 設定 /etc/ssh/sshd_config&lt;/h2>
-&lt;p>&lt;code>/etc/ssh/sshd_config&lt;/code>&lt;/p></description></item><item><title>Use terminal and SSH to remote host</title><link>https://linzeyan.github.io/posts/2023/20231124-ssh/</link><pubDate>Fri, 24 Nov 2023 22:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231124-ssh/</guid><description>&lt;h1 id="use-terminal-and-ssh-to-remote-host">Use terminal and SSH to remote host&lt;/h1>
-&lt;h2 id="1-modern-terminals">1. Modern Terminals&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/vercel/hyper" target="_blank" rel="noopener">Hyper&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://iterm2.com/" target="_blank" rel="noopener">iTerm2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/Eugeny/tabby" target="_blank" rel="noopener">Tabby&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.warp.dev/" target="_blank" rel="noopener">Warp&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/wez/wezterm" target="_blank" rel="noopener">Wez&amp;rsquo;s Terminal&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/kingToolbox/WindTerm" target="_blank" rel="noopener">WindTerm&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="2-open-terminal-in-macos">2. Open terminal in macOS&lt;/h2>
-&lt;ol>
-&lt;li>&lt;code>⌘ + space&lt;/code> open Spotlight
-&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222253.png" alt="">&lt;/li>
-&lt;li>search terminal.app
-&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222316.png" alt="">&lt;/li>
-&lt;li>press &lt;code>↩&lt;/code>
-&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222410.png" alt="">&lt;/li>
-&lt;/ol>
-&lt;h2 id="3-ssh-to-remote-host">3. SSH to remote host&lt;/h2>
-&lt;ol>
-&lt;li>ensure the private key file path.&lt;/li>
-&lt;li>enter the command in the terminal: &lt;code>ssh -i /path/to/private_key.pem ubuntu@ubuntu.host.com&lt;/code>&lt;/li>
-&lt;/ol></description></item><item><title>Fetch GraphQL schema information</title><link>https://linzeyan.github.io/posts/2023/20231018-graphql/</link><pubDate>Wed, 18 Oct 2023 20:56:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231018-graphql/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -XPOST &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -H &lt;span style="color:#e6db74">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -d &lt;span style="color:#e6db74">&amp;#39;{&amp;#34;query&amp;#34;:&amp;#34;{__schema { types { name enumValues { name } fields { name type {name kind enumValues { name } ofType { name kind ofType {name kind}}}}}}}&amp;#34;}&amp;#39;&lt;/span> &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> https://example.com/graphql
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231004-container/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener">Container security fundamentals: Exploring containers as processes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener">Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-3/" target="_blank" rel="noopener">Container security fundamentals part 3: Capabilities&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-4/" target="_blank" rel="noopener">Container security fundamentals part 4: Cgroups&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener">Container security fundamentals part 5: AppArmor and SELinux&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener">Container security fundamentals part 6: seccomp
-&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes</title><link>https://linzeyan.github.io/posts/2023/20230927-mqtt/</link><pubDate>Wed, 27 Sep 2023 10:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-mqtt/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener">Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning" target="_blank" rel="noopener">Performance Tuning (Linux)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.facebook.com/technologynoteniu/posts/pfbid02ntZshJdTEHLhnkb4hATadU8qGdzB45T2AdmCqtx73oegqrCLNRTKJwkYNZkVNLMsl" target="_blank" rel="noopener">矽谷牛的耕田筆記&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="linux-kernel-tuning">Linux Kernel Tuning&lt;/h3>
-&lt;ul>
-&lt;li>node level, basically the non-namespaced sysctls&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of file handles allowed by the kernel&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.file-max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of open file descriptors that a process can have&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w fs.nr_open&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2097152&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>namespaced sysctls&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of connections that can be queued for acceptance by the kernel.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.somaxconn&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">32768&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the maximum number of SYN requests that can be queued by the kernel&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_syn_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the minimum, default and maximum size of TCP Buffer&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_rmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_wmem&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;1024 4096 16777216&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting Parameters for TCP Connection Tracking&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">30&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls the maximum number of entries in the TCP time-wait bucket table&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_max_tw_buckets&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1048576&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Controls Timeout for FIN-WAIT-2 Sockets:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.ipv4.tcp_fin_timeout&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">15&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>There are some more namespaced sysctls that will improve the performance but because of an active issue we are not able to set them on the container level&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Sets the size of the backlog queue for the network device&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.netdev_max_backlog&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16384&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Amount of memory that is allocated for storing incoming and outgoing data for a socket&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_default&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">262144&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setting the maximum amount of memory for the socket buffers&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.rmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.wmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sysctl -w net.core.optmem_max&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16777216&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="erlang-vm-tuning">Erlang VM Tuning&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Erlang Process Limit&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.process_limit &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Sets the maximum number of simultaneously existing ports for this system&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>node.max_ports &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">2097152&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="emqx-broker-tuning">EMQX Broker Tuning&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Other configuration…&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.0.0.0:1883&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__ACCEPTORS&lt;/span>: &lt;span style="color:#ae81ff">64&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span>: &lt;span style="color:#ae81ff">1024000&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Install Chrome OS</title><link>https://linzeyan.github.io/posts/2023/20230927-chromeos/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-chromeos/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.youtube.com/watch?v=Nc3bTBA4meo" target="_blank" rel="noopener">老電腦別丟掉！安裝 Google 免費作業系統安裝教學（Chrome OS Flex /CloudReady）&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Nc3bTBA4meo?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
-&lt;/div>
-&lt;div style="margin-top: rem;">&lt;/div></description></item><item><title>Yongling Foundation AI Forum: How AI Shapes the Future of Humanity</title><link>https://linzeyan.github.io/posts/2023/20230927-ai/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-ai/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener">https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/M3z6gI1AEns?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
-&lt;/div>
-&lt;div style="margin-top: rem;">&lt;/div></description></item><item><title>Golang Tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/21128.html" target="_blank" rel="noopener">Go Programming Patterns: Slices, Interfaces, Time, and Performance&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>Go is a high-performance language, but that does not mean we can ignore performance. Here are some tips related to programming and performance.&lt;/p>
-&lt;ul>
-&lt;li>If you need to convert numbers to strings, &lt;code>strconv.Itoa()&lt;/code> is about twice as fast as &lt;code>fmt.Sprintf()&lt;/code>.&lt;/li>
-&lt;li>Avoid converting &lt;code>String&lt;/code> to &lt;code>[]Byte&lt;/code> where possible. This conversion hurts performance.&lt;/li>
-&lt;li>If you use &lt;code>append()&lt;/code> on a slice inside a for-loop, expand the slice capacity ahead of time to avoid reallocations and automatic growth by powers of two, which can waste memory.&lt;/li>
-&lt;li>Use &lt;code>StringBuffer&lt;/code> or &lt;code>StringBuild&lt;/code> to concatenate strings; they are three to four orders of magnitude faster than &lt;code>+&lt;/code> or &lt;code>+=&lt;/code>.&lt;/li>
-&lt;li>Use concurrent goroutines where possible, and use &lt;code>sync.WaitGroup&lt;/code> to synchronize concurrent work.&lt;/li>
-&lt;li>Avoid allocating in hot paths; it makes the GC busy. Use &lt;code>sync.Pool&lt;/code> to reuse objects.&lt;/li>
-&lt;li>Use lock-free operations and avoid mutexes when possible; use &lt;code>sync/Atomic&lt;/code>. (See &lt;a href="https://coolshell.cn/articles/8239.html" target="_blank" rel="noopener">Lock-Free Queue Implementation&lt;/a> or &lt;a href="https://coolshell.cn/articles/9703.html" target="_blank" rel="noopener">Lock-Free Hashmap Implementation&lt;/a>.)&lt;/li>
-&lt;li>Use I/O buffering; I/O is very slow. &lt;code>bufio.NewWrite()&lt;/code> and &lt;code>bufio.NewReader()&lt;/code> improve performance.&lt;/li>
-&lt;li>For fixed regex patterns in a for-loop, use &lt;code>regexp.Compile()&lt;/code> to precompile; it improves performance by two orders of magnitude.&lt;/li>
-&lt;li>If you need higher-performance protocols, consider &lt;a href="https://github.com/golang/protobuf" target="_blank" rel="noopener">protobuf&lt;/a> or &lt;a href="https://github.com/tinylib/msgp" target="_blank" rel="noopener">msgp&lt;/a> instead of JSON, because JSON serialization/deserialization uses reflection.&lt;/li>
-&lt;li>When using maps, integer keys are faster than string keys because integer comparisons are faster.&lt;/li>
-&lt;/ul></description></item><item><title>datavizproject</title><link>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://datavizproject.com" target="_blank" rel="noopener">https://datavizproject.com&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>朋友旅行防止絕交檢查表</title><link>https://linzeyan.github.io/posts/2023/20230926-checklist/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-checklist/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://travel-questions.gnehs.net/" target="_blank" rel="noopener">https://travel-questions.gnehs.net/&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener">Connect private networks&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/" target="_blank" rel="noopener">Configure Local Domain Fallback&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener">Configure Split Tunnels&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/" target="_blank" rel="noopener">Traffic routing with WARP&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="1-set-up-the-client">1. Set up the client&lt;/h3>
-&lt;h4 id="create-device-enrollment-rules">Create device enrollment rules&lt;/h4>
-&lt;blockquote>
-&lt;p>Create device enrollment rules to determine which devices can enroll to Zero Trust organization.&lt;/p>&lt;/blockquote>
-&lt;h5 id="set-device-enrollment-permissions">Set device enrollment permissions&lt;/h5>
-&lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage.&lt;/li>
-&lt;li>Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com.&lt;/li>
-&lt;/ol>
-&lt;h3 id="2-route-private-network-ips-through-warp">2. Route private network IPs through WARP&lt;/h3>
-&lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure.&lt;/li>
-&lt;li>Configure settings:
-&lt;ol>
-&lt;li>Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates.&lt;/li>
-&lt;li>Service mode: Gateway with WARP.&lt;/li>
-&lt;li>Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com.&lt;/li>
-&lt;li>Split Tunnels: Exclude IPs and domains &amp;gt; Manage.
-&lt;ul>
-&lt;li>Delete the IP range of nas.ruru910.com.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ol>
-&lt;h3 id="3-filter-network-traffic-with-gateway">3. Filter network traffic with Gateway&lt;/h3>
-&lt;h4 id="1-enable-the-gateway-proxy">1. Enable the Gateway proxy&lt;/h4>
-&lt;ol>
-&lt;li>In Zero Trust, go to Settings &amp;gt; Network.
-&lt;ol>
-&lt;li>Gateway Logging: Capture all.&lt;/li>
-&lt;li>Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection.&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;/ol>
-&lt;h4 id="2-create-zero-trust-policies">2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener">Create Zero Trust policies&lt;/a>&lt;/h4>
-&lt;ol>
-&lt;li>Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li>
-&lt;li>For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li>
-&lt;li>Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li>
-&lt;/ol></description></item><item><title>Cloudflare Tunnel on Synology</title><link>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
-&lt;/div>
-&lt;div style="margin-top: rem;">&lt;/div>
-&lt;h2 id="setup-synology">Setup Synology&lt;/h2>
-&lt;ol>
-&lt;li>Create a directory in docker directory, such as &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;li>Download cloudflared/cloudflared image to registry.&lt;/li>
-&lt;li>ssh to admin@synology&lt;/li>
-&lt;li>Change &lt;code>cloudflare-tunnel&lt;/code> owner, &lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;/ol>
-&lt;h3 id="run-containers">Run containers&lt;/h3>
-&lt;h4 id="--cloudflared-tunnel-login">- &lt;code>cloudflared tunnel login&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>Run container and mount volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>.&lt;/li>
-&lt;li>Select &lt;code>Use the same network as Docker Host&lt;/code> in network tab.&lt;/li>
-&lt;li>Add command &lt;code>tunnel login&lt;/code> in envorinment tab.&lt;/li>
-&lt;li>Go to container log, and copy login url.&lt;/li>
-&lt;li>Paste url to browser and authorize the zone.&lt;/li>
-&lt;li>Export the container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel">- &lt;code>cloudflared tunnel create synology-tunnel&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>Edit the container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel create synology-tunnel&lt;/code>.&lt;/li>
-&lt;li>Import the container setting json and run a new container.&lt;/li>
-&lt;li>The container will stop and create tunnel config json in &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;li>Create config.yml and write ingress rules.&lt;/li>
-&lt;li>In config.yml, tunnel value is the same as the tunnel config json name, and credentials-file is &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>&lt;/li>
-&lt;li>Export the second container setting json to the directory &lt;code>cloudflare-tunnel&lt;/code>.&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com">- &lt;code>cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>.&lt;/li>
-&lt;li>Import the second container setting json and run a new container.&lt;/li>
-&lt;li>The container will stop and create a dns record mapping domain to the tunnel.&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel">- &lt;code>cloudflared tunnel run synology-tunnel&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>Edit the second container setting json in the the directory &lt;code>cloudflare-tunnel&lt;/code>, modify cmd. &lt;code>tunnel run synology-tunnel&lt;/code>.&lt;/li>
-&lt;li>Import the second container setting json and run a new container.&lt;/li>
-&lt;li>The tunnel now is connectable.&lt;/li>
-&lt;/ol></description></item><item><title>Go Patterns</title><link>https://linzeyan.github.io/posts/2023/20230916-go-patterns/</link><pubDate>Sat, 16 Sep 2023 16:08:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230916-go-patterns/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/tmrts/go-patterns" target="_blank" rel="noopener">Go Patterns&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/mohuishou/go-design-pattern" target="_blank" rel="noopener">go-design-pattern&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener">Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="method">method&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>docker buildx create --use&lt;/code>&lt;/li>
-&lt;li>&lt;code>FROM --platform=linux/amd64 debian&lt;/code> / &lt;code>FROM --platform=$BUILDPLATFORM debian&lt;/code>&lt;/li>
-&lt;li>variables&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>BUILDPLATFORM — matches the current machine. (e.g. linux/amd64)
-BUILDOS — os component of BUILDPLATFORM, e.g. linux
-BUILDARCH — e.g. amd64, arm64, riscv64
-BUILDVARIANT — used to set ARM variant, e.g. v7
-TARGETPLATFORM — The value set with --platform flag on build
-TARGETOS - OS component from --platform, e.g. linux
-TARGETARCH - Architecture from --platform, e.g. arm64
-TARGETVARIANT
-&lt;/code>&lt;/pre>&lt;h3 id="example">example&lt;/h3>
-&lt;ul>
-&lt;li>before&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> golang:1.17-alpine AS build&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> . .&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> go build -o /out/myapp .&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>build /out/myapp /bin&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>after&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> --platform=$BUILDPLATFORM golang:1.17-alpine AS build&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">ARG&lt;/span> TARGETOS TARGETARCH&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>target&lt;span style="color:#f92672">=&lt;/span>. &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>type&lt;span style="color:#f92672">=&lt;/span>cache,target&lt;span style="color:#f92672">=&lt;/span>/root/.cache/go-build &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --mount&lt;span style="color:#f92672">=&lt;/span>type&lt;span style="color:#f92672">=&lt;/span>cache,target&lt;span style="color:#f92672">=&lt;/span>/go/pkg &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> GOOS&lt;span style="color:#f92672">=&lt;/span>$TARGETOS GOARCH&lt;span style="color:#f92672">=&lt;/span>$TARGETARCH go build -o /out/myapp .&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>build /out/myapp /bin&lt;span style="color:#960050;background-color:#1e0010">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to deal with a 50GB large csv file in r language?</title><link>https://linzeyan.github.io/posts/2023/20230720-how-to-deal-with-a-50gb-large-csv-file-in-r-language/</link><pubDate>Thu, 20 Jul 2023 15:44:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230720-how-to-deal-with-a-50gb-large-csv-file-in-r-language/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/39678940/how-to-deal-with-a-50gb-large-csv-file-in-r-language" target="_blank" rel="noopener">How to deal with a 50GB large csv file in r language?&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="question">question&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>all &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv.ffdf&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;lt;path of large file&amp;gt;&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;,&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> header&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> VERBOSE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">TRUE&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> first.rows&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10000&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next.rows&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">50000&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="answer">answer&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-r" data-lang="r">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">library&lt;/span>(sqldf)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iris2 &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">read.csv.sql&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;iris.csv&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sql &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;select * from file where Species = &amp;#39;setosa&amp;#39; &amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>15 Rules of Channels and Their Implementation</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener">15 Rules of Channels and Their Implementation&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="operation-rules">Operation rules&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: center">Operation&lt;/th>
-&lt;th style="text-align: center">nil&lt;/th>
-&lt;th style="text-align: center">Closed channel&lt;/th>
-&lt;th style="text-align: center">Open buffered channel&lt;/th>
-&lt;th style="text-align: center">Open unbuffered channel&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: center">Close&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">Close succeeds; buffered values can be read. After buffer drains, further reads return the zero value of the channel type.&lt;/td>
-&lt;td style="text-align: center">Close succeeds; further reads return the zero value of the channel type.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Receive&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;td style="text-align: center">Non-blocking; returns the zero value of the channel type&lt;/td>
-&lt;td style="text-align: center">Non-blocking; reads values normally&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Send&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;td style="text-align: center">panic&lt;/td>
-&lt;td style="text-align: center">Non-blocking; writes values normally&lt;/td>
-&lt;td style="text-align: center">Block&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="compile-time-rules">Compile-time rules&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: center">Operation&lt;/th>
-&lt;th style="text-align: center">Channel type&lt;/th>
-&lt;th style="text-align: center">Result&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: center">Receive&lt;/td>
-&lt;td style="text-align: center">Send-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Send&lt;/td>
-&lt;td style="text-align: center">Receive-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: center">Close&lt;/td>
-&lt;td style="text-align: center">Receive-only channel&lt;/td>
-&lt;td style="text-align: center">Compile error&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table></description></item><item><title>Create macOS DMG and Bootable ISO</title><link>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener">Create macOS DMG and Bootable ISO&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="dmg">dmg&lt;/h3>
-&lt;ol>
-&lt;li>AppStore ==&amp;gt; search &amp;lsquo;install macos&amp;rsquo; ==&amp;gt; get installer ==&amp;gt; &lt;code>du -sh /Applications/Install\ macOS\ Mojave.app/&lt;/code>&lt;/li>
-&lt;li>Disk Utility ==&amp;gt; File ==&amp;gt; New Image ==&amp;gt; Blank Image
-&lt;ol>
-&lt;li>Size: installer size&lt;/li>
-&lt;li>Format: Mac OS Extended (Journaled)&lt;/li>
-&lt;li>Partition: Single partition - GUID Partition Map&lt;/li>
-&lt;li>Image Format: read/write disk image&lt;/li>
-&lt;li>same as &lt;code>hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>&lt;code>sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS\ Mojave&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;h3 id="iso">iso&lt;/h3>
-&lt;ol>
-&lt;li>&lt;code>hdiutil convert ~/Desktop/macOS\ Mojave.dmg -format UDTO -o ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
-&lt;li>&lt;code>mv ~/Desktop/macOS\ Mojave.iso.cdr ~/Desktop/macOS\ Mojave.iso&lt;/code>&lt;/li>
-&lt;/ol></description></item><item><title>Synology: Your NAS RAM Details at a Glance</title><link>https://linzeyan.github.io/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</link><pubDate>Mon, 08 May 2023 10:55:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/" target="_blank" rel="noopener">Synology: Your NAS RAM Details at a Glance&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="step1">step1&lt;/h3>
-&lt;p>Control Panel / Task Scheduler / Create / Scheduled Task / User-defined script&lt;/p>
-&lt;h3 id="step2">step2&lt;/h3>
-&lt;ol>
-&lt;li>General: In the Task field type in RAM Details. Uncheck the &amp;ldquo;Enabled&amp;rdquo; option. Select root User.&lt;/li>
-&lt;li>Schedule: Select Run on the following date then select &amp;ldquo;Do not repeat&amp;rdquo;.&lt;/li>
-&lt;li>Task Settings: Check &amp;ldquo;Send run details by email&amp;rdquo;, add your email then copy paste the code below in the Run command area. After that, click OK.&lt;/li>
-&lt;/ol></description></item><item><title>Zsh Config Files and Priority</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">Zsh Config Files and Priority&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="zsh-environment-variable-config-files">Zsh environment variable config files:&lt;/h3>
-&lt;ul>
-&lt;li>.zprofile&lt;/li>
-&lt;li>.zlogin&lt;/li>
-&lt;li>.zshrc&lt;/li>
-&lt;li>.zshenv&lt;/li>
-&lt;li>.zlogout&lt;/li>
-&lt;/ul>
-&lt;p>.zshrc is used for overall shell customization&lt;/p>
-&lt;ul>
-&lt;li>.zprofile and .zlogin are similar. They both set environment variables for login shells, but their load timing differs. .zprofile is based on Bash&amp;rsquo;s .bash_profile, while .zlogin is the CSH-style .login legacy name.&lt;/li>
-&lt;li>.zshrc sets environment variables for interactive shells. It loads after .zprofile. Typically used for $PATH, $PROMPT, aliases, functions, etc.&lt;/li>
-&lt;li>.zshenv is always read, so you can set environment variables like $PATH or $EDITOR there, but it is generally not used.&lt;/li>
-&lt;li>.zlogout is loaded when a session logs out, which is good for cleanup, such as resetting terminal titles.&lt;/li>
-&lt;/ul>
-&lt;p>Zsh loads ~/.zprofile at login (login shell).&lt;/p></description></item><item><title>My Productivity Mac Settings and Apps</title><link>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</link><pubDate>Thu, 20 Apr 2023 14:52:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://jason-memo.dev/posts/my-mac-setting/" target="_blank" rel="noopener">My Productivity Mac Settings and Apps&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="control-dark-mode-per-app">Control dark mode per app&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;a href="https://nightowlapp.co/" target="_blank" rel="noopener">https://nightowlapp.co/&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>&lt;code>brew install --cask nightowl&lt;/code>&lt;/p>
-&lt;h3 id="control-external-monitor-brightness-with-the-keyboard---monitorcontrol">Control external monitor brightness with the keyboard - MonitorControl&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;a href="https://github.com/MonitorControl/MonitorControl" target="_blank" rel="noopener">https://github.com/MonitorControl/MonitorControl&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>&lt;code>brew install --cask monitorcontrol&lt;/code>&lt;/p>
-&lt;h3 id="raycast">Raycast&lt;/h3>
-&lt;p>Raycast is a free and more powerful Alfred. You can do most things with the keyboard and quickly launch features with Option + Space. It includes many features that other apps charge for.&lt;/p>
-&lt;ul>
-&lt;li>Launch apps quickly&lt;/li>
-&lt;li>Quick dictionary lookup and calculator&lt;/li>
-&lt;li>Built-in clipboard history search&lt;/li>
-&lt;li>Window management like Magnet, with shortcuts to resize and move windows&lt;/li>
-&lt;li>Calendar integration: quickly open Google Meet with the correct account when a meeting starts&lt;/li>
-&lt;li>Write shell/nodejs/applescript to bind shortcuts for quick actions&lt;/li>
-&lt;li>Rich extension store&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>&lt;a href="https://www.raycast.com/" target="_blank" rel="noopener">https://www.raycast.com/&lt;/a>&lt;/p></description></item><item><title>Some Software Design Principles</title><link>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</link><pubDate>Tue, 18 Apr 2023 13:58:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/4535.html" target="_blank" rel="noopener">Some Software Design Principles&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="1-dont-repeat-yourself-dry">1. Don&amp;rsquo;t Repeat Yourself (DRY)&lt;/h3>
-&lt;h3 id="2-keep-it-simple-stupid-kiss">2. Keep It Simple, Stupid (KISS)&lt;/h3>
-&lt;p>Making something complex is easy, but making something complex simple is difficult.&lt;/p>
-&lt;h3 id="3-program-to-an-interface-not-an-implementation">3. Program to an interface, not an implementation&lt;/h3>
-&lt;ol>
-&lt;li>Prefer composition over inheritance&lt;/li>
-&lt;li>Dependency inversion principle&lt;/li>
-&lt;/ol>
-&lt;h3 id="4-command-query-separation-cqs">4. Command-Query Separation (CQS)&lt;/h3>
-&lt;ul>
-&lt;li>Query: when a method returns a value to answer a question&lt;/li>
-&lt;li>Command: when a method changes the state of an object&lt;/li>
-&lt;/ul>
-&lt;h3 id="5-you-aint-gonna-need-it-yagni">5. You Ain&amp;rsquo;t Gonna Need It (YAGNI)&lt;/h3>
-&lt;p>Only design and implement what is necessary. Avoid overengineering. Implement what you need now; add more when needed later.&lt;/p></description></item><item><title>On High Availability Systems</title><link>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener">On High Availability Systems&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Item / Mechanism&lt;/th>
-&lt;th>Backups&lt;/th>
-&lt;th>M/S&lt;/th>
-&lt;th>MM&lt;/th>
-&lt;th>2PC&lt;/th>
-&lt;th>Paxos&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Consistency&lt;/td>
-&lt;td>Weak&lt;/td>
-&lt;td>Eventual&lt;/td>
-&lt;td>Eventual&lt;/td>
-&lt;td>Strong&lt;/td>
-&lt;td>Strong&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Transactions&lt;/td>
-&lt;td>No&lt;/td>
-&lt;td>Full&lt;/td>
-&lt;td>Local&lt;/td>
-&lt;td>Full&lt;/td>
-&lt;td>Full&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Latency&lt;/td>
-&lt;td>Low&lt;/td>
-&lt;td>Low&lt;/td>
-&lt;td>Low&lt;/td>
-&lt;td>High&lt;/td>
-&lt;td>High&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Throughput&lt;/td>
-&lt;td>High&lt;/td>
-&lt;td>High&lt;/td>
-&lt;td>High&lt;/td>
-&lt;td>Low&lt;/td>
-&lt;td>Medium&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Data loss&lt;/td>
-&lt;td>Lots&lt;/td>
-&lt;td>Some&lt;/td>
-&lt;td>Some&lt;/td>
-&lt;td>None&lt;/td>
-&lt;td>None&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Failover&lt;/td>
-&lt;td>Down&lt;/td>
-&lt;td>Read only&lt;/td>
-&lt;td>Read only&lt;/td>
-&lt;td>Read/write&lt;/td>
-&lt;td>Read/write&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>This table essentially covers the foundational solutions for high-availability systems today. M/S and MM are not hard to implement, but have many issues. 2PC suffers from poor performance, while Paxos is too complex and difficult to implement.&lt;/p></description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">Everything About MTU and MSS&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Pitfalls When Parsing Binary Data in Go</title><link>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</link><pubDate>Fri, 20 Jan 2023 13:48:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://tao.zz.ac/go/parse-binary-data.html" target="_blank" rel="noopener">Pitfalls When Parsing Binary Data in Go&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">buf&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> make([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#a6e22e">bufSize&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Read&lt;/span>(&lt;span style="color:#a6e22e">buf&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">EOF&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">aerr&lt;/span>.&lt;span style="color:#a6e22e">Store&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ch&lt;/span> &lt;span style="color:#f92672">&amp;lt;-&lt;/span> &lt;span style="color:#a6e22e">buf&lt;/span>[:&lt;span style="color:#a6e22e">n&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>The code returns immediately when err is io.EOF, which is the most likely problem. The docs say:&lt;/p>
-&lt;blockquote>
-&lt;p>Callers should always process the n &amp;gt; 0 bytes returned before considering the error err. Doing so correctly handles I/O errors that happen after reading some bytes and also both of the allowed EOF behaviors.&lt;/p></description></item><item><title>Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal</title><link>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</link><pubDate>Fri, 13 Jan 2023 16:51:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/" target="_blank" rel="noopener">Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="alacritty">&lt;a href="https://github.com/alacritty/alacritty" target="_blank" rel="noopener">Alacritty&lt;/a>&lt;/h4>
-&lt;p>Alacritty is a cross-platform modern terminal emulator with sensible defaults. It is GPU accelerated, super fast, and highly configurable. You can use it on Linux, macOS, and Windows.&lt;/p>
-&lt;h4 id="bat">&lt;a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat&lt;/a>&lt;/h4>
-&lt;p>bat is one of my favorite tools from this list. It&amp;rsquo;s a replacement for cat.&lt;/p>
-&lt;h4 id="dust">&lt;a href="https://github.com/bootandy/dust" target="_blank" rel="noopener">dust&lt;/a>&lt;/h4>
-&lt;p>Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p></description></item><item><title>Windows SSH Setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH Setup&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Install OpenSSH for Windows&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;ol>
-&lt;li>The default shell is cmd. The docs say to change the ansible_shell_type variable if needed. This should be set as a host variable in inventory: ansible_shell_type, with value cmd or powershell.&lt;/li>
-&lt;li>Add the ansible_connection host variable in inventory to indicate SSH connections. (&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
-&lt;li>You may need to add remote_tmp in ansible.cfg and set it to C:\TEMP.&lt;/li>
-&lt;li>In playbooks, use modules prefixed with &lt;code>win_&lt;/code>, or use the raw module.&lt;/li>
-&lt;/ol></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2023 on Ricky</title><link>https://linzeyan.github.io/posts/2023/</link><description>Recent content in 2023 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Dec 2023 15:40:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/posts/2023/index.xml" rel="self" type="application/rss+xml"/><item><title>A python script that allows your terminal to snow.</title><link>https://linzeyan.github.io/posts/2023/20231224-snow/</link><pubDate>Sun, 24 Dec 2023 15:40:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231224-snow/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/sontek/snowmachine" target="_blank" rel="noopener"&gt;A python script that allows your terminal to snow.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker run --rm -ti sontek/snowmachine tree --color rainbow --particle &lt;span style="color:#98c379"&gt;&amp;#34;*&amp;#34;&lt;/span&gt; --snow &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt; --lights-color rainbow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/posts/2023/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory"&gt;Add SFTP user and share directory&lt;/h1&gt;
+&lt;p&gt;dev_test_user, qa_test_user 同權限
+dev_user, qa_user 同權限&lt;/p&gt;
+&lt;h2 id="1-建立共享資料夾sftp-使用的資料夾"&gt;1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;exchange,upload&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/exchange/success
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/upload/backup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="2-建立使用者群組"&gt;2. 建立使用者群組&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-test
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test"&gt;3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-test qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_test_user 使用者的群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-test dev_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod"&gt;4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-prod qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_user 使用者的群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-prod dev_user
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="5-設定權限"&gt;5. 設定權限&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_test_user:share01-test test/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_user:share01-prod prod/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# SFTP 登入資料夾權限要給 root&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/test
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="6-設定-etcsshsshd_config"&gt;6. 設定 /etc/ssh/sshd_config&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Use terminal and SSH to remote host</title><link>https://linzeyan.github.io/posts/2023/20231124-ssh/</link><pubDate>Fri, 24 Nov 2023 22:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231124-ssh/</guid><description>&lt;h1 id="use-terminal-and-ssh-to-remote-host"&gt;Use terminal and SSH to remote host&lt;/h1&gt;
+&lt;h2 id="1-modern-terminals"&gt;1. Modern Terminals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/vercel/hyper" target="_blank" rel="noopener"&gt;Hyper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://iterm2.com/" target="_blank" rel="noopener"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Eugeny/tabby" target="_blank" rel="noopener"&gt;Tabby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.warp.dev/" target="_blank" rel="noopener"&gt;Warp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/wez/wezterm" target="_blank" rel="noopener"&gt;Wez&amp;rsquo;s Terminal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/kingToolbox/WindTerm" target="_blank" rel="noopener"&gt;WindTerm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="2-open-terminal-in-macos"&gt;2. Open terminal in macOS&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;⌘ + space&lt;/code&gt; open Spotlight
+&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222253.png" alt=""&gt;&lt;/li&gt;
+&lt;li&gt;search terminal.app
+&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222316.png" alt=""&gt;&lt;/li&gt;
+&lt;li&gt;press &lt;code&gt;↩&lt;/code&gt;
+&lt;img src="https://linzeyan.github.io/posts/2023/20231124-ssh/pics/auto_20231124_222410.png" alt=""&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="3-ssh-to-remote-host"&gt;3. SSH to remote host&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;ensure the private key file path.&lt;/li&gt;
+&lt;li&gt;enter the command in the terminal: &lt;code&gt;ssh -i /path/to/private_key.pem ubuntu@ubuntu.host.com&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Fetch GraphQL schema information</title><link>https://linzeyan.github.io/posts/2023/20231018-graphql/</link><pubDate>Wed, 18 Oct 2023 20:56:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231018-graphql/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -XPOST &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -H &lt;span style="color:#98c379"&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -d &lt;span style="color:#98c379"&gt;&amp;#39;{&amp;#34;query&amp;#34;:&amp;#34;{__schema { types { name enumValues { name } fields { name type {name kind enumValues { name } ofType { name kind ofType {name kind}}}}}}}&amp;#34;}&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; https://example.com/graphql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231004-container/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener"&gt;Container security fundamentals: Exploring containers as processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener"&gt;Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-3/" target="_blank" rel="noopener"&gt;Container security fundamentals part 3: Capabilities&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-4/" target="_blank" rel="noopener"&gt;Container security fundamentals part 4: Cgroups&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener"&gt;Container security fundamentals part 5: AppArmor and SELinux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener"&gt;Container security fundamentals part 6: seccomp
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes</title><link>https://linzeyan.github.io/posts/2023/20230927-mqtt/</link><pubDate>Wed, 27 Sep 2023 10:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-mqtt/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.infracloud.io/blogs/scale-emqx-one-million-connections-kubernetes/" target="_blank" rel="noopener"&gt;Tuning EMQX to Scale to One Million Concurrent Connection on Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.emqx.io/docs/en/v5.2/performance/tune.html#linux-kernel-tuning" target="_blank" rel="noopener"&gt;Performance Tuning (Linux)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.facebook.com/technologynoteniu/posts/pfbid02ntZshJdTEHLhnkb4hATadU8qGdzB45T2AdmCqtx73oegqrCLNRTKJwkYNZkVNLMsl" target="_blank" rel="noopener"&gt;矽谷牛的耕田筆記&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="linux-kernel-tuning"&gt;Linux Kernel Tuning&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;node level, basically the non-namespaced sysctls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sets the maximum number of file handles allowed by the kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w fs.file-max&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;2097152&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sets the maximum number of open file descriptors that a process can have&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w fs.nr_open&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;2097152&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;namespaced sysctls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sets the maximum number of connections that can be queued for acceptance by the kernel.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.somaxconn&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;32768&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sets the maximum number of SYN requests that can be queued by the kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.ipv4.tcp_max_syn_backlog&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;16384&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setting the minimum, default and maximum size of TCP Buffer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.ipv4.tcp_rmem&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;1024 4096 16777216&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.ipv4.tcp_wmem&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;1024 4096 16777216&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setting Parameters for TCP Connection Tracking&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Controls the maximum number of entries in the TCP time-wait bucket table&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.ipv4.tcp_max_tw_buckets&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1048576&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Controls Timeout for FIN-WAIT-2 Sockets:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.ipv4.tcp_fin_timeout&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;There are some more namespaced sysctls that will improve the performance but because of an active issue we are not able to set them on the container level&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sets the size of the backlog queue for the network device&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.netdev_max_backlog&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;16384&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Amount of memory that is allocated for storing incoming and outgoing data for a socket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.rmem_default&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;262144&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.wmem_default&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;262144&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setting the maximum amount of memory for the socket buffers&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.rmem_max&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.wmem_max&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sysctl -w net.core.optmem_max&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;16777216&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="erlang-vm-tuning"&gt;Erlang VM Tuning&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## Erlang Process Limit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;node.process_limit &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2097152&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## Sets the maximum number of simultaneously existing ports for this system&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;node.max_ports &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2097152&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="emqx-broker-tuning"&gt;EMQX Broker Tuning&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Other configuration…&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;EMQX_LISTENER__TCP__EXTERNAL&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;0.0.0.0:1883&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;EMQX_LISTENER__TCP__EXTERNAL__ACCEPTORS&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;EMQX_LISTENER__TCP__EXTERNAL__MAX_CONNECTIONS&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;1024000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Install Chrome OS</title><link>https://linzeyan.github.io/posts/2023/20230927-chromeos/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-chromeos/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Nc3bTBA4meo" target="_blank" rel="noopener"&gt;老電腦別丟掉！安裝 Google 免費作業系統安裝教學（Chrome OS Flex /CloudReady）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Nc3bTBA4meo?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div style="margin-top: rem;"&gt;&lt;/div&gt;</description></item><item><title>Yongling Foundation AI Forum: How AI Shapes the Future of Humanity</title><link>https://linzeyan.github.io/posts/2023/20230927-ai/</link><pubDate>Wed, 27 Sep 2023 09:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230927-ai/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=M3z6gI1AEns" target="_blank" rel="noopener"&gt;https://www.youtube.com/watch?v=M3z6gI1AEns&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/M3z6gI1AEns?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div style="margin-top: rem;"&gt;&lt;/div&gt;</description></item><item><title>Golang Tips</title><link>https://linzeyan.github.io/posts/2023/20230926-golang/</link><pubDate>Tue, 26 Sep 2023 22:15:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-golang/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://coolshell.cn/articles/21128.html" target="_blank" rel="noopener"&gt;Go Programming Patterns: Slices, Interfaces, Time, and Performance&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Go is a high-performance language, but that does not mean we can ignore performance. Here are some tips related to programming and performance.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you need to convert numbers to strings, &lt;code&gt;strconv.Itoa()&lt;/code&gt; is about twice as fast as &lt;code&gt;fmt.Sprintf()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Avoid converting &lt;code&gt;String&lt;/code&gt; to &lt;code&gt;[]Byte&lt;/code&gt; where possible. This conversion hurts performance.&lt;/li&gt;
+&lt;li&gt;If you use &lt;code&gt;append()&lt;/code&gt; on a slice inside a for-loop, expand the slice capacity ahead of time to avoid reallocations and automatic growth by powers of two, which can waste memory.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;StringBuffer&lt;/code&gt; or &lt;code&gt;StringBuild&lt;/code&gt; to concatenate strings; they are three to four orders of magnitude faster than &lt;code&gt;+&lt;/code&gt; or &lt;code&gt;+=&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use concurrent goroutines where possible, and use &lt;code&gt;sync.WaitGroup&lt;/code&gt; to synchronize concurrent work.&lt;/li&gt;
+&lt;li&gt;Avoid allocating in hot paths; it makes the GC busy. Use &lt;code&gt;sync.Pool&lt;/code&gt; to reuse objects.&lt;/li&gt;
+&lt;li&gt;Use lock-free operations and avoid mutexes when possible; use &lt;code&gt;sync/Atomic&lt;/code&gt;. (See &lt;a href="https://coolshell.cn/articles/8239.html" target="_blank" rel="noopener"&gt;Lock-Free Queue Implementation&lt;/a&gt; or &lt;a href="https://coolshell.cn/articles/9703.html" target="_blank" rel="noopener"&gt;Lock-Free Hashmap Implementation&lt;/a&gt;.)&lt;/li&gt;
+&lt;li&gt;Use I/O buffering; I/O is very slow. &lt;code&gt;bufio.NewWrite()&lt;/code&gt; and &lt;code&gt;bufio.NewReader()&lt;/code&gt; improve performance.&lt;/li&gt;
+&lt;li&gt;For fixed regex patterns in a for-loop, use &lt;code&gt;regexp.Compile()&lt;/code&gt; to precompile; it improves performance by two orders of magnitude.&lt;/li&gt;
+&lt;li&gt;If you need higher-performance protocols, consider &lt;a href="https://github.com/golang/protobuf" target="_blank" rel="noopener"&gt;protobuf&lt;/a&gt; or &lt;a href="https://github.com/tinylib/msgp" target="_blank" rel="noopener"&gt;msgp&lt;/a&gt; instead of JSON, because JSON serialization/deserialization uses reflection.&lt;/li&gt;
+&lt;li&gt;When using maps, integer keys are faster than string keys because integer comparisons are faster.&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>datavizproject</title><link>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-datavizproject/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://datavizproject.com" target="_blank" rel="noopener"&gt;https://datavizproject.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>朋友旅行防止絕交檢查表</title><link>https://linzeyan.github.io/posts/2023/20230926-checklist/</link><pubDate>Tue, 26 Sep 2023 13:29:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-checklist/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://travel-questions.gnehs.net/" target="_blank" rel="noopener"&gt;https://travel-questions.gnehs.net/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230926-cloudflare/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener"&gt;Connect private networks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/" target="_blank" rel="noopener"&gt;Configure Local Domain Fallback&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/split-tunnels/" target="_blank" rel="noopener"&gt;Configure Split Tunnels&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/exclude-traffic/" target="_blank" rel="noopener"&gt;Traffic routing with WARP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="1-set-up-the-client"&gt;1. Set up the client&lt;/h3&gt;
+&lt;h4 id="create-device-enrollment-rules"&gt;Create device enrollment rules&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Create device enrollment rules to determine which devices can enroll to Zero Trust organization.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id="set-device-enrollment-permissions"&gt;Set device enrollment permissions&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device enrollment &amp;gt; Device enrollment permissions &amp;gt; Manage.&lt;/li&gt;
+&lt;li&gt;Rules &amp;gt; Policies &amp;gt; Add a rule &amp;gt; Include &amp;gt; Selector &amp;gt; Emails ending in &amp;gt; Value &amp;gt; @ruru910.com.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="2-route-private-network-ips-through-warp"&gt;2. Route private network IPs through WARP&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;In Zero Trust, go to Settings &amp;gt; WARP Client &amp;gt; Device settings &amp;gt; Profile settings &amp;gt; Profile name &amp;gt; Default &amp;gt; Configure.&lt;/li&gt;
+&lt;li&gt;Configure settings:
+&lt;ol&gt;
+&lt;li&gt;Enabled: Captive portal detection, Mode switch, Allow device to leave organization, Allow updates.&lt;/li&gt;
+&lt;li&gt;Service mode: Gateway with WARP.&lt;/li&gt;
+&lt;li&gt;Local Domain Fallback &amp;gt; Manage &amp;gt; Domain &amp;gt; nas.ruru910.com.&lt;/li&gt;
+&lt;li&gt;Split Tunnels: Exclude IPs and domains &amp;gt; Manage.
+&lt;ul&gt;
+&lt;li&gt;Delete the IP range of nas.ruru910.com.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="3-filter-network-traffic-with-gateway"&gt;3. Filter network traffic with Gateway&lt;/h3&gt;
+&lt;h4 id="1-enable-the-gateway-proxy"&gt;1. Enable the Gateway proxy&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;In Zero Trust, go to Settings &amp;gt; Network.
+&lt;ol&gt;
+&lt;li&gt;Gateway Logging: Capture all.&lt;/li&gt;
+&lt;li&gt;Firewall: Proxy(TCP, UDP, ICMP), WARP to WARP, AV inspection.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="2-create-zero-trust-policies"&gt;2. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/#create-zero-trust-policies" target="_blank" rel="noopener"&gt;Create Zero Trust policies&lt;/a&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to Access &amp;gt; Applications &amp;gt; Add an application &amp;gt; Private Network &amp;gt; Application Type &amp;gt; Destination IP.&lt;/li&gt;
+&lt;li&gt;For Value, enter the IP address for your application (for example, 10.128.0.7).&lt;/li&gt;
+&lt;li&gt;Modify policy &amp;gt; identify &amp;gt; Selector &amp;gt; User Email &amp;gt; in &amp;gt; @ruru910.com.&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Cloudflare Tunnel on Synology</title><link>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230925-cloudflare/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener"&gt;CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div style="margin-top: rem;"&gt;&lt;/div&gt;
+&lt;h2 id="setup-synology"&gt;Setup Synology&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a directory in docker directory, such as &lt;code&gt;cloudflare-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Download cloudflared/cloudflared image to registry.&lt;/li&gt;
+&lt;li&gt;ssh to admin@synology&lt;/li&gt;
+&lt;li&gt;Change &lt;code&gt;cloudflare-tunnel&lt;/code&gt; owner, &lt;code&gt;sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="run-containers"&gt;Run containers&lt;/h3&gt;
+&lt;h4 id="--cloudflared-tunnel-login"&gt;- &lt;code&gt;cloudflared tunnel login&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Run container and mount volume &lt;code&gt;docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Select &lt;code&gt;Use the same network as Docker Host&lt;/code&gt; in network tab.&lt;/li&gt;
+&lt;li&gt;Add command &lt;code&gt;tunnel login&lt;/code&gt; in envorinment tab.&lt;/li&gt;
+&lt;li&gt;Go to container log, and copy login url.&lt;/li&gt;
+&lt;li&gt;Paste url to browser and authorize the zone.&lt;/li&gt;
+&lt;li&gt;Export the container setting json to the directory &lt;code&gt;cloudflare-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel"&gt;- &lt;code&gt;cloudflared tunnel create synology-tunnel&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Edit the container setting json in the the directory &lt;code&gt;cloudflare-tunnel&lt;/code&gt;, modify cmd. &lt;code&gt;tunnel create synology-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Import the container setting json and run a new container.&lt;/li&gt;
+&lt;li&gt;The container will stop and create tunnel config json in &lt;code&gt;cloudflare-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Create config.yml and write ingress rules.&lt;/li&gt;
+&lt;li&gt;In config.yml, tunnel value is the same as the tunnel config json name, and credentials-file is &lt;code&gt;/home/nonroot/.cloudflared/tunnel config json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Export the second container setting json to the directory &lt;code&gt;cloudflare-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com"&gt;- &lt;code&gt;cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Edit the second container setting json in the the directory &lt;code&gt;cloudflare-tunnel&lt;/code&gt;, modify cmd. &lt;code&gt;tunnel route dns synology-tunnel synology.ruru910.com&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Import the second container setting json and run a new container.&lt;/li&gt;
+&lt;li&gt;The container will stop and create a dns record mapping domain to the tunnel.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel"&gt;- &lt;code&gt;cloudflared tunnel run synology-tunnel&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Edit the second container setting json in the the directory &lt;code&gt;cloudflare-tunnel&lt;/code&gt;, modify cmd. &lt;code&gt;tunnel run synology-tunnel&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Import the second container setting json and run a new container.&lt;/li&gt;
+&lt;li&gt;The tunnel now is connectable.&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Go Patterns</title><link>https://linzeyan.github.io/posts/2023/20230916-go-patterns/</link><pubDate>Sat, 16 Sep 2023 16:08:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230916-go-patterns/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/tmrts/go-patterns" target="_blank" rel="noopener"&gt;Go Patterns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/mohuishou/go-design-pattern" target="_blank" rel="noopener"&gt;go-design-pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide</title><link>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</link><pubDate>Mon, 04 Sep 2023 10:31:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230904-faster-multi-platform-builds-dockerfile-cross-compilation-guide/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/" target="_blank" rel="noopener"&gt;Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="method"&gt;method&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker buildx create --use&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FROM --platform=linux/amd64 debian&lt;/code&gt; / &lt;code&gt;FROM --platform=$BUILDPLATFORM debian&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;BUILDPLATFORM&lt;/span&gt; — &lt;span style="color:#e06c75"&gt;matches&lt;/span&gt; &lt;span style="color:#e06c75"&gt;the&lt;/span&gt; &lt;span style="color:#e06c75"&gt;current&lt;/span&gt; &lt;span style="color:#e06c75"&gt;machine&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; (&lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;linux&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;amd64&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;BUILDOS&lt;/span&gt; — &lt;span style="color:#e06c75"&gt;os&lt;/span&gt; &lt;span style="color:#e06c75"&gt;component&lt;/span&gt; &lt;span style="color:#e06c75"&gt;of&lt;/span&gt; &lt;span style="color:#e06c75"&gt;BUILDPLATFORM&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;BUILDARCH&lt;/span&gt; — &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;amd64&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;arm64&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;riscv64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;BUILDVARIANT&lt;/span&gt; — &lt;span style="color:#e06c75"&gt;used&lt;/span&gt; &lt;span style="color:#e06c75"&gt;to&lt;/span&gt; &lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ARM&lt;/span&gt; &lt;span style="color:#e06c75"&gt;variant&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;v7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TARGETPLATFORM&lt;/span&gt; — &lt;span style="color:#e06c75"&gt;The&lt;/span&gt; &lt;span style="color:#e06c75"&gt;value&lt;/span&gt; &lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;with&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;--&lt;/span&gt;&lt;span style="color:#e06c75"&gt;platform&lt;/span&gt; &lt;span style="color:#e06c75"&gt;flag&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt; &lt;span style="color:#e06c75"&gt;build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TARGETOS&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt; &lt;span style="color:#e06c75"&gt;OS&lt;/span&gt; &lt;span style="color:#e06c75"&gt;component&lt;/span&gt; &lt;span style="color:#e06c75"&gt;from&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;--&lt;/span&gt;&lt;span style="color:#e06c75"&gt;platform&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;linux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TARGETARCH&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Architecture&lt;/span&gt; &lt;span style="color:#e06c75"&gt;from&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;--&lt;/span&gt;&lt;span style="color:#e06c75"&gt;platform&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#e06c75"&gt;g&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt; &lt;span style="color:#e06c75"&gt;arm64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TARGETVARIANT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="example"&gt;example&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;before&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#98c379"&gt;golang:1.17-alpine&lt;/span&gt; &lt;span style="color:#c678dd"&gt;AS&lt;/span&gt; &lt;span style="color:#98c379"&gt;build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#98c379"&gt;/src&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;COPY&lt;/span&gt; . .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;RUN&lt;/span&gt; go build -o /out/myapp .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#98c379"&gt;alpine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;COPY&lt;/span&gt; --from&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;build /out/myapp /bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;after&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#98c379"&gt;--platform=$BUILDPLATFORM&lt;/span&gt; golang:1.17-alpine AS build
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;WORKDIR&lt;/span&gt; &lt;span style="color:#98c379"&gt;/src&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ARG&lt;/span&gt; TARGETOS TARGETARCH
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;RUN&lt;/span&gt; --mount&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e06c75"&gt;target&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --mount&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e06c75"&gt;type&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;cache,target&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/root/.cache/go-build &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --mount&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e06c75"&gt;type&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;cache,target&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/go/pkg &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;GOOS&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$TARGETOS&lt;/span&gt; &lt;span style="color:#e06c75"&gt;GOARCH&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$TARGETARCH&lt;/span&gt; go build -o /out/myapp .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;FROM&lt;/span&gt; &lt;span style="color:#98c379"&gt;alpine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;COPY&lt;/span&gt; --from&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;build /out/myapp /bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>How to deal with a 50GB large csv file in r language?</title><link>https://linzeyan.github.io/posts/2023/20230720-how-to-deal-with-a-50gb-large-csv-file-in-r-language/</link><pubDate>Thu, 20 Jul 2023 15:44:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230720-how-to-deal-with-a-50gb-large-csv-file-in-r-language/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/39678940/how-to-deal-with-a-50gb-large-csv-file-in-r-language" target="_blank" rel="noopener"&gt;How to deal with a 50GB large csv file in r language?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="question"&gt;question&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;read.csv.ffdf&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;file&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&amp;lt;path of large file&amp;gt;&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;sep&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;,&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;header&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;TRUE&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;VERBOSE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;TRUE&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;first.rows&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;10000&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;next.rows&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;50000&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="answer"&gt;answer&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-r" data-lang="r"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;library&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;sqldf&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;iris2&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;read.csv.sql&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;iris.csv&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;sql&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;select * from file where Species = &amp;#39;setosa&amp;#39; &amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>15 Rules of Channels and Their Implementation</title><link>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</link><pubDate>Thu, 22 Jun 2023 21:25:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230622-go-channel-rules/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s/AsytcOBg0XpTnPzDq7iEhQ" target="_blank" rel="noopener"&gt;15 Rules of Channels and Their Implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="operation-rules"&gt;Operation rules&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: center"&gt;Operation&lt;/th&gt;
+&lt;th style="text-align: center"&gt;nil&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Closed channel&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Open buffered channel&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Open unbuffered channel&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Close&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Close succeeds; buffered values can be read. After buffer drains, further reads return the zero value of the channel type.&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Close succeeds; further reads return the zero value of the channel type.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Receive&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; returns the zero value of the channel type&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; reads values normally&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Send&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;td style="text-align: center"&gt;panic&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Non-blocking; writes values normally&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Block&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="compile-time-rules"&gt;Compile-time rules&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: center"&gt;Operation&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Channel type&lt;/th&gt;
+&lt;th style="text-align: center"&gt;Result&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Receive&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Send-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Send&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Receive-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center"&gt;Close&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Receive-only channel&lt;/td&gt;
+&lt;td style="text-align: center"&gt;Compile error&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>Create macOS DMG and Bootable ISO</title><link>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</link><pubDate>Mon, 12 Jun 2023 10:04:20 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230612-macos-dmg-iso/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.newlearner.site/2019/03/07/macos-dmg-iso.html" target="_blank" rel="noopener"&gt;Create macOS DMG and Bootable ISO&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="dmg"&gt;dmg&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;AppStore ==&amp;gt; search &amp;lsquo;install macos&amp;rsquo; ==&amp;gt; get installer ==&amp;gt; &lt;code&gt;du -sh /Applications/Install\ macOS\ Mojave.app/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Disk Utility ==&amp;gt; File ==&amp;gt; New Image ==&amp;gt; Blank Image
+&lt;ol&gt;
+&lt;li&gt;Size: installer size&lt;/li&gt;
+&lt;li&gt;Format: Mac OS Extended (Journaled)&lt;/li&gt;
+&lt;li&gt;Partition: Single partition - GUID Partition Map&lt;/li&gt;
+&lt;li&gt;Image Format: read/write disk image&lt;/li&gt;
+&lt;li&gt;same as &lt;code&gt;hdiutil create -o ~/Desktop/macOS\ Mojave -size 6500m -layout SPUD -fs HFS+J&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/macOS\ Mojave&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="iso"&gt;iso&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;hdiutil convert ~/Desktop/macOS\ Mojave.dmg -format UDTO -o ~/Desktop/macOS\ Mojave.iso&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mv ~/Desktop/macOS\ Mojave.iso.cdr ~/Desktop/macOS\ Mojave.iso&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Synology: Your NAS RAM Details at a Glance</title><link>https://linzeyan.github.io/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</link><pubDate>Mon, 08 May 2023 10:55:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/" target="_blank" rel="noopener"&gt;Synology: Your NAS RAM Details at a Glance&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step1"&gt;step1&lt;/h3&gt;
+&lt;p&gt;Control Panel / Task Scheduler / Create / Scheduled Task / User-defined script&lt;/p&gt;
+&lt;h3 id="step2"&gt;step2&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;General: In the Task field type in RAM Details. Uncheck the &amp;ldquo;Enabled&amp;rdquo; option. Select root User.&lt;/li&gt;
+&lt;li&gt;Schedule: Select Run on the following date then select &amp;ldquo;Do not repeat&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Task Settings: Check &amp;ldquo;Send run details by email&amp;rdquo;, add your email then copy paste the code below in the Run command area. After that, click OK.&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Zsh Config Files and Priority</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener"&gt;Zsh Config Files and Priority&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="zsh-environment-variable-config-files"&gt;Zsh environment variable config files:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile&lt;/li&gt;
+&lt;li&gt;.zlogin&lt;/li&gt;
+&lt;li&gt;.zshrc&lt;/li&gt;
+&lt;li&gt;.zshenv&lt;/li&gt;
+&lt;li&gt;.zlogout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;.zshrc is used for overall shell customization&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile and .zlogin are similar. They both set environment variables for login shells, but their load timing differs. .zprofile is based on Bash&amp;rsquo;s .bash_profile, while .zlogin is the CSH-style .login legacy name.&lt;/li&gt;
+&lt;li&gt;.zshrc sets environment variables for interactive shells. It loads after .zprofile. Typically used for $PATH, $PROMPT, aliases, functions, etc.&lt;/li&gt;
+&lt;li&gt;.zshenv is always read, so you can set environment variables like $PATH or $EDITOR there, but it is generally not used.&lt;/li&gt;
+&lt;li&gt;.zlogout is loaded when a session logs out, which is good for cleanup, such as resetting terminal titles.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Zsh loads ~/.zprofile at login (login shell).&lt;/p&gt;</description></item><item><title>My Productivity Mac Settings and Apps</title><link>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</link><pubDate>Thu, 20 Apr 2023 14:52:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230420-my-mac-setting/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jason-memo.dev/posts/my-mac-setting/" target="_blank" rel="noopener"&gt;My Productivity Mac Settings and Apps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="control-dark-mode-per-app"&gt;Control dark mode per app&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://nightowlapp.co/" target="_blank" rel="noopener"&gt;https://nightowlapp.co/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;brew install --cask nightowl&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="control-external-monitor-brightness-with-the-keyboard---monitorcontrol"&gt;Control external monitor brightness with the keyboard - MonitorControl&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/MonitorControl/MonitorControl" target="_blank" rel="noopener"&gt;https://github.com/MonitorControl/MonitorControl&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;brew install --cask monitorcontrol&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="raycast"&gt;Raycast&lt;/h3&gt;
+&lt;p&gt;Raycast is a free and more powerful Alfred. You can do most things with the keyboard and quickly launch features with Option + Space. It includes many features that other apps charge for.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Launch apps quickly&lt;/li&gt;
+&lt;li&gt;Quick dictionary lookup and calculator&lt;/li&gt;
+&lt;li&gt;Built-in clipboard history search&lt;/li&gt;
+&lt;li&gt;Window management like Magnet, with shortcuts to resize and move windows&lt;/li&gt;
+&lt;li&gt;Calendar integration: quickly open Google Meet with the correct account when a meeting starts&lt;/li&gt;
+&lt;li&gt;Write shell/nodejs/applescript to bind shortcuts for quick actions&lt;/li&gt;
+&lt;li&gt;Rich extension store&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.raycast.com/" target="_blank" rel="noopener"&gt;https://www.raycast.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Some Software Design Principles</title><link>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</link><pubDate>Tue, 18 Apr 2023 13:58:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-software-design-principles/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://coolshell.cn/articles/4535.html" target="_blank" rel="noopener"&gt;Some Software Design Principles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="1-dont-repeat-yourself-dry"&gt;1. Don&amp;rsquo;t Repeat Yourself (DRY)&lt;/h3&gt;
+&lt;h3 id="2-keep-it-simple-stupid-kiss"&gt;2. Keep It Simple, Stupid (KISS)&lt;/h3&gt;
+&lt;p&gt;Making something complex is easy, but making something complex simple is difficult.&lt;/p&gt;
+&lt;h3 id="3-program-to-an-interface-not-an-implementation"&gt;3. Program to an interface, not an implementation&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Prefer composition over inheritance&lt;/li&gt;
+&lt;li&gt;Dependency inversion principle&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="4-command-query-separation-cqs"&gt;4. Command-Query Separation (CQS)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Query: when a method returns a value to answer a question&lt;/li&gt;
+&lt;li&gt;Command: when a method changes the state of an object&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="5-you-aint-gonna-need-it-yagni"&gt;5. You Ain&amp;rsquo;t Gonna Need It (YAGNI)&lt;/h3&gt;
+&lt;p&gt;Only design and implement what is necessary. Avoid overengineering. Implement what you need now; add more when needed later.&lt;/p&gt;</description></item><item><title>On High Availability Systems</title><link>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</link><pubDate>Tue, 18 Apr 2023 10:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230418-high-availability-system/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://coolshell.cn/articles/17459.html" target="_blank" rel="noopener"&gt;On High Availability Systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Item / Mechanism&lt;/th&gt;
+&lt;th&gt;Backups&lt;/th&gt;
+&lt;th&gt;M/S&lt;/th&gt;
+&lt;th&gt;MM&lt;/th&gt;
+&lt;th&gt;2PC&lt;/th&gt;
+&lt;th&gt;Paxos&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Consistency&lt;/td&gt;
+&lt;td&gt;Weak&lt;/td&gt;
+&lt;td&gt;Eventual&lt;/td&gt;
+&lt;td&gt;Eventual&lt;/td&gt;
+&lt;td&gt;Strong&lt;/td&gt;
+&lt;td&gt;Strong&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Transactions&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;Local&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Latency&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Throughput&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
+&lt;td&gt;Medium&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Data loss&lt;/td&gt;
+&lt;td&gt;Lots&lt;/td&gt;
+&lt;td&gt;Some&lt;/td&gt;
+&lt;td&gt;Some&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;td&gt;None&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Failover&lt;/td&gt;
+&lt;td&gt;Down&lt;/td&gt;
+&lt;td&gt;Read only&lt;/td&gt;
+&lt;td&gt;Read only&lt;/td&gt;
+&lt;td&gt;Read/write&lt;/td&gt;
+&lt;td&gt;Read/write&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This table essentially covers the foundational solutions for high-availability systems today. M/S and MM are not hard to implement, but have many issues. 2PC suffers from poor performance, while Paxos is too complex and difficult to implement.&lt;/p&gt;</description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener"&gt;Everything About MTU and MSS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Pitfalls When Parsing Binary Data in Go</title><link>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</link><pubDate>Fri, 20 Jan 2023 13:48:27 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230120-parse-binary-data/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://tao.zz.ac/go/parse-binary-data.html" target="_blank" rel="noopener"&gt;Pitfalls When Parsing Binary Data in Go&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;for&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;buf&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;make&lt;/span&gt;([]&lt;span style="color:#e5c07b"&gt;byte&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;bufSize&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;n&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Read&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;buf&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#e06c75"&gt;io&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;EOF&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#c678dd"&gt;else&lt;/span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;!=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;aerr&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Store&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;err&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ch&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;-&lt;/span&gt; &lt;span style="color:#e06c75"&gt;buf&lt;/span&gt;[:&lt;span style="color:#e06c75"&gt;n&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;The code returns immediately when err is io.EOF, which is the most likely problem. The docs say:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Callers should always process the n &amp;gt; 0 bytes returned before considering the error err. Doing so correctly handles I/O errors that happen after reading some bytes and also both of the allowed EOF behaviors.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So the program must handle n &amp;gt; 0 first, and then handle err != nil. This differs from the usual assumption that a non-nil err implies no data. io.Reader does not behave that way.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal</title><link>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</link><pubDate>Fri, 13 Jan 2023 16:51:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230113-rust-terminal-tools-linux-mac-windows-fish-zsh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/" target="_blank" rel="noopener"&gt;Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="alacritty"&gt;&lt;a href="https://github.com/alacritty/alacritty" target="_blank" rel="noopener"&gt;Alacritty&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Alacritty is a cross-platform modern terminal emulator with sensible defaults. It is GPU accelerated, super fast, and highly configurable. You can use it on Linux, macOS, and Windows.&lt;/p&gt;
+&lt;h4 id="bat"&gt;&lt;a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener"&gt;bat&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;bat is one of my favorite tools from this list. It&amp;rsquo;s a replacement for cat.&lt;/p&gt;
+&lt;h4 id="dust"&gt;&lt;a href="https://github.com/bootandy/dust" target="_blank" rel="noopener"&gt;dust&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Dust is an alternative for the du command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p&gt;</description></item><item><title>Windows SSH Setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener"&gt;Windows SSH Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener"&gt;Install OpenSSH for Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;The default shell is cmd. The docs say to change the ansible_shell_type variable if needed. This should be set as a host variable in inventory: ansible_shell_type, with value cmd or powershell.&lt;/li&gt;
+&lt;li&gt;Add the ansible_connection host variable in inventory to indicate SSH connections. (&lt;code&gt;192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;You may need to add remote_tmp in ansible.cfg and set it to C:\TEMP.&lt;/li&gt;
+&lt;li&gt;In playbooks, use modules prefixed with &lt;code&gt;win_&lt;/code&gt;, or use the raw module.&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

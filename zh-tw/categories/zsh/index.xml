@@ -1,80 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZSH on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/zsh/</link><description>Recent content in ZSH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 08 May 2023 10:43:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>zsh 配置文件解析及优先级</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">zsh 配置文件解析及优先级&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="zsh-的环境变量配置文件有">zsh 的环境变量配置文件有：&lt;/h3>
-&lt;ul>
-&lt;li>.zprofile&lt;/li>
-&lt;li>.zlogin&lt;/li>
-&lt;li>.zshrc&lt;/li>
-&lt;li>.zshenv&lt;/li>
-&lt;li>.zlogout&lt;/li>
-&lt;/ul>
-&lt;p>.zshrc 就是用来对 Shell 整体做个性化配置的&lt;/p>
-&lt;ul>
-&lt;li>.zprofile 和 .zlogin 差不多是一样的，他们都会被 login shells 设置环境变量，只是加载时间可能有一些差别。.zprofile 是基于 Bash 的 .bash_profile ，而 .zlogin 则是仿照 CSH 的 .login 遗留下来的名字&lt;/li>
-&lt;li>.zshrc 会设置 interactive shells 的环境变量。它会在 .zprofile 之后加载。通常可以设置 $PATH, $PROMPT, aliases, functions 等等。&lt;/li>
-&lt;li>.zshenv 总是会被读取，所以也可以在这里设置环境变量，$PATH 或 $EDITOR 等，但一般不怎么使用&lt;/li>
-&lt;li>zlogout 是在一个会话登出的时候被加载，非常适合用来清理临时的配置，比如重置终端窗口的标题&lt;/li>
-&lt;/ul>
-&lt;p>zsh 会在用户登录时(login shell)加载 ~/.zprofile&lt;/p>
-&lt;p>zsh 会在开启新的终端会话时加载 ~/.zshrc&lt;/p>
-&lt;h3 id="需要注意的是首先会加载-etczshenv-下的内容-然后再加载-home-目录下的配置文件">需要注意的是首先会加载 /etc/zshenv 下的内容， 然后再加载 HOME 目录下的配置文件：&lt;/h3>
-&lt;p>&lt;code>.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code>&lt;/p></description></item><item><title>Zsh tab 補完無法使用</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener">Zsh tab 補完無法使用&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="問題">問題&lt;/h4>
-&lt;p>雖然我之前用過 Oh-My-Zsh，但這次（設定新電腦）我決定盡量不要安裝它，讓環境更精簡。現在我想單獨取用 Oh-My-Zsh 的大小寫不敏感補完功能。翻查原始碼後，我找到下面這行：
-&lt;code>zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code>&lt;/p>
-&lt;p>我相當確定 Oh-My-Zsh 就是用這行達成我的需求，所以我把它加進 &lt;code>.zshrc&lt;/code>。重啟終端機後輸入 &lt;code>cd desk&lt;/code>，再按 [tab]，結果沒有作用，並沒有補完成 &lt;code>cd Desktop/&lt;/code>。&lt;/p>
-&lt;p>以下是完整的 &lt;code>.zshrc&lt;/code> 供參考：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Source - https://stackoverflow.com/q&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Posted by kylemart&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Retrieved 2026-01-05, License - CC BY-SA 3.0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pure shell theme&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>autoload -U promptinit; promptinit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prompt pure
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># completion definitions&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>zstyle &lt;span style="color:#e6db74">&amp;#39;:completion:*&amp;#39;&lt;/span> matcher-list &lt;span style="color:#e6db74">&amp;#39;m:{a-zA-Z}={A-Za-z}&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;r:|=*&amp;#39;&lt;/span> &lt;span style="color:#e6db74">&amp;#39;l:|=* r:|=*&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fpath&lt;span style="color:#f92672">=(&lt;/span>/usr/local/share/zsh-completions $fpath&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># syntax highlighting (must be last line)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="答案">答案&lt;/h4>
-&lt;p>只要 &lt;code>autoload&lt;/code> 並執行 &lt;code>compinit&lt;/code> 即可。&lt;/p></description></item><item><title>超簡單！快速打造漂亮又好用的 zsh 終端環境</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211009-zsh/</link><pubDate>Thu, 07 Oct 2021 08:44:18 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211009-zsh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://medium.com/@white1033/%E8%B6%85%E7%B0%A1%E5%96%AE-%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E6%BC%82%E4%BA%AE%E5%8F%88%E5%A5%BD%E7%94%A8%E7%9A%84-zsh-%E7%B5%82%E7%AB%AF%E7%92%B0%E5%A2%83-c81874368264" target="_blank" rel="noopener">超簡單！快速打造漂亮又好用的 zsh 終端環境&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://dwye.dev/post/zsh-zim-powerlevel10k/" target="_blank" rel="noopener">用 zsh + zim + powerlevel10k 讓你的 Terminal 潮又快&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://medium.com/starbugs/%E6%89%93%E9%80%A0-10x-engineer-zsh-shell-97e40db76391" target="_blank" rel="noopener">打造 10X Engineer Shell 工作環境&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210715-make-oh-my-zsh-fly/</link><pubDate>Thu, 15 Jul 2021 18:19:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210715-make-oh-my-zsh-fly/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skk.moe/post/make-oh-my-zsh-fly/" target="_blank" rel="noopener">我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="profiling">Profiling&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># .zshrc&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>zmodload zsh/zprof
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ /bin/zsh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ zprof
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>num calls time self name
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-----------------------------------------------------------------------------------
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 395.66 395.66 33.10% 395.59 395.59 33.09% _zsh_nvm_auto_use
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 2&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 216.22 216.22 18.09% 216.13 216.13 18.08% nvm_die_on_prefix
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 3&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 648.00 648.00 54.20% 168.85 168.85 14.12% nvm_auto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 479.15 239.57 40.08% 160.50 80.25 13.43% nvm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 5&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 102.30 102.30 8.56% 84.99 84.99 7.11% nvm_ensure_version_installed
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 6&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 51.21 25.60 4.28% 29.55 14.78 2.47% compinit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 7&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 680.18 680.18 56.89% 22.17 22.17 1.85% _zsh_nvm_load
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 8&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 21.66 10.83 1.81% 21.66 10.83 1.81% compaudit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 9&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 17.31 17.31 1.45% 17.31 17.31 1.45% nvm_is_version_installed
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">193&lt;/span> 17.43 0.09 1.46% 14.50 0.08 1.21% _zsh_autosuggest_bind_widget
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Redacted&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>zprof&lt;/code> 模块只能获取每个 zsh 函数的用时，因此适合找出拖累 zsh 冷启动的 oh my zsh 的插件。如果要获取完整的 &lt;code>.zshrc&lt;/code> 性能分析，应该使用 &lt;code>xtrace&lt;/code>。在 &lt;code>.zshrc&lt;/code> 开头添加如下命令&lt;/p></description></item><item><title>ZSH 自动读取 macOS 系统代理配置并设置环境变量</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</link><pubDate>Mon, 11 Jan 2021 14:50:11 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/" target="_blank" rel="noopener">ZSH 自动读取 macOS 系统代理配置并设置环境变量&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-zsh" data-lang="zsh">&lt;span style="display:flex;">&lt;span>$ system_profiler SPNetworkDataType &lt;span style="color:#75715e"># 获取完整网络配置信息&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -listallnetworkservices &lt;span style="color:#75715e"># 列举所有网络设备&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -getwebproxy Wi-Fi &lt;span style="color:#75715e"># 获取特定网络设备的系统代理配置&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scutil --proxy &lt;span style="color:#75715e"># 获取当前已启用的代理配置，是对 system_profiler 的封装&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zsh on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/zsh/</link><description>Recent content in Zsh on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 08 May 2023 10:43:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>zsh 配置文件解析及优先级</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener"&gt;zsh 配置文件解析及优先级&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="zsh-的环境变量配置文件有"&gt;zsh 的环境变量配置文件有：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile&lt;/li&gt;
+&lt;li&gt;.zlogin&lt;/li&gt;
+&lt;li&gt;.zshrc&lt;/li&gt;
+&lt;li&gt;.zshenv&lt;/li&gt;
+&lt;li&gt;.zlogout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;.zshrc 就是用来对 Shell 整体做个性化配置的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile 和 .zlogin 差不多是一样的，他们都会被 login shells 设置环境变量，只是加载时间可能有一些差别。.zprofile 是基于 Bash 的 .bash_profile ，而 .zlogin 则是仿照 CSH 的 .login 遗留下来的名字&lt;/li&gt;
+&lt;li&gt;.zshrc 会设置 interactive shells 的环境变量。它会在 .zprofile 之后加载。通常可以设置 $PATH, $PROMPT, aliases, functions 等等。&lt;/li&gt;
+&lt;li&gt;.zshenv 总是会被读取，所以也可以在这里设置环境变量，$PATH 或 $EDITOR 等，但一般不怎么使用&lt;/li&gt;
+&lt;li&gt;zlogout 是在一个会话登出的时候被加载，非常适合用来清理临时的配置，比如重置终端窗口的标题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;zsh 会在用户登录时(login shell)加载 ~/.zprofile&lt;/p&gt;
+&lt;p&gt;zsh 会在开启新的终端会话时加载 ~/.zshrc&lt;/p&gt;
+&lt;h3 id="需要注意的是首先会加载-etczshenv-下的内容-然后再加载-home-目录下的配置文件"&gt;需要注意的是首先会加载 /etc/zshenv 下的内容， 然后再加载 HOME 目录下的配置文件：&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;.zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout].&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Zsh tab 補完無法使用</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener"&gt;Zsh tab 補完無法使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="問題"&gt;問題&lt;/h4&gt;
+&lt;p&gt;雖然我之前用過 Oh-My-Zsh，但這次（設定新電腦）我決定盡量不要安裝它，讓環境更精簡。現在我想單獨取用 Oh-My-Zsh 的大小寫不敏感補完功能。翻查原始碼後，我找到下面這行：
+&lt;code&gt;zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我相當確定 Oh-My-Zsh 就是用這行達成我的需求，所以我把它加進 &lt;code&gt;.zshrc&lt;/code&gt;。重啟終端機後輸入 &lt;code&gt;cd desk&lt;/code&gt;，再按 [tab]，結果沒有作用，並沒有補完成 &lt;code&gt;cd Desktop/&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;以下是完整的 &lt;code&gt;.zshrc&lt;/code&gt; 供參考：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Source - https://stackoverflow.com/q&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Posted by kylemart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Retrieved 2026-01-05, License - CC BY-SA 3.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# pure shell theme&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;autoload -U promptinit; promptinit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;prompt pure
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# completion definitions&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;zstyle &lt;span style="color:#98c379"&gt;&amp;#39;:completion:*&amp;#39;&lt;/span&gt; matcher-list &lt;span style="color:#98c379"&gt;&amp;#39;m:{a-zA-Z}={A-Za-z}&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;r:|=*&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;l:|=* r:|=*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;fpath&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=(&lt;/span&gt;/usr/local/share/zsh-completions &lt;span style="color:#e06c75"&gt;$fpath&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# syntax highlighting (must be last line)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;source&lt;/span&gt; /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="答案"&gt;答案&lt;/h4&gt;
+&lt;p&gt;只要 &lt;code&gt;autoload&lt;/code&gt; 並執行 &lt;code&gt;compinit&lt;/code&gt; 即可。&lt;/p&gt;</description></item><item><title>超簡單！快速打造漂亮又好用的 zsh 終端環境</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211009-zsh/</link><pubDate>Thu, 07 Oct 2021 08:44:18 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211009-zsh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://medium.com/@white1033/%E8%B6%85%E7%B0%A1%E5%96%AE-%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E6%BC%82%E4%BA%AE%E5%8F%88%E5%A5%BD%E7%94%A8%E7%9A%84-zsh-%E7%B5%82%E7%AB%AF%E7%92%B0%E5%A2%83-c81874368264" target="_blank" rel="noopener"&gt;超簡單！快速打造漂亮又好用的 zsh 終端環境&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dwye.dev/post/zsh-zim-powerlevel10k/" target="_blank" rel="noopener"&gt;用 zsh + zim + powerlevel10k 讓你的 Terminal 潮又快&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/starbugs/%E6%89%93%E9%80%A0-10x-engineer-zsh-shell-97e40db76391" target="_blank" rel="noopener"&gt;打造 10X Engineer Shell 工作環境&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210715-make-oh-my-zsh-fly/</link><pubDate>Thu, 15 Jul 2021 18:19:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210715-make-oh-my-zsh-fly/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.skk.moe/post/make-oh-my-zsh-fly/" target="_blank" rel="noopener"&gt;我就感觉到快 —— zsh 和 oh my zsh 冷启动速度优化&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="profiling"&gt;Profiling&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# .zshrc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;zmodload zsh/zprof
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ /bin/zsh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ zprof
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;num calls &lt;span style="color:#e5c07b"&gt;time&lt;/span&gt; self name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-----------------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 395.66 395.66 33.10% 395.59 395.59 33.09% _zsh_nvm_auto_use
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 2&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 216.22 216.22 18.09% 216.13 216.13 18.08% nvm_die_on_prefix
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 3&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 648.00 648.00 54.20% 168.85 168.85 14.12% nvm_auto
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 479.15 239.57 40.08% 160.50 80.25 13.43% nvm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 102.30 102.30 8.56% 84.99 84.99 7.11% nvm_ensure_version_installed
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 6&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 51.21 25.60 4.28% 29.55 14.78 2.47% compinit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 7&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 680.18 680.18 56.89% 22.17 22.17 1.85% _zsh_nvm_load
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 21.66 10.83 1.81% 21.66 10.83 1.81% compaudit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 9&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 17.31 17.31 1.45% 17.31 17.31 1.45% nvm_is_version_installed
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;10&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;193&lt;/span&gt; 17.43 0.09 1.46% 14.50 0.08 1.21% _zsh_autosuggest_bind_widget
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Redacted&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;zprof&lt;/code&gt; 模块只能获取每个 zsh 函数的用时，因此适合找出拖累 zsh 冷启动的 oh my zsh 的插件。如果要获取完整的 &lt;code&gt;.zshrc&lt;/code&gt; 性能分析，应该使用 &lt;code&gt;xtrace&lt;/code&gt;。在 &lt;code&gt;.zshrc&lt;/code&gt; 开头添加如下命令&lt;/p&gt;</description></item><item><title>ZSH 自动读取 macOS 系统代理配置并设置环境变量</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</link><pubDate>Mon, 11 Jan 2021 14:50:11 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/" target="_blank" rel="noopener"&gt;ZSH 自动读取 macOS 系统代理配置并设置环境变量&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-zsh" data-lang="zsh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ system_profiler SPNetworkDataType &lt;span style="color:#7f848e"&gt;# 获取完整网络配置信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ networksetup -listallnetworkservices &lt;span style="color:#7f848e"&gt;# 列举所有网络设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ networksetup -getwebproxy Wi-Fi &lt;span style="color:#7f848e"&gt;# 获取特定网络设备的系统代理配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ scutil --proxy &lt;span style="color:#7f848e"&gt;# 获取当前已启用的代理配置，是对 system_profiler 的封装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

@@ -1,215 +1,245 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on Ricky</title><link>https://linzeyan.github.io/categories/windows/</link><description>Recent content in Windows on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 05 Nov 2026 20:24:13 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Til</title><link>https://linzeyan.github.io/posts/2026/20261105-til/</link><pubDate>Thu, 05 Nov 2026 20:24:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20261105-til/</guid><description>&lt;ul>
-&lt;li>&lt;strong>Article&lt;/strong>
-&lt;ul>
-&lt;li>&lt;a href="https://go.dev/blog/jsonv2" target="_blank" rel="noopener">A new Go API for JSON&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Github&lt;/strong>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/Saffsanity/sill" target="_blank" rel="noopener">sill: Any window from your Mac, live on your iPhone or iPad. Touch, Apple Pencil, trackpad and keys.&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/HeyPuter/everything" target="_blank" rel="noopener">The world’s software. Rebuilt, and open-sourced.&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>Present&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Skill&lt;/strong>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/wheresryan22/anatomy" target="_blank" rel="noopener">An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SVGs with optional WebGL shaders and 3D effects.&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">Write HTML. Render video. Built for agents.&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="disable-telemetry">Disable Telemetry&lt;/h2>
-&lt;p>&lt;a href="./disable-telemetry.cmd">disable-telemetry.cmd&lt;/a>
-&lt;a href="./disable-telemetry.ps1">disable-telemetry.ps1&lt;/a>
-&lt;a href="./disable-telemetry.sh">disable-telemetry.sh&lt;/a>&lt;/p></description></item><item><title>Windows SSH Setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener">Windows SSH Setup&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener">Install OpenSSH for Windows&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;ol>
-&lt;li>The default shell is cmd. The docs say to change the ansible_shell_type variable if needed. This should be set as a host variable in inventory: ansible_shell_type, with value cmd or powershell.&lt;/li>
-&lt;li>Add the ansible_connection host variable in inventory to indicate SSH connections. (&lt;code>192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code>)&lt;/li>
-&lt;li>You may need to add remote_tmp in ansible.cfg and set it to C:\TEMP.&lt;/li>
-&lt;li>In playbooks, use modules prefixed with &lt;code>win_&lt;/code>, or use the raw module.&lt;/li>
-&lt;/ol></description></item><item><title>WSL 2 .wslconfig configuration explained</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 .wslconfig configuration explained&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">Install WSL 2 on Windows 10&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">Build a multi-Linux development environment with WSL 2&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;p>Steps to install WSL 2:&lt;/p>
-&lt;ul>
-&lt;li>Join the Windows Insider Program (required)&lt;/li>
-&lt;li>Enable required WSL components&lt;/li>
-&lt;li>Install a Linux distribution&lt;/li>
-&lt;li>Set the Linux distribution to use WSL 2&lt;/li>
-&lt;li>WSL 2 troubleshooting: compressed virtual disk files cannot be converted to the WSL 2 architecture&lt;/li>
-&lt;li>Install and start Docker&lt;/li>
-&lt;li>Install Docker Desktop v2.2.1.0&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable required WSL components&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>Microsoft-Windows-Subsystem-Linux /all /norestart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>VirtualMachinePlatform /all /norestart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set the Linux distribution to WSL 2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-version ubuntu &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-default-version &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;ul>
-&lt;li>
-&lt;p>Edit &lt;code>%UserProfile%\.wslconfig&lt;/code>&lt;/p></description></item><item><title>Style PowerShell with oh-my-posh</title><link>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener">Style PowerShell with oh-my-posh&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This downloads and installs the posh-git and oh-my-posh modules from PowerShell Gallery.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># The former shows Git info in the prompt, and the latter provides the themes.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module posh-git -Scope CurrentUser
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-Module oh-my-posh -Scope CurrentUser
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Next, edit the PowerShell profile loaded at startup. In PowerShell, $PROFILE shows the current&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># user&amp;#39;s profile path. The file may not exist; run the commands below to create it and open it.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>notepad $PROFILE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Add the following commands to the profile file:&lt;/p></description></item><item><title>Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy</title><link>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://kwilson.io/blog/provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/" target="_blank" rel="noopener">Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/64242931/how-to-use-a-powershell-script-during-vagrant-up-on-host-correctly" target="_blank" rel="noopener">How to use a powershell script during vagrant up on host correctly?&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://akrabat.com/first-steps-with-windows-on-vagrant/" target="_blank" rel="noopener">First steps with Windows on Vagrant&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/" target="_blank" rel="noopener">https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Deploying OpenVPN with AD domain authentication</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener">Deploying OpenVPN with AD domain authentication&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/" target="_blank" rel="noopener">OpenVPN + PAM + SSSD + Active Directory&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/" target="_blank" rel="noopener">https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener">https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener">https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install openssl openssl-devel -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum -y install lzo lzo-devel -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install -y libgcrypt libgpg-error libgcrypt-devel
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install OpenVPN auth plugin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install openvpn-auth-ldap -y
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Install easy-rsa&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Since openvpn 2.3 removed easy-rsa from the package, install it separately.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yum install easy-rsa
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Generate OpenVPN keys and certificates&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_COUNTRY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;CN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Country&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_PROVINCE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;ZJ&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Province&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_CITY&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;NingBo&amp;#34;&lt;/span> &lt;span style="color:#75715e"># City&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_ORG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;TEST-VPN&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Organization&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exportKEY_EMAIL&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;81367070@qq.com&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Email&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>export KEY_OU&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;baidu&amp;#34;&lt;/span> &lt;span style="color:#75715e"># Unit&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>source vars
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./clean-all
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-ca
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-dh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-key-server server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./build-key client1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit the OpenVPN server config: `/etc/openvpn/server.conf`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#ae81ff">1194&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>proto udp
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev tun
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ca keys/ca.crt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cert keys/server.crt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>key keys/server.key &lt;span style="color:#75715e"># This file should be kept secret&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dh keys/dh2048.pem
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server 10.8.0.0 255.255.255.0 // client IP pool
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span> // push route to clients
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>push &lt;span style="color:#e6db74">&amp;#34;redirect-gateway&amp;#34;&lt;/span> // change client gateway to route VPN traffic
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ifconfig-pool-persist ipp.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>keepalive &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#ae81ff">120&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>comp-lzo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>persist-key
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>persist-tun
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>status openvpn-status.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>verb &lt;span style="color:#ae81ff">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>plugin /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so &lt;span style="color:#e6db74">&amp;#34;/etc/openvpn/auth/ldap.conf&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client-cert-not-required
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>username-as-common-name
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log /var/log/openvpn.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/openvpn/auth/ldap.conf&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;LDAP&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># LDAP server URL&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the AD server IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL ldap://172.16.76.238:389
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Change to the domain admin DN; you can query it with ldapsearch&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BindDN &lt;span style="color:#e6db74">&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Bind Password&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Password SecretPassword&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Domain admin password&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Password passwd
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Network timeout (in seconds)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Timeout &lt;span style="color:#ae81ff">15&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Enable Start TLS&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TLSEnable no
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Follow LDAP Referrals (anonymously)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> FollowReferrals no
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLS CA Certificate File&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLSCACertFile /usr/local/etc/ssl/ca.pem&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLS CA Certificate Directory&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLSCACertDir /etc/ssl/certs&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Client Certificate and key&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># If TLS client authentication is required&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLSCertFile /usr/local/etc/ssl/client-cert.pem&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLSKeyFile /usr/local/etc/ssl/client-key.pem&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Cipher Suite&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># The defaults are usually fine here&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># TLSCipherSuite ALL:!ADH:@STRENGTH&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/LDAP&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;Authorization&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Base DN for auth search&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BaseDN &lt;span style="color:#e6db74">&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># User Search Filter&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># sAMAccountName=%u uses the sAMAccountName value as the username,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># and &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; points to the VPN user group to authenticate,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># so any user can use VPN once they are in this group.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SearchFilter &lt;span style="color:#e6db74">&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Require Group Membership&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> RequireGroup false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Add non-group members to a PF table (disabled)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># PFTable ips_vpn_users&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;Group&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># BaseDN &amp;#34;ou=Groups,dc=example,dc=com&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># SearchFilter &amp;#34;(|(cn=developers)(cn=artists))&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># MemberAttribute uniqueMember&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Add group members to a PF table (disabled)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># PFTable ips_vpn_eng&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BaseDN &lt;span style="color:#e6db74">&amp;#34;ou=vpn,dc=boqii-inc,dc=com&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SearchFilter &lt;span style="color:#e6db74">&amp;#34;(cn=openvpn)&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MemberAttribute &lt;span style="color:#e6db74">&amp;#34;member&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/Group&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/Authorization&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Copy the &lt;code>ca.crt&lt;/code> certificate under &lt;code>/etc/openvpn/key&lt;/code> for client use.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on Ricky</title><link>https://linzeyan.github.io/categories/windows/</link><description>Recent content in Windows on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Nov 2026 20:24:13 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Til</title><link>https://linzeyan.github.io/posts/2026/20261105-til/</link><pubDate>Thu, 05 Nov 2026 20:24:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/2026/20261105-til/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Article&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://go.dev/blog/jsonv2" target="_blank" rel="noopener"&gt;A new Go API for JSON&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Github&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/Saffsanity/sill" target="_blank" rel="noopener"&gt;sill: Any window from your Mac, live on your iPhone or iPad. Touch, Apple Pencil, trackpad and keys.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/HeyPuter/everything" target="_blank" rel="noopener"&gt;The world’s software. Rebuilt, and open-sourced.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skill&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/wheresryan22/anatomy" target="_blank" rel="noopener"&gt;An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SVGs with optional WebGL shaders and 3D effects.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener"&gt;Write HTML. Render video. Built for agents.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="disable-telemetry"&gt;Disable Telemetry&lt;/h2&gt;
+&lt;p&gt;&lt;a href="./disable-telemetry.cmd"&gt;disable-telemetry.cmd&lt;/a&gt;
+&lt;a href="./disable-telemetry.ps1"&gt;disable-telemetry.ps1&lt;/a&gt;
+&lt;a href="./disable-telemetry.sh"&gt;disable-telemetry.sh&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Windows SSH Setup</title><link>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</link><pubDate>Tue, 03 Jan 2023 12:36:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230103-windows-ssh-setup/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ansible.cloudns.pro/post/windows-ssh-setup/" target="_blank" rel="noopener"&gt;Windows SSH Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse" target="_blank" rel="noopener"&gt;Install OpenSSH for Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;The default shell is cmd. The docs say to change the ansible_shell_type variable if needed. This should be set as a host variable in inventory: ansible_shell_type, with value cmd or powershell.&lt;/li&gt;
+&lt;li&gt;Add the ansible_connection host variable in inventory to indicate SSH connections. (&lt;code&gt;192.168.192.11 ansible_user=Administrator ansible_connection=ssh ansible_shell_type=cmd &lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;You may need to add remote_tmp in ansible.cfg and set it to C:\TEMP.&lt;/li&gt;
+&lt;li&gt;In playbooks, use modules prefixed with &lt;code&gt;win_&lt;/code&gt;, or use the raw module.&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>WSL 2 .wslconfig configuration explained</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener"&gt;WSL 2 .wslconfig configuration explained&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener"&gt;Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener"&gt;Install WSL 2 on Windows 10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener"&gt;Build a multi-Linux development environment with WSL 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Steps to install WSL 2:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Join the Windows Insider Program (required)&lt;/li&gt;
+&lt;li&gt;Enable required WSL components&lt;/li&gt;
+&lt;li&gt;Install a Linux distribution&lt;/li&gt;
+&lt;li&gt;Set the Linux distribution to use WSL 2&lt;/li&gt;
+&lt;li&gt;WSL 2 troubleshooting: compressed virtual disk files cannot be converted to the WSL 2 architecture&lt;/li&gt;
+&lt;li&gt;Install and start Docker&lt;/li&gt;
+&lt;li&gt;Install Docker Desktop v2.2.1.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Enable required WSL components&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e5c07b"&gt;Microsoft-Windows&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-Subsystem-Linux&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;VirtualMachinePlatform&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Set the Linux distribution to WSL 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-version&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ubuntu&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-default-version&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Edit &lt;code&gt;%UserProfile%\.wslconfig&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Command Prompt&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;notepad %UserProfile%&lt;span style="color:#98c379"&gt;\.&lt;/span&gt;wslconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows PowerShell&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ps1" data-lang="ps1"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;notepad&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$env:USERPROFILE&lt;/span&gt;\.&lt;span style="color:#e06c75"&gt;wslconfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configuration reference&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[wsl2]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;kernel&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to a custom Linux kernel.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;memory&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much memory to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;processors&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;number&amp;gt; # How many processors to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swap&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much swap space to add to the WSL2 VM. 0 for no swap file.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swapFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to the swap vhd.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;localhostForwarding&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;bool&amp;gt; # Boolean specifying if ports bound to wildcard or localhost in the WSL2 VM should be connectable from the host via localhost:port (default true).&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;path&amp;gt; entries must be absolute Windows paths with escaped backslashes, for example C:\\Users\\Ben\\kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;size&amp;gt; entries must be size followed by unit, for example 8GB or 512MB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Related links&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener"&gt;Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Style PowerShell with oh-my-posh</title><link>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener"&gt;Style PowerShell with oh-my-posh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This downloads and installs the posh-git and oh-my-posh modules from PowerShell Gallery.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# The former shows Git info in the prompt, and the latter provides the themes.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Install-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;posh-git&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Scope&lt;/span&gt; &lt;span style="color:#e06c75"&gt;CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Install-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;oh-my&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-posh&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Scope&lt;/span&gt; &lt;span style="color:#e06c75"&gt;CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Next, edit the PowerShell profile loaded at startup. In PowerShell, $PROFILE shows the current&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# user&amp;#39;s profile path. The file may not exist; run the commands below to create it and open it.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; (!(&lt;span style="color:#e5c07b"&gt;Test-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt; )) { &lt;span style="color:#e5c07b"&gt;New-Item&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Type&lt;/span&gt; &lt;span style="color:#e06c75"&gt;File&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Force&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;notepad&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add the following commands to the profile file:&lt;/p&gt;</description></item><item><title>Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy</title><link>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://kwilson.io/blog/provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/" target="_blank" rel="noopener"&gt;Provisioning a Windows Server Vagrant box with IIS, .NET 4.5 and Octopus Deploy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/64242931/how-to-use-a-powershell-script-during-vagrant-up-on-host-correctly" target="_blank" rel="noopener"&gt;How to use a powershell script during vagrant up on host correctly?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://akrabat.com/first-steps-with-windows-on-vagrant/" target="_blank" rel="noopener"&gt;First steps with Windows on Vagrant&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/" target="_blank" rel="noopener"&gt;https://followkman.com/2016/07/27/vagrant-up-on-windows-10-with-hyper-v/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Deploying OpenVPN with AD domain authentication</title><link>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</link><pubDate>Thu, 17 Sep 2020 13:15:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200917-5b892a0b2b71775d1ce04eff/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.twblogs.net/a/5b892a0b2b71775d1ce04eff" target="_blank" rel="noopener"&gt;Deploying OpenVPN with AD domain authentication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://jameschien.no-ip.biz/wordpress/2020/02/19/openvpn-pam-sssd-active-directory/" target="_blank" rel="noopener"&gt;OpenVPN + PAM + SSSD + Active Directory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/" target="_blank" rel="noopener"&gt;https://computingforgeeks.com/install-and-configure-openvpn-server-on-rhel-centos-8/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener"&gt;https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener"&gt;https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Install OpenVPN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install openvpn -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum -y install openssl openssl-devel -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum -y install lzo lzo-devel -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install -y libgcrypt libgpg-error libgcrypt-devel
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Install OpenVPN auth plugin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install openvpn-auth-ldap -y
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Install easy-rsa&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Since openvpn 2.3 removed easy-rsa from the package, install it separately.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install easy-rsa
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Generate OpenVPN keys and certificates&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Edit `/opt/openvpn/etc/easy-rsa/2.0/vars` parameters&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_COUNTRY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;CN&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# Country&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_PROVINCE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;ZJ&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# Province&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_CITY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;NingBo&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# City&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_ORG&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;TEST-VPN&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# Organization&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;exportKEY_EMAIL&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;81367070@qq.com&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# Email&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_OU&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;baidu&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# Unit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;source&lt;/span&gt; vars
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./clean-all
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-ca
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-dh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-key-server server
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-key client1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Edit the OpenVPN server config: `/etc/openvpn/server.conf`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;port &lt;span style="color:#d19a66"&gt;1194&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;proto udp
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dev tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ca keys/ca.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert keys/server.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;key keys/server.key &lt;span style="color:#7f848e"&gt;# This file should be kept secret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dh keys/dh2048.pem
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server 10.8.0.0 255.255.255.0 // client IP pool
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;push &lt;span style="color:#98c379"&gt;&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span&gt; // push route to clients
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;push &lt;span style="color:#98c379"&gt;&amp;#34;redirect-gateway&amp;#34;&lt;/span&gt; // change client gateway to route VPN traffic
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ifconfig-pool-persist ipp.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;keepalive &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; &lt;span style="color:#d19a66"&gt;120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;comp-lzo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;persist-key
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;persist-tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;status openvpn-status.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;verb &lt;span style="color:#d19a66"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugin /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so &lt;span style="color:#98c379"&gt;&amp;#34;/etc/openvpn/auth/ldap.conf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;client-cert-not-required
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;username-as-common-name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log /var/log/openvpn.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Edit openvpn-ldap-auth config: `/etc/openvpn/auth/ldap.conf`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/openvpn/auth/ldap.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;LDAP&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# LDAP server URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Change to the AD server IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; URL ldap://172.16.76.238:389
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Change to the domain admin DN; you can query it with ldapsearch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Replace the IP in -h with the server IP, -D with the admin DN, -b with the base DN, and * for all&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BindDN &lt;span style="color:#98c379"&gt;&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Bind Password&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Password SecretPassword&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Domain admin password&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Password passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Network timeout (in seconds)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Timeout &lt;span style="color:#d19a66"&gt;15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Enable Start TLS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; TLSEnable no
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Follow LDAP Referrals (anonymously)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; FollowReferrals no
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLS CA Certificate File&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCACertFile /usr/local/etc/ssl/ca.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLS CA Certificate Directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCACertDir /etc/ssl/certs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Client Certificate and key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# If TLS client authentication is required&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCertFile /usr/local/etc/ssl/client-cert.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSKeyFile /usr/local/etc/ssl/client-key.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Cipher Suite&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# The defaults are usually fine here&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCipherSuite ALL:!ADH:@STRENGTH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/LDAP&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;Authorization&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Base DN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Base DN for auth search&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BaseDN &lt;span style="color:#98c379"&gt;&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# User Search Filter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# sAMAccountName=%u uses the sAMAccountName value as the username,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# and &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; points to the VPN user group to authenticate,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# so any user can use VPN once they are in this group.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; SearchFilter &lt;span style="color:#98c379"&gt;&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Require Group Membership&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RequireGroup &lt;span style="color:#e5c07b"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Add non-group members to a PF table (disabled)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# PFTable ips_vpn_users&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;Group&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# BaseDN &amp;#34;ou=Groups,dc=example,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# SearchFilter &amp;#34;(|(cn=developers)(cn=artists))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# MemberAttribute uniqueMember&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Add group members to a PF table (disabled)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# PFTable ips_vpn_eng&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BaseDN &lt;span style="color:#98c379"&gt;&amp;#34;ou=vpn,dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; SearchFilter &lt;span style="color:#98c379"&gt;&amp;#34;(cn=openvpn)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; MemberAttribute &lt;span style="color:#98c379"&gt;&amp;#34;member&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;/Group&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/Authorization&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Copy the &lt;code&gt;ca.crt&lt;/code&gt; certificate under &lt;code&gt;/etc/openvpn/key&lt;/code&gt; for client use.&lt;/p&gt;</description></item></channel></rss>

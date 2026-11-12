@@ -1,60 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZSH on Ricky</title><link>https://linzeyan.github.io/tags/zsh/</link><description>Recent content in ZSH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 May 2023 10:43:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>Zsh Config Files and Priority</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener">Zsh Config Files and Priority&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="zsh-environment-variable-config-files">Zsh environment variable config files:&lt;/h3>
-&lt;ul>
-&lt;li>.zprofile&lt;/li>
-&lt;li>.zlogin&lt;/li>
-&lt;li>.zshrc&lt;/li>
-&lt;li>.zshenv&lt;/li>
-&lt;li>.zlogout&lt;/li>
-&lt;/ul>
-&lt;p>.zshrc is used for overall shell customization&lt;/p>
-&lt;ul>
-&lt;li>.zprofile and .zlogin are similar. They both set environment variables for login shells, but their load timing differs. .zprofile is based on Bash&amp;rsquo;s .bash_profile, while .zlogin is the CSH-style .login legacy name.&lt;/li>
-&lt;li>.zshrc sets environment variables for interactive shells. It loads after .zprofile. Typically used for $PATH, $PROMPT, aliases, functions, etc.&lt;/li>
-&lt;li>.zshenv is always read, so you can set environment variables like $PATH or $EDITOR there, but it is generally not used.&lt;/li>
-&lt;li>.zlogout is loaded when a session logs out, which is good for cleanup, such as resetting terminal titles.&lt;/li>
-&lt;/ul>
-&lt;p>Zsh loads ~/.zprofile at login (login shell).&lt;/p></description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener">Zsh tab-completion not working&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="question">Question&lt;/h4>
-&lt;p>Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
-&lt;code>zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code>&lt;/p>
-&lt;p>I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code>.zshrc&lt;/code>. Restarted my terminal. Typed &lt;code>cd desk&lt;/code>, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code>cd Desktop/&lt;/code>.&lt;/p></description></item><item><title>Super easy! Build a beautiful and handy zsh terminal</title><link>https://linzeyan.github.io/posts/2021/20211009-zsh/</link><pubDate>Thu, 07 Oct 2021 08:44:18 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211009-zsh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://medium.com/@white1033/%E8%B6%85%E7%B0%A1%E5%96%AE-%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E6%BC%82%E4%BA%AE%E5%8F%88%E5%A5%BD%E7%94%A8%E7%9A%84-zsh-%E7%B5%82%E7%AB%AF%E7%92%B0%E5%A2%83-c81874368264" target="_blank" rel="noopener">Super easy! Build a beautiful and handy zsh terminal&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://dwye.dev/post/zsh-zim-powerlevel10k/" target="_blank" rel="noopener">Make your terminal stylish and fast with zsh + zim + powerlevel10k&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://medium.com/starbugs/%E6%89%93%E9%80%A0-10x-engineer-zsh-shell-97e40db76391" target="_blank" rel="noopener">Build a 10X Engineer shell environment&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>I can feel the speed — optimize zsh and oh my zsh cold start</title><link>https://linzeyan.github.io/posts/2021/20210715-make-oh-my-zsh-fly/</link><pubDate>Thu, 15 Jul 2021 18:19:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210715-make-oh-my-zsh-fly/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skk.moe/post/make-oh-my-zsh-fly/" target="_blank" rel="noopener">I can feel the speed — optimize zsh and oh my zsh cold start&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="profiling">Profiling&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># .zshrc&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>zmodload zsh/zprof
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ /bin/zsh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ zprof
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>num calls time self name
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-----------------------------------------------------------------------------------
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 395.66 395.66 33.10% 395.59 395.59 33.09% _zsh_nvm_auto_use
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 2&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 216.22 216.22 18.09% 216.13 216.13 18.08% nvm_die_on_prefix
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 3&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 648.00 648.00 54.20% 168.85 168.85 14.12% nvm_auto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 479.15 239.57 40.08% 160.50 80.25 13.43% nvm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 5&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 102.30 102.30 8.56% 84.99 84.99 7.11% nvm_ensure_version_installed
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 6&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 51.21 25.60 4.28% 29.55 14.78 2.47% compinit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 7&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 680.18 680.18 56.89% 22.17 22.17 1.85% _zsh_nvm_load
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 8&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> 21.66 10.83 1.81% 21.66 10.83 1.81% compaudit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 9&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span> 17.31 17.31 1.45% 17.31 17.31 1.45% nvm_is_version_installed
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#ae81ff">193&lt;/span> 17.43 0.09 1.46% 14.50 0.08 1.21% _zsh_autosuggest_bind_widget
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Redacted&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>zprof&lt;/code> module only reports the time for each zsh function, so it is useful for finding oh-my-zsh plugins that slow down cold start. To profile the entire &lt;code>.zshrc&lt;/code>, use &lt;code>xtrace&lt;/code>. Add the following at the top of &lt;code>.zshrc&lt;/code>:&lt;/p></description></item><item><title>Let Zsh read macOS system proxy settings and set env vars</title><link>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</link><pubDate>Mon, 11 Jan 2021 14:50:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/" target="_blank" rel="noopener">Let Zsh read macOS system proxy settings and set env vars&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-zsh" data-lang="zsh">&lt;span style="display:flex;">&lt;span>$ system_profiler SPNetworkDataType &lt;span style="color:#75715e"># get full network configuration&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -listallnetworkservices &lt;span style="color:#75715e"># list all network services&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ networksetup -getwebproxy Wi-Fi &lt;span style="color:#75715e"># get system proxy settings for a specific service&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ scutil --proxy &lt;span style="color:#75715e"># get enabled proxy settings (wrapper for system_profiler)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZSH on Ricky</title><link>https://linzeyan.github.io/tags/zsh/</link><description>Recent content in ZSH on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 08 May 2023 10:43:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml"/><item><title>Zsh Config Files and Priority</title><link>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</link><pubDate>Mon, 08 May 2023 10:43:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230508-zprofile-zshrc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://einverne.github.io/post/2023/01/zprofile-zshrc.html" target="_blank" rel="noopener"&gt;Zsh Config Files and Priority&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="zsh-environment-variable-config-files"&gt;Zsh environment variable config files:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile&lt;/li&gt;
+&lt;li&gt;.zlogin&lt;/li&gt;
+&lt;li&gt;.zshrc&lt;/li&gt;
+&lt;li&gt;.zshenv&lt;/li&gt;
+&lt;li&gt;.zlogout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;.zshrc is used for overall shell customization&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;.zprofile and .zlogin are similar. They both set environment variables for login shells, but their load timing differs. .zprofile is based on Bash&amp;rsquo;s .bash_profile, while .zlogin is the CSH-style .login legacy name.&lt;/li&gt;
+&lt;li&gt;.zshrc sets environment variables for interactive shells. It loads after .zprofile. Typically used for $PATH, $PROMPT, aliases, functions, etc.&lt;/li&gt;
+&lt;li&gt;.zshenv is always read, so you can set environment variables like $PATH or $EDITOR there, but it is generally not used.&lt;/li&gt;
+&lt;li&gt;.zlogout is loaded when a session logs out, which is good for cleanup, such as resetting terminal titles.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Zsh loads ~/.zprofile at login (login shell).&lt;/p&gt;</description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener"&gt;Zsh tab-completion not working&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="question"&gt;Question&lt;/h4&gt;
+&lt;p&gt;Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
+&lt;code&gt;zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code&gt;.zshrc&lt;/code&gt;. Restarted my terminal. Typed &lt;code&gt;cd desk&lt;/code&gt;, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code&gt;cd Desktop/&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Super easy! Build a beautiful and handy zsh terminal</title><link>https://linzeyan.github.io/posts/2021/20211009-zsh/</link><pubDate>Thu, 07 Oct 2021 08:44:18 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211009-zsh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://medium.com/@white1033/%E8%B6%85%E7%B0%A1%E5%96%AE-%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E6%BC%82%E4%BA%AE%E5%8F%88%E5%A5%BD%E7%94%A8%E7%9A%84-zsh-%E7%B5%82%E7%AB%AF%E7%92%B0%E5%A2%83-c81874368264" target="_blank" rel="noopener"&gt;Super easy! Build a beautiful and handy zsh terminal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dwye.dev/post/zsh-zim-powerlevel10k/" target="_blank" rel="noopener"&gt;Make your terminal stylish and fast with zsh + zim + powerlevel10k&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/starbugs/%E6%89%93%E9%80%A0-10x-engineer-zsh-shell-97e40db76391" target="_blank" rel="noopener"&gt;Build a 10X Engineer shell environment&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>I can feel the speed — optimize zsh and oh my zsh cold start</title><link>https://linzeyan.github.io/posts/2021/20210715-make-oh-my-zsh-fly/</link><pubDate>Thu, 15 Jul 2021 18:19:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210715-make-oh-my-zsh-fly/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.skk.moe/post/make-oh-my-zsh-fly/" target="_blank" rel="noopener"&gt;I can feel the speed — optimize zsh and oh my zsh cold start&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="profiling"&gt;Profiling&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# .zshrc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;zmodload zsh/zprof
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ /bin/zsh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ zprof
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;num calls &lt;span style="color:#e5c07b"&gt;time&lt;/span&gt; self name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-----------------------------------------------------------------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 395.66 395.66 33.10% 395.59 395.59 33.09% _zsh_nvm_auto_use
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 2&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 216.22 216.22 18.09% 216.13 216.13 18.08% nvm_die_on_prefix
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 3&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 648.00 648.00 54.20% 168.85 168.85 14.12% nvm_auto
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 479.15 239.57 40.08% 160.50 80.25 13.43% nvm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 5&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 102.30 102.30 8.56% 84.99 84.99 7.11% nvm_ensure_version_installed
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 6&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 51.21 25.60 4.28% 29.55 14.78 2.47% compinit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 7&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 680.18 680.18 56.89% 22.17 22.17 1.85% _zsh_nvm_load
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; 21.66 10.83 1.81% 21.66 10.83 1.81% compaudit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 9&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; 17.31 17.31 1.45% 17.31 17.31 1.45% nvm_is_version_installed
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;10&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#d19a66"&gt;193&lt;/span&gt; 17.43 0.09 1.46% 14.50 0.08 1.21% _zsh_autosuggest_bind_widget
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Redacted&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;zprof&lt;/code&gt; module only reports the time for each zsh function, so it is useful for finding oh-my-zsh plugins that slow down cold start. To profile the entire &lt;code&gt;.zshrc&lt;/code&gt;, use &lt;code&gt;xtrace&lt;/code&gt;. Add the following at the top of &lt;code&gt;.zshrc&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Let Zsh read macOS system proxy settings and set env vars</title><link>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</link><pubDate>Mon, 11 Jan 2021 14:50:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210111-macos-auto-read-proxy-settings-zsh/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.skk.moe/post/macos-auto-read-proxy-settings-zsh/" target="_blank" rel="noopener"&gt;Let Zsh read macOS system proxy settings and set env vars&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-zsh" data-lang="zsh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ system_profiler SPNetworkDataType &lt;span style="color:#7f848e"&gt;# get full network configuration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ networksetup -listallnetworkservices &lt;span style="color:#7f848e"&gt;# list all network services&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ networksetup -getwebproxy Wi-Fi &lt;span style="color:#7f848e"&gt;# get system proxy settings for a specific service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ scutil --proxy &lt;span style="color:#7f848e"&gt;# get enabled proxy settings (wrapper for system_profiler)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

@@ -1,387 +1,391 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Cloudflare 中轉 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">使用 Cloudflare 中轉 V2Ray 流量&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">最好用的 V2Ray 一鍵安裝腳本&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray 腳本 DNS 設定&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray 腳本中轉教學&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="安裝腳本">安裝腳本&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="準備">準備&lt;/h2>
-&lt;p>我們現在就新增一筆 DNS 記錄，名稱：&lt;code>ai&lt;/code>，IPv4 位址：&lt;code>寫你的 VPS IP&lt;/code>，代理狀態必須關閉，雲朵圖示為灰色。&lt;/p>
-&lt;p>提示：你可以使用 &lt;code>v2ray ip&lt;/code> 查看你的 VPS IP。&lt;/p>
-&lt;h2 id="新增中轉配置">新增中轉配置&lt;/h2>
-&lt;p>使用 &lt;code>v2ray add ws ai.233boy.com&lt;/code> 新增一個 vmess-ws-tls 配置；記得把 &lt;code>ai.233boy.com&lt;/code> 改成你的網域。&lt;/p>
-&lt;p>就是剛才新增記錄的那個網域，假設你的網域是 233boy.com，新增的名稱是 ai，網域就是 ai.233boy.com。&lt;/p>
-&lt;h2 id="開啟中轉">開啟中轉&lt;/h2>
-&lt;p>在 Cloudflare 後台首頁，點你的網域進去，在左側選項選單選擇 &lt;code>SSL/TLS&lt;/code>。&lt;/p>
-&lt;p>把 SSL/TLS 加密模式改成 &lt;code>完全&lt;/code>。&lt;/p>
-&lt;p>接著在左側選項選單選擇 &lt;code>DNS&lt;/code>。&lt;/p>
-&lt;p>編輯剛新增的記錄，把代理狀態打開，也就是 &lt;code>已代理&lt;/code>，雲朵圖示為點亮狀態，然後儲存。&lt;/p>
-&lt;p>雲朵點亮後，流量就會走 Cloudflare 中轉。&lt;/p>
-&lt;p>提醒：雲朵點亮代表流量經由 Cloudflare 中轉；雲朵灰色代表直連，不走 Cloudflare 中轉。&lt;/p>
-&lt;h2 id="取得真實客戶端-ip">取得真實客戶端 IP&lt;/h2>
-&lt;p>有些人可能有特殊需求，因為套上 CF 後，預設在查看日誌時會顯示客戶端 IP 為 CF 的 IP。&lt;/p></description></item><item><title>Google 基礎設施</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener">Google 十年五代網路架構&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>有关 MTU 和 MSS 的一切</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">有关 MTU 和 MSS 的一切&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>即時監控網路介面上的 HTTP 請求</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">即時監控網路介面上的 HTTP 請求&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="tcpflow">tcpflow&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;code>apt/dnf install tcpflow&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#ae81ff">80&lt;/span> | grep -oE &lt;span style="color:#e6db74">&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reportfilename: ./report.xml
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpflow: listening on wlp0s20f3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-p&lt;/code> 停用混雜模式&lt;/li>
-&lt;li>&lt;code>-c&lt;/code> 只輸出到主控台，不建立檔案&lt;/li>
-&lt;li>&lt;code>-i&lt;/code> 指定網路介面
-grep 會接收 tcpflow 的輸出&lt;/li>
-&lt;li>&lt;code>-o&lt;/code> 只顯示符合樣式的那一段&lt;/li>
-&lt;li>&lt;code>-E&lt;/code> 表示樣式是延伸正則表示式（ERE）&lt;/li>
-&lt;/ul>
-&lt;h3 id="httpry">httpry&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo httpry -i wlp0s20f3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>httpry version 0.1.8 -- HTTP logging and information retrieval tool
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting capture on wlp0s20f3 interface
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump 使用总结&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="命令使用">命令使用&lt;/h2>
-&lt;p>tcpdump 采用命令行方式，它的命令格式为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tcpdump &lt;span style="color:#f92672">[&lt;/span> -AdDeflLnNOpqRStuUvxX &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -c count &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -C file_size &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -F file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -i interface &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -m module &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -M secret &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -r file &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -s snaplen &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -T type &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -w file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -W filecount &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -E spi@ipaddr algo:secret, ... &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -y datalinktype &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -Z user &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> expression &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="tcpdump-的简单选项介绍">tcpdump 的简单选项介绍&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code>，可通过&lt;code>spi@ipaddr algo:secret&lt;/code> 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code>0x&lt;/code> 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code>spi@ipaddr algo:secret&lt;/code>)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li>
-&lt;li>&lt;code>-T type&lt;/code> 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:
-&lt;ul>
-&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol， 按需距离向量路由协议，在 Ad hoc(点对点模式)网络中使用)，&lt;/li>
-&lt;li>&lt;code>cnfp&lt;/code> (Cisco NetFlow protocol)&lt;/li>
-&lt;li>&lt;code>rpc&lt;/code>(Remote Procedure Call)&lt;/li>
-&lt;li>&lt;code>rtp&lt;/code> (Real-Time Applications protocol)&lt;/li>
-&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications con-trol protocol)&lt;/li>
-&lt;li>&lt;code>snmp&lt;/code> (Simple Network Management Protocol)&lt;/li>
-&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol， 碎文件协议)&lt;/li>
-&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool， 可用于在 internet 上进行电视电话会议的应用层协议)&lt;/li>
-&lt;li>&lt;code>wb&lt;/code> (distributed White Board， 可用于网络会议的应用层协议)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="实用命令实例">实用命令实例&lt;/h3>
-&lt;p>&lt;strong>截获主机 210.27.48.1 和主机 210.27.48.2 或 210.27.48.3 的通信&lt;/strong>&lt;/p></description></item><item><title>【理解 Cilium 系列文章】(一) 初識 Cilium</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211221-understanding-cilium/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener">【理解 Cilium 系列文章】(一) 初識 Cilium&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="當前-k8s-service-負載均衡的實現現狀">當前 k8s Service 負載均衡的實現現狀&lt;/h4>
-&lt;p>在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。&lt;/p>
-&lt;h5 id="userspace">Userspace&lt;/h5>
-&lt;p>當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。&lt;/p>
-&lt;h5 id="iptables">Iptables&lt;/h5>
-&lt;p>存在的問題：&lt;/p>
-&lt;p>1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)&lt;/p>
-&lt;p>2.LB 調度算法僅支持隨機轉發&lt;/p>
-&lt;h5 id="ipvs-模式">Ipvs 模式&lt;/h5>
-&lt;p>IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p>
-&lt;p>IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p></description></item><item><title>不使用 kube-proxy 的 Kubernetes</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">不使用 kube-proxy 的 Kubernetes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="快速開始">快速開始&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 設定 Helm 倉庫&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace kube-system &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Cloudflare 流量處理順序</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="流量處理順序">流量處理順序&lt;/h3>
-&lt;p>應用程式流量在 Cloudflare 邊緣節點會依下列順序處理：&lt;/p>
-&lt;ol>
-&lt;li>DDoS&lt;/li>
-&lt;li>URL 重寫&lt;/li>
-&lt;li>頁面規則&lt;/li>
-&lt;li>IP 存取規則&lt;/li>
-&lt;li>Bot 管理&lt;/li>
-&lt;li>防火牆規則&lt;/li>
-&lt;li>速率限制&lt;/li>
-&lt;li>託管規則&lt;/li>
-&lt;li>標頭修改&lt;/li>
-&lt;li>存取控制&lt;/li>
-&lt;li>Workers&lt;/li>
-&lt;/ol></description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener">在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>第 19 天 BGP 協定（1）</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener">第 19 天 BGP 協定（1）&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener">第 20 天 BGP 協定（2）&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt-get remove cloud-init&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;p>然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">192.168.32.231&lt;/span>&lt;span style="color:#ae81ff">/24]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway4&lt;/span>: &lt;span style="color:#ae81ff">192.168.32.1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">nameservers&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">addresses&lt;/span>: [&lt;span style="color:#ae81ff">8.8.8.8&lt;/span>, &lt;span style="color:#ae81ff">8.8.4.4&lt;/span>]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">no&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p></description></item><item><title>BIRD 与 BGP 的新手开场</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD 与 BGP 的新手开场&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener">BIRD Internet Routing Daemon&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再戰營運商快取：使用 iptables 對付快取劫持&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="起因">起因&lt;/h5>
-&lt;p>與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p>
-&lt;h5 id="解決">解決&lt;/h5>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p>
-&lt;p>因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p>
-&lt;p>這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p></description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">使用 TC 和 Netem 模拟网络异常&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>Netem 与 TC 简要说明&lt;/p>
-&lt;p>Netem 是 Linux 2.6 及以上内核版本提供的一个网络模拟功能模块。该功能模块可以用来在性能良好的局域网中，模拟出复杂的互联网传输性能。例如:低带宽、传输延迟、丢包等等情况。使用 Linux 2.6 (或以上) 版本内核的很多 Linux 发行版都默认开启了该内核模块，比如：Fedora、Ubuntu、Redhat、OpenSuse、CentOS、Debian 等等。&lt;/p>
-&lt;p>TC 是 Linux 系统中的一个用户态工具，全名为 Traffic Control (流量控制)。TC 可以用来控制 Netem 模块的工作模式，也就是说如果想使用 Netem 需要至少两个条件，一是内核中的 Netem 模块被启用，另一个是要有对应的用户态工具 TC 。&lt;/p>&lt;/blockquote>
-&lt;ol>
-&lt;li>所有的报文延迟 100ms 发送: &lt;code>$ tc qdisc add dev enp0s5 root netem delay 100ms&lt;/code>&lt;/li>
-&lt;li>模拟丢包率: &lt;code>$ tc qdisc change dev enp0s5 root netem loss 50%&lt;/code>&lt;/li>
-&lt;li>模拟包重复: &lt;code>$ tc qdisc change dev enp0s5 root netem duplicate 50%&lt;/code>&lt;/li>
-&lt;li>模拟包损坏: &lt;code>tc qdisc change dev enp0s5 root netem corrupt 2%&lt;/code>&lt;/li>
-&lt;li>模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code>tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置">查看并显示 enp0s5 网卡的相关传输配置&lt;/h5>
-&lt;p>&lt;code>$ tc qdisc show dev enp0s5&lt;/code>&lt;/p></description></item><item><title>Quagga Routing - 安裝、設定與建置 BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - 安裝、設定與建置 BGP&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>最好用的 V2Ray 一鍵安裝腳本 &amp; 管理腳本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">最好用的 V2Ray 一鍵安裝腳本 &amp;amp; 管理腳本&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">具有代表性的 HTTP 状态码&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch">Switch&lt;/h4>
-&lt;p>&lt;strong>&lt;em>Switch 通常是 L2 設備&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>只會將封包傳送到指定目的地的電腦（透過 MAC Table），相對上能減少資料碰撞及資料被竊聽的機會。交換器更能將同時傳到的封包分別處理，而集線器則不能。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>Hub 則是 L1 設備&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>會將網路內某一使用者傳送的封包傳至所有已連接到集線器的電腦，因會碰撞所以 random retry。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>MAC Table&lt;/em>&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>Learning
-&lt;ul>
-&lt;li>從某個 Port 收到某網段（設為 A）MAC 位址為 X 的計算機發給 MAC 位址為 Y 的計算機的資料包。交換機從而記下了 MAC 位址 X 在網段 A。這稱為學習(learning)。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Flooding
-&lt;ul>
-&lt;li>交換機還不知道 MAC 位址 Y 在哪個網段上，於是向除了 A 以外的所有網段轉發該資料包。這稱為洪水(flooding)。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Forwarding
-&lt;ul>
-&lt;li>MAC 位址 Y 的電腦收到該封包，向 MAC 位址 X 發出確認包。交換器收到該包後，從而記錄下 MAC 位址 Y 所在的網段。交換機向 MAC 位址 X 轉發確認包。這稱為轉發(forwarding)。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Filtering
-&lt;ul>
-&lt;li>交換機收到一個資料包，查表後發現該資料包的來源位址與目的位址屬於同一網段。交換機將不處理該資料包，這稱為過濾(filtering)。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Aging
-&lt;ul>
-&lt;li>交換機內部的 MAC 位址-網段查詢表的每條記錄採用時間戳記錄最後一次存取的時間。早於某個閾值（用戶可配置）的記錄被清除，這稱為老化(aging)。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;h5 id="vlan">Vlan&lt;/h5>
-&lt;p>Switch Interface 需支援 802.1Q&lt;/p></description></item><item><title>Juniper 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-隧道">[Juniper Firewall] 隧道&lt;/h4>
-&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
-&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
-set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
-set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
-set security zones security-zone JC32 host-inbound-traffic system-services ping
-set security zones security-zone JC32 interfaces gr-0/0/0.32
-set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
-set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
-set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
-set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
-set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
-&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item><item><title>機房 notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</guid><description>&lt;p>第一張網卡-藍色線&lt;/p>
-&lt;p>第二張網卡-綠色線&lt;/p>
-&lt;p>交換機互連-白色線&lt;/p>
-&lt;p>黃、紅&lt;/p>
-&lt;p>Storage 有磁碟陣列，數據交換量大，用光纖連接，使用光纖專用的交換機。&lt;/p>
-&lt;p>光纖顏色：&lt;/p>
-&lt;p>多模 (Multi-mode)或單模 (Single-mode)的光纖線&lt;/p>
-&lt;p>單模光纖是黃色，多模光纖 50μm 或是 62.5μm 通常都是橘色。10GB 多模光纖通常是水藍色(Aqua)。&lt;/p>
-&lt;p>以下是一些常見的規格區分方式。&lt;/p>
-&lt;ul>
-&lt;li>OS1, OS2, 9µm, 9/125 = 單模光纖&lt;/li>
-&lt;li>OM1, 62.5µm, 62.5/125 = 多模光纖 62.5&lt;/li>
-&lt;li>OM2, 50µ, 50/125 = 多模光纖 50&lt;/li>
-&lt;li>OM3, 10GB, 50µm, 50/125 = 多模光纖 10GB&lt;/li>
-&lt;li>OM4, 100GB, 50µm, 50/125 = 多模光纖 100GB&lt;/li>
-&lt;/ul>
-&lt;p>光纖結構&lt;/p>
-&lt;p>光纖裸纖的構成主要分為三層：&lt;/p>
-&lt;ul>
-&lt;li>中心：高折射率玻璃芯(芯徑一般為單模 9μm，多模 50 或 62.5μm) 。&lt;/li>
-&lt;li>夾層：低折射率硅玻璃包層(直徑為 125μm) 。&lt;/li>
-&lt;li>外層：加強用樹脂塗層(直徑為 250μm)。&lt;/li>
-&lt;/ul>
-&lt;p>光纖的種類&lt;/p>
-&lt;ol>
-&lt;li>一般依光波長在光纖中的傳輸模式可分為：單模態光纖和多模態光纖。
-&lt;ol>
-&lt;li>多模態光纖：中心玻璃芯(纖核)較粗(50 或 62.5μm)，外層纖殼為 125μm 可傳輸多種模代的光波長。但其模間色散較大，因而限制了傳輸信號的頻率，而隨著距離的增加會更加嚴重。例如：600MB/KM 的光纖再 2KM 時則只有 300MB 的頻寬了。因此，多模光纖傳輸的距離就比較近，一般只有幾公里的距離。&lt;/li>
-&lt;li>單模態光纖：中心玻璃芯較細(纖核一般為 9 或 10μm)，只能傳一種模式的光。因此，其模間色散很小，適用於遠距離通訊，但其色度色散起了主要作用，這樣單模光纖對光源的譜寬和穩定性有較高的要求，即譜寬要窄，穩定性要好。&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>按最佳傳輸頻率窗口分： 常規型單模光纖和色散位移型單模光纖。
-&lt;ol>
-&lt;li>常規型：光纖生產廠將光纖傳輸頻率最佳化在單一波長的光上，如 1300μm。&lt;/li>
-&lt;li>色散位移型：光纖生產廠將 光纖傳輸頻率最佳兩個波長的光上，如 1300μm 和 1550μm。&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>按折射率分佈情況分：突變型和漸變型光纖。&lt;/li>
-&lt;/ol>
-&lt;p>常用光纖規格&lt;/p></description></item><item><title>Route notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</guid><description>&lt;p>Router - 善於運算路由表的機器，L3 的設備。&lt;/p>
-&lt;p>Routing Table&lt;/p>
-&lt;ul>
-&lt;li>一張網卡綁了一個 IP，天生就有了 2 筆 route，不能被改變。192.168.1.1/24
-&lt;ul>
-&lt;li>自己本身。Local route / Host route：192.168.1.1/32&lt;/li>
-&lt;li>整個網段。Direct route / Connect route：192.168.1.0/24&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Static route 想設幾個就設幾個。
-&lt;ul>
-&lt;li>172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li>
-&lt;li>2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li>
-&lt;li>&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Default route - gateway 只有一個。
-&lt;ul>
-&lt;li>0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>小數優先 - 優先走範圍小的 route。&lt;/li>
-&lt;li>BGPv4&lt;/li>
-&lt;/ul></description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</guid><description>&lt;p>封包出去前&lt;/p>
-&lt;ul>
-&lt;li>對 Arp Table 找 IP 對應的 MAC
-&lt;ul>
-&lt;li>有 MAC - 封裝&lt;/li>
-&lt;li>無 MAC - 廣播
-&lt;ul>
-&lt;li>同網段 - OK&lt;/li>
-&lt;li>不同網段 - 對 Arp Table 找 Router 的 MAC
-&lt;ul>
-&lt;li>有 - OK&lt;/li>
-&lt;li>無 - 廣播&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Cloudflare 中轉 V2Ray 流量</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener"&gt;使用 Cloudflare 中轉 V2Ray 流量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener"&gt;最好用的 V2Ray 一鍵安裝腳本&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener"&gt;V2Ray 腳本 DNS 設定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener"&gt;V2Ray 腳本中轉教學&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安裝腳本"&gt;安裝腳本&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bash &amp;lt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="準備"&gt;準備&lt;/h2&gt;
+&lt;p&gt;我們現在就新增一筆 DNS 記錄，名稱：&lt;code&gt;ai&lt;/code&gt;，IPv4 位址：&lt;code&gt;寫你的 VPS IP&lt;/code&gt;，代理狀態必須關閉，雲朵圖示為灰色。&lt;/p&gt;
+&lt;p&gt;提示：你可以使用 &lt;code&gt;v2ray ip&lt;/code&gt; 查看你的 VPS IP。&lt;/p&gt;
+&lt;h2 id="新增中轉配置"&gt;新增中轉配置&lt;/h2&gt;
+&lt;p&gt;使用 &lt;code&gt;v2ray add ws ai.233boy.com&lt;/code&gt; 新增一個 vmess-ws-tls 配置；記得把 &lt;code&gt;ai.233boy.com&lt;/code&gt; 改成你的網域。&lt;/p&gt;
+&lt;p&gt;就是剛才新增記錄的那個網域，假設你的網域是 233boy.com，新增的名稱是 ai，網域就是 ai.233boy.com。&lt;/p&gt;
+&lt;h2 id="開啟中轉"&gt;開啟中轉&lt;/h2&gt;
+&lt;p&gt;在 Cloudflare 後台首頁，點你的網域進去，在左側選項選單選擇 &lt;code&gt;SSL/TLS&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;把 SSL/TLS 加密模式改成 &lt;code&gt;完全&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;接著在左側選項選單選擇 &lt;code&gt;DNS&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;編輯剛新增的記錄，把代理狀態打開，也就是 &lt;code&gt;已代理&lt;/code&gt;，雲朵圖示為點亮狀態，然後儲存。&lt;/p&gt;
+&lt;p&gt;雲朵點亮後，流量就會走 Cloudflare 中轉。&lt;/p&gt;
+&lt;p&gt;提醒：雲朵點亮代表流量經由 Cloudflare 中轉；雲朵灰色代表直連，不走 Cloudflare 中轉。&lt;/p&gt;
+&lt;h2 id="取得真實客戶端-ip"&gt;取得真實客戶端 IP&lt;/h2&gt;
+&lt;p&gt;有些人可能有特殊需求，因為套上 CF 後，預設在查看日誌時會顯示客戶端 IP 為 CF 的 IP。&lt;/p&gt;</description></item><item><title>Google 基礎設施</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240924-google-infra/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener"&gt;Google 十年五代網路架構&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>有关 MTU 和 MSS 的一切</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener"&gt;有关 MTU 和 MSS 的一切&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>即時監控網路介面上的 HTTP 請求</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener"&gt;即時監控網路介面上的 HTTP 請求&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tcpflow"&gt;tcpflow&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; 停用混雜模式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt; 只輸出到主控台，不建立檔案&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-i&lt;/code&gt; 指定網路介面
+grep 會接收 tcpflow 的輸出&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o&lt;/code&gt; 只顯示符合樣式的那一段&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-E&lt;/code&gt; 表示樣式是延伸正則表示式（ERE）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="httpry"&gt;httpry&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;https://github.com/jbittel/httpry.git&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo httpry -i wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;httpry version 0.1.8 -- HTTP logging and information retrieval tool
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Copyright &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;c&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Starting capture on wlp0s20f3 interface
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener"&gt;Tcpdump 使用总结&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="命令使用"&gt;命令使用&lt;/h2&gt;
+&lt;p&gt;tcpdump 采用命令行方式，它的命令格式为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="tcpdump-的简单选项介绍"&gt;tcpdump 的简单选项介绍&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt;，可通过&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt; 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code&gt;0x&lt;/code&gt; 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aodv&lt;/code&gt; (Ad-hoc On-demand Distance Vector protocol， 按需距离向量路由协议，在 Ad hoc(点对点模式)网络中使用)，&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cnfp&lt;/code&gt; (Cisco NetFlow protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpc&lt;/code&gt;(Remote Procedure Call)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtp&lt;/code&gt; (Real-Time Applications protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtcp&lt;/code&gt; (Real-Time Applications con-trol protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snmp&lt;/code&gt; (Simple Network Management Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tftp&lt;/code&gt; (Trivial File Transfer Protocol， 碎文件协议)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vat&lt;/code&gt; (Visual Audio Tool， 可用于在 internet 上进行电视电话会议的应用层协议)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wb&lt;/code&gt; (distributed White Board， 可用于网络会议的应用层协议)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="实用命令实例"&gt;实用命令实例&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;截获主机 210.27.48.1 和主机 210.27.48.2 或 210.27.48.3 的通信&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>【理解 Cilium 系列文章】(一) 初識 Cilium</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211221-understanding-cilium/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener"&gt;【理解 Cilium 系列文章】(一) 初識 Cilium&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="當前-k8s-service-負載均衡的實現現狀"&gt;當前 k8s Service 負載均衡的實現現狀&lt;/h4&gt;
+&lt;p&gt;在 Cilium 出現之前， Service 由 kube-proxy 來實現，實現方式有 userspace ， iptables ， ipvs 三種模式。&lt;/p&gt;
+&lt;h5 id="userspace"&gt;Userspace&lt;/h5&gt;
+&lt;p&gt;當前模式下，kube-proxy 作為反向代理,監聽隨機端口，通過 iptables 規則將流量重定向到代理端口，再由 kube-proxy 將流量轉發到 後端 pod。Service 的請求會先從用户空間進入內核 iptables，然後再回到用户空間，代價較大，性能較差。&lt;/p&gt;
+&lt;h5 id="iptables"&gt;Iptables&lt;/h5&gt;
+&lt;p&gt;存在的問題：&lt;/p&gt;
+&lt;p&gt;1.可擴展性差。隨着 service 數據達到數千個，其控制面和數據面的性能都會急劇下降。原因在於 iptables 控制面的接口設計中，每添加一條規則，需要遍歷和修改所有的規則，其控制面性能是 O(n²) 。在數據面，規則是用鏈表組織的，其性能是 O(n)&lt;/p&gt;
+&lt;p&gt;2.LB 調度算法僅支持隨機轉發&lt;/p&gt;
+&lt;h5 id="ipvs-模式"&gt;Ipvs 模式&lt;/h5&gt;
+&lt;p&gt;IPVS 是專門為 LB 設計的。它用 hash table 管理 service，對 service 的增刪查找都是 O(1)的時間複雜度。不過 IPVS 內核模塊沒有 SNAT 功能，因此借用了 iptables 的 SNAT 功能。&lt;/p&gt;
+&lt;p&gt;IPVS 針對報文做 DNAT 後，將連接信息保存在 nf_conntrack 中，iptables 據此接力做 SNAT。該模式是目前 Kubernetes 網絡性能最好的選擇。但是由於 nf_conntrack 的複雜性，帶來了很大的性能損耗。騰訊針對該問題做過相應的優化 【繞過 conntrack，使用 eBPF 增強 IPVS 優化 K8s 網絡性能】&lt;/p&gt;</description></item><item><title>不使用 kube-proxy 的 Kubernetes</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener"&gt;不使用 kube-proxy 的 Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="快速開始"&gt;快速開始&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubeadm init --skip-phases&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;addon/kube-proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 Helm 倉庫&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo add cilium https://helm.cilium.io/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --namespace kube-system &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;kubeProxyReplacement&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;strict &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServiceHost&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_IP &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServicePort&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_PORT
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Cloudflare 流量處理順序</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="流量處理順序"&gt;流量處理順序&lt;/h3&gt;
+&lt;p&gt;應用程式流量在 Cloudflare 邊緣節點會依下列順序處理：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DDoS&lt;/li&gt;
+&lt;li&gt;URL 重寫&lt;/li&gt;
+&lt;li&gt;頁面規則&lt;/li&gt;
+&lt;li&gt;IP 存取規則&lt;/li&gt;
+&lt;li&gt;Bot 管理&lt;/li&gt;
+&lt;li&gt;防火牆規則&lt;/li&gt;
+&lt;li&gt;速率限制&lt;/li&gt;
+&lt;li&gt;託管規則&lt;/li&gt;
+&lt;li&gt;標頭修改&lt;/li&gt;
+&lt;li&gt;存取控制&lt;/li&gt;
+&lt;li&gt;Workers&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener"&gt;在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>第 19 天 BGP 協定（1）</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201230-bgp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener"&gt;第 19 天 BGP 協定（1）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener"&gt;第 20 天 BGP 協定（2）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Ubuntu 18.04 透過 netplan 設定網路卡 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener"&gt;Ubuntu 18.04 透過 netplan 設定網路卡 IP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;照上面的說明看了一下 /etc/netplan 目錄，查閱一下 /etc/netplan/50-cloud-init.yaml，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This file is generated from information provided by&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# the datasource. Changes to it will not persist across an instance.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# network: {config: disabled}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ethernets&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens192&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens224&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;version&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看來可以關閉 cloud network，但是我其實也沒有要用 cloud-init，乾脆移除它，如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get remove cloud-init&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然後把 /etc/netplan/50-cloud-init.yaml 改成下面這樣：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This file is generated from information provided by&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# the datasource. Changes to it will not persist across an instance.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# network: {config: disabled}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ethernets&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens192&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;addresses&lt;/span&gt;: [&lt;span style="color:#d19a66"&gt;192.168.32.231&lt;/span&gt;/24]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gateway4&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;192.168.32.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;nameservers&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;addresses&lt;/span&gt;: [&lt;span style="color:#d19a66"&gt;8.8.8.8&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;8.8.4.4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;no&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens224&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;version&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這幾年 yaml 深得大眾的心，設定檔就是要用 yaml 格式才是潮，解說一下上述幾個設定：&lt;/p&gt;</description></item><item><title>BIRD 与 BGP 的新手开场</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener"&gt;BIRD 与 BGP 的新手开场&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener"&gt;BIRD Internet Routing Daemon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p&gt;&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt=""&gt;&lt;/p&gt;</description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener"&gt;再戰營運商快取：使用 iptables 對付快取劫持&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="起因"&gt;起因&lt;/h5&gt;
+&lt;p&gt;與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p&gt;
+&lt;h5 id="解決"&gt;解決&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p&gt;
+&lt;p&gt;因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p&gt;</description></item><item><title>使用 TC 和 Netem 模拟网络异常</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener"&gt;使用 TC 和 Netem 模拟网络异常&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Netem 与 TC 简要说明&lt;/p&gt;
+&lt;p&gt;Netem 是 Linux 2.6 及以上内核版本提供的一个网络模拟功能模块。该功能模块可以用来在性能良好的局域网中，模拟出复杂的互联网传输性能。例如:低带宽、传输延迟、丢包等等情况。使用 Linux 2.6 (或以上) 版本内核的很多 Linux 发行版都默认开启了该内核模块，比如：Fedora、Ubuntu、Redhat、OpenSuse、CentOS、Debian 等等。&lt;/p&gt;
+&lt;p&gt;TC 是 Linux 系统中的一个用户态工具，全名为 Traffic Control (流量控制)。TC 可以用来控制 Netem 模块的工作模式，也就是说如果想使用 Netem 需要至少两个条件，一是内核中的 Netem 模块被启用，另一个是要有对应的用户态工具 TC 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;所有的报文延迟 100ms 发送: &lt;code&gt;$ tc qdisc add dev enp0s5 root netem delay 100ms&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模拟丢包率: &lt;code&gt;$ tc qdisc change dev enp0s5 root netem loss 50%&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模拟包重复: &lt;code&gt;$ tc qdisc change dev enp0s5 root netem duplicate 50%&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模拟包损坏: &lt;code&gt;tc qdisc change dev enp0s5 root netem corrupt 2%&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;模拟包乱序(每 5 个报文（第 5、10、15…报文）会正常发送，其他的报文延迟 100ms): &lt;code&gt;tc qdisc change dev enp0s5 root netem reorder 50% gap 3 delay 100ms&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="查看并显示-enp0s5-网卡的相关传输配置"&gt;查看并显示 enp0s5 网卡的相关传输配置&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;$ tc qdisc show dev enp0s5&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Quagga Routing - 安裝、設定與建置 BGP</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener"&gt;Quagga Routing - 安裝、設定與建置 BGP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>最好用的 V2Ray 一鍵安裝腳本 &amp; 管理腳本</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180208-v2ray/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener"&gt;最好用的 V2Ray 一鍵安裝腳本 &amp;amp; 管理腳本&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener"&gt;v2ray&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener"&gt;具有代表性的 HTTP 状态码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch"&gt;Switch&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Switch 通常是 L2 設備&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只會將封包傳送到指定目的地的電腦（透過 MAC Table），相對上能減少資料碰撞及資料被竊聽的機會。交換器更能將同時傳到的封包分別處理，而集線器則不能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hub 則是 L1 設備&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;會將網路內某一使用者傳送的封包傳至所有已連接到集線器的電腦，因會碰撞所以 random retry。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;MAC Table&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Learning
+&lt;ul&gt;
+&lt;li&gt;從某個 Port 收到某網段（設為 A）MAC 位址為 X 的計算機發給 MAC 位址為 Y 的計算機的資料包。交換機從而記下了 MAC 位址 X 在網段 A。這稱為學習(learning)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Flooding
+&lt;ul&gt;
+&lt;li&gt;交換機還不知道 MAC 位址 Y 在哪個網段上，於是向除了 A 以外的所有網段轉發該資料包。這稱為洪水(flooding)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Forwarding
+&lt;ul&gt;
+&lt;li&gt;MAC 位址 Y 的電腦收到該封包，向 MAC 位址 X 發出確認包。交換器收到該包後，從而記錄下 MAC 位址 Y 所在的網段。交換機向 MAC 位址 X 轉發確認包。這稱為轉發(forwarding)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Filtering
+&lt;ul&gt;
+&lt;li&gt;交換機收到一個資料包，查表後發現該資料包的來源位址與目的位址屬於同一網段。交換機將不處理該資料包，這稱為過濾(filtering)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Aging
+&lt;ul&gt;
+&lt;li&gt;交換機內部的 MAC 位址-網段查詢表的每條記錄採用時間戳記錄最後一次存取的時間。早於某個閾值（用戶可配置）的記錄被清除，這稱為老化(aging)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="vlan"&gt;Vlan&lt;/h5&gt;
+&lt;p&gt;Switch Interface 需支援 802.1Q&lt;/p&gt;</description></item><item><title>Juniper 筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-隧道"&gt;[Juniper Firewall] 隧道&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;ACG&lt;/em&gt;&lt;/strong&gt;
+&lt;code&gt;icare@TWCHIJF01# show | compare rollback 4&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-diff" data-lang="diff"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security policies]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ from-zone DB_12 to-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ policy For_Backup {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ match {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source-address DB_10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination-address BACKUP_10.32.32.130;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ application any;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ then {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ permit;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones security-zone DB_12 address-book]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; address DB_10.11.12.57 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; security-zone ESB_15 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ security-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address-book {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ host-inbound-traffic {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ system-services {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ ping;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ interfaces {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ gr-0/0/0.32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit interfaces gr-0/0/0]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ unit 32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ description To_JC32_DBBackup;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ tunnel {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source 202.168.193.128;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination 218.253.210.8;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ family inet {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address 10.32.0.101/30;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit routing-options static]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; route 0.0.0.0/0 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 host-inbound-traffic system-services ping
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 interfaces gr-0/0/0.32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code&gt;&lt;/p&gt;</description></item><item><title>機房 notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171024-data-center/</guid><description>&lt;p&gt;第一張網卡-藍色線&lt;/p&gt;
+&lt;p&gt;第二張網卡-綠色線&lt;/p&gt;
+&lt;p&gt;交換機互連-白色線&lt;/p&gt;
+&lt;p&gt;黃、紅&lt;/p&gt;
+&lt;p&gt;Storage 有磁碟陣列，數據交換量大，用光纖連接，使用光纖專用的交換機。&lt;/p&gt;
+&lt;p&gt;光纖顏色：&lt;/p&gt;
+&lt;p&gt;多模 (Multi-mode)或單模 (Single-mode)的光纖線&lt;/p&gt;
+&lt;p&gt;單模光纖是黃色，多模光纖 50μm 或是 62.5μm 通常都是橘色。10GB 多模光纖通常是水藍色(Aqua)。&lt;/p&gt;
+&lt;p&gt;以下是一些常見的規格區分方式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OS1, OS2, 9µm, 9/125 = 單模光纖&lt;/li&gt;
+&lt;li&gt;OM1, 62.5µm, 62.5/125 = 多模光纖 62.5&lt;/li&gt;
+&lt;li&gt;OM2, 50µ, 50/125 = 多模光纖 50&lt;/li&gt;
+&lt;li&gt;OM3, 10GB, 50µm, 50/125 = 多模光纖 10GB&lt;/li&gt;
+&lt;li&gt;OM4, 100GB, 50µm, 50/125 = 多模光纖 100GB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;光纖結構&lt;/p&gt;
+&lt;p&gt;光纖裸纖的構成主要分為三層：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;中心：高折射率玻璃芯(芯徑一般為單模 9μm，多模 50 或 62.5μm) 。&lt;/li&gt;
+&lt;li&gt;夾層：低折射率硅玻璃包層(直徑為 125μm) 。&lt;/li&gt;
+&lt;li&gt;外層：加強用樹脂塗層(直徑為 250μm)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;光纖的種類&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一般依光波長在光纖中的傳輸模式可分為：單模態光纖和多模態光纖。
+&lt;ol&gt;
+&lt;li&gt;多模態光纖：中心玻璃芯(纖核)較粗(50 或 62.5μm)，外層纖殼為 125μm 可傳輸多種模代的光波長。但其模間色散較大，因而限制了傳輸信號的頻率，而隨著距離的增加會更加嚴重。例如：600MB/KM 的光纖再 2KM 時則只有 300MB 的頻寬了。因此，多模光纖傳輸的距離就比較近，一般只有幾公里的距離。&lt;/li&gt;
+&lt;li&gt;單模態光纖：中心玻璃芯較細(纖核一般為 9 或 10μm)，只能傳一種模式的光。因此，其模間色散很小，適用於遠距離通訊，但其色度色散起了主要作用，這樣單模光纖對光源的譜寬和穩定性有較高的要求，即譜寬要窄，穩定性要好。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;按最佳傳輸頻率窗口分： 常規型單模光纖和色散位移型單模光纖。
+&lt;ol&gt;
+&lt;li&gt;常規型：光纖生產廠將光纖傳輸頻率最佳化在單一波長的光上，如 1300μm。&lt;/li&gt;
+&lt;li&gt;色散位移型：光纖生產廠將 光纖傳輸頻率最佳兩個波長的光上，如 1300μm 和 1550μm。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;按折射率分佈情況分：突變型和漸變型光纖。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;常用光纖規格&lt;/p&gt;</description></item><item><title>Route notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170916-route/</guid><description>&lt;p&gt;Router - 善於運算路由表的機器，L3 的設備。&lt;/p&gt;
+&lt;p&gt;Routing Table&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一張網卡綁了一個 IP，天生就有了 2 筆 route，不能被改變。192.168.1.1/24
+&lt;ul&gt;
+&lt;li&gt;自己本身。Local route / Host route：192.168.1.1/32&lt;/li&gt;
+&lt;li&gt;整個網段。Direct route / Connect route：192.168.1.0/24&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Static route 想設幾個就設幾個。
+&lt;ul&gt;
+&lt;li&gt;172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li&gt;
+&lt;li&gt;2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Default route - gateway 只有一個。
+&lt;ul&gt;
+&lt;li&gt;0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;小數優先 - 優先走範圍小的 route。&lt;/li&gt;
+&lt;li&gt;BGPv4&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20170903-arp/</guid><description>&lt;p&gt;封包出去前&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;對 Arp Table 找 IP 對應的 MAC
+&lt;ul&gt;
+&lt;li&gt;有 MAC - 封裝&lt;/li&gt;
+&lt;li&gt;無 MAC - 廣播
+&lt;ul&gt;
+&lt;li&gt;同網段 - OK&lt;/li&gt;
+&lt;li&gt;不同網段 - 對 Arp Table 找 Router 的 MAC
+&lt;ul&gt;
+&lt;li&gt;有 - OK&lt;/li&gt;
+&lt;li&gt;無 - 廣播&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

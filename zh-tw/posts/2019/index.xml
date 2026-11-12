@@ -1,770 +1,741 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2019 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2019/</link><description>Recent content in 2019 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 30 Dec 2019 14:31:45 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2019/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="mktemp-命令">&lt;code>mktemp&lt;/code> 命令&lt;/h4>
-&lt;ul>
-&lt;li>產生的臨時檔案名稱是隨機的，而且權限只有使用者本人可讀寫。&lt;/li>
-&lt;li>為了確保臨時檔案建立成功，&lt;code>mktemp&lt;/code> 後面最好使用 OR 運算子（&lt;code>||&lt;/code>），在建立失敗時退出腳本。&lt;/li>
-&lt;li>為了確保腳本退出時刪除臨時檔案，可以使用 &lt;code>trap&lt;/code> 指定退出時的清理動作。&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trap &lt;span style="color:#e6db74">&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span> EXIT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TMPFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>mktemp&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#f92672">||&lt;/span> exit &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Our temp file is &lt;/span>$TMPFILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-參數">mktemp 參數&lt;/h5>
-&lt;ul>
-&lt;li>&lt;code>-d&lt;/code> 參數可以建立臨時目錄。&lt;/li>
-&lt;li>&lt;code>-p&lt;/code> 參數可以指定臨時檔案所在的目錄。預設使用 &lt;code>$TMPDIR&lt;/code> 環境變數指定的目錄；若未設定，使用 &lt;code>/tmp&lt;/code>。&lt;/li>
-&lt;li>&lt;code>-t&lt;/code> 參數可以指定臨時檔案的檔名模板，模板末尾必須至少包含三個連續的 &lt;code>X&lt;/code> 字元作為隨機字元，建議至少六個 &lt;code>X&lt;/code>。預設的檔名模板為 &lt;code>tmp.&lt;/code> 加上十個隨機字元。&lt;/li>
-&lt;/ul>
-&lt;h4 id="trap-命令的用法">&lt;code>trap&lt;/code> 命令的用法&lt;/h4>
-&lt;p>trap 命令用來在 Bash 腳本中響應系統訊號。&lt;/p>
-&lt;p>最常見的系統訊號是 SIGINT（中斷），也就是按下 Ctrl + C 產生的訊號。&lt;code>-l&lt;/code> 參數可以列出所有系統訊號。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ trap -l
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1&lt;span style="color:#f92672">)&lt;/span> SIGHUP 2&lt;span style="color:#f92672">)&lt;/span> SIGINT 3&lt;span style="color:#f92672">)&lt;/span> SIGQUIT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 4&lt;span style="color:#f92672">)&lt;/span> SIGILL 5&lt;span style="color:#f92672">)&lt;/span> SIGTRAP 6&lt;span style="color:#f92672">)&lt;/span> SIGABRT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ... ...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>trap 的命令格式如下：&lt;/p></description></item><item><title>GitHub Actions 入門教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener">GitHub Actions 入門教學&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Nginx 如何防禦 DDoS 攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener">Nginx 如何防禦 DDoS 攻擊？&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener">Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit（防止 DDoS 攻擊）&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="ngx_http_limit_req_module">ngx_http_limit_req_module&lt;/h4>
-&lt;p>&lt;code>limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code>&lt;/p></description></item><item><title>Golang 服務的檔案句柄超出系統限制（too many open files）</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</link><pubDate>Mon, 16 Dec 2019 10:14:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://studygolang.com/articles/23828" target="_blank" rel="noopener">Golang 服務的檔案句柄超出系統限制（too many open files）&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;ol>
-&lt;li>
-&lt;p>查看系統設定：&lt;code>ulimit -a | grep open&lt;/code>，系統設定正常。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查看服務的開啟檔案限制：&lt;code>cat /proc/40636/limits&lt;/code>，服務沒有繼承系統設定，仍是預設的 1024 限制。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查看服務開啟檔案數（連線數）：&lt;code>lsof -p 40636 | wc -l&lt;/code>，已超過限制，因此報錯。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查看開啟了哪些連線：&lt;code>lsof -p 40636 &amp;gt; openfiles.log&lt;/code>，發現很多 HTTP 連線未關閉，IP 是告警服務的介面。沿著線索找到原因：程式解析設定時出錯，對告警服務大量連線後未關閉，導致 too many open files。至於為何服務未繼承系統最大限制，還需進一步查看。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>最終原因：服務由 supervisor 管理，supervisor 預設 minfds 為 1024。於設定中加入 &lt;code>minfds=81920&lt;/code>，並重啟 &lt;code>supervisorctl reload&lt;/code>。&lt;/p>
-&lt;/li>
-&lt;/ol></description></item><item><title>Trellis Ansible 錯誤的解譯器</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://wpvilla.in/trellis-ansible-bad-interpreter-error/" target="_blank" rel="noopener">Trellis Ansible Bad Interpreter Error&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="bad-interpreter-error">Bad Interpreter Error&lt;/h4>
-&lt;p>使用 Ansible 時遇到錯誤的解譯器問題。找不到 Python 2.7：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p>
-&lt;h4 id="安裝-python-2">安裝 Python 2&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>brew install python@2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="python-嚴重崩潰">Python 嚴重崩潰&lt;/h5>
-&lt;p>接著在檢查 Ansible 版本時又出現錯誤：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ trellis git:&lt;span style="color:#f92672">(&lt;/span>master&lt;span style="color:#f92672">)&lt;/span> ansible --version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>1&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#ae81ff">19153&lt;/span> abort ansible --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>sudo pip install ansible --upgrade
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>.....
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Requirement already satisfied, skipping upgrade: six&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.4.1 in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>1.11.0&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python2.7/site-packages &lt;span style="color:#f92672">(&lt;/span>from cffi&amp;gt;&lt;span style="color:#f92672">=&lt;/span>1.7; platform_python_implementation !&lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;PyPy&amp;#34;&lt;/span>-&amp;gt;cryptography-&amp;gt;ansible&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>2.18&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Installing collected packages: ansible
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Found existing installation: ansible 2.7.5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Uninstalling ansible-2.7.5:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully uninstalled ansible-2.7.5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Successfully installed ansible-2.9.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Still I had the Python error and iTerm was showing a MacOS popup that Python was crashing unexpectedly:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Python quit unexpectedly.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Click Reopen to open the application again. Click Report to see more detailed information and send a report to Apple.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Application Specific Information:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/lib/libcrypto.dylib
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> abort&lt;span style="color:#f92672">()&lt;/span> called
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Invalid dylib load. Clients should not load the unversioned libcrypto dylib as it does not have a stable ABI.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="invalid-dylib">Invalid DyLib&lt;/h5>
-&lt;p>找到 &lt;a href="https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib" target="_blank" rel="noopener">https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib&lt;/a> 這篇，知道是動態函式庫載入錯誤，於是決定安裝 openssl。&lt;/p></description></item><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener">用 iptables 和 ip rule 做負載均衡&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="操作">操作&lt;/h4>
-&lt;p>這裡以一台透過有線 + 無線出口連線到網際網路的 Arch Linux 裝置為例。共有兩個出口，分別使用網卡 eth0 和 eth1。大致對應關係如下：&lt;/p>
-&lt;ul>
-&lt;li>標記 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li>
-&lt;li>標記 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li>
-&lt;/ul>
-&lt;p>我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p>
-&lt;p>通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">10&lt;/span> table &lt;span style="color:#ae81ff">110&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip rule add fwmark &lt;span style="color:#ae81ff">11&lt;/span> table &lt;span style="color:#ae81ff">111&lt;/span> prio &lt;span style="color:#ae81ff">31000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #110 路由表的路由&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#ae81ff">110&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.20.0.254 table &lt;span style="color:#ae81ff">110&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># #111 路由表的路由&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#ae81ff">111&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route add default via 10.25.0.254 table &lt;span style="color:#ae81ff">111&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果這條連線已經被標記，將標記設定到封包上&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包已經有標記，直接放行&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#ae81ff">0&lt;/span> -j ACCEPT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果封包沒有被標記&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包標記為 10 (0xa)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#ae81ff">2&lt;/span> --packet &lt;span style="color:#ae81ff">0&lt;/span> -j MARK --set-mark &lt;span style="color:#ae81ff">11&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 如果你有三條出口，這裡可以類似於&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 讓封包的出口與我們選擇的一致&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之後可以用 &lt;code>iptables -L OUTPUT -t mangle&lt;/code> 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p></description></item><item><title>htop 說明</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://peteris.rocks/blog/htop/" target="_blank" rel="noopener">htop explained&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Jenkinsfile 範例</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c" target="_blank" rel="noopener">Some Jenkinsfile examples&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="並行">並行&lt;/h5>
-&lt;pre tabindex="0">&lt;code>#!/usr/bin/env groovy
-pipeline {
-agent any
-stages {
-stage(&amp;#34;Build&amp;#34;) {
-steps {
-sh &amp;#39;mvn -v&amp;#39;
-}
-}
-stage(&amp;#34;Testing&amp;#34;) {
-parallel {
-stage(&amp;#34;Unit Tests&amp;#34;) {
-agent { docker &amp;#39;openjdk:7-jdk-alpine&amp;#39; }
-steps {
-sh &amp;#39;java -version&amp;#39;
-}
-}
-stage(&amp;#34;Functional Tests&amp;#34;) {
-agent { docker &amp;#39;openjdk:8-jdk-alpine&amp;#39; }
-steps {
-sh &amp;#39;java -version&amp;#39;
-}
-}
-stage(&amp;#34;Integration Tests&amp;#34;) {
-steps {
-sh &amp;#39;java -version&amp;#39;
-}
-}
-}
-}
-stage(&amp;#34;Deploy&amp;#34;) {
-steps {
-echo &amp;#34;Deploy!&amp;#34;
-}
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;h5 id="when">When&lt;/h5>
-&lt;pre tabindex="0">&lt;code>#!/usr/bin/env groovy
-pipeline {
-agent any
-environment {
-VALUE_ONE = &amp;#39;1&amp;#39;
-VALUE_TWO = &amp;#39;2&amp;#39;
-VALUE_THREE = &amp;#39;3&amp;#39;
-}
-stages {
-// skip a stage while creating the pipeline
-stage(&amp;#34;A stage to be skipped&amp;#34;) {
-when {
-expression { false } //skip this stage
-}
-steps {
-echo &amp;#39;This step will never be run&amp;#39;
-}
-}
-// Execute when branch = &amp;#39;master&amp;#39;
-stage(&amp;#34;BASIC WHEN - Branch&amp;#34;) {
-when {
-branch &amp;#39;master&amp;#39;
-}
-steps {
-echo &amp;#39;BASIC WHEN - Master Branch!&amp;#39;
-}
-}
-// Expression based when example with AND
-stage(&amp;#39;WHEN EXPRESSION with AND&amp;#39;) {
-when {
-expression {
-VALUE_ONE == &amp;#39;1&amp;#39; &amp;amp;&amp;amp; VALUE_THREE == &amp;#39;3&amp;#39;
-}
-}
-steps {
-echo &amp;#39;WHEN with AND expression works!&amp;#39;
-}
-}
-// Expression based when example
-stage(&amp;#39;WHEN EXPRESSION with OR&amp;#39;) {
-when {
-expression {
-VALUE_ONE == &amp;#39;1&amp;#39; || VALUE_THREE == &amp;#39;2&amp;#39;
-}
-}
-steps {
-echo &amp;#39;WHEN with OR expression works!&amp;#39;
-}
-}
-// When - AllOf Example
-stage(&amp;#34;AllOf&amp;#34;) {
-when {
-allOf {
-environment name:&amp;#39;VALUE_ONE&amp;#39;, value: &amp;#39;1&amp;#39;
-environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;2&amp;#39;
-}
-}
-steps {
-echo &amp;#34;AllOf Works!!&amp;#34;
-}
-}
-// When - Not AnyOf Example
-stage(&amp;#34;Not AnyOf&amp;#34;) {
-when {
-not {
-anyOf {
-branch &amp;#34;development&amp;#34;
-environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;4&amp;#39;
-}
-}
-}
-steps {
-echo &amp;#34;Not AnyOf - Works!&amp;#34;
-}
-}
-}
-}
-&lt;/code>&lt;/pre></description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener">Jinja docx 樣板：在巢狀 for 中避免換行&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>What the f*ck Python! 🐍 中文版</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</link><pubDate>Fri, 11 Oct 2019 14:32:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener">What the f*ck Python! 🐍&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">再戰營運商快取：使用 iptables 對付快取劫持&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="起因">起因&lt;/h5>
-&lt;p>與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p>
-&lt;h5 id="解決">解決&lt;/h5>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p>
-&lt;p>考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p>
-&lt;p>因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code>&lt;/p>
-&lt;p>這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p></description></item><item><title>使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="編譯-ngx_pagespeed">編譯 ngx_pagespeed&lt;/h4>
-&lt;blockquote>
-&lt;p>首先確保 Nginx 有 &lt;code>--with-compat&lt;/code> 編譯參數，這樣就不需要按照一些奇怪的教學讓大家從頭開始編譯 Nginx&lt;/p>
-&lt;p>incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener">https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-compat --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>../incubator-pagespeed-ngx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 編譯 modules&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make modules
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 將編譯好的 module 放到 nginx 目錄下&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 建立快取資料夾以存放自動轉換的圖片&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /var/ngx_pagespeed_cache
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_pagespeed.so&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># enable pagespeed module on this server block
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Needs to exist and be writable by nginx. Use tmpfs for best performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#e6db74">FileCachePath&lt;/span> &lt;span style="color:#e6db74">/var/ngx_pagespeed_cache&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Ensure requests for pagespeed optimized resources go to the pagespeed handler
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># and no extraneous headers get set.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span>{&lt;span style="color:#f92672">2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span> { }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span> { }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagespeed&lt;/span> &lt;span style="color:#e6db74">RewriteLevel&lt;/span> &lt;span style="color:#e6db74">CoreFilters&lt;/span>;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中最後一段（&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p></description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener">是否有正規表示式可以檢測有效的正規表示式？&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p>
-&lt;pre tabindex="0">&lt;code>/
-^ # start of string
-( # first group start
-(?:
-(?:[^?+*{}()[\]\\|]+ # literals and ^, $
-| \\. # escaped characters
-| \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
-(?: [^\]\\]+ | \\. )* \]
-| \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
-| \(\? (?:R|[+-]?\d+) \) # recursive matching
-)
-(?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
-| \| # alternative
-)* # repeat content
-) # end first group
-$ # end of string
-/
-&lt;/code>&lt;/pre>&lt;p>移除空白與註解後&lt;/p></description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener">用 Nginx 強制檔案下載&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;code>add_header Content-Disposition 'attachment;';&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">server&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">server_name&lt;/span> &lt;span style="color:#e6db74">my.domain.com&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">^.*/(?P&amp;lt;request_basename&amp;gt;[^/]+\.(mp3))$&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">root&lt;/span> &lt;span style="color:#e6db74">/path/to/mp3/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">add_header&lt;/span> &lt;span style="color:#e6db74">Content-Disposition&lt;/span> &lt;span style="color:#e6db74">&amp;#39;attachment&lt;/span>; &lt;span style="color:#f92672">filename=&amp;#34;$request_basename&amp;#34;&amp;#39;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">listen&lt;/span> &lt;span style="color:#ae81ff">80&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">server_name&lt;/span> &lt;span style="color:#e6db74">backup.baifu-tech.net&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">root&lt;/span> &lt;span style="color:#e6db74">/data/backup/rechargecent-mago&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic&lt;/span> &lt;span style="color:#e6db74">&amp;#34;baifu&lt;/span> &lt;span style="color:#e6db74">backup&lt;/span> &lt;span style="color:#e6db74">center&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auth_basic_user_file&lt;/span> &lt;span style="color:#e6db74">/etc/nginx/ssl/htpasswd&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_exact_size&lt;/span> &lt;span style="color:#66d9ef">off&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">autoindex_localtime&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell 腳本學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell 腳本學習筆記&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="執行算術運算">執行算術運算&lt;/h3>
-&lt;pre>&lt;code>val=`expr $a + $b`
-&lt;/code>&lt;/pre>
-&lt;h3 id="運算符">運算符&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>符號&lt;/th>
-&lt;th>說明&lt;/th>
-&lt;th>示例&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>!&lt;/td>
-&lt;td>非運算&lt;/td>
-&lt;td>[ ! false ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-o&lt;/td>
-&lt;td>或運算&lt;/td>
-&lt;td>[ $a -lt 20 -o $b -gt 20 ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-a&lt;/td>
-&lt;td>與運算&lt;/td>
-&lt;td>[ $a -lt 20 -a $b -gt 20 ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>=&lt;/td>
-&lt;td>相等檢測&lt;/td>
-&lt;td>[ $a = $b ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>!=&lt;/td>
-&lt;td>不相等檢測&lt;/td>
-&lt;td>[ $a != $b ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-z&lt;/td>
-&lt;td>字串長度是否為 0，為 0 則回傳 true&lt;/td>
-&lt;td>[ -z $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-n&lt;/td>
-&lt;td>字串長度不為 0，不為 0 回傳 true&lt;/td>
-&lt;td>[ -n $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>str&lt;/td>
-&lt;td>檢測字串是否為空，不為空回傳 true&lt;/td>
-&lt;td>[ $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-b&lt;/td>
-&lt;td>檢測檔案是否是區塊裝置檔&lt;/td>
-&lt;td>[ -b $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-c&lt;/td>
-&lt;td>檢測檔案是否是字元裝置&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-d&lt;/td>
-&lt;td>檢測檔案是否為目錄&lt;/td>
-&lt;td>[ -d $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-f&lt;/td>
-&lt;td>檢測檔案是否為一般檔案&lt;/td>
-&lt;td>[ -f $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-r&lt;/td>
-&lt;td>檢測檔案是否可讀&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-w&lt;/td>
-&lt;td>檢測檔案是否可寫&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-x&lt;/td>
-&lt;td>檢測檔案是否可執行&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-s&lt;/td>
-&lt;td>檢測檔案是否為空&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-e&lt;/td>
-&lt;td>檢測檔案是否存在&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="特殊變數">特殊變數&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>變數&lt;/th>
-&lt;th>含義&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>$0&lt;/td>
-&lt;td>目前腳本的檔名&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$n&lt;/td>
-&lt;td>傳遞給腳本或函式的參數，n 表示第幾個參數&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$#&lt;/td>
-&lt;td>傳遞給腳本或函式的參數個數&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$*&lt;/td>
-&lt;td>傳遞給腳本或函式的所有參數，所有參數視為一個詞，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$@&lt;/td>
-&lt;td>傳遞給腳本或函式的所有參數，每個參數視為一個詞，用雙引號包含，例如 &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$?&lt;/td>
-&lt;td>上個命令的退出狀態，或函式的回傳值&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$$&lt;/td>
-&lt;td>目前 Shell 行程 ID；對 Shell 腳本而言，就是該腳本所在的行程 ID&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="posix-程式退出狀態">POSIX 程式退出狀態&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>狀態碼&lt;/th>
-&lt;th>含義&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>0&lt;/td>
-&lt;td>命令成功退出&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;gt; 0&lt;/td>
-&lt;td>在重導向或單詞展開期間（~、變數、命令、算術展開以及單詞切割）失敗&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>1 - 125&lt;/td>
-&lt;td>命令不成功退出，各命令自行定義特定退出值含義&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>126&lt;/td>
-&lt;td>命令找到但檔案無法執行&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>127&lt;/td>
-&lt;td>命令未找到&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;gt; 128&lt;/td>
-&lt;td>命令因收到信號而終止&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="輸入輸出重導向">輸入輸出重導向&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>命令&lt;/th>
-&lt;th>說明&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>command &amp;gt; file&lt;/td>
-&lt;td>將輸出重導向到 file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>command &amp;gt; file&lt;/td>
-&lt;td>將輸出以追加的方式重導向到 file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;gt; file&lt;/td>
-&lt;td>將檔案描述符為 n 的檔案重導向到 file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;raquo; file&lt;/td>
-&lt;td>將檔案描述符為 n 的檔案以追加的方式重導向到 file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;gt;&amp;amp; m&lt;/td>
-&lt;td>將輸出檔案 m 和 n 合併&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;lt;&amp;amp; m&lt;/td>
-&lt;td>將輸入檔案 m 和 n 合併&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;laquo; tag&lt;/td>
-&lt;td>將開始標記 tag 和結束標記 tag 之間的內容作為輸入&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="檔案包含">檔案包含&lt;/h3>
-&lt;p>使用 &lt;code>.&lt;/code> 或 &lt;code>source&lt;/code> 包含檔案&lt;/p></description></item><item><title>`sentry.lang.javascript.processor: SoftTimeLimitExceeded()` 大量錯誤</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</link><pubDate>Thu, 25 Jul 2019 14:25:56 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/getsentry/sentry/issues/4386" target="_blank" rel="noopener">Excessive Errors from &lt;code>sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code>&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://forum.sentry.io/t/counters-0-queue-is-rising-continuously/5655/6" target="_blank" rel="noopener">Counters-0 queue is rising continuously&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="sentrylangjavascriptprocessor-softtimelimitexceeded-大量錯誤">&lt;code>sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code> 大量錯誤&lt;/h4>
-&lt;p>mattrobenolt:&lt;/p>
-&lt;p>我正打算提出這個。:) 很不幸，這個功能就是如此運作。如果它沒有用且只是浪費資源，可以很容易地全域關閉：在 &lt;code>sentry.conf.py&lt;/code> 設定 &lt;code>SENTRY_SCRAPE_JAVASCRIPT_CONTEXT = False&lt;/code>，或在 UI 內針對專案關閉。&lt;/p>
-&lt;p>除此之外，沒有太多能做的，因為這個功能本質上是按設計運作。&lt;/p>
-&lt;hr>
-&lt;h4 id="counters-0-佇列持續上升">Counters-0 佇列持續上升&lt;/h4>
-&lt;p>matt:&lt;/p>
-&lt;p>你需要更多 worker 來處理這個佇列的負載。&lt;/p>
-&lt;p>你也可以讓 worker 專門處理特定佇列，例如使用 &lt;code>sentry run worker -Q counters-0&lt;/code>。&lt;/p></description></item><item><title>Python Telegram Bot</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</link><pubDate>Thu, 11 Jul 2019 14:03:25 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://zaoldyeck.medium.com/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E6%80%8E%E9%BA%BC%E6%89%93%E9%80%A0-telegram-bot-a7b539c3402a" target="_blank" rel="noopener">（一）一步步打造 Telegram Bot&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zaoldyeck.medium.com/%E5%88%A9%E7%94%A8-olami-open-api-%E7%82%BA-chatbot-%E5%A2%9E%E5%8A%A0-nlp-%E5%8A%9F%E8%83%BD-e6b37940913d" target="_blank" rel="noopener">（二）為 Chatbot 增加 NLP 功能&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zaoldyeck.medium.com/add-custom-skill-into-chatbot-cef9bfeeef52" target="_blank" rel="noopener">（三）為 Chatbot 添加新技能&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://hackmd.io/@truckski/HkgaMUc24" target="_blank" rel="noopener">Python Telegram Bot 教學&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://kaive.me/2018/07/15/Python-telegram-bot/" target="_blank" rel="noopener">用 Python 寫一個簡單的 Telegram Bot&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets" target="_blank" rel="noopener">Code snippets&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Linux 磁碟空間未釋放的解決方法</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener">Linux 磁碟空間未釋放的解決方法&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="使用-df--ah-命令-du--h---max-depth1">使用 &lt;code>df -ah&lt;/code> 命令 &lt;code>du -h --max-depth=1&lt;/code>&lt;/h5>
-&lt;p>&lt;code>du&lt;/code> 的總和遠小於 &lt;code>df&lt;/code> 得到的總量。&lt;/p>
-&lt;p>程式使用的檔案資源被刪除後，程式仍在執行，導致檔案未真正刪除，無法釋放磁碟空間，也無法被統計到。&lt;/p>
-&lt;p>&lt;code>lsof |grep delete&lt;/code>&lt;/p></description></item><item><title>Sentry 原始碼開發筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</link><pubDate>Wed, 03 Jul 2019 11:53:15 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://chroming.gitlab.io/2018/09/26/edit_sentry_source_code/" target="_blank" rel="noopener">Sentry 原始碼開發筆記&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html" target="_blank" rel="noopener">Formatting uWSGI requests logs&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.postgresql.org/docs/9.3/libpq-pgpass.html" target="_blank" rel="noopener">PostgreSQL: Documentation: 9.3: The Password File&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>openresty+redis 攔截高頻訪問 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener">openresty+redis 攔截高頻訪問 IP&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">init_by_lua_block&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">redis&lt;/span> = &lt;span style="color:#e6db74">require&lt;/span> &lt;span style="color:#e6db74">&amp;#34;redis&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">client&lt;/span> = &lt;span style="color:#e6db74">redis.connect(&amp;#39;127.0.0.1&amp;#39;,&lt;/span> &lt;span style="color:#ae81ff">6379&lt;/span>&lt;span style="color:#e6db74">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">server&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">listen&lt;/span> &lt;span style="color:#ae81ff">8080&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">location&lt;/span> &lt;span style="color:#e6db74">/&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_by_lua_file&lt;/span> &lt;span style="color:#e6db74">/usr/local/nginx/conf/lua/block.lua&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">proxy_pass&lt;/span> &lt;span style="color:#e6db74">http://192.168.1.102:8000&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-lua" data-lang="lua">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- Redis-based IP rate limiting / blocking for OpenResty (ngx_lua)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- NOTE:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- This script assumes a global `client` variable is used/stored.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- Make sure `redis` module is available and `client` is initialized somewhere.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">isConnected&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> client:ping()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> &lt;span style="color:#66d9ef">function&lt;/span> &lt;span style="color:#a6e22e">createRedisConnection&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> redis.connect(&lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">6379&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> pcall(isConnected) &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- already connected (or ping succeeded)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- not connected; try reconnect&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> pcall(createRedisConnection) &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client &lt;span style="color:#f92672">=&lt;/span> createRedisConnection()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ngx.exit(ngx.OK)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">-- 監測週期（秒）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> bktimes &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#75715e">-- 在監測週期內達到觸發攔截的訪問量&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> block_ttl &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">600&lt;/span> &lt;span style="color:#75715e">-- 觸發攔截後攔截時間（秒）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ip &lt;span style="color:#f92672">=&lt;/span> ngx.var.remote_addr
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">local&lt;/span> ipvtimes &lt;span style="color:#f92672">=&lt;/span> client:get(ip)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> ipvtimes &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> ipvtimes &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;-1&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- blocked&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ngx.exit(&lt;span style="color:#ae81ff">403&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">local&lt;/span> last_ttl &lt;span style="color:#f92672">=&lt;/span> client:ttl(ip)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- ngx.say(&amp;#34;key exist.ttl is &amp;#34;, last_ttl)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> last_ttl &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:set(ip, &lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:expire(ip, ttl)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- ngx.say(&amp;#34;ttl &amp;amp; vtimes recount&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ngx.exit(ngx.OK)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">local&lt;/span> vtimes &lt;span style="color:#f92672">=&lt;/span> tonumber(client:get(ip)) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> vtimes &lt;span style="color:#f92672">&amp;lt;&lt;/span> bktimes &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:set(ip, vtimes)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:expire(ip, last_ttl)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- ngx.say(ip, &amp;#34; view &amp;#34;, vtimes, &amp;#34; times&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ngx.exit(ngx.OK)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- ngx.say(ip, &amp;#34; will be block next time.&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:set(ip, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:expire(ip, block_ttl)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ngx.exit(ngx.OK)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- key does not exist&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:set(ip, &lt;span style="color:#ae81ff">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">-- ngx.say(ip, &amp;#34; view 1 times&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client:expire(ip, ttl)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> ngx.exit(ngx.OK)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">end&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>[Terraform] 入門學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</link><pubDate>Wed, 26 Jun 2019 17:22:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://godleon.github.io/blog/DevOps/terraform-getting-started/" target="_blank" rel="noopener">[Terraform] 入門學習筆記&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>設定 Haproxy 以防止 DDOS 攻擊</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</link><pubDate>Mon, 17 Jun 2019 11:07:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html" target="_blank" rel="noopener">設定 Haproxy 以防止 DDOS 攻擊&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="tcp-syn-flood-attacks">TCP syn flood attacks&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>vi /etc/sysctl.conf
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Protection from SYN flood&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_syncookies &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.conf.all.rp_filter &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>net.ipv4.tcp_max_syn_backlog &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="slowloris-like-attacks">Slowloris like attacks&lt;/h3>
-&lt;pre tabindex="0">&lt;code>defaults
-option http-server-close
-timeout http-request 5s
-timeout connect 5s
-timeout client 30s
-timeout server 10s
-timeout tunnel 1h
-&lt;/code>&lt;/pre>&lt;h3 id="限制每一個-user-的連線數量">限制每一個 user 的連線數量&lt;/h3>
-&lt;p>普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p>
-&lt;p>但如果有很多使用者，是從某一個私有網段，透過 NAT 的方式連線到 Server 時，且實際上我們也不知道，到底哪一個會是 NAT 的轉址後的 IP，不知道該將哪個 IP 設定為白名單，這樣的限制就會造成問題，因此我們認為實際的環境，這樣的設定應該要保留不處理。&lt;/p>
-&lt;p>以下是一個設定的範例，最重要的地方是在 frontend ft_web 區塊的設定。&lt;/p>
-&lt;pre tabindex="0">&lt;code>global
-stats socket ./haproxy.stats level admin
-defaults
-option http-server-close
-mode http
-timeout http-request 5s
-timeout connect 5s
-timeout server 10s
-timeout client 30s
-listen stats
-bind 0.0.0.0:8880
-stats enable
-stats hide-version
-stats uri /
-stats realm HAProxy Statistics
-stats auth admin:admin
-frontend ft_web
-bind 0.0.0.0:8080
-# Table definition
-stick-table type ip size 100k expire 30s store conn_cur
-# Allow clean known IPs to bypass the filter
-tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
-# Shut the new connection as long as the client has already 10 opened
-tcp-request connection reject if { src_conn_cur ge 10 }
-tcp-request connection track-sc1 src
-# Split static and dynamic traffic since these requests have different impacts on the servers
-use_backend bk_web_static if { path_end .jpg .png .gif .css .js }
-default_backend bk_web
-# Dynamic part of the application
-backend bk_web
-balance roundrobin
-cookie MYSRV insert indirect nocache
-server srv1 192.168.1.2:80 check cookie srv1 maxconn 100
-server srv2 192.168.1.3:80 check cookie srv2 maxconn 100
-# Static objects
-backend bk_web_static
-balance roundrobin
-server srv1 192.168.1.2:80 check maxconn 1000
-server srv2 192.168.1.3:80 check maxconn 1000
-&lt;/code>&lt;/pre>&lt;h3 id="限制每個-user-產生新連線的速率-limiting-the-connection-rate-per-user">限制每個 user 產生新連線的速率 Limiting the connection rate per user&lt;/h3>
-&lt;p>惡意的使用者會在短時間內建立很多連線，但如果產生新連線的速度太高，就會消耗掉過多的資源服務一個使用者。&lt;/p></description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener">白話 Kubernetes Runtime&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Nginx 請求處理流程你了解嗎？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener">Nginx 請求處理流程你了解嗎？&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="11-個處理階段">11 個處理階段&lt;/h3>
-&lt;p>1）NGX_HTTP_POST_READ_PHASE：&lt;/p>
-&lt;p>接收到完整的 HTTP 標頭後處理的階段，位於 URI 重寫之前。實際上很少有模組會註冊在該階段，預設情況下會被跳過。&lt;/p>
-&lt;p>2）NGX_HTTP_SERVER_REWRITE_PHASE：&lt;/p>
-&lt;p>在 URI 與 location 匹配前修改 URI 的階段，用於重新導向。該階段執行 server 區塊內、location 區塊外的重寫指令。在讀取請求標頭的過程中，nginx 會根據 host 及埠號找到對應的虛擬主機設定。&lt;/p>
-&lt;p>3）NGX_HTTP_FIND_CONFIG_PHASE：&lt;/p>
-&lt;p>根據 URI 尋找匹配的 location 設定項階段，使用重寫後的 URI 來查找對應的 location。需要注意的是該階段可能會被執行多次，因為也可能有 location 級別的重寫指令。&lt;/p>
-&lt;p>4）NGX_HTTP_REWRITE_PHASE：&lt;/p>
-&lt;p>上一階段找到 location 後再次修改 URI，屬於 location 級別的 URI 重寫階段，也可能會被執行多次。&lt;/p>
-&lt;p>5）NGX_HTTP_POST_REWRITE_PHASE：&lt;/p>
-&lt;p>防止重寫 URL 後導致的死循環，屬於 location 重寫的下一階段，用來檢查上階段是否有 URI 重寫，並根據結果跳轉到合適的階段。&lt;/p>
-&lt;p>6）NGX_HTTP_PREACCESS_PHASE：&lt;/p>
-&lt;p>下一階段之前的準備，屬於存取權限控制的前一階段。一般也用於存取控制，例如限制存取頻率、連線數等。&lt;/p>
-&lt;p>7）NGX_HTTP_ACCESS_PHASE：&lt;/p>
-&lt;p>讓 HTTP 模組判斷是否允許請求進入 Nginx 伺服器的存取控制階段，例如基於 IP 白名單/黑名單、使用者名稱密碼等的權限控制。&lt;/p>
-&lt;p>8）NGX_HTTP_POST_ACCESS_PHASE：&lt;/p>
-&lt;p>存取控制的後一階段，根據上一階段的執行結果進行處理，向使用者送出拒絕服務的錯誤碼，用來回應上一階段的拒絕。&lt;/p>
-&lt;p>9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p>
-&lt;p>為存取靜態檔案資源而設置，try_files 指令的處理階段。如果沒有設定 try_files 指令，該階段會被跳過。&lt;/p>
-&lt;p>10）NGX_HTTP_CONTENT_PHASE：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>2019 on Ricky</title><link>https://linzeyan.github.io/zh-tw/posts/2019/</link><description>Recent content in 2019 on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 30 Dec 2019 14:31:45 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/posts/2019/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191230-mktemp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener"&gt;Bash 腳本如何建立臨時檔案：mktemp 與 trap 教學&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="mktemp-命令"&gt;&lt;code&gt;mktemp&lt;/code&gt; 命令&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;產生的臨時檔案名稱是隨機的，而且權限只有使用者本人可讀寫。&lt;/li&gt;
+&lt;li&gt;為了確保臨時檔案建立成功，&lt;code&gt;mktemp&lt;/code&gt; 後面最好使用 OR 運算子（&lt;code&gt;||&lt;/code&gt;），在建立失敗時退出腳本。&lt;/li&gt;
+&lt;li&gt;為了確保腳本退出時刪除臨時檔案，可以使用 &lt;code&gt;trap&lt;/code&gt; 指定退出時的清理動作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span&gt; EXIT
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TMPFILE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;mktemp&lt;span style="color:#c678dd"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Our temp file is &lt;/span&gt;&lt;span style="color:#e06c75"&gt;$TMPFILE&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="mktemp-參數"&gt;mktemp 參數&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; 參數可以建立臨時目錄。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; 參數可以指定臨時檔案所在的目錄。預設使用 &lt;code&gt;$TMPDIR&lt;/code&gt; 環境變數指定的目錄；若未設定，使用 &lt;code&gt;/tmp&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt; 參數可以指定臨時檔案的檔名模板，模板末尾必須至少包含三個連續的 &lt;code&gt;X&lt;/code&gt; 字元作為隨機字元，建議至少六個 &lt;code&gt;X&lt;/code&gt;。預設的檔名模板為 &lt;code&gt;tmp.&lt;/code&gt; 加上十個隨機字元。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="trap-命令的用法"&gt;&lt;code&gt;trap&lt;/code&gt; 命令的用法&lt;/h4&gt;
+&lt;p&gt;trap 命令用來在 Bash 腳本中響應系統訊號。&lt;/p&gt;
+&lt;p&gt;最常見的系統訊號是 SIGINT（中斷），也就是按下 Ctrl + C 產生的訊號。&lt;code&gt;-l&lt;/code&gt; 參數可以列出所有系統訊號。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; -l
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGHUP 2&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGINT 3&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGQUIT
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGILL 5&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGTRAP 6&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGABRT
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ... ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;trap 的命令格式如下：&lt;/p&gt;</description></item><item><title>GitHub Actions 入門教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener"&gt;GitHub Actions 入門教學&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Nginx 如何防禦 DDoS 攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener"&gt;Nginx 如何防禦 DDoS 攻擊？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.itread01.com/content/1547474225.html" target="_blank" rel="noopener"&gt;Nginx 限制訪問速率和最大併發連線數模組&amp;ndash;limit（防止 DDoS 攻擊）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="ngx_http_limit_req_module"&gt;ngx_http_limit_req_module&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Golang 服務的檔案句柄超出系統限制（too many open files）</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</link><pubDate>Mon, 16 Dec 2019 10:14:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191216-23828/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://studygolang.com/articles/23828" target="_blank" rel="noopener"&gt;Golang 服務的檔案句柄超出系統限制（too many open files）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看系統設定：&lt;code&gt;ulimit -a | grep open&lt;/code&gt;，系統設定正常。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看服務的開啟檔案限制：&lt;code&gt;cat /proc/40636/limits&lt;/code&gt;，服務沒有繼承系統設定，仍是預設的 1024 限制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看服務開啟檔案數（連線數）：&lt;code&gt;lsof -p 40636 | wc -l&lt;/code&gt;，已超過限制，因此報錯。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看開啟了哪些連線：&lt;code&gt;lsof -p 40636 &amp;gt; openfiles.log&lt;/code&gt;，發現很多 HTTP 連線未關閉，IP 是告警服務的介面。沿著線索找到原因：程式解析設定時出錯，對告警服務大量連線後未關閉，導致 too many open files。至於為何服務未繼承系統最大限制，還需進一步查看。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最終原因：服務由 supervisor 管理，supervisor 預設 minfds 為 1024。於設定中加入 &lt;code&gt;minfds=81920&lt;/code&gt;，並重啟 &lt;code&gt;supervisorctl reload&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Trellis Ansible 錯誤的解譯器</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</link><pubDate>Fri, 06 Dec 2019 22:34:31 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191206-trellis-ansible-bad-interpreter-error/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wpvilla.in/trellis-ansible-bad-interpreter-error/" target="_blank" rel="noopener"&gt;Trellis Ansible Bad Interpreter Error&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="bad-interpreter-error"&gt;Bad Interpreter Error&lt;/h4&gt;
+&lt;p&gt;使用 Ansible 時遇到錯誤的解譯器問題。找不到 Python 2.7：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p&gt;
+&lt;h4 id="安裝-python-2"&gt;安裝 Python 2&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install python@2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="python-嚴重崩潰"&gt;Python 嚴重崩潰&lt;/h5&gt;
+&lt;p&gt;接著在檢查 Ansible 版本時又出現錯誤：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ trellis git:&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;master&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ansible --version
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;1&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#d19a66"&gt;19153&lt;/span&gt; abort ansible --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip install ansible --upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.....
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Requirement already satisfied, skipping upgrade: six&amp;gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1.4.1 in /usr/local/lib/python2.7/site-packages &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;from cryptography-&amp;gt;ansible&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;1.11.0&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python2.7/site-packages &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;from cffi&amp;gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1.7; platform_python_implementation !&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;PyPy&amp;#34;&lt;/span&gt;-&amp;gt;cryptography-&amp;gt;ansible&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;2.18&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Installing collected packages: ansible
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Found existing installation: ansible 2.7.5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Uninstalling ansible-2.7.5:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Successfully uninstalled ansible-2.7.5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Successfully installed ansible-2.9.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Still I had the Python error and iTerm was showing a MacOS popup that Python was crashing unexpectedly:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Python quit unexpectedly.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Click Reopen to open the application again. Click Report to see more detailed information and send a report to Apple.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Application Specific Information:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/lib/libcrypto.dylib
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; abort&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; called
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Invalid dylib load. Clients should not load the unversioned libcrypto dylib as it does not have a stable ABI.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="invalid-dylib"&gt;Invalid DyLib&lt;/h5&gt;
+&lt;p&gt;找到 &lt;a href="https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib" target="_blank" rel="noopener"&gt;https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib&lt;/a&gt; 這篇，知道是動態函式庫載入錯誤，於是決定安裝 openssl。&lt;/p&gt;</description></item><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener"&gt;用 iptables 和 ip rule 做負載均衡&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="操作"&gt;操作&lt;/h4&gt;
+&lt;p&gt;這裡以一台透過有線 + 無線出口連線到網際網路的 Arch Linux 裝置為例。共有兩個出口，分別使用網卡 eth0 和 eth1。大致對應關係如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;標記 10 (0xa) - 路由表 #110 - 使用 eth0 出口&lt;/li&gt;
+&lt;li&gt;標記 11 (0xb) - 路由表 #111 - 使用 eth1 出口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p&gt;
+&lt;p&gt;通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #110 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.20.0.254 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #111 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.25.0.254 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果這條連線已經被標記，將標記設定到封包上&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包已經有標記，直接放行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j ACCEPT
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包沒有被標記&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包標記為 10 (0xa)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; --packet &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j MARK --set-mark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你有三條出口，這裡可以類似於&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓封包的出口與我們選擇的一致&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之後可以用 &lt;code&gt;iptables -L OUTPUT -t mangle&lt;/code&gt; 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p&gt;</description></item><item><title>htop 說明</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://peteris.rocks/blog/htop/" target="_blank" rel="noopener"&gt;htop explained&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Jenkinsfile 範例</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c" target="_blank" rel="noopener"&gt;Some Jenkinsfile examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="並行"&gt;並行&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#!/usr/bin/env groovy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipeline {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent any
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stages {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Build&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;mvn -v&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Testing&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; parallel {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Unit Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent { docker &amp;#39;openjdk:7-jdk-alpine&amp;#39; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Functional Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent { docker &amp;#39;openjdk:8-jdk-alpine&amp;#39; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Integration Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Deploy&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;Deploy!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="when"&gt;When&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#!/usr/bin/env groovy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipeline {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent any
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE = &amp;#39;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_TWO = &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_THREE = &amp;#39;3&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stages {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // skip a stage while creating the pipeline
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;A stage to be skipped&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression { false } //skip this stage
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;This step will never be run&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Execute when branch = &amp;#39;master&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;BASIC WHEN - Branch&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; branch &amp;#39;master&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;BASIC WHEN - Master Branch!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Expression based when example with AND
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#39;WHEN EXPRESSION with AND&amp;#39;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE == &amp;#39;1&amp;#39; &amp;amp;&amp;amp; VALUE_THREE == &amp;#39;3&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;WHEN with AND expression works!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Expression based when example
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#39;WHEN EXPRESSION with OR&amp;#39;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE == &amp;#39;1&amp;#39; || VALUE_THREE == &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;WHEN with OR expression works!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // When - AllOf Example
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;AllOf&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; allOf {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_ONE&amp;#39;, value: &amp;#39;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;AllOf Works!!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // When - Not AnyOf Example
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Not AnyOf&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; not {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; anyOf {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; branch &amp;#34;development&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;4&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;Not AnyOf - Works!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener"&gt;Jinja docx 樣板：在巢狀 for 中避免換行&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>What the f*ck Python! 🐍 中文版</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</link><pubDate>Fri, 11 Oct 2019 14:32:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener"&gt;What the f*ck Python! 🐍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener"&gt;再戰營運商快取：使用 iptables 對付快取劫持&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="起因"&gt;起因&lt;/h5&gt;
+&lt;p&gt;與移動的快取問題進行鬥爭要追溯到兩年前，那時因為移動竟然連 cnpm 的資料都進行快取。更離譜的是：移動的快取伺服器不但速度慢到堪比萬年王八跑馬拉松，還經常當機，導致我只想安安靜靜寫程式卻不得不面對一片鮮紅的報錯。&lt;/p&gt;
+&lt;h5 id="解決"&gt;解決&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;考慮到可能還真的有其他伺服器送來的正常封包 TTL 也在 20-30 的區間，應該再加一層判斷。對比移動的 302 劫持封包和正常的 302 跳轉封包後，發現移動的劫持封包狀態位包含 FIN、PSH、ACK，而正常的 302 跳轉封包通常不會這三個都有。&lt;/p&gt;
+&lt;p&gt;因此在 iptables 規則中加入是否包含 FIN、PSH、ACK 的判斷：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 --tcp-flags ALL FIN,PSH,ACK -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;這樣應能在丟棄劫持封包的同時，盡可能降低誤傷正常封包的可能性。&lt;/p&gt;</description></item><item><title>使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener"&gt;使用 Nginx 和 mod_pagespeed 自動將圖片轉換為 WebP 並輸出&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="編譯-ngx_pagespeed"&gt;編譯 ngx_pagespeed&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先確保 Nginx 有 &lt;code&gt;--with-compat&lt;/code&gt; 編譯參數，這樣就不需要按照一些奇怪的教學讓大家從頭開始編譯 Nginx&lt;/p&gt;
+&lt;p&gt;incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener"&gt;https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --with-compat --add-dynamic-module&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;../incubator-pagespeed-ngx
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 編譯 modules&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make modules
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 將編譯好的 module 放到 nginx 目錄下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 建立快取資料夾以存放自動轉換的圖片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;load_module&lt;/span&gt; &lt;span style="color:#98c379"&gt;modules/ngx_pagespeed.so&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# enable pagespeed module on this server block
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Needs to exist and be writable by nginx. Use tmpfs for best performance.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;FileCachePath&lt;/span&gt; &lt;span style="color:#98c379"&gt;/var/ngx_pagespeed_cache&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Ensure requests for pagespeed optimized resources go to the pagespeed handler
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# and no extraneous headers get set.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span&gt;{&lt;span style="color:#c678dd"&gt;2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;add_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span&gt; { }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span&gt; { }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;RewriteLevel&lt;/span&gt; &lt;span style="color:#98c379"&gt;CoreFilters&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中最後一段（&lt;code&gt;pagespeed RewriteLevel CoreFilters;&lt;/code&gt;）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p&gt;</description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener"&gt;是否有正規表示式可以檢測有效的正規表示式？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;^ # start of string
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;( # first group start
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:[^?+*{}()[\]\\|]+ # literals and ^, $
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \\. # escaped characters
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: [^\]\\]+ | \\. )* \]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \(\? (?:R|[+-]?\d+) \) # recursive matching
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \| # alternative
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )* # repeat content
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;) # end first group
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ # end of string
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;移除空白與註解後&lt;/p&gt;</description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener"&gt;用 Nginx 強制檔案下載&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;add_header Content-Disposition 'attachment;';&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;80&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;my.domain.com&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;^.*/(?P&amp;lt;request_basename&amp;gt;[^/]+\.(mp3))$&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/path/to/mp3/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;add_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;Content-Disposition&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;attachment&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;filename=&amp;#34;$request_basename&amp;#34;&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;80&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;backup.baifu-tech.net&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/data/backup/rechargecent-mago&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;auth_basic&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;baifu&lt;/span&gt; &lt;span style="color:#98c379"&gt;backup&lt;/span&gt; &lt;span style="color:#98c379"&gt;center&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;auth_basic_user_file&lt;/span&gt; &lt;span style="color:#98c379"&gt;/etc/nginx/ssl/htpasswd&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex_exact_size&lt;/span&gt; &lt;span style="color:#e06c75"&gt;off&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex_localtime&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Shell 腳本學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener"&gt;Shell 腳本學習筆記&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="執行算術運算"&gt;執行算術運算&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;val=`expr $a + $b`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="運算符"&gt;運算符&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;符號&lt;/th&gt;
+&lt;th&gt;說明&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;!&lt;/td&gt;
+&lt;td&gt;非運算&lt;/td&gt;
+&lt;td&gt;[ ! false ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-o&lt;/td&gt;
+&lt;td&gt;或運算&lt;/td&gt;
+&lt;td&gt;[ $a -lt 20 -o $b -gt 20 ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-a&lt;/td&gt;
+&lt;td&gt;與運算&lt;/td&gt;
+&lt;td&gt;[ $a -lt 20 -a $b -gt 20 ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;=&lt;/td&gt;
+&lt;td&gt;相等檢測&lt;/td&gt;
+&lt;td&gt;[ $a = $b ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;!=&lt;/td&gt;
+&lt;td&gt;不相等檢測&lt;/td&gt;
+&lt;td&gt;[ $a != $b ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-z&lt;/td&gt;
+&lt;td&gt;字串長度是否為 0，為 0 則回傳 true&lt;/td&gt;
+&lt;td&gt;[ -z $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-n&lt;/td&gt;
+&lt;td&gt;字串長度不為 0，不為 0 回傳 true&lt;/td&gt;
+&lt;td&gt;[ -n $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;檢測字串是否為空，不為空回傳 true&lt;/td&gt;
+&lt;td&gt;[ $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-b&lt;/td&gt;
+&lt;td&gt;檢測檔案是否是區塊裝置檔&lt;/td&gt;
+&lt;td&gt;[ -b $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-c&lt;/td&gt;
+&lt;td&gt;檢測檔案是否是字元裝置&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-d&lt;/td&gt;
+&lt;td&gt;檢測檔案是否為目錄&lt;/td&gt;
+&lt;td&gt;[ -d $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-f&lt;/td&gt;
+&lt;td&gt;檢測檔案是否為一般檔案&lt;/td&gt;
+&lt;td&gt;[ -f $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-r&lt;/td&gt;
+&lt;td&gt;檢測檔案是否可讀&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-w&lt;/td&gt;
+&lt;td&gt;檢測檔案是否可寫&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-x&lt;/td&gt;
+&lt;td&gt;檢測檔案是否可執行&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-s&lt;/td&gt;
+&lt;td&gt;檢測檔案是否為空&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-e&lt;/td&gt;
+&lt;td&gt;檢測檔案是否存在&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="特殊變數"&gt;特殊變數&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;變數&lt;/th&gt;
+&lt;th&gt;含義&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;$0&lt;/td&gt;
+&lt;td&gt;目前腳本的檔名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$n&lt;/td&gt;
+&lt;td&gt;傳遞給腳本或函式的參數，n 表示第幾個參數&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$#&lt;/td&gt;
+&lt;td&gt;傳遞給腳本或函式的參數個數&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$*&lt;/td&gt;
+&lt;td&gt;傳遞給腳本或函式的所有參數，所有參數視為一個詞，例如 &amp;ldquo;1 2 3&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$@&lt;/td&gt;
+&lt;td&gt;傳遞給腳本或函式的所有參數，每個參數視為一個詞，用雙引號包含，例如 &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$?&lt;/td&gt;
+&lt;td&gt;上個命令的退出狀態，或函式的回傳值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$$&lt;/td&gt;
+&lt;td&gt;目前 Shell 行程 ID；對 Shell 腳本而言，就是該腳本所在的行程 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="posix-程式退出狀態"&gt;POSIX 程式退出狀態&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;狀態碼&lt;/th&gt;
+&lt;th&gt;含義&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;命令成功退出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 0&lt;/td&gt;
+&lt;td&gt;在重導向或單詞展開期間（~、變數、命令、算術展開以及單詞切割）失敗&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1 - 125&lt;/td&gt;
+&lt;td&gt;命令不成功退出，各命令自行定義特定退出值含義&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;126&lt;/td&gt;
+&lt;td&gt;命令找到但檔案無法執行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;127&lt;/td&gt;
+&lt;td&gt;命令未找到&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 128&lt;/td&gt;
+&lt;td&gt;命令因收到信號而終止&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="輸入輸出重導向"&gt;輸入輸出重導向&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;說明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;command &amp;gt; file&lt;/td&gt;
+&lt;td&gt;將輸出重導向到 file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;command &amp;gt; file&lt;/td&gt;
+&lt;td&gt;將輸出以追加的方式重導向到 file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;gt; file&lt;/td&gt;
+&lt;td&gt;將檔案描述符為 n 的檔案重導向到 file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;raquo; file&lt;/td&gt;
+&lt;td&gt;將檔案描述符為 n 的檔案以追加的方式重導向到 file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;gt;&amp;amp; m&lt;/td&gt;
+&lt;td&gt;將輸出檔案 m 和 n 合併&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;lt;&amp;amp; m&lt;/td&gt;
+&lt;td&gt;將輸入檔案 m 和 n 合併&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;laquo; tag&lt;/td&gt;
+&lt;td&gt;將開始標記 tag 和結束標記 tag 之間的內容作為輸入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="檔案包含"&gt;檔案包含&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code&gt;.&lt;/code&gt; 或 &lt;code&gt;source&lt;/code&gt; 包含檔案&lt;/p&gt;</description></item><item><title>`sentry.lang.javascript.processor: SoftTimeLimitExceeded()` 大量錯誤</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</link><pubDate>Thu, 25 Jul 2019 14:25:56 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190725-getsentry-sentry-issues-4386/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/getsentry/sentry/issues/4386" target="_blank" rel="noopener"&gt;Excessive Errors from &lt;code&gt;sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://forum.sentry.io/t/counters-0-queue-is-rising-continuously/5655/6" target="_blank" rel="noopener"&gt;Counters-0 queue is rising continuously&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="sentrylangjavascriptprocessor-softtimelimitexceeded-大量錯誤"&gt;&lt;code&gt;sentry.lang.javascript.processor: SoftTimeLimitExceeded()&lt;/code&gt; 大量錯誤&lt;/h4&gt;
+&lt;p&gt;mattrobenolt:&lt;/p&gt;
+&lt;p&gt;我正打算提出這個。:) 很不幸，這個功能就是如此運作。如果它沒有用且只是浪費資源，可以很容易地全域關閉：在 &lt;code&gt;sentry.conf.py&lt;/code&gt; 設定 &lt;code&gt;SENTRY_SCRAPE_JAVASCRIPT_CONTEXT = False&lt;/code&gt;，或在 UI 內針對專案關閉。&lt;/p&gt;
+&lt;p&gt;除此之外，沒有太多能做的，因為這個功能本質上是按設計運作。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id="counters-0-佇列持續上升"&gt;Counters-0 佇列持續上升&lt;/h4&gt;
+&lt;p&gt;matt:&lt;/p&gt;
+&lt;p&gt;你需要更多 worker 來處理這個佇列的負載。&lt;/p&gt;
+&lt;p&gt;你也可以讓 worker 專門處理特定佇列，例如使用 &lt;code&gt;sentry run worker -Q counters-0&lt;/code&gt;。&lt;/p&gt;</description></item><item><title>Python Telegram Bot</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</link><pubDate>Thu, 11 Jul 2019 14:03:25 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190711-python-telegram-bot/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zaoldyeck.medium.com/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E6%80%8E%E9%BA%BC%E6%89%93%E9%80%A0-telegram-bot-a7b539c3402a" target="_blank" rel="noopener"&gt;（一）一步步打造 Telegram Bot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zaoldyeck.medium.com/%E5%88%A9%E7%94%A8-olami-open-api-%E7%82%BA-chatbot-%E5%A2%9E%E5%8A%A0-nlp-%E5%8A%9F%E8%83%BD-e6b37940913d" target="_blank" rel="noopener"&gt;（二）為 Chatbot 增加 NLP 功能&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zaoldyeck.medium.com/add-custom-skill-into-chatbot-cef9bfeeef52" target="_blank" rel="noopener"&gt;（三）為 Chatbot 添加新技能&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hackmd.io/@truckski/HkgaMUc24" target="_blank" rel="noopener"&gt;Python Telegram Bot 教學&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kaive.me/2018/07/15/Python-telegram-bot/" target="_blank" rel="noopener"&gt;用 Python 寫一個簡單的 Telegram Bot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets" target="_blank" rel="noopener"&gt;Code snippets&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Linux 磁碟空間未釋放的解決方法</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</link><pubDate>Wed, 10 Jul 2019 09:57:33 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190710-linux-command-line-du-dh-lsof/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.itread01.com/content/1542767890.html" target="_blank" rel="noopener"&gt;Linux 磁碟空間未釋放的解決方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="使用-df--ah-命令-du--h---max-depth1"&gt;使用 &lt;code&gt;df -ah&lt;/code&gt; 命令 &lt;code&gt;du -h --max-depth=1&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;du&lt;/code&gt; 的總和遠小於 &lt;code&gt;df&lt;/code&gt; 得到的總量。&lt;/p&gt;
+&lt;p&gt;程式使用的檔案資源被刪除後，程式仍在執行，導致檔案未真正刪除，無法釋放磁碟空間，也無法被統計到。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lsof |grep delete&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Sentry 原始碼開發筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</link><pubDate>Wed, 03 Jul 2019 11:53:15 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190703-python-sentry-develop-notes-and-uwsgi-log-format/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://chroming.gitlab.io/2018/09/26/edit_sentry_source_code/" target="_blank" rel="noopener"&gt;Sentry 原始碼開發筆記&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/LogFormat.html" target="_blank" rel="noopener"&gt;Formatting uWSGI requests logs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.postgresql.org/docs/9.3/libpq-pgpass.html" target="_blank" rel="noopener"&gt;PostgreSQL: Documentation: 9.3: The Password File&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>openresty+redis 攔截高頻訪問 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener"&gt;openresty+redis 攔截高頻訪問 IP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;init_by_lua_block&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;redis&lt;/span&gt; = &lt;span style="color:#98c379"&gt;require&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;client&lt;/span&gt; = &lt;span style="color:#98c379"&gt;redis.connect(&amp;#39;127.0.0.1&amp;#39;,&lt;/span&gt; &lt;span style="color:#d19a66"&gt;6379&lt;/span&gt;&lt;span style="color:#98c379"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;8080&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;access_by_lua_file&lt;/span&gt; &lt;span style="color:#98c379"&gt;/usr/local/nginx/conf/lua/block.lua&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;proxy_pass&lt;/span&gt; &lt;span style="color:#98c379"&gt;http://192.168.1.102:8000&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-lua" data-lang="lua"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- Redis-based IP rate limiting / blocking for OpenResty (ngx_lua)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- NOTE:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- This script assumes a global `client` variable is used/stored.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- Make sure `redis` module is available and `client` is initialized somewhere.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#c678dd"&gt;function&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;isConnected&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;ping&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#c678dd"&gt;function&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;createRedisConnection&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redis.connect&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;6379&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;pcall&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;isConnected&lt;/span&gt;) &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- already connected (or ping succeeded)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- not connected; try reconnect&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;pcall&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;createRedisConnection&lt;/span&gt;) &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;createRedisConnection&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;60&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 監測週期（秒）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;bktimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;30&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 在監測週期內達到觸發攔截的訪問量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;block_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;600&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 觸發攔截後攔截時間（秒）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ip&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.var&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;remote_addr&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;get&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- blocked&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;403&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(&amp;#34;key exist.ttl is &amp;#34;, last_ttl)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(&amp;#34;ttl &amp;amp; vtimes recount&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;tonumber&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;get&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)) &lt;span style="color:#56b6c2"&gt;+&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;bktimes&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; view &amp;#34;, vtimes, &amp;#34; times&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; will be block next time.&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;block_ttl&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- key does not exist&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; view 1 times&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>[Terraform] 入門學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</link><pubDate>Wed, 26 Jun 2019 17:22:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://godleon.github.io/blog/DevOps/terraform-getting-started/" target="_blank" rel="noopener"&gt;[Terraform] 入門學習筆記&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>設定 Haproxy 以防止 DDOS 攻擊</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</link><pubDate>Mon, 17 Jun 2019 11:07:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html" target="_blank" rel="noopener"&gt;設定 Haproxy 以防止 DDOS 攻擊&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tcp-syn-flood-attacks"&gt;TCP syn flood attacks&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi /etc/sysctl.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Protection from SYN flood&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_syncookies &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.conf.all.rp_filter &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_max_syn_backlog &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1024&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="slowloris-like-attacks"&gt;Slowloris like attacks&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;defaults
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; option http-server-close
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout http-request 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout connect 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout client 30s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout server 10s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout tunnel 1h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="限制每一個-user-的連線數量"&gt;限制每一個 user 的連線數量&lt;/h3&gt;
+&lt;p&gt;普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p&gt;
+&lt;p&gt;但如果有很多使用者，是從某一個私有網段，透過 NAT 的方式連線到 Server 時，且實際上我們也不知道，到底哪一個會是 NAT 的轉址後的 IP，不知道該將哪個 IP 設定為白名單，這樣的限制就會造成問題，因此我們認為實際的環境，這樣的設定應該要保留不處理。&lt;/p&gt;
+&lt;p&gt;以下是一個設定的範例，最重要的地方是在 frontend ft_web 區塊的設定。&lt;/p&gt;</description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener"&gt;白話 Kubernetes Runtime&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Nginx 請求處理流程你了解嗎？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener"&gt;Nginx 請求處理流程你了解嗎？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="11-個處理階段"&gt;11 個處理階段&lt;/h3&gt;
+&lt;p&gt;1）NGX_HTTP_POST_READ_PHASE：&lt;/p&gt;
+&lt;p&gt;接收到完整的 HTTP 標頭後處理的階段，位於 URI 重寫之前。實際上很少有模組會註冊在該階段，預設情況下會被跳過。&lt;/p&gt;
+&lt;p&gt;2）NGX_HTTP_SERVER_REWRITE_PHASE：&lt;/p&gt;
+&lt;p&gt;在 URI 與 location 匹配前修改 URI 的階段，用於重新導向。該階段執行 server 區塊內、location 區塊外的重寫指令。在讀取請求標頭的過程中，nginx 會根據 host 及埠號找到對應的虛擬主機設定。&lt;/p&gt;
+&lt;p&gt;3）NGX_HTTP_FIND_CONFIG_PHASE：&lt;/p&gt;
+&lt;p&gt;根據 URI 尋找匹配的 location 設定項階段，使用重寫後的 URI 來查找對應的 location。需要注意的是該階段可能會被執行多次，因為也可能有 location 級別的重寫指令。&lt;/p&gt;
+&lt;p&gt;4）NGX_HTTP_REWRITE_PHASE：&lt;/p&gt;
+&lt;p&gt;上一階段找到 location 後再次修改 URI，屬於 location 級別的 URI 重寫階段，也可能會被執行多次。&lt;/p&gt;
+&lt;p&gt;5）NGX_HTTP_POST_REWRITE_PHASE：&lt;/p&gt;
+&lt;p&gt;防止重寫 URL 後導致的死循環，屬於 location 重寫的下一階段，用來檢查上階段是否有 URI 重寫，並根據結果跳轉到合適的階段。&lt;/p&gt;
+&lt;p&gt;6）NGX_HTTP_PREACCESS_PHASE：&lt;/p&gt;
+&lt;p&gt;下一階段之前的準備，屬於存取權限控制的前一階段。一般也用於存取控制，例如限制存取頻率、連線數等。&lt;/p&gt;
+&lt;p&gt;7）NGX_HTTP_ACCESS_PHASE：&lt;/p&gt;
+&lt;p&gt;讓 HTTP 模組判斷是否允許請求進入 Nginx 伺服器的存取控制階段，例如基於 IP 白名單/黑名單、使用者名稱密碼等的權限控制。&lt;/p&gt;
+&lt;p&gt;8）NGX_HTTP_POST_ACCESS_PHASE：&lt;/p&gt;
+&lt;p&gt;存取控制的後一階段，根據上一階段的執行結果進行處理，向使用者送出拒絕服務的錯誤碼，用來回應上一階段的拒絕。&lt;/p&gt;
+&lt;p&gt;9）NGX_HTTP_TRY_FILES_PHASE：&lt;/p&gt;
+&lt;p&gt;為存取靜態檔案資源而設置，try_files 指令的處理階段。如果沒有設定 try_files 指令，該階段會被跳過。&lt;/p&gt;
+&lt;p&gt;10）NGX_HTTP_CONTENT_PHASE：&lt;/p&gt;</description></item></channel></rss>

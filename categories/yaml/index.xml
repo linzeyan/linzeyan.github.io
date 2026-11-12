@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YAML on Ricky</title><link>https://linzeyan.github.io/categories/yaml/</link><description>Recent content in YAML on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 29 Aug 2022 15:01:40 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/yaml/index.xml" rel="self" type="application/rss+xml"/><item><title>What to Do With Long Strings in YAML?</title><link>https://linzeyan.github.io/posts/2022/20220829-long-string-in-yaml/</link><pubDate>Mon, 29 Aug 2022 15:01:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220829-long-string-in-yaml/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ansible.cloudns.pro/post/long-string-in-yaml/" target="_blank" rel="noopener">What to Do With Long Strings in YAML?&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>YAML already defines this. In this case, there are four methods:&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>|&lt;/code>: Newlines under it are preserved as newlines, and the last line ends with a newline.&lt;/li>
-&lt;li>&lt;code>&amp;gt;&lt;/code>: Newlines under it are folded into spaces, forming a long string, and the last line ends with a newline.&lt;/li>
-&lt;li>&lt;code>|-&lt;/code>: Newlines under it are preserved, but the last line does not end with a newline.&lt;/li>
-&lt;li>&lt;code>&amp;gt;-&lt;/code>: Newlines under it are folded into spaces, and the last line does not end with a newline.&lt;/li>
-&lt;/ul>
-&lt;p>In short, &lt;code>&amp;gt;&lt;/code> and &lt;code>&amp;gt;-&lt;/code> improve YAML readability without adding extra newline characters. &lt;code>|&lt;/code> and &lt;code>|-&lt;/code> keep the string exactly as defined: if you see a newline in YAML, the string contains a newline.&lt;/p></description></item><item><title>6 YAML Features most programmers don't know</title><link>https://linzeyan.github.io/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener">6 YAML Features most programmers don&amp;rsquo;t know&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="there-are-more-examples-that-are-similarly-dangerous-as-tom-ritchford-pointed-out">There are more examples that are similarly dangerous as Tom Ritchford pointed out&lt;/h4>
-&lt;ul>
-&lt;li>&lt;code>013&lt;/code> is mapped to 11 as the leading zero triggers the octal notation&lt;/li>
-&lt;li>&lt;code>4:30&lt;/code> is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: &lt;code>4*60 + 30 = 270&lt;/code> . Interestingly, this pattern still &amp;ldquo;works&amp;rdquo; with &lt;code>1:1:1:1:1:1:1:1:4:30&lt;/code> .&lt;/li>
-&lt;/ul>
-&lt;h4 id="multi-line-string">Multi-Line String&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">mail_signature&lt;/span>: |&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Martin Thoma
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Tel. +49 123 4567&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{ &lt;span style="color:#f92672">&amp;#34;mail_signature&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Martin Thoma\nTel. +49 123 4567&amp;#34;&lt;/span> }
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="anchor">Anchor&lt;/h4>
-&lt;blockquote>
-&lt;p>The &lt;code>&amp;amp;&lt;/code> defined a variable &lt;code>emailAddress&lt;/code> with the value &lt;code>&amp;quot;info@example.de&amp;quot;&lt;/code>. The &lt;code>*&lt;/code> then indicated that the name of a variable follows.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>YAML on Ricky</title><link>https://linzeyan.github.io/categories/yaml/</link><description>Recent content in YAML on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 29 Aug 2022 15:01:40 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/yaml/index.xml" rel="self" type="application/rss+xml"/><item><title>What to Do With Long Strings in YAML?</title><link>https://linzeyan.github.io/posts/2022/20220829-long-string-in-yaml/</link><pubDate>Mon, 29 Aug 2022 15:01:40 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220829-long-string-in-yaml/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ansible.cloudns.pro/post/long-string-in-yaml/" target="_blank" rel="noopener"&gt;What to Do With Long Strings in YAML?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;YAML already defines this. In this case, there are four methods:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;|&lt;/code&gt;: Newlines under it are preserved as newlines, and the last line ends with a newline.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;: Newlines under it are folded into spaces, forming a long string, and the last line ends with a newline.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;|-&lt;/code&gt;: Newlines under it are preserved, but the last line does not end with a newline.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;-&lt;/code&gt;: Newlines under it are folded into spaces, and the last line does not end with a newline.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In short, &lt;code&gt;&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;gt;-&lt;/code&gt; improve YAML readability without adding extra newline characters. &lt;code&gt;|&lt;/code&gt; and &lt;code&gt;|-&lt;/code&gt; keep the string exactly as defined: if you see a newline in YAML, the string contains a newline.&lt;/p&gt;</description></item><item><title>6 YAML Features most programmers don't know</title><link>https://linzeyan.github.io/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</link><pubDate>Wed, 07 Jul 2021 15:08:31 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210707-6-yaml-features-most-programmers-dont-know/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://levelup.gitconnected.com/6-yaml-features-most-programmers-dont-know-164762343af3" target="_blank" rel="noopener"&gt;6 YAML Features most programmers don&amp;rsquo;t know&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="there-are-more-examples-that-are-similarly-dangerous-as-tom-ritchford-pointed-out"&gt;There are more examples that are similarly dangerous as Tom Ritchford pointed out&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;013&lt;/code&gt; is mapped to 11 as the leading zero triggers the octal notation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;4:30&lt;/code&gt; is mapped to 270. Max Werner Kaul-Gothe and Niklas Baumstark informed me that this is automatically converted to minutes (or seconds?) as it is interpreted as a duration: &lt;code&gt;4*60 + 30 = 270&lt;/code&gt; . Interestingly, this pattern still &amp;ldquo;works&amp;rdquo; with &lt;code&gt;1:1:1:1:1:1:1:1:4:30&lt;/code&gt; .&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="multi-line-string"&gt;Multi-Line String&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;mail_signature&lt;/span&gt;: |&lt;span style="color:#98c379"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; Martin Thoma
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; Tel. +49 123 4567&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{ &lt;span style="color:#e06c75"&gt;&amp;#34;mail_signature&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;Martin Thoma\nTel. +49 123 4567&amp;#34;&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="anchor"&gt;Anchor&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;&amp;amp;&lt;/code&gt; defined a variable &lt;code&gt;emailAddress&lt;/code&gt; with the value &lt;code&gt;&amp;quot;info@example.de&amp;quot;&lt;/code&gt;. The &lt;code&gt;*&lt;/code&gt; then indicated that the name of a variable follows.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>

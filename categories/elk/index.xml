@@ -1,41 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ELK on Ricky</title><link>https://linzeyan.github.io/categories/elk/</link><description>Recent content in ELK on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 06 Oct 2022 11:30:59 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/elk/index.xml" rel="self" type="application/rss+xml"/><item><title>Elasticsearch Study Notes</title><link>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">Elasticsearch Study Notes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="install-the-chinese-analyzer-plugin">Install the Chinese analyzer plugin&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it elasticsearch bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Dev Tools
-&lt;ul>
-&lt;li>The &lt;code>content&lt;/code> field is &lt;code>text&lt;/code>. Use &lt;code>ik_max_word&lt;/code> for indexing and &lt;code>ik_smart&lt;/code> for searching. The former generates as many tokens as possible, while the latter generates coarser-grained tokens.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">PUT&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">/words&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;mappings&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;content&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;text&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_max_word&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;search_analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_smart&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;age&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;integer&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Uncle Joe teaches Elastic - 30 - Elasticsearch optimization tips (4/4) - Shard optimization management</title><link>https://linzeyan.github.io/posts/2021/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211110-10253348/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener">Uncle Joe teaches Elastic - 30 - Elasticsearch optimization tips (4/4) - Shard optimization management&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="planning-considerations">Planning considerations&lt;/h4>
-&lt;h5 id="during-search-each-shard-uses-one-thread-too-many-shards-can-slow-things-down">During search, each shard uses one thread. Too many shards can slow things down.&lt;/h5>
-&lt;blockquote>
-&lt;p>A node has multiple thread pools by function. The search (count/search/suggest) pool size is &lt;code>int((# of allocated processors * 3) / 2) + 1&lt;/code> and the default queue_size is &lt;code>1000&lt;/code>. The write (index/delete/update/bulk) pool size is &lt;code># of allocated processors&lt;/code> and the default queue_size is also &lt;code>1000&lt;/code>. (Official docs - Thread pools)&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ELK on Ricky</title><link>https://linzeyan.github.io/categories/elk/</link><description>Recent content in ELK on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Oct 2022 11:30:59 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/elk/index.xml" rel="self" type="application/rss+xml"/><item><title>Elasticsearch Study Notes</title><link>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener"&gt;Elasticsearch Study Notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="install-the-chinese-analyzer-plugin"&gt;Install the Chinese analyzer plugin&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker &lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; -it elasticsearch bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Dev Tools
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;content&lt;/code&gt; field is &lt;code&gt;text&lt;/code&gt;. Use &lt;code&gt;ik_max_word&lt;/code&gt; for indexing and &lt;code&gt;ik_smart&lt;/code&gt; for searching. The former generates as many tokens as possible, while the latter generates coarser-grained tokens.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PUT /words
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;mappings&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;properties&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;content&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;analyzer&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;ik_max_word&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;search_analyzer&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;ik_smart&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;age&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;integer&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;acknowledged&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;shards_acknowledged&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;words&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Uncle Joe teaches Elastic - 30 - Elasticsearch optimization tips (4/4) - Shard optimization management</title><link>https://linzeyan.github.io/posts/2021/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211110-10253348/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener"&gt;Uncle Joe teaches Elastic - 30 - Elasticsearch optimization tips (4/4) - Shard optimization management&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="planning-considerations"&gt;Planning considerations&lt;/h4&gt;
+&lt;h5 id="during-search-each-shard-uses-one-thread-too-many-shards-can-slow-things-down"&gt;During search, each shard uses one thread. Too many shards can slow things down.&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A node has multiple thread pools by function. The search (count/search/suggest) pool size is &lt;code&gt;int((# of allocated processors * 3) / 2) + 1&lt;/code&gt; and the default queue_size is &lt;code&gt;1000&lt;/code&gt;. The write (index/delete/update/bulk) pool size is &lt;code&gt;# of allocated processors&lt;/code&gt; and the default queue_size is also &lt;code&gt;1000&lt;/code&gt;. (Official docs - Thread pools)&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>

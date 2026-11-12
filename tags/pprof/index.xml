@@ -1,90 +1,90 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pprof on Ricky</title><link>https://linzeyan.github.io/tags/pprof/</link><description>Recent content in Pprof on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 22 Jun 2022 15:29:02 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/pprof/index.xml" rel="self" type="application/rss+xml"/><item><title>Go pprof in Practice</title><link>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.wolfogre.com/posts/go-ppof-practice/" target="_blank" rel="noopener">Go pprof in Practice&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/wolfogre/go-pprof-practice" target="_blank" rel="noopener">Bomb program&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// omitted&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">_&lt;/span> &lt;span style="color:#e6db74">&amp;#34;net/http/pprof&amp;#34;&lt;/span> &lt;span style="color:#75715e">// auto-register handlers to the HTTP server for profiling via HTTP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// omitted&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// omitted&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">GOMAXPROCS&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// limit CPU usage to avoid overload&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetMutexProfileFraction&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// enable lock contention profiling&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">runtime&lt;/span>.&lt;span style="color:#a6e22e">SetBlockProfileRate&lt;/span>(&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#75715e">// enable blocking operation profiling&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">go&lt;/span> &lt;span style="color:#66d9ef">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// start an HTTP server; pprof handlers have already been registered&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// /debug/pprof/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">ListenAndServe&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;:6060&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">nil&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">os&lt;/span>.&lt;span style="color:#a6e22e">Exit&lt;/span>(&lt;span style="color:#ae81ff">0&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// omitted&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>http://localhost:6060/debug/pprof/&lt;/li>
-&lt;/ul>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Type&lt;/th>
-&lt;th>Description&lt;/th>
-&lt;th>Notes&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>allocs&lt;/td>
-&lt;td>Samples of memory allocations&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>blocks&lt;/td>
-&lt;td>Samples of blocking operations&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>cmdline&lt;/td>
-&lt;td>Show program startup command/args&lt;/td>
-&lt;td>Can open in a browser; shows ./go-pprof-practice&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>goroutine&lt;/td>
-&lt;td>Stacks of all current goroutines&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>heap&lt;/td>
-&lt;td>Samples of heap memory usage&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>mutex&lt;/td>
-&lt;td>Samples of lock contention&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>profile&lt;/td>
-&lt;td>Samples of CPU usage&lt;/td>
-&lt;td>Opening in a browser downloads a file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>threadcreate&lt;/td>
-&lt;td>Samples of system thread creation&lt;/td>
-&lt;td>Can open in a browser, but readability is low&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>trace&lt;/td>
-&lt;td>Program execution traces&lt;/td>
-&lt;td>Opening in a browser downloads a file; not covered here, see Go trace&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;strong>Investigate high CPU usage&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pprof on Ricky</title><link>https://linzeyan.github.io/tags/pprof/</link><description>Recent content in Pprof on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 22 Jun 2022 15:29:02 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/pprof/index.xml" rel="self" type="application/rss+xml"/><item><title>Go pprof in Practice</title><link>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</link><pubDate>Wed, 22 Jun 2022 15:29:02 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220622-go-ppof-practice/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.wolfogre.com/posts/go-ppof-practice/" target="_blank" rel="noopener"&gt;Go pprof in Practice&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/wolfogre/go-pprof-practice" target="_blank" rel="noopener"&gt;Bomb program&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;package&lt;/span&gt; &lt;span style="color:#e06c75"&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// omitted&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;_&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;net/http/pprof&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;// auto-register handlers to the HTTP server for profiling via HTTP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// omitted&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// omitted&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;runtime&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;GOMAXPROCS&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;) &lt;span style="color:#7f848e"&gt;// limit CPU usage to avoid overload&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;runtime&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;SetMutexProfileFraction&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;) &lt;span style="color:#7f848e"&gt;// enable lock contention profiling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;runtime&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;SetBlockProfileRate&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;) &lt;span style="color:#7f848e"&gt;// enable blocking operation profiling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;go&lt;/span&gt; &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// start an HTTP server; pprof handlers have already been registered&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// /debug/pprof/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ListenAndServe&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;:6060&amp;#34;&lt;/span&gt;, &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt;); &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;!=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;log&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Fatal&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;err&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;os&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Exit&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// omitted&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;http://localhost:6060/debug/pprof/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;allocs&lt;/td&gt;
+&lt;td&gt;Samples of memory allocations&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;blocks&lt;/td&gt;
+&lt;td&gt;Samples of blocking operations&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cmdline&lt;/td&gt;
+&lt;td&gt;Show program startup command/args&lt;/td&gt;
+&lt;td&gt;Can open in a browser; shows ./go-pprof-practice&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;goroutine&lt;/td&gt;
+&lt;td&gt;Stacks of all current goroutines&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;heap&lt;/td&gt;
+&lt;td&gt;Samples of heap memory usage&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mutex&lt;/td&gt;
+&lt;td&gt;Samples of lock contention&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;profile&lt;/td&gt;
+&lt;td&gt;Samples of CPU usage&lt;/td&gt;
+&lt;td&gt;Opening in a browser downloads a file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;threadcreate&lt;/td&gt;
+&lt;td&gt;Samples of system thread creation&lt;/td&gt;
+&lt;td&gt;Can open in a browser, but readability is low&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trace&lt;/td&gt;
+&lt;td&gt;Program execution traces&lt;/td&gt;
+&lt;td&gt;Opening in a browser downloads a file; not covered here, see Go trace&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Investigate high CPU usage&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

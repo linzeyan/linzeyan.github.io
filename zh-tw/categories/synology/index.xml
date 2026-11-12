@@ -1,57 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Synology on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/synology/</link><description>Recent content in Synology on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 25 Sep 2023 22:01:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/synology/index.xml" rel="self" type="application/rss+xml"/><item><title>在 Synology 上建立 Cloudflare Tunnel</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener">CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video">&lt;/iframe>
-&lt;/div>
-&lt;div style="margin-top: rem;">&lt;/div>
-&lt;h2 id="setup-synology">Setup Synology&lt;/h2>
-&lt;ol>
-&lt;li>在 docker 目錄下建立資料夾，例如 &lt;code>cloudflare-tunnel&lt;/code>。&lt;/li>
-&lt;li>下載 cloudflared/cloudflared 映像到 registry。&lt;/li>
-&lt;li>SSH 到 admin@synology。&lt;/li>
-&lt;li>變更 &lt;code>cloudflare-tunnel&lt;/code> 擁有者，&lt;code>sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code>。&lt;/li>
-&lt;/ol>
-&lt;h3 id="run-containers">Run containers&lt;/h3>
-&lt;h4 id="--cloudflared-tunnel-login">- &lt;code>cloudflared tunnel login&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>執行容器並掛載 volume &lt;code>docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code>。&lt;/li>
-&lt;li>在 network 分頁選擇 &lt;code>Use the same network as Docker Host&lt;/code>。&lt;/li>
-&lt;li>在 environment 分頁加入指令 &lt;code>tunnel login&lt;/code>。&lt;/li>
-&lt;li>到容器 log 複製登入 URL。&lt;/li>
-&lt;li>貼上 URL 到瀏覽器並授權 zone。&lt;/li>
-&lt;li>將容器設定 json 匯出到 &lt;code>cloudflare-tunnel&lt;/code> 目錄。&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel">- &lt;code>cloudflared tunnel create synology-tunnel&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的容器設定 json，修改 cmd 為 &lt;code>tunnel create synology-tunnel&lt;/code>。&lt;/li>
-&lt;li>匯入容器設定 json 並執行新容器。&lt;/li>
-&lt;li>容器會停止，並在 &lt;code>cloudflare-tunnel&lt;/code> 中建立 tunnel config json。&lt;/li>
-&lt;li>建立 config.yml 並撰寫 ingress 規則。&lt;/li>
-&lt;li>在 config.yml 中，tunnel 的值要與 tunnel config json 檔名一致，credentials-file 為 &lt;code>/home/nonroot/.cloudflared/tunnel config json&lt;/code>。&lt;/li>
-&lt;li>將第二個容器設定 json 匯出到 &lt;code>cloudflare-tunnel&lt;/code> 目錄。&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com">- &lt;code>cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code>tunnel route dns synology-tunnel synology.ruru910.com&lt;/code>。&lt;/li>
-&lt;li>匯入第二個容器設定 json 並執行新容器。&lt;/li>
-&lt;li>容器會停止並建立 DNS 紀錄，將網域指到 tunnel。&lt;/li>
-&lt;/ol>
-&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel">- &lt;code>cloudflared tunnel run synology-tunnel&lt;/code>&lt;/h4>
-&lt;ol>
-&lt;li>編輯 &lt;code>cloudflare-tunnel&lt;/code> 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code>tunnel run synology-tunnel&lt;/code>。&lt;/li>
-&lt;li>匯入第二個容器設定 json 並執行新容器。&lt;/li>
-&lt;li>Tunnel 現在可以連線使用。&lt;/li>
-&lt;/ol></description></item><item><title>Synology：一眼查看 NAS RAM 細節</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</link><pubDate>Mon, 08 May 2023 10:55:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/" target="_blank" rel="noopener">Synology：一眼查看 NAS RAM 細節&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="step1">step1&lt;/h3>
-&lt;p>Control Panel / Task Scheduler / Create / Scheduled Task / User-defined script&lt;/p>
-&lt;h3 id="step2">step2&lt;/h3>
-&lt;ol>
-&lt;li>General：在 Task 欄位輸入 RAM Details，取消勾選 &amp;ldquo;Enabled&amp;rdquo;，選擇 root 使用者。&lt;/li>
-&lt;li>Schedule：選擇 Run on the following date，並設定為 &amp;ldquo;Do not repeat&amp;rdquo;。&lt;/li>
-&lt;li>Task Settings：勾選 &amp;ldquo;Send run details by email&amp;rdquo;，填入 email，將下方指令貼到 Run command 區域，然後按 OK。&lt;/li>
-&lt;/ol></description></item><item><title>CentOS 7 掛載 Synology NAS 資料夾</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201109-145053/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener">CentOS 7 掛載 Synology NAS 資料夾&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Synology on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/synology/</link><description>Recent content in Synology on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Mon, 25 Sep 2023 22:01:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/synology/index.xml" rel="self" type="application/rss+xml"/><item><title>在 Synology 上建立 Cloudflare Tunnel</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</link><pubDate>Mon, 25 Sep 2023 22:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230925-cloudflare/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5IrtNxfzH1o" target="_blank" rel="noopener"&gt;CLOUDFLARE tunnel on SYNOLOGY. (the raw way)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div style="margin-top: rem;"&gt;&lt;/div&gt;
+&lt;h2 id="setup-synology"&gt;Setup Synology&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在 docker 目錄下建立資料夾，例如 &lt;code&gt;cloudflare-tunnel&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;下載 cloudflared/cloudflared 映像到 registry。&lt;/li&gt;
+&lt;li&gt;SSH 到 admin@synology。&lt;/li&gt;
+&lt;li&gt;變更 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 擁有者，&lt;code&gt;sudo chown -R 65532:65532 /volume1/docker/cloudflare-tunnel&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="run-containers"&gt;Run containers&lt;/h3&gt;
+&lt;h4 id="--cloudflared-tunnel-login"&gt;- &lt;code&gt;cloudflared tunnel login&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;執行容器並掛載 volume &lt;code&gt;docker/cloudflare-tunnel:/home/nonroot/.cloudflared&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在 network 分頁選擇 &lt;code&gt;Use the same network as Docker Host&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在 environment 分頁加入指令 &lt;code&gt;tunnel login&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;到容器 log 複製登入 URL。&lt;/li&gt;
+&lt;li&gt;貼上 URL 到瀏覽器並授權 zone。&lt;/li&gt;
+&lt;li&gt;將容器設定 json 匯出到 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 目錄。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-create-synology-tunnel"&gt;- &lt;code&gt;cloudflared tunnel create synology-tunnel&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;編輯 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 目錄中的容器設定 json，修改 cmd 為 &lt;code&gt;tunnel create synology-tunnel&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;匯入容器設定 json 並執行新容器。&lt;/li&gt;
+&lt;li&gt;容器會停止，並在 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 中建立 tunnel config json。&lt;/li&gt;
+&lt;li&gt;建立 config.yml 並撰寫 ingress 規則。&lt;/li&gt;
+&lt;li&gt;在 config.yml 中，tunnel 的值要與 tunnel config json 檔名一致，credentials-file 為 &lt;code&gt;/home/nonroot/.cloudflared/tunnel config json&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;將第二個容器設定 json 匯出到 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 目錄。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-route-dns-synology-tunnel-synologyruru910com"&gt;- &lt;code&gt;cloudflared tunnel route dns synology-tunnel synology.ruru910.com&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;編輯 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code&gt;tunnel route dns synology-tunnel synology.ruru910.com&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;匯入第二個容器設定 json 並執行新容器。&lt;/li&gt;
+&lt;li&gt;容器會停止並建立 DNS 紀錄，將網域指到 tunnel。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="--cloudflared-tunnel-run-synology-tunnel"&gt;- &lt;code&gt;cloudflared tunnel run synology-tunnel&lt;/code&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;編輯 &lt;code&gt;cloudflare-tunnel&lt;/code&gt; 目錄中的第二個容器設定 json，修改 cmd 為 &lt;code&gt;tunnel run synology-tunnel&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;匯入第二個容器設定 json 並執行新容器。&lt;/li&gt;
+&lt;li&gt;Tunnel 現在可以連線使用。&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Synology：一眼查看 NAS RAM 細節</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</link><pubDate>Mon, 08 May 2023 10:55:23 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230508-synology-your-nas-ram-details-at-a-glance/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mariushosting.com/synology-your-nas-ram-details-at-a-glance/" target="_blank" rel="noopener"&gt;Synology：一眼查看 NAS RAM 細節&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="step1"&gt;step1&lt;/h3&gt;
+&lt;p&gt;Control Panel / Task Scheduler / Create / Scheduled Task / User-defined script&lt;/p&gt;
+&lt;h3 id="step2"&gt;step2&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;General：在 Task 欄位輸入 RAM Details，取消勾選 &amp;ldquo;Enabled&amp;rdquo;，選擇 root 使用者。&lt;/li&gt;
+&lt;li&gt;Schedule：選擇 Run on the following date，並設定為 &amp;ldquo;Do not repeat&amp;rdquo;。&lt;/li&gt;
+&lt;li&gt;Task Settings：勾選 &amp;ldquo;Send run details by email&amp;rdquo;，填入 email，將下方指令貼到 Run command 區域，然後按 OK。&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>CentOS 7 掛載 Synology NAS 資料夾</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201109-145053/</link><pubDate>Mon, 09 Nov 2020 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201109-145053/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.dotblogs.com.tw/zerroyuy/2020/08/20/145053" target="_blank" rel="noopener"&gt;CentOS 7 掛載 Synology NAS 資料夾&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

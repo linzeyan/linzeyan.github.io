@@ -1,83 +1,83 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gluetun on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/gluetun/</link><description>Recent content in Gluetun on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Fri, 01 Aug 2025 15:51:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/gluetun/index.xml" rel="self" type="application/rss+xml"/><item><title>Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener">Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="gluetun">Gluetun&lt;/h2>
-&lt;ul>
-&lt;li>OpenVPN&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gluetun&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">qmcgaw/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">unless-stopped&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cap_add&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">NET_ADMIN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">devices&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/dev/net/tun:/dev/net/tun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8888&lt;/span>:&lt;span style="color:#ae81ff">8888&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># HTTP proxy&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>: &lt;span style="color:#75715e"># 按照VPN供應商的OpenVPN設定檔填寫&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=openvpn&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_USER=&lt;/span> &lt;span style="color:#75715e"># OpenVPN帳號&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">OPENVPN_PASSWORD=&lt;/span> &lt;span style="color:#75715e"># OpenVPN密碼&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>WireGuard&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gluetun&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">qmcgaw/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">unless-stopped&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cap_add&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">NET_ADMIN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">devices&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/dev/net/tun:/dev/net/tun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8888&lt;/span>:&lt;span style="color:#ae81ff">8888&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># HTTP proxy&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/tcp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8388&lt;/span>:&lt;span style="color:#ae81ff">8388&lt;/span>&lt;span style="color:#ae81ff">/udp&lt;/span> &lt;span style="color:#75715e"># Shadowsocks&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/home/user/gluetun:/gluetun&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_SERVICE_PROVIDER=protonvpn&lt;/span> &lt;span style="color:#75715e"># 按照VPN供應商的WireGuard設定檔填寫&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">VPN_TYPE=wireguard&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRESHARED_KEY=&lt;/span> &lt;span style="color:#75715e"># 預共享密鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_PRIVATE_KEY=&lt;/span> &lt;span style="color:#75715e"># 私鑰&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">WIREGUARD_ADDRESSES=&lt;/span> &lt;span style="color:#75715e"># 填IPV4與IPV6位址，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">SERVER_COUNTRIES=United Kingdom&lt;/span> &lt;span style="color:#75715e"># 指定伺服器所在國家，以逗號分隔&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipv4_address&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">networks&lt;/span>: &lt;span style="color:#75715e"># (選擇性) 固定Gluetun容器的IP&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">driver&lt;/span>: &lt;span style="color:#ae81ff">bridge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ipam&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.0&lt;/span>&lt;span style="color:#ae81ff">/16&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">gateway&lt;/span>: &lt;span style="color:#ae81ff">172.27.0.5&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="讓容器走-gluetun-的-vpn-連線">讓容器走 Gluetun 的 VPN 連線&lt;/h2>
-&lt;ul>
-&lt;li>如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li>
-&lt;li>如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li>
-&lt;li>開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li>
-&lt;li>依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li>
-&lt;li>容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gluetun on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/gluetun/</link><description>Recent content in Gluetun on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Fri, 01 Aug 2025 15:51:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/gluetun/index.xml" rel="self" type="application/rss+xml"/><item><title>Gluetun：讓Docker容器走VPN連線，沒網路就斷線，使用教學</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250801-gluetun-vpn-docker/</link><pubDate>Fri, 01 Aug 2025 15:51:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250801-gluetun-vpn-docker/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ivonblog.com/posts/gluetun-vpn-docker/" target="_blank" rel="noopener"&gt;Gluetun：讓 Docker 容器走 VPN 連線，沒網路就斷線，使用教學&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="gluetun"&gt;Gluetun&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenVPN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gluetun&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;image&lt;/span&gt;: qmcgaw/gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;container_name&lt;/span&gt;: gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;restart&lt;/span&gt;: unless-stopped
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;cap_add&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - NET_ADMIN
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;devices&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - /dev/net/tun:/dev/net/tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8888&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8888&lt;/span&gt;/tcp &lt;span style="color:#7f848e"&gt;# HTTP proxy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;/tcp &lt;span style="color:#7f848e"&gt;# Shadowsocks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;/udp &lt;span style="color:#7f848e"&gt;# Shadowsocks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - /home/user/gluetun:/gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;environment&lt;/span&gt;: &lt;span style="color:#7f848e"&gt;# 按照VPN供應商的OpenVPN設定檔填寫&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - VPN_SERVICE_PROVIDER=protonvpn
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - VPN_TYPE=openvpn
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - OPENVPN_USER= &lt;span style="color:#7f848e"&gt;# OpenVPN帳號&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - OPENVPN_PASSWORD= &lt;span style="color:#7f848e"&gt;# OpenVPN密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - SERVER_COUNTRIES=United Kingdom &lt;span style="color:#7f848e"&gt;# 指定伺服器所在國家，以逗號分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;networks&lt;/span&gt;: &lt;span style="color:#7f848e"&gt;# (選擇性) 固定Gluetun容器的IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ipv4_address&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;networks&lt;/span&gt;: &lt;span style="color:#7f848e"&gt;# (選擇性) 固定Gluetun容器的IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;driver&lt;/span&gt;: bridge
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ipam&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;config&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e06c75"&gt;subnet&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.0&lt;/span&gt;/16
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gateway&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;WireGuard&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gluetun&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;image&lt;/span&gt;: qmcgaw/gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;container_name&lt;/span&gt;: gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;restart&lt;/span&gt;: unless-stopped
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;cap_add&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - NET_ADMIN
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;devices&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - /dev/net/tun:/dev/net/tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8888&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8888&lt;/span&gt;/tcp &lt;span style="color:#7f848e"&gt;# HTTP proxy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;/tcp &lt;span style="color:#7f848e"&gt;# Shadowsocks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;:&lt;span style="color:#d19a66"&gt;8388&lt;/span&gt;/udp &lt;span style="color:#7f848e"&gt;# Shadowsocks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - /home/user/gluetun:/gluetun
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - VPN_SERVICE_PROVIDER=protonvpn &lt;span style="color:#7f848e"&gt;# 按照VPN供應商的WireGuard設定檔填寫&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - VPN_TYPE=wireguard
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - WIREGUARD_PRESHARED_KEY= &lt;span style="color:#7f848e"&gt;# 預共享密鑰&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - WIREGUARD_PRIVATE_KEY= &lt;span style="color:#7f848e"&gt;# 私鑰&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - WIREGUARD_ADDRESSES= &lt;span style="color:#7f848e"&gt;# 填IPV4與IPV6位址，以逗號分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - SERVER_COUNTRIES=United Kingdom &lt;span style="color:#7f848e"&gt;# 指定伺服器所在國家，以逗號分隔&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;networks&lt;/span&gt;: &lt;span style="color:#7f848e"&gt;# (選擇性) 固定Gluetun容器的IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ipv4_address&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;networks&lt;/span&gt;: &lt;span style="color:#7f848e"&gt;# (選擇性) 固定Gluetun容器的IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;driver&lt;/span&gt;: bridge
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ipam&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;config&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e06c75"&gt;subnet&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.0&lt;/span&gt;/16
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gateway&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;172.27.0.5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="讓容器走-gluetun-的-vpn-連線"&gt;讓容器走 Gluetun 的 VPN 連線&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;如果容器服務跟 Gluetun 寫在同一個 docker-compose：加入網路模式 network_mode: &amp;ldquo;service:gluetun&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;如果該容器跟 Gluetun 不是寫在同一個 docker-compose：加入 network_mode: &amp;ldquo;container:gluetun&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;開啟 Gluetun 的 docker-compose 檔案，把 service 用到的通訊埠(ex:8080)加回來&lt;/li&gt;
+&lt;li&gt;依序啟動 Gluetun 和 走 Gluetun 的 VPN 連線的服務&lt;/li&gt;
+&lt;li&gt;容器公共 IP 應當跟您選擇的 VPN 伺服器一致&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

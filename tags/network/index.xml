@@ -1,305 +1,308 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/tags/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>Relay V2Ray Traffic via Cloudflare</title><link>https://linzeyan.github.io/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener">Relay V2Ray Traffic via Cloudflare&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener">The most convenient V2Ray one-click install script&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener">V2Ray script DNS settings&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener">V2Ray script relay tutorial&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="install-script">Install Script&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bash &amp;lt;&lt;span style="color:#f92672">(&lt;/span>wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="preparation">Preparation&lt;/h2>
-&lt;p>Add a DNS record now. Name: &lt;code>ai&lt;/code>, IPv4 address: &lt;code>your VPS IP&lt;/code>. The proxy status must be off, so the cloud icon is gray.&lt;/p>
-&lt;p>Tip: You can use &lt;code>v2ray ip&lt;/code> to view your VPS IP.&lt;/p>
-&lt;h2 id="add-relay-configuration">Add Relay Configuration&lt;/h2>
-&lt;p>Use &lt;code>v2ray add ws ai.233boy.com&lt;/code> to add a vmess-ws-tls configuration; remember to replace &lt;code>ai.233boy.com&lt;/code> with your domain.&lt;/p></description></item><item><title>Google Infra</title><link>https://linzeyan.github.io/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240924-google-infra/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener">Google&amp;rsquo;s 5-generation network architecture in ten years&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener">Everything About MTU and MSS&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener">Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="tcpflow">tcpflow&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;code>apt/dnf install tcpflow&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#ae81ff">80&lt;/span> | grep -oE &lt;span style="color:#e6db74">&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reportfilename: ./report.xml
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tcpflow: listening on wlp0s20f3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GET /mirrors.txt HTTP/1.1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-p&lt;/code> disables promiscuous mode&lt;/li>
-&lt;li>&lt;code>-c&lt;/code> means only print the output to the console and don&amp;rsquo;t create files&lt;/li>
-&lt;li>&lt;code>-i&lt;/code> specifies the network interface
-grep receives the output of tcpflow&lt;/li>
-&lt;li>&lt;code>-o&lt;/code> means show only the matching parts of the lines that match the pattern&lt;/li>
-&lt;li>&lt;code>-E&lt;/code> means the pattern is an extended regular expression (ERE)&lt;/li>
-&lt;/ul>
-&lt;h3 id="httpry">httpry&lt;/h3>
-&lt;blockquote>
-&lt;p>&lt;code>https://github.com/jbittel/httpry.git&lt;/code>&lt;/p></description></item><item><title>Tcpdump Usage Summary</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump Usage Summary&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="command-usage">Command usage&lt;/h2>
-&lt;p>tcpdump uses the command line. The command format is:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tcpdump &lt;span style="color:#f92672">[&lt;/span> -AdDeflLnNOpqRStuUvxX &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -c count &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -C file_size &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -F file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -i interface &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -m module &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -M secret &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -r file &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -s snaplen &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -T type &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -w file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -W filecount &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -E spi@ipaddr algo:secret, ... &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -y datalinktype &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -Z user &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> expression &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="simple-option-notes-for-tcpdump">Simple option notes for tcpdump&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code> can decrypt IPsec ESP packets using &lt;code>spi@ipaddr algo:secret&lt;/code>. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code>0x&lt;/code>, the key is read as hex. In addition to the syntax above (&lt;code>spi@ipaddr algo:secret&lt;/code>), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code>spi@ipaddr algo:secret, ...&lt;/code> with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li>
-&lt;li>&lt;code>-T type&lt;/code> forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
-&lt;ul>
-&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol, used in Ad hoc peer-to-peer networks)&lt;/li>
-&lt;li>&lt;code>cnfp&lt;/code> (Cisco NetFlow protocol)&lt;/li>
-&lt;li>&lt;code>rpc&lt;/code> (Remote Procedure Call)&lt;/li>
-&lt;li>&lt;code>rtp&lt;/code> (Real-Time Applications protocol)&lt;/li>
-&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications control protocol)&lt;/li>
-&lt;li>&lt;code>snmp&lt;/code> (Simple Network Management Protocol)&lt;/li>
-&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol)&lt;/li>
-&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool, an application-layer protocol used for video conferencing on the internet)&lt;/li>
-&lt;li>&lt;code>wb&lt;/code> (distributed White Board, an application-layer protocol for online meetings)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="practical-command-examples">Practical command examples&lt;/h3>
-&lt;p>&lt;strong>Capture communication between host 210.27.48.1 and host 210.27.48.2 or 210.27.48.3&lt;/strong>&lt;/p></description></item><item><title>Understanding Cilium Series (1): Introduction to Cilium</title><link>https://linzeyan.github.io/posts/2021/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211221-understanding-cilium/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener">Understanding Cilium Series (1): Introduction to Cilium&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="current-status-of-k8s-service-load-balancing-implementations">Current status of k8s Service load balancing implementations&lt;/h4>
-&lt;p>Before Cilium, Services were implemented by kube-proxy in three modes: userspace, iptables, and ipvs.&lt;/p>
-&lt;h5 id="userspace">Userspace&lt;/h5>
-&lt;p>In this mode, kube-proxy acts as a reverse proxy and listens on random ports. It redirects traffic to the proxy port via iptables rules, and kube-proxy forwards the traffic to backend pods. Service requests go from user space into kernel iptables and then back to user space, which is costly and has poor performance.&lt;/p></description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener">Kubernetes Without kube-proxy&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="quick-start">Quick-Start&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubeadm init --skip-phases&lt;span style="color:#f92672">=&lt;/span>addon/kube-proxy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Setup Helm repository&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add cilium https://helm.cilium.io/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace kube-system &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set kubeProxyReplacement&lt;span style="color:#f92672">=&lt;/span>strict &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServiceHost&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_IP &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set k8sServicePort&lt;span style="color:#f92672">=&lt;/span>REPLACE_WITH_API_SERVER_PORT
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence">Traffic sequence&lt;/h3>
-&lt;p>Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p>
-&lt;ol>
-&lt;li>DDoS&lt;/li>
-&lt;li>URL Rewrites&lt;/li>
-&lt;li>Page Rules&lt;/li>
-&lt;li>IP Access Rules&lt;/li>
-&lt;li>Bots&lt;/li>
-&lt;li>Firewall Rules&lt;/li>
-&lt;li>Rate Limiting&lt;/li>
-&lt;li>Managed Rules&lt;/li>
-&lt;li>Header Modification&lt;/li>
-&lt;li>Access&lt;/li>
-&lt;li>Workers&lt;/li>
-&lt;/ol></description></item><item><title>What happens after you type a URL in the browser and press Enter?</title><link>https://linzeyan.github.io/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener">What happens after you type a URL in the browser and press Enter?&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Day 19 BGP Protocol (1)</title><link>https://linzeyan.github.io/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener">Day 19 BGP Protocol (1)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener">Day 20 BGP Protocol (2)&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Set interface IP with netplan on Ubuntu 18.04</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener">Set interface IP with netplan on Ubuntu 18.04&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>Following the notes above, check &lt;code>/etc/netplan&lt;/code> and open &lt;code>/etc/netplan/50-cloud-init.yaml&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># This file is generated from information provided by&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the datasource. Changes to it will not persist across an instance.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># network: {config: disabled}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">network&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ethernets&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens192&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ens224&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">dhcp4&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p></description></item><item><title>BIRD and BGP: a beginner's kickoff</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener">BIRD and BGP: a beginner&amp;rsquo;s kickoff&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener">BIRD Internet Routing Daemon&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p>&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt="">&lt;/p></description></item><item><title>Fighting ISP Cache Hijacking Again with iptables</title><link>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener">Fighting ISP Cache Hijacking Again with iptables&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="cause">Cause&lt;/h5>
-&lt;p>The fight against the carrier cache problem started two years ago. The carrier even cached cnpm data. Worse, their cache servers were not only slow like a turtle in a marathon, they also crashed frequently, so I just wanted to write code but had to face a wall of red errors.&lt;/p>
-&lt;h5 id="fix">Fix&lt;/h5>
-&lt;p>&lt;code>iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code>&lt;/p></description></item><item><title>Simulate Network Anomalies with TC and Netem</title><link>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener">Simulate Network Anomalies with TC and Netem&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>Netem and TC brief overview&lt;/p>
-&lt;p>Netem is a network emulation module provided by Linux 2.6 and later kernels. It can be used on a good LAN to simulate complex Internet transmission performance, such as low bandwidth, latency, packet loss, and so on. Many Linux distributions with kernel 2.6+ enable this module by default, such as Fedora, Ubuntu, Redhat, OpenSuse, CentOS, Debian, etc.&lt;/p>
-&lt;p>TC is a user-space tool in Linux, short for Traffic Control. TC controls the operating mode of the Netem module. In other words, to use Netem you need at least two conditions: the Netem module must be enabled in the kernel, and the corresponding user-space tool TC must be available.&lt;/p></description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener">Quagga Routing - Install, Configure and setup BGP&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Best V2Ray One-Click Install &amp; Management Script</title><link>https://linzeyan.github.io/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180208-v2ray/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener">Best V2Ray One-Click Install &amp;amp; Management Script&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener">v2ray&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Representative HTTP Status Codes</title><link>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener">Representative HTTP Status Codes&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch">Switch&lt;/h4>
-&lt;p>&lt;strong>&lt;em>Switches are usually L2 devices&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>They forward packets only to the destination host (based on the MAC table), which reduces collisions and eavesdropping. Switches can also handle packets arriving at the same time, while hubs cannot.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>Hubs are L1 devices&lt;/em>&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>They forward packets from any host to all connected hosts, so collisions happen and cause random retries.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>MAC Table&lt;/em>&lt;/strong>&lt;/p>
-&lt;ol>
-&lt;li>Learning
-&lt;ul>
-&lt;li>A packet arrives on some port (network A) from MAC X destined for MAC Y. The switch records that MAC X is on network A. This is called learning.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Flooding
-&lt;ul>
-&lt;li>The switch does not yet know where MAC Y is, so it forwards the packet to all networks except A. This is called flooding.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Forwarding
-&lt;ul>
-&lt;li>The host with MAC Y receives the packet and sends an ACK to MAC X. The switch records that MAC Y is on that network, then forwards the ACK to MAC X. This is forwarding.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Filtering
-&lt;ul>
-&lt;li>The switch receives a packet and finds that the source and destination MACs are on the same network, so it drops the packet. This is filtering.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Aging
-&lt;ul>
-&lt;li>Each MAC-table entry has a timestamp of last access. Entries older than a threshold (configurable) are removed. This is aging.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ol>
-&lt;h5 id="vlan">Vlan&lt;/h5>
-&lt;p>Switch interfaces must support 802.1Q&lt;/p></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
-&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
-&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
-set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
-set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
-set security zones security-zone JC32 host-inbound-traffic system-services ping
-set security zones security-zone JC32 interfaces gr-0/0/0.32
-set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
-set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
-set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
-set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
-set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
-&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item><item><title>Data Center Notes</title><link>https://linzeyan.github.io/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171024-data-center/</guid><description>&lt;p>First NIC - blue cable&lt;/p>
-&lt;p>Second NIC - green cable&lt;/p>
-&lt;p>Switch interconnect - white cable&lt;/p>
-&lt;p>Yellow, red&lt;/p>
-&lt;p>Storage has disk arrays and heavy data transfer, so it uses fiber connections and fiber switches.&lt;/p>
-&lt;p>Fiber colors:&lt;/p>
-&lt;p>Multi-mode or single-mode fiber&lt;/p>
-&lt;p>Single-mode fiber is yellow. Multi-mode fiber (50μm or 62.5μm) is usually orange. 10GB multi-mode fiber is usually aqua.&lt;/p>
-&lt;p>Common spec distinctions:&lt;/p>
-&lt;ul>
-&lt;li>OS1, OS2, 9µm, 9/125 = single-mode fiber&lt;/li>
-&lt;li>OM1, 62.5µm, 62.5/125 = 62.5 multi-mode fiber&lt;/li>
-&lt;li>OM2, 50µ, 50/125 = 50 multi-mode fiber&lt;/li>
-&lt;li>OM3, 10GB, 50µm, 50/125 = 10GB multi-mode fiber&lt;/li>
-&lt;li>OM4, 100GB, 50µm, 50/125 = 100GB multi-mode fiber&lt;/li>
-&lt;/ul>
-&lt;p>Fiber structure&lt;/p></description></item><item><title>Route notes</title><link>https://linzeyan.github.io/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20170916-route/</guid><description>&lt;p>Router - a device that is good at computing routing tables, an L3 device.&lt;/p>
-&lt;p>Routing Table&lt;/p>
-&lt;ul>
-&lt;li>A NIC with one IP naturally has two routes and they cannot be changed. 192.168.1.1/24
-&lt;ul>
-&lt;li>Itself. Local route / Host route: 192.168.1.1/32&lt;/li>
-&lt;li>The whole subnet. Direct route / Connect route: 192.168.1.0/24&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>You can add as many static routes as you want.
-&lt;ul>
-&lt;li>172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li>
-&lt;li>2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li>
-&lt;li>&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Default route - only one gateway.
-&lt;ul>
-&lt;li>0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>More specific routes take precedence.&lt;/li>
-&lt;li>BGPv4&lt;/li>
-&lt;/ul></description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20170903-arp/</guid><description>&lt;p>Before a packet is sent&lt;/p>
-&lt;ul>
-&lt;li>Look up the MAC for the IP in the ARP table
-&lt;ul>
-&lt;li>MAC found - encapsulate&lt;/li>
-&lt;li>No MAC - broadcast
-&lt;ul>
-&lt;li>Same subnet - OK&lt;/li>
-&lt;li>Different subnet - look up the router MAC in the ARP table
-&lt;ul>
-&lt;li>Found - OK&lt;/li>
-&lt;li>Not found - broadcast&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Ricky</title><link>https://linzeyan.github.io/tags/network/</link><description>Recent content in Network on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 22 Oct 2024 09:24:08 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>Relay V2Ray Traffic via Cloudflare</title><link>https://linzeyan.github.io/posts/2024/20241022-v2ray-cloudflare/</link><pubDate>Tue, 22 Oct 2024 09:24:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241022-v2ray-cloudflare/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-cloudflare/" target="_blank" rel="noopener"&gt;Relay V2Ray Traffic via Cloudflare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-script/" target="_blank" rel="noopener"&gt;The most convenient V2Ray one-click install script&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-dns/" target="_blank" rel="noopener"&gt;V2Ray script DNS settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener"&gt;V2Ray script relay tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="install-script"&gt;Install Script&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bash &amp;lt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="preparation"&gt;Preparation&lt;/h2&gt;
+&lt;p&gt;Add a DNS record now. Name: &lt;code&gt;ai&lt;/code&gt;, IPv4 address: &lt;code&gt;your VPS IP&lt;/code&gt;. The proxy status must be off, so the cloud icon is gray.&lt;/p&gt;
+&lt;p&gt;Tip: You can use &lt;code&gt;v2ray ip&lt;/code&gt; to view your VPS IP.&lt;/p&gt;
+&lt;h2 id="add-relay-configuration"&gt;Add Relay Configuration&lt;/h2&gt;
+&lt;p&gt;Use &lt;code&gt;v2ray add ws ai.233boy.com&lt;/code&gt; to add a vmess-ws-tls configuration; remember to replace &lt;code&gt;ai.233boy.com&lt;/code&gt; with your domain.&lt;/p&gt;</description></item><item><title>Google Infra</title><link>https://linzeyan.github.io/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240924-google-infra/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener"&gt;Google&amp;rsquo;s 5-generation network architecture in ten years&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener"&gt;Everything About MTU and MSS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Monitoring HTTP Requests on a Network Interface in Real Time</title><link>https://linzeyan.github.io/posts/2022/20220623-monitoring-http-requests-network-interfaces/</link><pubDate>Thu, 23 Jun 2022 16:48:42 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220623-monitoring-http-requests-network-interfaces/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/monitoring-http-requests-network-interfaces" target="_blank" rel="noopener"&gt;Monitoring HTTP Requests on a Network Interface in Real Time&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tcpflow"&gt;tcpflow&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; disables promiscuous mode&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt; means only print the output to the console and don&amp;rsquo;t create files&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-i&lt;/code&gt; specifies the network interface
+grep receives the output of tcpflow&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o&lt;/code&gt; means show only the matching parts of the lines that match the pattern&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-E&lt;/code&gt; means the pattern is an extended regular expression (ERE)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="httpry"&gt;httpry&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;https://github.com/jbittel/httpry.git&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Tcpdump Usage Summary</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener"&gt;Tcpdump Usage Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="command-usage"&gt;Command usage&lt;/h2&gt;
+&lt;p&gt;tcpdump uses the command line. The command format is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="simple-option-notes-for-tcpdump"&gt;Simple option notes for tcpdump&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt; can decrypt IPsec ESP packets using &lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code&gt;0x&lt;/code&gt;, the key is read as hex. In addition to the syntax above (&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code&gt;spi@ipaddr algo:secret, ...&lt;/code&gt; with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aodv&lt;/code&gt; (Ad-hoc On-demand Distance Vector protocol, used in Ad hoc peer-to-peer networks)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cnfp&lt;/code&gt; (Cisco NetFlow protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpc&lt;/code&gt; (Remote Procedure Call)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtp&lt;/code&gt; (Real-Time Applications protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtcp&lt;/code&gt; (Real-Time Applications control protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snmp&lt;/code&gt; (Simple Network Management Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tftp&lt;/code&gt; (Trivial File Transfer Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vat&lt;/code&gt; (Visual Audio Tool, an application-layer protocol used for video conferencing on the internet)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wb&lt;/code&gt; (distributed White Board, an application-layer protocol for online meetings)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="practical-command-examples"&gt;Practical command examples&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Capture communication between host 210.27.48.1 and host 210.27.48.2 or 210.27.48.3&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Understanding Cilium Series (1): Introduction to Cilium</title><link>https://linzeyan.github.io/posts/2021/20211221-understanding-cilium/</link><pubDate>Tue, 21 Dec 2021 13:04:38 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211221-understanding-cilium/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.gushiciku.cn/pl/geTr/zh-hk" target="_blank" rel="noopener"&gt;Understanding Cilium Series (1): Introduction to Cilium&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="current-status-of-k8s-service-load-balancing-implementations"&gt;Current status of k8s Service load balancing implementations&lt;/h4&gt;
+&lt;p&gt;Before Cilium, Services were implemented by kube-proxy in three modes: userspace, iptables, and ipvs.&lt;/p&gt;
+&lt;h5 id="userspace"&gt;Userspace&lt;/h5&gt;
+&lt;p&gt;In this mode, kube-proxy acts as a reverse proxy and listens on random ports. It redirects traffic to the proxy port via iptables rules, and kube-proxy forwards the traffic to backend pods. Service requests go from user space into kernel iptables and then back to user space, which is costly and has poor performance.&lt;/p&gt;</description></item><item><title>Kubernetes Without kube-proxy</title><link>https://linzeyan.github.io/posts/2021/20211220-kubeproxy-free/</link><pubDate>Mon, 20 Dec 2021 17:57:13 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211220-kubeproxy-free/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener"&gt;Kubernetes Without kube-proxy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="quick-start"&gt;Quick-Start&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubeadm init --skip-phases&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;addon/kube-proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setup Helm repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo add cilium https://helm.cilium.io/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --namespace kube-system &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;kubeProxyReplacement&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;strict &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServiceHost&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_IP &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServicePort&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_PORT
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence"&gt;Traffic sequence&lt;/h3&gt;
+&lt;p&gt;Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DDoS&lt;/li&gt;
+&lt;li&gt;URL Rewrites&lt;/li&gt;
+&lt;li&gt;Page Rules&lt;/li&gt;
+&lt;li&gt;IP Access Rules&lt;/li&gt;
+&lt;li&gt;Bots&lt;/li&gt;
+&lt;li&gt;Firewall Rules&lt;/li&gt;
+&lt;li&gt;Rate Limiting&lt;/li&gt;
+&lt;li&gt;Managed Rules&lt;/li&gt;
+&lt;li&gt;Header Modification&lt;/li&gt;
+&lt;li&gt;Access&lt;/li&gt;
+&lt;li&gt;Workers&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>What happens after you type a URL in the browser and press Enter?</title><link>https://linzeyan.github.io/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener"&gt;What happens after you type a URL in the browser and press Enter?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Day 19 BGP Protocol (1)</title><link>https://linzeyan.github.io/posts/2020/20201230-bgp/</link><pubDate>Wed, 30 Dec 2020 20:00:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-bgp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10249123" target="_blank" rel="noopener"&gt;Day 19 BGP Protocol (1)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10249539" target="_blank" rel="noopener"&gt;Day 20 BGP Protocol (2)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Set interface IP with netplan on Ubuntu 18.04</title><link>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</link><pubDate>Fri, 18 Sep 2020 13:00:05 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200918-ubuntu-18-04/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener"&gt;Set interface IP with netplan on Ubuntu 18.04&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Following the notes above, check &lt;code&gt;/etc/netplan&lt;/code&gt; and open &lt;code&gt;/etc/netplan/50-cloud-init.yaml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This file is generated from information provided by&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# the datasource. Changes to it will not persist across an instance.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# network: {config: disabled}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ethernets&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens192&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens224&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;version&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p&gt;</description></item><item><title>BIRD and BGP: a beginner's kickoff</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener"&gt;BIRD and BGP: a beginner&amp;rsquo;s kickoff&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener"&gt;BIRD Internet Routing Daemon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p&gt;&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt=""&gt;&lt;/p&gt;</description></item><item><title>Fighting ISP Cache Hijacking Again with iptables</title><link>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener"&gt;Fighting ISP Cache Hijacking Again with iptables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="cause"&gt;Cause&lt;/h5&gt;
+&lt;p&gt;The fight against the carrier cache problem started two years ago. The carrier even cached cnpm data. Worse, their cache servers were not only slow like a turtle in a marathon, they also crashed frequently, so I just wanted to write code but had to face a wall of red errors.&lt;/p&gt;
+&lt;h5 id="fix"&gt;Fix&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;iptables -I FORWARD -p tcp -m tcp -m ttl --ttl-gt 20 -m ttl --ttl-lt 30 -j DROP&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Simulate Network Anomalies with TC and Netem</title><link>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</link><pubDate>Sat, 15 Sep 2018 16:17:26 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180915-simulate-network-anomalies-using-tc-and-netem/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.hi-linux.com/posts/35699.html" target="_blank" rel="noopener"&gt;Simulate Network Anomalies with TC and Netem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Netem and TC brief overview&lt;/p&gt;
+&lt;p&gt;Netem is a network emulation module provided by Linux 2.6 and later kernels. It can be used on a good LAN to simulate complex Internet transmission performance, such as low bandwidth, latency, packet loss, and so on. Many Linux distributions with kernel 2.6+ enable this module by default, such as Fedora, Ubuntu, Redhat, OpenSuse, CentOS, Debian, etc.&lt;/p&gt;
+&lt;p&gt;TC is a user-space tool in Linux, short for Traffic Control. TC controls the operating mode of the Netem module. In other words, to use Netem you need at least two conditions: the Netem module must be enabled in the kernel, and the corresponding user-space tool TC must be available.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Quagga Routing - Install, Configure and setup BGP</title><link>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</link><pubDate>Tue, 14 Aug 2018 22:13:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180814-quagga-routing--install-configure-and-setup-bgp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.psychz.net/client/kb/en/quagga-routing--install-configure-and-setup-bgp.html" target="_blank" rel="noopener"&gt;Quagga Routing - Install, Configure and setup BGP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Best V2Ray One-Click Install &amp; Management Script</title><link>https://linzeyan.github.io/posts/2018/20180208-v2ray/</link><pubDate>Thu, 08 Feb 2018 10:56:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180208-v2ray/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://233blog.com/post/16/" target="_blank" rel="noopener"&gt;Best V2Ray One-Click Install &amp;amp; Management Script&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/233boy/v2ray" target="_blank" rel="noopener"&gt;v2ray&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Representative HTTP Status Codes</title><link>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener"&gt;Representative HTTP Status Codes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Switch notes</title><link>https://linzeyan.github.io/posts/2017/20171125-cisco/</link><pubDate>Sat, 25 Nov 2017 11:47:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171125-cisco/</guid><description>&lt;h4 id="switch"&gt;Switch&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Switches are usually L2 devices&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;They forward packets only to the destination host (based on the MAC table), which reduces collisions and eavesdropping. Switches can also handle packets arriving at the same time, while hubs cannot.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hubs are L1 devices&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;They forward packets from any host to all connected hosts, so collisions happen and cause random retries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;MAC Table&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Learning
+&lt;ul&gt;
+&lt;li&gt;A packet arrives on some port (network A) from MAC X destined for MAC Y. The switch records that MAC X is on network A. This is called learning.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Flooding
+&lt;ul&gt;
+&lt;li&gt;The switch does not yet know where MAC Y is, so it forwards the packet to all networks except A. This is called flooding.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Forwarding
+&lt;ul&gt;
+&lt;li&gt;The host with MAC Y receives the packet and sends an ACK to MAC X. The switch records that MAC Y is on that network, then forwards the ACK to MAC X. This is forwarding.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Filtering
+&lt;ul&gt;
+&lt;li&gt;The switch receives a packet and finds that the source and destination MACs are on the same network, so it drops the packet. This is filtering.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Aging
+&lt;ul&gt;
+&lt;li&gt;Each MAC-table entry has a timestamp of last access. Entries older than a threshold (configurable) are removed. This is aging.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id="vlan"&gt;Vlan&lt;/h5&gt;
+&lt;p&gt;Switch interfaces must support 802.1Q&lt;/p&gt;</description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel"&gt;[Juniper Firewall] tunnel&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;ACG&lt;/em&gt;&lt;/strong&gt;
+&lt;code&gt;icare@TWCHIJF01# show | compare rollback 4&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-diff" data-lang="diff"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security policies]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ from-zone DB_12 to-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ policy For_Backup {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ match {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source-address DB_10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination-address BACKUP_10.32.32.130;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ application any;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ then {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ permit;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones security-zone DB_12 address-book]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; address DB_10.11.12.57 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; security-zone ESB_15 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ security-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address-book {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ host-inbound-traffic {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ system-services {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ ping;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ interfaces {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ gr-0/0/0.32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit interfaces gr-0/0/0]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ unit 32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ description To_JC32_DBBackup;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ tunnel {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source 202.168.193.128;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination 218.253.210.8;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ family inet {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address 10.32.0.101/30;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit routing-options static]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; route 0.0.0.0/0 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 host-inbound-traffic system-services ping
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 interfaces gr-0/0/0.32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Data Center Notes</title><link>https://linzeyan.github.io/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171024-data-center/</guid><description>&lt;p&gt;First NIC - blue cable&lt;/p&gt;
+&lt;p&gt;Second NIC - green cable&lt;/p&gt;
+&lt;p&gt;Switch interconnect - white cable&lt;/p&gt;
+&lt;p&gt;Yellow, red&lt;/p&gt;
+&lt;p&gt;Storage has disk arrays and heavy data transfer, so it uses fiber connections and fiber switches.&lt;/p&gt;
+&lt;p&gt;Fiber colors:&lt;/p&gt;
+&lt;p&gt;Multi-mode or single-mode fiber&lt;/p&gt;
+&lt;p&gt;Single-mode fiber is yellow. Multi-mode fiber (50μm or 62.5μm) is usually orange. 10GB multi-mode fiber is usually aqua.&lt;/p&gt;
+&lt;p&gt;Common spec distinctions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OS1, OS2, 9µm, 9/125 = single-mode fiber&lt;/li&gt;
+&lt;li&gt;OM1, 62.5µm, 62.5/125 = 62.5 multi-mode fiber&lt;/li&gt;
+&lt;li&gt;OM2, 50µ, 50/125 = 50 multi-mode fiber&lt;/li&gt;
+&lt;li&gt;OM3, 10GB, 50µm, 50/125 = 10GB multi-mode fiber&lt;/li&gt;
+&lt;li&gt;OM4, 100GB, 50µm, 50/125 = 100GB multi-mode fiber&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Fiber structure&lt;/p&gt;</description></item><item><title>Route notes</title><link>https://linzeyan.github.io/posts/2017/20170916-route/</link><pubDate>Sat, 16 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20170916-route/</guid><description>&lt;p&gt;Router - a device that is good at computing routing tables, an L3 device.&lt;/p&gt;
+&lt;p&gt;Routing Table&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A NIC with one IP naturally has two routes and they cannot be changed. 192.168.1.1/24
+&lt;ul&gt;
+&lt;li&gt;Itself. Local route / Host route: 192.168.1.1/32&lt;/li&gt;
+&lt;li&gt;The whole subnet. Direct route / Connect route: 192.168.1.0/24&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;You can add as many static routes as you want.
+&lt;ul&gt;
+&lt;li&gt;172.10.10.10/24 -&amp;gt; 192.168.1.2&lt;/li&gt;
+&lt;li&gt;2.2.2.2/26 -&amp;gt; 192.168.1.9&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Default route - only one gateway.
+&lt;ul&gt;
+&lt;li&gt;0.0.0.0/0 -&amp;gt; 192.168.1.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;More specific routes take precedence.&lt;/li&gt;
+&lt;li&gt;BGPv4&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Arp notes</title><link>https://linzeyan.github.io/posts/2017/20170903-arp/</link><pubDate>Sun, 03 Sep 2017 15:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20170903-arp/</guid><description>&lt;p&gt;Before a packet is sent&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Look up the MAC for the IP in the ARP table
+&lt;ul&gt;
+&lt;li&gt;MAC found - encapsulate&lt;/li&gt;
+&lt;li&gt;No MAC - broadcast
+&lt;ul&gt;
+&lt;li&gt;Same subnet - OK&lt;/li&gt;
+&lt;li&gt;Different subnet - look up the router MAC in the ARP table
+&lt;ul&gt;
+&lt;li&gt;Found - OK&lt;/li&gt;
+&lt;li&gt;Not found - broadcast&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

@@ -1,113 +1,113 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Ricky</title><link>https://linzeyan.github.io/categories/git/</link><description>Recent content in Git on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Mar 2025 15:46:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/git/index.xml" rel="self" type="application/rss+xml"/><item><title>How Core Git Developers Configure Git</title><link>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</link><pubDate>Fri, 07 Mar 2025 15:46:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.gitbutler.com/how-git-core-devs-configure-git/" target="_blank" rel="noopener">How Core Git Developers Configure Git&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># clearly makes git better&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>column&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ui &lt;span style="color:#f92672">=&lt;/span> auto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>branch&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sort &lt;span style="color:#f92672">=&lt;/span> -committerdate
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>tag&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sort &lt;span style="color:#f92672">=&lt;/span> version:refname
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>init&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultBranch &lt;span style="color:#f92672">=&lt;/span> main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>diff&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> algorithm &lt;span style="color:#f92672">=&lt;/span> histogram
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> colorMoved &lt;span style="color:#f92672">=&lt;/span> plain
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mnemonicPrefix &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> renames &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>push&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> default &lt;span style="color:#f92672">=&lt;/span> simple
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoSetupRemote &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> followTags &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>fetch&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prune &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pruneTags &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> all &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># why the hell not?&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>help&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autocorrect &lt;span style="color:#f92672">=&lt;/span> prompt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>commit&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> verbose &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>rerere&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enabled &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoupdate &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>core&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> excludesfile &lt;span style="color:#f92672">=&lt;/span> ~/.gitignore
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>rebase&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoSquash &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> autoStash &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> updateRefs &lt;span style="color:#f92672">=&lt;/span> true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># a matter of taste (uncomment if you dare)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>core&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># fsmonitor = true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># untrackedCache = true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>merge&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># (just &amp;#39;diff3&amp;#39; if git version &amp;lt; 2.3)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># conflictstyle = zdiff3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>pull&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># rebase = true&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How I configure my Git identities</title><link>https://linzeyan.github.io/posts/2024/20241125-git-config/</link><pubDate>Mon, 25 Nov 2024 17:35:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241125-git-config/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.benji.dog/articles/git-config/" target="_blank" rel="noopener">How I configure my Git identities&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>&lt;em>includeIf&lt;/em>&lt;/strong>&lt;/p>
-&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;gitdir:~/code/**&amp;#34;]
-path = ~/.config/git/personal
-[includeIf &amp;#34;gitdir:~/work/**&amp;#34;]
-path = ~/.config/git/work
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;code>hasconfig:remote.*.url:&lt;/code>&lt;/strong>&lt;/p>
-&lt;pre tabindex="0">&lt;code>[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:*/**&amp;#34;]
-path = ~/.config/git/config-gh
-[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:orgname/**&amp;#34;]
-path = ~/.config/git/config-gh-org
-[includeIf &amp;#34;hasconfig:remote.*.url:git@gitlab.com:*/**&amp;#34;]
-path = ~/.config/git/config-gl
-[includeIf &amp;#34;hasconfig:remote.*.url:git@git.sr.ht:*/**&amp;#34;]
-path = ~/.config/git/config-srht
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>&lt;em>insteadOf&lt;/em>&lt;/strong>&lt;/p>
-&lt;pre tabindex="0">&lt;code>[url &amp;#34;gh-work:orgname&amp;#34;]
-insteadOf = git@github.com:orgname
-&lt;/code>&lt;/pre></description></item><item><title>Git force push</title><link>https://linzeyan.github.io/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240726-git/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.jvt.me/posts/2021/10/23/undo-force-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2021/10/23/undo-force-push/&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.jvt.me/posts/2018/09/18/safely-force-git-push/" target="_blank" rel="noopener">https://www.jvt.me/posts/2018/09/18/safely-force-git-push/&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git push --force-with-lease
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Tracking SQLite Database Changes in Git</title><link>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</link><pubDate>Wed, 07 Feb 2024 19:20:15 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://lobste.rs/s/gnv9ho/tracking_sqlite_database_changes_git" target="_blank" rel="noopener">Tracking SQLite Database Changes in Git&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://stackoverflow.com/a/21789167" target="_blank" rel="noopener">Git hook for diff sqlite table&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>First, add a diff type called &amp;ldquo;sqlite3&amp;rdquo; to your config. The simplest way is to just run these commands:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git config diff.sqlite3.binary true git config diff.sqlite3.textconv &lt;span style="color:#e6db74">&amp;#34;echo .dump | sqlite3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Alternatively, you can add this snippet to your &lt;code>~/.gitconfig&lt;/code> or &lt;code>.git/config&lt;/code> in your repository:&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-gitconfig" data-lang="gitconfig">[diff &amp;#34;sqlite3&amp;#34;] binary = true textconv = &amp;#34;echo .dump | sqlite3&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>Next, create a file called &lt;code>.gitattributes&lt;/code> if it&amp;rsquo;s not already present and add this line:&lt;/p></description></item><item><title>Sign git commits with GPG</title><link>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/" target="_blank" rel="noopener">Sign git commits with GPG&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Little Git Tricks: Use .mailmap to Merge Different Authors</title><link>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</link><pubDate>Thu, 05 Aug 2021 13:42:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/" target="_blank" rel="noopener">Little Git Tricks: Use .mailmap to Merge Different Authors&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;code>.mailmap&lt;/code> file ==&amp;gt; &lt;code>Name you want to keep &amp;lt;email&amp;gt; Name you no longer want &amp;lt;email&amp;gt;&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code>John Doe John Doe
-John Doe John Doe
-John Doe john doe
-Max Example Max
-&lt;/code>&lt;/pre>&lt;h5 id="before">before&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git shortlog -se
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> John Doe &amp;lt;John@Doe.org&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> John Doe &amp;lt;John@doe.org&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2&lt;/span> John Doe &amp;lt;john@doe.org&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> Max &amp;lt;max@test.co.uk&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">3&lt;/span> Max Example &amp;lt;hi@test.com&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> john doe &amp;lt;john@doe.org&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="after">after&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ git shortlog -se
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">5&lt;/span> John Doe &amp;lt;john@doe.org&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">4&lt;/span> Max Example &amp;lt;hi@test.com&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Introduction to Git internals</title><link>https://linzeyan.github.io/posts/2020/20200602-1369947/</link><pubDate>Tue, 02 Jun 2020 08:39:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200602-1369947/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://cloud.tencent.com/developer/article/1369947" target="_blank" rel="noopener">Introduction to Git internals&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>CS Visualized: Useful Git Commands</title><link>https://linzeyan.github.io/posts/2020/20200416-cs-visualized-useful-git-commands-37p1/</link><pubDate>Thu, 16 Apr 2020 20:20:16 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200416-cs-visualized-useful-git-commands-37p1/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1" target="_blank" rel="noopener">CS Visualized: Useful Git Commands&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Ricky</title><link>https://linzeyan.github.io/categories/git/</link><description>Recent content in Git on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 07 Mar 2025 15:46:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/git/index.xml" rel="self" type="application/rss+xml"/><item><title>How Core Git Developers Configure Git</title><link>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</link><pubDate>Fri, 07 Mar 2025 15:46:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250307-how-git-core-devs-configure-git/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.gitbutler.com/how-git-core-devs-configure-git/" target="_blank" rel="noopener"&gt;How Core Git Developers Configure Git&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# clearly makes git better&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;column&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ui&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; auto
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;branch&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;sort&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; -committerdate
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;tag&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;sort&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; version:refname
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;init&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;defaultBranch&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; main
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;diff&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;algorithm&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; histogram
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;colorMoved&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; plain
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;mnemonicPrefix&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;renames&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;push&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;default&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; simple
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;autoSetupRemote&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;followTags&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;fetch&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;prune&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;pruneTags&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;all&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# why the hell not?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;help&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;autocorrect&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; prompt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;commit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;verbose&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;rerere&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;enabled&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;autoupdate&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;core&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;excludesfile&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; ~/.gitignore
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;rebase&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;autoSquash&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;autoStash&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;updateRefs&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# a matter of taste (uncomment if you dare)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;core&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# fsmonitor = true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# untrackedCache = true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;merge&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# (just &amp;#39;diff3&amp;#39; if git version &amp;lt; 2.3)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# conflictstyle = zdiff3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;pull&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# rebase = true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>How I configure my Git identities</title><link>https://linzeyan.github.io/posts/2024/20241125-git-config/</link><pubDate>Mon, 25 Nov 2024 17:35:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20241125-git-config/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.benji.dog/articles/git-config/" target="_blank" rel="noopener"&gt;How I configure my Git identities&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;includeIf&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;gitdir:~/code/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/personal
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;gitdir:~/work/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/work
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;hasconfig:remote.*.url:&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:*/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/config-gh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;hasconfig:remote.*.url:git@github.com:orgname/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/config-gh-org
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;hasconfig:remote.*.url:git@gitlab.com:*/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/config-gl
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[includeIf &amp;#34;hasconfig:remote.*.url:git@git.sr.ht:*/**&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; path = ~/.config/git/config-srht
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;insteadOf&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[url &amp;#34;gh-work:orgname&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; insteadOf = git@github.com:orgname
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Git force push</title><link>https://linzeyan.github.io/posts/2024/20240726-git/</link><pubDate>Fri, 26 Jul 2024 12:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240726-git/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.jvt.me/posts/2021/10/23/undo-force-push/" target="_blank" rel="noopener"&gt;https://www.jvt.me/posts/2021/10/23/undo-force-push/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.jvt.me/posts/2018/09/18/safely-force-git-push/" target="_blank" rel="noopener"&gt;https://www.jvt.me/posts/2018/09/18/safely-force-git-push/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push --force-with-lease
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Tracking SQLite Database Changes in Git</title><link>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</link><pubDate>Wed, 07 Feb 2024 19:20:15 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240207-tracking_sqlite_database_changes_git/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://lobste.rs/s/gnv9ho/tracking_sqlite_database_changes_git" target="_blank" rel="noopener"&gt;Tracking SQLite Database Changes in Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/a/21789167" target="_blank" rel="noopener"&gt;Git hook for diff sqlite table&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;First, add a diff type called &amp;ldquo;sqlite3&amp;rdquo; to your config. The simplest way is to just run these commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config diff.sqlite3.binary &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt; git config diff.sqlite3.textconv &lt;span style="color:#98c379"&gt;&amp;#34;echo .dump | sqlite3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, you can add this snippet to your &lt;code&gt;~/.gitconfig&lt;/code&gt; or &lt;code&gt;.git/config&lt;/code&gt; in your repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[diff &amp;#34;sqlite3&amp;#34;] binary = true textconv = &amp;#34;echo .dump | sqlite3&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, create a file called &lt;code&gt;.gitattributes&lt;/code&gt; if it&amp;rsquo;s not already present and add this line:&lt;/p&gt;</description></item><item><title>Sign git commits with GPG</title><link>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</link><pubDate>Tue, 05 Oct 2021 18:28:06 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211005-sign_git_commit_with_gpg/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/" target="_blank" rel="noopener"&gt;Sign git commits with GPG&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Little Git Tricks: Use .mailmap to Merge Different Authors</title><link>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</link><pubDate>Thu, 05 Aug 2021 13:42:14 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210805-little-git-tricks-use-mailmap-to-merge-different-authors/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://improveandrepeat.com/2019/06/little-git-tricks-use-mailmap-to-merge-different-authors/" target="_blank" rel="noopener"&gt;Little Git Tricks: Use .mailmap to Merge Different Authors&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;.mailmap&lt;/code&gt; file ==&amp;gt; &lt;code&gt;Name you want to keep &amp;lt;email&amp;gt; Name you no longer want &amp;lt;email&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;John Doe John Doe
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;John Doe John Doe
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;John Doe john doe
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Max Example Max
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="before"&gt;before&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git shortlog -se
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; John Doe &amp;lt;John@Doe.org&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; John Doe &amp;lt;John@doe.org&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; John Doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; Max &amp;lt;max@test.co.uk&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;3&lt;/span&gt; Max Example &amp;lt;hi@test.com&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; john doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="after"&gt;after&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git shortlog -se
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;5&lt;/span&gt; John Doe &amp;lt;john@doe.org&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Max Example &amp;lt;hi@test.com&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Introduction to Git internals</title><link>https://linzeyan.github.io/posts/2020/20200602-1369947/</link><pubDate>Tue, 02 Jun 2020 08:39:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200602-1369947/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://cloud.tencent.com/developer/article/1369947" target="_blank" rel="noopener"&gt;Introduction to Git internals&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>CS Visualized: Useful Git Commands</title><link>https://linzeyan.github.io/posts/2020/20200416-cs-visualized-useful-git-commands-37p1/</link><pubDate>Thu, 16 Apr 2020 20:20:16 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200416-cs-visualized-useful-git-commands-37p1/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1" target="_blank" rel="noopener"&gt;CS Visualized: Useful Git Commands&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

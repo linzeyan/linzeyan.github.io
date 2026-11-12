@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tcpdump on Ricky</title><link>https://linzeyan.github.io/categories/tcpdump/</link><description>Recent content in Tcpdump on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 05 May 2022 13:39:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/tcpdump/index.xml" rel="self" type="application/rss+xml"/><item><title>Tcpdump Usage Summary</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump Usage Summary&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="command-usage">Command usage&lt;/h2>
-&lt;p>tcpdump uses the command line. The command format is:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tcpdump &lt;span style="color:#f92672">[&lt;/span> -AdDeflLnNOpqRStuUvxX &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -c count &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -C file_size &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -F file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -i interface &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -m module &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -M secret &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -r file &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -s snaplen &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -T type &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -w file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -W filecount &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -E spi@ipaddr algo:secret, ... &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -y datalinktype &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -Z user &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> expression &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="simple-option-notes-for-tcpdump">Simple option notes for tcpdump&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code> can decrypt IPsec ESP packets using &lt;code>spi@ipaddr algo:secret&lt;/code>. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code>0x&lt;/code>, the key is read as hex. In addition to the syntax above (&lt;code>spi@ipaddr algo:secret&lt;/code>), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code>spi@ipaddr algo:secret, ...&lt;/code> with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li>
-&lt;li>&lt;code>-T type&lt;/code> forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
-&lt;ul>
-&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol, used in Ad hoc peer-to-peer networks)&lt;/li>
-&lt;li>&lt;code>cnfp&lt;/code> (Cisco NetFlow protocol)&lt;/li>
-&lt;li>&lt;code>rpc&lt;/code> (Remote Procedure Call)&lt;/li>
-&lt;li>&lt;code>rtp&lt;/code> (Real-Time Applications protocol)&lt;/li>
-&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications control protocol)&lt;/li>
-&lt;li>&lt;code>snmp&lt;/code> (Simple Network Management Protocol)&lt;/li>
-&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol)&lt;/li>
-&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool, an application-layer protocol used for video conferencing on the internet)&lt;/li>
-&lt;li>&lt;code>wb&lt;/code> (distributed White Board, an application-layer protocol for online meetings)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="practical-command-examples">Practical command examples&lt;/h3>
-&lt;p>&lt;strong>Capture communication between host 210.27.48.1 and host 210.27.48.2 or 210.27.48.3&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tcpdump on Ricky</title><link>https://linzeyan.github.io/categories/tcpdump/</link><description>Recent content in Tcpdump on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 May 2022 13:39:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/tcpdump/index.xml" rel="self" type="application/rss+xml"/><item><title>Tcpdump Usage Summary</title><link>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener"&gt;Tcpdump Usage Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="command-usage"&gt;Command usage&lt;/h2&gt;
+&lt;p&gt;tcpdump uses the command line. The command format is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="simple-option-notes-for-tcpdump"&gt;Simple option notes for tcpdump&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt; can decrypt IPsec ESP packets using &lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code&gt;0x&lt;/code&gt;, the key is read as hex. In addition to the syntax above (&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code&gt;spi@ipaddr algo:secret, ...&lt;/code&gt; with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aodv&lt;/code&gt; (Ad-hoc On-demand Distance Vector protocol, used in Ad hoc peer-to-peer networks)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cnfp&lt;/code&gt; (Cisco NetFlow protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpc&lt;/code&gt; (Remote Procedure Call)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtp&lt;/code&gt; (Real-Time Applications protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtcp&lt;/code&gt; (Real-Time Applications control protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snmp&lt;/code&gt; (Simple Network Management Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tftp&lt;/code&gt; (Trivial File Transfer Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vat&lt;/code&gt; (Visual Audio Tool, an application-layer protocol used for video conferencing on the internet)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wb&lt;/code&gt; (distributed White Board, an application-layer protocol for online meetings)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="practical-command-examples"&gt;Practical command examples&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Capture communication between host 210.27.48.1 and host 210.27.48.2 or 210.27.48.3&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

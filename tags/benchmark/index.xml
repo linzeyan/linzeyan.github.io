@@ -1,44 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Benchmark on Ricky</title><link>https://linzeyan.github.io/tags/benchmark/</link><description>Recent content in Benchmark on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Sep 2021 12:50:33 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/benchmark/index.xml" rel="self" type="application/rss+xml"/><item><title>Golang benchmarks</title><link>https://linzeyan.github.io/posts/2021/20210902-golang-ji-zhun-ce-shi/</link><pubDate>Thu, 02 Sep 2021 12:50:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210902-golang-ji-zhun-ce-shi/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&amp;amp;mid=2247485595&amp;amp;idx=1&amp;amp;sn=9981e6103a6b33cc3a06be0781a2bf10&amp;amp;chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd" target="_blank" rel="noopener">Golang benchmarks&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="basics">Basics&lt;/h4>
-&lt;blockquote>
-&lt;p>Benchmarks are used for performance testing. Functions should import the testing package and define functions that start with Benchmark. The parameter type is testing.B, and the target function is called repeatedly inside the benchmark loop.&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -run&lt;span style="color:#f92672">=&lt;/span>none
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">250&lt;/span> &lt;span style="color:#ae81ff">4682682&lt;/span> ns/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.875s
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-12 &lt;span style="color:#ae81ff">249&lt;/span> &lt;span style="color:#ae81ff">4686452&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 1.854s
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="how-bench-works">How bench works&lt;/h4>
-&lt;ul>
-&lt;li>The benchmark function keeps running until &lt;code>b.N&lt;/code> is no longer valid; it is the number of iterations.&lt;/li>
-&lt;li>&lt;code>b.N&lt;/code> starts at &lt;code>1&lt;/code>. If the benchmark completes within &lt;code>1&lt;/code> second (default), &lt;code>b.N&lt;/code> increases and the benchmark runs again.&lt;/li>
-&lt;li>&lt;code>b.N&lt;/code> increases in the sequence &lt;code>1,2,5,10,20,50,...&lt;/code> and the benchmark reruns.&lt;/li>
-&lt;li>The result above means it ran &lt;code>250&lt;/code> times in 1 second, with each run taking &lt;code>4682682 ns&lt;/code>.&lt;/li>
-&lt;li>The &lt;code>-12&lt;/code> suffix relates to &lt;code>GOMAXPROCS&lt;/code>. The default value is the number of CPUs visible to the Go process at startup. You can change it with &lt;code>-cpu&lt;/code>, and pass multiple values to run multiple benchmarks.&lt;/li>
-&lt;/ul>
-&lt;h4 id="run-with-multiple-cpu-counts">Run with multiple CPU counts&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>➜ go test -bench&lt;span style="color:#f92672">=&lt;/span>. -cpu&lt;span style="color:#f92672">=&lt;/span>1,2,4 -benchmem -run&lt;span style="color:#f92672">=&lt;/span>none
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goos: darwin
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>goarch: amd64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pkg: pkg06
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cpu: Intel&lt;span style="color:#f92672">(&lt;/span>R&lt;span style="color:#f92672">)&lt;/span> Core&lt;span style="color:#f92672">(&lt;/span>TM&lt;span style="color:#f92672">)&lt;/span> i7-8850H CPU @ 2.60GHz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib &lt;span style="color:#ae81ff">244&lt;/span> &lt;span style="color:#ae81ff">4694667&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-2 &lt;span style="color:#ae81ff">255&lt;/span> &lt;span style="color:#ae81ff">4721201&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkFib-4 &lt;span style="color:#ae81ff">256&lt;/span> &lt;span style="color:#ae81ff">4756392&lt;/span> ns/op &lt;span style="color:#ae81ff">0&lt;/span> B/op &lt;span style="color:#ae81ff">0&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>PASS
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ok pkg06 5.826s
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-benchmarks-multiple-times-with-count">Run benchmarks multiple times with count&lt;/h4>
-&lt;blockquote>
-&lt;p>Due to CPU throttling, memory locality, background work, GC activity, etc., a single run may be noisy. It is common to run benchmarks multiple times.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Benchmark on Ricky</title><link>https://linzeyan.github.io/tags/benchmark/</link><description>Recent content in Benchmark on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 02 Sep 2021 12:50:33 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/benchmark/index.xml" rel="self" type="application/rss+xml"/><item><title>Golang benchmarks</title><link>https://linzeyan.github.io/posts/2021/20210902-golang-ji-zhun-ce-shi/</link><pubDate>Thu, 02 Sep 2021 12:50:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210902-golang-ji-zhun-ce-shi/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s?__biz=MzkxNzAzNDA3Ng==&amp;amp;mid=2247485595&amp;amp;idx=1&amp;amp;sn=9981e6103a6b33cc3a06be0781a2bf10&amp;amp;chksm=c1478da8f63004be44a8c84941280f3888d4e5a2120a4288ed1a21f8a1a82fe65d719c31bae6#rd" target="_blank" rel="noopener"&gt;Golang benchmarks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="basics"&gt;Basics&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Benchmarks are used for performance testing. Functions should import the testing package and define functions that start with Benchmark. The parameter type is testing.B, and the target function is called repeatedly inside the benchmark loop.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-12 &lt;span style="color:#d19a66"&gt;250&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4682682&lt;/span&gt; ns/op
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 1.875s
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -benchmem -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-12 &lt;span style="color:#d19a66"&gt;249&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4686452&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 1.854s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="how-bench-works"&gt;How bench works&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;The benchmark function keeps running until &lt;code&gt;b.N&lt;/code&gt; is no longer valid; it is the number of iterations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b.N&lt;/code&gt; starts at &lt;code&gt;1&lt;/code&gt;. If the benchmark completes within &lt;code&gt;1&lt;/code&gt; second (default), &lt;code&gt;b.N&lt;/code&gt; increases and the benchmark runs again.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b.N&lt;/code&gt; increases in the sequence &lt;code&gt;1,2,5,10,20,50,...&lt;/code&gt; and the benchmark reruns.&lt;/li&gt;
+&lt;li&gt;The result above means it ran &lt;code&gt;250&lt;/code&gt; times in 1 second, with each run taking &lt;code&gt;4682682 ns&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;-12&lt;/code&gt; suffix relates to &lt;code&gt;GOMAXPROCS&lt;/code&gt;. The default value is the number of CPUs visible to the Go process at startup. You can change it with &lt;code&gt;-cpu&lt;/code&gt;, and pass multiple values to run multiple benchmarks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="run-with-multiple-cpu-counts"&gt;Run with multiple CPU counts&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -cpu&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1,2,4 -benchmem -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib &lt;span style="color:#d19a66"&gt;244&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4694667&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-2 &lt;span style="color:#d19a66"&gt;255&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4721201&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-4 &lt;span style="color:#d19a66"&gt;256&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4756392&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 5.826s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="run-benchmarks-multiple-times-with-count"&gt;Run benchmarks multiple times with count&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Due to CPU throttling, memory locality, background work, GC activity, etc., a single run may be noisy. It is common to run benchmarks multiple times.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>

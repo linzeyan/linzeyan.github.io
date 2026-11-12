@@ -1,195 +1,196 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GIN on Ricky</title><link>https://linzeyan.github.io/categories/gin/</link><description>Recent content in GIN on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 20 Aug 2024 08:55:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/gin/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Articles</title><link>https://linzeyan.github.io/posts/2024/20240820-golang/</link><pubDate>Tue, 20 Aug 2024 08:55:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240820-golang/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://juejin.cn/post/6863765115456454664" target="_blank" rel="noopener">Learn gin Parameter Validation with the validator Library - This One Article Is Enough&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="string-constraints">String Constraints&lt;/h3>
-&lt;p>excludesall: does not contain any of the UNICODE characters in the parameter, e.g. excludesall=ab&lt;/p>
-&lt;p>excludesrune: does not contain the rune specified by the parameter, e.g. excludesrune=asong&lt;/p>
-&lt;p>startswith: starts with the parameter substring, e.g. startswith=hi&lt;/p>
-&lt;p>endswith: ends with the parameter substring, e.g. endswith=bye&lt;/p>
-&lt;p>contains: contains the parameter substring, e.g. contains=email&lt;/p>
-&lt;p>containsany: contains any of the UNICODE characters in the parameter, e.g. containsany=ab&lt;/p></description></item><item><title>Bind JSON with jsoniter in Gin</title><link>https://linzeyan.github.io/posts/2021/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211122-go-gin-jsoniter/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener">Bind JSON with jsoniter in Gin&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="simple">simple&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go build -tags&lt;span style="color:#f92672">=&lt;/span>jsoniter ./...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="custom">custom&lt;/h3>
-&lt;h4 id="implement-bindingbody-interface">implement &lt;code>BindingBody&lt;/code> interface&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// github.com/gin-gonic/gin@v1.6.3/binding/binding.go:36&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Binding describes the interface which needs to be implemented for binding the&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// data present in the request such as JSON request body, query parameters or&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// the form POST.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Binding&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Name&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Bind&lt;/span>(&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Request&lt;/span>, &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// BindingBody adds BindBody method to Binding. BindBody is similar with Bind,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// but it reads the body from supplied bytes instead of req.Body.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">BindingBody&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Binding&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">BindBody&lt;/span>([]&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">custom&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;bytes&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;io&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;net/http&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">jsoniter&lt;/span> &lt;span style="color:#e6db74">&amp;#34;github.com/json-iterator/go&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/gin-gonic/gin/binding&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// BindingJSON replaces Gin&amp;#39;s default binding and supports richer JSON features&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">BindingJSON&lt;/span> = &lt;span style="color:#a6e22e">jsonBinding&lt;/span>{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// You can customize jsoniter config or add plugins&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">json&lt;/span> = &lt;span style="color:#a6e22e">jsoniter&lt;/span>.&lt;span style="color:#a6e22e">ConfigCompatibleWithStandardLibrary&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">jsonBinding&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span>{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">jsonBinding&lt;/span>) &lt;span style="color:#a6e22e">Name&lt;/span>() &lt;span style="color:#66d9ef">string&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;json&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">jsonBinding&lt;/span>) &lt;span style="color:#a6e22e">Bind&lt;/span>(&lt;span style="color:#a6e22e">req&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Request&lt;/span>, &lt;span style="color:#a6e22e">obj&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">req&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#a6e22e">req&lt;/span>.&lt;span style="color:#a6e22e">Body&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Errorf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;invalid request&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">decodeJSON&lt;/span>(&lt;span style="color:#a6e22e">req&lt;/span>.&lt;span style="color:#a6e22e">Body&lt;/span>, &lt;span style="color:#a6e22e">obj&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> (&lt;span style="color:#a6e22e">jsonBinding&lt;/span>) &lt;span style="color:#a6e22e">BindBody&lt;/span>(&lt;span style="color:#a6e22e">body&lt;/span> []&lt;span style="color:#66d9ef">byte&lt;/span>, &lt;span style="color:#a6e22e">obj&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">decodeJSON&lt;/span>(&lt;span style="color:#a6e22e">bytes&lt;/span>.&lt;span style="color:#a6e22e">NewReader&lt;/span>(&lt;span style="color:#a6e22e">body&lt;/span>), &lt;span style="color:#a6e22e">obj&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">decodeJSON&lt;/span>(&lt;span style="color:#a6e22e">r&lt;/span> &lt;span style="color:#a6e22e">io&lt;/span>.&lt;span style="color:#a6e22e">Reader&lt;/span>, &lt;span style="color:#a6e22e">obj&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">decoder&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">json&lt;/span>.&lt;span style="color:#a6e22e">NewDecoder&lt;/span>(&lt;span style="color:#a6e22e">r&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">EnableDecoderUseNumber&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">decoder&lt;/span>.&lt;span style="color:#a6e22e">UseNumber&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">EnableDecoderDisallowUnknownFields&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">decoder&lt;/span>.&lt;span style="color:#a6e22e">DisallowUnknownFields&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">decoder&lt;/span>.&lt;span style="color:#a6e22e">Decode&lt;/span>(&lt;span style="color:#a6e22e">obj&lt;/span>); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">validate&lt;/span>(&lt;span style="color:#a6e22e">obj&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">validate&lt;/span>(&lt;span style="color:#a6e22e">obj&lt;/span> &lt;span style="color:#66d9ef">interface&lt;/span>{}) &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">Validator&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">Validator&lt;/span>.&lt;span style="color:#a6e22e">ValidateStruct&lt;/span>(&lt;span style="color:#a6e22e">obj&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// Replace binding.JSON with the custom one&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ctx&lt;/span>.&lt;span style="color:#a6e22e">ShouldBindWith&lt;/span>(&lt;span style="color:#a6e22e">ms&lt;/span>, &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ctx&lt;/span>.&lt;span style="color:#a6e22e">ShouldBindBodyWith&lt;/span>(&lt;span style="color:#a6e22e">ms&lt;/span>, &lt;span style="color:#a6e22e">binding&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Gin documentation (Chinese)</title><link>https://linzeyan.github.io/posts/2021/20210722-shuangdeyu-gin-book/</link><pubDate>Thu, 22 Jul 2021 15:55:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210722-shuangdeyu-gin-book/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949450" target="_blank" rel="noopener">Customize route log format&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949444" target="_blank" rel="noopener">Run multiple services with Gin&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949433" target="_blank" rel="noopener">XML, JSON, YAML, and ProtoBuf rendering (output formats)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="customize-route-log-format">Customize route log format&lt;/h3>
-&lt;p>default&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>GIN-debug&lt;span style="color:#f92672">]&lt;/span> POST /foo --&amp;gt; main.main.func1 &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span> handlers&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>GIN-debug&lt;span style="color:#f92672">]&lt;/span> GET /bar --&amp;gt; main.main.func2 &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span> handlers&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>GIN-debug&lt;span style="color:#f92672">]&lt;/span> GET /status --&amp;gt; main.main.func3 &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span> handlers&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;log&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;net/http&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Default&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">DebugPrintRouteFunc&lt;/span> = &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">httpMethod&lt;/span>, &lt;span style="color:#a6e22e">absolutePath&lt;/span>, &lt;span style="color:#a6e22e">handlerName&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>, &lt;span style="color:#a6e22e">nuHandlers&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;endpoint %v %v %v %v\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">httpMethod&lt;/span>, &lt;span style="color:#a6e22e">absolutePath&lt;/span>, &lt;span style="color:#a6e22e">handlerName&lt;/span>, &lt;span style="color:#a6e22e">nuHandlers&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">POST&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/foo&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>(&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;foo&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">GET&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/bar&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>(&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">GET&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/status&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>(&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;ok&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// Listen and Server in http://0.0.0.0:8080&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">r&lt;/span>.&lt;span style="color:#a6e22e">Run&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="run-multiple-services-with-gin">Run multiple services with Gin&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;log&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;net/http&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;time&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;golang.org/x/sync/errgroup&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">g&lt;/span> &lt;span style="color:#a6e22e">errgroup&lt;/span>.&lt;span style="color:#a6e22e">Group&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">router01&lt;/span>() &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Handler&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">New&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">Use&lt;/span>(&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Recovery&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">GET&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">H&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;code&amp;#34;&lt;/span>: &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;error&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Welcome server 01&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">router02&lt;/span>() &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Handler&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">New&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">Use&lt;/span>(&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Recovery&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">e&lt;/span>.&lt;span style="color:#a6e22e">GET&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">func&lt;/span>(&lt;span style="color:#a6e22e">c&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">Context&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">c&lt;/span>.&lt;span style="color:#a6e22e">JSON&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">gin&lt;/span>.&lt;span style="color:#a6e22e">H&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;code&amp;#34;&lt;/span>: &lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">StatusOK&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;error&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Welcome server 02&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">e&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">server01&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Server&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Addr&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;:8080&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Handler&lt;/span>: &lt;span style="color:#a6e22e">router01&lt;/span>(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ReadTimeout&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">WriteTimeout&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">server02&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">http&lt;/span>.&lt;span style="color:#a6e22e">Server&lt;/span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Addr&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;:8081&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Handler&lt;/span>: &lt;span style="color:#a6e22e">router02&lt;/span>(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ReadTimeout&lt;/span>: &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">WriteTimeout&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Second&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">g&lt;/span>.&lt;span style="color:#a6e22e">Go&lt;/span>(&lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">server01&lt;/span>.&lt;span style="color:#a6e22e">ListenAndServe&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">g&lt;/span>.&lt;span style="color:#a6e22e">Go&lt;/span>(&lt;span style="color:#66d9ef">func&lt;/span>() &lt;span style="color:#66d9ef">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#a6e22e">server02&lt;/span>.&lt;span style="color:#a6e22e">ListenAndServe&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">g&lt;/span>.&lt;span style="color:#a6e22e">Wait&lt;/span>(); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">log&lt;/span>.&lt;span style="color:#a6e22e">Fatal&lt;/span>(&lt;span style="color:#a6e22e">err&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xml-json-yaml-and-protobuf-rendering-output-formats">XML, JSON, YAML, and ProtoBuf rendering (output formats)&lt;/h3>
-&lt;h4 id="securejson">SecureJSON&lt;/h4>
-&lt;blockquote>
-&lt;p>SecureJSON prevents JSON hijacking. If the response is an array, it will prefix the output with &amp;ldquo;while(1)&amp;rdquo; by default.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gin on Ricky</title><link>https://linzeyan.github.io/categories/gin/</link><description>Recent content in Gin on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 20 Aug 2024 08:55:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/gin/index.xml" rel="self" type="application/rss+xml"/><item><title>Go Articles</title><link>https://linzeyan.github.io/posts/2024/20240820-golang/</link><pubDate>Tue, 20 Aug 2024 08:55:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240820-golang/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://juejin.cn/post/6863765115456454664" target="_blank" rel="noopener"&gt;Learn gin Parameter Validation with the validator Library - This One Article Is Enough&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="string-constraints"&gt;String Constraints&lt;/h3&gt;
+&lt;p&gt;excludesall: does not contain any of the UNICODE characters in the parameter, e.g. excludesall=ab&lt;/p&gt;
+&lt;p&gt;excludesrune: does not contain the rune specified by the parameter, e.g. excludesrune=asong&lt;/p&gt;
+&lt;p&gt;startswith: starts with the parameter substring, e.g. startswith=hi&lt;/p&gt;
+&lt;p&gt;endswith: ends with the parameter substring, e.g. endswith=bye&lt;/p&gt;
+&lt;p&gt;contains: contains the parameter substring, e.g. contains=email&lt;/p&gt;
+&lt;p&gt;containsany: contains any of the UNICODE characters in the parameter, e.g. containsany=ab&lt;/p&gt;</description></item><item><title>Bind JSON with jsoniter in Gin</title><link>https://linzeyan.github.io/posts/2021/20211122-go-gin-jsoniter/</link><pubDate>Mon, 22 Nov 2021 10:27:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211122-go-gin-jsoniter/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s/nf9OYpN3f8HMDj_xkdCzdw" target="_blank" rel="noopener"&gt;Bind JSON with jsoniter in Gin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="simple"&gt;simple&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go build -tags&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;jsoniter ./...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="custom"&gt;custom&lt;/h3&gt;
+&lt;h4 id="implement-bindingbody-interface"&gt;implement &lt;code&gt;BindingBody&lt;/code&gt; interface&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// github.com/gin-gonic/gin@v1.6.3/binding/binding.go:36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// Binding describes the interface which needs to be implemented for binding the&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// data present in the request such as JSON request body, query parameters or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// the form POST.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;type&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Binding&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;Name&lt;/span&gt;() &lt;span style="color:#e5c07b"&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;Bind&lt;/span&gt;(&lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Request&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// BindingBody adds BindBody method to Binding. BindBody is similar with Bind,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// but it reads the body from supplied bytes instead of req.Body.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;type&lt;/span&gt; &lt;span style="color:#e06c75"&gt;BindingBody&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Binding&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;BindBody&lt;/span&gt;([]&lt;span style="color:#e5c07b"&gt;byte&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;package&lt;/span&gt; &lt;span style="color:#e06c75"&gt;custom&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;bytes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;io&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;jsoniter&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;github.com/json-iterator/go&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;github.com/gin-gonic/gin/binding&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// BindingJSON replaces Gin&amp;#39;s default binding and supports richer JSON features&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;var&lt;/span&gt; &lt;span style="color:#e06c75"&gt;BindingJSON&lt;/span&gt; = &lt;span style="color:#e06c75"&gt;jsonBinding&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// You can customize jsoniter config or add plugins&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;var&lt;/span&gt; &lt;span style="color:#e06c75"&gt;json&lt;/span&gt; = &lt;span style="color:#e06c75"&gt;jsoniter&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;ConfigCompatibleWithStandardLibrary&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;type&lt;/span&gt; &lt;span style="color:#e06c75"&gt;jsonBinding&lt;/span&gt; &lt;span style="color:#c678dd"&gt;struct&lt;/span&gt;{}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; (&lt;span style="color:#e06c75"&gt;jsonBinding&lt;/span&gt;) &lt;span style="color:#61afef;font-weight:bold"&gt;Name&lt;/span&gt;() &lt;span style="color:#e5c07b"&gt;string&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; (&lt;span style="color:#e06c75"&gt;jsonBinding&lt;/span&gt;) &lt;span style="color:#61afef;font-weight:bold"&gt;Bind&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;req&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Request&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;obj&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;req&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#e06c75"&gt;req&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Body&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fmt&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Errorf&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;invalid request&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;decodeJSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;req&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Body&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;obj&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; (&lt;span style="color:#e06c75"&gt;jsonBinding&lt;/span&gt;) &lt;span style="color:#61afef;font-weight:bold"&gt;BindBody&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;body&lt;/span&gt; []&lt;span style="color:#e5c07b"&gt;byte&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;obj&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;decodeJSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;bytes&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;NewReader&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;body&lt;/span&gt;), &lt;span style="color:#e06c75"&gt;obj&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;decodeJSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;r&lt;/span&gt; &lt;span style="color:#e06c75"&gt;io&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Reader&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;obj&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;decoder&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;json&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;NewDecoder&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;r&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;EnableDecoderUseNumber&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;decoder&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;UseNumber&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;EnableDecoderDisallowUnknownFields&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;decoder&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;DisallowUnknownFields&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;decoder&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Decode&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;obj&lt;/span&gt;); &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;!=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;validate&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;obj&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;validate&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;obj&lt;/span&gt; &lt;span style="color:#c678dd"&gt;interface&lt;/span&gt;{}) &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Validator&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Validator&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ValidateStruct&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;obj&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;// Replace binding.JSON with the custom one&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ctx&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ShouldBindWith&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ms&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;JSON&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ctx&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ShouldBindBodyWith&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ms&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;binding&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;JSON&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Gin documentation (Chinese)</title><link>https://linzeyan.github.io/posts/2021/20210722-shuangdeyu-gin-book/</link><pubDate>Thu, 22 Jul 2021 15:55:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210722-shuangdeyu-gin-book/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949450" target="_blank" rel="noopener"&gt;Customize route log format&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949444" target="_blank" rel="noopener"&gt;Run multiple services with Gin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.kancloud.cn/shuangdeyu/gin_book/949433" target="_blank" rel="noopener"&gt;XML, JSON, YAML, and ProtoBuf rendering (output formats)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="customize-route-log-format"&gt;Customize route log format&lt;/h3&gt;
+&lt;p&gt;default&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;GIN-debug&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; POST /foo --&amp;gt; main.main.func1 &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; handlers&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;GIN-debug&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; GET /bar --&amp;gt; main.main.func2 &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; handlers&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;GIN-debug&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; GET /status --&amp;gt; main.main.func3 &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; handlers&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Default&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;DebugPrintRouteFunc&lt;/span&gt; = &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;httpMethod&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;absolutePath&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;handlerName&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;string&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;nuHandlers&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;int&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;log&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Printf&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;endpoint %v %v %v %v\n&amp;#34;&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;httpMethod&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;absolutePath&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;handlerName&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;nuHandlers&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;POST&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/foo&amp;#34;&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;c&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Context&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;c&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;JSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;foo&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;GET&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/bar&amp;#34;&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;c&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Context&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;c&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;JSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;bar&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;GET&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/status&amp;#34;&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;c&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Context&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;c&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;JSON&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;ok&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;// Listen and Server in http://0.0.0.0:8080&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;r&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Run&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="run-multiple-services-with-gin"&gt;Run multiple services with Gin&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;package&lt;/span&gt; &lt;span style="color:#e06c75"&gt;main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;golang.org/x/sync/errgroup&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;var&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;g&lt;/span&gt; &lt;span style="color:#e06c75"&gt;errgroup&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Group&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;router01&lt;/span&gt;() &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Handler&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;New&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Use&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Recovery&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;GET&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/&amp;#34;&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;c&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Context&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;c&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;JSON&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;H&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;code&amp;#34;&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;error&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;Welcome server 01&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;router02&lt;/span&gt;() &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Handler&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;New&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Use&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Recovery&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;GET&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/&amp;#34;&lt;/span&gt;, &lt;span style="color:#c678dd"&gt;func&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;c&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt;&lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Context&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;c&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;JSON&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;gin&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;H&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;code&amp;#34;&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;StatusOK&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;error&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;Welcome server 02&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;e&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;func&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;server01&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Server&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Addr&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;:8080&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Handler&lt;/span&gt;: &lt;span style="color:#61afef;font-weight:bold"&gt;router01&lt;/span&gt;(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ReadTimeout&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt; &lt;span style="color:#e06c75"&gt;time&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Second&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;WriteTimeout&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt; &lt;span style="color:#e06c75"&gt;time&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Second&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;server02&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;http&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Server&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Addr&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;:8081&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Handler&lt;/span&gt;: &lt;span style="color:#61afef;font-weight:bold"&gt;router02&lt;/span&gt;(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ReadTimeout&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt; &lt;span style="color:#e06c75"&gt;time&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Second&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;WriteTimeout&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;*&lt;/span&gt; &lt;span style="color:#e06c75"&gt;time&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;Second&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;g&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Go&lt;/span&gt;(&lt;span style="color:#c678dd"&gt;func&lt;/span&gt;() &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;server01&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ListenAndServe&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;g&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Go&lt;/span&gt;(&lt;span style="color:#c678dd"&gt;func&lt;/span&gt;() &lt;span style="color:#e5c07b"&gt;error&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;server02&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;ListenAndServe&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;:=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;g&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Wait&lt;/span&gt;(); &lt;span style="color:#e06c75"&gt;err&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;!=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;log&lt;/span&gt;.&lt;span style="color:#61afef;font-weight:bold"&gt;Fatal&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;err&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="xml-json-yaml-and-protobuf-rendering-output-formats"&gt;XML, JSON, YAML, and ProtoBuf rendering (output formats)&lt;/h3&gt;
+&lt;h4 id="securejson"&gt;SecureJSON&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SecureJSON prevents JSON hijacking. If the response is an array, it will prefix the output with &amp;ldquo;while(1)&amp;rdquo; by default.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item></channel></rss>

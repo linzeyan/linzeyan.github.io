@@ -1,166 +1,191 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Juniper on Ricky</title><link>https://linzeyan.github.io/tags/juniper/</link><description>Recent content in Juniper on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 21 Jul 2018 14:45:29 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/juniper/index.xml" rel="self" type="application/rss+xml"/><item><title>HA command</title><link>https://linzeyan.github.io/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180721-ha/</guid><description>&lt;pre tabindex="0">&lt;code>load merge relative terminal
-# On a brand-new device without HA enabled, you must define the cluster ID.
-# Cluster ID must be unique and cannot duplicate other SRX, because HA creates a virtual MAC address and this ID affects it. Duplicates may cause MAC duplication and unexpected errors.
-#
-request system zeroize
-# The following commands must be run in `&amp;gt;` mode.
-set chassis cluster cluster-id &amp;lt;ID range 0~255&amp;gt; node 0 # This is on node 0
-set chassis cluster cluster-id &amp;lt;ID range 0~255&amp;gt; node 1 # This is on node 1
-# On the secondary node, run this command.
-request chassis cluster configuration-synchronize
-# After reboot, you will see Hold or standby; check whether the cluster is up.
-show chassis cluster status
-# This appears only after RETH interfaces are created; you must configure first.
-show chassis cluster interfaces
-# The following commands are run in config mode; build the config first.
----
-# The backup-router is for the HA standby device management interface (fxp) so it can respond to routing; by default the standby does not enable the routing engine, so this is required.
-set groups node0 system host-name SRX-node0
-set groups node0 system backup-router 10.10.0.254
-set groups node0 system backup-router destination 0.0.0.0/0
-set groups node0 interfaces fxp0 unit 0 family inet address 10.10.0.2/24
-set groups node1 system host-name SRX-node1
-set groups node1 system backup-router 10.10.0.254
-set groups node1 system backup-router destination 0.0.0.0/0
-set groups node1 interfaces fxp0 unit 0 family inet address 10.10.0.3/24
-set apply-groups &amp;#34;${node}&amp;#34;
-set system time-zone Asia/Taipei
-set chassis cluster control-link-recovery
-set chassis cluster reth-count 10
-set chassis cluster heartbeat-interval 2000
-# It is recommended to enable IPv6 during setup using the following command, because enabling IPv6 later requires a reboot.
-set security forwarding-options family inet6 mode flow-based
-# Interface numbers vary by chassis model.
-# The easiest way is to check how many slots the device has. For example, SRX550HM has expansion 0-8, so HA starts at 9, hence ge-9/x/x.
-set chassis cluster redundancy-group 0 node 0 priority 150
-set chassis cluster redundancy-group 0 node 1 priority 100
-set chassis cluster redundancy-group 0 interface-monitor ge-0/0/3 weight 150
-set chassis cluster redundancy-group 0 interface-monitor ge-0/0/5 weight 150
-set chassis cluster redundancy-group 0 interface-monitor ge-9/0/3 weight 100
-set chassis cluster redundancy-group 0 interface-monitor ge-9/0/5 weight 100
-set chassis cluster redundancy-group 1 node 0 priority 150
-set chassis cluster redundancy-group 1 node 1 priority 100
-set chassis cluster redundancy-group 1 interface-monitor ge-0/0/3 weight 150
-set chassis cluster redundancy-group 1 interface-monitor ge-0/0/5 weight 150
-set chassis cluster redundancy-group 1 interface-monitor ge-9/0/3 weight 100
-set chassis cluster redundancy-group 1 interface-monitor ge-9/0/5 weight 100
-# This is the data sync setting for redundancy group 1; you must set it to enable the ge-0/0/2 heartbeat link.
-set interfaces fab0 fabric-options member-interfaces ge-0/0/2
-set interfaces fab1 fabric-options member-interfaces ge-9/0/2
-# Add interfaces to the reth group.
-set interfaces ge-0/0/3 gigether-options redundant-parent reth0
-set interfaces ge-0/0/4 gigether-options redundant-parent reth0
-set interfaces ge-9/0/3 gigether-options redundant-parent reth0
-set interfaces ge-9/0/4 gigether-options redundant-parent reth0
-set interfaces ge-0/0/5 gigether-options redundant-parent reth1
-set interfaces ge-9/0/5 gigether-options redundant-parent reth1
-set interfaces reth0 vlan-tagging
-# You must add RETH to the data sync group, otherwise it will not work.
-set interfaces reth0 redundant-ether-options redundancy-group 1
-# Note: SRX uses LACP passive mode, but the switch must use LACP active mode.
-set interfaces reth0 redundant-ether-options lacp passive
-set interfaces reth0 redundant-ether-options lacp periodic slow
-set interfaces reth1 redundant-ether-options redundancy-group 1
-set interfaces reth1 unit 0 family inet address 202.99.240.100/26
-&lt;/code>&lt;/pre></description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180627-juniper/</guid><description>&lt;p>The following commands are run in operational mode, or use &lt;code>run show&lt;/code> in configuration mode.&lt;/p>
-&lt;p>Show current firewall session count&lt;/p>
-&lt;pre tabindex="0">&lt;code>show security flow session | match 10.22.12.104
-show security flow session source-prefix 10.22.12.104
-&lt;/code>&lt;/pre>&lt;p>Clear current sessions&lt;/p>
-&lt;pre tabindex="0">&lt;code>clear security flow session all
-&lt;/code>&lt;/pre>&lt;p>Query OID&lt;/p>
-&lt;pre tabindex="0">&lt;code>show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
-&lt;/code>&lt;/pre>&lt;p>Check current software version&lt;/p>
-&lt;pre tabindex="0">&lt;code>show system software
-&lt;/code>&lt;/pre>&lt;p>Check system uptime&lt;/p>
-&lt;pre tabindex="0">&lt;code>show system uptime
-&lt;/code>&lt;/pre>&lt;p>Check hardware cards and serial numbers&lt;/p>
-&lt;pre tabindex="0">&lt;code>show chassis haredware
-&lt;/code>&lt;/pre>&lt;p>Check current hardware status&lt;/p>
-&lt;pre tabindex="0">&lt;code>show chassis environment
-&lt;/code>&lt;/pre>&lt;p>Show routing table&lt;/p></description></item><item><title>Firewall Update</title><link>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="preparation">Preparation:&lt;/h4>
-&lt;p>Plug in the console.&lt;/p>
-&lt;p>Copy the update file to the USB drive.&lt;/p>
-&lt;p>&lt;strong>&lt;em>Before starting, use &lt;code>show version&lt;/code> to check the current version&lt;/em>&lt;/strong>&lt;/p>
-&lt;h4 id="update-sop">Update SOP:&lt;/h4>
-&lt;ol>
-&lt;li>&lt;code>start shell&lt;/code>&lt;/li>
-&lt;li>&lt;code>su&lt;/code> to root&lt;/li>
-&lt;li>Create a directory: &lt;code>mkdir /var/tmp/usb&lt;/code> (name can be anything)&lt;/li>
-&lt;li>Insert the USB. Note the number after &lt;code>da&lt;/code>, currently &lt;code>da1&lt;/code>.&lt;/li>
-&lt;li>Mount it: &lt;code>mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code> (if &lt;code>da0&lt;/code>, then use &lt;code>da0s1&lt;/code>, etc.)&lt;/li>
-&lt;li>After it finishes, &lt;code>cd /cf/var/tmp/usb/da2s1/&lt;/code> (usb)
-&lt;ol>
-&lt;li>&lt;code>ls&lt;/code> (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Switch the CLI to operational mode
-&lt;ol>
-&lt;li>&lt;code>request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>&lt;code>request system reboot&lt;/code>&lt;/li>
-&lt;li>&lt;code>show version&lt;/code>&lt;/li>
-&lt;/ol></description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel">[Juniper Firewall] tunnel&lt;/h4>
-&lt;p>&lt;strong>&lt;em>ACG&lt;/em>&lt;/strong>
-&lt;code>icare@TWCHIJF01# show | compare rollback 4&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-diff" data-lang="diff">&lt;span style="display:flex;">&lt;span>[edit security policies]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> from-zone DB_12 to-zone TCT_Office { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ from-zone DB_12 to-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ policy For_Backup {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ match {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source-address DB_10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination-address BACKUP_10.32.32.130;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ application any;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ then {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ permit;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones security-zone DB_12 address-book]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address DB_10.11.12.57 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address DB_10.11.12.0/24 10.11.12.0/24;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit security zones]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> security-zone ESB_15 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ security-zone JC32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address-book {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address BACKUP_10.32.32.130 10.32.32.130/32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ host-inbound-traffic {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ system-services {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ ping;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ interfaces {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ gr-0/0/0.32;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit interfaces gr-0/0/0]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ unit 32 {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ description To_JC32_DBBackup;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ tunnel {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ source 202.168.193.128;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ destination 218.253.210.8;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ family inet {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ address 10.32.0.101/30;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ }
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">&lt;/span>[edit routing-options static]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route 0.0.0.0/0 { ... }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">+ route 10.32.32.130/32 next-hop 10.32.0.102;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
-set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
-set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
-set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
-set security zones security-zone JC32 host-inbound-traffic system-services ping
-set security zones security-zone JC32 interfaces gr-0/0/0.32
-set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
-set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
-set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
-set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
-set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
-&lt;/code>&lt;/pre>&lt;p>&lt;code>icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Juniper on Ricky</title><link>https://linzeyan.github.io/tags/juniper/</link><description>Recent content in Juniper on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 21 Jul 2018 14:45:29 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/juniper/index.xml" rel="self" type="application/rss+xml"/><item><title>HA command</title><link>https://linzeyan.github.io/posts/2018/20180721-ha/</link><pubDate>Sat, 21 Jul 2018 14:45:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180721-ha/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;load&lt;/span&gt; &lt;span style="color:#e06c75"&gt;merge&lt;/span&gt; &lt;span style="color:#e06c75"&gt;relative&lt;/span&gt; &lt;span style="color:#e06c75"&gt;terminal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# On a brand-new device without HA enabled, you must define the cluster ID.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Cluster ID must be unique and cannot duplicate other SRX, because HA creates a virtual MAC address and this ID affects it. Duplicates may cause MAC duplication and unexpected errors.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;request&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;zeroize&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# The following commands must be run in `&amp;gt;` mode.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;id&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ID&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;range&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;~&lt;/span&gt;&lt;span style="color:#d19a66"&gt;255&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# This is on node 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;id&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ID&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;range&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;~&lt;/span&gt;&lt;span style="color:#d19a66"&gt;255&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;&amp;gt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# This is on node 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# On the secondary node, run this command.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;request&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;configuration&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;synchronize&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# After reboot, you will see Hold or standby; check whether the cluster is up.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;show&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;status&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This appears only after RETH interfaces are created; you must configure first.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;show&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# The following commands are run in config mode; build the config first.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# The backup-router is for the HA standby device management interface (fxp) so it can respond to routing; by default the standby does not enable the routing engine, so this is required.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;host&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;name&lt;/span&gt; &lt;span style="color:#e06c75"&gt;SRX&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;node0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;backup&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;router&lt;/span&gt; &lt;span style="color:#d19a66"&gt;10.10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.254&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;backup&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;router&lt;/span&gt; &lt;span style="color:#e06c75"&gt;destination&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0.0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fxp0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;unit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;family&lt;/span&gt; &lt;span style="color:#e06c75"&gt;inet&lt;/span&gt; &lt;span style="color:#e06c75"&gt;address&lt;/span&gt; &lt;span style="color:#d19a66"&gt;10.10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.2&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;24&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;host&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;name&lt;/span&gt; &lt;span style="color:#e06c75"&gt;SRX&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;node1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;backup&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;router&lt;/span&gt; &lt;span style="color:#d19a66"&gt;10.10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.254&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;backup&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;router&lt;/span&gt; &lt;span style="color:#e06c75"&gt;destination&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0.0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fxp0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;unit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;family&lt;/span&gt; &lt;span style="color:#e06c75"&gt;inet&lt;/span&gt; &lt;span style="color:#e06c75"&gt;address&lt;/span&gt; &lt;span style="color:#d19a66"&gt;10.10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0.3&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;24&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;apply&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;groups&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;${node}&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;system&lt;/span&gt; &lt;span style="color:#e06c75"&gt;time&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;zone&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Asia&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;Taipei&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;control&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;link&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;recovery&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;count&lt;/span&gt; &lt;span style="color:#d19a66"&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;heartbeat&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;interval&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# It is recommended to enable IPv6 during setup using the following command, because enabling IPv6 later requires a reboot.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;security&lt;/span&gt; &lt;span style="color:#e06c75"&gt;forwarding&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;family&lt;/span&gt; &lt;span style="color:#e06c75"&gt;inet6&lt;/span&gt; &lt;span style="color:#e06c75"&gt;mode&lt;/span&gt; &lt;span style="color:#e06c75"&gt;flow&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;based&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Interface numbers vary by chassis model.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# The easiest way is to check how many slots the device has. For example, SRX550HM has expansion 0-8, so HA starts at 9, hence ge-9/x/x.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;priority&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;priority&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;priority&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;node&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;priority&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;150&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;chassis&lt;/span&gt; &lt;span style="color:#e06c75"&gt;cluster&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interface&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;monitor&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;weight&lt;/span&gt; &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This is the data sync setting for redundancy group 1; you must set it to enable the ge-0/0/2 heartbeat link.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fab0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fabric&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;member&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fab1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fabric&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;member&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Add interfaces to the reth group.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;4&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;3&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;4&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ge&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; &lt;span style="color:#e06c75"&gt;gigether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;parent&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;vlan&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;tagging&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# You must add RETH to the data sync group, otherwise it will not work.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Note: SRX uses LACP passive mode, but the switch must use LACP active mode.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;lacp&lt;/span&gt; &lt;span style="color:#e06c75"&gt;passive&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;lacp&lt;/span&gt; &lt;span style="color:#e06c75"&gt;periodic&lt;/span&gt; &lt;span style="color:#e06c75"&gt;slow&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundant&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;ether&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;options&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redundancy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#e06c75"&gt;group&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;set&lt;/span&gt; &lt;span style="color:#e06c75"&gt;interfaces&lt;/span&gt; &lt;span style="color:#e06c75"&gt;reth1&lt;/span&gt; &lt;span style="color:#e06c75"&gt;unit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#e06c75"&gt;family&lt;/span&gt; &lt;span style="color:#e06c75"&gt;inet&lt;/span&gt; &lt;span style="color:#e06c75"&gt;address&lt;/span&gt; &lt;span style="color:#d19a66"&gt;202.99&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;.&lt;/span&gt;&lt;span style="color:#d19a66"&gt;240.100&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#d19a66"&gt;26&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>[Juniper Firewall] command</title><link>https://linzeyan.github.io/posts/2018/20180627-juniper/</link><pubDate>Wed, 27 Jun 2018 00:58:01 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180627-juniper/</guid><description>&lt;p&gt;The following commands are run in operational mode, or use &lt;code&gt;run show&lt;/code&gt; in configuration mode.&lt;/p&gt;
+&lt;p&gt;Show current firewall session count&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show security flow session | match 10.22.12.104
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show security flow session source-prefix 10.22.12.104
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Clear current sessions&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;clear security flow session all
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Query OID&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check current software version&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show system software
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check system uptime&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show system uptime
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check hardware cards and serial numbers&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show chassis haredware
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check current hardware status&lt;/p&gt;</description></item><item><title>Firewall Update</title><link>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</link><pubDate>Tue, 12 Jun 2018 07:48:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20180612-juniper-firmware-version-update/</guid><description>&lt;h4 id="preparation"&gt;Preparation:&lt;/h4&gt;
+&lt;p&gt;Plug in the console.&lt;/p&gt;
+&lt;p&gt;Copy the update file to the USB drive.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Before starting, use &lt;code&gt;show version&lt;/code&gt; to check the current version&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id="update-sop"&gt;Update SOP:&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;start shell&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;su&lt;/code&gt; to root&lt;/li&gt;
+&lt;li&gt;Create a directory: &lt;code&gt;mkdir /var/tmp/usb&lt;/code&gt; (name can be anything)&lt;/li&gt;
+&lt;li&gt;Insert the USB. Note the number after &lt;code&gt;da&lt;/code&gt;, currently &lt;code&gt;da1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Mount it: &lt;code&gt;mount -t msdos /dev/da1s1 /var/tmp/usb&lt;/code&gt; (if &lt;code&gt;da0&lt;/code&gt;, then use &lt;code&gt;da0s1&lt;/code&gt;, etc.)&lt;/li&gt;
+&lt;li&gt;After it finishes, &lt;code&gt;cd /cf/var/tmp/usb/da2s1/&lt;/code&gt; (usb)
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;ls&lt;/code&gt; (junos-srxsme-15.1X49-D120.3-domestic.tgz)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Switch the CLI to operational mode
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;request system software add /var/tmp/usb/da2s1/junos-srxsme-15.1X49-D120.3-domestic.tgz&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;request system reboot&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;show version&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel"&gt;[Juniper Firewall] tunnel&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;ACG&lt;/em&gt;&lt;/strong&gt;
+&lt;code&gt;icare@TWCHIJF01# show | compare rollback 4&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-diff" data-lang="diff"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security policies]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ from-zone DB_12 to-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ policy For_Backup {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ match {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source-address DB_10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination-address BACKUP_10.32.32.130;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ application any;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ then {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ permit;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones security-zone DB_12 address-book]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; address DB_10.11.12.57 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; security-zone ESB_15 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ security-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address-book {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ host-inbound-traffic {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ system-services {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ ping;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ interfaces {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ gr-0/0/0.32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit interfaces gr-0/0/0]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ unit 32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ description To_JC32_DBBackup;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ tunnel {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source 202.168.193.128;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination 218.253.210.8;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ family inet {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address 10.32.0.101/30;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit routing-options static]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; route 0.0.0.0/0 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 host-inbound-traffic system-services ping
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 interfaces gr-0/0/0.32
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>

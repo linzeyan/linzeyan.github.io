@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tcpdump on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/tcpdump/</link><description>Recent content in Tcpdump on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 05 May 2022 13:39:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/tcpdump/index.xml" rel="self" type="application/rss+xml"/><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener">Tcpdump 使用总结&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="命令使用">命令使用&lt;/h2>
-&lt;p>tcpdump 采用命令行方式，它的命令格式为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tcpdump &lt;span style="color:#f92672">[&lt;/span> -AdDeflLnNOpqRStuUvxX &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -c count &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -C file_size &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -F file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -i interface &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -m module &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -M secret &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -r file &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -s snaplen &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -T type &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -w file &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -W filecount &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -E spi@ipaddr algo:secret, ... &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> -y datalinktype &lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span> -Z user &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">[&lt;/span> expression &lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="tcpdump-的简单选项介绍">tcpdump 的简单选项介绍&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>-E spi@ipaddr algo:secret , ...&lt;/code>，可通过&lt;code>spi@ipaddr algo:secret&lt;/code> 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code>0x&lt;/code> 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code>spi@ipaddr algo:secret&lt;/code>)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li>
-&lt;li>&lt;code>-T type&lt;/code> 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:
-&lt;ul>
-&lt;li>&lt;code>aodv&lt;/code> (Ad-hoc On-demand Distance Vector protocol， 按需距离向量路由协议，在 Ad hoc(点对点模式)网络中使用)，&lt;/li>
-&lt;li>&lt;code>cnfp&lt;/code> (Cisco NetFlow protocol)&lt;/li>
-&lt;li>&lt;code>rpc&lt;/code>(Remote Procedure Call)&lt;/li>
-&lt;li>&lt;code>rtp&lt;/code> (Real-Time Applications protocol)&lt;/li>
-&lt;li>&lt;code>rtcp&lt;/code> (Real-Time Applications con-trol protocol)&lt;/li>
-&lt;li>&lt;code>snmp&lt;/code> (Simple Network Management Protocol)&lt;/li>
-&lt;li>&lt;code>tftp&lt;/code> (Trivial File Transfer Protocol， 碎文件协议)&lt;/li>
-&lt;li>&lt;code>vat&lt;/code> (Visual Audio Tool， 可用于在 internet 上进行电视电话会议的应用层协议)&lt;/li>
-&lt;li>&lt;code>wb&lt;/code> (distributed White Board， 可用于网络会议的应用层协议)&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="实用命令实例">实用命令实例&lt;/h3>
-&lt;p>&lt;strong>截获主机 210.27.48.1 和主机 210.27.48.2 或 210.27.48.3 的通信&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tcpdump on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/tcpdump/</link><description>Recent content in Tcpdump on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 05 May 2022 13:39:10 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/tcpdump/index.xml" rel="self" type="application/rss+xml"/><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener"&gt;Tcpdump 使用总结&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="命令使用"&gt;命令使用&lt;/h2&gt;
+&lt;p&gt;tcpdump 采用命令行方式，它的命令格式为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="tcpdump-的简单选项介绍"&gt;tcpdump 的简单选项介绍&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt;，可通过&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt; 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code&gt;0x&lt;/code&gt; 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aodv&lt;/code&gt; (Ad-hoc On-demand Distance Vector protocol， 按需距离向量路由协议，在 Ad hoc(点对点模式)网络中使用)，&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cnfp&lt;/code&gt; (Cisco NetFlow protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rpc&lt;/code&gt;(Remote Procedure Call)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtp&lt;/code&gt; (Real-Time Applications protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rtcp&lt;/code&gt; (Real-Time Applications con-trol protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snmp&lt;/code&gt; (Simple Network Management Protocol)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tftp&lt;/code&gt; (Trivial File Transfer Protocol， 碎文件协议)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vat&lt;/code&gt; (Visual Audio Tool， 可用于在 internet 上进行电视电话会议的应用层协议)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wb&lt;/code&gt; (distributed White Board， 可用于网络会议的应用层协议)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="实用命令实例"&gt;实用命令实例&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;截获主机 210.27.48.1 和主机 210.27.48.2 或 210.27.48.3 的通信&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

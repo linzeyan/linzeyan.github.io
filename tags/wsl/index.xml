@@ -1,28 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Ricky</title><link>https://linzeyan.github.io/tags/wsl/</link><description>Recent content in WSL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Dec 2020 21:24:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL 2 .wslconfig configuration explained</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener">WSL 2 .wslconfig configuration explained&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener">Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener">Install WSL 2 on Windows 10&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener">Build a multi-Linux development environment with WSL 2&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;p>Steps to install WSL 2:&lt;/p>
-&lt;ul>
-&lt;li>Join the Windows Insider Program (required)&lt;/li>
-&lt;li>Enable required WSL components&lt;/li>
-&lt;li>Install a Linux distribution&lt;/li>
-&lt;li>Set the Linux distribution to use WSL 2&lt;/li>
-&lt;li>WSL 2 troubleshooting: compressed virtual disk files cannot be converted to the WSL 2 architecture&lt;/li>
-&lt;li>Install and start Docker&lt;/li>
-&lt;li>Install Docker Desktop v2.2.1.0&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable required WSL components&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>Microsoft-Windows-Subsystem-Linux /all /norestart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dism.exe /online /enable-feature /featurename&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>VirtualMachinePlatform /all /norestart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set the Linux distribution to WSL 2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-version ubuntu &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wsl --set-default-version &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;ul>
-&lt;li>
-&lt;p>Edit &lt;code>%UserProfile%\.wslconfig&lt;/code>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WSL on Ricky</title><link>https://linzeyan.github.io/tags/wsl/</link><description>Recent content in WSL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 30 Dec 2020 21:24:12 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL 2 .wslconfig configuration explained</title><link>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</link><pubDate>Wed, 30 Dec 2020 21:24:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201230-e4619f17e8d252b9ff72579ac271881c/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/doggy8088/e4619f17e8d252b9ff72579ac271881c" target="_blank" rel="noopener"&gt;WSL 2 .wslconfig configuration explained&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener"&gt;Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.huanlintalk.com/2020/02/wsl-2-installation.html" target="_blank" rel="noopener"&gt;Install WSL 2 on Windows 10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2#google_vignette" target="_blank" rel="noopener"&gt;Build a multi-Linux development environment with WSL 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Steps to install WSL 2:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Join the Windows Insider Program (required)&lt;/li&gt;
+&lt;li&gt;Enable required WSL components&lt;/li&gt;
+&lt;li&gt;Install a Linux distribution&lt;/li&gt;
+&lt;li&gt;Set the Linux distribution to use WSL 2&lt;/li&gt;
+&lt;li&gt;WSL 2 troubleshooting: compressed virtual disk files cannot be converted to the WSL 2 architecture&lt;/li&gt;
+&lt;li&gt;Install and start Docker&lt;/li&gt;
+&lt;li&gt;Install Docker Desktop v2.2.1.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Enable required WSL components&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e5c07b"&gt;Microsoft-Windows&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-Subsystem-Linux&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;VirtualMachinePlatform&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Set the Linux distribution to WSL 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-version&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ubuntu&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-default-version&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Edit &lt;code&gt;%UserProfile%\.wslconfig&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Command Prompt&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;notepad %UserProfile%&lt;span style="color:#98c379"&gt;\.&lt;/span&gt;wslconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows PowerShell&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ps1" data-lang="ps1"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;notepad&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$env:USERPROFILE&lt;/span&gt;\.&lt;span style="color:#e06c75"&gt;wslconfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configuration reference&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[wsl2]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;kernel&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to a custom Linux kernel.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;memory&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much memory to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;processors&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;number&amp;gt; # How many processors to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swap&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much swap space to add to the WSL2 VM. 0 for no swap file.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swapFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to the swap vhd.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;localhostForwarding&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;bool&amp;gt; # Boolean specifying if ports bound to wildcard or localhost in the WSL2 VM should be connectable from the host via localhost:port (default true).&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;path&amp;gt; entries must be absolute Windows paths with escaped backslashes, for example C:\\Users\\Ben\\kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;size&amp;gt; entries must be size followed by unit, for example 8GB or 512MB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Related links&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945" target="_blank" rel="noopener"&gt;Release Notes for Windows Subsystem for Linux | Microsoft Docs - Build 18945&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

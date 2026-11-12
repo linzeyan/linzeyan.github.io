@@ -1,46 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Container on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/container/</link><description>Recent content in Container on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 10 Sep 2025 09:50:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/container/index.xml" rel="self" type="application/rss+xml"/><item><title>用 Golang 從零打造容器（Liz Rice）</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</link><pubDate>Wed, 10 Sep 2025 09:50:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://baconyao.notion.site/Containers-From-Scratch-by-Golang-feat-Liz-Rice-2638a3a7d9d48053ae1dce0763fb52e8" target="_blank" rel="noopener">用 Golang 從零打造容器（Liz Rice）&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/baconYao/container-from-scratch-golang" target="_blank" rel="noopener">container-from-scratch-golang&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>隨著我們擴充這個小程式的功能，會依序探索以下主題，讓我們建立一個非正式環境的容器模擬。&lt;/p>
-&lt;ol>
-&lt;li>UTS Namespace&lt;/li>
-&lt;li>Chroot&lt;/li>
-&lt;li>PID Namespace&lt;/li>
-&lt;li>Mount Namespace&lt;/li>
-&lt;li>Control Group&lt;/li>
-&lt;li>Rootless Container&lt;/li>
-&lt;/ol></description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener">Container security fundamentals: Exploring containers as processes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener">Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-3/" target="_blank" rel="noopener">Container security fundamentals part 3: Capabilities&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-4/" target="_blank" rel="noopener">Container security fundamentals part 4: Cgroups&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener">Container security fundamentals part 5: AppArmor and SELinux&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener">Container security fundamentals part 6: seccomp
-&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>從零開始的容器</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221124-containers-from-scratch/</link><pubDate>Thu, 24 Nov 2022 13:10:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221124-containers-from-scratch/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener">從零開始的容器&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="容器檔案系統">容器檔案系統&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sha256sum rootfs.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#75715e"># tar needs sudo to create /dev files and setup file ownership&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sudo tar -zxf rootfs.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls rootfs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin dev home lib64 mnt proc run srv tmp var
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>boot etc lib media opt root sbin sys usr
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls -al rootfs/bin/ls
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rwxr-xr-x. &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">118280&lt;/span> Mar &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#ae81ff">2015&lt;/span> rootfs/bin/ls
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="chroot">chroot&lt;/h3>
-&lt;p>它可以限制某個程序對檔案系統的視野。這裡我們把程序限制在 &amp;ldquo;rootfs&amp;rdquo; 目錄，然後執行一個 shell。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ sudo chroot rootfs /bin/bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@localhost:/# ls /
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin dev home lib64 mnt proc run srv tmp var
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>boot etc lib media opt root sbin sys usr
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@localhost:/# which python
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/python
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@localhost:/# /usr/bin/python -c &lt;span style="color:#e6db74">&amp;#39;print &amp;#34;Hello, container world!&amp;#34;&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hello, container world!
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>root@localhost:/#
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>當我們執行 Python 直譯器時，實際上是執行 &lt;code>rootfs/usr/bin/python&lt;/code>，而不是宿主機的 Python。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Container on Ricky</title><link>https://linzeyan.github.io/zh-tw/tags/container/</link><description>Recent content in Container on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Wed, 10 Sep 2025 09:50:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/tags/container/index.xml" rel="self" type="application/rss+xml"/><item><title>用 Golang 從零打造容器（Liz Rice）</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</link><pubDate>Wed, 10 Sep 2025 09:50:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250910-containers-from-scratch-by-golang-feat-liz-rice/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://baconyao.notion.site/Containers-From-Scratch-by-Golang-feat-Liz-Rice-2638a3a7d9d48053ae1dce0763fb52e8" target="_blank" rel="noopener"&gt;用 Golang 從零打造容器（Liz Rice）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/baconYao/container-from-scratch-golang" target="_blank" rel="noopener"&gt;container-from-scratch-golang&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;隨著我們擴充這個小程式的功能，會依序探索以下主題，讓我們建立一個非正式環境的容器模擬。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;UTS Namespace&lt;/li&gt;
+&lt;li&gt;Chroot&lt;/li&gt;
+&lt;li&gt;PID Namespace&lt;/li&gt;
+&lt;li&gt;Mount Namespace&lt;/li&gt;
+&lt;li&gt;Control Group&lt;/li&gt;
+&lt;li&gt;Rootless Container&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Container security fundamentals</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</link><pubDate>Wed, 04 Oct 2023 09:06:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20231004-container/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-1/" target="_blank" rel="noopener"&gt;Container security fundamentals: Exploring containers as processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-2/" target="_blank" rel="noopener"&gt;Container security fundamentals part 2: Isolation &amp;amp; namespaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-3/" target="_blank" rel="noopener"&gt;Container security fundamentals part 3: Capabilities&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-4/" target="_blank" rel="noopener"&gt;Container security fundamentals part 4: Cgroups&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-5/" target="_blank" rel="noopener"&gt;Container security fundamentals part 5: AppArmor and SELinux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://securitylabs.datadoghq.com/articles/container-security-fundamentals-part-6/" target="_blank" rel="noopener"&gt;Container security fundamentals part 6: seccomp
+&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>從零開始的容器</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221124-containers-from-scratch/</link><pubDate>Thu, 24 Nov 2022 13:10:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221124-containers-from-scratch/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener"&gt;從零開始的容器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="容器檔案系統"&gt;容器檔案系統&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sha256sum rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#7f848e"&gt;# tar needs sudo to create /dev files and setup file ownership&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tar -zxf rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls rootfs
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin dev home lib64 mnt proc run srv tmp var
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boot etc lib media opt root sbin sys usr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls -al rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x. &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;118280&lt;/span&gt; Mar &lt;span style="color:#d19a66"&gt;14&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2015&lt;/span&gt; rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="chroot"&gt;chroot&lt;/h3&gt;
+&lt;p&gt;它可以限制某個程序對檔案系統的視野。這裡我們把程序限制在 &amp;ldquo;rootfs&amp;rdquo; 目錄，然後執行一個 shell。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo chroot rootfs /bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# ls /
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin dev home lib64 mnt proc run srv tmp var
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boot etc lib media opt root sbin sys usr
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# which python
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/python
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# /usr/bin/python -c &lt;span style="color:#98c379"&gt;&amp;#39;print &amp;#34;Hello, container world!&amp;#34;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Hello, container world!
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/#
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;當我們執行 Python 直譯器時，實際上是執行 &lt;code&gt;rootfs/usr/bin/python&lt;/code&gt;，而不是宿主機的 Python。&lt;/p&gt;</description></item></channel></rss>

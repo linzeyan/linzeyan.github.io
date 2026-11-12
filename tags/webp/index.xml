@@ -1,38 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Webp on Ricky</title><link>https://linzeyan.github.io/tags/webp/</link><description>Recent content in Webp on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 07 Oct 2019 10:35:22 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/webp/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly</title><link>https://linzeyan.github.io/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener">Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="compile-ngx_pagespeed">Compile ngx_pagespeed&lt;/h4>
-&lt;blockquote>
-&lt;p>First make sure Nginx is built with &lt;code>--with-compat&lt;/code>, so we do not need to rebuild Nginx from scratch.&lt;/p>
-&lt;p>incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener">https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Switch to the nginx source directory and configure the build&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-compat --add-dynamic-module&lt;span style="color:#f92672">=&lt;/span>../incubator-pagespeed-ngx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Build modules&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make modules
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Copy the built module into the nginx modules directory&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Create the cache directory for converted images&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir -p /var/ngx_pagespeed_cache
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nginx" data-lang="nginx">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">load_module&lt;/span> &lt;span style="color:#e6db74">modules/ngx_pagespeed.so&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># enable pagespeed module on this server block
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Needs to exist and be writable by nginx. Use tmpfs for best performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">pagespeed&lt;/span> &lt;span style="color:#e6db74">FileCachePath&lt;/span> &lt;span style="color:#e6db74">/var/ngx_pagespeed_cache&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Ensure requests for pagespeed optimized resources go to the pagespeed handler
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># and no extraneous headers get set.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span>{&lt;span style="color:#f92672">2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">add_header&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span> { }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span> ~ &lt;span style="color:#e6db74">&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span> { }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagespeed&lt;/span> &lt;span style="color:#e6db74">RewriteLevel&lt;/span> &lt;span style="color:#e6db74">CoreFilters&lt;/span>;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The last line (&lt;code>pagespeed RewriteLevel CoreFilters;&lt;/code>) specifies the enabled optimizations. It includes basic filters such as:&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Webp on Ricky</title><link>https://linzeyan.github.io/tags/webp/</link><description>Recent content in Webp on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Oct 2019 10:35:22 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/tags/webp/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly</title><link>https://linzeyan.github.io/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</link><pubDate>Mon, 07 Oct 2019 10:35:22 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://nova.moe/serve-webp-on-the-fly-with-nginx-and-mod_pagespeed/" target="_blank" rel="noopener"&gt;Use Nginx and mod_pagespeed to Convert Images to WebP on the Fly&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="compile-ngx_pagespeed"&gt;Compile ngx_pagespeed&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;First make sure Nginx is built with &lt;code&gt;--with-compat&lt;/code&gt;, so we do not need to rebuild Nginx from scratch.&lt;/p&gt;
+&lt;p&gt;incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener"&gt;https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Switch to the nginx source directory and configure the build&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --with-compat --add-dynamic-module&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;../incubator-pagespeed-ngx
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Build modules&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make modules
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Copy the built module into the nginx modules directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Create the cache directory for converted images&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;load_module&lt;/span&gt; &lt;span style="color:#98c379"&gt;modules/ngx_pagespeed.so&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# enable pagespeed module on this server block
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Needs to exist and be writable by nginx. Use tmpfs for best performance.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;FileCachePath&lt;/span&gt; &lt;span style="color:#98c379"&gt;/var/ngx_pagespeed_cache&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Ensure requests for pagespeed optimized resources go to the pagespeed handler
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# and no extraneous headers get set.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span&gt;{&lt;span style="color:#c678dd"&gt;2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;add_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span&gt; { }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span&gt; { }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;RewriteLevel&lt;/span&gt; &lt;span style="color:#98c379"&gt;CoreFilters&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The last line (&lt;code&gt;pagespeed RewriteLevel CoreFilters;&lt;/code&gt;) specifies the enabled optimizations. It includes basic filters such as:&lt;/p&gt;</description></item></channel></rss>

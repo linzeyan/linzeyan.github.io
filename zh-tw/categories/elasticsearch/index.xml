@@ -1,67 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ElasticSearch on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/elasticsearch/</link><description>Recent content in ElasticSearch on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 06 Oct 2022 11:30:59 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/elasticsearch/index.xml" rel="self" type="application/rss+xml"/><item><title>ElasticSearch 学习笔记</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener">ElasticSearch 学习笔记&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="安装中文分词插件">安装中文分词插件&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it elasticsearch bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Dev Tools
-&lt;ul>
-&lt;li>&lt;code>content&lt;/code> 类型为 &lt;code>text&lt;/code>，写入时使用 &lt;code>ik_max_word&lt;/code> 做分词，搜索时使用 &lt;code>ik_smart&lt;/code> 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">PUT&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">/words&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;mappings&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;content&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;text&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_max_word&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;search_analyzer&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ik_smart&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;age&amp;#34;&lt;/span>: {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;integer&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;shards_acknowledged&amp;#34;&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;index&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;words&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211110-10253348/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener">喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="規劃時建議要考量的項目">規劃時建議要考量的項目&lt;/h4>
-&lt;h5 id="search-在執行時一個-shard-會分配一個-thread數量太多反而會拖慢速度">Search 在執行時，一個 Shard 會分配一個 Thread，數量太多反而會拖慢速度&lt;/h5>
-&lt;blockquote>
-&lt;p>一個 Node 依照不同的功能分類有多種 Thread pool， 其中 search (count/search/suggest) 的 size 是 &lt;code>int((# of allocated processors * 3) / 2) + 1&lt;/code> 並且 queue_size 預設是 &lt;code>1000&lt;/code> ，而 write (index/delete/update/bulk) 的 size 是 &lt;code># of allocated processors&lt;/code> ，預設的 queue_size 也是 &lt;code>1000&lt;/code>。( 官方文件 - Thread pools )&lt;/p>&lt;/blockquote>
-&lt;p>大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p></description></item><item><title>go-mysql-elasticsearch 基準測試</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200120-go-mysql-elasticsearch/</link><pubDate>Mon, 20 Jan 2020 09:18:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200120-go-mysql-elasticsearch/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/go-mysql-org/go-mysql-elasticsearch" target="_blank" rel="noopener">go-mysql-elasticsearch&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div
-class="pdf-viewer"
-data-url="./go-mysql-elasticsearch-benchmarking.pdf"
-data-hide-paginator="false"
-data-hide-loader="false"
-data-page-num="1"
->
-&lt;div class="paginator">
-&lt;div class="page-number-indicator">
-&lt;span>Page: &lt;span class="page-num">&lt;/span> / &lt;span class="page-count">&lt;/span>&lt;/span>
-&lt;/div>
-&lt;div class="next-prev-btn">
-&lt;button class="prev btn btn-sm btn-info">Previous&lt;/button>
-&lt;button class="next btn btn-sm btn-info">Next&lt;/button>
-&lt;/div>
-&lt;/div>
-&lt;div class="embed-pdf-container">
-&lt;div class="loading-wrapper">
-&lt;div class="loading">&lt;/div>
-&lt;/div>
-&lt;canvas class="pdf-canvas">&lt;/canvas>
-&lt;/div>
-&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Elasticsearch on Ricky</title><link>https://linzeyan.github.io/zh-tw/categories/elasticsearch/</link><description>Recent content in Elasticsearch on Ricky</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Thu, 06 Oct 2022 11:30:59 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/zh-tw/categories/elasticsearch/index.xml" rel="self" type="application/rss+xml"/><item><title>ElasticSearch 学习笔记</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221006-elasticsearch/</link><pubDate>Thu, 06 Oct 2022 11:30:59 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221006-elasticsearch/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://jiajunhuang.com/articles/2022_10_06-elasticsearch.md.html" target="_blank" rel="noopener"&gt;ElasticSearch 学习笔记&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="安装中文分词插件"&gt;安装中文分词插件&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker &lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; -it elasticsearch bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.1/elasticsearch-analysis-ik-8.4.1.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Dev Tools
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;content&lt;/code&gt; 类型为 &lt;code&gt;text&lt;/code&gt;，写入时使用 &lt;code&gt;ik_max_word&lt;/code&gt; 做分词，搜索时使用 &lt;code&gt;ik_smart&lt;/code&gt; 分词。这两个的区别在于，前者产生尽可能多的分词，后者产生粗粒度的分词。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PUT /words
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;mappings&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;properties&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;content&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;text&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;analyzer&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;ik_max_word&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;search_analyzer&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;ik_smart&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;age&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;integer&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;acknowledged&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;shards_acknowledged&amp;#34;&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;index&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;words&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20211110-10253348/</link><pubDate>Wed, 10 Nov 2021 13:12:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20211110-10253348/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10253348" target="_blank" rel="noopener"&gt;喬叔教 Elastic - 30 - Elasticsearch 的優化技巧 (4/4) - Shard 的最佳化管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="規劃時建議要考量的項目"&gt;規劃時建議要考量的項目&lt;/h4&gt;
+&lt;h5 id="search-在執行時一個-shard-會分配一個-thread數量太多反而會拖慢速度"&gt;Search 在執行時，一個 Shard 會分配一個 Thread，數量太多反而會拖慢速度&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一個 Node 依照不同的功能分類有多種 Thread pool， 其中 search (count/search/suggest) 的 size 是 &lt;code&gt;int((# of allocated processors * 3) / 2) + 1&lt;/code&gt; 並且 queue_size 預設是 &lt;code&gt;1000&lt;/code&gt; ，而 write (index/delete/update/bulk) 的 size 是 &lt;code&gt;# of allocated processors&lt;/code&gt; ，預設的 queue_size 也是 &lt;code&gt;1000&lt;/code&gt;。( 官方文件 - Thread pools )&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;大多數的 searching 在執行時，查詢的資料是會橫跨多個 shards，而每個 shard 在搜尋時會使用一個 CPU thread 在處理執行，也就是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果有多個 shard，可以讓查詢的處理並發在多個 shard 身上同時進行，以增加處理的效率。&lt;/li&gt;
+&lt;li&gt;shard 數量愈多，node thread pool 的消耗也愈多，因此 thread pool 數量不足的話，反而會影響查詢的執行效率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="每個-shard-都有基本運作的成本數量太多成本愈高"&gt;每個 Shard 都有基本運作的成本，數量太多成本愈高&lt;/h5&gt;
+&lt;h5 id="指定-shard-在-cluster-中的分配方式以優化儲存硬體的資源"&gt;指定 Shard 在 Cluster 中的分配方式，以優化儲存硬體的資源&lt;/h5&gt;
+&lt;h5 id="刪除整批資料時以-index-為單位來刪除而不要從一批-documents-來刪除"&gt;刪除整批資料時，以 Index 為單位來刪除，而不要從一批 Documents 來刪除&lt;/h5&gt;
+&lt;p&gt;Document 的刪除，在 Elasticsearch 的運作上，是產生另外一筆 &amp;ldquo;標示刪除&amp;rdquo; 的記錄在 segment files 中，所以這些都還是會持續的佔用系統資源，一直到 segment merge 之後，才會真正的被移除。&lt;/p&gt;</description></item><item><title>go-mysql-elasticsearch 基準測試</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20200120-go-mysql-elasticsearch/</link><pubDate>Mon, 20 Jan 2020 09:18:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20200120-go-mysql-elasticsearch/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/go-mysql-org/go-mysql-elasticsearch" target="_blank" rel="noopener"&gt;go-mysql-elasticsearch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="pdf-viewer" data-url="./go-mysql-elasticsearch-benchmarking.pdf" data-hide-paginator="false"
+data-hide-loader="false" data-page-num="1"&gt;
+&lt;div class="paginator"&gt;
+&lt;div class="page-number-indicator"&gt;
+&lt;span&gt;Page: &lt;span class="page-num"&gt;&lt;/span&gt; / &lt;span class="page-count"&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="next-prev-btn"&gt;
+&lt;button class="prev btn btn-sm btn-info"&gt;Previous&lt;/button&gt;
+&lt;button class="next btn btn-sm btn-info"&gt;Next&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="download-btn"&gt;
+&lt;a href="./go-mysql-elasticsearch-benchmarking.pdf" download class="btn btn-sm btn-info download-pdf-btn"&gt;
+&lt;i class="fas fa-download"&gt;&lt;/i&gt; Download PDF
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="embed-pdf-container"&gt;
+&lt;div class="loading-wrapper"&gt;
+&lt;div class="loading"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;canvas class="pdf-canvas"&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>

