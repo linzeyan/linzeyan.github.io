@@ -222,6 +222,17 @@ GRPC_GO_LOG_SEVERITY_LEVEL=info GRPC_GO_LOG_VERBOSITY_LEVEL=2 ./bin/grpc-service
 
 ```shell
 systemd-run --scope --user -p MemoryHigh=1800M -p MemoryMax=2G -p CPUQuota=200% \
-	env GOMAXPROCS=2 GOMEMLIMIT=600MiB go build -v -p 2 -o myapp main.go
+	env GOMAXPROCS=2 GOMEMLIMIT=600MiB env CGO_ENABLED=0 go build -v -p 2 -o myapp main.go
+```
+{{< /note >}}
+
+{{< note title="避免 Javascript 溢位" >}}
+
+```go
+// 如果是 input 前端需要用 string
+// 如果是 output 會返回 string 給前端
+type T struct {
+    ID int64 `json:"id,string"`
+}
 ```
 {{< /note >}}

@@ -6,8 +6,8 @@ run:
 .PHONY: run
 
 cf:
-	@wget https://github.com/gohugoio/hugo/releases/download/v0.148.2/hugo_extended_0.148.2_linux-amd64.tar.gz
-	@tar xf hugo_extended_0.148.2_linux-amd64.tar.gz
+	@wget https://github.com/gohugoio/hugo/releases/download/v0.169.0/hugo_extended_0.169.0_linux-amd64.tar.gz
+	@tar xf hugo_extended_0.169.0_linux-amd64.tar.gz
 	@./hugo --minify -b "$(CF_PAGES_URL)"
 .PHONY: cf
 
@@ -18,3 +18,12 @@ clean:
 	@rm -rf ~/Library/Caches/hugo_cache
 	@hugo mod clean
 .PHONY: clean
+
+# Tests read the built HTML, so build into a throwaway dir rather than public/,
+# which a running `make run` server or a deploy may be using.
+test:
+	@out=$$(mktemp -d) && hugo --quiet -d "$$out" && SITE_OUT="$$out" node --test tests/*.test.mjs; code=$$?; rm -rf "$$out"; exit $$code
+.PHONY: test
+
+check: test
+.PHONY: check

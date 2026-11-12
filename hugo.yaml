@@ -1,6 +1,6 @@
 baseURL: https://linzeyan.github.io/
 
-languageCode: en-us
+locale: en-us
 title: "Ricky"
 
 # Use Hugo modules to add theme
@@ -21,10 +21,10 @@ module:
 # For any more details, you can check the official documentation: https://gohugo.io/content-management/multilingual/
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
   zh-tw:
-    languageName: Chinese
+    label: Chinese
     weight: 2
 
 # Force a locale to be use, really useful to develop the application ! Should be commented in production, the "weight" should rocks.
@@ -39,6 +39,14 @@ markup:
     startLevel: 2
     endLevel: 6
     ordered: false
+  # Code is coloured once, at build time, in the One Dark palette the site
+  # used to get from highlight.js. Colouring it again in the browser repainted
+  # every block after load (seconds later on /notes/, whose gist embeds hold
+  # back deferred JS). guessSyntax keeps unlabeled fences inside the same dark
+  # block that highlight.js auto-detection used to give them.
+  highlight:
+    style: onedark
+    guessSyntax: true
 
 # At least HTML and JSON are required for the main HTML content and
 # client-side JavaScript search
@@ -246,8 +254,9 @@ params:
     #   # this disables hugo's syntax highlighting.
     #   codeFences: false
     # ```
+    # Off: Hugo already colours code at build time (markup.highlight above).
     syntaxHighlight:
-      enable: true
+      enable: false
       services:
         hljs:
           # see: https://highlightjs.readthedocs.io/en/latest/api.html#configure

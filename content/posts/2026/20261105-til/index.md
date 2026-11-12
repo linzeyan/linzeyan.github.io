@@ -57,7 +57,6 @@ categories:
 - **Github**
   - [sill: Any window from your Mac, live on your iPhone or iPad. Touch, Apple Pencil, trackpad and keys.](https://github.com/Saffsanity/sill)
   - [The world’s software. Rebuilt, and open-sourced.](https://github.com/HeyPuter/everything)
-- **Present**
 - **Skill**
   - [An agent skill for creating detailed, interactive isometric illustrations of real-world machines and complex systems. Generates polished SVGs with optional WebGL shaders and 3D effects.](https://github.com/wheresryan22/anatomy)
   - [Write HTML. Render video. Built for agents.](https://github.com/heygen-com/hyperframes)
