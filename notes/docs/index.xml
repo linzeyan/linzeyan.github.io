@@ -2,7 +2,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;Setting CloudFlare Worker for CORS&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;addEventListener&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;fetch&amp;#34;&lt;/span&gt;, (&lt;span style="color:#e06c75"&gt;event&lt;/span&gt;) =&amp;gt; {
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-21f7fd054fd1509f750431a345da3b5c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;addEventListener&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;fetch&amp;#34;&lt;/span&gt;, (&lt;span style="color:#e06c75"&gt;event&lt;/span&gt;) =&amp;gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;event&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;respondWith&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;handleRequest&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;event&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;request&lt;/span&gt;));
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -22,6 +22,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;response&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"addEventListener(\"fetch\", (event) =\u003e {\n\tevent.respondWith(handleRequest(event.request));\n});\n\nasync function handleRequest(request) {\n\tlet response = await fetch(request);\n\tresponse = new Response(response.body, response);\n\tresponse.headers.set(\n\t\t\"Access-Control-Allow-Origin\",\n\t\t\"frontend-h5.shyc883.com\"\n\t);\n\tresponse.headers.set(\"Access-Control-Allow-Methods\", \"GET, OPTIONS, POST\");\n\tresponse.headers.set(\n\t\t\"Access-Control-Allow-Headers\",\n\t\t\"Content-Type, Authorization\"\n\t);\n\tresponse.headers.set(\"Access-Control-Allow-Credentials\", true);\n\treturn response;\n}\n","title":"javascript"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -29,7 +30,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;Terraform_create_record&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;terraform&lt;/span&gt; {
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-21f7fd054fd1509f750431a345da3b5c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;terraform&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;required_providers&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; cloudflare&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; source&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;cloudflare/cloudflare&amp;#34;&lt;/span&gt;
@@ -53,6 +54,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; proxied&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"terraform {\n required_providers {\n cloudflare = {\n source = \"cloudflare/cloudflare\"\n version = \"~\u003e 2.0\"\n }\n }\n}\n\nprovider \"cloudflare\" {\n email = \"cloudflare@gmail.com\"\n api_key = \"1488ed0d2082ed36c010b773431fd9dcacde1\"\n account_id = \"06ae012a1ba907df24a220cd14a4fa8b\"\n}\n\nresource \"cloudflare_record\" \"gitlab\" {\n zone_id = \"92c6d5010fbacab27d464f4d79c11fce\"\n name = \"gitlab\"\n value = \"192.123.168.234\"\n type = \"A\"\n ttl = 300\n proxied = true\n}\n","title":"hcl"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -60,7 +62,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;Terraform_create_page_rule&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Add a page rule to the domain
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-21f7fd054fd1509f750431a345da3b5c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Add a page rule to the domain
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;resource&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;cloudflare_page_rule&amp;#34; &amp;#34;page_rule_png&amp;#34;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; zone_id&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; target&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;www.example.com/*.png*&amp;#34;&lt;/span&gt;
@@ -122,6 +124,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# priority = &amp;#34;${count.index + 1}&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# }
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Add a page rule to the domain\nresource \"cloudflare_page_rule\" \"page_rule_png\" {\n zone_id = \"92c6d5010fbacab27d464f4d79c11fce\"\n target = \"www.example.com/*.png*\"\n status = \"active\"\n\n actions {\n always_use_https = \"true\"\n browser_cache_ttl = 86400\n cache_level = \"cache_everything\"\n # edge_cache_ttl = 86400\n cache_key_fields {\n cookie {}\n header {}\n host {}\n query_string {\n ignore = true\n }\n user {}\n }\n # cache_ttl_by_status {\n # codes = \"200-299\"\n # ttl = 300\n # }\n # cache_ttl_by_status {\n # codes = \"300-399\"\n # ttl = 60\n # }\n # cache_ttl_by_status {\n # codes = \"400-403\"\n # ttl = -1\n # }\n # cache_ttl_by_status {\n # codes = \"404\"\n # ttl = 30\n # }\n # cache_ttl_by_status {\n # codes = \"405-499\"\n # ttl = -1\n # }\n # cache_ttl_by_status {\n # codes = \"500-599\"\n # ttl = 0\n # }\n # }\n}\n\n# resource \"cloudflare_page_rule\" \"rules\" {\n# count = \"${length(keys(\"${var.targets}\"))}\"\n# lifecycle {\n# create_before_destroy = true\n# }\n\n# zone_id = \"92c6d5010fbacab27d464f4d79c11fce\"\n# target = \"${var.targets[element(keys(var.targets),count.index)]}\"\n# actions {\n# always_use_https = \"true\"\n# cache_level = \"cache_everything\"\n# }\n# priority = \"${count.index + 1}\"\n# }\n","title":"hcl"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -129,7 +132,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;Terraform_create_rate_limit_rule&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Create rate limit rule
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-21f7fd054fd1509f750431a345da3b5c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-hcl" data-lang="hcl"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Create rate limit rule
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;resource&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;cloudflare_rate_limit&amp;#34; &amp;#34;wss_rate_limit&amp;#34;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; zone_id&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;92c6d5010fbacab27d464f4d79c11fce&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt; threshold&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;50&lt;/span&gt;
@@ -166,6 +169,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Create rate limit rule\nresource \"cloudflare_rate_limit\" \"wss_rate_limit\" {\n zone_id = \"92c6d5010fbacab27d464f4d79c11fce\"\n threshold = 50\n period = 60\n match {\n request {\n url_pattern = \"*wss*/*\"\n }\n }\n action {\n mode = \"ban\"\n timeout = 3600\n }\n correlate {\n by = \"nat\"\n }\n}\n\nresource \"cloudflare_rate_limit\" \"frontend_rate_limit\" {\n zone_id = \"92c6d5010fbacab27d464f4d79c11fce\"\n threshold = 50\n period = 10\n match {\n request {\n url_pattern = \"*h5*/*\"\n }\n }\n action {\n mode = \"ban\"\n timeout = 3600\n }\n correlate {\n by = \"nat\"\n }\n}\n","title":"hcl"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -287,7 +291,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;docker build 的時候限制使用資源&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker buildx create --name limited &lt;span style="color:#98c379"&gt;\
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-c90ad7d8ff6c61b2c5be6e9499b2a8de-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker buildx create --name limited &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --driver docker-container &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --driver-opt default-load&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;true&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --driver-opt &lt;span style="color:#e06c75"&gt;memory&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;2g &lt;span style="color:#98c379"&gt;\
@@ -298,6 +302,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker buildx build -t myimage .
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"docker buildx create --name limited \\\n --driver docker-container \\\n --driver-opt default-load=true \\\n --driver-opt memory=2g \\\n --driver-opt memory-swap=2g \\\n --driver-opt cpu-quota=200000 \\\n --driver-opt cpu-period=100000 \\\n --use\n\ndocker buildx build -t myimage .\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Gitlab docs</title><link>https://linzeyan.github.io/notes/docs/gitlab/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/docs/gitlab/</guid><description>&lt;div class="note-card "&gt;
@@ -312,13 +317,14 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;backup cronjob&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Backup Gitlab configs&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Backup Gitlab configs&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; * * * /usr/bin/tar -zcf /var/opt/gitlab/backups/&lt;span style="color:#98c379"&gt;`&lt;/span&gt;date +%Y_%m_%d&lt;span style="color:#98c379"&gt;`&lt;/span&gt;_gitlab_config.tar.gz /etc/gitlab &amp;amp;&amp;gt; /tmp/backup.log
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Backup Gitlab data&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; * * * /usr/bin/gitlab-backup create &lt;span style="color:#e06c75"&gt;STRATEGY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;copy &lt;span style="color:#e06c75"&gt;BACKUP&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;`&lt;/span&gt;date +%Y_%m_%d&lt;span style="color:#98c379"&gt;`&lt;/span&gt; &amp;amp;&amp;gt;&amp;gt; /tmp/backup.log
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Rotate&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; * * * /usr/bin/rm -f &lt;span style="color:#98c379"&gt;`&lt;/span&gt;find /data/backups/ -name &lt;span style="color:#98c379"&gt;&amp;#34;*.tar*&amp;#34;&lt;/span&gt; -mtime +15&lt;span style="color:#98c379"&gt;`&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Backup Gitlab configs\n1 0 * * * /usr/bin/tar -zcf /var/opt/gitlab/backups/`date +%Y_%m_%d`_gitlab_config.tar.gz /etc/gitlab \u0026\u003e /tmp/backup.log\n# Backup Gitlab data\n1 1 * * * /usr/bin/gitlab-backup create STRATEGY=copy BACKUP=`date +%Y_%m_%d` \u0026\u003e\u003e /tmp/backup.log\n# Rotate\n0 2 * * * /usr/bin/rm -f `find /data/backups/ -name \"*.tar*\" -mtime +15`\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -368,11 +374,12 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;issue&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="console-output-while-install"&gt;console output while install&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#e06c75"&gt;execute&lt;/span&gt;] &lt;span style="color:#e06c75"&gt;psql&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;could&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;not&lt;/span&gt; &lt;span style="color:#e06c75"&gt;connect&lt;/span&gt; &lt;span style="color:#e06c75"&gt;to&lt;/span&gt; &lt;span style="color:#e06c75"&gt;server&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;Connection&lt;/span&gt; &lt;span style="color:#e06c75"&gt;refused&lt;/span&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#e06c75"&gt;execute&lt;/span&gt;] &lt;span style="color:#e06c75"&gt;psql&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;could&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;not&lt;/span&gt; &lt;span style="color:#e06c75"&gt;connect&lt;/span&gt; &lt;span style="color:#e06c75"&gt;to&lt;/span&gt; &lt;span style="color:#e06c75"&gt;server&lt;/span&gt;: &lt;span style="color:#e06c75"&gt;Connection&lt;/span&gt; &lt;span style="color:#e06c75"&gt;refused&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;Is&lt;/span&gt; &lt;span style="color:#e06c75"&gt;the&lt;/span&gt; &lt;span style="color:#e06c75"&gt;server&lt;/span&gt; &lt;span style="color:#e06c75"&gt;running&lt;/span&gt; &lt;span style="color:#e06c75"&gt;locally&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;and&lt;/span&gt; &lt;span style="color:#e06c75"&gt;accepting&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;connections&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Unix&lt;/span&gt; &lt;span style="color:#e06c75"&gt;domain&lt;/span&gt; &lt;span style="color:#e06c75"&gt;socket&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;/var/opt/gitlab/postgresql/.s.PGSQL.5432&amp;#34;&lt;/span&gt;?
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="solve"&gt;solve&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# stop service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[execute] psql: could not connect to server: Connection refused\n Is the server running locally and accepting\n connections on Unix domain socket \"/var/opt/gitlab/postgresql/.s.PGSQL.5432\"?\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="solve"&gt;solve&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# stop service&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo gitlab-ctl stop
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl stop gitlab-runsvdir.service
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -386,6 +393,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl start gitlab-runsvdir.service
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo gitlab-ctl reconfigure
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# stop service\nsudo gitlab-ctl stop\nsudo systemctl stop gitlab-runsvdir.service\n\n# check if there are any postgres processes; shouldn't be\nps aux | grep postgre\n\n# remove process pid\nsudo rm /var/opt/gitlab/postgresql/data/postmaster.pid\n\n# start service\nsudo systemctl start gitlab-runsvdir.service\nsudo gitlab-ctl reconfigure\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -407,11 +415,12 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;issue2&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="console-output"&gt;console output&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Gitlab Container Registry&lt;/span&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Gitlab Container Registry&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Error response from daemon: Get https://registry.knowhow.fun/v2/: x509: certificate has expired or is not yet valid
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="etcgitlabgitlabrb"&gt;&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/config/gitlab/gitlab.rb"&gt;/etc/gitlab/gitlab.rb&lt;/a&gt;&lt;/h6&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Gitlab Container Registry\nError response from daemon: Get https://registry.knowhow.fun/v2/: x509: certificate has expired or is not yet valid\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="etcgitlabgitlabrb"&gt;&lt;a href="https://linzeyan.github.io/notes/docs/gitlab/config/gitlab/gitlab.rb"&gt;/etc/gitlab/gitlab.rb&lt;/a&gt;&lt;/h6&gt;
 &lt;h6 id="solve"&gt;solve&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install ca-certificates
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install ca-certificates
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /etc/gitlab
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;openssl genrsa -out ca.key &lt;span style="color:#d19a66"&gt;4096&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;openssl req -new -x509 -days &lt;span style="color:#d19a66"&gt;3650&lt;/span&gt; -key ca.key -out ca.crt
@@ -422,6 +431,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cp ca.crt /etc/pki/ca-trust/source/anchors/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;update-ca-trust
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"yum install ca-certificates\ncd /etc/gitlab\nopenssl genrsa -out ca.key 4096\nopenssl req -new -x509 -days 3650 -key ca.key -out ca.crt\nopenssl genrsa -out server.key 4096\nopenssl req -new -key server.key -out server.csr\nopenssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt\ncp server.crt /etc/pki/ca-trust/source/anchors/\ncp ca.crt /etc/pki/ca-trust/source/anchors/\nupdate-ca-trust\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -430,24 +440,27 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;issue3&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="console-output"&gt;console output&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Gitlab Container Registry&lt;/span&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Gitlab Container Registry&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;received unexpected HTTP status: &lt;span style="color:#d19a66"&gt;500&lt;/span&gt; Internal Server Error
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="solve"&gt;solve&lt;/h6&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Gitlab Container Registry\nreceived unexpected HTTP status: 500 Internal Server Error\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="solve"&gt;solve&lt;/h6&gt;
 &lt;p&gt;&lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ruby" data-lang="ruby"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;gitlab_rails&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;ldap_servers&amp;#39;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; {
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-075ff22941a759c827ac07e5d451d5cc-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ruby" data-lang="ruby"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;gitlab_rails&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;ldap_servers&amp;#39;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;main&amp;#39;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&amp;gt;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;encryption&amp;#39;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&amp;gt;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;plain&amp;#39;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"gitlab_rails['ldap_servers'] = {\n 'main' =\u003e {\n 'encryption' =\u003e 'plain',\n }\n}\n","title":"ruby"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Linux docs</title><link>https://linzeyan.github.io/notes/docs/linux/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/docs/linux/</guid><description>&lt;div class="note-card "&gt;
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;docker.service&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ExecStart&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --bip 10.255.0.1/16 --containerd&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/run/containerd/containerd.sock --insecure-registry hub.srjob.co:8888 --insecure-registry registry.knowhow.fun
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-150bc452d8ab43e820fcccd04e186a23-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ExecStart&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --bip 10.255.0.1/16 --containerd&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/run/containerd/containerd.sock --insecure-registry hub.srjob.co:8888 --insecure-registry registry.knowhow.fun
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --bip 10.255.0.1/16 --containerd=/run/containerd/containerd.sock --insecure-registry hub.srjob.co:8888 --insecure-registry registry.knowhow.fun\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -455,7 +468,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;gd.service&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-150bc452d8ab43e820fcccd04e186a23-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;Description&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;Fetch DNS
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;After&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;network.target
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;After&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;mysql.service
@@ -469,6 +482,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Install&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;WantedBy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;multi-user.target
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[Unit]\nDescription=Fetch DNS\nAfter=network.target\nAfter=mysql.service\n\n[Service]\nWorkingDirectory=/data/dns\nExecStart=/data/dns/gd -o hourly\nExecReload=/bin/kill -s HUP $MAINPID\nRestart=always\n\n[Install]\nWantedBy=multi-user.target\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -476,7 +490,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;openresty.service&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-150bc452d8ab43e820fcccd04e186a23-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;Description&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;The OpenResty Application Platform
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;After&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;syslog.target network-online.target remote-fs.target nss-lookup.target
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;Wants&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;network-online.target
@@ -501,6 +515,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Install&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;WantedBy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;multi-user.target
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[Unit]\nDescription=The OpenResty Application Platform\nAfter=syslog.target network-online.target remote-fs.target nss-lookup.target\nWants=network-online.target\n\n[Service]\nType=forking\nWorkingDirectory=/data/config/nginx\nPIDFile=/data/config/nginx/logs/nginx.pid\nExecStartPre=/usr/bin/chown -R root:root /data/nginx\nExecStartPre=/usr/bin/rm -f /data/nginx/logs/nginx.pid\nExecStartPre=/usr/local/openresty/nginx/sbin/nginx -p /data/nginx -t\nExecStart=/usr/local/openresty/nginx/sbin/nginx -p /data/nginx\nExecReload=/bin/kill -s HUP $MAINPID\nExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /data/nginx/logs/nginx.pid\n#ExecStop=/bin/kill -s QUIT $MAINPID\nKillSignal=SIGQUIT\nTimeoutStopSec=5\nKillMode=process\nPrivateTmp=true\nLimitNOFILE=1048576\n\n[Install]\nWantedBy=multi-user.target\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -508,7 +523,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;pm2.service&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-150bc452d8ab43e820fcccd04e186a23-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Unit&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;Description&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;PM2 process manager
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;Documentation&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;https://pm2.keymetrics.io/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;After&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;network.target
@@ -529,6 +544,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;Install&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;WantedBy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;multi-user.target
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[Unit]\nDescription=PM2 process manager\nDocumentation=https://pm2.keymetrics.io/\nAfter=network.target\n\n[Service]\nType=forking\nUser=root\nLimitNOFILE=infinity\nLimitNPROC=infinity\nLimitCORE=infinity\nEnvironment=PM2_HOME=/root/.pm2\nPIDFile=/root/.pm2/pm2.pid\nWorkingDirectory=/game/publish\nExecStart=/lib/node_modules/pm2/bin/pm2 start game_api.json manage.json\nExecReload=/lib/node_modules/pm2/bin/pm2 reload all\nExecStop=/lib/node_modules/pm2/bin/pm2 kill\n\n[Install]\nWantedBy=multi-user.target\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -536,7 +552,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;logrotate&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/data/gameapi/logs/*.log {
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-150bc452d8ab43e820fcccd04e186a23-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/data/gameapi/logs/*.log {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; create 0644 nobody root
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; daily
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; rotate 30
@@ -550,6 +566,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; endscript
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"/data/gameapi/logs/*.log {\n create 0644 nobody root\n daily\n rotate 30\n dateext\n missingok\n notifempty\n compress\n sharedscripts\n postrotate\n /bin/kill -USR1 `cat /data/gameapi/logs/nginx.pid 2\u003e/dev/null` 2\u003e/dev/null || true\n endscript\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>mermaid notes</title><link>https://linzeyan.github.io/notes/docs/mermaid/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/docs/mermaid/</guid><description>&lt;div class="note-card "&gt;
@@ -574,7 +591,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;class&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;classDiagram
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;classDiagram
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class01 &amp;lt;|-- AveryLongClass : Cool
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class03 _-- Class04
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class05 o-- Class06
@@ -588,7 +605,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class01 : int chimp
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class01 : int gorilla
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Class08 &amp;lt;--&amp;gt; C2: Cool label
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"classDiagram\nClass01 \u003c|-- AveryLongClass : Cool\nClass03 _-- Class04\nClass05 o-- Class06\nClass07 .. Class08\nClass09 --\u003e C2 : Where am i?\nClass09 --_ C3\nClass09 --|\u003e Class07\nClass07 : equals()\nClass07 : Object[] elementData\nClass01 : size()\nClass01 : int chimp\nClass01 : int gorilla\nClass08 \u003c--\u003e C2: Cool label\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/class_1.svg"&gt;classDiagram&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -599,14 +617,15 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;flow-link&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;flowchart LR
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;flowchart LR
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;A --o B
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;B --x C
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;D o--o E
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;E &amp;lt;--&amp;gt; F
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;F x--x G
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"flowchart LR\nA --o B\nB --x C\n\nD o--o E\nE \u003c--\u003e F\nF x--x G\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/link.svg"&gt;flowchart&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -629,7 +648,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;flow-shapes&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;graph LR
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;graph LR
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id1[方框]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id2(帶有圓角的方框)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id3([體育場形狀])
@@ -644,7 +663,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id12[/梯形 1\]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id13[\梯形 2/]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;id14(((雙圓)))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"graph LR\nid1[方框]\nid2(帶有圓角的方框)\nid3([體育場形狀])\nid4[[子例程]]\nid5[(圓柱狀)]\nid6((圓形))\nid7\u003e非對稱形狀]\nid8{菱形}\nid9{{六角形}}\nid10[/平行四邊形 1/]\nid11[\\平行四邊形 2\\]\nid12[/梯形 1\\]\nid13[\\梯形 2/]\nid14(((雙圓)))\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/shapes.svg"&gt;flowchart&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -655,7 +675,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;flow-subgraphs&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;flowchart TD
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;flowchart TD
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;c1--&amp;gt;a2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; subgraph one
@@ -669,7 +689,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; subgraph three
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; c1--&amp;gt;c2
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"flowchart TD\nc1--\u003ea2\n\n subgraph one\n a1--\u003ea2\n end\n\n subgraph \"`**two**`\"\n b1--\u003eb2\n end\n\n subgraph three\n c1--\u003ec2\n end\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/subgraphs.svg"&gt;flowchart&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -680,7 +701,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;gantt&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gantt
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gantt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dateFormat YYYY-MM-DD
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;title Adding GANTT diagram functionality to mermaid
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;section A section
@@ -695,7 +716,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Future task in critical line :crit, 5d
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Create tests for renderer :2d
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Add to mermaid :1d
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"gantt\ndateFormat YYYY-MM-DD\ntitle Adding GANTT diagram functionality to mermaid\nsection A section\nCompleted task :done, des1, 2014-01-06,2014-01-08\nActive task :active, des2, 2014-01-09, 3d\nFuture task : des3, after des2, 5d\nFuture task2 : des4, after des3, 5d\nsection Critical tasks\nCompleted task in the critical line :crit, done, 2014-01-06,24h\nImplement parser and jison :crit, done, after des1, 2d\nCreate tests for parser :crit, active, 3d\nFuture task in critical line :crit, 5d\nCreate tests for renderer :2d\nAdd to mermaid :1d\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/gantt_1.svg"&gt;gantt&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -706,7 +728,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;git&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gitGraph
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gitGraph
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;branch develop
@@ -717,7 +739,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;merge develop
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"gitGraph\ncommit\ncommit\nbranch develop\ncheckout develop\ncommit\ncommit\ncheckout main\nmerge develop\ncommit\ncommit\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/git_1.svg"&gt;git&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -728,7 +751,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;er&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;erDiagram
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;erDiagram
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CUSTOMER }|..|{ DELIVERY-ADDRESS : has
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CUSTOMER ||--o{ ORDER : places
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;CUSTOMER ||--o{ INVOICE : &amp;#34;liable for&amp;#34;
@@ -737,7 +760,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ORDER ||--|{ ORDER-ITEM : includes
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PRODUCT-CATEGORY ||--|{ PRODUCT : contains
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PRODUCT ||--o{ ORDER-ITEM : &amp;#34;ordered in&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"erDiagram\nCUSTOMER }|..|{ DELIVERY-ADDRESS : has\nCUSTOMER ||--o{ ORDER : places\nCUSTOMER ||--o{ INVOICE : \"liable for\"\nDELIVERY-ADDRESS ||--o{ ORDER : receives\nINVOICE ||--|{ ORDER : covers\nORDER ||--|{ ORDER-ITEM : includes\nPRODUCT-CATEGORY ||--|{ PRODUCT : contains\nPRODUCT ||--o{ ORDER-ITEM : \"ordered in\"\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/er_1.svg"&gt;erDiagram&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -748,7 +772,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;journey&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;journey
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d7f0e7d06a21928e185949e3eb5409f9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;journey
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;title My working day
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;section Go to work
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Make tea: 5: Me
@@ -757,7 +781,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;section Go home
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Go downstairs: 5: Me
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sit down: 3: Me
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"journey\ntitle My working day\nsection Go to work\nMake tea: 5: Me\nGo upstairs: 3: Me\nDo work: 1: Me, Cat\nsection Go home\nGo downstairs: 5: Me\nSit down: 3: Me\n","title":"markdown"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://linzeyan.github.io/notes/docs/mermaid/img/journey_1.svg"&gt;erDiagram&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -825,7 +850,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;Juniper SRX 320&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 查看當前軟體版本號&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-690a4f77ffb8e2424257c1f868be0243-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 查看當前軟體版本號&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;show system software
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 查看系統啟動時間&lt;/span&gt;
@@ -890,13 +915,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 動態報文抓取（Tcpdump，類似 ScreenOS snoop命令）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;monitor traffic interface ge-x/y/z
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 查看當前軟體版本號\nshow system software\n\n# 查看系統啟動時間\nshow system uptime\n\n# 查看硬體板卡及序號\nshow chassis haredware\n\n# 查看硬體板卡當前狀態\nshow chassis environment\n\n# 查看主控板（RE）資源使用及狀態\nshow chassis routing-engine\n\n\n# 查看當前防火牆併發會話數\nshow security flow session summary\n\n# 查看當前防火牆具體併發會話\nshow security flow session\n\n# 清除當前 session\nclear security flow session all\n\n# 檢查全域 ALG 開啟情況\nshow security alg status\n\n# 查OID\nshow snmp mib walk decimal 1.3.6.1.2.1.2.2.1.2\n\n# 設定政策\nset security policy zones from-zone to-zone\n\n# 查看路由表\nshow route\n\n# 查看 ARP 表\nshow arp\n\n# 查看系統日誌\nshow log messages\n\n# 查看所有介面運行狀態\nshow interface terse\n\n# 查看介面運行細節資訊\nshow interface ge-x/y/z detail\n\n# 比較修改\nshow | compare rollback ?\nshow | compare rollback 1\n\n# 查看系統\nshow system\n\n# 查看設定\nshow configuration\n\n# 動態統計介面資料包轉發資訊\nmonitor interface ge-x/y/z\n\n# 動態報文抓取（Tcpdump，類似 ScreenOS snoop命令）\nmonitor traffic interface ge-x/y/z\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Nginx docs</title><link>https://linzeyan.github.io/notes/docs/nginx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/docs/nginx/</guid><description>&lt;div class="note-card "&gt;
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;map&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# map
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# map
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;map&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$remote_addr&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$limit_key&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;35.229.201.209&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;default&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$binary_remote_addr&lt;/span&gt;;
@@ -912,6 +938,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# map\nmap $remote_addr $limit_key {\n 35.229.201.209 \"\";\n default $binary_remote_addr;\n}\n# wss.conf\nlimit_req_zone $limit_key zone=websocket:10m rate=20r/s;\nlimit_req_status 499;\n\nserver {\n location = / {\n limit_req zone=websocket nodelay;\n limit_req_log_level warn;\n }\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -920,7 +947,7 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;rewrite&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="1"&gt;1&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/img&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;rewrite&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;^/img/(.*)&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;/static/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$1&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
@@ -929,8 +956,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/data/nginxconfig.io/src&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;index&lt;/span&gt; &lt;span style="color:#98c379"&gt;nginx.svg&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="2"&gt;2&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# https://localhost/img/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg\nlocation /img {\n rewrite '^/img/(.*)$' /static/$1;\n }\n\nlocation /static {\n root /data/nginxconfig.io/src;\n index nginx.svg;\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="2"&gt;2&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/photo&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/data/nginxconfig.io/src&lt;/span&gt;;
@@ -940,8 +968,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;@pic&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;rewrite&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;^/photo/(.*)&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$&amp;#39;&lt;/span&gt; &lt;span style="color:#98c379"&gt;/static/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$1&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="3"&gt;3&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# remove prefix path and allow proxy_pass POST
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# https://localhost/photo/nginx.svg can access /data/nginxconfig.io/src/static/nginx.svg\n\nlocation /photo {\n root /data/nginxconfig.io/src;\n try_files $uri /$uri @pic;\n}\n\nlocation @pic {\n rewrite '^/photo/(.*)$' /static/$1;\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="3"&gt;3&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# remove prefix path and allow proxy_pass POST
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/upload/&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;proxy_set_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;Host&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$host&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;proxy_set_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;X-Real-IP&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$remote_addr&lt;/span&gt;;
@@ -966,6 +995,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;index&lt;/span&gt; &lt;span style="color:#98c379"&gt;index.html&lt;/span&gt; &lt;span style="color:#98c379"&gt;index.htm&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# remove prefix path and allow proxy_pass POST\nlocation /upload/ {\n proxy_set_header Host $host;\n proxy_set_header X-Real-IP $remote_addr;\n proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n root /data/nginx/html;\n # Remove path\n rewrite ^/upload/(.*) /$1 break;\n proxy_pass https://logo$uri$is_args$args;\n # Proxy_pass POST\n proxy_http_version 1.1;\n proxy_set_header Upgrade $http_upgrade;\n proxy_set_header Connection 'upgrade';\n proxy_cache_bypass $http_upgrade;\n #proxy_redirect https://logo/ /;\n}\n\nlocation / {\n proxy_set_header Host $host;\n proxy_set_header X-Real-IP $remote_addr;\n proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n root /data/nginx/html;\n index index.html index.htm;\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -974,17 +1004,19 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;grafana behind nginx&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="serversslconf"&gt;server/ssl.conf&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_certificate&lt;/span&gt; &lt;span style="color:#98c379"&gt;/etc/ssl/go2cloudten.com.crt&lt;/span&gt;;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_certificate&lt;/span&gt; &lt;span style="color:#98c379"&gt;/etc/ssl/go2cloudten.com.crt&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_certificate_key&lt;/span&gt; &lt;span style="color:#98c379"&gt;/etc/ssl/go2cloudten.com.key&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_ciphers&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:HIGH:!RC2:!RC4:!aNULL:!eNULL:!LOW:!IDEA:!DES:!TDES:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!EXPORT:!ANON&amp;#34;&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_prefer_server_ciphers&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_protocols&lt;/span&gt; &lt;span style="color:#98c379"&gt;TLSv1.2&lt;/span&gt; &lt;span style="color:#98c379"&gt;TLSv1.3&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;ssl_session_timeout&lt;/span&gt; &lt;span style="color:#d19a66"&gt;50m&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="serverproxyconf"&gt;server/proxy.conf&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;proxy_set_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;X-Real-IP&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$remote_addr&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ssl_certificate /etc/ssl/go2cloudten.com.crt;\nssl_certificate_key /etc/ssl/go2cloudten.com.key;\nssl_ciphers \"EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH:EDH+aRSA:HIGH:!RC2:!RC4:!aNULL:!eNULL:!LOW:!IDEA:!DES:!TDES:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!EXPORT:!ANON\";\nssl_prefer_server_ciphers on;\nssl_protocols TLSv1.2 TLSv1.3;\nssl_session_timeout 50m;\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="serverproxyconf"&gt;server/proxy.conf&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;proxy_set_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;X-Real-IP&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$remote_addr&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;proxy_set_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;X-Forwarded-For&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$proxy_add_x_forwarded_for&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="grafanaconf"&gt;grafana.conf&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"proxy_set_header X-Real-IP $remote_addr;\nproxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="grafanaconf"&gt;grafana.conf&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0f08c9acd967fecf91cc85f84bae850f-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;server&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;443&lt;/span&gt; &lt;span style="color:#98c379"&gt;ssl&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;grafana-test.go2cloudten.com&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;grafana.go2cloudten.com&lt;/span&gt;;
@@ -1003,6 +1035,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"server {\n listen 443 ssl;\n server_name grafana-test.go2cloudten.com;\n server_name grafana.go2cloudten.com;\n include server/ssl.conf;\n include server/proxy.conf;\n access_log logs/grafana.log json;\n error_log logs/grafana.error.log warn;\n location / {\n proxy_pass http://grafana;\n proxy_connect_timeout 300;\n proxy_read_timeout 700;\n proxy_send_timeout 700;\n proxy_set_header Host $host;\n proxy_set_header Upgrade $http_upgrade;\n proxy_set_header Connection \"Upgrade\";\n }\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Vagrant docs</title><link>https://linzeyan.github.io/notes/docs/vagrant/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/notes/docs/vagrant/</guid><description>&lt;div class="note-card "&gt;
@@ -1079,7 +1112,7 @@
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;h6 id="etczabbixzabbix_serverconf"&gt;/etc/zabbix/zabbix_server.conf&lt;/h6&gt;
 &lt;p&gt;Zabbix Server perform high loading, and slow query. Increase ValueCacheSize solve this problem.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;LogFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/var/log/zabbix/zabbix_server.log&lt;/span&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9cad21aa292e1960d78eb8b16f26b07f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;LogFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/var/log/zabbix/zabbix_server.log&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;LogFileSize&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;5&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;PidFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/var/run/zabbix/zabbix_server.pid&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;SocketDir&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/var/run/zabbix&lt;/span&gt;
@@ -1105,8 +1138,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ExternalScripts&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/usr/lib/zabbix/externalscripts&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;LogSlowQueries&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;3000&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;StatsAllowedIP&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;127.0.0.1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id="etcmycnf"&gt;/etc/my.cnf&lt;/h6&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[client-server]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"LogFile=/var/log/zabbix/zabbix_server.log\nLogFileSize=5\nPidFile=/var/run/zabbix/zabbix_server.pid\nSocketDir=/var/run/zabbix\nDBHost=localhost\nDBName=zabbix_db\nDBUser=zabbix_user\nDBPassword=zabbix\nDBSocket=/data/mysql/mysql.sock\nStartPollers=200\nStartPreprocessors=30\nStartPollersUnreachable=30\nStartTrappers=100\nStartDiscoverers=30\nSNMPTrapperFile=/var/log/snmptrap/snmptrap.log\nCacheSize=4G\nHistoryCacheSize=2G\nHistoryIndexCacheSize=2G\nTrendCacheSize=2G\nValueCacheSize=24G\nTimeout=30\nUnavailableDelay=120\nAlertScriptsPath=/usr/lib/zabbix/alertscripts\nExternalScripts=/usr/lib/zabbix/externalscripts\nLogSlowQueries=3000\nStatsAllowedIP=127.0.0.1\n","title":"ini"}&lt;/script&gt;&lt;/div&gt;&lt;h6 id="etcmycnf"&gt;/etc/my.cnf&lt;/h6&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9cad21aa292e1960d78eb8b16f26b07f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[client-server]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;socket&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;/data/mysql/mysql.sock&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[mysqld]&lt;/span&gt;
@@ -1202,6 +1236,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;!includedir /etc/my.cnf.d&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[client-server]\nsocket=/data/mysql/mysql.sock\n\n[mysqld]\nsocket=/data/mysql/mysql.sock\ndatadir=/data/mysql\n\ncharacter_set_server=utf8mb4\ncharacter_set_filesystem=utf8\nmax_allowed_packet=32M\nevent_scheduler=1\ndefault_storage_engine=innodb\nopen_files_limit=65535\nlocal_infile=1\nsysdate_is_now=1\nback_log=256\n##error log format\n# connection\ninteractive_timeout=28800\nwait_timeout=28800\nlock_wait_timeout=28800\nskip_name_resolve=1\nmax_connections=2000\nmax_user_connections=1000\nmax_connect_errors=1000000\n\n# table cache performance settings #\ntable_open_cache=8192\ntable_definition_cache=8192\ntable_open_cache_instances=16\n\n# session memory settings #\nread_buffer_size=131072\nread_rnd_buffer_size=262144\nsort_buffer_size=262144\ntmp_table_size=67108864\njoin_buffer_size=8M\nthread_cache_size=256\n\n# log settings #\n###slow log ###\nslow_query_log=1\nlog_queries_not_using_indexes=0\nlog_slow_admin_statements=1\n#log_slow_slave_statements = 1\nlog_throttle_queries_not_using_indexes=1\nlong_query_time=0.5\nlog_bin_trust_function_creators=1\n\n###binlog ###\nbinlog_cache_size=32K\nmax_binlog_cache_size=1G\nmax_binlog_size=2G\nexpire_logs_days=31\nlog_slave_updates=1\n#binlog_format=STATEMENT\nbinlog_format=ROW\nslave_compressed_protocol = 1\n# innodb settings #\n#innodb_data_file_path=ibdata1:4G;ibdata2:4G:autoextend\ninnodb_page_size=16384\ninnodb_buffer_pool_size=4G\ninnodb_buffer_pool_instances=1\ninnodb_buffer_pool_load_at_startup=1\ninnodb_buffer_pool_dump_at_shutdown=1\ninnodb_lock_wait_timeout=50\ninnodb_io_capacity=100\ninnodb_io_capacity_max=200\ninnodb_flush_neighbors=1\ninnodb_file_per_table=1\ninnodb_log_files_in_group=3\ninnodb_log_file_size=2G\ninnodb_log_buffer_size=33554432\ninnodb_purge_threads=2\ninnodb_large_prefix=1\ninnodb_thread_concurrency=64\ninnodb_print_all_deadlocks=1\ninnodb_strict_mode=1\ninnodb_sort_buffer_size=67108864\ninnodb_write_io_threads=4\ninnodb_read_io_threads=4\ninnodb_online_alter_log_max_size=1G\ninnodb_open_files=60000\ninnodb_max_dirty_pages_pct=75\ninnodb_adaptive_flushing=on\ninnodb_flush_log_at_trx_commit=1\n\nsync_binlog =1\n\n[mysqld_safe]\nlog-error=/var/log/mariadb/mariadb.log\n#\n# include *.cnf from the config directory\n#\n!includedir /etc/my.cnf.d\n","title":"ini"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item></channel></rss>

@@ -8,65 +8,67 @@
 &lt;li&gt;&lt;a href="https://chubakbidpaa.com/interesting/2021/09/28/regex-for-md.html" target="_blank" rel="noopener"&gt;Markdown 語法的正則表達式&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener"&gt;基本語法&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Headings
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headerOne = `(#{1}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headeTwo = `(#{2}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headerThree = `(#{3}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headerFour = `(#{4}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headerFive = `(#{5}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;headerSix = `(#{6}\s)(.*)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Bold and Italic Text
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boldItalicText = `(\*|\_)+(\S+)(\*|\_)+`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Links
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;linkText = `(\[.*\])(\((http)(?:s)?(\:\/\/).*\))`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Images
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;imageFile = `(\!)(\[(?:.*)?\])(\(.*(\.(jpg|png|gif|tiff|bmp))(?:(\s\&amp;#34;|\&amp;#39;)(\w|\W|\d)+(\&amp;#34;|\&amp;#39;))?\)`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Unordered List
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;listText = `(^(\W{1})(\s)(.*)(?:$)?)+`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Numbered Text
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;numberedListText = `(^(\d+\.)(\s)(.*)(?:$)?)+`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Block Quotes
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;blockQuote = `((^(\&amp;gt;{1})(\s)(.*)(?:$)?)+`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Inline Code
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;inlineCode = &amp;#34;(\\`{1})(.*)(\\`{1})&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Code Block
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;codeBlock = &amp;#34;(\\`{3}\\n+)(.*)(\\n+\\`{3})&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Horizontal Line
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;horizontalLine = `(\=|\-|\*){3}`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# Email Text
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;emailText = `(\&amp;lt;{1})(\S+@\S+)(\&amp;gt;{1})`
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;# TABLES
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}&amp;gt;?(?!-))]+))+(\|))(?:\n)?((\|)(-+))+(\|)(\n)((\|)(\W+|\w+|\S+))+(\|$)`
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-02bea91b9b74caecc2edc189694667bf-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Headings
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headerOne = `(#{1}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headeTwo = `(#{2}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headerThree = `(#{3}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headerFour = `(#{4}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headerFive = `(#{5}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;headerSix = `(#{6}\s)(.*)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Bold and Italic Text
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;boldItalicText = `(\*|\_)+(\S+)(\*|\_)+`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Links
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;linkText = `(\[.*\])(\((http)(?:s)?(\:\/\/).*\))`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Images
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;imageFile = `(\!)(\[(?:.*)?\])(\(.*(\.(jpg|png|gif|tiff|bmp))(?:(\s\&amp;#34;|\&amp;#39;)(\w|\W|\d)+(\&amp;#34;|\&amp;#39;))?\)`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Unordered List
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;listText = `(^(\W{1})(\s)(.*)(?:$)?)+`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Numbered Text
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;numberedListText = `(^(\d+\.)(\s)(.*)(?:$)?)+`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Block Quotes
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;blockQuote = `((^(\&amp;gt;{1})(\s)(.*)(?:$)?)+`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Inline Code
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;inlineCode = &amp;#34;(\\`{1})(.*)(\\`{1})&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Code Block
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;codeBlock = &amp;#34;(\\`{3}\\n+)(.*)(\\n+\\`{3})&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Horizontal Line
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;horizontalLine = `(\=|\-|\*){3}`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# Email Text
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;emailText = `(\&amp;lt;{1})(\S+@\S+)(\&amp;gt;{1})`
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# TABLES
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tableText = `(((\|)([a-zA-Z\d+\s#!@&amp;#39;&amp;#34;():;\\\/.\[\]\^&amp;lt;={$}&amp;gt;?(?!-))]+))+(\|))(?:\n)?((\|)(-+))+(\|)(\n)((\|)(\W+|\w+|\S+))+(\|$)`
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Headings\nheaderOne = `(#{1}\\s)(.*)`\nheadeTwo = `(#{2}\\s)(.*)`\nheaderThree = `(#{3}\\s)(.*)`\nheaderFour = `(#{4}\\s)(.*)`\nheaderFive = `(#{5}\\s)(.*)`\nheaderSix = `(#{6}\\s)(.*)`\n\n# Bold and Italic Text\nboldItalicText = `(\\*|\\_)+(\\S+)(\\*|\\_)+`\n\n# Links\nlinkText = `(\\[.*\\])(\\((http)(?:s)?(\\:\\/\\/).*\\))`\n\n# Images\nimageFile = `(\\!)(\\[(?:.*)?\\])(\\(.*(\\.(jpg|png|gif|tiff|bmp))(?:(\\s\\\"|\\')(\\w|\\W|\\d)+(\\\"|\\'))?\\)`\n\n# Unordered List\nlistText = `(^(\\W{1})(\\s)(.*)(?:$)?)+`\n\n# Numbered Text\nnumberedListText = `(^(\\d+\\.)(\\s)(.*)(?:$)?)+`\n\n# Block Quotes\nblockQuote = `((^(\\\u003e{1})(\\s)(.*)(?:$)?)+`\n\n# Inline Code\ninlineCode = \"(\\\\`{1})(.*)(\\\\`{1})\"\n\n# Code Block\ncodeBlock = \"(\\\\`{3}\\\\n+)(.*)(\\\\n+\\\\`{3})\"\n\n# Horizontal Line\nhorizontalLine = `(\\=|\\-|\\*){3}`\n\n# Email Text\nemailText = `(\\\u003c{1})(\\S+@\\S+)(\\\u003e{1})`\n\n# TABLES\ntableText = `(((\\|)([a-zA-Z\\d+\\s#!@'\"():;\\\\\\/.\\[\\]\\^\u003c={$}\u003e?(?!-))]+))+(\\|))(?:\\n)?((\\|)(-+))+(\\|)(\\n)((\\|)(\\W+|\\w+|\\S+))+(\\|$)`\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener"&gt;是否有正規表示式可以檢測有效的正規表示式？&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;^ # start of string
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;( # first group start
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:[^?+*{}()[\]\\|]+ # literals and ^, $
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \\. # escaped characters
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: [^\]\\]+ | \\. )* \]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \(\? (?:R|[+-]?\d+) \) # recursive matching
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \| # alternative
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )* # repeat content
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;) # end first group
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ # end of string
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;移除空白與註解後&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-07bb142249fd613479b7c02aaf22a51a-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;^ # start of string
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;( # first group start
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?:[^?+*{}()[\]\\|]+ # literals and ^, $
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \\. # escaped characters
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?: [^\]\\]+ | \\. )* \]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \(\? (?:R|[+-]?\d+) \) # recursive matching
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \| # alternative
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; )* # repeat content
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;) # end first group
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ # end of string
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"/\n^ # start of string\n( # first group start\n (?:\n (?:[^?+*{}()[\\]\\\\|]+ # literals and ^, $\n | \\\\. # escaped characters\n | \\[ (?: \\^?\\\\. | \\^[^\\\\] | [^\\\\^] ) # character classes\n (?: [^\\]\\\\]+ | \\\\. )* \\]\n | \\( (?:\\?[:=!]|\\?\u003c[=!]|\\?\u003e)? (?1)?? \\) # parenthesis, with recursive content\n | \\(\\? (?:R|[+-]?\\d+) \\) # recursive matching\n )\n (?: (?:[?+*]|\\{\\d+(?:,\\d*)?\\}) [?+]? )? # quantifiers\n | \\| # alternative\n )* # repeat content\n) # end first group\n$ # end of string\n/\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;移除空白與註解後&lt;/p&gt;</description></item></channel></rss>

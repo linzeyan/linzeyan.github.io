@@ -7,26 +7,21 @@
 &lt;li&gt;為了確保臨時檔案建立成功，&lt;code&gt;mktemp&lt;/code&gt; 後面最好使用 OR 運算子（&lt;code&gt;||&lt;/code&gt;），在建立失敗時退出腳本。&lt;/li&gt;
 &lt;li&gt;為了確保腳本退出時刪除臨時檔案，可以使用 &lt;code&gt;trap&lt;/code&gt; 指定退出時的清理動作。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span&gt; EXIT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;TMPFILE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;mktemp&lt;span style="color:#c678dd"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Our temp file is &lt;/span&gt;&lt;span style="color:#e06c75"&gt;$TMPFILE&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="mktemp-參數"&gt;mktemp 參數&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-bb1ecdf5e069b060cbb6dadd0fa015cf-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;trap&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rm -f &amp;#34;$TMPFILE&amp;#34;&amp;#39;&lt;/span&gt; EXIT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TMPFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;mktemp&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Our temp file is &lt;/span&gt;&lt;span class="nv"&gt;$TMPFILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/bin/bash\n\ntrap 'rm -f \"$TMPFILE\"' EXIT\n\nTMPFILE=$(mktemp) || exit 1\necho \"Our temp file is $TMPFILE\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="mktemp-參數"&gt;mktemp 參數&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-d&lt;/code&gt; 參數可以建立臨時目錄。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-p&lt;/code&gt; 參數可以指定臨時檔案所在的目錄。預設使用 &lt;code&gt;$TMPDIR&lt;/code&gt; 環境變數指定的目錄；若未設定，使用 &lt;code&gt;/tmp&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-t&lt;/code&gt; 參數可以指定臨時檔案的檔名模板，模板末尾必須至少包含三個連續的 &lt;code&gt;X&lt;/code&gt; 字元作為隨機字元，建議至少六個 &lt;code&gt;X&lt;/code&gt;。預設的檔名模板為 &lt;code&gt;tmp.&lt;/code&gt; 加上十個隨機字元。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="trap-命令的用法"&gt;&lt;code&gt;trap&lt;/code&gt; 命令的用法&lt;/h4&gt;
-&lt;p&gt;trap 命令用來在 Bash 腳本中響應系統訊號。&lt;/p&gt;
-&lt;p&gt;最常見的系統訊號是 SIGINT（中斷），也就是按下 Ctrl + C 產生的訊號。&lt;code&gt;-l&lt;/code&gt; 參數可以列出所有系統訊號。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; -l
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGHUP 2&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGINT 3&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGQUIT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGILL 5&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGTRAP 6&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; SIGABRT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ... ...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;trap 的命令格式如下：&lt;/p&gt;</description></item><item><title>GitHub Actions 入門教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul&gt;
+&lt;p&gt;trap 命令用來在 Bash 腳本中響應系統訊號。&lt;/p&gt;</description></item><item><title>GitHub Actions 入門教學</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</link><pubDate>Mon, 23 Dec 2019 10:16:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191223-getting-started-with-github-actions/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html" target="_blank" rel="noopener"&gt;GitHub Actions 入門教學&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Nginx 如何防禦 DDoS 攻擊？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</link><pubDate>Fri, 20 Dec 2019 09:42:50 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191220-nginx-defend-ddos/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://magiclen.org/nginx-defend-ddos/" target="_blank" rel="noopener"&gt;Nginx 如何防禦 DDoS 攻擊？&lt;/a&gt;&lt;/li&gt;
@@ -57,35 +52,18 @@
 &lt;/ul&gt;
 &lt;h4 id="bad-interpreter-error"&gt;Bad Interpreter Error&lt;/h4&gt;
 &lt;p&gt;使用 Ansible 時遇到錯誤的解譯器問題。找不到 Python 2.7：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1ba1c54e6cee421003f5219f363bf157-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"zsh: /usr/local/bin/ansible-vault: bad interpreter: /usr/local/opt/python@2/bin/python2.7: no such file or directory\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;這是正常的，因為我們檢查 /usr/local/opt 後只看到 Python 3。&lt;/p&gt;
 &lt;h4 id="安裝-python-2"&gt;安裝 Python 2&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install python@2
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="python-嚴重崩潰"&gt;Python 嚴重崩潰&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1ba1c54e6cee421003f5219f363bf157-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install python@2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"brew install python@2\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="python-嚴重崩潰"&gt;Python 嚴重崩潰&lt;/h5&gt;
 &lt;p&gt;接著在檢查 Ansible 版本時又出現錯誤：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ trellis git:&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;master&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ansible --version
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;1&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#d19a66"&gt;19153&lt;/span&gt; abort ansible --version
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip install ansible --upgrade
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;.....
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Requirement already satisfied, skipping upgrade: six&amp;gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1.4.1 in /usr/local/lib/python2.7/site-packages &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;from cryptography-&amp;gt;ansible&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;1.11.0&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python2.7/site-packages &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;from cffi&amp;gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1.7; platform_python_implementation !&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;PyPy&amp;#34;&lt;/span&gt;-&amp;gt;cryptography-&amp;gt;ansible&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;2.18&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Installing collected packages: ansible
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Found existing installation: ansible 2.7.5
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Uninstalling ansible-2.7.5:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Successfully uninstalled ansible-2.7.5
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Successfully installed ansible-2.9.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Still I had the Python error and iTerm was showing a MacOS popup that Python was crashing unexpectedly:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Python quit unexpectedly.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Click Reopen to open the application again. Click Report to see more detailed information and send a report to Apple.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Application Specific Information:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/lib/libcrypto.dylib
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; abort&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; called
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Invalid dylib load. Clients should not load the unversioned libcrypto dylib as it does not have a stable ABI.
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="invalid-dylib"&gt;Invalid DyLib&lt;/h5&gt;
-&lt;p&gt;找到 &lt;a href="https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib" target="_blank" rel="noopener"&gt;https://stackoverflow.com/questions/58272830/python-crashing-on-macos-10-15-beta-19a582a-with-usr-lib-libcrypto-dylib&lt;/a&gt; 這篇，知道是動態函式庫載入錯誤，於是決定安裝 openssl。&lt;/p&gt;</description></item><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1ba1c54e6cee421003f5219f363bf157-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;➜ trellis git:&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)&lt;/span&gt; ansible --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="m"&gt;19153&lt;/span&gt; abort ansible --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"➜ trellis git:(master) ansible --version\n[1] 19153 abort ansible --version\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;它在 Python 2.7 上崩潰了，但理論上應該可以正常執行。我決定升級 Ansible。&lt;/p&gt;</description></item><item><title>用 iptables 和 ip rule 做負載均衡</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</link><pubDate>Wed, 04 Dec 2019 11:08:04 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191204-ip-tables-rule-load-balance/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.outv.im/2019/ip-tables-rule-load-balance/" target="_blank" rel="noopener"&gt;用 iptables 和 ip rule 做負載均衡&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="操作"&gt;操作&lt;/h4&gt;
@@ -96,174 +74,177 @@
 &lt;/ul&gt;
 &lt;p&gt;我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p&gt;
 &lt;p&gt;通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #110 路由表的路由&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.20.0.254 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #111 路由表的路由&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.25.0.254 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果這條連線已經被標記，將標記設定到封包上&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包已經有標記，直接放行&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j ACCEPT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包沒有被標記&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包標記為 10 (0xa)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; --packet &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j MARK --set-mark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你有三條出口，這裡可以類似於&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓封包的出口與我們選擇的一致&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之後可以用 &lt;code&gt;iptables -L OUTPUT -t mangle&lt;/code&gt; 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p&gt;</description></item><item><title>htop 說明</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-aef911efeb8f663b3c9f3223f7a841d4-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip rule add fwmark &lt;span class="m"&gt;10&lt;/span&gt; table &lt;span class="m"&gt;110&lt;/span&gt; prio &lt;span class="m"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip rule add fwmark &lt;span class="m"&gt;11&lt;/span&gt; table &lt;span class="m"&gt;111&lt;/span&gt; prio &lt;span class="m"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# #110 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add 10.20.0.0/24 dev eth0 table &lt;span class="m"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add default via 10.20.0.254 table &lt;span class="m"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# #111 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add 10.25.0.0/24 dev eth1 table &lt;span class="m"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add default via 10.25.0.254 table &lt;span class="m"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果這條連線已經被標記，將標記設定到封包上&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果封包已經有標記，直接放行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span class="m"&gt;0&lt;/span&gt; -j ACCEPT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果封包沒有被標記&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把封包標記為 10 (0xa)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span class="m"&gt;2&lt;/span&gt; --packet &lt;span class="m"&gt;0&lt;/span&gt; -j MARK --set-mark &lt;span class="m"&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果你有三條出口，這裡可以類似於&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓封包的出口與我們選擇的一致&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000\nip rule add fwmark 10 table 110 prio 31000\n# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000\nip rule add fwmark 11 table 111 prio 31000\n# 如果你的連線更多，可以繼續新增標記 \u003c-\u003e 路由表的對應關係\n\n# #110 路由表的路由\nip route add 10.20.0.0/24 dev eth0 table 110\nip route add default via 10.20.0.254 table 110\n# #111 路由表的路由\nip route add 10.25.0.0/24 dev eth1 table 111\nip route add default via 10.25.0.254 table 111\n\n\n# 如果這條連線已經被標記，將標記設定到封包上\niptables -t mangle -A OUTPUT -j CONNMARK --restore-mark\n# 如果封包已經有標記，直接放行\niptables -t mangle -A OUTPUT -m mark ! --mark 0 -j ACCEPT\n# 如果封包沒有被標記\n# 把封包標記為 10 (0xa)\niptables -t mangle -A OUTPUT -j MARK --set-mark 10\n# 每 2 個封包就把一個封包標記為 11 (0xb)\niptables -t mangle -A OUTPUT -m statistic --mode nth --every 2 --packet 0 -j MARK --set-mark 11\n\n# 如果你有三條出口，這裡可以類似於\n# iptables -t mangle -A OUTPUT -j MARK --set-mark 10\n# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11\n# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12\n\n# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口\niptables -t mangle -A OUTPUT -j CONNMARK --save-mark\n\n# 讓封包的出口與我們選擇的一致\niptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\niptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;之後可以用 &lt;code&gt;iptables -L OUTPUT -t mangle&lt;/code&gt; 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p&gt;</description></item><item><title>htop 說明</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</link><pubDate>Thu, 14 Nov 2019 10:05:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191114-htop/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://peteris.rocks/blog/htop/" target="_blank" rel="noopener"&gt;htop explained&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Jenkinsfile 範例</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</link><pubDate>Wed, 06 Nov 2019 17:29:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191106-228cdb1893fca91f0663bab7b095757c/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/merikan/228cdb1893fca91f0663bab7b095757c" target="_blank" rel="noopener"&gt;Some Jenkinsfile examples&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="並行"&gt;並行&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#!/usr/bin/env groovy
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipeline {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent any
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stages {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Build&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;mvn -v&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Testing&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; parallel {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Unit Tests&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent { docker &amp;#39;openjdk:7-jdk-alpine&amp;#39; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Functional Tests&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent { docker &amp;#39;openjdk:8-jdk-alpine&amp;#39; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Integration Tests&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sh &amp;#39;java -version&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Deploy&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;Deploy!&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="when"&gt;When&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;#!/usr/bin/env groovy
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pipeline {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent any
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE = &amp;#39;1&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_TWO = &amp;#39;2&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_THREE = &amp;#39;3&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stages {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // skip a stage while creating the pipeline
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;A stage to be skipped&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression { false } //skip this stage
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;This step will never be run&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Execute when branch = &amp;#39;master&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;BASIC WHEN - Branch&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; branch &amp;#39;master&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;BASIC WHEN - Master Branch!&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Expression based when example with AND
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#39;WHEN EXPRESSION with AND&amp;#39;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE == &amp;#39;1&amp;#39; &amp;amp;&amp;amp; VALUE_THREE == &amp;#39;3&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;WHEN with AND expression works!&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // Expression based when example
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#39;WHEN EXPRESSION with OR&amp;#39;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; expression {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; VALUE_ONE == &amp;#39;1&amp;#39; || VALUE_THREE == &amp;#39;2&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#39;WHEN with OR expression works!&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // When - AllOf Example
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;AllOf&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; allOf {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_ONE&amp;#39;, value: &amp;#39;1&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;2&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;AllOf Works!!&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; // When - Not AnyOf Example
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; stage(&amp;#34;Not AnyOf&amp;#34;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; when {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; not {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; anyOf {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; branch &amp;#34;development&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;4&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; steps {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; echo &amp;#34;Not AnyOf - Works!&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-69380bbc1f04e9f18cd97807659c3ddf-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#!/usr/bin/env groovy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pipeline {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; agent any
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stages {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Build&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sh &amp;#39;mvn -v&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Testing&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; parallel {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Unit Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; agent { docker &amp;#39;openjdk:7-jdk-alpine&amp;#39; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Functional Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; agent { docker &amp;#39;openjdk:8-jdk-alpine&amp;#39; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Integration Tests&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sh &amp;#39;java -version&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Deploy&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#34;Deploy!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/usr/bin/env groovy\npipeline {\n agent any\n\n stages {\n stage(\"Build\") {\n steps {\n sh 'mvn -v'\n }\n }\n\n stage(\"Testing\") {\n parallel {\n stage(\"Unit Tests\") {\n agent { docker 'openjdk:7-jdk-alpine' }\n steps {\n sh 'java -version'\n }\n }\n stage(\"Functional Tests\") {\n agent { docker 'openjdk:8-jdk-alpine' }\n steps {\n sh 'java -version'\n }\n }\n stage(\"Integration Tests\") {\n steps {\n sh 'java -version'\n }\n }\n }\n }\n\n stage(\"Deploy\") {\n steps {\n echo \"Deploy!\"\n }\n }\n }\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="when"&gt;When&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-69380bbc1f04e9f18cd97807659c3ddf-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;#!/usr/bin/env groovy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pipeline {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; agent any
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; environment {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VALUE_ONE = &amp;#39;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VALUE_TWO = &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VALUE_THREE = &amp;#39;3&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stages {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // skip a stage while creating the pipeline
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;A stage to be skipped&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; expression { false } //skip this stage
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#39;This step will never be run&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Execute when branch = &amp;#39;master&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;BASIC WHEN - Branch&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; branch &amp;#39;master&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#39;BASIC WHEN - Master Branch!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Expression based when example with AND
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#39;WHEN EXPRESSION with AND&amp;#39;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; expression {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VALUE_ONE == &amp;#39;1&amp;#39; &amp;amp;&amp;amp; VALUE_THREE == &amp;#39;3&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#39;WHEN with AND expression works!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // Expression based when example
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#39;WHEN EXPRESSION with OR&amp;#39;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; expression {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; VALUE_ONE == &amp;#39;1&amp;#39; || VALUE_THREE == &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#39;WHEN with OR expression works!&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // When - AllOf Example
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;AllOf&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; allOf {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; environment name:&amp;#39;VALUE_ONE&amp;#39;, value: &amp;#39;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;2&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#34;AllOf Works!!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; // When - Not AnyOf Example
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; stage(&amp;#34;Not AnyOf&amp;#34;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; when {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; not {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; anyOf {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; branch &amp;#34;development&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; environment name:&amp;#39;VALUE_TWO&amp;#39;, value: &amp;#39;4&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; steps {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; echo &amp;#34;Not AnyOf - Works!&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/usr/bin/env groovy\npipeline {\n agent any\n\n environment {\n VALUE_ONE = '1'\n VALUE_TWO = '2'\n VALUE_THREE = '3'\n }\n\n stages {\n\n // skip a stage while creating the pipeline\n stage(\"A stage to be skipped\") {\n when {\n expression { false } //skip this stage\n }\n steps {\n echo 'This step will never be run'\n }\n }\n\n // Execute when branch = 'master'\n stage(\"BASIC WHEN - Branch\") {\n when {\n branch 'master'\n\t }\n steps {\n echo 'BASIC WHEN - Master Branch!'\n }\n }\n\n // Expression based when example with AND\n stage('WHEN EXPRESSION with AND') {\n when {\n expression {\n VALUE_ONE == '1' \u0026\u0026 VALUE_THREE == '3'\n }\n }\n steps {\n echo 'WHEN with AND expression works!'\n }\n }\n\n // Expression based when example\n stage('WHEN EXPRESSION with OR') {\n when {\n expression {\n VALUE_ONE == '1' || VALUE_THREE == '2'\n }\n }\n steps {\n echo 'WHEN with OR expression works!'\n }\n }\n\n // When - AllOf Example\n stage(\"AllOf\") {\n when {\n allOf {\n environment name:'VALUE_ONE', value: '1'\n environment name:'VALUE_TWO', value: '2'\n }\n }\n steps {\n echo \"AllOf Works!!\"\n }\n }\n\n // When - Not AnyOf Example\n stage(\"Not AnyOf\") {\n when {\n not {\n anyOf {\n branch \"development\"\n environment name:'VALUE_TWO', value: '4'\n }\n }\n }\n steps {\n echo \"Not AnyOf - Works!\"\n }\n }\n }\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Jinja docx 樣板：在巢狀 for 中避免換行</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</link><pubDate>Tue, 29 Oct 2019 10:17:35 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191029-jinja-docx-template-avoiding-new-line-in-nested-for/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://stackoverflow.com/questions/45719062/jinja-docx-template-avoiding-new-line-in-nested-for#_=_" target="_blank" rel="noopener"&gt;Jinja docx 樣板：在巢狀 for 中避免換行&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>What the f*ck Python! 🐍 中文版</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</link><pubDate>Fri, 11 Oct 2019 14:32:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191011-wtfpython-cn/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/leisurelicht/wtfpython-cn" target="_blank" rel="noopener"&gt;What the f*ck Python! 🐍&lt;/a&gt;&lt;/li&gt;
@@ -285,82 +266,87 @@
 &lt;p&gt;首先確保 Nginx 有 &lt;code&gt;--with-compat&lt;/code&gt; 編譯參數，這樣就不需要按照一些奇怪的教學讓大家從頭開始編譯 Nginx&lt;/p&gt;
 &lt;p&gt;incubator: &lt;a href="https://github.com/apache/incubator-pagespeed-ngx.git" target="_blank" rel="noopener"&gt;https://github.com/apache/incubator-pagespeed-ngx.git&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --with-compat --add-dynamic-module&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;../incubator-pagespeed-ngx
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 編譯 modules&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make modules
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 將編譯好的 module 放到 nginx 目錄下&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 建立快取資料夾以存放自動轉換的圖片&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /var/ngx_pagespeed_cache
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;load_module&lt;/span&gt; &lt;span style="color:#98c379"&gt;modules/ngx_pagespeed.so&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# enable pagespeed module on this server block
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Needs to exist and be writable by nginx. Use tmpfs for best performance.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;FileCachePath&lt;/span&gt; &lt;span style="color:#98c379"&gt;/var/ngx_pagespeed_cache&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Ensure requests for pagespeed optimized resources go to the pagespeed handler
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# and no extraneous headers get set.
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span&gt;{&lt;span style="color:#c678dd"&gt;2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;add_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&amp;#34;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span&gt; { }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span&gt; { }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;pagespeed&lt;/span&gt; &lt;span style="color:#98c379"&gt;RewriteLevel&lt;/span&gt; &lt;span style="color:#98c379"&gt;CoreFilters&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中最後一段（&lt;code&gt;pagespeed RewriteLevel CoreFilters;&lt;/code&gt;）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p&gt;</description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-98fc36690fa040115a9ef26938a01c0f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 切換到 nginx 原始碼目錄下開始設定編譯環境&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./configure --with-compat --add-dynamic-module&lt;span class="o"&gt;=&lt;/span&gt;../incubator-pagespeed-ngx
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 編譯 modules&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;make modules
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 將編譯好的 module 放到 nginx 目錄下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo cp objs/ngx_pagespeed.so /etc/nginx/modules/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 建立快取資料夾以存放自動轉換的圖片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown -R www-data:www-data /var/ngx_pagespeed_cache
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 切換到 nginx 原始碼目錄下開始設定編譯環境\n./configure --with-compat --add-dynamic-module=../incubator-pagespeed-ngx\n\n# 編譯 modules\nmake modules\n\n# 將編譯好的 module 放到 nginx 目錄下\nsudo cp objs/ngx_pagespeed.so /etc/nginx/modules/\n\n# 建立快取資料夾以存放自動轉換的圖片\nsudo mkdir -p /var/ngx_pagespeed_cache\nsudo chown -R www-data:www-data /var/ngx_pagespeed_cache\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-98fc36690fa040115a9ef26938a01c0f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;load_module&lt;/span&gt; &lt;span class="s"&gt;modules/ngx_pagespeed.so&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# enable pagespeed module on this server block
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;pagespeed&lt;/span&gt; &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Needs to exist and be writable by nginx. Use tmpfs for best performance.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;pagespeed&lt;/span&gt; &lt;span class="s"&gt;FileCachePath&lt;/span&gt; &lt;span class="s"&gt;/var/ngx_pagespeed_cache&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Ensure requests for pagespeed optimized resources go to the pagespeed handler
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# and no extraneous headers get set.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;&amp;#34;\.pagespeed\.([a-z]\.)?[a-z]&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="kn"&gt;2}\.[^.]{10}\.[^.]+&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;add_header&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;&amp;#34;^/pagespeed_static/&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;&amp;#34;^/ngx_pagespeed_beacon$&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;pagespeed&lt;/span&gt; &lt;span class="s"&gt;RewriteLevel&lt;/span&gt; &lt;span class="s"&gt;CoreFilters&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"load_module modules/ngx_pagespeed.so;\n\n\n# enable pagespeed module on this server block\npagespeed on;\n\n# Needs to exist and be writable by nginx. Use tmpfs for best performance.\npagespeed FileCachePath /var/ngx_pagespeed_cache;\n\n# Ensure requests for pagespeed optimized resources go to the pagespeed handler\n# and no extraneous headers get set.\nlocation ~ \"\\.pagespeed\\.([a-z]\\.)?[a-z]{2}\\.[^.]{10}\\.[^.]+\" {\n add_header \"\" \"\";\n}\nlocation ~ \"^/pagespeed_static/\" { }\nlocation ~ \"^/ngx_pagespeed_beacon$\" { }\n\npagespeed RewriteLevel CoreFilters;\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;其中最後一段（&lt;code&gt;pagespeed RewriteLevel CoreFilters;&lt;/code&gt;）表示啟用的最佳化方式，包含一些基礎的最佳化，例如：&lt;/p&gt;</description></item><item><title>是否有正規表示式可以檢測有效的正規表示式？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</link><pubDate>Fri, 04 Oct 2019 14:44:38 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191004-is-there-a-regular-expression-to-detect-a-valid-regular-expression/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://stackoverflow.com/questions/172303/is-there-a-regular-expression-to-detect-a-valid-regular-expression" target="_blank" rel="noopener"&gt;是否有正規表示式可以檢測有效的正規表示式？&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;這是一個遞迴正則，許多正則引擎不支援。基於 PCRE 的引擎應該支援。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;^ # start of string
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;( # first group start
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?:[^?+*{}()[\]\\|]+ # literals and ^, $
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \\. # escaped characters
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: [^\]\\]+ | \\. )* \]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \(\? (?:R|[+-]?\d+) \) # recursive matching
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | \| # alternative
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )* # repeat content
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;) # end first group
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ # end of string
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;移除空白與註解後&lt;/p&gt;</description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-07bb142249fd613479b7c02aaf22a51a-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;^ # start of string
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;( # first group start
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?:[^?+*{}()[\]\\|]+ # literals and ^, $
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \\. # escaped characters
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \[ (?: \^?\\. | \^[^\\] | [^\\^] ) # character classes
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?: [^\]\\]+ | \\. )* \]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \( (?:\?[:=!]|\?&amp;lt;[=!]|\?&amp;gt;)? (?1)?? \) # parenthesis, with recursive content
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \(\? (?:R|[+-]?\d+) \) # recursive matching
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; (?: (?:[?+*]|\{\d+(?:,\d*)?\}) [?+]? )? # quantifiers
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | \| # alternative
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; )* # repeat content
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;) # end first group
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ # end of string
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"/\n^ # start of string\n( # first group start\n (?:\n (?:[^?+*{}()[\\]\\\\|]+ # literals and ^, $\n | \\\\. # escaped characters\n | \\[ (?: \\^?\\\\. | \\^[^\\\\] | [^\\\\^] ) # character classes\n (?: [^\\]\\\\]+ | \\\\. )* \\]\n | \\( (?:\\?[:=!]|\\?\u003c[=!]|\\?\u003e)? (?1)?? \\) # parenthesis, with recursive content\n | \\(\\? (?:R|[+-]?\\d+) \\) # recursive matching\n )\n (?: (?:[?+*]|\\{\\d+(?:,\\d*)?\\}) [?+]? )? # quantifiers\n | \\| # alternative\n )* # repeat content\n) # end first group\n$ # end of string\n/\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;移除空白與註解後&lt;/p&gt;</description></item><item><title>用 Nginx 強制檔案下載</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</link><pubDate>Mon, 19 Aug 2019 12:12:32 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190819-force-file-download-with-nginx/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://coderwall.com/p/3yb8vg/force-file-download-with-nginx" target="_blank" rel="noopener"&gt;用 Nginx 強制檔案下載&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;add_header Content-Disposition 'attachment;';&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;server&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;80&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;my.domain.com&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; ~ &lt;span style="color:#98c379"&gt;^.*/(?P&amp;lt;request_basename&amp;gt;[^/]+\.(mp3))$&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/path/to/mp3/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;add_header&lt;/span&gt; &lt;span style="color:#98c379"&gt;Content-Disposition&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;attachment&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;filename=&amp;#34;$request_basename&amp;#34;&amp;#39;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;80&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;server_name&lt;/span&gt; &lt;span style="color:#98c379"&gt;backup.baifu-tech.net&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;root&lt;/span&gt; &lt;span style="color:#98c379"&gt;/data/backup/rechargecent-mago&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;auth_basic&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;baifu&lt;/span&gt; &lt;span style="color:#98c379"&gt;backup&lt;/span&gt; &lt;span style="color:#98c379"&gt;center&amp;#34;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;auth_basic_user_file&lt;/span&gt; &lt;span style="color:#98c379"&gt;/etc/nginx/ssl/htpasswd&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex_exact_size&lt;/span&gt; &lt;span style="color:#e06c75"&gt;off&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;autoindex_localtime&lt;/span&gt; &lt;span style="color:#e06c75"&gt;on&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Shell 腳本學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1acef480f68642f0a5bb0f68b51179d1-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;server_name&lt;/span&gt; &lt;span class="s"&gt;my.domain.com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;^.*/(?P&amp;lt;request_basename&amp;gt;[^/]+\.(mp3))$&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/path/to/mp3/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s"&gt;add_header&lt;/span&gt; &lt;span class="s"&gt;Content-Disposition&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;attachment&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="kn"&gt;filename=&amp;#34;$request_basename&amp;#34;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"server {\n listen 80;\n server_name my.domain.com;\n location ~ ^.*/(?P\u003crequest_basename\u003e[^/]+\\.(mp3))$ {\n root /path/to/mp3/\n add_header Content-Disposition 'attachment; filename=\"$request_basename\"';\n }\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1acef480f68642f0a5bb0f68b51179d1-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;server_name&lt;/span&gt; &lt;span class="s"&gt;backup.baifu-tech.net&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/data/backup/rechargecent-mago&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;auth_basic&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;baifu&lt;/span&gt; &lt;span class="s"&gt;backup&lt;/span&gt; &lt;span class="s"&gt;center&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;auth_basic_user_file&lt;/span&gt; &lt;span class="s"&gt;/etc/nginx/ssl/htpasswd&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;autoindex&lt;/span&gt; &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;autoindex_exact_size&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;autoindex_localtime&lt;/span&gt; &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"{\n listen 80;\n server_name backup.baifu-tech.net;\n root /data/backup/rechargecent-mago;\n location / {\n auth_basic \"baifu backup center\";\n auth_basic_user_file /etc/nginx/ssl/htpasswd;\n autoindex on;\n autoindex_exact_size off;\n autoindex_localtime on;\n }\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Shell 腳本學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</link><pubDate>Wed, 07 Aug 2019 15:14:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190807-mylxsw-growing-up-shell/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/mylxsw/growing-up/blob/master/doc/Shell%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank" rel="noopener"&gt;Shell 腳本學習筆記&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="執行算術運算"&gt;執行算術運算&lt;/h3&gt;
@@ -609,112 +595,114 @@
 &lt;/ul&gt;</description></item><item><title>openresty+redis 攔截高頻訪問 IP</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</link><pubDate>Thu, 27 Jun 2019 11:18:46 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190627-openrestyredis/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.centos.bz/2018/11/openrestyredis%E6%8B%A6%E6%88%AA%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AEip/" target="_blank" rel="noopener"&gt;openresty+redis 攔截高頻訪問 IP&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;init_by_lua_block&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;redis&lt;/span&gt; = &lt;span style="color:#98c379"&gt;require&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#98c379"&gt;client&lt;/span&gt; = &lt;span style="color:#98c379"&gt;redis.connect(&amp;#39;127.0.0.1&amp;#39;,&lt;/span&gt; &lt;span style="color:#d19a66"&gt;6379&lt;/span&gt;&lt;span style="color:#98c379"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;server&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;listen&lt;/span&gt; &lt;span style="color:#d19a66"&gt;8080&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;location&lt;/span&gt; &lt;span style="color:#98c379"&gt;/&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;access_by_lua_file&lt;/span&gt; &lt;span style="color:#98c379"&gt;/usr/local/nginx/conf/lua/block.lua&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;proxy_pass&lt;/span&gt; &lt;span style="color:#98c379"&gt;http://192.168.1.102:8000&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-lua" data-lang="lua"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- Redis-based IP rate limiting / blocking for OpenResty (ngx_lua)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- NOTE:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- This script assumes a global `client` variable is used/stored.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- Make sure `redis` module is available and `client` is initialized somewhere.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#c678dd"&gt;function&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;isConnected&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;ping&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#c678dd"&gt;function&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;createRedisConnection&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;redis.connect&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;6379&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;pcall&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;isConnected&lt;/span&gt;) &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- already connected (or ping succeeded)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- not connected; try reconnect&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;pcall&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;createRedisConnection&lt;/span&gt;) &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;createRedisConnection&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;60&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 監測週期（秒）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;bktimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;30&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 在監測週期內達到觸發攔截的訪問量&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;block_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;600&lt;/span&gt; &lt;span style="color:#7f848e"&gt;-- 觸發攔截後攔截時間（秒）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ip&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.var&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;remote_addr&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;get&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ipvtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- blocked&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#d19a66"&gt;403&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(&amp;#34;key exist.ttl is &amp;#34;, last_ttl)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;==&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(&amp;#34;ttl &amp;amp; vtimes recount&amp;#34;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;local&lt;/span&gt; &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e06c75"&gt;tonumber&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;get&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;)) &lt;span style="color:#56b6c2"&gt;+&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#e06c75"&gt;bktimes&lt;/span&gt; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;vtimes&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;last_ttl&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; view &amp;#34;, vtimes, &amp;#34; times&amp;#34;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; will be block next time.&amp;#34;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;block_ttl&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- key does not exist&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;set&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;-- ngx.say(ip, &amp;#34; view 1 times&amp;#34;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;client&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;expire&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ip&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;ttl&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ngx.exit&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;ngx.OK&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;end&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>[Terraform] 入門學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</link><pubDate>Wed, 26 Jun 2019 17:22:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-183b56f74a72630f111561544bc25fa2-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-nginx" data-lang="nginx"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;init_by_lua_block&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;redis&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;require&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;redis&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="s"&gt;client&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;redis.connect(&amp;#39;127.0.0.1&amp;#39;,&lt;/span&gt; &lt;span class="mi"&gt;6379&lt;/span&gt;&lt;span class="s"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;access_by_lua_file&lt;/span&gt; &lt;span class="s"&gt;/usr/local/nginx/conf/lua/block.lua&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kn"&gt;proxy_pass&lt;/span&gt; &lt;span class="s"&gt;http://192.168.1.102:8000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"init_by_lua_block {\n redis = require \"redis\"\n client = redis.connect('127.0.0.1', 6379)\n}\nserver {\n listen 8080;\n location / {\n access_by_lua_file /usr/local/nginx/conf/lua/block.lua;\n proxy_pass http://192.168.1.102:8000;\n }\n}\n","title":"nginx"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-183b56f74a72630f111561544bc25fa2-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-lua" data-lang="lua"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- Redis-based IP rate limiting / blocking for OpenResty (ngx_lua)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- NOTE:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- This script assumes a global `client` variable is used/stored.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- Make sure `redis` module is available and `client` is initialized somewhere.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;isConnected&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;ping&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;createRedisConnection&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redis.connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6379&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;-- 如果發生 redis 連線失敗，將停止攔截（直接放行）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pcall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;isConnected&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- already connected (or ping succeeded)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- not connected; try reconnect&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pcall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;createRedisConnection&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- 斷開重連：會導致每次訪問都需要重連 redis&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;createRedisConnection&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ngx.OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="c1"&gt;-- 監測週期（秒）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;bktimes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="c1"&gt;-- 在監測週期內達到觸發攔截的訪問量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;block_ttl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="c1"&gt;-- 觸發攔截後攔截時間（秒）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;ip&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ngx.var&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remote_addr&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;ipvtimes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ipvtimes&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ipvtimes&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;-1&amp;#34;&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- blocked&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;403&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;last_ttl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- ngx.say(&amp;#34;key exist.ttl is &amp;#34;, last_ttl)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;last_ttl&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;expire&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- ngx.say(&amp;#34;ttl &amp;amp; vtimes recount&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ngx.OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;vtimes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tonumber&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;vtimes&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;bktimes&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vtimes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;expire&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;last_ttl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- ngx.say(ip, &amp;#34; view &amp;#34;, vtimes, &amp;#34; times&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ngx.OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- ngx.say(ip, &amp;#34; will be block next time.&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;expire&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block_ttl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ngx.OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- key does not exist&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;-- ngx.say(ip, &amp;#34; view 1 times&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;expire&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ngx.exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ngx.OK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"-- Redis-based IP rate limiting / blocking for OpenResty (ngx_lua)\n\n-- NOTE:\n-- This script assumes a global `client` variable is used/stored.\n-- Make sure `redis` module is available and `client` is initialized somewhere.\n\nlocal function isConnected()\n return client:ping()\nend\n\nlocal function createRedisConnection()\n return redis.connect(\"127.0.0.1\", 6379)\nend\n\n-- 如果發生 redis 連線失敗，將停止攔截（直接放行）\nif pcall(isConnected) then\n -- already connected (or ping succeeded)\nelse\n -- not connected; try reconnect\n if pcall(createRedisConnection) then\n -- 斷開重連：會導致每次訪問都需要重連 redis\n -- 訪問量大時建議：關閉重連邏輯（pcall 不執行），直接 ngx.exit 放行/終止\n client = createRedisConnection()\n else\n ngx.exit(ngx.OK)\n end\nend\n\nlocal ttl = 60 -- 監測週期（秒）\nlocal bktimes = 30 -- 在監測週期內達到觸發攔截的訪問量\nlocal block_ttl = 600 -- 觸發攔截後攔截時間（秒）\n\nlocal ip = ngx.var.remote_addr\nlocal ipvtimes = client:get(ip)\n\nif ipvtimes then\n if ipvtimes == \"-1\" then\n -- blocked\n return ngx.exit(403)\n else\n local last_ttl = client:ttl(ip)\n -- ngx.say(\"key exist.ttl is \", last_ttl)\n\n if last_ttl == -1 then\n client:set(ip, 0)\n client:expire(ip, ttl)\n -- ngx.say(\"ttl \u0026 vtimes recount\")\n return ngx.exit(ngx.OK)\n end\n\n local vtimes = tonumber(client:get(ip)) + 1\n\n if vtimes \u003c bktimes then\n client:set(ip, vtimes)\n client:expire(ip, last_ttl)\n -- ngx.say(ip, \" view \", vtimes, \" times\")\n return ngx.exit(ngx.OK)\n else\n -- ngx.say(ip, \" will be block next time.\")\n client:set(ip, -1)\n client:expire(ip, block_ttl)\n return ngx.exit(ngx.OK)\n end\n end\nelse\n -- key does not exist\n client:set(ip, 1)\n -- ngx.say(ip, \" view 1 times\")\n client:expire(ip, ttl)\n return ngx.exit(ngx.OK)\nend\n","title":"lua"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>[Terraform] 入門學習筆記</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</link><pubDate>Wed, 26 Jun 2019 17:22:52 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190626-terraform-getting-started/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://godleon.github.io/blog/DevOps/terraform-getting-started/" target="_blank" rel="noopener"&gt;[Terraform] 入門學習筆記&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>設定 Haproxy 以防止 DDOS 攻擊</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</link><pubDate>Mon, 17 Jun 2019 11:07:13 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190617-haproxy-ddos/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html" target="_blank" rel="noopener"&gt;設定 Haproxy 以防止 DDOS 攻擊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="tcp-syn-flood-attacks"&gt;TCP syn flood attacks&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi /etc/sysctl.conf
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Protection from SYN flood&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_syncookies &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.conf.all.rp_filter &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_max_syn_backlog &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1024&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="slowloris-like-attacks"&gt;Slowloris like attacks&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;defaults
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; option http-server-close
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout http-request 5s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout connect 5s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout client 30s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout server 10s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout tunnel 1h
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="限制每一個-user-的連線數量"&gt;限制每一個 user 的連線數量&lt;/h3&gt;
-&lt;p&gt;普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p&gt;
-&lt;p&gt;但如果有很多使用者，是從某一個私有網段，透過 NAT 的方式連線到 Server 時，且實際上我們也不知道，到底哪一個會是 NAT 的轉址後的 IP，不知道該將哪個 IP 設定為白名單，這樣的限制就會造成問題，因此我們認為實際的環境，這樣的設定應該要保留不處理。&lt;/p&gt;
-&lt;p&gt;以下是一個設定的範例，最重要的地方是在 frontend ft_web 區塊的設定。&lt;/p&gt;</description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-66b51f6681c142905c6cece6d244dbec-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vi /etc/sysctl.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Protection from SYN flood&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.tcp_syncookies &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.conf.all.rp_filter &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.tcp_max_syn_backlog &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1024&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"vi /etc/sysctl.conf\n\n# Protection from SYN flood\nnet.ipv4.tcp_syncookies = 1\nnet.ipv4.conf.all.rp_filter = 1\nnet.ipv4.tcp_max_syn_backlog = 1024\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="slowloris-like-attacks"&gt;Slowloris like attacks&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-66b51f6681c142905c6cece6d244dbec-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;defaults
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; option http-server-close
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout http-request 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout connect 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout client 30s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout server 10s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout tunnel 1h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"defaults\n option http-server-close\n timeout http-request 5s\n timeout connect 5s\n timeout client 30s\n timeout server 10s\n timeout tunnel 1h\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="限制每一個-user-的連線數量"&gt;限制每一個 user 的連線數量&lt;/h3&gt;
+&lt;p&gt;普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p&gt;</description></item><item><title>白話 Kubernetes Runtime</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</link><pubDate>Thu, 13 Jun 2019 11:28:26 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190613-k8s-runtime/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3MjIyMA==&amp;amp;mid=2247543594&amp;amp;idx=1&amp;amp;sn=9083cff79ca7f5fb9d6fee08d1144989&amp;amp;source=41&amp;amp;poc_token=HL8MZmmjq-HF5O8fHC711sGwSQ1O9OuO5hGLL_px" target="_blank" rel="noopener"&gt;白話 Kubernetes Runtime&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Nginx 請求處理流程你了解嗎？</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</link><pubDate>Thu, 07 Mar 2019 14:05:55 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20190307-nginx/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://mp.weixin.qq.com/s/otQIhuLABU3omOLtRfJnZQ" target="_blank" rel="noopener"&gt;Nginx 請求處理流程你了解嗎？&lt;/a&gt;&lt;/li&gt;

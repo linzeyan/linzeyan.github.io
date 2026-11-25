@@ -2,37 +2,43 @@
 &lt;li&gt;&lt;a href="https://flower.codes/2025/10/23/onion-mirror.html" target="_blank" rel="noopener"&gt;onion-mirror&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="安裝-tor"&gt;安裝 Tor&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install tor
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="設定-tor"&gt;設定 Tor&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Disable SOCKS proxy since we aren&amp;#39;t making outbound connections&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# through Tor&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;SocksPort&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Make sure Tor runs as a daemon (i.e. in the background)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;RunAsDaemon&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setup the hidden service on port 80, this is where we tell Tor to&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# create a .onion service for our web server&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;HiddenServiceDir&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#c678dd"&gt;var&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;lib&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;tor&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;&lt;span style="color:#e06c75"&gt;hidden_service&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;HiddenServicePort&lt;/span&gt; &lt;span style="color:#d19a66"&gt;80&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Disable inbound connections, since we aren&amp;#39;t running a relay or&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# exit node&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ORPort&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Disable directory services, since we won&amp;#39;t be mirroring directory&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# information to other Tor nodes&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;DirPort&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo systemctl restart tor
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="取得你的-onion-位址"&gt;取得你的 .onion 位址&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo cat /var/lib/tor/hidden_service/hostname
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="設定-caddy"&gt;設定 Caddy&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; # Set up a reverse proxy, or serve static files, etc.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="公告你的-onion-位址"&gt;公告你的 .onion 位址&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;header {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Onion-Location http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion{uri}
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install tor
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo apt update\nsudo apt install tor\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="設定-tor"&gt;設定 Tor&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Disable SOCKS proxy since we aren&amp;#39;t making outbound connections&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# through Tor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;SocksPort&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Make sure Tor runs as a daemon (i.e. in the background)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;RunAsDaemon&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Setup the hidden service on port 80, this is where we tell Tor to&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# create a .onion service for our web server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;HiddenServiceDir&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tor&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hidden_service&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;HiddenServicePort&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Disable inbound connections, since we aren&amp;#39;t running a relay or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# exit node&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;ORPort&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Disable directory services, since we won&amp;#39;t be mirroring directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# information to other Tor nodes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;DirPort&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Disable SOCKS proxy since we aren't making outbound connections\n# through Tor\nSocksPort 0\n\n# Make sure Tor runs as a daemon (i.e. in the background)\nRunAsDaemon 1\n\n# Setup the hidden service on port 80, this is where we tell Tor to\n# create a .onion service for our web server\nHiddenServiceDir /var/lib/tor/hidden_service/\nHiddenServicePort 80\n\n# Disable inbound connections, since we aren't running a relay or\n# exit node\nORPort 0\n\n# Disable directory services, since we won't be mirroring directory\n# information to other Tor nodes\nDirPort 0\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo systemctl restart tor
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo systemctl restart tor\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="取得你的-onion-位址"&gt;取得你的 .onion 位址&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo cat /var/lib/tor/hidden_service/hostname
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo cat /var/lib/tor/hidden_service/hostname\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="設定-caddy"&gt;設定 Caddy&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-4"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # Set up a reverse proxy, or serve static files, etc.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion:80 {\n # Set up a reverse proxy, or serve static files, etc.\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="公告你的-onion-位址"&gt;公告你的 .onion 位址&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d57f294a73e2a80c951f83cbba2888b-5"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;header {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Onion-Location http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion{uri}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"header {\n Onion-Location http://jytkco7clxwj4hhzaydhk4kr3hwzsdzyvtsc6zn2ivog5uma5pxowzad.onion{uri}\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;</description></item></channel></rss>

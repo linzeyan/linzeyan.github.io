@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RDP on Ricky</title><link>https://linzeyan.github.io/categories/rdp/</link><description>Recent content in RDP on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 Oct 2021 16:15:48 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/rdp/index.xml" rel="self" type="application/rss+xml"/><item><title>Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.</title><link>https://linzeyan.github.io/posts/2021/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</link><pubDate>Wed, 20 Oct 2021 16:15:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211020-google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://medium.com/tech-guides/google-cloud-platform-gcp-access-linux-server-using-gui-running-in-gcp-instance-using-windows-201e315925a6" target="_blank" rel="noopener"&gt;Google Cloud Platform(GCP): Access Linux Server using GUI running in GCP instance using Windows Remote Desktop Connection.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This will install GUI and make it as a default startup option and then restart the machine.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo yum install xrdp tigervnc-server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~# sudo su
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~# passwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~# systemctl &lt;span style="color:#e5c07b"&gt;enable&lt;/span&gt; --now xrdp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;~# netstat -antup | grep xrdp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcp &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcp &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7d2abeccc46a265c68bc357cf28cb8bd-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# This will install GUI and make it as a default startup option and then restart the machine.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo yum install xrdp tigervnc-server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~# sudo su
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~# passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~# systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; --now xrdp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~# netstat -antup &lt;span class="p"&gt;|&lt;/span&gt; grep xrdp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcp &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcp &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# This will install GUI and make it as a default startup option and then restart the machine.\n$ sudo yum install xrdp tigervnc-server\n\n~# sudo su\n~# passwd\n~# systemctl enable --now xrdp\n\n~# netstat -antup | grep xrdp\ntcp 0 0 0.0.0.0:3389 0.0.0.0:* LISTEN 10202/xrdp\ntcp 0 0 127.0.0.1:3350 0.0.0.0:* LISTEN 10201/xrdp-sesman\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item></channel></rss>

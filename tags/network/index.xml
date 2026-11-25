@@ -5,12 +5,11 @@
 &lt;li&gt;&lt;a href="https://233boy.com/v2ray/v2ray-dokodemo-door/" target="_blank" rel="noopener"&gt;V2Ray script relay tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="install-script"&gt;Install Script&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bash &amp;lt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;wget -qO- -o- https://git.io/v2ray.sh&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="preparation"&gt;Preparation&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1c6d8f14cdfae90a8a2ed56c29401d06-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bash &amp;lt;&lt;span class="o"&gt;(&lt;/span&gt;wget -qO- -o- https://git.io/v2ray.sh&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"bash \u003c(wget -qO- -o- https://git.io/v2ray.sh)\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="preparation"&gt;Preparation&lt;/h2&gt;
 &lt;p&gt;Add a DNS record now. Name: &lt;code&gt;ai&lt;/code&gt;, IPv4 address: &lt;code&gt;your VPS IP&lt;/code&gt;. The proxy status must be off, so the cloud icon is gray.&lt;/p&gt;
-&lt;p&gt;Tip: You can use &lt;code&gt;v2ray ip&lt;/code&gt; to view your VPS IP.&lt;/p&gt;
-&lt;h2 id="add-relay-configuration"&gt;Add Relay Configuration&lt;/h2&gt;
-&lt;p&gt;Use &lt;code&gt;v2ray add ws ai.233boy.com&lt;/code&gt; to add a vmess-ws-tls configuration; remember to replace &lt;code&gt;ai.233boy.com&lt;/code&gt; with your domain.&lt;/p&gt;</description></item><item><title>Google Infra</title><link>https://linzeyan.github.io/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240924-google-infra/</guid><description>&lt;ul&gt;
+&lt;p&gt;Tip: You can use &lt;code&gt;v2ray ip&lt;/code&gt; to view your VPS IP.&lt;/p&gt;</description></item><item><title>Google Infra</title><link>https://linzeyan.github.io/posts/2024/20240924-google-infra/</link><pubDate>Tue, 24 Sep 2024 09:04:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240924-google-infra/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/6624" target="_blank" rel="noopener"&gt;Google&amp;rsquo;s 5-generation network architecture in ten years&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Everything About MTU and MSS</title><link>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</link><pubDate>Wed, 12 Apr 2023 12:48:12 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20230412-all-about-mtu-and-mss/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.kawabangga.com/posts/4983" target="_blank" rel="noopener"&gt;Everything About MTU and MSS&lt;/a&gt;&lt;/li&gt;
@@ -21,13 +20,14 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-53f0b1b9b767d51be01bc1078d927eef-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -oE &lt;span class="s1"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ sudo tcpflow -p -c -i wlp0s20f3 port 80 | grep -oE '(GET|POST) .* HTTP/1.[01]|Host: .*'\nreportfilename: ./report.xml\ntcpflow: listening on wlp0s20f3\nGET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1\n\nGET /mirrors.txt HTTP/1.1\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-p&lt;/code&gt; disables promiscuous mode&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-c&lt;/code&gt; means only print the output to the console and don&amp;rsquo;t create files&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-i&lt;/code&gt; specifies the network interface
@@ -43,15 +43,16 @@ grep receives the output of tcpflow&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="command-usage"&gt;Command usage&lt;/h2&gt;
 &lt;p&gt;tcpdump uses the command line. The command format is:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="simple-option-notes-for-tcpdump"&gt;Simple option notes for tcpdump&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-e1a4568ec2136fe4cc69a102a2d396af-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpdump &lt;span class="o"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -c count &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -C file_size &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -F file &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -i interface &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -m module &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -M secret &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -r file &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -s snaplen &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -T &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -w file &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -W filecount &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -y datalinktype &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -Z user &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; expression &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"tcpdump [ -AdDeflLnNOpqRStuUvxX ] [ -c count ]\n [ -C file_size ] [ -F file ]\n [ -i interface ] [ -m module ] [ -M secret ]\n [ -r file ] [ -s snaplen ] [ -T type ] [ -w file ]\n [ -W filecount ]\n [ -E spi@ipaddr algo:secret, ... ]\n [ -y datalinktype ] [ -Z user ]\n [ expression ]\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="simple-option-notes-for-tcpdump"&gt;Simple option notes for tcpdump&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt; can decrypt IPsec ESP packets using &lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;. The secret is the ESP key, expressed as an ASCII string. If it starts with &lt;code&gt;0x&lt;/code&gt;, the key is read as hex. In addition to the syntax above (&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;), you can append a syntax input filename for tcpdump to use (replace &amp;hellip; in &lt;code&gt;spi@ipaddr algo:secret, ...&lt;/code&gt; with a syntax filename). This file is opened when the first ESP packet arrives, so it is best to drop some privileges at that time (to reduce risk if the file is malicious).&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; forces tcpdump to analyze packets according to the protocol structure specified by type. Known type values include:
@@ -79,18 +80,19 @@ grep receives the output of tcpflow&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://docs.cilium.io/en/v1.9/gettingstarted/kubeproxy-free/" target="_blank" rel="noopener"&gt;Kubernetes Without kube-proxy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="quick-start"&gt;Quick-Start&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubeadm init --skip-phases&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;addon/kube-proxy
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Setup Helm repository&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm repo add cilium https://helm.cilium.io/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm install cilium cilium/cilium --version 1.9.18 &lt;span style="color:#98c379"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --namespace kube-system &lt;span style="color:#98c379"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;kubeProxyReplacement&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;strict &lt;span style="color:#98c379"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServiceHost&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_IP &lt;span style="color:#98c379"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --set &lt;span style="color:#e06c75"&gt;k8sServicePort&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_PORT
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence"&gt;Traffic sequence&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-43aaa251653ee8d07e868994186f32ff-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;kubeadm init --skip-phases&lt;span class="o"&gt;=&lt;/span&gt;addon/kube-proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Setup Helm repository&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;helm repo add cilium https://helm.cilium.io/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;helm install cilium cilium/cilium --version 1.9.18 &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --namespace kube-system &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --set &lt;span class="nv"&gt;kubeProxyReplacement&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;strict &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --set &lt;span class="nv"&gt;k8sServiceHost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_IP &lt;span class="se"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --set &lt;span class="nv"&gt;k8sServicePort&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;REPLACE_WITH_API_SERVER_PORT
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"kubeadm init --skip-phases=addon/kube-proxy\n\n# Setup Helm repository\nhelm repo add cilium https://helm.cilium.io/\n\n\nhelm install cilium cilium/cilium --version 1.9.18 \\\n --namespace kube-system \\\n --set kubeProxyReplacement=strict \\\n --set k8sServiceHost=REPLACE_WITH_API_SERVER_IP \\\n --set k8sServicePort=REPLACE_WITH_API_SERVER_PORT\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Cloudflare Traffic sequence</title><link>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</link><pubDate>Wed, 03 Nov 2021 13:11:29 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211103-cloudflare-waf/</guid><description>&lt;h3 id="traffic-sequence"&gt;Traffic sequence&lt;/h3&gt;
 &lt;p&gt;Traffic to your application runs through the following sequence on Cloudflare&amp;rsquo;s edge:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;DDoS&lt;/li&gt;
@@ -113,19 +115,20 @@ grep receives the output of tcpflow&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://blog.toright.com/posts/6293/ubuntu-18-04-%E9%80%8F%E9%81%8E-netplan-%E8%A8%AD%E5%AE%9A%E7%B6%B2%E8%B7%AF%E5%8D%A1-ip.html" target="_blank" rel="noopener"&gt;Set interface IP with netplan on Ubuntu 18.04&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Following the notes above, check &lt;code&gt;/etc/netplan&lt;/code&gt; and open &lt;code&gt;/etc/netplan/50-cloud-init.yaml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# This file is generated from information provided by&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# the datasource. Changes to it will not persist across an instance.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# network: {config: disabled}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;network&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ethernets&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens192&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;ens224&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;dhcp4&lt;/span&gt;: &lt;span style="color:#e5c07b"&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;version&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p&gt;</description></item><item><title>BIRD and BGP: a beginner's kickoff</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-64c8a327a811c7ea934bce1d8c817483-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# This file is generated from information provided by&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# the datasource. Changes to it will not persist across an instance.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# To disable cloud-init&amp;#39;s network configuration capabilities, write a file&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# network: {config: disabled}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;network&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;ethernets&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;ens192&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;dhcp4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;ens224&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;dhcp4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# This file is generated from information provided by\n# the datasource. Changes to it will not persist across an instance.\n# To disable cloud-init's network configuration capabilities, write a file\n# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:\n# network: {config: disabled}\nnetwork:\n ethernets:\n ens192:\n dhcp4: true\n ens224:\n dhcp4: true\n version: 2\n","title":"yaml"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;It looks like you can disable cloud network, but I do not use cloud-init, so remove it:&lt;/p&gt;</description></item><item><title>BIRD and BGP: a beginner's kickoff</title><link>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</link><pubDate>Mon, 22 Jun 2020 09:38:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200622-bird-bgp-kickstart/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://soha.moe/post/bird-bgp-kickstart.html" target="_blank" rel="noopener"&gt;BIRD and BGP: a beginner&amp;rsquo;s kickoff&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://gitlab.nic.cz/labs/bird" target="_blank" rel="noopener"&gt;BIRD Internet Routing Daemon&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Aliyun CDN Cache Rules</title><link>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</link><pubDate>Tue, 12 May 2020 21:51:55 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/</guid><description>&lt;p&gt;&lt;img src="https://linzeyan.github.io/posts/2020/20200512-aliyun-cdn-cache/cache.png" alt=""&gt;&lt;/p&gt;</description></item><item><title>Fighting ISP Cache Hijacking Again with iptables</title><link>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
@@ -189,66 +192,68 @@ grep receives the output of tcpflow&lt;/li&gt;
 &lt;p&gt;Switch interfaces must support 802.1Q&lt;/p&gt;</description></item><item><title>Juniper notes</title><link>https://linzeyan.github.io/posts/2017/20171123-juniper/</link><pubDate>Thu, 23 Nov 2017 16:00:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171123-juniper/</guid><description>&lt;h4 id="juniper-firewall-tunnel"&gt;[Juniper Firewall] tunnel&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;ACG&lt;/em&gt;&lt;/strong&gt;
 &lt;code&gt;icare@TWCHIJF01# show | compare rollback 4&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-diff" data-lang="diff"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security policies]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; from-zone DB_12 to-zone TCT_Office { ... }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ from-zone DB_12 to-zone JC32 {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ policy For_Backup {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ match {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source-address DB_10.11.12.0/24;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination-address BACKUP_10.32.32.130;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ application any;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ then {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ permit;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones security-zone DB_12 address-book]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; address DB_10.11.12.57 { ... }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address DB_10.11.12.0/24 10.11.12.0/24;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit security zones]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; security-zone ESB_15 { ... }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ security-zone JC32 {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address-book {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address BACKUP_10.32.32.130 10.32.32.130/32;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ host-inbound-traffic {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ system-services {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ ping;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ interfaces {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ gr-0/0/0.32;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit interfaces gr-0/0/0]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ unit 32 {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ description To_JC32_DBBackup;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ tunnel {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ source 202.168.193.128;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ destination 218.253.210.8;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ family inet {
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ address 10.32.0.101/30;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ }
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[edit routing-options static]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; route 0.0.0.0/0 { ... }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379;font-weight:bold"&gt;+ route 10.32.32.130/32 next-hop 10.32.0.102;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 host-inbound-traffic system-services ping
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set security zones security-zone JC32 interfaces gr-0/0/0.32
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Data Center Notes</title><link>https://linzeyan.github.io/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171024-data-center/</guid><description>&lt;p&gt;First NIC - blue cable&lt;/p&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-569f4b9aa0f0fe032206880faa091095-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-diff" data-lang="diff"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[edit security policies]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; from-zone DB_12 to-zone TCT_Office { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ from-zone DB_12 to-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ policy For_Backup {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ match {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ source-address DB_10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ destination-address BACKUP_10.32.32.130;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ application any;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ then {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ permit;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[edit security zones security-zone DB_12 address-book]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; address DB_10.11.12.57 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ address DB_10.11.12.0/24 10.11.12.0/24;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[edit security zones]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; security-zone ESB_15 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ security-zone JC32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ address-book {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ address BACKUP_10.32.32.130 10.32.32.130/32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ host-inbound-traffic {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ system-services {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ ping;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ interfaces {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ gr-0/0/0.32;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[edit interfaces gr-0/0/0]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ unit 32 {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ description To_JC32_DBBackup;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ tunnel {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ source 202.168.193.128;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ destination 218.253.210.8;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ family inet {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ address 10.32.0.101/30;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[edit routing-options static]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; route 0.0.0.0/0 { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="gi"&gt;+ route 10.32.32.130/32 next-hop 10.32.0.102;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[edit security policies]\n from-zone DB_12 to-zone TCT_Office { ... }\n+ from-zone DB_12 to-zone JC32 {\n+ policy For_Backup {\n+ match {\n+ source-address DB_10.11.12.0/24;\n+ destination-address BACKUP_10.32.32.130;\n+ application any;\n+ }\n+ then {\n+ permit;\n+ }\n+ }\n+ }\n[edit security zones security-zone DB_12 address-book]\n address DB_10.11.12.57 { ... }\n+ address DB_10.11.12.0/24 10.11.12.0/24;\n[edit security zones]\n security-zone ESB_15 { ... }\n+ security-zone JC32 {\n+ address-book {\n+ address BACKUP_10.32.32.130 10.32.32.130/32;\n+ }\n+ host-inbound-traffic {\n+ system-services {\n+ ping;\n+ }\n+ }\n+ interfaces {\n+ gr-0/0/0.32;\n+ }\n+ }\n[edit interfaces gr-0/0/0]\n+ unit 32 {\n+ description To_JC32_DBBackup;\n+ tunnel {\n+ source 202.168.193.128;\n+ destination 218.253.210.8;\n+ }\n+ family inet {\n+ address 10.32.0.101/30;\n+ }\n+ }\n[edit routing-options static]\n route 0.0.0.0/0 { ... }\n+ route 10.32.32.130/32 next-hop 10.32.0.102;\n","title":"diff"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-569f4b9aa0f0fe032206880faa091095-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security zones security-zone JC32 host-inbound-traffic system-services ping
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set security zones security-zone JC32 interfaces gr-0/0/0.32
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;set routing-options static route 10.32.32.130/32 next-hop 10.32.0.102
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"set security policies from-zone DB_12 to-zone JC32 policy For_Backup match source-address DB_10.11.12.0/24\nset security policies from-zone DB_12 to-zone JC32 policy For_Backup match destination-address BACKUP_10.32.32.130\nset security policies from-zone DB_12 to-zone JC32 policy For_Backup match application any\nset security policies from-zone DB_12 to-zone JC32 policy For_Backup then permit\nset security zones security-zone DB_12 address-book address DB_10.11.12.0/24 10.11.12.0/24\nset security zones security-zone JC32 address-book address BACKUP_10.32.32.130 10.32.32.130/32\nset security zones security-zone JC32 host-inbound-traffic system-services ping\nset security zones security-zone JC32 interfaces gr-0/0/0.32\nset interfaces gr-0/0/0 unit 32 description To_JC32_DBBackup\nset interfaces gr-0/0/0 unit 32 tunnel source 202.168.193.128\nset interfaces gr-0/0/0 unit 32 tunnel destination 218.253.210.8\nset interfaces gr-0/0/0 unit 32 family inet address 10.32.0.101/30\nset routing-options static route 10.32.32.130/32 next-hop 10.32.0.102\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;icare@TWCHIJF01&amp;gt; show configuration | compare rollback 1&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Data Center Notes</title><link>https://linzeyan.github.io/posts/2017/20171024-data-center/</link><pubDate>Tue, 24 Oct 2017 23:17:33 +0800</pubDate><guid>https://linzeyan.github.io/posts/2017/20171024-data-center/</guid><description>&lt;p&gt;First NIC - blue cable&lt;/p&gt;
 &lt;p&gt;Second NIC - green cable&lt;/p&gt;
 &lt;p&gt;Switch interconnect - white cable&lt;/p&gt;
 &lt;p&gt;Yellow, red&lt;/p&gt;

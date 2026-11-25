@@ -130,134 +130,51 @@
 &lt;p&gt;wrap&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;timeout 1m bash -c &lt;span style="color:#98c379"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; sleep 1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;done&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-8fb0af79311de6dc8f3409a441714cc6-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout 1m bash -c &lt;span class="s2"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; sleep 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;done&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"timeout 1m bash -c \"until curl --silent --fail-with-body 10.0.0.1:8080/health; do\n\tsleep 1\ndone\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash</title><link>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</link><pubDate>Wed, 25 Sep 2024 09:23:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240925-advanced-shell-scripting/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://omid.dev/2024/06/19/advanced-shell-scripting-techniques-automating-complex-tasks-with-bash/" target="_blank" rel="noopener"&gt;Advanced Shell Scripting Techniques: Automating Complex Tasks with Bash&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="use-built-in-commands"&gt;Use Built-in Commands&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
+&lt;aside class="modern-callout not-prose my-6 flex gap-3 rounded-xl border p-5 text-sm leading-7 text-foreground" data-tone="info"&gt;
+&lt;svg class="mt-1 size-5 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"&gt;&lt;path d="M12 11v6 m0-10v.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0" /&gt;&lt;/svg&gt;
+&lt;div class="min-w-0"&gt;&lt;div class="callout-content"&gt;&lt;p&gt;Built-in commands execute faster because they don&amp;rsquo;t require loading an external process.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/aside&gt;
 &lt;h4 id="minimize-subshells"&gt;Minimize Subshells&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;Subshells can be expensive in terms of performance.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;output&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;cat file.txt&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;output&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&amp;lt;file.txt&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="use-arrays-for-bulk-data"&gt;Use Arrays for Bulk Data&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;When handling a large amount of data, arrays can be more efficient and easier to manage than multiple variables.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item1&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;apple&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item2&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;banana&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;item3&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;cherry&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;items&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=(&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;apple&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;banana&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;cherry&amp;#34;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;for&lt;/span&gt; item in &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;items&lt;/span&gt;[@]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$item&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="enable-noclobber"&gt;Enable Noclobber&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;To prevent accidental overwriting of files.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o noclobber
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="use-functions"&gt;Use Functions&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;Functions allow you to encapsulate and reuse code, making scripts cleaner and reducing redundancy.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;h4 id="efficient-file-operations"&gt;Efficient File Operations&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;When performing file operations, use efficient techniques to minimize resource usage.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Inefficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;read&lt;/span&gt; -r line; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$line&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt; &amp;lt; file.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Efficient&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e06c75"&gt;IFS&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;read&lt;/span&gt; -r line; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$line&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt; &amp;lt; file.txt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="parallel-processing"&gt;Parallel Processing&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;Tools like &lt;code&gt;xargs&lt;/code&gt; and GNU &lt;code&gt;parallel&lt;/code&gt; can be incredibly useful.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;h4 id="error-handling"&gt;Error Handling&lt;/h4&gt;
-&lt;div class="alert info"&gt;
-&lt;span&gt;&lt;i data-feather="info"&gt;&lt;/i&gt;&lt;/span&gt;
-&lt;span&gt;&lt;strong&gt;Robust error handling is critical for creating reliable and maintainable scripts.&lt;/strong&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Exit on Error: Using set -e ensures that your script exits immediately if any command fails, preventing cascading errors.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -e
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Custom Error Messages: Implement custom error messages to provide more context when something goes wrong.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;command1 &lt;span style="color:#56b6c2"&gt;||&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;command1 failed&amp;#34;&lt;/span&gt;; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; 1; &lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Trap Signals: Use the `trap` command to catch and handle signals and errors gracefully.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;trap&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;echo &amp;#34;Error occurred&amp;#34;; cleanup; exit 1&amp;#39;&lt;/span&gt; ERR
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;function&lt;/span&gt; cleanup&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Cleanup code&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Validate Inputs: Always validate user inputs and script arguments to prevent unexpected behavior.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[[&lt;/span&gt; -z &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$1&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#98c379"&gt; &amp;lt;argument&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Logging: Implement logging to keep track of script execution and diagnose issues.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;logfile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;script.log&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; &amp;gt; &amp;gt;&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;tee -i &lt;span style="color:#e06c75"&gt;$logfile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; 2&amp;gt;&amp;amp;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Script started&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="automating-complex-system-administration-tasks"&gt;Automating Complex System Administration Tasks:&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Automated Backups&lt;/li&gt;
-&lt;li&gt;System Monitoring&lt;/li&gt;
-&lt;li&gt;User Management&lt;/li&gt;
-&lt;li&gt;Automated Updates&lt;/li&gt;
-&lt;li&gt;Network Configuration&lt;/li&gt;
-&lt;/ol&gt;</description></item><item><title>Makefiles for Web Projects: Manage Your Environment Workflow</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul&gt;
+&lt;aside class="modern-callout not-prose my-6 flex gap-3 rounded-xl border p-5 text-sm leading-7 text-foreground" data-tone="info"&gt;
+&lt;svg class="mt-1 size-5 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"&gt;&lt;path d="M12 11v6 m0-10v.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0" /&gt;&lt;/svg&gt;
+&lt;div class="min-w-0"&gt;&lt;div class="callout-content"&gt;&lt;p&gt;Subshells can be expensive in terms of performance.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/aside&gt;</description></item><item><title>Makefiles for Web Projects: Manage Your Environment Workflow</title><link>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</link><pubDate>Mon, 05 Aug 2024 17:21:24 +0800</pubDate><guid>https://linzeyan.github.io/posts/2024/20240805-use-makefile-to-manage-workflows-for-web-projects/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.goodjack.tw/2023/01/use-makefile-to-manage-workflows-for-web-projects.html" target="_blank" rel="noopener"&gt;Makefiles for Web Projects: Manage Your Environment Workflow&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://gagor.pro/2024/02/how-i-stopped-worrying-and-loved-makefiles/" target="_blank" rel="noopener"&gt;How I stopped worrying and loved Makefiles&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Note: Makefile indentation must use tabs, otherwise you&amp;rsquo;ll get syntax errors.&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id="the-core-of-a-makefile-targets"&gt;The Core of a Makefile: Targets&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;up&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cp .env.example .env
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose up -d workspace
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;stop&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose stop
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;zsh&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose &lt;span style="color:#e5c07b"&gt;exec&lt;/span&gt; workspace zsh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-837fd26901b81d3e11f173b364f379d0-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;up&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; cp .env.example .env
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; docker compose up -d workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;stop&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; docker compose stop
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;zsh&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; docker compose &lt;span class="nb"&gt;exec&lt;/span&gt; workspace zsh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"up:\n\tcp .env.example .env\n\tdocker compose up -d workspace\n\nstop:\n\tdocker compose stop\n\nzsh:\n\tdocker compose exec workspace zsh\n","title":"makefile"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;This example has three targets: &lt;code&gt;up&lt;/code&gt;, &lt;code&gt;stop&lt;/code&gt;, and &lt;code&gt;zsh&lt;/code&gt;. By default, Make treats the first target as the &lt;a href="https://www.gnu.org/software/make/manual/html_node/Goals.html" target="_blank" rel="noopener"&gt;Goal&lt;/a&gt; (it cannot start with a dot), which is the project&amp;rsquo;s primary workflow. In this case, &lt;code&gt;make&lt;/code&gt; and &lt;code&gt;make up&lt;/code&gt; do the same thing.&lt;/li&gt;
 &lt;li&gt;But the copy step above is not a typical Make use case. Make shines at deciding whether each target needs to run. For example, we often store secrets in &lt;code&gt;.env&lt;/code&gt;. If &lt;code&gt;.env&lt;/code&gt; already exists, we shouldn&amp;rsquo;t overwrite it by copying &lt;code&gt;.env.example&lt;/code&gt; again. In that case, we can make &lt;code&gt;.env&lt;/code&gt; a target:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;up&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; .&lt;span style="color:#e06c75"&gt;env&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; docker compose up -d workspace
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;.env&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cp .env.example .env
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-837fd26901b81d3e11f173b364f379d0-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;up&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; .&lt;span class="n"&gt;env&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; docker compose up -d workspace
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;.env&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; cp .env.example .env
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"up: .env\n\tdocker compose up -d workspace\n\n.env:\n\tcp .env.example .env\n","title":"makefile"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;By default, target names are treated as filenames. The name &amp;ldquo;make&amp;rdquo; implies building a target; it will only execute the target&amp;rsquo;s recipe when the conditions are met (like the file not existing).
 &lt;ul&gt;
 &lt;li&gt;In this example, when you run the &lt;code&gt;up&lt;/code&gt; target, if &lt;code&gt;.env&lt;/code&gt; doesn&amp;rsquo;t exist it will run the &lt;code&gt;.env&lt;/code&gt; target first to create it, then start the workspace container. If &lt;code&gt;.env&lt;/code&gt; already exists, it skips the &lt;code&gt;.env&lt;/code&gt; target and starts the container directly.&lt;/li&gt;
@@ -265,8 +182,9 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#61afef;font-weight:bold"&gt;.PHONY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#e06c75"&gt;up&lt;/span&gt; &lt;span style="color:#e06c75"&gt;stop&lt;/span&gt; &lt;span style="color:#e06c75"&gt;zsh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="add-some-variables"&gt;Add Some Variables&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-837fd26901b81d3e11f173b364f379d0-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-makefile" data-lang="makefile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;zsh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":".PHONY: up stop zsh\n","title":"makefile"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="add-some-variables"&gt;Add Some Variables&lt;/h2&gt;
 &lt;p&gt;Make supports variables (&lt;a href="https://www.gnu.org/software/make/manual/html_node/Setting.html" target="_blank" rel="noopener"&gt;Variable&lt;/a&gt;). Following common Unix environment variable conventions, we usually write them in SCREAMING_SNAKE_CASE. When used, variables are wrapped in &lt;code&gt;$()&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Bash Bitwise Operators</title><link>https://linzeyan.github.io/posts/2022/20220704-bash-bitwise-operators/</link><pubDate>Mon, 04 Jul 2022 15:20:39 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220704-bash-bitwise-operators/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/bash-bitwise-operators" target="_blank" rel="noopener"&gt;Bash Bitwise Operators&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -274,141 +192,147 @@
 &lt;ul&gt;
 &lt;li&gt;Bash&amp;rsquo;s arithmetic expansion allows us to write numbers in any base by prefixing the numeric digits of the base followed by the hash symbol.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#c678dd"&gt;$((&lt;/span&gt;&lt;span style="color:#d19a66"&gt;2#1001&lt;/span&gt;&lt;span style="color:#c678dd"&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;9&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-355e10231851ffcd3ccdedb107a960cc-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$((&lt;/span&gt;&lt;span class="m"&gt;2#1001&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ echo $((2#1001))\n9\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;bc allows us to convert effortlessly between bases, using the parameters ibase (for the input base) and obase (for the output base). So, let&amp;rsquo;s convert the decimal number 9 to base 2&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;ibase=10;obase=2;9&amp;#34;&lt;/span&gt; | bc
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;1001&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Parse Command Line Arguments in Bash</title><link>https://linzeyan.github.io/posts/2022/20220607-bash-parse-command-line-arguments/</link><pubDate>Tue, 07 Jun 2022 14:48:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220607-bash-parse-command-line-arguments/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-355e10231851ffcd3ccdedb107a960cc-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;ibase=10;obase=2;9&amp;#34;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; bc
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;1001&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ echo \"ibase=10;obase=2;9\" | bc\n1001\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Parse Command Line Arguments in Bash</title><link>https://linzeyan.github.io/posts/2022/20220607-bash-parse-command-line-arguments/</link><pubDate>Tue, 07 Jun 2022 14:48:47 +0800</pubDate><guid>https://linzeyan.github.io/posts/2022/20220607-bash-parse-command-line-arguments/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/bash-parse-command-line-arguments" target="_blank" rel="noopener"&gt;Parse Command Line Arguments in Bash&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="getopts"&gt;getopts&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;getopts optstring opt [arg ...]&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;getopts&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;abc:h&amp;#39;&lt;/span&gt; opt; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;case&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$opt&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; in
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; a&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;a&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; b&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;b&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; c&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;arg&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$OPTARG&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;c&amp;#39; with &amp;#39;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;OPTARG&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39; argument&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ?|h&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;esac&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$((&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$OPTIND&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;&lt;span style="color:#c678dd"&gt;))&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-ab5fe0bd3869d1e27e2058aecafcd317-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;getopts&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abc:h&amp;#39;&lt;/span&gt; opt&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$opt&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; in
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;a&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;b&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;arg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$OPTARG&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;c&amp;#39; with &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;OPTARG&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39; argument&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ?&lt;span class="p"&gt;|&lt;/span&gt;h&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;&lt;span class="nv"&gt;$OPTIND&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/bin/bash\n\nwhile getopts 'abc:h' opt; do\n case \"$opt\" in\n a)\n echo \"Processing option 'a'\"\n ;;\n\n b)\n echo \"Processing option 'b'\"\n ;;\n\n c)\n arg=\"$OPTARG\"\n echo \"Processing option 'c' with '${OPTARG}' argument\"\n ;;\n\n ?|h)\n echo \"Usage: $(basename $0) [-a] [-b] [-c arg]\"\n exit 1\n ;;\n esac\ndone\nshift \"$(($OPTIND -1))\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;optstring represents the supported options. The option expects an argument if there is a colon (:) after it. For instance, if option c expects an argument, then it would be represented as c: in the optstring&lt;/li&gt;
 &lt;li&gt;When an option has an associated argument, then getopts stores the argument as a string in the OPTARG shell variable. For instance, the argument passed to option c would be stored in the OPTARG variable.&lt;/li&gt;
 &lt;li&gt;opt contains the parsed option.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;getopts&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;:abc:h&amp;#39;&lt;/span&gt; opt; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;case&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$opt&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; in
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; a&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;a&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; b&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;b&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; c&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;arg&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$OPTARG&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing option &amp;#39;c&amp;#39; with &amp;#39;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;OPTARG&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39; argument&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; h&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; :&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; -e &lt;span style="color:#98c379"&gt;&amp;#34;option requires an argument.\nUsage: &lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ?&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; -e &lt;span style="color:#98c379"&gt;&amp;#34;Invalid command option.\nUsage: &lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#e06c75"&gt;$0&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;esac&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$((&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$OPTIND&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;-&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1&lt;/span&gt;&lt;span style="color:#c678dd"&gt;))&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-ab5fe0bd3869d1e27e2058aecafcd317-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;getopts&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;:abc:h&amp;#39;&lt;/span&gt; opt&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$opt&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; in
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; a&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;a&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; b&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;b&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; c&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;arg&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$OPTARG&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing option &amp;#39;c&amp;#39; with &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;OPTARG&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39; argument&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; h&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Usage: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; :&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s2"&gt;&amp;#34;option requires an argument.\nUsage: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ?&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s2"&gt;&amp;#34;Invalid command option.\nUsage: &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt; [-a] [-b] [-c arg]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;&lt;span class="nv"&gt;$OPTIND&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/bin/bash\n\nwhile getopts ':abc:h' opt; do\n case \"$opt\" in\n a)\n echo \"Processing option 'a'\"\n ;;\n\n b)\n echo \"Processing option 'b'\"\n ;;\n\n c)\n arg=\"$OPTARG\"\n echo \"Processing option 'c' with '${OPTARG}' argument\"\n ;;\n\n h)\n echo \"Usage: $(basename $0) [-a] [-b] [-c arg]\"\n exit 0\n ;;\n\n :)\n echo -e \"option requires an argument.\\nUsage: $(basename $0) [-a] [-b] [-c arg]\"\n exit 1\n ;;\n\n ?)\n echo -e \"Invalid command option.\\nUsage: $(basename $0) [-a] [-b] [-c arg]\"\n exit 1\n ;;\n esac\ndone\nshift \"$(($OPTIND -1))\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Note that we&amp;rsquo;ve updated optstring as well. Now it starts with the colon(:) character, which suppresses the default error message.&lt;/li&gt;
 &lt;li&gt;The getopts function disables error reporting when the OPTERR variable is set to zero.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="parsing-long-command-line-options-with-getopt"&gt;Parsing Long Command-Line Options With getopt&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;VALID_ARGS&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;getopt -o abg:d: --long alpha,beta,gamma:,delta: -- &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$@&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[[&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$?&lt;/span&gt; -ne &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;exit&lt;/span&gt; 1;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;eval&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -- &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$VALID_ARGS&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;while&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; : &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;; &lt;span style="color:#c678dd"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;case&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$1&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; in
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -a | --alpha&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing &amp;#39;alpha&amp;#39; option&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -b | --beta&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing &amp;#39;beta&amp;#39; option&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -g | --gamma&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing &amp;#39;gamma&amp;#39; option. Input argument is &amp;#39;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$2&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; -d | --delta&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;Processing &amp;#39;delta&amp;#39; option. Input argument is &amp;#39;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$2&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;shift&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; shift;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;break&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;esac&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-ab5fe0bd3869d1e27e2058aecafcd317-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;VALID_ARGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;getopt -o abg:d: --long alpha,beta,gamma:,delta: -- &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$@&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; -ne &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; 1&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; -- &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$VALID_ARGS&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; : &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; in
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -a &lt;span class="p"&gt;|&lt;/span&gt; --alpha&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing &amp;#39;alpha&amp;#39; option&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -b &lt;span class="p"&gt;|&lt;/span&gt; --beta&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing &amp;#39;beta&amp;#39; option&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -g &lt;span class="p"&gt;|&lt;/span&gt; --gamma&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing &amp;#39;gamma&amp;#39; option. Input argument is &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; -d &lt;span class="p"&gt;|&lt;/span&gt; --delta&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;Processing &amp;#39;delta&amp;#39; option. Input argument is &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; --&lt;span class="o"&gt;)&lt;/span&gt; shift&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/bin/bash\n\nVALID_ARGS=$(getopt -o abg:d: --long alpha,beta,gamma:,delta: -- \"$@\")\nif [[ $? -ne 0 ]]; then\n exit 1;\nfi\n\neval set -- \"$VALID_ARGS\"\nwhile [ : ]; do\n case \"$1\" in\n -a | --alpha)\n echo \"Processing 'alpha' option\"\n shift\n ;;\n -b | --beta)\n echo \"Processing 'beta' option\"\n shift\n ;;\n -g | --gamma)\n echo \"Processing 'gamma' option. Input argument is '$2'\"\n shift 2\n ;;\n -d | --delta)\n echo \"Processing 'delta' option. Input argument is '$2'\"\n shift 2\n ;;\n --) shift;\n break\n ;;\n esac\ndone\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-o&lt;/code&gt; option represents the short command-line options&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--long&lt;/code&gt; option represents the long command-line options&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Best Practices for Writing Bash Scripts</title><link>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</link><pubDate>Mon, 06 Dec 2021 11:11:54 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211206-bash-best-practices/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://kvz.io/bash-best-practices.html" target="_blank" rel="noopener"&gt;Best Practices for Writing Bash Scripts&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.javacodegeeks.com/2013/10/shell-scripting-best-practices.html" target="_blank" rel="noopener"&gt;Shell Scripting - Best Practices&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#!/usr/bin/env bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o errexit
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o pipefail
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;set&lt;/span&gt; -o nounset
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# set -o xtrace&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Set magic variables for current file &amp;amp; dir&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;dirname &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;BASH_SOURCE&lt;/span&gt;[0]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;pwd&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__file&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;/&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;BASH_SOURCE&lt;/span&gt;[0]&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__base&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;basename &lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__file&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt; .sh&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;__root&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;$(&lt;/span&gt;dirname &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;__dir&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;pwd&lt;/span&gt;&lt;span style="color:#c678dd"&gt;)&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# &amp;lt;-- change this as it depends on your app&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;arg1&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#98c379"&gt;${&lt;/span&gt;&lt;span style="color:#e06c75"&gt;1&lt;/span&gt;&lt;span style="color:#c678dd"&gt;:-&lt;/span&gt;&lt;span style="color:#98c379"&gt;}&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="use-shift-to-read-function-arguments"&gt;Use shift to read function arguments&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9d3d1819d3d9ad52d2c30c5a23e3e2ca-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#!/usr/bin/env bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bash3 Boilerplate. Copyright (c) 2014, kvz.io&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -o errexit
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -o pipefail
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;set&lt;/span&gt; -o nounset
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# set -o xtrace&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Set magic variables for current file &amp;amp; dir&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;__dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dirname &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[0]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;__file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;__dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[0]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;__base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;__file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; .sh&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;__root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;dirname &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;__dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# &amp;lt;-- change this as it depends on your app&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#!/usr/bin/env bash\n# Bash3 Boilerplate. Copyright (c) 2014, kvz.io\nset -o errexit\nset -o pipefail\nset -o nounset\n# set -o xtrace\n\n# Set magic variables for current file \u0026 dir\n__dir=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" \u0026\u0026 pwd)\"\n__file=\"${__dir}/$(basename \"${BASH_SOURCE[0]}\")\"\n__base=\"$(basename ${__file} .sh)\"\n__root=\"$(cd \"$(dirname \"${__dir}\")\" \u0026\u0026 pwd)\" # \u003c-- change this as it depends on your app\n\narg1=\"${1:-}\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="use-shift-to-read-function-arguments"&gt;Use shift to read function arguments&lt;/h5&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This makes it easier to reorder arguments, if you change your mind later.&lt;/p&gt;
 &lt;/blockquote&gt;</description></item></channel></rss>

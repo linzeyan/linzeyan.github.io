@@ -2,21 +2,21 @@
 &lt;li&gt;&lt;a href="https://blog.maxkit.com.tw/2016/05/haproxy-ddos.html" target="_blank" rel="noopener"&gt;設定 Haproxy 以防止 DDOS 攻擊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="tcp-syn-flood-attacks"&gt;TCP syn flood attacks&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi /etc/sysctl.conf
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Protection from SYN flood&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_syncookies &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.conf.all.rp_filter &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;net.ipv4.tcp_max_syn_backlog &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#d19a66"&gt;1024&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="slowloris-like-attacks"&gt;Slowloris like attacks&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;defaults
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; option http-server-close
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout http-request 5s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout connect 5s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout client 30s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout server 10s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; timeout tunnel 1h
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="限制每一個-user-的連線數量"&gt;限制每一個 user 的連線數量&lt;/h3&gt;
-&lt;p&gt;普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p&gt;
-&lt;p&gt;但如果有很多使用者，是從某一個私有網段，透過 NAT 的方式連線到 Server 時，且實際上我們也不知道，到底哪一個會是 NAT 的轉址後的 IP，不知道該將哪個 IP 設定為白名單，這樣的限制就會造成問題，因此我們認為實際的環境，這樣的設定應該要保留不處理。&lt;/p&gt;
-&lt;p&gt;以下是一個設定的範例，最重要的地方是在 frontend ft_web 區塊的設定。&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-894602fe0f08c4a476ab9850ea817597-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vi /etc/sysctl.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Protection from SYN flood&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.tcp_syncookies &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.conf.all.rp_filter &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;net.ipv4.tcp_max_syn_backlog &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1024&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"vi /etc/sysctl.conf\n\n# Protection from SYN flood\nnet.ipv4.tcp_syncookies = 1\nnet.ipv4.conf.all.rp_filter = 1\nnet.ipv4.tcp_max_syn_backlog = 1024\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="slowloris-like-attacks"&gt;Slowloris like attacks&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-894602fe0f08c4a476ab9850ea817597-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;defaults
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; option http-server-close
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout http-request 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout connect 5s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout client 30s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout server 10s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; timeout tunnel 1h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"defaults\n option http-server-close\n timeout http-request 5s\n timeout connect 5s\n timeout client 30s\n timeout server 10s\n timeout tunnel 1h\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="限制每一個-user-的連線數量"&gt;限制每一個 user 的連線數量&lt;/h3&gt;
+&lt;p&gt;普通用戶瀏覽網站的網頁，或是從網站下載東西時，瀏覽器一般會建立 5-7 個 TCP 鏈接。當一個惡意 client 打開了大量 TCP 連線時，耗費大量資源，因此我們必須要限制同一個用戶的連線數量。&lt;/p&gt;</description></item></channel></rss>

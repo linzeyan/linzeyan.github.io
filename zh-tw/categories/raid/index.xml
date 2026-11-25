@@ -2,86 +2,93 @@
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/raid-information-command-line" target="_blank" rel="noopener"&gt;在 Linux 中偵測 RAID 資訊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="lspci"&gt;lspci&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lspci | grep RAID
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00:1f.2 RAID bus controller: Intel Corporation &lt;span style="color:#d19a66"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;RAID mode&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;rev 04&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="lshw"&gt;lshw&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lshw -class storage
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; *-raid
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; description: RAID bus controller
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; product: &lt;span style="color:#d19a66"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;RAID mode&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; vendor: Intel Corporation
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; physical id: 1f.2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; bus info: pci@0000:00:1f.2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; logical name: scsi0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; version: &lt;span style="color:#d19a66"&gt;04&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; width: &lt;span style="color:#d19a66"&gt;32&lt;/span&gt; bits
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; clock: 66MHz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; capabilities: raid msi pm bus_master cap_list emulated
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; configuration: &lt;span style="color:#e06c75"&gt;driver&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;ahci &lt;span style="color:#e06c75"&gt;latency&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; resources: irq:26 ioport:f0d0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0c0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0b0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0a0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f060&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;32&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; memory:f7e36000-f7e367ff
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="smartctl"&gt;smartctl&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | grep -i scsi
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 0.210852&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; SCSI subsystem initialized
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 0.341280&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Block layer SCSI generic &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;bsg&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; driver version 0.4 loaded &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;major 243&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 1.213299&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; ANSI: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 1.319886&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;sda&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Attached SCSI disk
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 19.571008&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; sd 0:0:0:0: Attached scsi generic sg0 &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;smartctl --all /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Model Family: Seagate Laptop HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device Model: ST320LT012-9WS14C
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Serial Number: S0V3R9LL
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;LU WWN Device Id: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt; 000c50 05be4653c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Firmware Version: 0001YAM1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User Capacity: 320,072,933,376 bytes &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;&lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sector Sizes: &lt;span style="color:#d19a66"&gt;512&lt;/span&gt; bytes logical, &lt;span style="color:#d19a66"&gt;4096&lt;/span&gt; bytes physical
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Rotation Rate: &lt;span style="color:#d19a66"&gt;5400&lt;/span&gt; rpm
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Form Factor: 2.5 inches
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device is: In smartctl database 7.3/5319
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ATA Version is: ATA8-ACS T13/1699-D revision &lt;span style="color:#d19a66"&gt;4&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;current: 3.0 Gb/s&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Local Time is: Sat Nov &lt;span style="color:#d19a66"&gt;19&lt;/span&gt; 20:52:01 &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt; PKT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SMART support is: Available - device has SMART capability.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SMART support is: Enabled
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="megacli"&gt;MegaCLI&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;megacli -LDInfo -Lall -aALL
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Adapter &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -- Virtual Drive Information:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Virtual Drive: &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;Target Id: 0&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name : SEAGATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Size : &lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sector Size : &lt;span style="color:#d19a66"&gt;512&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Mirror Data : &lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State : Optimal
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="lsscsi"&gt;lsscsi&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsscsi
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;0:0:0:0&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; disk ATA ST320LT012-9WS14 YAM1 /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="廠商專用工具"&gt;廠商專用工具&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;omreport storage vdisk
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;List of Virtual Disks in the System
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Controller SEAGATE Laptop HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ID : &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Status : Ok
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name : SEAGATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State : Ready
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Hot Spare Policy violated : Not Assigned
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Encrypted : No
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Layout : RAID-0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Size : 320.00 GB &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#d19a66"&gt;343597383680&lt;/span&gt; bytes&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;T10 Protection Information Status : No
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Associated Fluid Cache State : Not Applicable
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device Name : /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus Protocol : ATA
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Media : HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Read Policy : Adaptive Read Ahead
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Write Policy : Write Back
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Cache Policy : Not Applicable
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Stripe Element Size : &lt;span style="color:#d19a66"&gt;128&lt;/span&gt; KB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Disk Cache Policy : Enabled
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Raid10 徹底崩壞 ,壞就壞在同組作Mirror硬碟一起故障。</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</link><pubDate>Wed, 01 Aug 2018 18:21:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lspci &lt;span class="p"&gt;|&lt;/span&gt; grep RAID
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;00:1f.2 RAID bus controller: Intel Corporation &lt;span class="m"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span class="o"&gt;[&lt;/span&gt;RAID mode&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;rev 04&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lspci | grep RAID\n00:1f.2 RAID bus controller: Intel Corporation 82801 Mobile SATA Controller [RAID mode] (rev 04)\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="lshw"&gt;lshw&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lshw -class storage
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; *-raid
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; description: RAID bus controller
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; product: &lt;span class="m"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span class="o"&gt;[&lt;/span&gt;RAID mode&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; vendor: Intel Corporation
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; physical id: 1f.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; bus info: pci@0000:00:1f.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; logical name: scsi0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; version: &lt;span class="m"&gt;04&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; width: &lt;span class="m"&gt;32&lt;/span&gt; bits
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; clock: 66MHz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; capabilities: raid msi pm bus_master cap_list emulated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; configuration: &lt;span class="nv"&gt;driver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ahci &lt;span class="nv"&gt;latency&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; resources: irq:26 ioport:f0d0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0c0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0b0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0a0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt; ioport:f060&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;32&lt;span class="o"&gt;)&lt;/span&gt; memory:f7e36000-f7e367ff
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lshw -class storage\n *-raid\n description: RAID bus controller\n product: 82801 Mobile SATA Controller [RAID mode]\n vendor: Intel Corporation\n physical id: 1f.2\n bus info: pci@0000:00:1f.2\n logical name: scsi0\n version: 04\n width: 32 bits\n clock: 66MHz\n capabilities: raid msi pm bus_master cap_list emulated\n configuration: driver=ahci latency=0\n resources: irq:26 ioport:f0d0(size=8) ioport:f0c0(size=4) ioport:f0b0(size=8) ioport:f0a0(size=4) ioport:f060(size=32) memory:f7e36000-f7e367ff\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="smartctl"&gt;smartctl&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dmesg &lt;span class="p"&gt;|&lt;/span&gt; grep -i scsi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 0.210852&lt;span class="o"&gt;]&lt;/span&gt; SCSI subsystem initialized
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 0.341280&lt;span class="o"&gt;]&lt;/span&gt; Block layer SCSI generic &lt;span class="o"&gt;(&lt;/span&gt;bsg&lt;span class="o"&gt;)&lt;/span&gt; driver version 0.4 loaded &lt;span class="o"&gt;(&lt;/span&gt;major 243&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 1.213299&lt;span class="o"&gt;]&lt;/span&gt; scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span class="m"&gt;0&lt;/span&gt; ANSI: &lt;span class="m"&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 1.319886&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 19.571008&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"dmesg | grep -i scsi\n[ 0.210852] SCSI subsystem initialized\n[ 0.341280] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)\n...\n[ 1.213299] scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: 0 ANSI: 5\n[ 1.319886] sd 0:0:0:0: [sda] Attached SCSI disk\n[ 19.571008] sd 0:0:0:0: Attached scsi generic sg0 type 0\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;smartctl --all /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Model Family: Seagate Laptop HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device Model: ST320LT012-9WS14C
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Serial Number: S0V3R9LL
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;LU WWN Device Id: &lt;span class="m"&gt;5&lt;/span&gt; 000c50 05be4653c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Firmware Version: 0001YAM1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;User Capacity: 320,072,933,376 bytes &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;320&lt;/span&gt; GB&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sector Sizes: &lt;span class="m"&gt;512&lt;/span&gt; bytes logical, &lt;span class="m"&gt;4096&lt;/span&gt; bytes physical
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Rotation Rate: &lt;span class="m"&gt;5400&lt;/span&gt; rpm
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Form Factor: 2.5 inches
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device is: In smartctl database 7.3/5319
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ATA Version is: ATA8-ACS T13/1699-D revision &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span class="o"&gt;(&lt;/span&gt;current: 3.0 Gb/s&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Local Time is: Sat Nov &lt;span class="m"&gt;19&lt;/span&gt; 20:52:01 &lt;span class="m"&gt;2022&lt;/span&gt; PKT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SMART support is: Available - device has SMART capability.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SMART support is: Enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"smartctl --all /dev/sda\nModel Family: Seagate Laptop HDD\nDevice Model: ST320LT012-9WS14C\nSerial Number: S0V3R9LL\nLU WWN Device Id: 5 000c50 05be4653c\nFirmware Version: 0001YAM1\nUser Capacity: 320,072,933,376 bytes [320 GB]\nSector Sizes: 512 bytes logical, 4096 bytes physical\nRotation Rate: 5400 rpm\nForm Factor: 2.5 inches\nDevice is: In smartctl database 7.3/5319\nATA Version is: ATA8-ACS T13/1699-D revision 4\nSATA Version is: SATA 2.6, 3.0 Gb/s (current: 3.0 Gb/s)\nLocal Time is: Sat Nov 19 20:52:01 2022 PKT\nSMART support is: Available - device has SMART capability.\nSMART support is: Enabled\n...\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="megacli"&gt;MegaCLI&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-4"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;megacli -LDInfo -Lall -aALL
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Adapter &lt;span class="m"&gt;0&lt;/span&gt; -- Virtual Drive Information:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Virtual Drive: &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;Target Id: 0&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Name : SEAGATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Size : &lt;span class="m"&gt;320&lt;/span&gt; GB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sector Size : &lt;span class="m"&gt;512&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Mirror Data : &lt;span class="m"&gt;320&lt;/span&gt; GB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;State : Optimal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"megacli -LDInfo -Lall -aALL\nAdapter 0 -- Virtual Drive Information:\nVirtual Drive: 0 (Target Id: 0)\nName : SEAGATE\nRAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0\nSize : 320 GB\nSector Size : 512\nMirror Data : 320 GB\nState : Optimal\n...\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="lsscsi"&gt;lsscsi&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-5"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsscsi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;0:0:0:0&lt;span class="o"&gt;]&lt;/span&gt; disk ATA ST320LT012-9WS14 YAM1 /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lsscsi\n[0:0:0:0] disk ATA ST320LT012-9WS14 YAM1 /dev/sda\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="廠商專用工具"&gt;廠商專用工具&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-6"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;omreport storage vdisk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;List of Virtual Disks in the System
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Controller SEAGATE Laptop HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ID : &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Status : Ok
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Name : SEAGATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;State : Ready
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hot Spare Policy violated : Not Assigned
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Encrypted : No
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Layout : RAID-0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Size : 320.00 GB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;343597383680&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;T10 Protection Information Status : No
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Associated Fluid Cache State : Not Applicable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device Name : /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus Protocol : ATA
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Media : HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Read Policy : Adaptive Read Ahead
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Write Policy : Write Back
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Cache Policy : Not Applicable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Stripe Element Size : &lt;span class="m"&gt;128&lt;/span&gt; KB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Disk Cache Policy : Enabled
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"omreport storage vdisk\nList of Virtual Disks in the System\n\nController SEAGATE Laptop HDD\nID : 0\nStatus : Ok\nName : SEAGATE\nState : Ready\nHot Spare Policy violated : Not Assigned\nEncrypted : No\nLayout : RAID-0\nSize : 320.00 GB (343597383680 bytes)\nT10 Protection Information Status : No\nAssociated Fluid Cache State : Not Applicable\nDevice Name : /dev/sda\nBus Protocol : ATA\nMedia : HDD\nRead Policy : Adaptive Read Ahead\nWrite Policy : Write Back\nCache Policy : Not Applicable\nStripe Element Size : 128 KB\nDisk Cache Policy : Enabled\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Raid10 徹底崩壞 ,壞就壞在同組作Mirror硬碟一起故障。</title><link>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</link><pubDate>Wed, 01 Aug 2018 18:21:20 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2018/20180801-raid/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://jerry2yang.wordpress.com/2013/01/09/raid10-%E5%BE%B9%E5%BA%95%E5%B4%A9%E5%A3%9E-%E5%A3%9E%E5%B0%B1%E5%A3%9E%E5%9C%A8%E5%90%8C%E7%B5%84%E4%BD%9Cmirror%E7%A1%AC%E7%A2%9F%E4%B8%80%E8%B5%B7%E6%95%85%E9%9A%9C%E3%80%82/" target="_blank" rel="noopener"&gt;Raid10 徹底崩壞 ,壞就壞在同組作 Mirror 硬碟一起故障。&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zh.wikipedia.org/wiki/RAID" target="_blank" rel="noopener"&gt;RAID&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>

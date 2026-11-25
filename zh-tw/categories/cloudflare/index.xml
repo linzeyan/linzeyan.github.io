@@ -41,55 +41,54 @@
 &lt;/ul&gt;</description></item><item><title>將 Cloudflare WARP 轉成 HTTP 代理</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</link><pubDate>Wed, 06 Nov 2024 17:47:06 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241106-warp-http-proxy/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://dmesg.app/warp-http-proxy.html" target="_blank" rel="noopener"&gt;將 Cloudflare WARP 轉成 HTTP 代理&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli proxy port &lt;span style="color:#d19a66"&gt;60606&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli mode proxy
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而，Go 程式不支援 socks 代理，要手動加 transport 我可沒那個功夫去加。&lt;/p&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-18b3f9dc6fc531b84a182ae35ff106a1-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli proxy port &lt;span class="m"&gt;60606&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli mode proxy
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"warp-cli proxy port 60606\nwarp-cli mode proxy\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;然而，Go 程式不支援 socks 代理，要手動加 transport 我可沒那個功夫去加。&lt;/p&gt;
 &lt;p&gt;好消息是，Go 預設會尊重環境變數 &lt;code&gt;http_proxy&lt;/code&gt;。因此我們要想辦法把 socks 代理轉成 http 代理。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;http://127.0.0.1:8118 &lt;span style="color:#e06c75"&gt;http_proxy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;http://127.0.0.1:8118 curl ipv4.win
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl: &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;52&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Empty reply from server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# pproxy logs&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Serving on ipv? 127.0.0.1:8118 by http
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;http 127.0.0.1:45012 -&amp;gt; socks5 127.0.0.1:60606 -&amp;gt; ipv4.win:80
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Unknown remote protocol from 127.0.0.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可能是 pproxy 的問題，那就用 gost。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;gost -L http://127.0.0.1:8118 -F socks5://127.0.0.1:60606
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2024/11/03 12:32:43 route.go:700: http://127.0.0.1:8118 on 127.0.0.1:8118
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2024/11/03 12:32:46 http.go:162: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;http&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; ipv4.win:80
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2024/11/03 12:32:46 http.go:257: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;route&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; 127.0.0.1:33284 -&amp;gt; http://127.0.0.1:8118 -&amp;gt; 1@socks5://127.0.0.1:60606 -&amp;gt; ipv4.win:80
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2024/11/03 12:32:46 http.go:280: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;http&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; 127.0.0.1:33284 -&amp;gt; 127.0.0.1:8118 : unexpected EOF
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那就用 Privoxy。&lt;/p&gt;</description></item><item><title>隱藏於 Cloudflare 的全球網路之中</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-18b3f9dc6fc531b84a182ae35ff106a1-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:8118 &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://127.0.0.1:8118 curl ipv4.win
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl: &lt;span class="o"&gt;(&lt;/span&gt;52&lt;span class="o"&gt;)&lt;/span&gt; Empty reply from server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# pproxy logs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Serving on ipv? 127.0.0.1:8118 by http
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;http 127.0.0.1:45012 -&amp;gt; socks5 127.0.0.1:60606 -&amp;gt; ipv4.win:80
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Unknown remote protocol from 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"pproxy -v -l http://127.0.0.1:8118 -r socks5://127.0.0.1:60606\n\nhttps_proxy=http://127.0.0.1:8118 http_proxy=http://127.0.0.1:8118 curl ipv4.win\ncurl: (52) Empty reply from server\n\n# pproxy logs\nServing on ipv? 127.0.0.1:8118 by http\nhttp 127.0.0.1:45012 -\u003e socks5 127.0.0.1:60606 -\u003e ipv4.win:80\nUnknown remote protocol from 127.0.0.1\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;可能是 pproxy 的問題，那就用 gost。&lt;/p&gt;</description></item><item><title>隱藏於 Cloudflare 的全球網路之中</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</link><pubDate>Thu, 01 Aug 2024 14:35:24 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240801-hide-in-cf/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://dmesg.app/hide-in-cf.html" target="_blank" rel="noopener"&gt;隱藏於 Cloudflare 的全球網路之中&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol&gt;
 &lt;li&gt;一種方式是使用 Cloudflare WARP，讓 WARP 以 proxy mode 執行，而不是接管全域流量。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli register
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# WARP 監聽本機的 11111 埠&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli set-proxy-port &lt;span style="color:#d19a66"&gt;11111&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# WARP proxy mode&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli set-mode proxy
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 永久啟用&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;warp-cli enable-always-on
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;socks5://127.0.0.1:11111 &lt;span style="color:#e06c75"&gt;http_proxy&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;socks5://127.0.0.1:11111 go run main.go
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-6e5097bfdbc2686217b05f25b8bff8b2-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli register
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# WARP 監聽本機的 11111 埠&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli set-proxy-port &lt;span class="m"&gt;11111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# WARP proxy mode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli set-mode proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 永久啟用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;warp-cli enable-always-on
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"warp-cli register\n# WARP 監聽本機的 11111 埠\nwarp-cli set-proxy-port 11111\n\n# WARP proxy mode\nwarp-cli set-mode proxy\n\n# 永久啟用\nwarp-cli enable-always-on\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-6e5097bfdbc2686217b05f25b8bff8b2-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;socks5://127.0.0.1:11111 &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;socks5://127.0.0.1:11111 go run main.go
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"https_proxy=socks5://127.0.0.1:11111 http_proxy=socks5://127.0.0.1:11111 go run main.go\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;ol start="2"&gt;
 &lt;li&gt;另一種方式是使用 Cloudflare Workers，請求由 Workers 轉發。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;export&lt;/span&gt; &lt;span style="color:#c678dd"&gt;default&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;async&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fetch&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;request&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Request&lt;/span&gt;)&lt;span style="color:#56b6c2"&gt;:&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;Promise&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;/**
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt; * 將 `remote` 替換為你想要轉發請求的主機
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt; */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;const&lt;/span&gt; &lt;span style="color:#e06c75"&gt;remote&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;https://example.com&amp;#34;&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#c678dd"&gt;await&lt;/span&gt; &lt;span style="color:#e06c75"&gt;fetch&lt;/span&gt;(&lt;span style="color:#e06c75"&gt;remote&lt;/span&gt;, &lt;span style="color:#e06c75"&gt;request&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>WebP Cloud 使用 Cloudflare Workers 回源以保護回源伺服器並開始提供回源時間資訊</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-6e5097bfdbc2686217b05f25b8bff8b2-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;async&lt;/span&gt; &lt;span class="nx"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;Promise&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="cm"&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; * 將 `remote` 替換為你想要轉發請求的主機
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cm"&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;remote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;https://example.com&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kr"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;remote&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"export default {\n\tasync fetch(request: Request): Promise {\n\t\t/**\n\t\t * 將 `remote` 替換為你想要轉發請求的主機\n\t\t */\n\t\tconst remote = \"https://example.com\";\n\n\t\treturn await fetch(remote, request);\n\t},\n};\n","title":"javascript"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>WebP Cloud 使用 Cloudflare Workers 回源以保護回源伺服器並開始提供回源時間資訊</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</link><pubDate>Sun, 09 Jun 2024 10:49:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20240609-cloudflare-workers-origin/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.webp.se/cloudflare-workers-origin-zh/" target="_blank" rel="noopener"&gt;WebP Cloud 使用 Cloudflare Workers 回源以保護回源伺服器並開始提供回源時間資訊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Cloudflare Zero Trust</title><link>https://linzeyan.github.io/zh-tw/posts/2023/20230926-cloudflare/</link><pubDate>Tue, 26 Sep 2023 09:01:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2023/20230926-cloudflare/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/private-net/connect-private-networks/" target="_blank" rel="noopener"&gt;Connect private networks&lt;/a&gt;&lt;/li&gt;
@@ -144,7 +143,7 @@
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
 &lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/5IrtNxfzH1o?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"&gt;&lt;/iframe&gt;
 &lt;/div&gt;
-&lt;div style="margin-top: rem;"&gt;&lt;/div&gt;
+&lt;div class="h-[1rem]" aria-hidden="true"&gt;&lt;/div&gt;
 &lt;h2 id="setup-synology"&gt;Setup Synology&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;在 docker 目錄下建立資料夾，例如 &lt;code&gt;cloudflare-tunnel&lt;/code&gt;。&lt;/li&gt;

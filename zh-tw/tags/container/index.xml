@@ -22,25 +22,16 @@
 &lt;li&gt;&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener"&gt;從零開始的容器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="容器檔案系統"&gt;容器檔案系統&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sha256sum rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#7f848e"&gt;# tar needs sudo to create /dev files and setup file ownership&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tar -zxf rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls rootfs
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin dev home lib64 mnt proc run srv tmp var
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boot etc lib media opt root sbin sys usr
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls -al rootfs/bin/ls
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x. &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;118280&lt;/span&gt; Mar &lt;span style="color:#d19a66"&gt;14&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2015&lt;/span&gt; rootfs/bin/ls
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="chroot"&gt;chroot&lt;/h3&gt;
-&lt;p&gt;它可以限制某個程序對檔案系統的視野。這裡我們把程序限制在 &amp;ldquo;rootfs&amp;rdquo; 目錄，然後執行一個 shell。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo chroot rootfs /bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# ls /
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin dev home lib64 mnt proc run srv tmp var
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boot etc lib media opt root sbin sys usr
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# which python
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/python
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/# /usr/bin/python -c &lt;span style="color:#98c379"&gt;&amp;#39;print &amp;#34;Hello, container world!&amp;#34;&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Hello, container world!
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@localhost:/#
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;當我們執行 Python 直譯器時，實際上是執行 &lt;code&gt;rootfs/usr/bin/python&lt;/code&gt;，而不是宿主機的 Python。&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-1023aa6e0df0ae5f3a69d11b1a81efa8-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sha256sum rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ &lt;span class="c1"&gt;# tar needs sudo to create /dev files and setup file ownership&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tar -zxf rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ls rootfs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bin dev home lib64 mnt proc run srv tmp var
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;boot etc lib media opt root sbin sys usr
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ls -al rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x. &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;118280&lt;/span&gt; Mar &lt;span class="m"&gt;14&lt;/span&gt; &lt;span class="m"&gt;2015&lt;/span&gt; rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz\n$ sha256sum rootfs.tar.gz\nc79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz\n$ # tar needs sudo to create /dev files and setup file ownership\n$ sudo tar -zxf rootfs.tar.gz\n$ ls rootfs\nbin dev home lib64 mnt proc run srv tmp var\nboot etc lib media opt root sbin sys usr\n$ ls -al rootfs/bin/ls\n-rwxr-xr-x. 1 root root 118280 Mar 14 2015 rootfs/bin/ls\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="chroot"&gt;chroot&lt;/h3&gt;
+&lt;p&gt;它可以限制某個程序對檔案系統的視野。這裡我們把程序限制在 &amp;ldquo;rootfs&amp;rdquo; 目錄，然後執行一個 shell。&lt;/p&gt;</description></item></channel></rss>

@@ -14,18 +14,19 @@
 &lt;li&gt;一台執行 Linux 的 Amazon EC2 執行個體（Amazon Linux、Ubuntu、CentOS 等）。&lt;/li&gt;
 &lt;li&gt;已附加具備存取 S3 Bucket 權限的 IAM 角色。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install awscli -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install s3fs -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 建立 S3 bucket 的掛載點目錄&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir /mnt/s3-bucket
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 同步本機目錄與 S3 bucket 以檢查存取&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; /mnt/s3-bucket ;touch test1.txt test2.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws s3 sync /mnt/s3-bucket s3://&amp;lt;your-s3-bucket-name&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 將 S3 bucket 掛載成檔案系統&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo s3fs &amp;lt;your-s3-bucket-name&amp;gt; /mnt/s3-bucket -o &lt;span style="color:#e06c75"&gt;iam_role&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&amp;lt;iam-role-name&amp;gt; -o &lt;span style="color:#e06c75"&gt;use_cache&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;/tmp -o allow_other -o &lt;span style="color:#e06c75"&gt;uid&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;1001&lt;/span&gt; -o &lt;span style="color:#e06c75"&gt;mp_umask&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;002&lt;/span&gt; -o &lt;span style="color:#e06c75"&gt;multireq_max&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#d19a66"&gt;5&lt;/span&gt; -o use_path_request_style -o &lt;span style="color:#e06c75"&gt;url&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;https://s3-&lt;span style="color:#56b6c2"&gt;{{&lt;/span&gt;aws_region&lt;span style="color:#56b6c2"&gt;}}&lt;/span&gt;.amazonaws.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id="除錯問題"&gt;除錯問題&lt;/h5&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-a64814c712bb39a03146f8e874b01041-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get update -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get install awscli -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get install s3fs -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 建立 S3 bucket 的掛載點目錄&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir /mnt/s3-bucket
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 同步本機目錄與 S3 bucket 以檢查存取&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /mnt/s3-bucket &lt;span class="p"&gt;;&lt;/span&gt;touch test1.txt test2.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;aws s3 sync /mnt/s3-bucket s3://&amp;lt;your-s3-bucket-name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 將 S3 bucket 掛載成檔案系統&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo s3fs &amp;lt;your-s3-bucket-name&amp;gt; /mnt/s3-bucket -o &lt;span class="nv"&gt;iam_role&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;iam-role-name&amp;gt; -o &lt;span class="nv"&gt;use_cache&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/tmp -o allow_other -o &lt;span class="nv"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1001&lt;/span&gt; -o &lt;span class="nv"&gt;mp_umask&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;002&lt;/span&gt; -o &lt;span class="nv"&gt;multireq_max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt; -o use_path_request_style -o &lt;span class="nv"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://s3-&lt;span class="o"&gt;{{&lt;/span&gt;aws_region&lt;span class="o"&gt;}}&lt;/span&gt;.amazonaws.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo apt-get update -y\nsudo apt-get install awscli -y\nsudo apt-get install s3fs -y\n\n# 建立 S3 bucket 的掛載點目錄\nsudo mkdir /mnt/s3-bucket\n\n# 同步本機目錄與 S3 bucket 以檢查存取\ncd /mnt/s3-bucket ;touch test1.txt test2.txt\naws s3 sync /mnt/s3-bucket s3://\u003cyour-s3-bucket-name\u003e\n\n# 將 S3 bucket 掛載成檔案系統\nsudo s3fs \u003cyour-s3-bucket-name\u003e /mnt/s3-bucket -o iam_role=\u003ciam-role-name\u003e -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 -o use_path_request_style -o url=https://s3-{{aws_region}}.amazonaws.com\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h5 id="除錯問題"&gt;除錯問題&lt;/h5&gt;
 &lt;p&gt;需要除錯時，可加上：&lt;/p&gt;</description></item></channel></rss>

@@ -5,23 +5,24 @@
 &lt;blockquote&gt;
 &lt;p&gt;基准测试常用于代码性能测试，函数需要导入 testing 包，并定义以 Benchmark 开头的函数， 参数为 testing.B 指针类型，在测试函数中循环调用函数多次&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-12 &lt;span style="color:#d19a66"&gt;250&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4682682&lt;/span&gt; ns/op
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 1.875s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -benchmem -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-12 &lt;span style="color:#d19a66"&gt;249&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4686452&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 1.854s
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="bench-的工作原理"&gt;bench 的工作原理&lt;/h4&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d17023c1c044baf5be7bc21ae88d53a2-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;➜ go &lt;span class="nb"&gt;test&lt;/span&gt; -bench&lt;span class="o"&gt;=&lt;/span&gt;. -run&lt;span class="o"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cpu: Intel&lt;span class="o"&gt;(&lt;/span&gt;R&lt;span class="o"&gt;)&lt;/span&gt; Core&lt;span class="o"&gt;(&lt;/span&gt;TM&lt;span class="o"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BenchmarkFib-12 &lt;span class="m"&gt;250&lt;/span&gt; &lt;span class="m"&gt;4682682&lt;/span&gt; ns/op
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ok pkg06 1.875s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;➜ go &lt;span class="nb"&gt;test&lt;/span&gt; -bench&lt;span class="o"&gt;=&lt;/span&gt;. -benchmem -run&lt;span class="o"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cpu: Intel&lt;span class="o"&gt;(&lt;/span&gt;R&lt;span class="o"&gt;)&lt;/span&gt; Core&lt;span class="o"&gt;(&lt;/span&gt;TM&lt;span class="o"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BenchmarkFib-12 &lt;span class="m"&gt;249&lt;/span&gt; &lt;span class="m"&gt;4686452&lt;/span&gt; ns/op &lt;span class="m"&gt;0&lt;/span&gt; B/op &lt;span class="m"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ok pkg06 1.854s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"➜ go test -bench=. -run=none\ngoos: darwin\ngoarch: amd64\npkg: pkg06\ncpu: Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz\nBenchmarkFib-12 250 4682682 ns/op\nPASS\nok pkg06 1.875s\n➜ go test -bench=. -benchmem -run=none\ngoos: darwin\ngoarch: amd64\npkg: pkg06\ncpu: Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz\nBenchmarkFib-12 249 4686452 ns/op 0 B/op 0 allocs/op\nPASS\nok pkg06 1.854s\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h4 id="bench-的工作原理"&gt;bench 的工作原理&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;基准测试函数会被一直调用直到 &lt;code&gt;b.N&lt;/code&gt; 无效，它是基准测试循环的次数&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;b.N&lt;/code&gt; 从 &lt;code&gt;1&lt;/code&gt; 开始，如果基准测试函数在 &lt;code&gt;1&lt;/code&gt; 秒内就完成 (默认值)，则 &lt;code&gt;b.N&lt;/code&gt; 增加，并再次运行基准测试函数&lt;/li&gt;
@@ -30,17 +31,18 @@
 &lt;li&gt;&lt;code&gt;-12&lt;/code&gt; 后缀和用于运行次测试的 &lt;code&gt;GOMAXPROCS&lt;/code&gt; 值有关。与 &lt;code&gt;GOMAXPROCS&lt;/code&gt; 一样，此数字默认为启动时 Go 进程可见的 CPU 数。可以使用 &lt;code&gt;-cpu&lt;/code&gt; 标识更改此值，可以传入多个值以列表形式来运行基准测试&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="传入-cpu-num-进行测试"&gt;传入 cpu num 进行测试&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;➜ go &lt;span style="color:#e5c07b"&gt;test&lt;/span&gt; -bench&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;. -cpu&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;1,2,4 -benchmem -run&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;none
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goos: darwin
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;goarch: amd64
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pkg: pkg06
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cpu: Intel&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;R&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; Core&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;TM&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib &lt;span style="color:#d19a66"&gt;244&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4694667&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-2 &lt;span style="color:#d19a66"&gt;255&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4721201&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;BenchmarkFib-4 &lt;span style="color:#d19a66"&gt;256&lt;/span&gt; &lt;span style="color:#d19a66"&gt;4756392&lt;/span&gt; ns/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; B/op &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; allocs/op
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;PASS
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ok pkg06 5.826s
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="count-多次运行基准测试"&gt;count 多次运行基准测试&lt;/h4&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d17023c1c044baf5be7bc21ae88d53a2-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;➜ go &lt;span class="nb"&gt;test&lt;/span&gt; -bench&lt;span class="o"&gt;=&lt;/span&gt;. -cpu&lt;span class="o"&gt;=&lt;/span&gt;1,2,4 -benchmem -run&lt;span class="o"&gt;=&lt;/span&gt;none
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goos: darwin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;goarch: amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pkg: pkg06
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cpu: Intel&lt;span class="o"&gt;(&lt;/span&gt;R&lt;span class="o"&gt;)&lt;/span&gt; Core&lt;span class="o"&gt;(&lt;/span&gt;TM&lt;span class="o"&gt;)&lt;/span&gt; i7-8850H CPU @ 2.60GHz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BenchmarkFib &lt;span class="m"&gt;244&lt;/span&gt; &lt;span class="m"&gt;4694667&lt;/span&gt; ns/op &lt;span class="m"&gt;0&lt;/span&gt; B/op &lt;span class="m"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BenchmarkFib-2 &lt;span class="m"&gt;255&lt;/span&gt; &lt;span class="m"&gt;4721201&lt;/span&gt; ns/op &lt;span class="m"&gt;0&lt;/span&gt; B/op &lt;span class="m"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;BenchmarkFib-4 &lt;span class="m"&gt;256&lt;/span&gt; &lt;span class="m"&gt;4756392&lt;/span&gt; ns/op &lt;span class="m"&gt;0&lt;/span&gt; B/op &lt;span class="m"&gt;0&lt;/span&gt; allocs/op
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PASS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ok pkg06 5.826s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"➜ go test -bench=. -cpu=1,2,4 -benchmem -run=none\ngoos: darwin\ngoarch: amd64\npkg: pkg06\ncpu: Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz\nBenchmarkFib 244 4694667 ns/op 0 B/op 0 allocs/op\nBenchmarkFib-2 255 4721201 ns/op 0 B/op 0 allocs/op\nBenchmarkFib-4 256 4756392 ns/op 0 B/op 0 allocs/op\nPASS\nok pkg06 5.826s\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h4 id="count-多次运行基准测试"&gt;count 多次运行基准测试&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;因为热缩放、内存局部性、后台处理、gc 活动等等会导致单次的误差，所以一般会进行多次测试&lt;/p&gt;
 &lt;/blockquote&gt;</description></item></channel></rss>

@@ -61,10 +61,11 @@
 &lt;p&gt;wrap&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;timeout 1m bash -c &lt;span style="color:#98c379"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; sleep 1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;done&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>I use Zip Bombs to Protect my Server</title><link>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-8fb0af79311de6dc8f3409a441714cc6-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout 1m bash -c &lt;span class="s2"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; sleep 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;done&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"timeout 1m bash -c \"until curl --silent --fail-with-body 10.0.0.1:8080/health; do\n\tsleep 1\ndone\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>I use Zip Bombs to Protect my Server</title><link>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener"&gt;I use Zip Bombs to Protect my Server&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -97,13 +98,14 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-53f0b1b9b767d51be01bc1078d927eef-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -oE &lt;span class="s1"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ sudo tcpflow -p -c -i wlp0s20f3 port 80 | grep -oE '(GET|POST) .* HTTP/1.[01]|Host: .*'\nreportfilename: ./report.xml\ntcpflow: listening on wlp0s20f3\nGET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1\n\nGET /mirrors.txt HTTP/1.1\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-p&lt;/code&gt; disables promiscuous mode&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-c&lt;/code&gt; means only print the output to the console and don&amp;rsquo;t create files&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-i&lt;/code&gt; specifies the network interface

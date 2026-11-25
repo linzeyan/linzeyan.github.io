@@ -2,37 +2,42 @@
 &lt;p&gt;dev_test_user, qa_test_user 同權限
 dev_user, qa_user 同權限&lt;/p&gt;
 &lt;h2 id="1-建立共享資料夾sftp-使用的資料夾"&gt;1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;exchange,upload&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/exchange/success
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/upload/backup
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="2-建立使用者群組"&gt;2. 建立使用者群組&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-test
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-prod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test"&gt;3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-test qa_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_test_user 使用者的群組為 share01-test&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-test dev_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod"&gt;4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-prod qa_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_user 使用者的群組為 share01-prod&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-prod dev_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_user
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="5-設定權限"&gt;5. 設定權限&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_test_user:share01-test test/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_user:share01-prod prod/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# SFTP 登入資料夾權限要給 root&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/test
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/prod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="6-設定-etcsshsshd_config"&gt;6. 設定 /etc/ssh/sshd_config&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2cae54701e0527d36fc3fed4b067db9f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/&lt;span class="o"&gt;{&lt;/span&gt;exchange,upload&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/exchange/success
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/upload/backup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo mkdir -p /home/{test,prod}/{exchange,upload}\nsudo mkdir -p /home/{test,prod}/exchange/success\nsudo mkdir -p /home/{test,prod}/upload/backup\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="2-建立使用者群組"&gt;2. 建立使用者群組&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2cae54701e0527d36fc3fed4b067db9f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo groupadd share01-test
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo groupadd share01-prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo groupadd share01-test\nsudo groupadd share01-prod\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test"&gt;3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2cae54701e0527d36fc3fed4b067db9f-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo useradd -m -G share01-test qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 dev_test_user 使用者的群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usermod -G share01-test dev_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo passwd qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo useradd -m -G share01-test qa_test_user\n\n# 設定 dev_test_user 使用者的群組為 share01-test\nsudo usermod -G share01-test dev_test_user\n\n# 設定密碼\nsudo passwd qa_test_user\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod"&gt;4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2cae54701e0527d36fc3fed4b067db9f-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo useradd -m -G share01-prod qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 dev_user 使用者的群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usermod -G share01-prod dev_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo passwd qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo useradd -m -G share01-prod qa_user\n\n# 設定 dev_user 使用者的群組為 share01-prod\nsudo usermod -G share01-prod dev_user\n\n# 設定密碼\nsudo passwd qa_user\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="5-設定權限"&gt;5. 設定權限&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2cae54701e0527d36fc3fed4b067db9f-4"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown -R qa_test_user:share01-test test/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown -R qa_user:share01-prod prod/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# SFTP 登入資料夾權限要給 root&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown root:root /home/test
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown root:root /home/prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test\nsudo chown -R qa_test_user:share01-test test/\n\n# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod\nsudo chown -R qa_user:share01-prod prod/\n\n# SFTP 登入資料夾權限要給 root\nsudo chown root:root /home/test\nsudo chown root:root /home/prod\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="6-設定-etcsshsshd_config"&gt;6. 設定 /etc/ssh/sshd_config&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>

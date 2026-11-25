@@ -2,7 +2,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;CloudFront&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list distributions&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list distributions&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws cloudfront list-distributions --query &lt;span style="color:#98c379"&gt;&amp;#39;*.Items[*].[Comment,Id,Aliases.Items[0],DefaultCacheBehavior.TargetOriginId]&amp;#39;&lt;/span&gt; --output table
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# create invalidation&lt;/span&gt;
@@ -17,6 +17,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;fi&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# list distributions\naws cloudfront list-distributions --query '*.Items[*].[Comment,Id,Aliases.Items[0],DefaultCacheBehavior.TargetOriginId]' --output table\n\n# create invalidation\naws cloudfront create-invalidation --distribution-id EATDVGD171BHDS1 --paths \"/*\"\n\n## check cloudfornt log enable or not\nfor i in $(aws cloudfront list-distributions --output table --query 'DistributionList.Items[*].Id' --profile route53 | sed '1,3d;$d' | awk '{print $2}')\ndo\n result=$(aws cloudfront get-distribution --id ${i} --query 'Distribution.DistributionConfig.Logging' --profile route53 | jq .Enabled)\n if [[ \"${result}\" != \"true\" ]];then\n echo ${i}\n fi\ndone\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -24,9 +25,10 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;EC2&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ec2 describe-instances --query &lt;span style="color:#98c379"&gt;&amp;#39;Reservations[*].Instances[*].[Tags[0].Value,InstanceId]&amp;#39;&lt;/span&gt; --output table --page-size &lt;span style="color:#d19a66"&gt;100&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# list\naws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -34,9 +36,10 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;ECR&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Get password and login to 12345.dkr.ecr.ap-northeast-1.amazonaws.com&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Get password and login to 12345.dkr.ecr.ap-northeast-1.amazonaws.com&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ecr get-login-password | docker login --username AWS --password-stdin 12345.dkr.ecr.ap-northeast-1.amazonaws.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Get password and login to 12345.dkr.ecr.ap-northeast-1.amazonaws.com\naws ecr get-login-password | docker login --username AWS --password-stdin 12345.dkr.ecr.ap-northeast-1.amazonaws.com\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -44,12 +47,13 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;S3&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Copy local file to S3&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Copy local file to S3&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws s3 cp ./pic.png s3://bucket_name/dir/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Sync local local_dir to S3&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws s3 sync local_dir s3://bucket_name --exclude &lt;span style="color:#98c379"&gt;&amp;#39;gameConfig.json&amp;#39;&lt;/span&gt; --acl public-read --delete
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Copy local file to S3\naws s3 cp ./pic.png s3://bucket_name/dir/\n\n# Sync local local_dir to S3\naws s3 sync local_dir s3://bucket_name --exclude 'gameConfig.json' --acl public-read --delete\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -57,7 +61,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;snapshot&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# list&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ec2 describe-snapshots &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --owner-ids self &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --query &lt;span style="color:#98c379"&gt;&amp;#34;Snapshots[?(Tags[0].Value==&amp;#39;backend&amp;#39;)].[SnapshotId,VolumeId]&amp;#34;&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
@@ -69,6 +73,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# delete&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0 --region ap-northeast-1
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# list\naws ec2 describe-snapshots \\\n --owner-ids self \\\n --query \"Snapshots[?(Tags[0].Value=='backend')].[SnapshotId,VolumeId]\" \\\n --region ap-northeast-1\n\n# create\naws ec2 create-snapshot --volume-id vol-02468851c2bc3bc4b --description \"gitlab-$(date +%F)\" --region ap-northeast-1\n\n# delete\naws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0 --region ap-northeast-1\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -76,7 +81,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;sns&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;region&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;ap-east-1&amp;#39;&lt;/span&gt;
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;region&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;ap-east-1&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;account_id&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;888886666321&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;topic&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#39;sa&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -113,6 +118,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#e06c75"&gt;$ID&lt;/span&gt;&lt;span style="color:#98c379"&gt; done&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;done&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"region='ap-east-1'\naccount_id='888886666321'\ntopic='sa'\n\n# create topic\naws sns create-topic --name ${topic}\n\n# subscribe\naws sns subscribe --topic-arn arn:aws:sns:${region}:${account_id}:${topic} --protocol email --notification-endpoint ricky@gmail.com\n\n# list\naws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:${region}:${account_id}:${topic}\n\n# create alarm\n### metric-name\n##CPUUtilization --\u003epercent\n##NetworkIn --\u003ebytes\n##NetworkOut --\u003ebytes\nfor line in $(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[0].Value,InstanceId]' --output table --page-size 100)\ndo\n ID=$(echo ${line}|awk -F ',' '{print $1}')\n VALUE=$(echo ${line}|awk -F ',' '{print $2}')\n aws cloudwatch put-metric-alarm \\\n --alarm-name ${ID}_netout \\\n --metric-name NetworkOut \\\n --namespace AWS/EC2 \\\n --statistic Average \\\n --period 300 \\\n --threshold 2560000 \\\n --comparison-operator GreaterThanOrEqualToThreshold \\\n --dimensions \"Name=InstanceId,Value=${VALUE}\" \\\n --evaluation-periods 3 \\\n --alarm-actions arn:aws:sns:${region}:${account_id}:${topic}\n ##--unit Bytes\n echo \"$ID done\"\ndone\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -120,13 +126,14 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;WAF&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws wafv2 create-web-acl &lt;span style="color:#98c379"&gt;\
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;aws wafv2 create-web-acl &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --name acl_name &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --scope CLOUDFRONT &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --default-action &lt;span style="color:#e06c75"&gt;Allow&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;={}&lt;/span&gt; &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --visibility-config &lt;span style="color:#e06c75"&gt;SampledRequestsEnabled&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;true,CloudWatchMetricsEnabled&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;true,MetricName&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;metric_acl_name &lt;span style="color:#98c379"&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --rule
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"aws wafv2 create-web-acl \\\n --name acl_name \\\n --scope CLOUDFRONT \\\n --default-action Allow={} \\\n --visibility-config SampledRequestsEnabled=true,CloudWatchMetricsEnabled=true,MetricName=metric_acl_name \\\n --rule\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -135,7 +142,7 @@
 &lt;h5 class="note-title"&gt;&lt;span&gt;Mount S3 Bucket on EC2&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
 &lt;div class="card-body"&gt;&lt;p&gt;references: &lt;a href="https://linuxbeast.com/blog/how-to-mount-s3-bucket-on-ubuntu-22-04-with-s3fs-fuse/" target="_blank" rel="noopener"&gt;How to Mount S3 Bucket on Ubuntu 22.04 with S3FS Fuse&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Installing s3fs-fuse&lt;/span&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-844d3af39825f04605b072b35c08514b-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Installing s3fs-fuse&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt-get install s3fs
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Configuring AWS Credentials&lt;/span&gt;
@@ -148,13 +155,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Ensuring Persistent Mounting&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;echo&lt;/span&gt; &lt;span style="color:#98c379"&gt;&amp;#39;s3fs#mybucketname:/path/to/dir /path/to/local/mountpoint fuse _netdev,allow_other 0 0&amp;#39;&lt;/span&gt; | sudo tee -a /etc/fstab
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Installing s3fs-fuse\nsudo apt-get update \u0026\u0026 sudo apt-get install s3fs\n\n# Configuring AWS Credentials\necho ACCESS_KEY_ID:SECRET_ACCESS_KEY \u003e ${HOME}/.passwd-s3fs\nchmod 600 ${HOME}/.passwd-s3fs\n\n# Mounting the S3 Bucket\ns3fs mybucketname:/path/to/dir /path/to/local/mountpoint -o passwd_file=${HOME}/.passwd-s3fs\n\n# Ensuring Persistent Mounting\necho 's3fs#mybucketname:/path/to/dir /path/to/local/mountpoint fuse _netdev,allow_other 0 0' | sudo tee -a /etc/fstab\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>AWS Configure</title><link>https://linzeyan.github.io/zh-tw/notes/aws/configure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/aws/configure/</guid><description>&lt;div class="note-card "&gt;
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;S3 Bucket Policy&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-56d67250685e5258520c905e42298d6e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;Version&amp;#34;&lt;/span&gt;: &lt;span style="color:#98c379"&gt;&amp;#34;2012-10-17&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;Statement&amp;#34;&lt;/span&gt;: [
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
@@ -167,6 +175,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"{\n\t\"Version\": \"2012-10-17\",\n\t\"Statement\": [\n\t\t{\n\t\t\t\"Sid\": \"AllowPublicRead\",\n\t\t\t\"Effect\": \"Allow\",\n\t\t\t\"Principal\": \"*\",\n\t\t\t\"Action\": \"s3:GetObject\",\n\t\t\t\"Resource\": \"arn:aws:s3:::bucketName/*\"\n\t\t}\n\t]\n}\n","title":"json"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -174,7 +183,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;S3 CORS&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-56d67250685e5258520c905e42298d6e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;AllowedHeaders&amp;#34;&lt;/span&gt;: [&lt;span style="color:#98c379"&gt;&amp;#34;*&amp;#34;&lt;/span&gt;],
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;AllowedMethods&amp;#34;&lt;/span&gt;: [&lt;span style="color:#98c379"&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;PUT&amp;#34;&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;, &lt;span style="color:#98c379"&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;],
@@ -188,6 +197,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[\n\t{\n\t\t\"AllowedHeaders\": [\"*\"],\n\t\t\"AllowedMethods\": [\"GET\", \"PUT\", \"POST\", \"DELETE\"],\n\t\t\"AllowedOrigins\": [\"*\"],\n\t\t\"ExposeHeaders\": [\n\t\t\t\"x-amz-server-side-encryption\",\n\t\t\t\"x-amz-request-id\",\n\t\t\t\"x-amz-id-2\"\n\t\t],\n\t\t\"MaxAgeSeconds\": 3000\n\t}\n]\n","title":"json"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -195,7 +205,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;ECR Lifecycle Policy&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-56d67250685e5258520c905e42298d6e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rules&amp;#34;&lt;/span&gt;: [
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rulePriority&amp;#34;&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;,
@@ -212,6 +222,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"{\n\t\"rules\": [\n\t\t{\n\t\t\t\"rulePriority\": 1,\n\t\t\t\"description\": \"Keep only the last 100 images\",\n\t\t\t\"selection\": {\n\t\t\t\t\"tagStatus\": \"any\",\n\t\t\t\t\"countType\": \"imageCountMoreThan\",\n\t\t\t\t\"countNumber\": 100\n\t\t\t},\n\t\t\t\"action\": {\n\t\t\t\t\"type\": \"expire\"\n\t\t\t}\n\t\t}\n\t]\n}\n","title":"json"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -219,7 +230,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;ECR Lifecycle Policy1&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-56d67250685e5258520c905e42298d6e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rules&amp;#34;&lt;/span&gt;: [
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rulePriority&amp;#34;&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;,
@@ -237,6 +248,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"{\n\t\"rules\": [\n\t\t{\n\t\t\t\"rulePriority\": 1,\n\t\t\t\"description\": \"Remove images with certain tag\",\n\t\t\t\"selection\": {\n\t\t\t\t\"tagStatus\": \"tagged\",\n\t\t\t\t\"tagPrefixList\": [\"tag1\", \"tag2\"],\n\t\t\t\t\"countType\": \"imageCountMoreThan\",\n\t\t\t\t\"countNumber\": 0\n\t\t\t},\n\t\t\t\"action\": {\n\t\t\t\t\"type\": \"expire\"\n\t\t\t}\n\t\t}\n\t]\n}\n","title":"json"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -244,7 +256,7 @@
 &lt;div class="item"&gt;
 &lt;h5 class="note-title"&gt;&lt;span&gt;ECR Lifecycle Policy2&lt;/span&gt;&lt;/h5&gt;
 &lt;div class="card"&gt;
-&lt;div class="card-body"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
+&lt;div class="card-body"&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-56d67250685e5258520c905e42298d6e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rules&amp;#34;&lt;/span&gt;: [
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;&amp;#34;rulePriority&amp;#34;&lt;/span&gt;: &lt;span style="color:#d19a66"&gt;1&lt;/span&gt;,
@@ -262,6 +274,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"{\n\t\"rules\": [\n\t\t{\n\t\t\t\"rulePriority\": 1,\n\t\t\t\"description\": \"Remove untagged images older than 14 days\",\n\t\t\t\"selection\": {\n\t\t\t\t\"tagStatus\": \"untagged\",\n\t\t\t\t\"countType\": \"sinceImagePushed\",\n\t\t\t\t\"countUnit\": \"days\",\n\t\t\t\t\"countNumber\": 14\n\t\t\t},\n\t\t\t\"action\": {\n\t\t\t\t\"type\": \"expire\"\n\t\t\t}\n\t\t}\n\t]\n}\n","title":"json"}&lt;/script&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>AWS Terraform</title><link>https://linzeyan.github.io/zh-tw/notes/aws/terraform/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linzeyan.github.io/zh-tw/notes/aws/terraform/</guid><description>&lt;div class="note-card "&gt;

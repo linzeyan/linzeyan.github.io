@@ -22,15 +22,16 @@
 &lt;li&gt;&lt;a href="https://ericchiang.github.io/post/containers-from-scratch/" target="_blank" rel="noopener"&gt;Containers from scratch&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="container-file-systems"&gt;Container file systems&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sha256sum rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#7f848e"&gt;# tar needs sudo to create /dev files and setup file ownership&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tar -zxf rootfs.tar.gz
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls rootfs
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;bin dev home lib64 mnt proc run srv tmp var
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;boot etc lib media opt root sbin sys usr
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ls -al rootfs/bin/ls
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x. &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;118280&lt;/span&gt; Mar &lt;span style="color:#d19a66"&gt;14&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2015&lt;/span&gt; rootfs/bin/ls
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="chroot"&gt;chroot&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-d1a673f246bf12b4f14e6b5dda03ce80-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sha256sum rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;c79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ &lt;span class="c1"&gt;# tar needs sudo to create /dev files and setup file ownership&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tar -zxf rootfs.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ls rootfs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bin dev home lib64 mnt proc run srv tmp var
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;boot etc lib media opt root sbin sys usr
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ls -al rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x. &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;118280&lt;/span&gt; Mar &lt;span class="m"&gt;14&lt;/span&gt; &lt;span class="m"&gt;2015&lt;/span&gt; rootfs/bin/ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ wget https://github.com/ericchiang/containers-from-scratch/releases/download/v0.1.0/rootfs.tar.gz\n$ sha256sum rootfs.tar.gz\nc79bfb46b9cf842055761a49161831aee8f4e667ad9e84ab57ab324a49bc828c rootfs.tar.gz\n$ # tar needs sudo to create /dev files and setup file ownership\n$ sudo tar -zxf rootfs.tar.gz\n$ ls rootfs\nbin dev home lib64 mnt proc run srv tmp var\nboot etc lib media opt root sbin sys usr\n$ ls -al rootfs/bin/ls\n-rwxr-xr-x. 1 root root 118280 Mar 14 2015 rootfs/bin/ls\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="chroot"&gt;chroot&lt;/h3&gt;
 &lt;p&gt;it allows us to restrict a process&amp;rsquo; view of the file system. In this case, we&amp;rsquo;ll restrict our process to the &amp;ldquo;rootfs&amp;rdquo; directory then exec a shell.&lt;/p&gt;</description></item></channel></rss>

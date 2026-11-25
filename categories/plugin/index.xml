@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Plugin on Ricky</title><link>https://linzeyan.github.io/categories/plugin/</link><description>Recent content in Plugin on Ricky</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 02 Dec 2021 13:28:09 +0800</lastBuildDate><atom:link href="https://linzeyan.github.io/categories/plugin/index.xml" rel="self" type="application/rss+xml"/><item><title>Day 28 - Introduction to Useful Third-Party Kubernetes Tools</title><link>https://linzeyan.github.io/posts/2021/20211202-10252675/</link><pubDate>Thu, 02 Dec 2021 13:28:09 +0800</pubDate><guid>https://linzeyan.github.io/posts/2021/20211202-10252675/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://ithelp.ithome.com.tw/articles/10252675" target="_blank" rel="noopener"&gt;Day 28 - Introduction to Useful Third-Party Kubernetes Tools&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ kubectl get pods
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME READY STATUS RESTARTS AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ithome-6564f65698-947rv 1/1 Running &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 84s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ithome-6564f65698-fglr9 1/1 Running &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 84s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ithome-6564f65698-k5wtg 1/1 Running &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 84s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ithome-6564f65698-rrvk4 1/1 Running &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 84s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ithome-6564f65698-zhwlj 1/1 Running &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; 84s
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="sternkail"&gt;&lt;a href="https://github.com/wercker/stern" target="_blank" rel="noopener"&gt;Stern&lt;/a&gt;/Kail&lt;/h4&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-e3847e3a00b80e5ad1729c19c9fd0f0c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ kubectl get pods
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;NAME READY STATUS RESTARTS AGE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ithome-6564f65698-947rv 1/1 Running &lt;span class="m"&gt;0&lt;/span&gt; 84s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ithome-6564f65698-fglr9 1/1 Running &lt;span class="m"&gt;0&lt;/span&gt; 84s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ithome-6564f65698-k5wtg 1/1 Running &lt;span class="m"&gt;0&lt;/span&gt; 84s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ithome-6564f65698-rrvk4 1/1 Running &lt;span class="m"&gt;0&lt;/span&gt; 84s
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ithome-6564f65698-zhwlj 1/1 Running &lt;span class="m"&gt;0&lt;/span&gt; 84s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ kubectl get pods\nNAME READY STATUS RESTARTS AGE\nithome-6564f65698-947rv 1/1 Running 0 84s\nithome-6564f65698-fglr9 1/1 Running 0 84s\nithome-6564f65698-k5wtg 1/1 Running 0 84s\nithome-6564f65698-rrvk4 1/1 Running 0 84s\nithome-6564f65698-zhwlj 1/1 Running 0 84s\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;h4 id="sternkail"&gt;&lt;a href="https://github.com/wercker/stern" target="_blank" rel="noopener"&gt;Stern&lt;/a&gt;/Kail&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The names of created pods often contain some unreadable random strings.&lt;/p&gt;
 &lt;p&gt;If you use kubectl to observe logs for individual pods, you need to switch between different pods.&lt;/p&gt;

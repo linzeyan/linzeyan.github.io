@@ -41,38 +41,40 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id="linux-系统误将-chmod-权限改成-了-000如何恢复"&gt;Linux 系统误将 chmod 权限改成 了 000，如何恢复?&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#include&lt;/span&gt; &lt;span style="color:#7f848e"&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;span style="color:#7f848e"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;int&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;main&lt;/span&gt;() {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;chmod&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;0755&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ which chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ sudo chmod &lt;span style="color:#d19a66"&gt;000&lt;/span&gt; /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---------- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ cat main.c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;int main&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; chmod&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, 0755&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; 0;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ gcc ./main.c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ sudo ./a.out
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-68dd692e2d19e51ea33d7ed9df69de5f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nf"&gt;chmod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mo"&gt;0755&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#include \u003csys/stat.h\u003e\n\nint main() {\n chmod(\"/usr/bin/chmod\", 0755);\n return 0;\n}\n","title":"c"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-68dd692e2d19e51ea33d7ed9df69de5f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ which chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ sudo chmod &lt;span class="m"&gt;000&lt;/span&gt; /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---------- &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ cat main.c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;int main&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; chmod&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, 0755&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; 0&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ gcc ./main.c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ sudo ./a.out
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ubuntu@ubuntu:~$ which chmod\n/usr/bin/chmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n-rwxr-xr-x 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\nubuntu@ubuntu:~$ sudo chmod 000 /usr/bin/chmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n---------- 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\nubuntu@ubuntu:~$ cat main.c\n#include \u003csys/stat.h\u003e\n\nint main() {\n chmod(\"/usr/bin/chmod\", 0755);\n return 0;\n}\n\nubuntu@ubuntu:~$ gcc ./main.c\nubuntu@ubuntu:~$ sudo ./a.out\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n-rwxr-xr-x 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;h2 id="laptops-all-have-built-in-security-tokens-these-days"&gt;Laptops all have built-in security tokens these days&lt;/h2&gt;
 &lt;h3 id="macos"&gt;macOS&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -100,68 +102,78 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id="dirty-frag"&gt;Dirty Frag&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/V4bel/dirtyfrag.git &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;cd&lt;/span&gt; dirtyfrag &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; gcc -O0 -Wall -o exp exp.c -lutil &lt;span style="color:#56b6c2"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./exp
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Configuring SSH Keys for Multiple GitHub Accounts</title><link>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</link><pubDate>Tue, 11 Feb 2025 15:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-2ef78f5c4376aa96de00569247ec037a-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/V4bel/dirtyfrag.git &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; dirtyfrag &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; gcc -O0 -Wall -o exp exp.c -lutil &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./exp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"git clone https://github.com/V4bel/dirtyfrag.git \u0026\u0026 cd dirtyfrag \u0026\u0026 gcc -O0 -Wall -o exp exp.c -lutil \u0026\u0026 ./exp\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Configuring SSH Keys for Multiple GitHub Accounts</title><link>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</link><pubDate>Tue, 11 Feb 2025 15:06:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2025/20250211-configure-ssh-keys-for-multiple-github-accounts/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://stevenharman.net/configure-ssh-keys-for-multiple-github-accounts" target="_blank" rel="noopener"&gt;Configuring SSH Keys for Multiple GitHub Accounts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="use-different-host-values"&gt;Use Different Host values&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; HostName github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; User git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; IdentityFile ~/.ssh/id_fry_ed25519
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host github-plnx
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; HostName github.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; User git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; IdentityFile ~/.ssh/id_fry_plnx_ed25519
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Instead of the actual URL&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone git@github.com:planet-express/delivery_service.git
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Substitue in our custom Host value for the `github.com` part&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git clone git@github-plnx:planet-express/delivery_service.git
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="automate-substituting-the-host"&gt;Automate Substituting the Host&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;include&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;path&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; ~/.gitconfig_custom
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# See custom `Host github-plnx` in ~/.ssh/config&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;[&lt;/span&gt;url &lt;span style="color:#98c379"&gt;&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e06c75"&gt;insteadOf&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;=&lt;/span&gt; git@github.com:planet-express
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/posts/2023/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory"&gt;Add SFTP user and share directory&lt;/h1&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-92eacd71fb3ce3c08ec19ce3edc5286e-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_fry_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host github-plnx
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; HostName github.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; IdentityFile ~/.ssh/id_fry_plnx_ed25519
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"Host github.com\n HostName github.com\n User git\n IdentityFile ~/.ssh/id_fry_ed25519\n\nHost github-plnx\n HostName github.com\n User git\n IdentityFile ~/.ssh/id_fry_plnx_ed25519\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-92eacd71fb3ce3c08ec19ce3edc5286e-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Instead of the actual URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git clone git@github.com:planet-express/delivery_service.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Substitue in our custom Host value for the `github.com` part&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ git clone git@github-plnx:planet-express/delivery_service.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Instead of the actual URL\n$ git clone git@github.com:planet-express/delivery_service.git\n\n# Substitue in our custom Host value for the `github.com` part\n$ git clone git@github-plnx:planet-express/delivery_service.git\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h3 id="automate-substituting-the-host"&gt;Automate Substituting the Host&lt;/h3&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-92eacd71fb3ce3c08ec19ce3edc5286e-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;include&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; ~/.gitconfig_custom
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[include]\n path = ~/.gitconfig_custom\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-92eacd71fb3ce3c08ec19ce3edc5286e-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# See custom `Host github-plnx` in ~/.ssh/config&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;url &lt;span class="s2"&gt;&amp;#34;github-plnx:planet-express&amp;#34;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;insteadOf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; git@github.com:planet-express
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# See custom `Host github-plnx` in ~/.ssh/config\n[url \"github-plnx:planet-express\"]\n insteadOf = git@github.com:planet-express\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>Add SFTP user and share directory</title><link>https://linzeyan.github.io/posts/2023/20231130-sftp/</link><pubDate>Thu, 30 Nov 2023 17:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231130-sftp/</guid><description>&lt;h1 id="add-sftp-user-and-share-directory"&gt;Add SFTP user and share directory&lt;/h1&gt;
 &lt;p&gt;dev_test_user, qa_test_user 同權限
 dev_user, qa_user 同權限&lt;/p&gt;
 &lt;h2 id="1-建立共享資料夾sftp-使用的資料夾"&gt;1. 建立共享資料夾(SFTP 使用的資料夾)&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;exchange,upload&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/exchange/success
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir -p /home/&lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;test,prod&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;/upload/backup
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="2-建立使用者群組"&gt;2. 建立使用者群組&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-test
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo groupadd share01-prod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test"&gt;3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-test qa_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_test_user 使用者的群組為 share01-test&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-test dev_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_test_user
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod"&gt;4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo useradd -m -G share01-prod qa_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 dev_user 使用者的群組為 share01-prod&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usermod -G share01-prod dev_user
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定密碼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd qa_user
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="5-設定權限"&gt;5. 設定權限&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_test_user:share01-test test/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown -R qa_user:share01-prod prod/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# SFTP 登入資料夾權限要給 root&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/test
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo chown root:root /home/prod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="6-設定-etcsshsshd_config"&gt;6. 設定 /etc/ssh/sshd_config&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-39879411a3d96f5f40dcdcbe4ab35b7c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/&lt;span class="o"&gt;{&lt;/span&gt;exchange,upload&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/exchange/success
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo mkdir -p /home/&lt;span class="o"&gt;{&lt;/span&gt;test,prod&lt;span class="o"&gt;}&lt;/span&gt;/upload/backup
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo mkdir -p /home/{test,prod}/{exchange,upload}\nsudo mkdir -p /home/{test,prod}/exchange/success\nsudo mkdir -p /home/{test,prod}/upload/backup\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="2-建立使用者群組"&gt;2. 建立使用者群組&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-39879411a3d96f5f40dcdcbe4ab35b7c-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo groupadd share01-test
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo groupadd share01-prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo groupadd share01-test\nsudo groupadd share01-prod\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="3-創建-qa_test_user-使用者並設定-qa_test_user-使用者的群組為-share01-test"&gt;3. 創建 qa_test_user 使用者並設定 qa_test_user 使用者的群組為 share01-test&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-39879411a3d96f5f40dcdcbe4ab35b7c-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo useradd -m -G share01-test qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 dev_test_user 使用者的群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usermod -G share01-test dev_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo passwd qa_test_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo useradd -m -G share01-test qa_test_user\n\n# 設定 dev_test_user 使用者的群組為 share01-test\nsudo usermod -G share01-test dev_test_user\n\n# 設定密碼\nsudo passwd qa_test_user\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="4-創建-qa_user-使用者並設定-qa_user-使用者的群組為-share01-prod"&gt;4. 創建 qa_user 使用者並設定 qa_user 使用者的群組為 share01-prod&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-39879411a3d96f5f40dcdcbe4ab35b7c-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo useradd -m -G share01-prod qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 dev_user 使用者的群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usermod -G share01-prod dev_user
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo passwd qa_user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"sudo useradd -m -G share01-prod qa_user\n\n# 設定 dev_user 使用者的群組為 share01-prod\nsudo usermod -G share01-prod dev_user\n\n# 設定密碼\nsudo passwd qa_user\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="5-設定權限"&gt;5. 設定權限&lt;/h2&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-39879411a3d96f5f40dcdcbe4ab35b7c-4"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown -R qa_test_user:share01-test test/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown -R qa_user:share01-prod prod/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# SFTP 登入資料夾權限要給 root&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown root:root /home/test
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo chown root:root /home/prod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 設定 /home/test 資料夾(含下級資料夾)的使用者為 qa_test_user，群組為 share01-test\nsudo chown -R qa_test_user:share01-test test/\n\n# 設定 /home/prod 資料夾(含下級資料夾)的使用者為 qa_user，群組為 share01-prod\nsudo chown -R qa_user:share01-prod prod/\n\n# SFTP 登入資料夾權限要給 root\nsudo chown root:root /home/test\nsudo chown root:root /home/prod\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;h2 id="6-設定-etcsshsshd_config"&gt;6. 設定 /etc/ssh/sshd_config&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Use terminal and SSH to remote host</title><link>https://linzeyan.github.io/posts/2023/20231124-ssh/</link><pubDate>Fri, 24 Nov 2023 22:22:00 +0800</pubDate><guid>https://linzeyan.github.io/posts/2023/20231124-ssh/</guid><description>&lt;h1 id="use-terminal-and-ssh-to-remote-host"&gt;Use terminal and SSH to remote host&lt;/h1&gt;
 &lt;h2 id="1-modern-terminals"&gt;1. Modern Terminals&lt;/h2&gt;
 &lt;ul&gt;
@@ -199,29 +211,30 @@ dev_user, qa_user 同權限&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;/var/log/secure&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Oct 10 10:58:05 vps sshd[23799]: fatal: daemon() failed: No such device&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# rm -vf /dev/null&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;removed &lt;span style="color:#98c379"&gt;`&lt;/span&gt;/dev/null&lt;span style="color:#98c379"&gt;`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-bash-3.2# mknod /dev/null c &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; &lt;span style="color:#d19a66"&gt;3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Started SSH and the SSH started responding:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# service sshd restart&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Stopping sshd: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; OK &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Starting sshd: &lt;span style="color:#56b6c2"&gt;[&lt;/span&gt; OK &lt;span style="color:#56b6c2"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-bash-3.2# service sshd status
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;openssh-daemon &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;pid 30608&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; is running…
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-7714bf802e26c7e8b497ee547609381c-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# rm -vf /dev/null&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;removed &lt;span class="sb"&gt;`&lt;/span&gt;/dev/null&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-bash-3.2# mknod /dev/null c &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Started SSH and the SSH started responding:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# service sshd restart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Stopping sshd: &lt;span class="o"&gt;[&lt;/span&gt; OK &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Starting sshd: &lt;span class="o"&gt;[&lt;/span&gt; OK &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-bash-3.2# service sshd status
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;openssh-daemon &lt;span class="o"&gt;(&lt;/span&gt;pid 30608&lt;span class="o"&gt;)&lt;/span&gt; is running…
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# rm -vf /dev/null\nremoved `/dev/null`\n-bash-3.2# mknod /dev/null c 1 3\nStarted SSH and the SSH started responding:\n\n# service sshd restart\nStopping sshd: [ OK ]\nStarting sshd: [ OK ]\n-bash-3.2# service sshd status\nopenssh-daemon (pid 30608) is running…\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement</title><link>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</link><pubDate>Wed, 25 Nov 2020 21:09:50 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20201125-new-libssh-connection-plugin-for-ansible-network/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.ansible.com/blog/new-libssh-connection-plugin-for-ansible-network" target="_blank" rel="noopener"&gt;New LibSSH Connection Plugin for Ansible Network Replaces Paramiko, Adds FIPS Mode Enablement&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="switching-ansible-playbooks-to-use-libssh"&gt;Switching Ansible Playbooks to use LibSSH&lt;/h5&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# Installing LibSSH&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pip install ansible-pylibssh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Using LibSSH in Ansible Playbooks&lt;/p&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0b9d6544e063695876a9d9956109de90-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Installing LibSSH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;pip install ansible-pylibssh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# Installing LibSSH\npip install ansible-pylibssh\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;Using LibSSH in Ansible Playbooks&lt;/p&gt;
 &lt;p&gt;Method 1. The &lt;code&gt;ssh_type&lt;/code&gt; configuration parameter can be set to use libssh in the active &lt;code&gt;ansible.cfg&lt;/code&gt; file of your project&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[&lt;span style="color:#e06c75"&gt;persistent_connection&lt;/span&gt;]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;ssh_type&lt;/span&gt; = &lt;span style="color:#e06c75"&gt;libssh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Method 2: Set the &lt;code&gt;ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code&gt; environment variable&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ &lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;libssh
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Method 3: Set the &lt;code&gt;ansible_network_cli_ssh_type&lt;/code&gt; parameter to libssh within your playbook at the play level&lt;/p&gt;</description></item><item><title>SSH certificate login guide</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0b9d6544e063695876a9d9956109de90-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-toml" data-lang="toml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;persistent_connection&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;ssh_type&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;libssh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[persistent_connection]\nssh_type = libssh\n","title":"toml"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;Method 2: Set the &lt;code&gt;ANSIBLE_NETWORK_CLI_SSH_TYPE&lt;/code&gt; environment variable&lt;/p&gt;</description></item><item><title>SSH certificate login guide</title><link>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</link><pubDate>Wed, 08 Jul 2020 13:39:48 +0800</pubDate><guid>https://linzeyan.github.io/posts/2020/20200708-ssh-certificate/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.ruanyifeng.com/blog/2020/07/ssh-certificate.html" target="_blank" rel="noopener"&gt;SSH certificate login guide&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="certificate-login-flow"&gt;Certificate login flow&lt;/h3&gt;

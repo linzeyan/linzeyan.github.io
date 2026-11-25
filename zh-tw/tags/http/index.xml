@@ -61,10 +61,11 @@
 &lt;p&gt;包一層&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;timeout 1m bash -c &lt;span style="color:#98c379"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt; sleep 1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#98c379"&gt;done&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>我用 Zip Bomb 來保護我的伺服器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-8e02649b675f7fb8917fc518969d8473-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timeout 1m bash -c &lt;span class="s2"&gt;&amp;#34;until curl --silent --fail-with-body 10.0.0.1:8080/health; do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt; sleep 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s2"&gt;done&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"timeout 1m bash -c \"until curl --silent --fail-with-body 10.0.0.1:8080/health; do\n\tsleep 1\ndone\"\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>我用 Zip Bomb 來保護我的伺服器</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</link><pubDate>Sat, 03 May 2025 11:24:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250503-zipbomb-protection/</guid><description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href="https://idiallo.com/blog/zipbomb-protection" target="_blank" rel="noopener"&gt;我用 Zip Bomb 來保護我的伺服器&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -84,13 +85,14 @@
 &lt;p&gt;middleware&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;if (ipIsBlackListed() || isMalicious()) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; header(&amp;#34;Content-Encoding: gzip&amp;#34;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; header(&amp;#34;Content-Length: &amp;#34;. filesize(ZIP_BOMB_FILE_10G)); // 10 MB
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; readfile(ZIP_BOMB_FILE_10G);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; exit;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>人人都需要一個 HTTP proxy 來 debug</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</link><pubDate>Fri, 25 Apr 2025 16:58:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-25a0f29d0b8c4269ef1388a25c29ebae-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;if (ipIsBlackListed() || isMalicious()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; header(&amp;#34;Content-Encoding: gzip&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; header(&amp;#34;Content-Length: &amp;#34;. filesize(ZIP_BOMB_FILE_10G)); // 10 MB
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; readfile(ZIP_BOMB_FILE_10G);
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; exit;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"if (ipIsBlackListed() || isMalicious()) {\n header(\"Content-Encoding: gzip\");\n header(\"Content-Length: \". filesize(ZIP_BOMB_FILE_10G)); // 10 MB\n readfile(ZIP_BOMB_FILE_10G);\n exit;\n}\n","title":"Code"}&lt;/script&gt;&lt;/div&gt;</description></item><item><title>人人都需要一個 HTTP proxy 來 debug</title><link>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</link><pubDate>Fri, 25 Apr 2025 16:58:00 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2025/20250425-everyone-need-a-http-proxy-to-debug/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.huli.tw/2025/04/23/everyone-need-a-http-proxy-to-debug/" target="_blank" rel="noopener"&gt;人人都需要一個 HTTP proxy 來 debug&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol&gt;
@@ -104,13 +106,14 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;apt/dnf install tcpflow&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span style="color:#d19a66"&gt;80&lt;/span&gt; | grep -oE &lt;span style="color:#98c379"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reportfilename: ./report.xml
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;tcpflow: listening on wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GET /mirrors.txt HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-31c0429e7bad3b12d7182096476f60db-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo tcpflow -p -c -i wlp0s20f3 port &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -oE &lt;span class="s1"&gt;&amp;#39;(GET|POST) .* HTTP/1.[01]|Host: .*&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;reportfilename: ./report.xml
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tcpflow: listening on wlp0s20f3
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /mirrors.txt HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"$ sudo tcpflow -p -c -i wlp0s20f3 port 80 | grep -oE '(GET|POST) .* HTTP/1.[01]|Host: .*'\nreportfilename: ./report.xml\ntcpflow: listening on wlp0s20f3\nGET /alexlarsson/flatpak/ubuntu/dists/focal/InRelease HTTP/1.1\n\nGET /mirrors.txt HTTP/1.1\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-p&lt;/code&gt; 停用混雜模式&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-c&lt;/code&gt; 只輸出到主控台，不建立檔案&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-i&lt;/code&gt; 指定網路介面
@@ -121,16 +124,7 @@ grep 會接收 tcpflow 的輸出&lt;/li&gt;
 &lt;h3 id="httpry"&gt;httpry&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;https://github.com/jbittel/httpry.git&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo httpry -i wlp0s20f3
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;httpry version 0.1.8 -- HTTP logging and information retrieval tool
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Copyright &lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;c&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt; 2005-2014 Jason Bittel &amp;lt;jason.bittel@gmail.com&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Starting capture on wlp0s20f3 interface
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.166 192.168.1.24 172.217.17.238 &amp;gt; GET google.com / HTTP/1.1 - -
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:12.199 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.0 400 Bad Request
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.090 192.168.1.24 172.217.17.238 &amp;gt; POST google.com / HTTP/1.1 - -
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2022-06-22 16:38:23.163 172.217.17.238 192.168.1.24 &amp;lt; - - - HTTP/1.1 405 Method Not Allowed
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul&gt;
+&lt;/blockquote&gt;</description></item><item><title>在瀏覽器輸入網址並送出後，到底發生了什麼事？</title><link>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</link><pubDate>Sun, 18 Jul 2021 23:45:45 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2021/20210718-what-happens-when-you-type-an-url-in-the-browser-and-press-enter/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.cythilya.tw/2018/11/26/what-happens-when-you-type-an-url-in-the-browser-and-press-enter/" target="_blank" rel="noopener"&gt;在瀏覽器輸入網址並送出後，到底發生了什麼事？&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>具有代表性的 HTTP 状态码</title><link>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</link><pubDate>Fri, 15 Dec 2017 15:33:14 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2017/20171215-6844903519447678990/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://juejin.cn/post/6844903519447678990" target="_blank" rel="noopener"&gt;具有代表性的 HTTP 状态码&lt;/a&gt;&lt;/li&gt;

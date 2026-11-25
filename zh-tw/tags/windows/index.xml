@@ -46,41 +46,45 @@
 &lt;li&gt;安裝及啟動 Docker&lt;/li&gt;
 &lt;li&gt;安裝 Docker Desktop v2.2.1.0&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 啟用 WSL 必要元件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e5c07b"&gt;Microsoft-Windows&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-Subsystem-Linux&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;dism&lt;/span&gt;.&lt;span style="color:#e06c75"&gt;exe&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;online&lt;/span&gt; /&lt;span style="color:#e5c07b"&gt;enable-feature&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;featurename&lt;/span&gt;:&lt;span style="color:#e06c75"&gt;VirtualMachinePlatform&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;all&lt;/span&gt; /&lt;span style="color:#e06c75"&gt;norestart&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 設定 WSL 2 支援的 Linux 發行版本&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-version&lt;/span&gt; &lt;span style="color:#e06c75"&gt;ubuntu&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;wsl&lt;/span&gt; -&lt;span style="color:#e06c75"&gt;-set-default-version&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-cba1db985c16717061ef44177ec264f4-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 啟用 WSL 必要元件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;dism&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;exe&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;online&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;enable-feature&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;featurename&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;Microsoft-Windows&lt;/span&gt;&lt;span class="n"&gt;-Subsystem-Linux&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;dism&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;exe&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;online&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;enable-feature&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;featurename&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;VirtualMachinePlatform&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;norestart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 設定 WSL 2 支援的 Linux 發行版本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;wsl&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="n"&gt;-set-version&lt;/span&gt; &lt;span class="n"&gt;ubuntu&lt;/span&gt; &lt;span class="mf"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;wsl&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="n"&gt;-set-default-version&lt;/span&gt; &lt;span class="mf"&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 啟用 WSL 必要元件\ndism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart\ndism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart\n\n# 設定 WSL 2 支援的 Linux 發行版本\nwsl --set-version ubuntu 2\nwsl --set-default-version 2\n","title":"powershell"}&lt;/script&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;編輯 &lt;code&gt;%UserProfile%\.wslconfig&lt;/code&gt; 檔案&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Command Prompt&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;notepad %UserProfile%&lt;span style="color:#98c379"&gt;\.&lt;/span&gt;wslconfig
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-cba1db985c16717061ef44177ec264f4-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;notepad %UserProfile%&lt;span class="se"&gt;\.&lt;/span&gt;wslconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"notepad %UserProfile%\\.wslconfig\n","title":"sh"}&lt;/script&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Windows PowerShell&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ps1" data-lang="ps1"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;notepad&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$env:USERPROFILE&lt;/span&gt;\.&lt;span style="color:#e06c75"&gt;wslconfig&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-cba1db985c16717061ef44177ec264f4-2"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ps1" data-lang="ps1"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;notepad&lt;/span&gt; &lt;span class="nv"&gt;$env:USERPROFILE&lt;/span&gt;&lt;span class="p"&gt;\.&lt;/span&gt;&lt;span class="py"&gt;wslconfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"notepad $env:USERPROFILE\\.wslconfig\n","title":"ps1"}&lt;/script&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;設定內容說明&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;[wsl2]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;kernel&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to a custom Linux kernel.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;memory&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much memory to assign to the WSL2 VM.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;processors&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;number&amp;gt; # How many processors to assign to the WSL2 VM.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swap&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;size&amp;gt; # How much swap space to add to the WSL2 VM. 0 for no swap file.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;swapFile&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to the swap vhd.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;localhostForwarding&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;lt;bool&amp;gt; # Boolean specifying if ports bound to wildcard or localhost in the WSL2 VM should be connectable from the host via localhost:port (default true).&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;path&amp;gt; entries must be absolute Windows paths with escaped backslashes, for example C:\\Users\\Ben\\kernel&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# &amp;lt;size&amp;gt; entries must be size followed by unit, for example 8GB or 512MB&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-cba1db985c16717061ef44177ec264f4-3"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ini" data-lang="ini"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;[wsl2]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to a custom Linux kernel.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;memory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;size&amp;gt; # How much memory to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;processors&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;number&amp;gt; # How many processors to assign to the WSL2 VM.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;swap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;size&amp;gt; # How much swap space to add to the WSL2 VM. 0 for no swap file.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;swapFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;path&amp;gt; # An absolute Windows path to the swap vhd.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="na"&gt;localhostForwarding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;bool&amp;gt; # Boolean specifying if ports bound to wildcard or localhost in the WSL2 VM should be connectable from the host via localhost:port (default true).&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# &amp;lt;path&amp;gt; entries must be absolute Windows paths with escaped backslashes, for example C:\\Users\\Ben\\kernel&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# &amp;lt;size&amp;gt; entries must be size followed by unit, for example 8GB or 512MB&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"[wsl2]\nkernel=\u003cpath\u003e # An absolute Windows path to a custom Linux kernel.\nmemory=\u003csize\u003e # How much memory to assign to the WSL2 VM.\nprocessors=\u003cnumber\u003e # How many processors to assign to the WSL2 VM.\nswap=\u003csize\u003e # How much swap space to add to the WSL2 VM. 0 for no swap file.\nswapFile=\u003cpath\u003e # An absolute Windows path to the swap vhd.\nlocalhostForwarding=\u003cbool\u003e # Boolean specifying if ports bound to wildcard or localhost in the WSL2 VM should be connectable from the host via localhost:port (default true).\n\n# \u003cpath\u003e entries must be absolute Windows paths with escaped backslashes, for example C:\\\\Users\\\\Ben\\\\kernel\n# \u003csize\u003e entries must be size followed by unit, for example 8GB or 512MB\n","title":"ini"}&lt;/script&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;相關連結&lt;/p&gt;
 &lt;ul&gt;
@@ -90,20 +94,17 @@
 &lt;/ul&gt;</description></item><item><title>使用 oh-my-posh 美化 PowerShell 樣式</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</link><pubDate>Thu, 10 Dec 2020 13:15:59 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201210-setting-powershell-theme-with-oh-my-posh/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://blog.poychang.net/setting-powershell-theme-with-oh-my-posh/" target="_blank" rel="noopener"&gt;使用 oh-my-posh 美化 PowerShell 樣式&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 這會從 PowerShell Gallery 下載並安裝 posh-git 和 oh-my-posh 這兩個模組，前者是在命令列中顯示 Git 專案的相關資訊，後者則是美美的樣式套件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Install-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;posh-git&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Scope&lt;/span&gt; &lt;span style="color:#e06c75"&gt;CurrentUser&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Install-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;oh-my&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-posh&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Scope&lt;/span&gt; &lt;span style="color:#e06c75"&gt;CurrentUser&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 接著我們要修改 PowerShell 啟動時所載入的設定檔，在 PowerShell 中輸入 $PROFILE 可得到當前使用者啟動 PowerShell 時，會載入的個人設定檔位置。&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 你的電腦可能沒有這個實體檔案，這時可以執行下面的指令，如果沒有該設定檔，則建立一個，然後使用 notepad 來開啟該設定檔。&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c678dd"&gt;if&lt;/span&gt; (!(&lt;span style="color:#e5c07b"&gt;Test-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt; )) { &lt;span style="color:#e5c07b"&gt;New-Item&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Type&lt;/span&gt; &lt;span style="color:#e06c75"&gt;File&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Path&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt; &lt;span style="color:#e06c75"&gt;-Force&lt;/span&gt; }
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;notepad&lt;/span&gt; &lt;span style="color:#e06c75"&gt;$PROFILE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最後在該設定檔中加入下列指令&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Import-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;posh-git&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Import-Module&lt;/span&gt; &lt;span style="color:#e5c07b"&gt;oh-my&lt;/span&gt;&lt;span style="color:#e06c75"&gt;-posh&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;Set-Theme&lt;/span&gt; &lt;span style="color:#e06c75"&gt;Paradox&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;oh-my-posh 內建了很多樣式，你也可以使用 Get-Theme 這個 Cmdlet 指令取得 oh-my-posh 有提供的所有樣式及相關檔案位置&lt;/p&gt;</description></item><item><title>用 IIS、.NET 4.5 與 Octopus Deploy 建立 Windows Server Vagrant box</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-b694874b2fcd722cda042dbe519fdde3-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 這會從 PowerShell Gallery 下載並安裝 posh-git 和 oh-my-posh 這兩個模組，前者是在命令列中顯示 Git 專案的相關資訊，後者則是美美的樣式套件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;Install-Module&lt;/span&gt; &lt;span class="nb"&gt;posh-git&lt;/span&gt; &lt;span class="n"&gt;-Scope&lt;/span&gt; &lt;span class="n"&gt;CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;Install-Module&lt;/span&gt; &lt;span class="nb"&gt;oh-my&lt;/span&gt;&lt;span class="n"&gt;-posh&lt;/span&gt; &lt;span class="n"&gt;-Scope&lt;/span&gt; &lt;span class="n"&gt;CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 接著我們要修改 PowerShell 啟動時所載入的設定檔，在 PowerShell 中輸入 $PROFILE 可得到當前使用者啟動 PowerShell 時，會載入的個人設定檔位置。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# 你的電腦可能沒有這個實體檔案，這時可以執行下面的指令，如果沒有該設定檔，則建立一個，然後使用 notepad 來開啟該設定檔。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(!(&lt;/span&gt;&lt;span class="nb"&gt;Test-Path&lt;/span&gt; &lt;span class="n"&gt;-Path&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt; &lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;New-Item&lt;/span&gt; &lt;span class="n"&gt;-Type&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="n"&gt;-Path&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt; &lt;span class="n"&gt;-Force&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;notepad&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 這會從 PowerShell Gallery 下載並安裝 posh-git 和 oh-my-posh 這兩個模組，前者是在命令列中顯示 Git 專案的相關資訊，後者則是美美的樣式套件\nInstall-Module posh-git -Scope CurrentUser\nInstall-Module oh-my-posh -Scope CurrentUser\n\n\n# 接著我們要修改 PowerShell 啟動時所載入的設定檔，在 PowerShell 中輸入 $PROFILE 可得到當前使用者啟動 PowerShell 時，會載入的個人設定檔位置。\n# 你的電腦可能沒有這個實體檔案，這時可以執行下面的指令，如果沒有該設定檔，則建立一個，然後使用 notepad 來開啟該設定檔。\nif (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }\nnotepad $PROFILE\n","title":"powershell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;最後在該設定檔中加入下列指令&lt;/p&gt;</description></item><item><title>用 IIS、.NET 4.5 與 Octopus Deploy 建立 Windows Server Vagrant box</title><link>https://linzeyan.github.io/zh-tw/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</link><pubDate>Thu, 03 Dec 2020 12:39:01 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2020/20201203-provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://kwilson.io/blog/provisioning-a-windows-server-vagrant-box-with-iis-net-4-5-and-octopus-deploy/" target="_blank" rel="noopener"&gt;用 IIS、.NET 4.5 與 Octopus Deploy 建立 Windows Server Vagrant box&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://stackoverflow.com/questions/64242931/how-to-use-a-powershell-script-during-vagrant-up-on-host-correctly" target="_blank" rel="noopener"&gt;在 host 端執行 vagrant up 時如何正確使用 PowerShell script？&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://akrabat.com/first-steps-with-windows-on-vagrant/" target="_blank" rel="noopener"&gt;Windows 在 Vagrant 上的起步&lt;/a&gt;&lt;/li&gt;
@@ -115,134 +116,135 @@
 &lt;li&gt;&lt;a href="https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8" target="_blank" rel="noopener"&gt;https://www.redhat.com/en/blog/consistent-security-crypto-policies-red-hat-enterprise-linux-8&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5" target="_blank" rel="noopener"&gt;https://medium.com/jerrynotes/linux-authentication-windows-ad-without-join-domain-7963c3fd44c5&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 安裝openvpn&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install openvpn -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum -y install openssl openssl-devel -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum -y install lzo lzo-devel -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install -y libgcrypt libgpg-error libgcrypt-devel
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 安裝openvpn認證插件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install openvpn-auth-ldap -y
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 安裝easy-rsa&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install easy-rsa
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 生成openvpn的key及證書&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_COUNTRY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;CN&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 國家&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_PROVINCE&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;ZJ&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 省份&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_CITY&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;NingBo&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 城市&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_ORG&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;TEST-VPN&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 組織&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e06c75"&gt;exportKEY_EMAIL&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;81367070@qq.com&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 郵件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;export&lt;/span&gt; &lt;span style="color:#e06c75"&gt;KEY_OU&lt;/span&gt;&lt;span style="color:#56b6c2"&gt;=&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;baidu&amp;#34;&lt;/span&gt; &lt;span style="color:#7f848e"&gt;# 單位&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;source&lt;/span&gt; vars
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./clean-all
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-ca
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-dh
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-key-server server
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./build-key client1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;port &lt;span style="color:#d19a66"&gt;1194&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;proto udp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dev tun
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ca keys/ca.crt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert keys/server.crt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;key keys/server.key &lt;span style="color:#7f848e"&gt;# This file should be kept secret&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dh keys/dh2048.pem
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;server 10.8.0.0 255.255.255.0 //客戶端分配的ip地址
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;push &lt;span style="color:#98c379"&gt;&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span&gt; //推送客戶端的路由
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;push &lt;span style="color:#98c379"&gt;&amp;#34;redirect-gateway&amp;#34;&lt;/span&gt; //修改客戶端的網關，使其直接走vpn流量
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ifconfig-pool-persist ipp.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;keepalive &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; &lt;span style="color:#d19a66"&gt;120&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;comp-lzo
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;persist-key
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;persist-tun
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;status openvpn-status.log
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;verb &lt;span style="color:#d19a66"&gt;3&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugin /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so &lt;span style="color:#98c379"&gt;&amp;#34;/etc/openvpn/auth/ldap.conf&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;client-cert-not-required
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;username-as-common-name
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;log /var/log/openvpn.log
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# /etc/openvpn/auth/ldap.conf&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;LDAP&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# LDAP server URL&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 更改爲 AD 服務器的 IP&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; URL ldap://172.16.76.238:389
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BindDN &lt;span style="color:#98c379"&gt;&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Bind Password&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Password SecretPassword&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 域管理員的密碼&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Password passwd
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Network timeout (in seconds)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Timeout &lt;span style="color:#d19a66"&gt;15&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Enable Start TLS&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; TLSEnable no
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Follow LDAP Referrals (anonymously)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; FollowReferrals no
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLS CA Certificate File&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCACertFile /usr/local/etc/ssl/ca.pem&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLS CA Certificate Directory&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCACertDir /etc/ssl/certs&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Client Certificate and key&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# If TLS client authentication is required&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCertFile /usr/local/etc/ssl/client-cert.pem&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSKeyFile /usr/local/etc/ssl/client-key.pem&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Cipher Suite&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# The defaults are usually fine here&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# TLSCipherSuite ALL:!ADH:@STRENGTH&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/LDAP&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;Authorization&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Base DN&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 查詢認證的基礎 dn&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BaseDN &lt;span style="color:#98c379"&gt;&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# User Search Filter&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 後面 &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; 指向要認證的 vpn 用戶組，&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# 這樣任何用戶使用 vpn，只要加入這個組就好了&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; SearchFilter &lt;span style="color:#98c379"&gt;&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Require Group Membership&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RequireGroup &lt;span style="color:#e5c07b"&gt;false&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Add non-group members to a PF table (disabled)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# PFTable ips_vpn_users&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;Group&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# BaseDN &amp;#34;ou=Groups,dc=example,dc=com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# SearchFilter &amp;#34;(|(cn=developers)(cn=artists))&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# MemberAttribute uniqueMember&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# Add group members to a PF table (disabled)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#7f848e"&gt;# PFTable ips_vpn_eng&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; BaseDN &lt;span style="color:#98c379"&gt;&amp;#34;ou=vpn,dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; SearchFilter &lt;span style="color:#98c379"&gt;&amp;#34;(cn=openvpn)&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; MemberAttribute &lt;span style="color:#98c379"&gt;&amp;#34;member&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;/Group&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/Authorization&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;拷貝&lt;code&gt;/etc/openvpn/key&lt;/code&gt;目錄下的&lt;code&gt;ca.crt&lt;/code&gt;證書，以備客戶端使用。&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-dd5dae4ddaac14de1dff72f381349a79-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安裝openvpn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum install openvpn -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum -y install openssl openssl-devel -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum -y install lzo lzo-devel -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum install -y libgcrypt libgpg-error libgcrypt-devel
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安裝openvpn認證插件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum install openvpn-auth-ldap -y
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安裝easy-rsa&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yum install easy-rsa
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 生成openvpn的key及證書&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KEY_COUNTRY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;CN&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 國家&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KEY_PROVINCE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;ZJ&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 省份&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KEY_CITY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;NingBo&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 城市&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KEY_ORG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;TEST-VPN&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 組織&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;exportKEY_EMAIL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;81367070@qq.com&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 郵件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KEY_OU&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;baidu&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# 單位&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;source&lt;/span&gt; vars
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./clean-all
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./build-ca
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./build-dh
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./build-key-server server
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./build-key client1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;port &lt;span class="m"&gt;1194&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;proto udp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dev tun
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ca keys/ca.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cert keys/server.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;key keys/server.key &lt;span class="c1"&gt;# This file should be kept secret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;dh keys/dh2048.pem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;server 10.8.0.0 255.255.255.0 //客戶端分配的ip地址
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;push &lt;span class="s2"&gt;&amp;#34;route 192.168.1.0 255.255.255.0&amp;#34;&lt;/span&gt; //推送客戶端的路由
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;push &lt;span class="s2"&gt;&amp;#34;redirect-gateway&amp;#34;&lt;/span&gt; //修改客戶端的網關，使其直接走vpn流量
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ifconfig-pool-persist ipp.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;keepalive &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="m"&gt;120&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;comp-lzo
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;persist-key
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;persist-tun
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;status openvpn-status.log
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;verb &lt;span class="m"&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;plugin /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so &lt;span class="s2"&gt;&amp;#34;/etc/openvpn/auth/ldap.conf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;client-cert-not-required
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;username-as-common-name
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;log /var/log/openvpn.log
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# /etc/openvpn/auth/ldap.conf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;LDAP&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# LDAP server URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 更改爲 AD 服務器的 IP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; URL ldap://172.16.76.238:389
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Bind DN (If your LDAP server doesn&amp;#39;t support anonymous binds)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# BindDN uid=Manager,ou=People,dc=example,dc=com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# ldapsearch -LLL -x -h 172.16.76.238 -D &amp;#34;administrator@xx.com&amp;#34; -W -b &amp;#34;dc=xx,dc=com&amp;#34; &amp;#34;*&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; BindDN &lt;span class="s2"&gt;&amp;#34;cn=administrator,cn=Users,dc=xx,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Bind Password&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Password SecretPassword&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 域管理員的密碼&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Password passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Network timeout (in seconds)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Timeout &lt;span class="m"&gt;15&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Enable Start TLS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; TLSEnable no
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Follow LDAP Referrals (anonymously)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; FollowReferrals no
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLS CA Certificate File&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLSCACertFile /usr/local/etc/ssl/ca.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLS CA Certificate Directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLSCACertDir /etc/ssl/certs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Client Certificate and key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# If TLS client authentication is required&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLSCertFile /usr/local/etc/ssl/client-cert.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLSKeyFile /usr/local/etc/ssl/client-key.pem&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Cipher Suite&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# The defaults are usually fine here&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# TLSCipherSuite ALL:!ADH:@STRENGTH&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/LDAP&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;Authorization&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Base DN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 查詢認證的基礎 dn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; BaseDN &lt;span class="s2"&gt;&amp;#34;dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# User Search Filter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# SearchFilter &amp;#34;(&amp;amp;(uid=%u)(accountStatus=active))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 後面 &amp;#34;memberof=CN=myvpn,DC=xx,DC=com&amp;#34; 指向要認證的 vpn 用戶組，&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# 這樣任何用戶使用 vpn，只要加入這個組就好了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SearchFilter &lt;span class="s2"&gt;&amp;#34;(&amp;amp;(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Require Group Membership&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; RequireGroup &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Add non-group members to a PF table (disabled)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# PFTable ips_vpn_users&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;Group&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# BaseDN &amp;#34;ou=Groups,dc=example,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# SearchFilter &amp;#34;(|(cn=developers)(cn=artists))&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# MemberAttribute uniqueMember&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# Add group members to a PF table (disabled)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="c1"&gt;# PFTable ips_vpn_eng&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; BaseDN &lt;span class="s2"&gt;&amp;#34;ou=vpn,dc=boqii-inc,dc=com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; SearchFilter &lt;span class="s2"&gt;&amp;#34;(cn=openvpn)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; MemberAttribute &lt;span class="s2"&gt;&amp;#34;member&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &amp;lt;/Group&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;lt;/Authorization&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 安裝openvpn\nyum install openvpn -y\nyum -y install openssl openssl-devel -y\nyum -y install lzo lzo-devel -y\nyum install -y libgcrypt libgpg-error libgcrypt-devel\n\n# 安裝openvpn認證插件\nyum install openvpn-auth-ldap -y\n\n# 安裝easy-rsa\n# 由於openvpn2.3之後，在openvpn裏面剔除了easy-rsa文件，所以需要單獨安裝\nyum install easy-rsa\ncp -rf /usr/share/easy-rsa/2.0 /etc/opevpn/\n\n# 生成openvpn的key及證書\n# 修改 `/opt/openvpn/etc/easy-rsa/2.0/vars` 參數\nexport KEY_COUNTRY=\"CN\" # 國家\nexport KEY_PROVINCE=\"ZJ\" # 省份\nexport KEY_CITY=\"NingBo\" # 城市\nexport KEY_ORG=\"TEST-VPN\" # 組織\nexportKEY_EMAIL=\"81367070@qq.com\" # 郵件\nexport KEY_OU=\"baidu\" # 單位\n\nsource vars\n./clean-all\n./build-ca\n./build-dh\n./build-key-server server\n./build-key client1\n\n\n# 編輯openvpn服務端配置文件：`/etc/openvpn/server.conf`\nport 1194\nproto udp\ndev tun\nca keys/ca.crt\ncert keys/server.crt\nkey keys/server.key # This file should be kept secret\ndh keys/dh2048.pem\nserver 10.8.0.0 255.255.255.0 //客戶端分配的ip地址\npush \"route 192.168.1.0 255.255.255.0\" //推送客戶端的路由\npush \"redirect-gateway\" //修改客戶端的網關，使其直接走vpn流量\nifconfig-pool-persist ipp.txt\nkeepalive 10 120\ncomp-lzo\npersist-key\npersist-tun\nstatus openvpn-status.log\nverb 3\nplugin /usr/lib64/openvpn/plugin/lib/openvpn-auth-ldap.so \"/etc/openvpn/auth/ldap.conf\"\nclient-cert-not-required\nusername-as-common-name\nlog /var/log/openvpn.log\n\n\n# 修改openvpn-ldap-auth的配置文件 `/etc/openvpn/auth/ldap.conf`\n# /etc/openvpn/auth/ldap.conf\n\n\u003cLDAP\u003e\n # LDAP server URL\n # 更改爲 AD 服務器的 IP\n URL ldap://172.16.76.238:389\n\n # Bind DN (If your LDAP server doesn't support anonymous binds)\n # BindDN uid=Manager,ou=People,dc=example,dc=com\n # 更改爲域管理的 DN, 可以通過 ldapsearch 進行查詢\n # -h 的 ip 替換爲服務器 ip，-D 換爲管理員的 dn，-b 爲基礎的查詢 dn，* 爲所有\n # ldapsearch -LLL -x -h 172.16.76.238 -D \"administrator@xx.com\" -W -b \"dc=xx,dc=com\" \"*\"\n BindDN \"cn=administrator,cn=Users,dc=xx,dc=com\"\n\n # Bind Password\n # Password SecretPassword\n # 域管理員的密碼\n Password passwd\n\n # Network timeout (in seconds)\n Timeout 15\n\n # Enable Start TLS\n TLSEnable no\n\n # Follow LDAP Referrals (anonymously)\n FollowReferrals no\n\n # TLS CA Certificate File\n # TLSCACertFile /usr/local/etc/ssl/ca.pem\n\n # TLS CA Certificate Directory\n # TLSCACertDir /etc/ssl/certs\n\n # Client Certificate and key\n # If TLS client authentication is required\n # TLSCertFile /usr/local/etc/ssl/client-cert.pem\n # TLSKeyFile /usr/local/etc/ssl/client-key.pem\n\n # Cipher Suite\n # The defaults are usually fine here\n # TLSCipherSuite ALL:!ADH:@STRENGTH\n\u003c/LDAP\u003e\n\n\u003cAuthorization\u003e\n # Base DN\n # 查詢認證的基礎 dn\n BaseDN \"dc=boqii-inc,dc=com\"\n\n # User Search Filter\n # SearchFilter \"(\u0026(uid=%u)(accountStatus=active))\"\n # 其中 sAMAccountName=%u 的意思是把 sAMAccountName 的字段取值爲用戶名，\n # 後面 \"memberof=CN=myvpn,DC=xx,DC=com\" 指向要認證的 vpn 用戶組，\n # 這樣任何用戶使用 vpn，只要加入這個組就好了\n SearchFilter \"(\u0026(sAMAccountName=%u)(memberof=CN=myvpn,DC=boqii-inc,DC=com))\"\n\n # Require Group Membership\n RequireGroup false\n\n # Add non-group members to a PF table (disabled)\n # PFTable ips_vpn_users\n\n \u003cGroup\u003e\n # BaseDN \"ou=Groups,dc=example,dc=com\"\n # SearchFilter \"(|(cn=developers)(cn=artists))\"\n # MemberAttribute uniqueMember\n # Add group members to a PF table (disabled)\n # PFTable ips_vpn_eng\n\n BaseDN \"ou=vpn,dc=boqii-inc,dc=com\"\n SearchFilter \"(cn=openvpn)\"\n MemberAttribute \"member\"\n \u003c/Group\u003e\n\u003c/Authorization\u003e\n","title":"bash"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;拷貝&lt;code&gt;/etc/openvpn/key&lt;/code&gt;目錄下的&lt;code&gt;ca.crt&lt;/code&gt;證書，以備客戶端使用。&lt;/p&gt;</description></item></channel></rss>

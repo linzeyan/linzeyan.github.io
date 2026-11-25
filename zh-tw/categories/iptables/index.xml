@@ -41,38 +41,40 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id="linux-系统误将-chmod-权限改成-了-000如何恢复"&gt;Linux 系统误将 chmod 权限改成 了 000，如何恢复?&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#include&lt;/span&gt; &lt;span style="color:#7f848e"&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;span style="color:#7f848e"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e5c07b"&gt;int&lt;/span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;main&lt;/span&gt;() {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#61afef;font-weight:bold"&gt;chmod&lt;/span&gt;(&lt;span style="color:#98c379"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, &lt;span style="color:#d19a66"&gt;0755&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; &lt;span style="color:#d19a66"&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ which chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ sudo chmod &lt;span style="color:#d19a66"&gt;000&lt;/span&gt; /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;---------- &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ cat main.c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;int main&lt;span style="color:#56b6c2"&gt;()&lt;/span&gt; &lt;span style="color:#56b6c2"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; chmod&lt;span style="color:#56b6c2"&gt;(&lt;/span&gt;&lt;span style="color:#98c379"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, 0755&lt;span style="color:#56b6c2"&gt;)&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#c678dd"&gt;return&lt;/span&gt; 0;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#56b6c2"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ gcc ./main.c
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ sudo ./a.out
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lrwxrwxrwx &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root &lt;span style="color:#d19a66"&gt;8&lt;/span&gt; Sep &lt;span style="color:#d19a66"&gt;27&lt;/span&gt; &lt;span style="color:#d19a66"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-rwxr-xr-x &lt;span style="color:#d19a66"&gt;1&lt;/span&gt; root root 67K Jan &lt;span style="color:#d19a66"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0ab89651ae2698a7332cf53321dd873f-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nf"&gt;chmod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mo"&gt;0755&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"#include \u003csys/stat.h\u003e\n\nint main() {\n chmod(\"/usr/bin/chmod\", 0755);\n return 0;\n}\n","title":"c"}&lt;/script&gt;&lt;/div&gt;&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-0ab89651ae2698a7332cf53321dd873f-1"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ which chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ sudo chmod &lt;span class="m"&gt;000&lt;/span&gt; /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;---------- &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ cat main.c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;int main&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; chmod&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;/usr/bin/chmod&amp;#34;&lt;/span&gt;, 0755&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; 0&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ gcc ./main.c
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ sudo ./a.out
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/chmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lrwxrwxrwx &lt;span class="m"&gt;1&lt;/span&gt; root root &lt;span class="m"&gt;8&lt;/span&gt; Sep &lt;span class="m"&gt;27&lt;/span&gt; &lt;span class="m"&gt;2025&lt;/span&gt; /usr/bin/chmod -&amp;gt; gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;-rwxr-xr-x &lt;span class="m"&gt;1&lt;/span&gt; root root 67K Jan &lt;span class="m"&gt;23&lt;/span&gt; 21:34 /usr/bin/gnuchmod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"ubuntu@ubuntu:~$ which chmod\n/usr/bin/chmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n-rwxr-xr-x 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\nubuntu@ubuntu:~$ sudo chmod 000 /usr/bin/chmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n---------- 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\nubuntu@ubuntu:~$ cat main.c\n#include \u003csys/stat.h\u003e\n\nint main() {\n chmod(\"/usr/bin/chmod\", 0755);\n return 0;\n}\n\nubuntu@ubuntu:~$ gcc ./main.c\nubuntu@ubuntu:~$ sudo ./a.out\nubuntu@ubuntu:~$ ls -lh /usr/bin/chmod\nlrwxrwxrwx 1 root root 8 Sep 27 2025 /usr/bin/chmod -\u003e gnuchmod\nubuntu@ubuntu:~$ ls -lh /usr/bin/gnuchmod\n-rwxr-xr-x 1 root root 67K Jan 23 21:34 /usr/bin/gnuchmod\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;h2 id="laptops-all-have-built-in-security-tokens-these-days"&gt;Laptops all have built-in security tokens these days&lt;/h2&gt;
 &lt;h3 id="macos"&gt;macOS&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -89,42 +91,43 @@
 &lt;/ul&gt;
 &lt;p&gt;我們會根據封包上的標記值判斷它應該走哪個出口。首先，使用 ip rule 為每個標記值指定一張路由表。&lt;/p&gt;
 &lt;p&gt;通常預設路由表的權重是 32768。為了讓我們的路由表生效，需要將權重調高一些（例如 31000）。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip rule add fwmark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt; table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt; prio &lt;span style="color:#d19a66"&gt;31000&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #110 路由表的路由&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.20.0.0/24 dev eth0 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.20.0.254 table &lt;span style="color:#d19a66"&gt;110&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# #111 路由表的路由&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add 10.25.0.0/24 dev eth1 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ip route add default via 10.25.0.254 table &lt;span style="color:#d19a66"&gt;111&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果這條連線已經被標記，將標記設定到封包上&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包已經有標記，直接放行&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j ACCEPT
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果封包沒有被標記&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包標記為 10 (0xa)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span style="color:#d19a66"&gt;10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span style="color:#d19a66"&gt;2&lt;/span&gt; --packet &lt;span style="color:#d19a66"&gt;0&lt;/span&gt; -j MARK --set-mark &lt;span style="color:#d19a66"&gt;11&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 如果你有三條出口，這裡可以類似於&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#7f848e"&gt;# 讓封包的出口與我們選擇的一致&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之後可以用 &lt;code&gt;iptables -L OUTPUT -t mangle&lt;/code&gt; 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p&gt;</description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
+&lt;div class="code-block" data-code-block&gt;&lt;div class="code-block-full" id="code-block-aef911efeb8f663b3c9f3223f7a841d4-0"&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip rule add fwmark &lt;span class="m"&gt;10&lt;/span&gt; table &lt;span class="m"&gt;110&lt;/span&gt; prio &lt;span class="m"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip rule add fwmark &lt;span class="m"&gt;11&lt;/span&gt; table &lt;span class="m"&gt;111&lt;/span&gt; prio &lt;span class="m"&gt;31000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果你的連線更多，可以繼續新增標記 &amp;lt;-&amp;gt; 路由表的對應關係&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# #110 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add 10.20.0.0/24 dev eth0 table &lt;span class="m"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add default via 10.20.0.254 table &lt;span class="m"&gt;110&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# #111 路由表的路由&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add 10.25.0.0/24 dev eth1 table &lt;span class="m"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ip route add default via 10.25.0.254 table &lt;span class="m"&gt;111&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果這條連線已經被標記，將標記設定到封包上&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果封包已經有標記，直接放行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -m mark ! --mark &lt;span class="m"&gt;0&lt;/span&gt; -j ACCEPT
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果封包沒有被標記&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把封包標記為 10 (0xa)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j MARK --set-mark &lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 每 2 個封包就把一個封包標記為 11 (0xb)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -m statistic --mode nth --every &lt;span class="m"&gt;2&lt;/span&gt; --packet &lt;span class="m"&gt;0&lt;/span&gt; -j MARK --set-mark &lt;span class="m"&gt;11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 如果你有三條出口，這裡可以類似於&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -j MARK --set-mark 10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t mangle -A OUTPUT -j CONNMARK --save-mark
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 讓封包的出口與我們選擇的一致&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;script type="application/json" class="code-block-data"&gt;{"copyButton":true,"expanded":false,"labels":{"code":"Code","copied":"Copied!","copy":"Copy","copyError":"Copy failed. Try again.","showAll":"Show all {count} lines","showLess":"Show fewer lines"},"language":"","preview":"","source":"# 讓帶標記 10 (0xa) 的封包使用 110 號路由表，權重 31000\nip rule add fwmark 10 table 110 prio 31000\n# 讓帶標記 11 (0xb) 的封包使用 111 號路由表，權重 31000\nip rule add fwmark 11 table 111 prio 31000\n# 如果你的連線更多，可以繼續新增標記 \u003c-\u003e 路由表的對應關係\n\n# #110 路由表的路由\nip route add 10.20.0.0/24 dev eth0 table 110\nip route add default via 10.20.0.254 table 110\n# #111 路由表的路由\nip route add 10.25.0.0/24 dev eth1 table 111\nip route add default via 10.25.0.254 table 111\n\n\n# 如果這條連線已經被標記，將標記設定到封包上\niptables -t mangle -A OUTPUT -j CONNMARK --restore-mark\n# 如果封包已經有標記，直接放行\niptables -t mangle -A OUTPUT -m mark ! --mark 0 -j ACCEPT\n# 如果封包沒有被標記\n# 把封包標記為 10 (0xa)\niptables -t mangle -A OUTPUT -j MARK --set-mark 10\n# 每 2 個封包就把一個封包標記為 11 (0xb)\niptables -t mangle -A OUTPUT -m statistic --mode nth --every 2 --packet 0 -j MARK --set-mark 11\n\n# 如果你有三條出口，這裡可以類似於\n# iptables -t mangle -A OUTPUT -j MARK --set-mark 10\n# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 0 -j MARK --set-mark 11\n# iptables -t mangle -A OUTPUT -m statistic --mode nth --every 3 --packet 1 -j MARK --set-mark 12\n\n# 把封包的標記儲存到整條連線上，讓整個連線使用同一個出口\niptables -t mangle -A OUTPUT -j CONNMARK --save-mark\n\n# 讓封包的出口與我們選擇的一致\niptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\niptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE\n","title":"shell"}&lt;/script&gt;&lt;/div&gt;&lt;p&gt;之後可以用 &lt;code&gt;iptables -L OUTPUT -t mangle&lt;/code&gt; 看一下規則是否正確，再用 Wireshark 驗證連線是否真的分流。&lt;/p&gt;</description></item><item><title>再戰營運商快取：使用 iptables 對付快取劫持</title><link>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</link><pubDate>Mon, 07 Oct 2019 10:41:08 +0800</pubDate><guid>https://linzeyan.github.io/zh-tw/posts/2019/20191007-fuck-cmcc/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://v2c.tech/Article/FUCK-CMCC" target="_blank" rel="noopener"&gt;再戰營運商快取：使用 iptables 對付快取劫持&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id="起因"&gt;起因&lt;/h5&gt;
