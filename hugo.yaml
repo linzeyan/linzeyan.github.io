@@ -6,8 +6,25 @@ title: "Ricky"
 # Use Hugo modules to add theme
 module:
   imports:
+    # go.mod pins this to a commit on toha's main (bf0d55056672, 2026-11-22),
+    # not a release: the Tailwind home page and posts (portfolio.modern below)
+    # are newer than v4.17.0. Move to the first tag that has them. Four files
+    # here are edited copies of the theme's, each says so in its first lines;
+    # compare them with upstream after any upgrade.
     - path: github.com/hugo-toha/toha/v4
   mounts:
+    # Declaring any assets mount drops Hugo's default one, so it is restated.
+    - source: assets
+      target: assets
+    # One first-paint theme script for both of toha's page families (the file
+    # says why); this is the name its Tailwind pages load it under.
+    - source: assets/scripts/core/theme-scheme.js
+      target: assets/scripts/modern/theme-init.js
+    # Tailwind (toha's home page and posts) reads the class names Hugo saw
+    # while rendering; see build.buildStats below.
+    - source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+      disableWatch: true
     - source: static/files
       target: static/files
     - source: ./node_modules/flag-icon-css/flags
@@ -16,6 +33,27 @@ module:
       target: static/files
     - source: ./node_modules/katex/dist/fonts
       target: static/fonts
+
+# toha's home page and post layouts are styled with Tailwind, which only emits
+# the classes listed in hugo_stats.json; the stylesheet is rebuilt when that
+# list changes.
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: 'assets/notwatching/hugo_stats\.json'
+      target: css
+
+# Hugo's default allowlist plus tailwindcss, which toha runs from node_modules.
+security:
+  exec:
+    allow: ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+  # Hugo runs Tailwind under Node's permission model and refuses to start when
+  # a symlink in the project root points outside the readable paths. docs/ is
+  # one (untracked, into a private notes repo); checkouts without it ignore this.
+  node:
+    permissions:
+      allowRead: ['.', '../dev_docs/linzeyan.github.io']
 
 # Manage languages
 # For any more details, you can check the official documentation: https://gohugo.io/content-management/multilingual/
@@ -93,6 +131,10 @@ params:
 
   # Configure various features of this theme
   features:
+    # Neutral palette for the Tailwind pages; its dark scheme is pure black.
+    componentsDesign:
+      enable: true
+
     # Enable dark theme
     darkMode:
       enable: true
@@ -100,6 +142,17 @@ params:
     # Enable and configure portfolio
     portfolio:
       enable: true
+      # toha's Tailwind home page. It also switches the post archive and the
+      # post reading page to their Tailwind layouts; notes, search and 404
+      # stay on Bootstrap.
+      modern:
+        enable: true
+        navigation: bar # bar | rail
+        hero:
+          style: photo # photo | surface
+        # Posts lose their sidebar search box in the new archive; this dialog replaces it.
+        search:
+          enable: true
 
     # Enable and configure blog posts
     blog:
@@ -261,6 +314,11 @@ params:
         hljs:
           # see: https://highlightjs.readthedocs.io/en/latest/api.html#configure
           noHighlightRe: /^no-highlight$/i
+
+    # Language header with a Copy button on every code block.
+    codeBlock:
+      copyButton:
+        enable: true
 
     # Enable to use `video-player` shortcode
     videoPlayer:

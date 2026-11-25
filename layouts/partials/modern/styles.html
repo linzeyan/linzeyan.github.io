@@ -1,0 +1,16 @@
+{{/* Copy of toha's partials/modern/styles.html plus the last block. The theme
+     has no hook for site CSS on its Tailwind pages (override.scss only reaches
+     the Bootstrap ones), so the site's own rules are linked here.
+     Called through templates.Defer after Hugo has collected all rendered classes. */}}
+{{- with resources.Get "styles/modern/main.css" -}}
+  {{- $css := . | css.TailwindCSS (dict "minify" (not hugo.IsDevelopment)) | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
+{{- if site.Params.features.componentsDesign.enable -}}
+  {{- $css := resources.Get "styles/modern/components-design.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}
+{{- with resources.Get "styles/modern/site.css" -}}
+  {{- $css := . | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+{{- end -}}

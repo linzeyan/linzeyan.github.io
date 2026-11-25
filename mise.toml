@@ -1,0 +1,9 @@
+# Build tools for the site. The Makefile runs hugo through `mise exec --` and
+# the deploy workflow installs this same file, so the two cannot drift. Node is
+# not listed: any current LTS works, and CI sets it up on its own.
+[tools]
+# toha needs >= 0.163; this is the version the deploy has been building with.
+hugo-extended = "0.169.0"
+# toha compiles its Bootstrap stylesheet (notes, search, 404) with Dart Sass,
+# which Hugo runs as `sass` from PATH. Same pin as toha's own mise.toml.
+"github:sass/dart-sass" = { version = "1.108.2", version_prefix = "" }

@@ -9,229 +9,273 @@ section:
   # hideTitle: true
 
 # filter buttons
-# buttons:
-# - name: All
-#   filter: "all"
-# - name: Professional
-#   filter: "professional"
-# - name: Academic
-#   filter: "academic"
-# - name: Hobby
-#   filter: "hobby"
+# A button shows the projects that carry its filter as a tag (compared in lower
+# case), so each project's first tag is its category. The categories are the
+# groups of the profile README (linzeyan/linzeyan); a project without one only
+# shows under All.
+buttons:
+  - name: 全部
+    filter: "all"
+  - name: App Store
+    filter: "App Store"
+  - name: 桌面應用
+    filter: "桌面應用"
+  - name: 開發工具
+    filter: "開發工具"
+  - name: 網頁
+    filter: "網頁"
+  - name: 函式庫
+    filter: "函式庫"
+  - name: 早期作品
+    filter: "早期作品"
 
 # your projects
 projects:
   - name: charta
+    logo: /images/sections/projects/charta.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     repo: https://github.com/linzeyan/charta
     summary: 涵蓋 Data Viz Catalogue 全部 59 種資料圖表的互動圖表庫，從長條圖到 Sankey、面量圖。Rust crate 與 Go module 對同一張圖輸出逐位元相同的結果，可輸出 HTML／SVG／PNG，或畫進 egui、Slint、Gio、Fyne；座標軸可用滾輪、拖曳、框選縮放，瀏覽器端透過 WebAssembly。
-    tags: ["Rust", "Go", "Charts"]
+    tags: ["函式庫", "Rust", "Go", "Charts"]
   - name: FontsMaker
+    logo: /images/sections/projects/fontsmaker.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     repo: https://github.com/linzeyan/FontsMaker
     summary: 把開源字型改成適合電子書閱讀器的版本：加粗、偽直排、簡轉繁，附電子紙頁面預覽。設定存成配方，命令列可以重建出位元組相同的字型。支援 macOS、iPhone 與 iPad。
-    tags: ["Swift", "SwiftUI", "Fonts"]
+    tags: ["桌面應用", "Swift", "SwiftUI", "Fonts"]
   - name: Viewer
+    logo: /images/sections/projects/viewer.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     repo: https://github.com/linzeyan/viewer
     summary: macOS 與 Windows 的輕量看圖程式：方向鍵瀏覽同資料夾的圖、滾輪縮放。支援 JPEG、PNG、GIF／WebP 動畫、BMP、TIFF、SVG，開一張 4800 萬畫素的照片約佔 75 MB 記憶體。
-    tags: ["Rust", "Slint", "Desktop"]
+    tags: ["桌面應用", "Rust", "Slint"]
   - name: s3dal
+    logo: /images/sections/projects/s3dal.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     repo: https://github.com/linzeyan/s3dal
     summary: S3 相容閘道，透過 Apache OpenDAL 把本機目錄、其他 S3 服務、Azure Blob 或 GCS 以 S3 API 提供出去。單一執行檔，也可當函式庫嵌入。
-    tags: ["Rust", "S3", "Storage"]
+    tags: ["開發工具", "Rust", "S3", "Storage"]
   - name: WiFiDetect
+    logo: /images/sections/projects/wifidetect.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     url: https://apps.apple.com/app/wifidetect/id6823874308
     summary: macOS 的 Wi-Fi 訊號、流量監控與 HTTP(S) 除錯工具，附 iPhone／iPad 配套 App。
-    tags: ["macOS", "iOS", "Network"]
+    tags: ["桌面應用", "macOS", "iOS", "Network"]
   - name: 小星星塗色
+    logo: /images/sections/projects/little-star.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     url: https://apps.apple.com/app/%E5%B0%8F%E6%98%9F%E6%98%9F%E5%A1%97%E8%89%B2/id6823662245
     summary: 給五歲以下孩子的離線 iPad 塗色本：點一下填色、質感筆刷、印章。沒有廣告，不連網路。
-    tags: ["iPadOS", "SwiftUI", "Kids"]
+    tags: ["App Store", "iPadOS", "SwiftUI", "Kids"]
   - name: Ringtone Cutter
+    logo: /images/sections/projects/ringtone-cutter.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     url: https://apps.apple.com/app/ringtone-cutter/id6823386594
     summary: 把任何歌曲剪成 iPhone 鈴聲：波形編輯、淡入淡出，一鍵「設為鈴聲」。
-    tags: ["iOS", "SwiftUI", "Audio"]
+    tags: ["App Store", "iOS", "SwiftUI", "Audio"]
   - name: SCROLLING.LIGHT
+    logo: /images/sections/projects/scrolling-light.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     url: https://scrolling-light.pages.dev
     summary: 滿版 LED 跑馬燈，所有設定都在網址裡：沒有後端、可離線使用、可安裝成 App。
-    tags: ["Web", "PWA"]
+    tags: ["網頁", "PWA"]
   - name: LiteBrowser
+    logo: /images/sections/projects/litebrowser.svg
     role: 擁有者
     timeline: "2026 十月 - 現在"
     repo: https://github.com/linzeyan/LiteBrowser
     summary: 給低記憶體 Windows／VDI 的輕量分頁瀏覽器，只讓少數分頁保持運作，其餘凍結或釋放。支援 Chrome 擴充功能，內建 MCP server。
-    tags: ["Rust", "Windows", "Browser"]
+    tags: ["桌面應用", "Rust", "Windows", "Browser"]
   - name: apitool
+    logo: /images/sections/projects/apitool.svg
     role: 擁有者
     timeline: "2026 九月 - 現在"
     repo: https://github.com/linzeyan/testing
     summary: 給低記憶體環境的可攜式 Postman 風格 API 用戶端：REST、GraphQL、WebSocket、gRPC、MQTT，可匯入 Postman／OpenAPI。解壓縮即可執行。
-    tags: ["Rust", "API", "egui"]
+    tags: ["桌面應用", "Rust", "API", "egui"]
   - name: InputMethodEditor
+    logo: /images/sections/projects/ime.svg
     role: 擁有者
     timeline: "2026 九月 - 現在"
     repo: https://github.com/linzeyan/InputMethodEditor
     summary: 以 libchewing 打造的 Windows 中文輸入法（注音、拼音）。
-    tags: ["Rust", "Windows", "IME"]
+    tags: ["桌面應用", "Rust", "Windows", "IME"]
   - name: keybr 注音
+    logo: /images/sections/projects/keybr.svg
     role: 擁有者
     timeline: "2026 九月 - 現在"
     url: https://keybr.pages.dev/
     summary: 注音打字練習：keybr.com 的注音版分支，依你最弱的鍵自動產生練習。
-    tags: ["TypeScript", "Typing"]
+    tags: ["網頁", "TypeScript", "Typing"]
   - name: loadconf
+    logo: /images/sections/projects/loadconf.svg
     role: 擁有者
     timeline: "2026 九月 - 現在"
     repo: https://github.com/linzeyan/loadconf
     summary: Go 函式庫：宣告設定 struct，從檔案、環境變數與 etcd 載入。
-    tags: ["Go", "Library", "Config"]
+    tags: ["函式庫", "Go", "Config"]
   - name: draft
+    logo: /images/sections/projects/draft.svg
     role: 擁有者
     timeline: "2026 九月 - 現在"
     url: https://draft-4w0.pages.dev
     summary: 貼上 SQL schema，得到可平移、縮放、編輯的 ER 圖，完全在瀏覽器裡執行。
-    tags: ["Rust", "SQL", "Diagram"]
+    tags: ["網頁", "Rust", "SQL", "Diagram"]
   - name: Poly
+    logo: /images/sections/projects/poly.svg
     role: 擁有者
     timeline: "2026 八月 - 現在"
     repo: https://github.com/linzeyan/vscode-syntax
     summary: 一個 CLI 加兩個 VSCode 擴充套件，取代一堆各語言的語法高亮、lint 與 format 擴充。
-    tags: ["VSCode", "TypeScript", "CLI"]
+    tags: ["開發工具", "VSCode", "TypeScript", "CLI"]
   - name: nginx
+    logo: /images/sections/projects/nginx.svg
     role: 擁有者
     timeline: "2026 八月 - 現在"
     repo: https://github.com/linzeyan/nginx
     summary: 自動建置的 nginx／OpenResty `.deb`／`.rpm` 安裝包，靜態連結，跟著上游版本發佈。
-    tags: ["Nginx", "Packaging", "CI"]
+    tags: ["開發工具", "Nginx", "Packaging", "CI"]
   - name: 書房
+    logo: /images/sections/projects/shufang.svg
     role: 擁有者
     timeline: "2026 八月 - 現在"
     url: https://apps.apple.com/app/%E6%9B%B8%E6%88%BF/id6798525550
     summary: 無廣告的小說、漫畫與 RSS 閱讀器：貼上網址即可離線閱讀。不需帳號，不追蹤。
-    tags: ["iOS", "Android", "Reader"]
+    tags: ["App Store", "iOS", "Android", "Reader"]
   - name: DbClient
+    logo: /images/sections/projects/dbclient.svg
     role: 擁有者
     timeline: "2026 八月 - 現在"
     repo: https://github.com/linzeyan/dbeaver
     summary: 以原生方式重寫的 DBeaver 級資料庫用戶端：Rust 核心、Metal 表格、不需要 JVM。支援約 35 種資料庫，從 Postgres、MySQL 到 ClickHouse、DuckDB、MongoDB 與 Snowflake。
-    tags: ["Rust", "Database", "macOS"]
+    tags: ["桌面應用", "Rust", "Database", "macOS"]
   - name: MiniGames
+    logo: /images/sections/projects/minigames.svg
     role: 擁有者
     timeline: "2026 七月 - 現在"
     url: https://apps.apple.com/app/minigames/id6795174941
     summary: 四款童年街機遊戲，為觸控重新設計。
-    tags: ["iOS", "SwiftUI", "Games"]
+    tags: ["App Store", "iOS", "SwiftUI", "Games"]
   - name: macshot for Windows
+    logo: /images/sections/projects/macshot.svg
     role: 擁有者
     timeline: "2026 七月 - 現在"
     repo: https://github.com/linzeyan/macshot
     summary: "[macshot](https://macshot.io) 的 Windows 版：標註、錄影、OCR 翻譯、捲動擷取。"
-    tags: ["C#", "Windows", "Screenshot"]
+    tags: ["桌面應用", "C#", "Windows", "Screenshot"]
   - name: AmbientSound
+    logo: /images/sections/projects/ambientsound.svg
     role: 擁有者
     timeline: "2026 七月 - 現在"
     url: https://apps.apple.com/app/ambientsound/id6792389273
     summary: 水墨風格的白噪音與助眠 App：播放並混合環境音。
-    tags: ["iOS", "SwiftUI", "Audio"]
+    tags: ["App Store", "iOS", "SwiftUI", "Audio"]
   - name: Simple CF
+    logo: /images/sections/projects/simple-cf.svg
     role: 擁有者
     timeline: "2026 六月 - 現在"
     url: https://apps.apple.com/tw/app/simple-cf/id6785373007
     summary: 快速的原生 iOS／iPadOS Cloudflare 帳號用戶端。
-    tags: ["iOS", "SwiftUI", "Cloudflare"]
+    tags: ["App Store", "iOS", "SwiftUI", "Cloudflare"]
   - name: Assistant
+    logo: /images/sections/projects/assistant.svg
     role: 擁有者
     timeline: "2026 六月 - 現在"
     repo: https://github.com/linzeyan/assistant
     summary: Apple Silicon Mac 上私密、完全本地執行的 AI 助理。
-    tags: ["Python", "MLX", "AI"]
+    tags: ["桌面應用", "Python", "MLX", "AI"]
   - name: Universe
+    logo: /images/sections/projects/universe.svg
     role: 擁有者
     timeline: "2026 六月 - 現在"
     url: https://universal-ex.pages.dev
     summary: 太陽系與銀河的動畫：自轉與公轉軌道。
-    tags: ["Web", "Animation"]
+    tags: ["網頁", "Animation"]
   - name: webp-go
+    logo: /images/sections/projects/webp-go.svg
     role: 擁有者
     timeline: "2026 六月 - 現在"
     repo: https://github.com/linzeyan/webp-go
     summary: 純 Go 的 WebP 編碼器（有損、無損、動畫、透明度），不需要 cgo。
-    tags: ["Go", "Library", "WebP"]
+    tags: ["函式庫", "Go", "WebP"]
   - name: Pintu
+    logo: /images/sections/projects/pintu.svg
     role: 擁有者
     timeline: "2026 四月 - 現在"
     url: https://puzzle-coloring.pages.dev
     summary: 把任何圖片變成塗色頁或拼圖。
-    tags: ["Web", "Puzzle"]
+    tags: ["網頁", "Puzzle"]
   - name: PaperCut
+    logo: /images/sections/projects/papercut.svg
     role: 擁有者
     timeline: "2026 三月 - 現在"
     url: https://papercutting.pages.dev
     summary: 摺一張虛擬紙、剪出形狀，展開看看圖案，並匯出成 SVG。
-    tags: ["Web", "SVG"]
+    tags: ["網頁", "SVG"]
   - name: asdf-gui
+    logo: /images/sections/projects/asdf-gui.svg
     role: 擁有者
     timeline: "2026 二月 - 現在"
     repo: https://github.com/linzeyan/asdf-gui
     summary: asdf 版本管理工具的跨平台桌面 GUI。
-    tags: ["TypeScript", "Desktop"]
+    tags: ["桌面應用", "TypeScript"]
   - name: MarkNote
+    logo: /images/sections/projects/marknote.svg
     role: 擁有者
     timeline: "2026 二月 - 現在"
     # repo: https://github.com/Cacao-s/marknote-official
     url: https://marknote.pages.dev/
     summary: 以 Tauri、React 和 CodeMirror 6 打造的現代、本地優先所見即所得 Markdown 編輯器。
-    tags: ["Markdown", "Editor"]
+    tags: ["桌面應用", "Markdown", "Editor"]
   - name: RayUI
+    logo: /images/sections/projects/rayui.svg
     role: 擁有者
     timeline: "2026 一月 - 現在"
     repo: https://github.com/linzeyan/RayUI
     summary: 透過 Xray-core 與 sing-box 管理代理連線的簡潔介面，依協定自動選擇核心。
-    tags: ["Go", "Proxy", "GUI"]
+    tags: ["桌面應用", "Go", "Proxy", "GUI"]
   - name: pm
+    logo: /images/sections/projects/pm.svg
     role: 擁有者
     timeline: "2026 一月 - 現在"
     repo: https://github.com/linzeyan/proxy-manager
     summary: 管理 v2ray／sing-box／xray 的 CLI。
-    tags: ["Go", "CLI", "Proxy"]
+    tags: ["開發工具", "Go", "CLI", "Proxy"]
   - name: formatter
+    logo: /images/sections/projects/formatter.svg
     role: 擁有者
     timeline: "2026 一月 - 現在"
     repo: https://github.com/linzeyan/formatter
     summary: 純 Rust 的多格式文件 formatter CLI。
-    tags: ["Rust", "CLI"]
+    tags: ["開發工具", "Rust", "CLI"]
   - name: redis-top-keys-analyzer
+    logo: /images/sections/projects/redis-top-keys.svg
     role: 擁有者
     timeline: "2026 一月 - 現在"
     repo: https://github.com/linzeyan/redis-top-keys-analyzer
     summary: 找出 Redis 裡最大、最熱門的 key。
-    tags: ["Rust", "Redis", "CLI"]
+    tags: ["開發工具", "Rust", "Redis", "CLI"]
   - name: Transform
+    logo: /images/sections/projects/transform.svg
     role: 擁有者
     timeline: "2025 十一月 - 現在"
     # repo: https://github.com/linzeyan/transform
     url: https://transforms.pages.dev/
     summary: 一個輕量級的 Rust/WebAssembly 工具箱。
-    tags: ["WASM", "Rust"]
+    tags: ["網頁", "WASM", "Rust"]
   - name: OPS-CLI
-    # logo: /images/sections/projects/kubernetes.png
+    logo: /images/sections/projects/ops-cli.svg
     role: 擁有者
     timeline: "2022 七月 - 2025 四月"
     repo: https://github.com/linzeyan/ops-cli # If your project is a public repo on GitHub, then provide this link. it will show star count.
     #url: ""  # If your project is not a public repo but it has a website or any external details url then provide it here. don't provide "repo" and "url" simultaneously.
     summary: 適用於運維的命令行工具。
-    tags: ["OPS", "CLI"]
+    tags: ["早期作品", "OPS", "CLI"]

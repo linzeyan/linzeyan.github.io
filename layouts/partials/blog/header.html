@@ -1,0 +1,21 @@
+{{- /* Copy of toha's partials/blog/header.html plus the Notes link. The theme
+       lists Notes in the home page's bar (portfolio/modern/header.html) but not
+       in this one, so the link vanished on the post archive, posts and tag
+       pages. Delete this file once the theme lists it here too. */ -}}
+{{- $page := .page -}}
+{{- $root := .root -}}
+{{- $links := slice (dict "label" (i18n "home") "href" $page.Site.Home.RelPermalink) (dict "label" ($page.Site.Params.features.blog.title | default (i18n "posts")) "href" $root.RelPermalink) -}}
+{{- if $page.Site.Params.features.notes.enable -}}
+  {{- $links = $links | append (dict "label" (i18n "notes") "href" (partial "helpers/get-page-url.html" "/notes/")) -}}
+{{- end -}}
+{{- $menus := $page.Site.Params.customMenus -}}
+{{- with (index hugo.Data $page.Language.Lang).site.customMenus }}{{ $menus = . }}{{ end -}}
+{{- range $menus -}}
+  {{- if not .hideFromNavbar }}{{ $links = $links | append (dict "label" .name "href" (partial "helpers/get-page-url.html" .url)) }}{{ end -}}
+{{- end -}}
+{{- $searchMarkup := "" -}}
+{{- if partial "blog/feature-enabled.html" (dict "page" $page "feature" "search") -}}
+  {{- $index := partialCached "blog/search-index.html" $root $root.Language.Lang $root.RelPermalink -}}
+  {{- $searchMarkup = partial "components/search-dialog.html" (dict "iconLibrary" (cond (eq $page.Site.Params.features.componentsDesign.enable true) "lucide" "") "id" "blog-search" "indexURL" $index.RelPermalink "labels" (partial "modern/search-labels.html" (i18n "search"))) -}}
+{{- end -}}
+{{- partial "modern/header.html" (dict "page" $page "links" $links "searchMarkup" $searchMarkup "navigationLabel" (i18n "blog_navigation")) -}}

@@ -1,0 +1,17 @@
+{{- /* Copy of toha's shortcodes/note.html with one change: the card body is
+       rendered with RenderString on the note's own page instead of markdownify.
+       markdownify renders in the home page's context, and toha's code block
+       hook asks that page which layout it is on. With the Tailwind home page
+       enabled (hugo.yaml portfolio.modern) the answer is "modern", so every
+       code block in a note came out with class names and no colours, on a page
+       whose stylesheet has no rules for them. */ -}}
+<div class="note-card {{if .Get "size" }}{{.Get "size"}}-note{{end}}">
+    <div class="item">
+        <h5 class="note-title"><span>{{ .Get "title" }}</span></h5>
+        {{ range $idx, $val := split .Inner "---" }}
+            <div class="card">
+                <div class="card-body">{{ $.Page.RenderString $val }}</div>
+            </div>
+        {{ end }}
+    </div>
+</div>

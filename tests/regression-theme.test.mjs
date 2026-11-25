@@ -18,21 +18,39 @@ function headThemeScript(page) {
   return found
 }
 
-function firstPaintTheme(script, { stored = {}, osDark }) {
-  let theme = null
+// One page load: runs the head script against `stored`, which it may rewrite
+// the way a page rewrites localStorage, and returns what it painted. toha's
+// Bootstrap pages (notes, search, 404) style themselves from data-theme, its
+// Tailwind pages (home, posts) from the 'dark' class.
+function firstPaint(script, stored, osDark) {
+  const painted = { dataTheme: null, darkClass: null }
   const sandbox = {
-    localStorage: { getItem: (k) => (k in stored ? stored[k] : null) },
+    localStorage: {
+      getItem: (k) => (k in stored ? stored[k] : null),
+      setItem: (k, v) => { stored[k] = String(v) },
+      removeItem: (k) => { delete stored[k] },
+    },
     window: { matchMedia: (q) => ({ matches: q.includes('dark') && osDark }) },
-    document: { documentElement: { setAttribute: (k, v) => k === 'data-theme' && (theme = v) } },
+    document: {
+      documentElement: {
+        setAttribute: (k, v) => k === 'data-theme' && (painted.dataTheme = v),
+        classList: { toggle: (name, on) => name === 'dark' && (painted.darkClass = on) },
+      },
+    },
   }
   vm.runInNewContext(script, sandbox)
-  return theme
+  return painted
 }
 
-// `expected` is what the darkMode feature (hugo.yaml features.darkMode) sets on
-// window load: localStorage 'darkmode:color-scheme', else 'system' resolved
+// What the Bootstrap pages' darkMode feature (hugo.yaml features.darkMode)
+// applies on window load: 'darkmode:color-scheme', else 'system', resolved
 // against the OS. If the site moves to the `theme` feature, its key changes to
-// 'theme-scheme' and these cases must change with it.
+// 'theme-scheme' and this must change with it.
+function settledTheme(stored, osDark) {
+  const scheme = stored['darkmode:color-scheme'] || 'system'
+  return scheme === 'system' ? (osDark ? 'dark' : 'light') : scheme
+}
+
 const cases = [
   { name: 'first visit, OS dark', stored: {}, osDark: true, expected: 'dark' },
   { name: 'first visit, OS light', stored: {}, osDark: false, expected: 'light' },
@@ -61,11 +79,19 @@ test('regression fb20261112a: code blocks are coloured at build time only', () =
 
 // 2. The <head> script and the darkMode feature disagreed on the storage key and
 //    the default, so a dark-mode reader got a light first paint until load.
+//    Checked on a Bootstrap page and on a Tailwind one: both get the same script.
 for (const page of ['notes/index.html', 'index.html']) {
   test(`regression fb20261112a: first paint matches the settled theme on ${page}`, () => {
     const script = headThemeScript(page)
     for (const c of cases) {
-      assert.equal(firstPaintTheme(script, c), c.expected, `${page}: ${c.name}`)
+      const stored = { ...c.stored }
+      const painted = firstPaint(script, stored, c.osDark)
+      // The head script may rewrite the stored choice, so the settled theme is read after it ran.
+      assert.deepEqual(
+        { ...painted, settled: settledTheme(stored, c.osDark) },
+        { dataTheme: c.expected, darkClass: c.expected === 'dark', settled: c.expected },
+        `${page}: ${c.name}`,
+      )
     }
   })
 }

@@ -6,21 +6,25 @@ on:
     branches:
       - main
 
+# The job only reads the repo; gh-pages is pushed with secrets.TOKEN.
+permissions:
+  contents: read
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    # A run takes about a minute; this only stops a hung download.
+    timeout-minutes: 15
     steps:
       # checkout to the commit that has been pushed
       - uses: actions/checkout@v7
         with:
           submodules: recursive
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.169.0"
-          # hugo-version: "latest"
-          extended: true
+      # Hugo and Dart Sass at the versions in mise.toml, the ones `make run`
+      # builds with. toha needs `sass` on PATH for its Bootstrap stylesheet.
+      - name: Setup Hugo and Dart Sass
+        uses: jdx/mise-action@v5
 
       - name: Update Hugo Modules
         run: hugo mod tidy

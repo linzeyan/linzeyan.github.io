@@ -1,8 +1,50 @@
-/* Overrides toha v4.16.0's empty assets/styles/override.scss. */
+/* Site rules for toha's Bootstrap pages (notes, search, 404); replaces the
+   theme's empty assets/styles/override.scss. The Tailwind pages (home, posts)
+   take theirs from modern/site.css. */
 
 /* Code is coloured by Hugo at build time (hugo.yaml markup.highlight). The
    theme's `pre > code { padding: 10px !important }` only frames the block when
    <code> is a block, which highlight.js's CSS used to provide. */
 .highlight pre > code {
   display: block;
+}
+
+/* Below 1024px the theme removes that padding. A bare block could live with
+   it; inside the Copy panel the first character would touch the border. */
+.code-block pre > code {
+  padding: 10px !important;
+}
+
+/* The dark scheme paints the page, the bars and the panels in the same black
+   (variables.scss), where the theme told them apart by three shades of slate.
+   These hairlines do that job instead, in the border colour of toha's Tailwind
+   pages (--border), so both page families draw the same edges. */
+$dark-border: #292929;
+
+html[data-theme='dark'] {
+  .top-navbar {
+    border-bottom: 1px solid $dark-border;
+  }
+
+  .sidebar-section .sidebar-holder {
+    /* The theme's shadow is teal; on black it shows as a blue haze beside the sidebar. */
+    box-shadow: none;
+    border-right: 1px solid $dark-border;
+  }
+
+  .footer {
+    border-top: 1px solid $dark-border;
+  }
+
+  .card,
+  .code-block,
+  .code-block .code-block-toggle {
+    border-color: $dark-border;
+  }
+
+  /* The logo is drawn in currentColor, which inside <img> is always black: on
+     the black bar it has to be flipped to stay visible. */
+  .navbar-brand img {
+    filter: invert(1);
+  }
 }
